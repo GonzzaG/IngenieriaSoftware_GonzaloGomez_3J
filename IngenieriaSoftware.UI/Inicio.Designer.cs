@@ -54,7 +54,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.LogIn);
             // 
             // label1
             // 
@@ -95,7 +95,7 @@
             this.button2.Text = "Cerrar Sesion";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.LogOut);
             // 
             // Inicio
             // 

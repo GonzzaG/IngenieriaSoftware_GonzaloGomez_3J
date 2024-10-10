@@ -34,9 +34,11 @@ namespace IngenieriaSoftware.Servicios
             {
                 if (_Session == null)
                 {
-                    _Session = new SessionManager();
-                    _Session.Usuario = pUsuario;
-                    _Session.FechaInicio = DateTime.Now;
+                    _Session = new SessionManager
+                    {
+                        Usuario = pUsuario,
+                        FechaInicio = DateTime.Now
+                    };
                 }
                 else
                 {

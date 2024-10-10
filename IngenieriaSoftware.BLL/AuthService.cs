@@ -11,9 +11,11 @@ namespace IngenieriaSoftware.BLL
     {
         public void LogIn(string pNombreUsuario, string pContrasena)
         {
-            Usuario _Usuario = new Usuario();
-            _Usuario.Username = "Prueba";
-            _Usuario.Password = "Prueba";
+            Usuario _Usuario = new Usuario
+            {
+                Username = pNombreUsuario,
+                Password = pContrasena
+            };
 
             SessionManager.LogIn(_Usuario);
         }

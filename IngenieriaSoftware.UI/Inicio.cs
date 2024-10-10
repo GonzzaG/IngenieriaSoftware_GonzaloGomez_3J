@@ -15,14 +15,14 @@ namespace IngenieriaSoftware.UI
 {
     public partial class Inicio : Form
     {
-        private AuthService _authService = new AuthService();
+        private readonly AuthService _authService = new AuthService();
 
         public Inicio()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LogIn(object sender, EventArgs e)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace IngenieriaSoftware.UI
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void LogOut(object sender, EventArgs e)
         {
 
             try
