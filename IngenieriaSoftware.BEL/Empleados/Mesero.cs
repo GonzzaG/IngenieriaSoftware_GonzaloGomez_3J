@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Cliente
+    public class Mesero : Cocina
     {
-
+        
     }
 }
