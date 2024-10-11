@@ -9,14 +9,19 @@ namespace IngenieriaSoftware.Servicios
 {
     public class Usuario
     {
-
+        public int Id {  get; set; }    
         public string Username { get; set; }
         private string _passwordHash;
 
         public string Password 
         {
-            get => null; 
+            get => _passwordHash; 
             set => _passwordHash =  HashingManager.GenerarHash(value);
+        }
+
+        public void AsignarPassword(string password)
+        {
+            _passwordHash = password;
         }
 
         public bool VerifyPassword(string password)

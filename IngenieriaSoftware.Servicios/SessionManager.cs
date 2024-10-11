@@ -42,7 +42,7 @@ namespace IngenieriaSoftware.Servicios
                 }
                 else
                 {
-                    throw new Exception("Sesion ya iniciada.");
+                    //throw new Exception("Sesion ya iniciada.");
                 }
             }
 

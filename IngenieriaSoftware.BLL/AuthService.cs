@@ -9,7 +9,7 @@ namespace IngenieriaSoftware.BLL
 {
     public class AuthService
     {
-        public void LogIn(string pNombreUsuario, string pContrasena)
+        public bool LogIn(string pNombreUsuario, string pContrasena)
         {
             Usuario _Usuario = new Usuario
             {
@@ -17,7 +17,18 @@ namespace IngenieriaSoftware.BLL
                 Password = pContrasena
             };
 
-            SessionManager.LogIn(_Usuario);
+            if (new UsuarioBLL().LogIn(_Usuario.Username, _Usuario.Password))
+            {
+                SessionManager.LogIn(_Usuario);
+
+                return true;
+            }
+            else
+            {
+                throw new Exception("Fallo en las credenciales.");
+            }
+
+            //new UsuarioBLL().RegistrarUsuario(_Usuario, SessionManager.GetInstance);
         }
 
         public void LogOut()

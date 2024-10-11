@@ -26,9 +26,14 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                _authService.LogIn(textBox1.Text, textBox2.Text);
-                button1.Visible = false;
-                button2.Visible = true;
+                
+                if(_authService.LogIn(textBox1.Text, textBox2.Text))
+                {
+                    button1.Visible = false;
+                    button2.Visible = true;
+
+                }
+                
         
             }
             catch (Exception ex)

@@ -25,8 +25,8 @@ namespace IngenieriaSoftware.Servicios
 
         public static bool VerificarHash(string pPassword, string pHashedPassword)
         {
-            string mHashDeEntrada = GenerarHash(pPassword);
-            return StringComparer.OrdinalIgnoreCase.Compare(mHashDeEntrada, pHashedPassword) == 0;
+           // string mHashDeEntrada = GenerarHash(pPassword);
+            return StringComparer.OrdinalIgnoreCase.Compare(pPassword, pHashedPassword) == 0;
         }
     }
 }
