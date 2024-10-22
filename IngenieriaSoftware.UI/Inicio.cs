@@ -20,6 +20,9 @@ namespace IngenieriaSoftware.UI
         public Inicio()
         {
             InitializeComponent();
+
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.DialogResult = DialogResult.No;
         }
 
         private void LogIn(object sender, EventArgs e)
@@ -32,6 +35,9 @@ namespace IngenieriaSoftware.UI
                     button1.Visible = false;
                     button2.Visible = true;
 
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
                 
         
@@ -61,5 +67,11 @@ namespace IngenieriaSoftware.UI
 
           
         }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+          
+        }
+
     }
 }
