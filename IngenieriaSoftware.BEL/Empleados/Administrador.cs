@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Mesero : Cocina
+    internal class Administrador: Usuario
     {
-        
     }
 }

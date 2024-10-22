@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Factura : Empleado
+    public class Factura
     {
     }
 }

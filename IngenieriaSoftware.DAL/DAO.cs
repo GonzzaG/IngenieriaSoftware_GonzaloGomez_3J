@@ -10,7 +10,7 @@ namespace IngenieriaSoftware.DAL
 {
     public class DAO
     {
-        private SqlConnection mCon = new SqlConnection(@"Data Source=HUMBERTO2024\SQLEXPRESS;Initial Catalog=ISEntrga;Integrated Security=True");
+        private SqlConnection mCon = new SqlConnection(@"Data Source=HUMBERTO2024\SQLEXPRESS;Initial Catalog=ISProyecto;Integrated Security=True");
 
         public DataSet ExecuteDataSet(string pCommandText)
         {

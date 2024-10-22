@@ -17,7 +17,7 @@ namespace IngenieriaSoftware.DAL
         // Método para obtener un usuario por su nombre
         public Servicios.Usuario ObtenerUsuarioPorNombre(string pUsuarioNombre)
         {
-            string query = $"SELECT * FROM Usuario2 WHERE UserName = '{pUsuarioNombre}'";
+            string query = $"SELECT * FROM usuarios WHERE UserName = '{pUsuarioNombre}'";
             DataSet mDs = new DAO().ExecuteDataSet(query);
             if (mDs.Tables.Count > 0 && mDs.Tables[0].Rows.Count > 0)
             {
@@ -33,7 +33,7 @@ namespace IngenieriaSoftware.DAL
 
         public int GuardarUsuario(Servicios.Usuario pUsuario, SessionManager pSession)
         {
-            string query = $"INSERT INTO Usuario2 (UserName, PasswordHash, FechaCreacion) " +
+            string query = $"INSERT INTO usuarios (UserName, PasswordHash, FechaCreacion) " +
                            $"VALUES ('{pUsuario.Username}', '{pUsuario.Password}', '{pSession.FechaInicio}')";
             return _dao.ExecuteNonQuery(query); // Devuelve 1 si la inserción fue exitosa
         }
