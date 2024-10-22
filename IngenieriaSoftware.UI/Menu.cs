@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class Mesas : Form
+    public partial class Menu : Form
     {
-        public Mesas()
+        public Menu()
         {
             InitializeComponent();
         }

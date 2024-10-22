@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI
 {
-    partial class Mesas
+    partial class Menu
     {
         /// <summary>
         /// Required designer variable.
