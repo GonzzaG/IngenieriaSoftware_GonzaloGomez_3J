@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IngenieriaSoftware.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace IngenieriaSoftware.UI
 {
     public partial class GestionUsuarios : Form
     {
+        private readonly AuthService _authService = new AuthService();
         public GestionUsuarios()
         {
             InitializeComponent();
@@ -29,6 +31,33 @@ namespace IngenieriaSoftware.UI
             comboBoxCategorias.Items.Add("Caja");
             comboBoxCategorias.Items.Add("Cocina");
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (_authService.LogIn(textBox1.Text, textBox2.Text))
+                {
+                 
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
         }
     }
 }

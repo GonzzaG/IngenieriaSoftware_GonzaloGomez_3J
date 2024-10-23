@@ -35,5 +35,25 @@ namespace IngenieriaSoftware.BLL
         {
             SessionManager.LogOut();
         }
+
+        public bool RegistrarUsuario(string pNombreUsuario, string pContrasena) //string categoria)
+        {
+            Usuario _Usuario = new Usuario
+            {
+                Username = pNombreUsuario,
+                Password = pContrasena
+            };
+
+            if (new UsuarioBLL().RegistrarUsuario(_Usuario, f))
+            {
+                SessionManager.LogIn(_Usuario);
+
+                return true;
+            }
+            else
+            {
+                throw new Exception("Fallo en las credenciales.");
+            }
+        }
     }
 }

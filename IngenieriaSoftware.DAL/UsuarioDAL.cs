@@ -42,7 +42,7 @@ namespace IngenieriaSoftware.DAL
         {
             pUsuario.Username = pDr["Username"].ToString();
             pUsuario.AsignarPassword(pDr["PasswordHash"].ToString());
-            pUsuario.Id = (int)pDr["Id"];
+            pUsuario.Id = (int)pDr["Id_usuario"];
 
         }
     }

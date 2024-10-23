@@ -13,13 +13,24 @@ namespace IngenieriaSoftware.BLL
         private UsuarioDAL _usuarioDAL = new UsuarioDAL();
 
         // Método para registrar un nuevo usuario
-        public bool RegistrarUsuario(Servicios.Usuario pUsuario, SessionManager pSession)
+        public bool RegistrarUsuario(Servicios.Usuario pUsuario, string FechaInicio)
         {
-            // Guardar el nuevo usuario en la base de datos
-            int resultado = _usuarioDAL.GuardarUsuario(pUsuario, pSession);
+            //Obtener el usuario por su nombre
+            Servicios.Usuario mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(pUsuario.Username);
 
-            // Retorna true si el registro fue exitoso
-            return resultado > 0;
+            if (mUsuario == null)
+            {
+                // Si no encuentra el usuario en la bd, lo guarda en la base de datos
+                int resultado = _usuarioDAL.GuardarUsuario(pUsuario, FechaInicio);
+
+                // Retorna true si el registro fue exitoso
+                return resultado > 0;
+            }
+            else
+            {
+                throw new Exception($"El username {pUsuario.Username} ya existe");
+            }
+
         }
 
         // Método para iniciar sesión

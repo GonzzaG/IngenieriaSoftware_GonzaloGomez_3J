@@ -25,10 +25,10 @@ namespace IngenieriaSoftware.UI
                 // Si el inicio de sesion es correcto, se abre el formulario menu
                 AbrirFormMenu();
             }
-            else
-            {
-                this.Close();   
-            }
+            //else
+            //{
+            //    this.Close();   
+            //}
         }
 
         private void AbrirFormMenu()
@@ -40,7 +40,9 @@ namespace IngenieriaSoftware.UI
 
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            GestionUsuarios formGestionUsuario = new GestionUsuarios();
+            formGestionUsuario.StartPosition = FormStartPosition.CenterScreen;
+            formGestionUsuario.Show();
         }
     }
 }
