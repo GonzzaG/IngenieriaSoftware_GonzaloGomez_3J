@@ -22,6 +22,11 @@ namespace IngenieriaSoftware.Servicios
                 return builder.ToString();
             }
         }
+        public string GenerarPasswordHash(string password)
+        {
+            return HashingManager.GenerarHash(password);
+        }
+
 
         public static bool VerificarHash(string pPassword, string pHashedPassword)
         {

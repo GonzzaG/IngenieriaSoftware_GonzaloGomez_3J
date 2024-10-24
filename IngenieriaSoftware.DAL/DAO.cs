@@ -55,6 +55,38 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+        public DataSet ExecuteStoredProcedure(string pNombreStoreProcedure, SqlParameter[] pParametros)
+        {
+            try
+            {
+                SqlCommand mComm = new SqlCommand(pNombreStoreProcedure, mCon)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                if(pParametros != null)
+                {
+                    mComm.Parameters.AddRange(pParametros);
+                }
+
+                SqlDataAdapter mDa = new SqlDataAdapter(mComm);
+                DataSet mDs = new DataSet();
+                mDa.Fill(mDs);
+
+                return mDs;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if(mCon.State != ConnectionState.Closed)
+                    mCon.Close();
+            }
+        }
+
+
         public int ObtenerUltimoId(string pTabla, string pColumnaId)
         {
             try

@@ -1,5 +1,4 @@
 ﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,14 +13,23 @@ namespace IngenieriaSoftware.DAL
     {
         private DAO _dao = new DAO();
 
+        static int mId;
+        private static int ProximoId()
+        {
+            if (mId == 0)
+                mId = (new DAO()).ObtenerUltimoId("usuarios", "id_usuario");
+            mId += 1;
+            return mId;
+        }
+
         // Método para obtener un usuario por su nombre
-        public Servicios.Usuario ObtenerUsuarioPorNombre(string pUsuarioNombre)
+        public Usuario ObtenerUsuarioPorNombre(string pUsuarioNombre)
         {
             string query = $"SELECT * FROM usuarios WHERE UserName = '{pUsuarioNombre}'";
             DataSet mDs = new DAO().ExecuteDataSet(query);
             if (mDs.Tables.Count > 0 && mDs.Tables[0].Rows.Count > 0)
             {
-                Servicios.Usuario mUsuario = new Servicios.Usuario();
+                Usuario mUsuario = new Usuario();
                 ValorizarEntidad(mUsuario, mDs.Tables[0].Rows[0]);
                 return mUsuario;
             }
@@ -31,17 +39,18 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public int GuardarUsuario(Servicios.Usuario pUsuario, SessionManager pSession)
+        public int GuardarUsuario(Usuario pUsuario, DateTime FechaInicio)
         {
-            string query = $"INSERT INTO usuarios (UserName, PasswordHash, FechaCreacion) " +
-                           $"VALUES ('{pUsuario.Username}', '{pUsuario.Password}', '{pSession.FechaInicio}')";
+            pUsuario.Id = ProximoId();  
+            string query = $"INSERT INTO usuarios (id_usuario, Username, PasswordHash, FechaCreacion) " +
+                           $"VALUES ({pUsuario.Id},'{pUsuario.Username}', '{pUsuario._passwordHash}', '{FechaInicio}')";
             return _dao.ExecuteNonQuery(query); // Devuelve 1 si la inserción fue exitosa
         }
 
-        private static void ValorizarEntidad(Servicios.Usuario pUsuario, DataRow pDr)
+        private static void ValorizarEntidad(Usuario pUsuario, DataRow pDr)
         {
             pUsuario.Username = pDr["Username"].ToString();
-            pUsuario.AsignarPassword(pDr["PasswordHash"].ToString());
+            pUsuario._passwordHash = (pDr["PasswordHash"].ToString());
             pUsuario.Id = (int)pDr["Id_usuario"];
 
         }

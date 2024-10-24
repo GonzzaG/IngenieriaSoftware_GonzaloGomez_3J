@@ -43,7 +43,7 @@ namespace IngenieriaSoftware.UI
             try
             {
 
-                if (_authService.LogIn(textBox1.Text, textBox2.Text))
+                if (_authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text))
                 {
                  
 

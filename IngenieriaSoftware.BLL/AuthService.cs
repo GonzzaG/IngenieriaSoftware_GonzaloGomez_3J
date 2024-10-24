@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.Servicios;
 
 namespace IngenieriaSoftware.BLL
@@ -14,10 +15,10 @@ namespace IngenieriaSoftware.BLL
             Usuario _Usuario = new Usuario
             {
                 Username = pNombreUsuario,
-                Password = pContrasena
+                _passwordHash = pContrasena
             };
 
-            if (new UsuarioBLL().LogIn(_Usuario.Username, _Usuario.Password))
+            if (new UsuarioBLL().LogIn(_Usuario.Username, _Usuario._passwordHash))
             {
                 SessionManager.LogIn(_Usuario);
 
@@ -41,12 +42,12 @@ namespace IngenieriaSoftware.BLL
             Usuario _Usuario = new Usuario
             {
                 Username = pNombreUsuario,
-                Password = pContrasena
+                _passwordHash = pContrasena
             };
 
-            if (new UsuarioBLL().RegistrarUsuario(_Usuario, f))
+            if (new UsuarioBLL().RegistrarUsuario(_Usuario, DateTime.Now))
             {
-                SessionManager.LogIn(_Usuario);
+                //SessionManager.LogIn(_Usuario);
 
                 return true;
             }
