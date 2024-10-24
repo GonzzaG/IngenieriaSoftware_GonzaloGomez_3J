@@ -45,7 +45,6 @@
     <Compile Include="HashingManager.cs" />
     <Compile Include="PermisoService.cs" />
     <Compile Include="SessionManager.cs" />
-    <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
