@@ -13,7 +13,7 @@ namespace IngenieriaSoftware.BLL
         private UsuarioDAL _usuarioDAL = new UsuarioDAL();
 
         // Método para registrar un nuevo usuario
-        public bool RegistrarUsuario(Servicios.Usuario pUsuario, string FechaInicio)
+        public bool RegistrarUsuario(Servicios.Usuario pUsuario, DateTime FechaInicio)
         {
             //Obtener el usuario por su nombre
             Servicios.Usuario mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(pUsuario.Username);

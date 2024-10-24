@@ -14,6 +14,15 @@ namespace IngenieriaSoftware.DAL
     {
         private DAO _dao = new DAO();
 
+        static int mId;
+        private static int ProximoId()
+        {
+            if (mId == 0)
+                mId = (new DAO()).ObtenerUltimoId("usuarios", "id_usuario");
+            mId += 1;
+            return mId;
+        }
+
         // Método para obtener un usuario por su nombre
         public Servicios.Usuario ObtenerUsuarioPorNombre(string pUsuarioNombre)
         {
@@ -31,10 +40,11 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public int GuardarUsuario(Servicios.Usuario pUsuario, SessionManager pSession)
+        public int GuardarUsuario(Servicios.Usuario pUsuario, DateTime FechaInicio)
         {
-            string query = $"INSERT INTO usuarios (UserName, PasswordHash, FechaCreacion) " +
-                           $"VALUES ('{pUsuario.Username}', '{pUsuario.Password}', '{pSession.FechaInicio}')";
+            pUsuario.Id = ProximoId();  
+            string query = $"INSERT INTO usuarios (id_usuario, Username, PasswordHash, FechaCreacion) " +
+                           $"VALUES ({pUsuario.Id},'{pUsuario.Username}', '{pUsuario.Password}', '{FechaInicio}')";
             return _dao.ExecuteNonQuery(query); // Devuelve 1 si la inserción fue exitosa
         }
 

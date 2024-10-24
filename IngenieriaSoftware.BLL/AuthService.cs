@@ -44,9 +44,9 @@ namespace IngenieriaSoftware.BLL
                 Password = pContrasena
             };
 
-            if (new UsuarioBLL().RegistrarUsuario(_Usuario, f))
+            if (new UsuarioBLL().RegistrarUsuario(_Usuario, DateTime.Now))
             {
-                SessionManager.LogIn(_Usuario);
+                //SessionManager.LogIn(_Usuario);
 
                 return true;
             }
