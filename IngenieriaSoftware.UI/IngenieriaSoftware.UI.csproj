@@ -106,13 +106,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">
-      <Project>{5da171d4-ef5b-4e09-8687-305243dfb51e}</Project>
-      <Name>IngenieriaSoftware.BEL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IngenieriaSoftware.BLL\IngenieriaSoftware.BLL.csproj">
       <Project>{07222a65-46d4-408e-91b8-c8bd4c3cd860}</Project>
       <Name>IngenieriaSoftware.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IngenieriaSoftware.Servicios\IngenieriaSoftware.Servicios.csproj">
+      <Project>{88779aa0-50fe-4fae-af75-2374a220469d}</Project>
+      <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

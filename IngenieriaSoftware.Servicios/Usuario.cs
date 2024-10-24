@@ -9,6 +9,8 @@ namespace IngenieriaSoftware.Servicios
 {
     public class Usuario
     {
+        private UsuarioDAL _usuarioDAL = new UsuarioDAL();
+
         public int Id {  get; set; }    
         public string Username { get; set; }
         private string _passwordHash;
@@ -17,6 +19,11 @@ namespace IngenieriaSoftware.Servicios
         {
             get => _passwordHash; 
             set => _passwordHash =  HashingManager.GenerarHash(value);
+        }
+
+        public string GenerarPasswordHash(string password)
+        {
+            return HashingManager.GenerarHash(password);
         }
 
         public void AsignarPassword(string password)

@@ -20,6 +20,8 @@ namespace IngenieriaSoftware.BLL
 
             if (mUsuario == null)
             {
+                //pUsuario.Password
+
                 // Si no encuentra el usuario en la bd, lo guarda en la base de datos
                 int resultado = _usuarioDAL.GuardarUsuario(pUsuario, FechaInicio);
 

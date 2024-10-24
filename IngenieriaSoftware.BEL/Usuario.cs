@@ -8,9 +8,8 @@ namespace IngenieriaSoftware.BEL
 {
     public class Usuario
     {
+        public int Id { get; set; }
         public string Username { get; set; }
-
-        public string _passwordHash { get; set; }
-
+        public string _passwordHash;
     }
 }
