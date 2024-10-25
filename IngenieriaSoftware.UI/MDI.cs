@@ -19,7 +19,7 @@ namespace IngenieriaSoftware.UI
 
         private void MDI_Load(object sender, EventArgs e)
         {
-            Inicio FormInicio = new Inicio();
+            InicioSesion FormInicio = new InicioSesion();
             if (FormInicio.ShowDialog(this) == DialogResult.OK)
             {
                 // Si el inicio de sesion es correcto, se abre el formulario menu
@@ -40,9 +40,21 @@ namespace IngenieriaSoftware.UI
 
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             GestionUsuarios formGestionUsuario = new GestionUsuarios();
             formGestionUsuario.StartPosition = FormStartPosition.CenterScreen;
             formGestionUsuario.Show();
+        }
+
+        private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GestionarPermisos formGestionPermisos = new GestionarPermisos();
+            formGestionPermisos.StartPosition = FormStartPosition.CenterScreen;
+            formGestionPermisos.Show();
         }
     }
 }

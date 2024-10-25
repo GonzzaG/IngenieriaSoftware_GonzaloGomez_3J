@@ -11,5 +11,9 @@ namespace IngenieriaSoftware.BEL
         public int Id { get; set; }
         public string Username { get; set; }
         public string _passwordHash;
+
+        public Constantes.Categoria Categoria { get; set; } = Constantes.Categoria.Ninguna;
+
+        public List<Permiso> Permisos { get; set; }
     }
 }

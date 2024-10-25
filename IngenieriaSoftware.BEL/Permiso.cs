@@ -10,9 +10,11 @@ namespace IngenieriaSoftware.BEL
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public string TipoPermiso { get; set; } // Podrías usar un enum si deseas
-        public bool Estado { get; set; } // Activo o inactivo
+        public string CodPermiso { get; set; }
+        public bool EsRol {  get; set; }    
+        public bool Habilitado {  get; set; }    
+
+        public string TipoPermiso { get; set; } // Podría usar un enum
         public int? PermisoPadreId { get; set; } // Permiso padre (opcional)
     }
 }

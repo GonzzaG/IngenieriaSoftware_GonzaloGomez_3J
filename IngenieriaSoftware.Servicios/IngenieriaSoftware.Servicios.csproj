@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="EncryptionManager.cs" />
     <Compile Include="HashingManager.cs" />
+    <Compile Include="IPermisoService.cs" />
     <Compile Include="PermisoService.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
