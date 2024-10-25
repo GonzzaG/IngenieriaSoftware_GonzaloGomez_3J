@@ -5,13 +5,29 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlTypes;
+using System.Configuration;
 
 namespace IngenieriaSoftware.DAL
 {
     public class DAO
     {
-        private SqlConnection mCon = new SqlConnection(@"Data Source=HUMBERTO2024\SQLEXPRESS;Initial Catalog=ISProyecto;Integrated Security=True");
+        private SqlConnection mCon;
 
+        public void Conectar()
+        {
+          
+            string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+
+            // Validar si la variable está definida
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new Exception("La cadena de conexion no está definida.");
+            }
+
+            // Crear la conexión
+            mCon = new SqlConnection(connectionString);
+        }
 
         //este metodo sera elimnado por la misma razon que executenonquery
         public DataSet ExecuteDataSet(string pCommandText)
@@ -61,6 +77,8 @@ namespace IngenieriaSoftware.DAL
         {
             try
             {
+                Conectar();
+
                 SqlCommand mComm = new SqlCommand(pNombreStoredProcedure, mCon)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -90,6 +108,8 @@ namespace IngenieriaSoftware.DAL
         {
             try
             {
+                Conectar();
+
                 SqlCommand mComm = new SqlCommand(pNombreStoreProcedure, mCon)
                 {
                     CommandType = CommandType.StoredProcedure

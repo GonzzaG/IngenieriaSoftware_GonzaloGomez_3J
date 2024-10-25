@@ -8,6 +8,6 @@ namespace IngenieriaSoftware.BEL
 {
     public class Constantes
     {
-        public enum TipoEmpleado { Cajero, Mesero, Cocina };
+        public enum Categoria { Admin, Cajero, Mesero, Cocina, Ninguna };
     }
 }
