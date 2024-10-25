@@ -10,8 +10,10 @@ namespace IngenieriaSoftware.DAL
 {
     public class DAO
     {
-        private SqlConnection mCon = new SqlConnection(@"Data Source=.;Initial Catalog=ISProyecto;Integrated Security=True");
+        private SqlConnection mCon = new SqlConnection(@"Data Source=HUMBERTO2024\SQLEXPRESS;Initial Catalog=ISProyecto;Integrated Security=True");
 
+
+        //este metodo sera elimnado por la misma razon que executenonquery
         public DataSet ExecuteDataSet(string pCommandText)
         {
             try
@@ -34,6 +36,7 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+        //este se va a tener que eliminar ya que no ejecuta storeprocedure
         public int ExecuteNonQuery(string pCommandText)
         {
             try
@@ -54,6 +57,34 @@ namespace IngenieriaSoftware.DAL
                     mCon.Close();
             }
         }
+        public int ExecuteNonQuery(string pNombreStoredProcedure, SqlParameter[] pParametros)
+        {
+            try
+            {
+                SqlCommand mComm = new SqlCommand(pNombreStoredProcedure, mCon)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                if (pParametros != null)
+                {
+                    mComm.Parameters.AddRange(pParametros);
+                }
+
+                mCon.Open();
+                return mComm.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (mCon.State != ConnectionState.Closed)
+                    mCon.Close();
+            }
+        }
+
 
         public DataSet ExecuteStoredProcedure(string pNombreStoreProcedure, SqlParameter[] pParametros)
         {

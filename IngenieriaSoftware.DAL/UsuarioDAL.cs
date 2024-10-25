@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -25,26 +26,40 @@ namespace IngenieriaSoftware.DAL
         // Método para obtener un usuario por su nombre
         public Usuario ObtenerUsuarioPorNombre(string pUsuarioNombre)
         {
-            string query = $"SELECT * FROM usuarios WHERE UserName = '{pUsuarioNombre}'";
-            DataSet mDs = new DAO().ExecuteDataSet(query);
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@UserName", pUsuarioNombre)
+            };
+
+            DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerUsuarioPorNombre", parametros);
+
             if (mDs.Tables.Count > 0 && mDs.Tables[0].Rows.Count > 0)
             {
                 Usuario mUsuario = new Usuario();
                 ValorizarEntidad(mUsuario, mDs.Tables[0].Rows[0]);
+
                 return mUsuario;
             }
             else
             {
                 return null;
             }
+
         }
 
         public int GuardarUsuario(Usuario pUsuario, DateTime FechaInicio)
         {
-            pUsuario.Id = ProximoId();  
-            string query = $"INSERT INTO usuarios (id_usuario, Username, PasswordHash, FechaCreacion) " +
-                           $"VALUES ({pUsuario.Id},'{pUsuario.Username}', '{pUsuario._passwordHash}', '{FechaInicio}')";
-            return _dao.ExecuteNonQuery(query); // Devuelve 1 si la inserción fue exitosa
+            pUsuario.Id = ProximoId();
+
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdUsuario", pUsuario.Id),
+                new SqlParameter("@Username", pUsuario.Username),
+                new SqlParameter("@PasswordHash", pUsuario._passwordHash),
+                new SqlParameter("@FechaCreacion", FechaInicio)
+            };
+
+            return _dao.ExecuteNonQuery("sp_GuardarUsuario", parametros);
         }
 
         private static void ValorizarEntidad(Usuario pUsuario, DataRow pDr)
