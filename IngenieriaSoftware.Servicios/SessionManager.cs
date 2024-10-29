@@ -1,5 +1,4 @@
 ﻿using System;
-using IngenieriaSoftware.BEL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios
 {
-    public class SessionManager
+    public class SessionManager 
     {
         public static object _lock = new Object();
 
         private static SessionManager _Session;
 
-        public Usuario Usuario { get; set; }
+        public IUsuario Usuario { get; set; }
 
         public DateTime FechaInicio { get; set; }
 
@@ -29,7 +28,7 @@ namespace IngenieriaSoftware.Servicios
         }
 
 
-        public static void LogIn(Usuario pUsuario)
+        public static void LogIn(IUsuario pUsuario)
         {
             lock (_lock)
             {

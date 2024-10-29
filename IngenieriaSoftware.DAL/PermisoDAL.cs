@@ -12,71 +12,85 @@ namespace IngenieriaSoftware.DAL
 {
     public class PermisoDAL
     {
-        private readonly DAO _dao;
-
+        private readonly DAO _dao = new DAO();
+        internal List<Permiso> _permisosGlobales; 
         public PermisoDAL()
         {
-            _dao = new DAO();
+            _permisosGlobales = new List<Permiso>(); // Para almacenar todos los permisos.
+
         }
 
-        public List<Permiso> ObtenerPermisosDelUsuario(int pUsuarioId)
+        public List<Permiso> PermisosGlobales()
         {
-            var permisos = new List<BEL.Permiso>();
-
-            string mNombreStoredProcedure = "sp_ObtenerPermisosDelUsuario";
-
-            SqlParameter[] mParametros = new SqlParameter[]
-            {
-                new SqlParameter("@usuario_id", pUsuarioId)
-            };
-
-            DataSet mDs = _dao.ExecuteStoredProcedure(mNombreStoredProcedure, mParametros);
-
-            foreach(DataRow row in mDs.Tables[0].Rows)
-            {
-                permisos.Add(new Permiso
-                {
-                    Id = (int)row["id"],
-                    Nombre = row["nombre"].ToString(),
-                    CodPermiso = row["permiso"].ToString()
-                });
-            }
-
-            return permisos;
+            return _permisosGlobales;
         }
 
-        public List<Permiso> ObtenerPermisos()
+        //public List<Permiso> ObtenerPermisosDelUsuario(int pUsuarioId)
+        //{
+        //    string mNombreStoredProcedure = "sp_ObtenerPermisosDelUsuario";
+
+        //    SqlParameter[] mParametros = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@usuario_id", pUsuarioId)
+        //    };
+
+        //    DataSet mDs = _dao.ExecuteStoredProcedure(mNombreStoredProcedure, mParametros);
+
+        //    PermisoMapper mapper = new PermisoMapper();
+        //    return mapper.MapearPermisosDesdeDataSet(mDs);
+        //}
+        
+
+
+        public void AsignarPermisosHijos(DataSet pDs)
         {
-            var permisos = new List<BEL.Permiso>();
-
-            string mNombreStoredProcedure = "sp_ObtenerTodosLosPermisos";
-
-
-            DataSet mDs = _dao.ExecuteStoredProcedure(mNombreStoredProcedure, null);
-
-            foreach (DataRow row in mDs.Tables[0].Rows)
+            // Limpiar la lista de permisos hijos antes de asignar nuevos permisos (opcional)
+            foreach (var permiso in _permisosGlobales)
             {
-                permisos.Add(new Permiso
-                {
-                    Id = (int)row["id_permiso"],
-                    Nombre = row["nombre_permiso"].ToString(),
-                    CodPermiso = row["permiso"].ToString(),
-                    EsRol = (bool)row["es_rol"],
-                    Habilitado = (bool)row["habilitado"],
-                }) ;
+                permiso.permisosHijos = new List<Permiso>();
             }
 
-            return permisos;
+            // Asignar permisos hijos a sus respectivos permisos padres
+            foreach (var permiso in _permisosGlobales)
+            {
+                // Si el permiso tiene un PermisoPadreId, intentamos asignarlo
+                if (permiso.PermisoPadreId.HasValue)
+                {
+                    // Encontrar el permiso que actúa como padre
+                    var permisoPadre = PermisosGlobales()
+                        .FirstOrDefault(p => p.Id == permiso.PermisoPadreId.Value);
+
+                    permisoPadre.permisosHijos.Add(permiso);
+                }
+            }
+        }
+
+        public Permiso ObtenerPermisoPorId(int idPermiso)
+        {
+            Permiso permiso = _permisosGlobales.FirstOrDefault(p => p.Id == idPermiso);
+
+            return permiso;
+        }
+
+        public List<Permiso> MapearPermisos(DataSet pDS)
+        {
+            // Mapearemos los permisos LO OY A HACER EN PERMISODAL
+           _permisosGlobales = new PermisoMapper().MapearPermisosTreeViewDesdeDataSet(pDS);
+            return _permisosGlobales;
         }
 
 
         //MODIFICAR PARA QUE DEVUELVA LIST<PERMISOS>
-        public DataSet ObtenerPermisosTreeView()
+        public List<Permiso> ObtenerPermisosTreeView()
         {
             string mNombreStoredProcedure = "sp_ObtenerPermisosTreeView";
             DataSet mDs = _dao.ExecuteStoredProcedure(mNombreStoredProcedure, null);
 
-            return mDs;
+            PermisoMapper permmisoMapper = new PermisoMapper();
+            UsuarioMapper usuarioMapper = new UsuarioMapper();
+            List<Permiso> permisos = permmisoMapper.MapearPermisosDesdeDataSet(mDs);
+         
+            return permisos;
         }
 
         public void AsignarPermiso(int usuarioId, int permisoId)
@@ -91,6 +105,7 @@ namespace IngenieriaSoftware.DAL
 
             _dao.ExecuteStoredProcedure(nombreStoredProcedure, parametros);
         }
+
 
 
 

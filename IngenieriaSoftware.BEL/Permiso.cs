@@ -16,5 +16,11 @@ namespace IngenieriaSoftware.BEL
 
         public string TipoPermiso { get; set; } // Podría usar un enum
         public int? PermisoPadreId { get; set; } // Permiso padre (opcional)
+
+        // Composicion donde un permiso puede tener muchos permisos
+        public List<Permiso> permisosHijos { get; set; } = new List<Permiso>();
+
+        //relacion de muchos a muchos con usuarios
+        public List<Usuario> Usuarios { get; set; } = new List<Usuario>();
     }
 }

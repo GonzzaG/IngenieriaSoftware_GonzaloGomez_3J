@@ -44,15 +44,10 @@
     <Compile Include="EncryptionManager.cs" />
     <Compile Include="HashingManager.cs" />
     <Compile Include="IPermisoService.cs" />
+    <Compile Include="IUsuarioConPermisos.cs" />
     <Compile Include="PermisoService.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">
-      <Project>{5da171d4-ef5b-4e09-8687-305243dfb51e}</Project>
-      <Name>IngenieriaSoftware.BEL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
