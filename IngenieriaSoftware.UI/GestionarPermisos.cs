@@ -55,7 +55,7 @@ namespace IngenieriaSoftware.UI
         private void ListarTreeView()
         { 
             var permisos = _usuarioBLL.ObtenerPermisosGlobales();
-            permisos = _usuarioBLL.ConstruirJerarquiaPermisos(permisos);
+           //permisos = _usuarioBLL.ConstruirJerarquiaPermisos(permisos);
             FillTreeView(permisos, treeViewPermisos);
 
         }
@@ -104,6 +104,12 @@ namespace IngenieriaSoftware.UI
             var permisosDelUsuario = _usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
 
             FillTreeView(permisosDelUsuario, treeViewPermisoUsuario);
+        }
+
+        private void btnAsignarPermiso_Click(object sender, EventArgs e)
+        {
+            if(treeViewPermisos.SelectedNode == null) return;
+            Permiso permiso = _permisoBLL.ObtenerPermisoPorId((int)treeViewPermisos.SelectedNode.Tag);
         }
     }
 }

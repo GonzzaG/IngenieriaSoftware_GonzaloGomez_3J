@@ -25,7 +25,8 @@ namespace IngenieriaSoftware.BLL
         {
             var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuario(pUserName);
 
-            return ConstruirJerarquiaPermisosRaiz(permisosUsuario);
+            //return ConstruirJerarquiaPermisosRaiz(permisosUsuario);
+            return permisosUsuario;
         }
 
         public List<Permiso> ConstruirJerarquiaPermisos(List<Permiso> permisos)

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.btnAsignarPermiso = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTotalPermisos = new System.Windows.Forms.Label();
             this.comboBoxUsuario = new System.Windows.Forms.ComboBox();
@@ -39,15 +39,16 @@
             this.lblUsuarioPermisos = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnRegistrar
+            // btnAsignarPermiso
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(80, 454);
-            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(201, 86);
-            this.btnRegistrar.TabIndex = 14;
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnAsignarPermiso.Location = new System.Drawing.Point(96, 294);
+            this.btnAsignarPermiso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAsignarPermiso.Name = "btnAsignarPermiso";
+            this.btnAsignarPermiso.Size = new System.Drawing.Size(201, 86);
+            this.btnAsignarPermiso.TabIndex = 14;
+            this.btnAsignarPermiso.Text = "Asignar permiso";
+            this.btnAsignarPermiso.UseVisualStyleBackColor = true;
+            this.btnAsignarPermiso.Click += new System.EventHandler(this.btnAsignarPermiso_Click);
             // 
             // label1
             // 
@@ -130,7 +131,7 @@
             this.Controls.Add(this.treeViewPermisos);
             this.Controls.Add(this.comboBoxRol);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnRegistrar);
+            this.Controls.Add(this.btnAsignarPermiso);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTotalPermisos);
             this.Controls.Add(this.comboBoxUsuario);
@@ -145,7 +146,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.Button btnAsignarPermiso;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTotalPermisos;
         private System.Windows.Forms.ComboBox comboBoxUsuario;

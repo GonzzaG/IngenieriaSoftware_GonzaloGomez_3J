@@ -84,7 +84,9 @@ namespace IngenieriaSoftware.DAL
             _usuarioGlobales = new UsuarioMapper().MapearUsuariosDesdeDataSet(UsuariosPermisosDataSet);
 
             // Mapearemos los permisos LO OY A HACER EN PERMISODAL
-            _permisoDAL.MapearPermisos(UsuariosPermisosDataSet);
+            var permisosMapeados = _permisoDAL.MapearPermisos(UsuariosPermisosDataSet);
+
+            _permisoDAL.AsignarPermisosHijos(UsuariosPermisosDataSet);
 
             // Ahora establecemos la relacion usuarios_permisos
             RelacionarUsuariosPermisos(UsuariosPermisosDataSet);
@@ -96,25 +98,70 @@ namespace IngenieriaSoftware.DAL
 
         public void RelacionarUsuariosPermisos(DataSet pDs)
         {
-             _permisoDAL.AsignarPermisosHijos(pDs);
-
             foreach (DataRow row in pDs.Tables[2].Rows)
             {
                 int idUsuario = (int)row["id_usuario"];
                 int idPermiso = (int)row["id_permiso"];
 
-
+                // Obtener el usuario correspondiente
                 Usuario usuario = _usuarioGlobales.FirstOrDefault(u => u.Id == idUsuario);
+
+                // Obtener el permiso correspondiente
                 Permiso permiso = _permisoDAL.ObtenerPermisoPorId(idPermiso);
+
                 if (usuario != null && permiso != null)
                 {
-                    usuario.Permisos.Add(permiso);
-
-                    permiso.Usuarios.Add(usuario);
+                    // Verificar si el permiso y sus hijos ya están asignados al usuario
+                    if (!TienePermiso(usuario, permiso))
+                    {
+                        // Agregar el permiso al usuario
+                        usuario.Permisos.Add(permiso);
+                        permiso.Usuarios.Add(usuario);
+                    }
                 }
             }
         }
 
+        private bool TienePermiso(Usuario usuario, Permiso permiso)
+        {
+            // Verificar si el permiso está directamente en la lista de permisos del usuario
+            if (usuario.Permisos.Contains(permiso))
+            {
+                return true;
+            }
+
+            // Buscar recursivamente en los permisos hijos de cada permiso del usuario
+            foreach (var permisoAsignado in usuario.Permisos)
+            {
+                if (VerificarPermisoRecursivo(permisoAsignado, permiso))
+                {
+                    return true;
+                }
+            }
+
+            return false; // Si no se encontró el permiso en la lista del usuario ni en sus hijos
+        }
+
+        // Método auxiliar recursivo para verificar permisos
+        private bool VerificarPermisoRecursivo(Permiso permisoActual, Permiso permisoBuscado)
+        {
+            // Verificar si el permiso actual es el que estamos buscando
+            if (permisoActual == permisoBuscado)
+            {
+                return true;
+            }
+
+            // Buscar en los permisos hijos del permiso actual
+            foreach (var hijo in permisoActual.permisosHijos)
+            {
+                if (VerificarPermisoRecursivo(hijo, permisoBuscado))
+                {
+                    return true;
+                }
+            }
+
+            return false; // Si no se encontró el permiso buscado en el permiso actual ni en sus hijos
+        }
 
 
 
