@@ -109,7 +109,7 @@ namespace IngenieriaSoftware.UI
         private void btnAsignarPermiso_Click(object sender, EventArgs e)
         {
             if(treeViewPermisos.SelectedNode == null) return;
-            Permiso permiso = _permisoBLL.ObtenerPermisoPorId((int)treeViewPermisos.SelectedNode.Tag);
+            Permiso permiso = _usuarioBLL.ObtenerPermisoPorId((int)treeViewPermisos.SelectedNode.Tag, comboBoxUsuario.SelectedItem.ToString());
         }
     }
 }

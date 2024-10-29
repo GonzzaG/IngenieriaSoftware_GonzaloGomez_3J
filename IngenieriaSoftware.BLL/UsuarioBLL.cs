@@ -15,25 +15,11 @@ namespace IngenieriaSoftware.BLL
         private UsuarioDAL _usuarioDAL = new UsuarioDAL();
         private List<Permiso> _permisoRaiz = new List<Permiso>();
 
-        public List<Permiso> ConstruirJerarquiaPermisosRaiz(List<Permiso> permisos)
-        {
-            // Filtrar y devolver solo los permisos que no tienen un padre (PermisoPadreId es null)
-            _permisoRaiz = permisos.Where(p => p.PermisoPadreId == null).ToList();
-            return _permisoRaiz;
-        }
         public List<Permiso> ObtenerPermisosDelUsuario(string pUserName)
         {
             var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuario(pUserName);
 
-            //return ConstruirJerarquiaPermisosRaiz(permisosUsuario);
             return permisosUsuario;
-        }
-
-        public List<Permiso> ConstruirJerarquiaPermisos(List<Permiso> permisos)
-        {
-            // Filtrar y devolver solo los permisos que no tienen un padre (PermisoPadreId es null)
-            _permisoRaiz = permisos.Where(p => p.PermisoPadreId == null).ToList();
-            return _permisoRaiz;
         }
 
         // Metodo para obtener los usuarios con sus permisos
@@ -53,13 +39,28 @@ namespace IngenieriaSoftware.BLL
         }
         public List<Permiso> ObtenerPermisosGlobales()
         {
-            return _usuarioDAL.PermisosGlobales();
+            return _usuarioDAL.PermisosTree();
 
         }
-        
-      
-            // Método para registrar un nuevo usuario
-            public bool RegistrarUsuario(Usuario pUsuario, DateTime FechaInicio)
+
+        public Permiso ObtenerPermisoPorId(int permisoId, string username)
+        {
+            var permisosGlobales = _usuarioDAL.PermisosGlobales();
+            
+            Permiso permiso = permisosGlobales.Find(p => p.Id == permisoId);
+
+//            var usuario = _usuarioDAL.UsuariosGlobales().Find(u => u.Username == username);
+                // encontre el usuario y el permiso, deberia verificar si el permiso ya se encuentra en el usuario para asi asignarlo en bd
+
+            var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuario(username);
+
+            return permiso;
+        }
+
+
+        #region Login LogOut
+        // Método para registrar un nuevo usuario
+        public bool RegistrarUsuario(Usuario pUsuario, DateTime FechaInicio)
         {
             //Obtener el usuario por su nombre
             Usuario mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(pUsuario.Username);
@@ -109,5 +110,6 @@ namespace IngenieriaSoftware.BLL
         {
             SessionManager.LogOut();
         }
+        #endregion
     }
 }

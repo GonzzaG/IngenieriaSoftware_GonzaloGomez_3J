@@ -41,11 +41,14 @@ namespace IngenieriaSoftware.DAL
             return _usuarioGlobales;
         }
 
+        public List<Permiso> PermisosTree()
+        {
+            return _permisoDAL.PermisosTree();
+        }
         public List<Permiso> PermisosGlobales()
         {
             return _permisoDAL.PermisosGlobales();
         }
-
         public List<Permiso> ObtenerPermisosDelUsuario(string pUsername)
         {
             Usuario usuario = _usuarioGlobales.Find(u => u.Username == pUsername);
@@ -83,7 +86,7 @@ namespace IngenieriaSoftware.DAL
             // Mapearemos los usuarios
             _usuarioGlobales = new UsuarioMapper().MapearUsuariosDesdeDataSet(UsuariosPermisosDataSet);
 
-            // Mapearemos los permisos LO OY A HACER EN PERMISODAL
+            // Mapearemos los permisos
             var permisosMapeados = _permisoDAL.MapearPermisos(UsuariosPermisosDataSet);
 
             _permisoDAL.AsignarPermisosHijos(UsuariosPermisosDataSet);
@@ -163,8 +166,52 @@ namespace IngenieriaSoftware.DAL
             return false; // Si no se encontró el permiso buscado en el permiso actual ni en sus hijos
         }
 
+        public Permiso BuscarPermiso(int permisoBuscadoId, List<Permiso> permisos)
+        {
+            foreach(Permiso permiso in permisos)
+            {
+                var permisoEncontrado = permiso.permisosHijos.Find(p => p.Id == permisoBuscadoId);
+                // Verificar si el permiso está directamente en la lista de permisos del usuario
+                if (permisoEncontrado != null)
+                {
+                    return permisoEncontrado;
+                }
 
+                // Buscar recursivamente en los permisos hijos de cada permiso del usuario
+                foreach (var permisoAsignado in permiso.permisosHijos)
+                {
+                    permisoEncontrado = VerificarPermisoRecursivo(permisoAsignado, permisoBuscadoId);
+                    if (permisoEncontrado != null)
+                    {
+                        return permisoEncontrado;
+                    }
+                }
+            
+            }
 
+            throw new Exception("Permiso no encontrado"); // Si no se encontró el permiso en la lista del usuario ni en sus hijos
+        }
+        // Método auxiliar recursivo para verificar permisos
+        private Permiso VerificarPermisoRecursivo(Permiso permisoActual, int permisoBuscadoId)
+        {
+            var permisoEncontrado = permisoActual.permisosHijos.Find(p => p.Id == permisoBuscadoId);
+            // Verificar si el permiso actual es el que estamos buscando
+            if (permisoEncontrado != null)
+            {
+                return permisoEncontrado;
+            }
+
+            // Buscar en los permisos hijos del permiso actual
+            foreach (var hijo in permisoActual.permisosHijos)
+            {
+                permisoEncontrado = VerificarPermisoRecursivo(hijo, permisoBuscadoId);
+                if (permisoEncontrado != null)
+                {
+                    return permisoEncontrado;
+                }
+            }
+            return null;
+        }
 
         public int GuardarUsuario(Usuario pUsuario, DateTime FechaInicio)
         {
@@ -178,7 +225,7 @@ namespace IngenieriaSoftware.DAL
                 new SqlParameter("@FechaCreacion", FechaInicio)
             };
 
-            return _dao.ExecuteNonQuery("sp_GuardarUsuario", parametros);
+            return _dao.ExecuteNonQuery("sp_GuardarUsuario",  parametros);
         }
     }
 }

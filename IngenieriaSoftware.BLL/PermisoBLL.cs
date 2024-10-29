@@ -30,7 +30,7 @@ namespace IngenieriaSoftware.BLL
 
         public List<Permiso> ObtenerPermisos()
         {
-            return new PermisoDAL().PermisosGlobales();
+            return new PermisoDAL().PermisosTree();
         }
 
         public Permiso ObtenerPermisoPorId(int permisoId)

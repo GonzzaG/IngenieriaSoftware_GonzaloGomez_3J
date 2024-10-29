@@ -13,18 +13,20 @@ namespace IngenieriaSoftware.DAL
     public class PermisoDAL
     {
         private readonly DAO _dao = new DAO();
+        internal List<Permiso> _permisosTree; 
         internal List<Permiso> _permisosGlobales; 
-        public PermisoDAL(List<Permiso> permisoGlobal)
-        {
-            _permisosGlobales = permisoGlobal;// Para almacenar todos los permisos.
-
-        }
+   
         public PermisoDAL() { }
 
+        public List<Permiso> PermisosTree()
+        {
+            return _permisosTree;
+        }
         public List<Permiso> PermisosGlobales()
         {
             return _permisosGlobales;
         }
+
 
         public void AsignarPermisosHijos(DataSet pDs)
         {
@@ -32,10 +34,10 @@ namespace IngenieriaSoftware.DAL
             var permisosConHijos = new List<Permiso>();
 
             // Crear un diccionario para facilitar la búsqueda de permisos por ID
-            var permisosPorId = _permisosGlobales.ToDictionary(p => p.Id);
+            var permisosPorId = _permisosTree.ToDictionary(p => p.Id);
 
-            // Limpiar la lista de permisos hijos de cada permiso en _permisosGlobales
-            foreach (var permiso in _permisosGlobales)
+            // Limpiar la lista de permisos hijos de cada permiso en _permisosTree
+            foreach (var permiso in _permisosTree)
             {
                 permiso.permisosHijos.Clear(); // Limpiar la lista de permisos hijos
             }
@@ -59,7 +61,7 @@ namespace IngenieriaSoftware.DAL
             }
 
             // Agregar solo los permisos que no tienen padre (permisos raíz) a la lista de resultados
-            foreach (var permiso in _permisosGlobales)
+            foreach (var permiso in _permisosTree)
             {
                 // Solo agregar permisos que no tienen un PermisoPadreId (permisos raíz)
                 if (!permiso.PermisoPadreId.HasValue)
@@ -69,7 +71,7 @@ namespace IngenieriaSoftware.DAL
             }
 
             // Retornar la nueva lista de permisos que incluye sus hijos
-            _permisosGlobales = permisosConHijos;
+            _permisosTree = permisosConHijos;
         }
 
 
@@ -80,12 +82,12 @@ namespace IngenieriaSoftware.DAL
         public Permiso ObtenerPermisoPorId(int idPermiso)
         {
             // Buscar el permiso directamente en la lista
-            var permiso = _permisosGlobales.FirstOrDefault(p => p.Id == idPermiso);
+            var permiso = _permisosTree.FirstOrDefault(p => p.Id == idPermiso);
 
             // Si no se encuentra, buscar recursivamente en los permisos hijos
             if (permiso == null)
             {
-                foreach (var p in _permisosGlobales)
+                foreach (var p in _permisosTree)
                 {
                     permiso = BuscarPermisoEnHijos(p, idPermiso);
                     if (permiso != null)
@@ -124,8 +126,10 @@ namespace IngenieriaSoftware.DAL
         public List<Permiso> MapearPermisos(DataSet pDS)
         {
             // Mapearemos los permisos LO OY A HACER EN PERMISODAL
-           _permisosGlobales = new PermisoMapper().MapearPermisosTreeViewDesdeDataSet(pDS);
-            return _permisosGlobales;
+            _permisosGlobales = new PermisoMapper().MapearPermisosTreeViewDesdeDataSet(pDS);
+            _permisosTree = _permisosGlobales;
+
+            return _permisosTree;
         }
 
 
