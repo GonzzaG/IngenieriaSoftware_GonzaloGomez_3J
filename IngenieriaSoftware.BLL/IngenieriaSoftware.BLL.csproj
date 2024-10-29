@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="AuthService.cs" />
     <Compile Include="PermisoBLL.cs" />
+    <Compile Include="PermisoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioBLL.cs" />
+    <Compile Include="UsuarioManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">
