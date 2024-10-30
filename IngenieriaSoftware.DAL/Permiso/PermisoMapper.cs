@@ -15,25 +15,6 @@ namespace IngenieriaSoftware.DAL
         {
             var permisos = new List<Permiso>();
 
-            foreach (DataRow row in pDS.Tables[0].Rows)
-            {
-                permisos.Add(new Permiso
-                {
-                    Id = (int)row["id_permiso"],
-                    Nombre = row["nombre_permiso"].ToString(),
-                    CodPermiso = row["permiso"].ToString(),
-                    EsRol = (bool)row["es_rol"],
-                    Habilitado = (bool)row["habilitado"],
-                });
-            }
-
-            return permisos;
-        }
-
-        public List<Permiso> MapearPermisosTreeViewDesdeDataSet(DataSet pDS)
-        {
-            var permisos = new List<Permiso>();
-
 
             foreach (DataRow row in pDS.Tables[0].Rows)
             {

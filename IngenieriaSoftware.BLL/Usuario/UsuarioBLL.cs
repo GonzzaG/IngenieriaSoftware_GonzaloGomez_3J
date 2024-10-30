@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 
 namespace IngenieriaSoftware.BLL
@@ -15,11 +16,66 @@ namespace IngenieriaSoftware.BLL
         private UsuarioDAL _usuarioDAL = new UsuarioDAL();
         private List<Permiso> _permisoRaiz = new List<Permiso>();
 
-        public List<Permiso> ObtenerPermisosDelUsuario(string pUserName)
+        #region Eliminar Usuarios Metodos
+        public List<Usuario> EliminarUsuario(List<Usuario> usuarios, string usuarioAEliminarNombre)
         {
-            var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuario(pUserName);
+            try
+            {
+                Usuario usuarioAEliminar = usuarios.Find(u => u.Username == usuarioAEliminarNombre);
+                //eliminar usuario en bd
+                _usuarioDAL.EliminarUsuario(usuarioAEliminar.Id);
+
+                //eliminar usuario de lista
+                usuarios.Remove(usuarioAEliminar);
+                return usuarios;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+
+        #region Usuarios permisos Metodos
+        public List<Permiso> ObtenerPermisosDelUsuarioEnMemoria(string pUserName)
+        {
+           // var permisos;
+            var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
 
             return permisosUsuario;
+        }
+
+        public List<Permiso> CargarPermisosDelUsuario(string pUserName)
+        {
+            
+            // var permisos;
+            var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
+
+            return permisosUsuario;
+        }
+
+        public List<Permiso> ObtenerPermisosDelUsuario(string pUserName)
+        {
+            List<Permiso> permisosUsuario= _usuarioDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
+
+            return permisosUsuario;
+        }
+
+        public List<Usuario> CargarUsuarios()
+        {
+            List<Usuario> _usuariosGlobales = _usuarioDAL.ObtenerTodosLosUsuarios();
+
+            if (_usuariosGlobales == null)
+            {
+                throw new Exception("No hay usuarios almacenados");
+            }
+            else
+            {
+                return _usuariosGlobales;
+            }
         }
 
         // Metodo para obtener los usuarios con sus permisos
@@ -43,19 +99,51 @@ namespace IngenieriaSoftware.BLL
 
         }
 
-        public Permiso ObtenerPermisoPorId(int permisoId, string username)
+        public List<Permiso> AsignarPermisoUsuario(int permisoId, string username)
         {
             var permisosGlobales = _usuarioDAL.PermisosGlobales();
             
             Permiso permiso = permisosGlobales.Find(p => p.Id == permisoId);
 
-//            var usuario = _usuarioDAL.UsuariosGlobales().Find(u => u.Username == username);
-                // encontre el usuario y el permiso, deberia verificar si el permiso ya se encuentra en el usuario para asi asignarlo en bd
+            var usuario = _usuarioDAL.UsuariosGlobales().Find(u => u.Username == username);
 
-            var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuario(username);
+            if(_usuarioDAL.TienePermiso(usuario, permiso))
+            {
+                throw new Exception($"{username} ya tiene el permiso {permiso.Nombre}");
+            }
+            else 
+            {
+                try
+                {
+                    // Si no tiene el permiso, se lo asignamos en base de datos
+                    _usuarioDAL.AsignarPermiso(usuario.Id, permisoId);
+             
+                }
+                catch(Exception ex)
+                {
+                    throw ex;   
+                }
+            
 
-            return permiso;
+            }
+
+            return usuario.Permisos;
         }
+
+        public void DesasignarPermisoUsuario (string username, int permisoId)
+        {
+            try
+            {
+                _usuarioDAL.DesasignarPermiso(username, permisoId);
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
 
 
         #region Login LogOut
@@ -67,8 +155,6 @@ namespace IngenieriaSoftware.BLL
 
             if (mUsuario == null)
             {
-                //pUsuario.Password
-
                 // Si no encuentra el usuario en la bd, lo guarda en la base de datos
                 int resultado = _usuarioDAL.GuardarUsuario(pUsuario, FechaInicio);
 

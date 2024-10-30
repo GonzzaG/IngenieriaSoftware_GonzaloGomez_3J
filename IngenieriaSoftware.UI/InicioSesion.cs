@@ -31,11 +31,7 @@ namespace IngenieriaSoftware.UI
             {
                 
                 if(_authService.LogIn(textBox1.Text, textBox2.Text))
-                {
-                    button1.Visible = false;
-                    button2.Visible = true;
-
-
+                {               
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -57,8 +53,6 @@ namespace IngenieriaSoftware.UI
             try
             {
                 _authService.LogOut();
-                button1.Visible = true;
-                button2.Visible = false;
             }
             catch (Exception ex)
             {

@@ -99,6 +99,7 @@ namespace IngenieriaSoftware.DAL
 
             return permiso;
         }
+
         // Método auxiliar para buscar permisos en los hijos de un permiso
         private Permiso BuscarPermisoEnHijos(Permiso permiso, int idPermiso)
         {
@@ -126,37 +127,36 @@ namespace IngenieriaSoftware.DAL
         public List<Permiso> MapearPermisos(DataSet pDS)
         {
             // Mapearemos los permisos LO OY A HACER EN PERMISODAL
-            _permisosGlobales = new PermisoMapper().MapearPermisosTreeViewDesdeDataSet(pDS);
+            _permisosGlobales = new PermisoMapper().MapearPermisosDesdeDataSet(pDS);
             _permisosTree = _permisosGlobales;
 
             return _permisosTree;
         }
 
-
-        //MODIFICAR PARA QUE DEVUELVA LIST<PERMISOS>
-        public List<Permiso> ObtenerPermisosTreeView()
+        public DataSet AsignarPermiso(int usuarioId, int permisoId)
         {
-            string mNombreStoredProcedure = "sp_ObtenerPermisosTreeView";
-            DataSet mDs = _dao.ExecuteStoredProcedure(mNombreStoredProcedure, null);
-
-            PermisoMapper permmisoMapper = new PermisoMapper();
-            UsuarioMapper usuarioMapper = new UsuarioMapper();
-            List<Permiso> permisos = permmisoMapper.MapearPermisosDesdeDataSet(mDs);
-         
-            return permisos;
-        }
-
-        public void AsignarPermiso(int usuarioId, int permisoId)
-        {
-            string nombreStoredProcedure = "sp_AsignarPermiso";
-
-            SqlParameter[] parametros = new SqlParameter[]
+            try
             {
-                new SqlParameter("@usuario_id", usuarioId),
-                new SqlParameter("@permiso_id", permisoId)
-            };
+                string nombreStoredProcedure = "sp_AsignarPermiso";
 
-            _dao.ExecuteStoredProcedure(nombreStoredProcedure, parametros);
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@usuario_id", usuarioId),
+                    new SqlParameter("@permiso_id", permisoId)
+                };
+
+                var permisosUsuarioDataSet = _dao.ExecuteStoredProcedure(nombreStoredProcedure, parametros);
+
+                if(permisosUsuarioDataSet != null)
+                    return permisosUsuarioDataSet;
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
 

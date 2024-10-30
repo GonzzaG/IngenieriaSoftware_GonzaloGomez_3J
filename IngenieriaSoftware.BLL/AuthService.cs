@@ -15,7 +15,7 @@ namespace IngenieriaSoftware.BLL
             Usuario _Usuario = new Usuario
             {
                 Username = pNombreUsuario,
-                _passwordHash = pContrasena
+                _passwordHash = HashingManager.GenerarHash(pContrasena)
             };
 
             if (new UsuarioBLL().LogIn(_Usuario.Username, _Usuario._passwordHash))
@@ -29,7 +29,6 @@ namespace IngenieriaSoftware.BLL
                 throw new Exception("Fallo en las credenciales.");
             }
 
-            //new UsuarioBLL().RegistrarUsuario(_Usuario, SessionManager.GetInstance);
         }
 
         public void LogOut()
@@ -42,7 +41,7 @@ namespace IngenieriaSoftware.BLL
             Usuario _Usuario = new Usuario
             {
                 Username = pNombreUsuario,
-                _passwordHash = pContrasena
+                _passwordHash = HashingManager.GenerarHash(pContrasena)
             };
 
             if (new UsuarioBLL().RegistrarUsuario(_Usuario, DateTime.Now))

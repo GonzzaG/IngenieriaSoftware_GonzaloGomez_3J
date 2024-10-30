@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EliminarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EliminarUsuario.Designer.cs">
+      <DependentUpon>EliminarUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="GestionarPermisos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EliminarUsuario.resx">
+      <DependentUpon>EliminarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GestionarPermisos.resx">
       <DependentUpon>GestionarPermisos.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +131,10 @@
     <ProjectReference Include="..\IngenieriaSoftware.BLL\IngenieriaSoftware.BLL.csproj">
       <Project>{07222a65-46d4-408e-91b8-c8bd4c3cd860}</Project>
       <Name>IngenieriaSoftware.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IngenieriaSoftware.Servicios\IngenieriaSoftware.Servicios.csproj">
+      <Project>{88779aa0-50fe-4fae-af75-2374a220469d}</Project>
+      <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

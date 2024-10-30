@@ -37,11 +37,12 @@
             this.treeViewPermisos = new System.Windows.Forms.TreeView();
             this.treeViewPermisoUsuario = new System.Windows.Forms.TreeView();
             this.lblUsuarioPermisos = new System.Windows.Forms.Label();
+            this.btnDesasignarPermiso = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAsignarPermiso
             // 
-            this.btnAsignarPermiso.Location = new System.Drawing.Point(96, 294);
+            this.btnAsignarPermiso.Location = new System.Drawing.Point(79, 245);
             this.btnAsignarPermiso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAsignarPermiso.Name = "btnAsignarPermiso";
             this.btnAsignarPermiso.Size = new System.Drawing.Size(201, 86);
@@ -121,11 +122,23 @@
             this.lblUsuarioPermisos.TabIndex = 19;
             this.lblUsuarioPermisos.Text = "Permisos del usuario";
             // 
+            // btnDesasignarPermiso
+            // 
+            this.btnDesasignarPermiso.Location = new System.Drawing.Point(79, 350);
+            this.btnDesasignarPermiso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDesasignarPermiso.Name = "btnDesasignarPermiso";
+            this.btnDesasignarPermiso.Size = new System.Drawing.Size(201, 86);
+            this.btnDesasignarPermiso.TabIndex = 21;
+            this.btnDesasignarPermiso.Text = "Desasignar permiso";
+            this.btnDesasignarPermiso.UseVisualStyleBackColor = true;
+            this.btnDesasignarPermiso.Click += new System.EventHandler(this.btnDesasignarPermiso_Click);
+            // 
             // GestionarPermisos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 577);
+            this.Controls.Add(this.btnDesasignarPermiso);
             this.Controls.Add(this.treeViewPermisoUsuario);
             this.Controls.Add(this.lblUsuarioPermisos);
             this.Controls.Add(this.treeViewPermisos);
@@ -155,5 +168,6 @@
         private System.Windows.Forms.TreeView treeViewPermisos;
         private System.Windows.Forms.TreeView treeViewPermisoUsuario;
         private System.Windows.Forms.Label lblUsuarioPermisos;
+        private System.Windows.Forms.Button btnDesasignarPermiso;
     }
 }

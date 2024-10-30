@@ -29,50 +29,6 @@ namespace IngenieriaSoftware.DAL
             mCon = new SqlConnection(connectionString);
         }
 
-        //este metodo sera elimnado por la misma razon que executenonquery
-        public DataSet ExecuteDataSet(string pCommandText)
-        {
-            try
-            {
-                SqlDataAdapter mDa = new SqlDataAdapter(pCommandText, mCon);
-
-                DataSet mDs = new DataSet();
-                mDa.Fill(mDs);
-
-                return mDs;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (mCon.State != ConnectionState.Closed)
-                    mCon.Close();
-            }
-        }
-
-        //este se va a tener que eliminar ya que no ejecuta storeprocedure
-        public int ExecuteNonQuery(string pCommandText)
-        {
-            try
-            {
-                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
-
-                mCon.Open();
-
-                return mComm.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (mCon.State != ConnectionState.Closed)
-                    mCon.Close();
-            }
-        }
         public int ExecuteNonQuery(string pNombreStoredProcedure, SqlParameter[] pParametros)
         {
             try
@@ -142,6 +98,7 @@ namespace IngenieriaSoftware.DAL
         {
             try
             {
+                Conectar();
                 SqlCommand mComm = new SqlCommand("SELECT ISNULL(MAX(" + pColumnaId + "),0) FROM " + pTabla, mCon);
 
                 mCon.Open();

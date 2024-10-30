@@ -43,11 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO.cs" />
-    <Compile Include="PermisoDAL.cs" />
-    <Compile Include="PermisoMapper.cs" />
+    <Compile Include="Permiso\PermisoDAL.cs" />
+    <Compile Include="Permiso\PermisoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsuarioDAL.cs" />
-    <Compile Include="UsuarioMapper.cs" />
+    <Compile Include="Usuario\UsuarioDAL.cs" />
+    <Compile Include="Usuario\UsuarioMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">

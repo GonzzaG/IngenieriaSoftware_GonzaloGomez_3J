@@ -15,14 +15,12 @@ namespace IngenieriaSoftware.UI
 {
     public partial class GestionarPermisos : Form
     {
-        private readonly PermisoBLL _permisoBLL;
         private readonly UsuarioBLL _usuarioBLL;
         public GestionarPermisos()
         {
             InitializeComponent();
-            _permisoBLL = new PermisoBLL();
             _usuarioBLL = new UsuarioBLL();
-            CargarFormulario(); 
+            ActualizarFormulario(); 
             
         }
 
@@ -39,13 +37,14 @@ namespace IngenieriaSoftware.UI
 
         public void listarUsuarios(List<Usuario> pUsuarios)
         {
+            comboBoxUsuario.Items.Clear();
             foreach(Usuario usuario in pUsuarios)
             {
                 comboBoxUsuario.Items.Add(usuario.Username);
             }
         }
 
-        public void CargarFormulario()
+        public void ActualizarFormulario()
         {
             CargarUsuariosPermisos();
             ListarTreeView();
@@ -55,7 +54,6 @@ namespace IngenieriaSoftware.UI
         private void ListarTreeView()
         { 
             var permisos = _usuarioBLL.ObtenerPermisosGlobales();
-           //permisos = _usuarioBLL.ConstruirJerarquiaPermisos(permisos);
             FillTreeView(permisos, treeViewPermisos);
 
         }
@@ -101,15 +99,53 @@ namespace IngenieriaSoftware.UI
         {
             if (comboBoxUsuario.SelectedItem == null) return;
             string nombreUsuario = comboBoxUsuario.SelectedItem.ToString();
-            var permisosDelUsuario = _usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
+            var permisosDelUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
 
             FillTreeView(permisosDelUsuario, treeViewPermisoUsuario);
         }
 
         private void btnAsignarPermiso_Click(object sender, EventArgs e)
         {
-            if(treeViewPermisos.SelectedNode == null) return;
-            Permiso permiso = _usuarioBLL.ObtenerPermisoPorId((int)treeViewPermisos.SelectedNode.Tag, comboBoxUsuario.SelectedItem.ToString());
+            if (treeViewPermisos.SelectedNode == null) return;
+            if (comboBoxUsuario.Text.Length == 0) return;
+            try
+            {
+                string nombreUsuario = comboBoxUsuario.Text.ToString();
+                List<Permiso> permisosUsuario = _usuarioBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, nombreUsuario);
+
+                ActualizarFormulario();
+                permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
+                
+                FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnDesasignarPermiso_Click(object sender, EventArgs e)
+        {
+            if (treeViewPermisoUsuario.SelectedNode == null) return;
+            if (comboBoxUsuario.Text.Length == 0) return;
+            try
+            {
+                string nombreUsuario = comboBoxUsuario.Text.ToString();
+                _usuarioBLL.DesasignarPermisoUsuario(nombreUsuario, (int)treeViewPermisoUsuario.SelectedNode.Tag);
+
+                ActualizarFormulario();
+                var permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
+
+                FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

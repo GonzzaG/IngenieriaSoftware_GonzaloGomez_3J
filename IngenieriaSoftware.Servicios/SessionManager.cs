@@ -15,6 +15,14 @@ namespace IngenieriaSoftware.Servicios
         public IUsuario Usuario { get; set; }
 
         public DateTime FechaInicio { get; set; }
+        public static IUsuario UsuarioActual
+        {
+            get
+            {
+                if (_Session == null) throw new Exception("Sesión no iniciada.");
+                return _Session.Usuario;
+            }
+        }
 
         public static SessionManager GetInstance
         {
@@ -26,7 +34,6 @@ namespace IngenieriaSoftware.Servicios
             }
 
         }
-
 
         public static void LogIn(IUsuario pUsuario)
         {
