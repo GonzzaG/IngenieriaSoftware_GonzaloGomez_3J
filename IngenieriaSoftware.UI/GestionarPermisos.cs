@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.Servicios;
 namespace IngenieriaSoftware.UI
 {
     public partial class GestionarPermisos : Form
@@ -57,7 +58,7 @@ namespace IngenieriaSoftware.UI
             FillTreeView(permisos, treeViewPermisos);
 
         }
-        private void FillTreeView(List<Permiso> permisosJerarquizados, TreeView treeViewPermisos)
+        private void FillTreeView(List<IPermiso> permisosJerarquizados, TreeView treeViewPermisos)
         {
             // Limpiar el TreeView antes de llenarlo
             treeViewPermisos.Nodes.Clear();
@@ -75,7 +76,7 @@ namespace IngenieriaSoftware.UI
         }
 
         // Método recursivo para construir nodos del TreeView con sus hijos
-        private TreeNode CrearNodoRecursivo(Permiso permiso)
+        private TreeNode CrearNodoRecursivo(IPermiso permiso)
         {
             // Crear un nodo para el permiso actual
             TreeNode nodo = new TreeNode(permiso.Nombre)
@@ -84,7 +85,7 @@ namespace IngenieriaSoftware.UI
             };
 
             // Recorrer los permisos hijos del permiso actual y añadirlos como nodos hijos
-            foreach (var hijo in permiso.permisosHijos)
+            foreach (IPermiso hijo in permiso.permisosHijos)
             {
                 TreeNode nodoHijo = CrearNodoRecursivo(hijo);
                 nodo.Nodes.Add(nodoHijo);
@@ -111,7 +112,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 string nombreUsuario = comboBoxUsuario.Text.ToString();
-                List<Permiso> permisosUsuario = _usuarioBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, nombreUsuario);
+                List<IPermiso> permisosUsuario = _usuarioBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, nombreUsuario);
 
                 ActualizarFormulario();
                 permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);

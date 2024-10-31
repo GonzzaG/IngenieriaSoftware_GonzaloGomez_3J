@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -66,18 +67,18 @@ namespace IngenieriaSoftware.DAL
             return _usuarioGlobales;
         }
 
-        public List<Permiso> PermisosTree()
+        public List<IPermiso> PermisosTree()
         {
             return _permisoDAL.PermisosTree();
         }
-        public List<Permiso> PermisosGlobales()
+        public List<IPermiso> PermisosGlobales()
         {
             return _permisoDAL.PermisosGlobales();
         }
         
         // Asignamos el permiso al usuario y retornamos la lista de permisos
 
-        public List<Permiso> ObtenerPermisosDelUsuarioEnMemoria(string pUsername)
+        public List<IPermiso> ObtenerPermisosDelUsuarioEnMemoria(string pUsername)
         {
             Usuario usuario = _usuarioGlobales.Find(u => u.Username == pUsername);
 
@@ -101,7 +102,7 @@ namespace IngenieriaSoftware.DAL
 
         }
 
-        public List<Permiso> ObtenerPermisosDelUsuarioPorUsername(string pUsuarioNombre)
+        public List<IPermiso> ObtenerPermisosDelUsuarioPorUsername(string pUsuarioNombre)
         {
             try
             {
@@ -111,7 +112,7 @@ namespace IngenieriaSoftware.DAL
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosUsuarioPorUsername", parametros);
-                List<Permiso> permisosUsuario = new PermisoMapper().MapearPermisosDesdeDataSet(mDs);
+                List<IPermiso> permisosUsuario = new PermisoMapper().MapearPermisosDesdeDataSet(mDs);
 
                 return permisosUsuario;
 
@@ -182,7 +183,7 @@ namespace IngenieriaSoftware.DAL
                 Usuario usuario = _usuarioGlobales.FirstOrDefault(u => u.Id == idUsuario);
 
                 // Obtener el permiso correspondiente
-                Permiso permiso = _permisoDAL.ObtenerPermisoPorId(idPermiso);
+                Permiso permiso = (Permiso)_permisoDAL.ObtenerPermisoPorId(idPermiso);
 
                 if (usuario != null && permiso != null)
                 {
@@ -197,7 +198,7 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public bool TienePermiso(Usuario usuario, Permiso permiso)
+        public bool TienePermiso(Usuario usuario, IPermiso permiso)
         {
             // Verificar si el permiso está directamente en la lista de permisos del usuario
             if (usuario.Permisos.Contains(permiso))
@@ -218,7 +219,7 @@ namespace IngenieriaSoftware.DAL
         }
 
         // Método auxiliar recursivo para verificar permisos
-        private bool VerificarPermisoRecursivo(Permiso permisoActual, Permiso permisoBuscado)
+        private bool VerificarPermisoRecursivo(IPermiso permisoActual, IPermiso permisoBuscado)
         {
             // Verificar si el permiso actual es el que estamos buscando
             if (permisoActual == permisoBuscado)
@@ -227,7 +228,7 @@ namespace IngenieriaSoftware.DAL
             }
 
             // Buscar en los permisos hijos del permiso actual
-            foreach (var hijo in permisoActual.permisosHijos)
+            foreach (IPermiso hijo in permisoActual.permisosHijos)
             {
                 if (VerificarPermisoRecursivo(hijo, permisoBuscado))
                 {
@@ -267,6 +268,19 @@ namespace IngenieriaSoftware.DAL
             
         }
 
+        public void AsignarPermisoPorCod(string username, string permisoCod)
+        {
+            try
+            {
+               _permisoDAL.AsignarPermisoPorCod(username, permisoCod);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public void DesasignarPermiso(string username, int permisoId)
         {         
             try
@@ -287,7 +301,7 @@ namespace IngenieriaSoftware.DAL
                 if (usuario != null)
                 {
                     // Encuentra el permiso que deseas eliminar y quítalo
-                    Permiso permisoAEliminar = usuario.Permisos.FirstOrDefault(p => p.Id == permisoId);
+                    Permiso permisoAEliminar = (Permiso)usuario.Permisos.FirstOrDefault(p => p.Id == permisoId);
                     if (permisoAEliminar != null)
                     {
                         usuario.Permisos.Remove(permisoAEliminar);

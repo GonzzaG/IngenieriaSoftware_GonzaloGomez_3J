@@ -40,7 +40,7 @@ namespace IngenieriaSoftware.BLL
 
 
         #region Usuarios permisos Metodos
-        public List<Permiso> ObtenerPermisosDelUsuarioEnMemoria(string pUserName)
+        public List<IPermiso> ObtenerPermisosDelUsuarioEnMemoria(string pUserName)
         {
            // var permisos;
             var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
@@ -48,7 +48,7 @@ namespace IngenieriaSoftware.BLL
             return permisosUsuario;
         }
 
-        public List<Permiso> CargarPermisosDelUsuario(string pUserName)
+        public List<IPermiso> CargarPermisosDelUsuario(string pUserName)
         {
             
             // var permisos;
@@ -57,9 +57,9 @@ namespace IngenieriaSoftware.BLL
             return permisosUsuario;
         }
 
-        public List<Permiso> ObtenerPermisosDelUsuario(string pUserName)
+        public List<IPermiso> ObtenerPermisosDelUsuario(string pUserName)
         {
-            List<Permiso> permisosUsuario= _usuarioDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
+            List<IPermiso> permisosUsuario= _usuarioDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
 
             return permisosUsuario;
         }
@@ -93,17 +93,17 @@ namespace IngenieriaSoftware.BLL
             }
           
         }
-        public List<Permiso> ObtenerPermisosGlobales()
+        public List<IPermiso> ObtenerPermisosGlobales()
         {
             return _usuarioDAL.PermisosTree();
 
         }
 
-        public List<Permiso> AsignarPermisoUsuario(int permisoId, string username)
+        public List<IPermiso> AsignarPermisoUsuario(int permisoId, string username)
         {
             var permisosGlobales = _usuarioDAL.PermisosGlobales();
-            
-            Permiso permiso = permisosGlobales.Find(p => p.Id == permisoId);
+
+            IPermiso permiso = permisosGlobales.Find(p => p.Id == permisoId);
 
             var usuario = _usuarioDAL.UsuariosGlobales().Find(u => u.Username == username);
 
@@ -128,6 +128,19 @@ namespace IngenieriaSoftware.BLL
             }
 
             return usuario.Permisos;
+        }
+
+        public void AsignarPermisoPorCod(string username, string permisoCod)
+        {
+            try
+            {
+                _usuarioDAL.AsignarPermisoPorCod(username, permisoCod);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+                
         }
 
         public void DesasignarPermisoUsuario (string username, int permisoId)

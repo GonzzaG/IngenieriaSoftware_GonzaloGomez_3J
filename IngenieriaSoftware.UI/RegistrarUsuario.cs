@@ -11,12 +11,14 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class GestionUsuarios : Form
+    public partial class RegistrarUsuario : Form
     {
         private readonly AuthService _authService = new AuthService();
-        public GestionUsuarios()
+        private readonly UsuarioBLL _usuarioBLL;
+        public RegistrarUsuario()
         {
             InitializeComponent();
+            _usuarioBLL = new UsuarioBLL();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -42,11 +44,25 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-
+                if(txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0 || comboBoxCategorias.SelectedItem == null) { return; }
                 if (_authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text))
                 {
-                 
-
+                    switch (comboBoxCategorias.Text)
+                    {
+                        case "Administrador":
+                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_ADMIN");
+                            break;
+                        case "Mesero":
+                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_MESERO");
+                            break;
+                        case "Caja":
+                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_CAJA");
+                            break;
+                        case "Cocina":
+                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_COCINA");
+                            break;
+                    }
+                   
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

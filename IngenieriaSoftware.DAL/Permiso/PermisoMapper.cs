@@ -6,14 +6,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IngenieriaSoftware.Servicios;
 
 namespace IngenieriaSoftware.DAL
 {
     public class PermisoMapper
     {
-        public List<Permiso> MapearPermisosDesdeDataSet(DataSet pDS)
+        public List<IPermiso> MapearPermisosDesdeDataSet(DataSet pDS)
         {
-            var permisos = new List<Permiso>();
+            var permisos = new List<IPermiso>();
 
 
             foreach (DataRow row in pDS.Tables[0].Rows)

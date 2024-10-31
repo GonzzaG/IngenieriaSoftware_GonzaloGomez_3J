@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI
 {
-    partial class GestionUsuarios
+    partial class RegistrarUsuario
     {
         /// <summary>
         /// Required designer variable.

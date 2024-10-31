@@ -13,18 +13,32 @@ namespace IngenieriaSoftware.DAL
         public List<Usuario> MapearUsuariosDesdeDataSet(DataSet pDS)
         {
             var permisos = new List<Usuario>();
-
-            foreach (DataRow row in pDS.Tables[1].Rows)
-            {                                             
-                permisos.Add(new Usuario                  
-                {                                         
-                    Id = (int)row["id_usuario"],          
-                    Username = row["Username"].ToString(),
-                    _passwordHash = row["PasswordHash"].ToString(),
-                    FechaCreacion = (DateTime)row["FechaCreacion"]
-                });
+            try
+            {
+                foreach (DataRow row in pDS.Tables[1].Rows)
+                {                                             
+                    permisos.Add(new Usuario                  
+                    {                                         
+                        Id = (int)row["id_usuario"],          
+                        Username = row["Username"].ToString(),
+                        _passwordHash = row["PasswordHash"].ToString(),
+                        FechaCreacion = (DateTime)row["FechaCreacion"]
+                    });
+                }
             }
-
+            catch(Exception ex) //excepcion no encuentra table 1
+            {
+                foreach (DataRow row in pDS.Tables[0].Rows)
+                {
+                    permisos.Add(new Usuario
+                    {
+                        Id = (int)row["id_usuario"],
+                        Username = row["Username"].ToString(),
+                        _passwordHash = row["PasswordHash"].ToString(),
+                        FechaCreacion = (DateTime)row["FechaCreacion"]
+                    });
+                }
+            }
             return permisos;
         }
 

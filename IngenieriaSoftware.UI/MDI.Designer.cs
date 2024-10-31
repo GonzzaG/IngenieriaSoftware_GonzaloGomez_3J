@@ -32,11 +32,13 @@
             this.mesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cobrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comandasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionIdiomasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gestionIdiomasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,9 +48,11 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mesasToolStripMenuItem,
             this.cobrosToolStripMenuItem,
-            this.estadisticasToolStripMenuItem,
+            this.comandasToolStripMenuItem,
             this.gestionUsuariosToolStripMenuItem,
-            this.gestionIdiomasToolStripMenuItem});
+            this.gestionIdiomasToolStripMenuItem,
+            this.estadisticasToolStripMenuItem,
+            this.LogOutgestionUsuariosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
@@ -73,6 +77,19 @@
             this.estadisticasToolStripMenuItem.Size = new System.Drawing.Size(99, 24);
             this.estadisticasToolStripMenuItem.Text = "Estadisticas";
             // 
+            // comandasToolStripMenuItem
+            // 
+            this.comandasToolStripMenuItem.Name = "comandasToolStripMenuItem";
+            this.comandasToolStripMenuItem.Size = new System.Drawing.Size(93, 24);
+            this.comandasToolStripMenuItem.Text = "Comandas";
+            // 
+            // gestionIdiomasToolStripMenuItem
+            // 
+            this.gestionIdiomasToolStripMenuItem.Name = "gestionIdiomasToolStripMenuItem";
+            this.gestionIdiomasToolStripMenuItem.Size = new System.Drawing.Size(130, 24);
+            this.gestionIdiomasToolStripMenuItem.Text = "Gestion Idiomas";
+            this.gestionIdiomasToolStripMenuItem.Click += new System.EventHandler(this.gestionIdiomasToolStripMenuItem_Click);
+            // 
             // gestionUsuariosToolStripMenuItem
             // 
             this.gestionUsuariosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -91,6 +108,13 @@
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
             // 
+            // eliminarUsuarioToolStripMenuItem
+            // 
+            this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
+            this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
+            // 
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
@@ -98,19 +122,12 @@
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem_Click);
             // 
-            // gestionIdiomasToolStripMenuItem
+            // LogOutgestionUsuariosToolStripMenuItem
             // 
-            this.gestionIdiomasToolStripMenuItem.Name = "gestionIdiomasToolStripMenuItem";
-            this.gestionIdiomasToolStripMenuItem.Size = new System.Drawing.Size(130, 24);
-            this.gestionIdiomasToolStripMenuItem.Text = "Gestion Idiomas";
-            this.gestionIdiomasToolStripMenuItem.Click += new System.EventHandler(this.gestionIdiomasToolStripMenuItem_Click);
-            // 
-            // eliminarUsuarioToolStripMenuItem
-            // 
-            this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
-            this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
+            this.LogOutgestionUsuariosToolStripMenuItem.Name = "LogOutgestionUsuariosToolStripMenuItem";
+            this.LogOutgestionUsuariosToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
+            this.LogOutgestionUsuariosToolStripMenuItem.Text = "Cerrar Sesion";
+            this.LogOutgestionUsuariosToolStripMenuItem.Click += new System.EventHandler(this.LogOutgestionUsuariosToolStripMenuItem_Click);
             // 
             // MDI
             // 
@@ -142,5 +159,7 @@
         private System.Windows.Forms.ToolStripMenuItem registrarUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarUsuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem comandasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LogOutgestionUsuariosToolStripMenuItem;
     }
 }

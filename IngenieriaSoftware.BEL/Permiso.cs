@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IngenieriaSoftware.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Permiso
+    public class Permiso : IPermiso
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -18,7 +19,9 @@ namespace IngenieriaSoftware.BEL
         public int? PermisoPadreId { get; set; } // Permiso padre (opcional)
 
         // Composicion donde un permiso puede tener muchos permisos
-        public List<Permiso> permisosHijos { get; set; } = new List<Permiso>();
+        //public List<Permiso> permisosHijos { get; set; } = new List<Permiso>();
+
+        public List<IPermiso> permisosHijos { get; set; } = new List<IPermiso>();
 
         //relacion de muchos a muchos con usuarios
         public List<Usuario> Usuarios { get; set; } = new List<Usuario>();

@@ -16,6 +16,6 @@ namespace IngenieriaSoftware.BEL
 
         public Constantes.Categoria Categoria { get; set; } = Constantes.Categoria.Ninguna;
 
-        public List<Permiso> Permisos { get; set; } = new List<Permiso>();
+        public List<IPermiso> Permisos { get; set; } = new List<IPermiso>();
     }
 }

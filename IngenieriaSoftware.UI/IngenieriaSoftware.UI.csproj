@@ -58,11 +58,11 @@
     <Compile Include="GestionarPermisos.Designer.cs">
       <DependentUpon>GestionarPermisos.cs</DependentUpon>
     </Compile>
-    <Compile Include="GestionUsuarios.cs">
+    <Compile Include="RegistrarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GestionUsuarios.Designer.cs">
-      <DependentUpon>GestionUsuarios.cs</DependentUpon>
+    <Compile Include="RegistrarUsuario.Designer.cs">
+      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="InicioSesion.cs">
       <SubType>Form</SubType>
@@ -90,8 +90,8 @@
     <EmbeddedResource Include="GestionarPermisos.resx">
       <DependentUpon>GestionarPermisos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GestionUsuarios.resx">
-      <DependentUpon>GestionUsuarios.cs</DependentUpon>
+    <EmbeddedResource Include="RegistrarUsuario.resx">
+      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InicioSesion.resx">
       <DependentUpon>InicioSesion.cs</DependentUpon>
