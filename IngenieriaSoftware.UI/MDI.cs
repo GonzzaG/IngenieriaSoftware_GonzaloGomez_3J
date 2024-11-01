@@ -18,19 +18,27 @@ namespace IngenieriaSoftware.UI
     {
         UsuarioBLL usuarioBLL;
         PermisoBLL permisoBLL;
+        IdiomaBLL idiomaBLL;
         List<IPermiso> permisosUsuario;
         private readonly AuthService _authService = new AuthService();
+
+        private string idiomaActual;
+
         public MDI()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             usuarioBLL = new UsuarioBLL();  
             permisoBLL = new PermisoBLL();
+          
+
         }
 
         private void MDI_Load(object sender, EventArgs e)
         {
+            ControlesHelper.EstablecerTags(this);
             Actualizar();
+         
         }
 
 
@@ -46,25 +54,17 @@ namespace IngenieriaSoftware.UI
             CerrarFormulariosHijos();
             
             RegistrarUsuario formRegistrarUsuario = new RegistrarUsuario();
-            formRegistrarUsuario.StartPosition = FormStartPosition.CenterScreen;
-            formRegistrarUsuario.MdiParent = this;
-            formRegistrarUsuario.Size = this.Size;
-            formRegistrarUsuario.Show();
+            AbrirFormHijo(formRegistrarUsuario);
 
            // formRegistrarUsuario.ShowDialog();
-            //AbrirFormMenu();
-         
+           //AbrirFormMenu();
+
         }
 
         private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CerrarFormulariosHijos();
-
+        {         
             GestionarPermisos formGestionPermisos = new GestionarPermisos();
-            formGestionPermisos.StartPosition = FormStartPosition.CenterScreen;
-            formGestionPermisos.MdiParent = this;
-            formGestionPermisos.Size = this.Size;
-            formGestionPermisos.Show();
+            AbrirFormHijo(formGestionPermisos);
            // formGestionPermisos.ShowDialog();
             //AbrirFormMenu();
         }
@@ -76,13 +76,8 @@ namespace IngenieriaSoftware.UI
 
         private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CerrarFormulariosHijos();
-
             EliminarUsuario formEliminarUsuario = new EliminarUsuario();
-            formEliminarUsuario.StartPosition = FormStartPosition.CenterScreen;
-            formEliminarUsuario.Size = this.Size;
-            formEliminarUsuario.MdiParent = this;
-            formEliminarUsuario.Show();
+            AbrirFormHijo(formEliminarUsuario);
 
         }
 
@@ -93,16 +88,24 @@ namespace IngenieriaSoftware.UI
                 
                 _authService.LogOut();
 
-            Actualizar();
+                Actualizar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+        #region Metodos privados
         private void Actualizar()
         {
             InicioSesion FormInicio = new InicioSesion();
+            ControlesHelper.EstablecerTags(FormInicio);
             if (FormInicio.ShowDialog(this) == DialogResult.OK)
             {
                 // Si el inicio de sesion es correcto, se abre el formulario menu
                 AbrirFormMenu();
+
             }
             else
             {
@@ -112,15 +115,64 @@ namespace IngenieriaSoftware.UI
 
         private void AbrirFormMenu()
         {
-            //Menu FormMenu = new Menu();
-            //FormMenu.MdiParent = this;
-            //FormMenu.Show();
             var nombreUsuario = SessionManager.UsuarioActual.Username;
+
             permisosUsuario = usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
         }
 
+        private void AbrirFormHijo(Form formHijo)
+        {
+            CerrarFormulariosHijos();
+
+            formHijo.MdiParent = this;
+            formHijo.WindowState = FormWindowState.Maximized;
+            formHijo.StartPosition = FormStartPosition.CenterScreen;
+            formHijo.Size = this.Size;
+            formHijo.Show();
+
+            ControlesHelper.EstablecerTags(formHijo);
+
+           // CargarTraducciones(); // Llamar para traducir controles después de abrir
+        }
+
+        #region Traducciones
+        //public void CargarTraducciones()
+        //{
+        //    // Lógica para cargar traducciones desde la base de datos
+        //    // y aplicar los nombres a los controles
+
+        //    //Dictionary<string, string> traducciones = ObtenerTraduccionesDesdeBD(idiomaActual);
+
+        //    // Aplicar traducciones a los controles del formulario
+        //    foreach (Control control in this.Controls)
+        //    {
+        //        if (control.Tag != null && traducciones.ContainsKey(control.Tag.ToString()))
+        //        {
+        //            control.Text = traducciones[control.Tag.ToString()];
+        //        }
+        //    }
+        //}
+
+
+        //esto va a ir en la DALIDIOMA
+
+        private Dictionary<string, string> ObtenerTraduccionesDesdeBD(string idioma)
+        {
+            // Lógica para consultar la base de datos y obtener las traducciones
+            // Esto debería retornar un Dictionary donde la clave es el Tag
+            // y el valor es el texto traducido
+            var traducciones = new Dictionary<string, string>
+            {
+                { "lblNombre", "Nombre" }, // Ejemplo de traducción
+                { "btnAgregar", "Agregar" } // Ejemplo de traducción
+                // Agrega más traducciones según sea necesario
+            };
+            return traducciones;
+        }
+
+        #endregion
         private void VerificarPermisosRoles(List<IPermiso> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
@@ -316,57 +368,55 @@ namespace IngenieriaSoftware.UI
             string mensajeFinal = string.Join("\n", permisos);
             MessageBox.Show(mensajeFinal, "Lista de Permisos");
         }
-
-        private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CerrarFormulariosHijos()
         {
-            
-        }
-
-        private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RegistrarUsuario formGestionUsuario = new RegistrarUsuario();
-            formGestionUsuario.StartPosition = FormStartPosition.CenterScreen;
-            formGestionUsuario.ShowDialog();
-
-            AbrirFormMenu();
-        }
-
-        private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GestionarPermisos formGestionPermisos = new GestionarPermisos();
-            formGestionPermisos.StartPosition = FormStartPosition.CenterScreen;
-            formGestionPermisos.ShowDialog();
-
-            AbrirFormMenu();
-        }
-
-        private void gestionIdiomasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EliminarUsuario formGestionPermisos = new EliminarUsuario();
-            formGestionPermisos.StartPosition = FormStartPosition.CenterScreen;
-            formGestionPermisos.ShowDialog();
-
-            AbrirFormMenu();
-        }
-
-        private void LogOutgestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
+            foreach (Form childForm in this.MdiChildren)
             {
-                
-                _authService.LogOut();
+                childForm.Close();
+            }
 
-                Actualizar();
-            }
-            catch (Exception ex)
+        }
+
+        #endregion
+
+        private void actualizarEtiquetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show("Está seguro que desea agregar todos los controles a la base de datos?", "Alerta de Agregacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (respuesta == DialogResult.No) return;
+            else if (respuesta == DialogResult.Yes)
             {
-                MessageBox.Show(ex.Message);
+                ActualizarEtiquetas();
+
             }
+            // Este boton preguntara si esta seguro que desea continuar
+            //este evento instanciara todos los formularios agregandolos a una List<Form>
+            //se ejecutara el metodo d eControlesHelper que establece los tags a cada form
+            //para luego traer de la bd todas las etiquetas
+            // todas las etiquetas de bd se guardaran en otra lista
+            //la lista de etiquetas en memoria recorrera la lista de etiquetas en bd, y si existe en la bd, se borrara de la lista de etiquetas en memoria
+            // en el mismo foreach o en otro foreach, lo que se hara es ejecutar el stored procedure que agregue las etiquetas que hay en la lista en memoria y no en bd
+            //esto agregara todas las etiquetas en memoria que no existen en bd
+        }
+
+        private void ActualizarEtiquetas()
+        {
+            var formulariosHijos = FormHelper.InstanciarTodosLosFormularios(this);
+
+            foreach (Form f in formulariosHijos)
+            {
+                ControlesHelper.EstablecerTags(f);
+            }
+
+            List<string> etiquetas =ControlesHelper.ObtenerTagsDeTodosLosControles(this);
+             new IdiomaBLL().AgregarEtiqueta(etiquetas);
+            //una vez obtenido las etiquetas, vamos a ir a bd a traer las etiquetas en base de datos
+        }
+
+        private void agregarTraduccionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AgregarIdioma formAgregarIdioma = new AgregarIdioma();
+            AbrirFormHijo(formAgregarIdioma);
         }
     }
 }

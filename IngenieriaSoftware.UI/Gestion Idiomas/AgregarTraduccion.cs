@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class Menu : Form
+    public partial class AgregarIdioma : Form
     {
-        public Menu()
+        public AgregarIdioma()
         {
             InitializeComponent();
+        }
+
+        private void AgregarIdioma_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO.cs" />
+    <Compile Include="IdiomaDAL.cs" />
+    <Compile Include="EtiquetaMapper.cs" />
     <Compile Include="Permiso\PermisoDAL.cs" />
     <Compile Include="Permiso\PermisoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

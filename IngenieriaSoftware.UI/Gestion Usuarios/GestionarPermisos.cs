@@ -21,12 +21,12 @@ namespace IngenieriaSoftware.UI
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
-            ActualizarFormulario(); 
             
         }
 
         private void GestionarPermisos_Load(object sender, EventArgs e)
         {
+            ActualizarFormulario(); 
            
         }
 

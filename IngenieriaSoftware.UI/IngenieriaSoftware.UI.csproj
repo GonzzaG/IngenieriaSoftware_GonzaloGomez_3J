@@ -46,22 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EliminarUsuario.cs">
+    <Compile Include="ControlesHelper.cs" />
+    <Compile Include="FormHelper.cs" />
+    <Compile Include="Gestion Idiomas\AgregarTraduccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EliminarUsuario.Designer.cs">
+    <Compile Include="Gestion Idiomas\AgregarTraduccion.Designer.cs">
+      <DependentUpon>AgregarTraduccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion Usuarios\EliminarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion Usuarios\EliminarUsuario.Designer.cs">
       <DependentUpon>EliminarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="GestionarPermisos.cs">
+    <Compile Include="Gestion Idiomas\GestionarIdioma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GestionarPermisos.Designer.cs">
+    <Compile Include="Gestion Idiomas\GestionarIdioma.Designer.cs">
+      <DependentUpon>GestionarIdioma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion Usuarios\GestionarPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion Usuarios\GestionarPermisos.Designer.cs">
       <DependentUpon>GestionarPermisos.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarUsuario.cs">
+    <Compile Include="Gestion Usuarios\RegistrarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistrarUsuario.Designer.cs">
+    <Compile Include="Gestion Usuarios\RegistrarUsuario.Designer.cs">
       <DependentUpon>RegistrarUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="InicioSesion.cs">
@@ -76,21 +90,21 @@
     <Compile Include="MDI.Designer.cs">
       <DependentUpon>MDI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Menu.Designer.cs">
-      <DependentUpon>Menu.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EliminarUsuario.resx">
+    <EmbeddedResource Include="Gestion Idiomas\AgregarTraduccion.resx">
+      <DependentUpon>AgregarTraduccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion Usuarios\EliminarUsuario.resx">
       <DependentUpon>EliminarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GestionarPermisos.resx">
+    <EmbeddedResource Include="Gestion Idiomas\GestionarIdioma.resx">
+      <DependentUpon>GestionarIdioma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion Usuarios\GestionarPermisos.resx">
       <DependentUpon>GestionarPermisos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarUsuario.resx">
+    <EmbeddedResource Include="Gestion Usuarios\RegistrarUsuario.resx">
       <DependentUpon>RegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InicioSesion.resx">
@@ -137,5 +151,6 @@
       <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

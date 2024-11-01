@@ -10,5 +10,6 @@ namespace IngenieriaSoftware.Servicios
     {
          int Id { get; set; }
          string Username { get; set; }
+
     }
 }

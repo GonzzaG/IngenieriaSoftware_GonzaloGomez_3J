@@ -16,13 +16,14 @@ namespace IngenieriaSoftware.DAL
             try
             {
                 foreach (DataRow row in pDS.Tables[1].Rows)
-                {                                             
-                    permisos.Add(new Usuario                  
-                    {                                         
-                        Id = (int)row["id_usuario"],          
+                {
+                    permisos.Add(new Usuario
+                    {
+                        Id = (int)row["id_usuario"],
                         Username = row["Username"].ToString(),
                         _passwordHash = row["PasswordHash"].ToString(),
-                        FechaCreacion = (DateTime)row["FechaCreacion"]
+                        FechaCreacion = (DateTime)row["FechaCreacion"],
+                        idioma_id = (int)row["idioma_id"]
                     });
                 }
             }
@@ -35,7 +36,8 @@ namespace IngenieriaSoftware.DAL
                         Id = (int)row["id_usuario"],
                         Username = row["Username"].ToString(),
                         _passwordHash = row["PasswordHash"].ToString(),
-                        FechaCreacion = (DateTime)row["FechaCreacion"]
+                        FechaCreacion = (DateTime)row["FechaCreacion"],
+                        idioma_id = (int)row["idioma_id"]
                     });
                 }
             }
@@ -44,16 +46,17 @@ namespace IngenieriaSoftware.DAL
 
         public Usuario MapearUsuarioDesdeDataSet(DataSet pDS)
         {
-            Usuario permiso = new Usuario();
+            Usuario usuario = new Usuario();
             foreach (DataRow row in pDS.Tables[0].Rows)
             {
-                  permiso.Id = (int)row["id_usuario"];
-                  permiso.Username = row["Username"].ToString();
-                  permiso._passwordHash = row["PasswordHash"].ToString();
-                  permiso.FechaCreacion = (DateTime)row["FechaCreacion"];
+                  usuario.Id = (int)row["id_usuario"];
+                  usuario.Username = row["Username"].ToString();
+                  usuario._passwordHash = row["PasswordHash"].ToString();
+                  usuario.FechaCreacion = (DateTime)row["FechaCreacion"];
+                usuario.idioma_id = (int)row["idioma_id"];
             }
-            if (permiso.Id == 0) {return null;}
-            return permiso;
+            if (usuario.Id == 0) {return null;}
+            return usuario;
         }
 
     }

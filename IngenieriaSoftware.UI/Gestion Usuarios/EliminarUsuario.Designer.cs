@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnEliminarUsuario = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblUsuarios = new System.Windows.Forms.Label();
             this.comboBoxUsuarios = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -44,14 +44,14 @@
             this.btnEliminarUsuario.UseVisualStyleBackColor = true;
             this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
             // 
-            // label1
+            // lblUsuarios
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(146, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 16);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Usuarios";
+            this.lblUsuarios.AutoSize = true;
+            this.lblUsuarios.Location = new System.Drawing.Point(146, 48);
+            this.lblUsuarios.Name = "lblUsuarios";
+            this.lblUsuarios.Size = new System.Drawing.Size(61, 16);
+            this.lblUsuarios.TabIndex = 10;
+            this.lblUsuarios.Text = "Usuarios";
             // 
             // comboBoxUsuarios
             // 
@@ -68,10 +68,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 297);
             this.Controls.Add(this.btnEliminarUsuario);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblUsuarios);
             this.Controls.Add(this.comboBoxUsuarios);
             this.Name = "EliminarUsuario";
             this.Text = "EliminarUsuario";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.EliminarUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -81,7 +82,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnEliminarUsuario;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblUsuarios;
         private System.Windows.Forms.ComboBox comboBoxUsuarios;
     }
 }

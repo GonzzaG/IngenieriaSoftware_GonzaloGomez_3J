@@ -49,6 +49,7 @@ namespace IngenieriaSoftware.UI
         {
             if(comboBoxUsuarios.SelectedItem == null) { return; }
             DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar?", "Alerta de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            
             if(respuesta == DialogResult.No) return;
             else if(respuesta == DialogResult.Yes)
             {

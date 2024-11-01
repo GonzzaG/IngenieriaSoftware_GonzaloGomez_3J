@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             this.btnAsignarPermiso = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblTotalPermisos = new System.Windows.Forms.Label();
+            this.lblUsuario = new System.Windows.Forms.Label();
+            this.lblTodosLosPermisos = new System.Windows.Forms.Label();
             this.comboBoxUsuario = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxRol = new System.Windows.Forms.ComboBox();
             this.treeViewPermisos = new System.Windows.Forms.TreeView();
             this.treeViewPermisoUsuario = new System.Windows.Forms.TreeView();
-            this.lblUsuarioPermisos = new System.Windows.Forms.Label();
+            this.lblPermisosUsuario = new System.Windows.Forms.Label();
             this.btnDesasignarPermiso = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -51,51 +49,33 @@
             this.btnAsignarPermiso.UseVisualStyleBackColor = true;
             this.btnAsignarPermiso.Click += new System.EventHandler(this.btnAsignarPermiso_Click);
             // 
-            // label1
+            // lblUsuario
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 79);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 16);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Usuario";
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(62, 126);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(54, 16);
+            this.lblUsuario.TabIndex = 13;
+            this.lblUsuario.Text = "Usuario";
             // 
-            // lblTotalPermisos
+            // lblTodosLosPermisos
             // 
-            this.lblTotalPermisos.AutoSize = true;
-            this.lblTotalPermisos.Location = new System.Drawing.Point(760, 68);
-            this.lblTotalPermisos.Name = "lblTotalPermisos";
-            this.lblTotalPermisos.Size = new System.Drawing.Size(127, 16);
-            this.lblTotalPermisos.TabIndex = 11;
-            this.lblTotalPermisos.Text = "Todos los permisos";
+            this.lblTodosLosPermisos.AutoSize = true;
+            this.lblTodosLosPermisos.Location = new System.Drawing.Point(760, 68);
+            this.lblTodosLosPermisos.Name = "lblTodosLosPermisos";
+            this.lblTodosLosPermisos.Size = new System.Drawing.Size(127, 16);
+            this.lblTodosLosPermisos.TabIndex = 11;
+            this.lblTodosLosPermisos.Text = "Todos los permisos";
             // 
             // comboBoxUsuario
             // 
             this.comboBoxUsuario.FormattingEnabled = true;
-            this.comboBoxUsuario.Location = new System.Drawing.Point(68, 98);
+            this.comboBoxUsuario.Location = new System.Drawing.Point(54, 145);
             this.comboBoxUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxUsuario.Name = "comboBoxUsuario";
             this.comboBoxUsuario.Size = new System.Drawing.Size(251, 24);
             this.comboBoxUsuario.TabIndex = 8;
             this.comboBoxUsuario.SelectedIndexChanged += new System.EventHandler(this.comboBoxUsuario_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(76, 153);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 16);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Rol:";
-            // 
-            // comboBoxRol
-            // 
-            this.comboBoxRol.FormattingEnabled = true;
-            this.comboBoxRol.Location = new System.Drawing.Point(68, 172);
-            this.comboBoxRol.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBoxRol.Name = "comboBoxRol";
-            this.comboBoxRol.Size = new System.Drawing.Size(251, 24);
-            this.comboBoxRol.TabIndex = 17;
             // 
             // treeViewPermisos
             // 
@@ -113,14 +93,14 @@
             this.treeViewPermisoUsuario.Size = new System.Drawing.Size(248, 312);
             this.treeViewPermisoUsuario.TabIndex = 20;
             // 
-            // lblUsuarioPermisos
+            // lblPermisosUsuario
             // 
-            this.lblUsuarioPermisos.AutoSize = true;
-            this.lblUsuarioPermisos.Location = new System.Drawing.Point(432, 68);
-            this.lblUsuarioPermisos.Name = "lblUsuarioPermisos";
-            this.lblUsuarioPermisos.Size = new System.Drawing.Size(133, 16);
-            this.lblUsuarioPermisos.TabIndex = 19;
-            this.lblUsuarioPermisos.Text = "Permisos del usuario";
+            this.lblPermisosUsuario.AutoSize = true;
+            this.lblPermisosUsuario.Location = new System.Drawing.Point(432, 68);
+            this.lblPermisosUsuario.Name = "lblPermisosUsuario";
+            this.lblPermisosUsuario.Size = new System.Drawing.Size(133, 16);
+            this.lblPermisosUsuario.TabIndex = 19;
+            this.lblPermisosUsuario.Text = "Permisos del usuario";
             // 
             // btnDesasignarPermiso
             // 
@@ -140,17 +120,16 @@
             this.ClientSize = new System.Drawing.Size(1083, 577);
             this.Controls.Add(this.btnDesasignarPermiso);
             this.Controls.Add(this.treeViewPermisoUsuario);
-            this.Controls.Add(this.lblUsuarioPermisos);
+            this.Controls.Add(this.lblPermisosUsuario);
             this.Controls.Add(this.treeViewPermisos);
-            this.Controls.Add(this.comboBoxRol);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnAsignarPermiso);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblTotalPermisos);
+            this.Controls.Add(this.lblUsuario);
+            this.Controls.Add(this.lblTodosLosPermisos);
             this.Controls.Add(this.comboBoxUsuario);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "GestionarPermisos";
             this.Text = "GestionarPermisos";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GestionarPermisos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -160,14 +139,12 @@
         #endregion
 
         private System.Windows.Forms.Button btnAsignarPermiso;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblTotalPermisos;
+        private System.Windows.Forms.Label lblUsuario;
+        private System.Windows.Forms.Label lblTodosLosPermisos;
         private System.Windows.Forms.ComboBox comboBoxUsuario;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxRol;
         private System.Windows.Forms.TreeView treeViewPermisos;
         private System.Windows.Forms.TreeView treeViewPermisoUsuario;
-        private System.Windows.Forms.Label lblUsuarioPermisos;
+        private System.Windows.Forms.Label lblPermisosUsuario;
         private System.Windows.Forms.Button btnDesasignarPermiso;
     }
 }

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    internal class Mesa
+    public class Etiqueta
     {
+        public int Id {  get; set; }
+        public string Nombre { get; set; }  
     }
 }

@@ -12,12 +12,7 @@ namespace IngenieriaSoftware.BLL
 {
     public class PermisoBLL 
     {
-
-        private readonly PermisoDAL _permisoDAL; 
         private readonly Dictionary<int, List<Permiso>> _permisosPorUsuario = new Dictionary<int, List<Permiso>>();
-        internal List<Permiso> _permisosGlobales; // Para almacenar todos los permisos
-
-
     }
 
     

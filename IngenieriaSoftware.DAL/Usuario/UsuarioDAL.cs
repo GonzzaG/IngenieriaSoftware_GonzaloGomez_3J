@@ -248,7 +248,8 @@ namespace IngenieriaSoftware.DAL
                 new SqlParameter("@IdUsuario", pUsuario.Id),
                 new SqlParameter("@Username", pUsuario.Username),
                 new SqlParameter("@PasswordHash", pUsuario._passwordHash),
-                new SqlParameter("@FechaCreacion", FechaInicio)
+                new SqlParameter("@FechaCreacion", FechaInicio),
+                new SqlParameter("@idioma_id", pUsuario.idioma_id)
             };
 
             return _dao.ExecuteNonQuery("sp_GuardarUsuario",  parametros);

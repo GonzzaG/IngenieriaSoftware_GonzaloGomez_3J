@@ -30,7 +30,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 
-                if(_authService.LogIn(textBox1.Text, textBox2.Text))
+                if(_authService.LogIn(txtUsuario.Text, txtContrasena.Text))
                 {               
                     this.DialogResult = DialogResult.OK;
                     this.Close();

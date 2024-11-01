@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Cuenta 
+    internal interface IObserver
     {
+        void Actualizar(Idioma i);
+
     }
 }
