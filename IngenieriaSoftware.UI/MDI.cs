@@ -33,6 +33,69 @@ namespace IngenieriaSoftware.UI
             Actualizar();
         }
 
+
+
+        private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            CerrarFormulariosHijos();
+            
+            RegistrarUsuario formRegistrarUsuario = new RegistrarUsuario();
+            formRegistrarUsuario.StartPosition = FormStartPosition.CenterScreen;
+            formRegistrarUsuario.MdiParent = this;
+            formRegistrarUsuario.Size = this.Size;
+            formRegistrarUsuario.Show();
+
+           // formRegistrarUsuario.ShowDialog();
+            //AbrirFormMenu();
+         
+        }
+
+        private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CerrarFormulariosHijos();
+
+            GestionarPermisos formGestionPermisos = new GestionarPermisos();
+            formGestionPermisos.StartPosition = FormStartPosition.CenterScreen;
+            formGestionPermisos.MdiParent = this;
+            formGestionPermisos.Size = this.Size;
+            formGestionPermisos.Show();
+           // formGestionPermisos.ShowDialog();
+            //AbrirFormMenu();
+        }
+
+        private void gestionIdiomasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CerrarFormulariosHijos();
+
+            EliminarUsuario formEliminarUsuario = new EliminarUsuario();
+            formEliminarUsuario.StartPosition = FormStartPosition.CenterScreen;
+            formEliminarUsuario.Size = this.Size;
+            formEliminarUsuario.MdiParent = this;
+            formEliminarUsuario.Show();
+
+        }
+
+        private void LogOutgestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                _authService.LogOut();
+
+            Actualizar();
+        }
+
         private void Actualizar()
         {
             InicioSesion FormInicio = new InicioSesion();
