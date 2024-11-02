@@ -12,14 +12,14 @@ namespace IngenieriaSoftware.DAL
 {
     public class PermisoMapper
     {
-        public List<IPermiso> MapearPermisosDesdeDataSet(DataSet pDS)
+        public List<PermisoDTO> MapearPermisosDesdeDataSet(DataSet pDS)
         {
-            var permisos = new List<IPermiso>();
+            var permisos = new List<PermisoDTO>();
 
 
             foreach (DataRow row in pDS.Tables[0].Rows)
             {
-                permisos.Add(new Permiso
+                permisos.Add(new PermisoDTO
                 {
                     Id = (int)row["id_permiso"],
                     Nombre = row["nombre_permiso"].ToString(),

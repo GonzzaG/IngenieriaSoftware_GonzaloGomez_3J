@@ -32,14 +32,14 @@ namespace IngenieriaSoftware.UI
 
         private void CargarUsuariosPermisos()
         {
-            List<Usuario> usuarios = _usuarioBLL.CargarUsuariosPermisos();
+            List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuariosPermisos();
             listarUsuarios(usuarios);
         }
 
-        public void listarUsuarios(List<Usuario> pUsuarios)
+        public void listarUsuarios(List<UsuarioDTO> pUsuarios)
         {
             comboBoxUsuario.Items.Clear();
-            foreach(Usuario usuario in pUsuarios)
+            foreach(UsuarioDTO usuario in pUsuarios)
             {
                 comboBoxUsuario.Items.Add(usuario.Username);
             }
@@ -58,13 +58,13 @@ namespace IngenieriaSoftware.UI
             FillTreeView(permisos, treeViewPermisos);
 
         }
-        private void FillTreeView(List<IPermiso> permisosJerarquizados, TreeView treeViewPermisos)
+        private void FillTreeView(List<PermisoDTO> permisosJerarquizados, TreeView treeViewPermisos)
         {
             // Limpiar el TreeView antes de llenarlo
             treeViewPermisos.Nodes.Clear();
 
             // Agregar cada permiso raíz y construir sus hijos recursivamente
-            foreach (var permiso in permisosJerarquizados)
+            foreach (PermisoDTO permiso in permisosJerarquizados)
             {
                 // Crear y añadir el nodo raíz
                 TreeNode nodoRaiz = CrearNodoRecursivo(permiso);
@@ -76,7 +76,7 @@ namespace IngenieriaSoftware.UI
         }
 
         // Método recursivo para construir nodos del TreeView con sus hijos
-        private TreeNode CrearNodoRecursivo(IPermiso permiso)
+        private TreeNode CrearNodoRecursivo(PermisoDTO permiso)
         {
             // Crear un nodo para el permiso actual
             TreeNode nodo = new TreeNode(permiso.Nombre)
@@ -85,7 +85,7 @@ namespace IngenieriaSoftware.UI
             };
 
             // Recorrer los permisos hijos del permiso actual y añadirlos como nodos hijos
-            foreach (IPermiso hijo in permiso.permisosHijos)
+            foreach (PermisoDTO hijo in permiso.permisosHijos)
             {
                 TreeNode nodoHijo = CrearNodoRecursivo(hijo);
                 nodo.Nodes.Add(nodoHijo);
@@ -112,7 +112,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 string nombreUsuario = comboBoxUsuario.Text.ToString();
-                List<IPermiso> permisosUsuario = _usuarioBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, nombreUsuario);
+                List<PermisoDTO> permisosUsuario = _usuarioBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, nombreUsuario);
 
                 ActualizarFormulario();
                 permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);

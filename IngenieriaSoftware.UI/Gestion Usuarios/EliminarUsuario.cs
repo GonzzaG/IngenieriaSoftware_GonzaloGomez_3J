@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,12 @@ namespace IngenieriaSoftware.UI
     public partial class EliminarUsuario : Form
     {
         UsuarioBLL usuarioBLL;
-        List<Usuario> usuarios;
+        List<UsuarioDTO> usuarios;
         public EliminarUsuario()
         {
             InitializeComponent();
             usuarioBLL = new UsuarioBLL();
-            usuarios = new List<Usuario>();
+            usuarios = new List<UsuarioDTO>();
         }
 
         private void EliminarUsuario_Load(object sender, EventArgs e)
@@ -36,10 +37,10 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        public void listarUsuarios(List<Usuario> pUsuarios)
+        public void listarUsuarios(List<UsuarioDTO> pUsuarios)
         {
             comboBoxUsuarios.Items.Clear();
-            foreach (Usuario usuario in pUsuarios)
+            foreach (UsuarioDTO usuario in pUsuarios)
             {
                 comboBoxUsuarios.Items.Add(usuario.Username);
             }

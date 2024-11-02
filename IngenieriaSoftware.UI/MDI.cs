@@ -19,7 +19,8 @@ namespace IngenieriaSoftware.UI
         UsuarioBLL usuarioBLL;
         PermisoBLL permisoBLL;
         IdiomaBLL idiomaBLL;
-        List<IPermiso> permisosUsuario;
+        List<PermisoDTO> permisosUsuario;
+        SessionManager _sessionManager;
         private readonly AuthService _authService = new AuthService();
 
         private string idiomaActual;
@@ -30,7 +31,7 @@ namespace IngenieriaSoftware.UI
             this.StartPosition = FormStartPosition.CenterScreen;
             usuarioBLL = new UsuarioBLL();  
             permisoBLL = new PermisoBLL();
-          
+            
 
         }
 
@@ -115,7 +116,10 @@ namespace IngenieriaSoftware.UI
 
         private void AbrirFormMenu()
         {
-            var nombreUsuario = SessionManager.UsuarioActual.Username;
+         
+            
+           // var nombreUsuario = _sessionManager.Usuario.Username;
+            var nombreUsuario =  SessionManager.UsuarioActual.Username;
 
             permisosUsuario = usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
             VerificarPermisosRoles(permisosUsuario);
@@ -173,7 +177,7 @@ namespace IngenieriaSoftware.UI
         }
 
         #endregion
-        private void VerificarPermisosRoles(List<IPermiso> permisos)
+        private void VerificarPermisosRoles(List<PermisoDTO> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
 
@@ -241,7 +245,7 @@ namespace IngenieriaSoftware.UI
             mostrarPermisosDelUsuario(permisosPermitidos);
         }
 
-        private void VerificarPermisosIndividuales(List<IPermiso> permisos)
+        private void VerificarPermisosIndividuales(List<PermisoDTO> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
 

@@ -9,18 +9,18 @@ namespace IngenieriaSoftware.UI
 {
     internal class ControlesHelper
     {
-        // Método para establecer el Tag de cada control en función de su Name
+        // Método para establecer el Tag de cada control en función de su Nombre
         public static void EstablecerTags(Control control)
         {
             foreach (Control c in control.Controls)
             {
-                // Si el control tiene controles hijos, llamar recursivamente
+ 
                 if (c.HasChildren)
                 {
                     EstablecerTags(c);
                 }
 
-                // Establecer el Tag igual al Name del control
+         
                 c.Tag = c.Name;
             }
         }
@@ -29,10 +29,8 @@ namespace IngenieriaSoftware.UI
         {
             var tags = new List<string>();
 
-            // Obtener tags de los controles del formulario principal
             ObtenerTagsRecursivamente(formularioPadre, tags);
 
-            // Si el formulario principal tiene formularios hijos, obtener sus tags también
             foreach (Form formularioHijo in formularioPadre.MdiChildren)
             {
                 ObtenerTagsRecursivamente(formularioHijo, tags);
@@ -45,12 +43,11 @@ namespace IngenieriaSoftware.UI
         {
             foreach (Control c in control.Controls)
             {
-                if (c.Tag != null) // Verificar que el Tag no sea null
+                if (c.Tag != null) 
                 {
                     tags.Add(c.Tag.ToString());
                 }
 
-                // Llamar recursivamente si el control tiene hijos
                 if (c.HasChildren)
                 {
                     ObtenerTagsRecursivamente(c, tags);
@@ -67,8 +64,6 @@ namespace IngenieriaSoftware.UI
                 {
                     c.Text = traducciones[c.Tag.ToString()];
                 }
-
-                // Si el control tiene controles hijos, llamar recursivamente
                 if (c.HasChildren)
                 {
                     CargarTraducciones(c, traducciones);

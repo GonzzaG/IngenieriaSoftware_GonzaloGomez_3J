@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,20 +11,20 @@ namespace IngenieriaSoftware.DAL
 {
     public class UsuarioMapper
     {
-        public List<Usuario> MapearUsuariosDesdeDataSet(DataSet pDS)
+        public List<UsuarioDTO> MapearUsuariosDesdeDataSet(DataSet pDS)
         {
-            var permisos = new List<Usuario>();
+            var permisos = new List<UsuarioDTO>();
             try
             {
                 foreach (DataRow row in pDS.Tables[1].Rows)
                 {
-                    permisos.Add(new Usuario
+                    permisos.Add(new UsuarioDTO
                     {
                         Id = (int)row["id_usuario"],
                         Username = row["Username"].ToString(),
                         _passwordHash = row["PasswordHash"].ToString(),
                         FechaCreacion = (DateTime)row["FechaCreacion"],
-                        idioma_id = (int)row["idioma_id"]
+                        IdiomaId = (int)row["idioma_id"]
                     });
                 }
             }
@@ -31,29 +32,29 @@ namespace IngenieriaSoftware.DAL
             {
                 foreach (DataRow row in pDS.Tables[0].Rows)
                 {
-                    permisos.Add(new Usuario
+                    permisos.Add(new UsuarioDTO
                     {
                         Id = (int)row["id_usuario"],
                         Username = row["Username"].ToString(),
                         _passwordHash = row["PasswordHash"].ToString(),
                         FechaCreacion = (DateTime)row["FechaCreacion"],
-                        idioma_id = (int)row["idioma_id"]
+                        IdiomaId = (int)row["idioma_id"]
                     });
                 }
             }
             return permisos;
         }
 
-        public Usuario MapearUsuarioDesdeDataSet(DataSet pDS)
+        public UsuarioDTO MapearUsuarioDesdeDataSet(DataSet pDS)
         {
-            Usuario usuario = new Usuario();
+            UsuarioDTO usuario = new UsuarioDTO();
             foreach (DataRow row in pDS.Tables[0].Rows)
             {
                   usuario.Id = (int)row["id_usuario"];
                   usuario.Username = row["Username"].ToString();
                   usuario._passwordHash = row["PasswordHash"].ToString();
                   usuario.FechaCreacion = (DateTime)row["FechaCreacion"];
-                usuario.idioma_id = (int)row["idioma_id"];
+                usuario.IdiomaId = (int)row["idioma_id"];
             }
             if (usuario.Id == 0) {return null;}
             return usuario;

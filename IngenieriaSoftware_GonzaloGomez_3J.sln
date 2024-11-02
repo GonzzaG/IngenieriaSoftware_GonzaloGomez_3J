@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngenieriaSoftware.BEL", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngenieriaSoftware.Servicios", "IngenieriaSoftware.Servicios\IngenieriaSoftware.Servicios.csproj", "{88779AA0-50FE-4FAE-AF75-2374A220469D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngenieriaSoftware.Abstracciones", "IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj", "{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{88779AA0-50FE-4FAE-AF75-2374A220469D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88779AA0-50FE-4FAE-AF75-2374A220469D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88779AA0-50FE-4FAE-AF75-2374A220469D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

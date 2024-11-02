@@ -4,24 +4,20 @@ using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-
 
 namespace IngenieriaSoftware.BLL
 {
     public class UsuarioBLL
     {
         private UsuarioDAL _usuarioDAL = new UsuarioDAL();
-        private List<Permiso> _permisoRaiz = new List<Permiso>();
+        private List<PermisoDTO> _permisoRaiz = new List<PermisoDTO>(); // Cambiado a PermisoDTO
 
         #region Eliminar Usuarios Metodos
-        public List<Usuario> EliminarUsuario(List<Usuario> usuarios, string usuarioAEliminarNombre)
+        public List<UsuarioDTO> EliminarUsuario(List<UsuarioDTO> usuarios, string usuarioAEliminarNombre)
         {
             try
             {
-                Usuario usuarioAEliminar = usuarios.Find(u => u.Username == usuarioAEliminarNombre);
+                UsuarioDTO usuarioAEliminar = usuarios.Find(u => u.Username == usuarioAEliminarNombre);
                 //eliminar usuario en bd
                 _usuarioDAL.EliminarUsuario(usuarioAEliminar.Id);
 
@@ -30,43 +26,35 @@ namespace IngenieriaSoftware.BLL
                 return usuarios;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-
         #endregion
 
-
         #region Usuarios permisos Metodos
-        public List<IPermiso> ObtenerPermisosDelUsuarioEnMemoria(string pUserName)
+        public List<PermisoDTO> ObtenerPermisosDelUsuarioEnMemoria(string pUserName) // Cambiado a PermisoDTO
         {
-           // var permisos;
             var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
-
             return permisosUsuario;
         }
 
-        public List<IPermiso> CargarPermisosDelUsuario(string pUserName)
+        public List<PermisoDTO> CargarPermisosDelUsuario(string pUserName) // Cambiado a PermisoDTO
         {
-            
-            // var permisos;
-            var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
-
+            List<PermisoDTO> permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
             return permisosUsuario;
         }
 
-        public List<IPermiso> ObtenerPermisosDelUsuario(string pUserName)
+        public List<PermisoDTO> ObtenerPermisosDelUsuario(string pUserName) // Cambiado a PermisoDTO
         {
-            List<IPermiso> permisosUsuario= _usuarioDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
-
+            List<PermisoDTO> permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
             return permisosUsuario;
         }
 
-        public List<Usuario> CargarUsuarios()
+        public List<UsuarioDTO> CargarUsuarios()
         {
-            List<Usuario> _usuariosGlobales = _usuarioDAL.ObtenerTodosLosUsuarios();
+            List<UsuarioDTO> _usuariosGlobales = _usuarioDAL.ObtenerTodosLosUsuarios();
 
             if (_usuariosGlobales == null)
             {
@@ -78,10 +66,9 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        // Metodo para obtener los usuarios con sus permisos
-        public List<Usuario> CargarUsuariosPermisos()
+        public List<UsuarioDTO> CargarUsuariosPermisos()
         {
-            List<Usuario> _usuariosGlobales = _usuarioDAL.CargarUsuariosPermisos();
+            List<UsuarioDTO> _usuariosGlobales = _usuarioDAL.CargarUsuariosPermisos();
 
             if (_usuariosGlobales == null)
             {
@@ -91,111 +78,93 @@ namespace IngenieriaSoftware.BLL
             {
                 return _usuariosGlobales;
             }
-          
         }
-        public List<IPermiso> ObtenerPermisosGlobales()
+
+        public List<PermisoDTO> ObtenerPermisosGlobales() // Cambiado a PermisoDTO
         {
             return _usuarioDAL.PermisosTree();
-
         }
 
-        public List<IPermiso> AsignarPermisoUsuario(int permisoId, string username)
+        public List<PermisoDTO> AsignarPermisoUsuario(int permisoId, string username) // Cambiado a PermisoDTO
         {
             var permisosGlobales = _usuarioDAL.PermisosGlobales();
 
-            IPermiso permiso = permisosGlobales.Find(p => p.Id == permisoId);
+            PermisoDTO permiso = permisosGlobales.Find(p => p.Id == permisoId); // Cambiado a PermisoDTO
 
-            var usuario = _usuarioDAL.UsuariosGlobales().Find(u => u.Username == username);
+            var usuario = _usuarioDAL.ObtenerUsuariosGlobales().Find(u => u.Username == username);
 
-            if(_usuarioDAL.TienePermiso(usuario, permiso))
+            if (_usuarioDAL.TienePermiso(usuario, permiso)) // Este método debería adaptarse para usar PermisoDTO
             {
                 throw new Exception($"{username} ya tiene el permiso {permiso.Nombre}");
             }
-            else 
+            else
             {
                 try
                 {
                     // Si no tiene el permiso, se lo asignamos en base de datos
                     _usuarioDAL.AsignarPermiso(usuario.Id, permisoId);
-             
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    throw ex;   
+                    throw ex;
                 }
-            
-
             }
 
-            return usuario.Permisos;
+            return usuario.Permisos; // Este debería ser adaptado para que devuelva permisos de tipo PermisoDTO
         }
 
         public void AsignarPermisoPorCod(string username, string permisoCod)
         {
             try
             {
-                _usuarioDAL.AsignarPermisoPorCod(username, permisoCod);
+                _usuarioDAL.AsignarPermisoPorCod(username, permisoCod) ;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-                
         }
 
-        public void DesasignarPermisoUsuario (string username, int permisoId)
+        public void DesasignarPermisoUsuario(string username, int permisoId)
         {
             try
             {
                 _usuarioDAL.DesasignarPermiso(username, permisoId);
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-
         #endregion
 
-
         #region Login LogOut
-        // Método para registrar un nuevo usuario
-        public bool RegistrarUsuario(Usuario pUsuario, DateTime FechaInicio)
+        public bool RegistrarUsuario(UsuarioDTO pUsuario, DateTime FechaInicio)
         {
-            //Obtener el usuario por su nombre
-            Usuario mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(pUsuario.Username);
+            UsuarioDTO mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(pUsuario.Username);
 
             if (mUsuario == null)
             {
-                // Si no encuentra el usuario en la bd, lo guarda en la base de datos
                 int resultado = _usuarioDAL.GuardarUsuario(pUsuario, FechaInicio);
-
-                // Retorna true si el registro fue exitoso
                 return resultado > 0;
             }
             else
             {
                 throw new Exception($"El username {pUsuario.Username} ya existe");
             }
-
         }
 
-        // Método para iniciar sesión
         public bool LogIn(string username, string password)
         {
-            //Obtener el usuario por su nombre
-            Usuario mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(username);
+            UsuarioDTO mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(username);
 
             if (mUsuario != null)
             {
-                // Verificar si la contraseña coincide
                 string storedHash = mUsuario._passwordHash;
 
                 if (HashingManager.VerificarHash(password, storedHash))
                 {
-                   // Contraseña correcta, iniciar sesión
-                   Usuario usuario = new Usuario { Username = username };
+                    UsuarioDTO usuario = new UsuarioDTO { Username = username };
                     SessionManager.LogIn(usuario);
                     return true; // Login exitoso
                 }
@@ -204,7 +173,6 @@ namespace IngenieriaSoftware.BLL
             return false; // Usuario no encontrado o contraseña incorrecta
         }
 
-        // Método para cerrar sesión
         public void LogOut()
         {
             SessionManager.LogOut();
