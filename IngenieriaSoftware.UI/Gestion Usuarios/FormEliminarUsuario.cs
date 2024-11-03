@@ -13,11 +13,11 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class EliminarUsuario : Form
+    public partial class FormEliminarUsuario : Form
     {
         UsuarioBLL usuarioBLL;
         List<UsuarioDTO> usuarios;
-        public EliminarUsuario()
+        public FormEliminarUsuario()
         {
             InitializeComponent();
             usuarioBLL = new UsuarioBLL();
@@ -57,6 +57,11 @@ namespace IngenieriaSoftware.UI
                 usuarios = usuarioBLL.EliminarUsuario(usuarios, comboBoxUsuarios.SelectedItem.ToString());
                 listarUsuarios(usuarios);
             }
+
+        }
+
+        private void comboBoxUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

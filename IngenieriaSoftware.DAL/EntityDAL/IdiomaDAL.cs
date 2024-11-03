@@ -42,6 +42,49 @@ namespace IngenieriaSoftware.DAL
 
         #region Etiqueta
 
+        public void GuardarEtiquetas(List<EtiquetaDTO> etiquetas)
+        {
+            try
+            {
+                foreach (var etiqueta in etiquetas)
+                { 
+                    SqlParameter[] parametros = new SqlParameter[]
+                    {
+                        new SqlParameter("@etiquetaId", etiqueta.Id),
+                        new SqlParameter("@nombre", etiqueta.Nombre)
+                    };
+
+                    DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarEtiqueta", parametros);
+                             
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public int AgregarEtiqueta(List<EtiquetaDTO> etiquetasMemoria)
         {
             List<EtiquetaDTO> etiquetasBD = ObtenerTodasLasEtiquetasEnBD();

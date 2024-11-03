@@ -14,12 +14,12 @@ using IngenieriaSoftware.Servicios.DTOs;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class InicioSesion : Form
+    public partial class FormInicioSesion : Form
     {
         private readonly AuthService _authService = new AuthService();
         internal List<IdiomaDTO> _idiomas;
 
-        public InicioSesion()
+        public FormInicioSesion()
         {
             InitializeComponent();
 

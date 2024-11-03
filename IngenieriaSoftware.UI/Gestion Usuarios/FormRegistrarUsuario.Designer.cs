@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI
 {
-    partial class RegistrarUsuario
+    partial class FormRegistrarUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -48,6 +48,7 @@
             this.comboBoxCategorias.Name = "comboBoxCategorias";
             this.comboBoxCategorias.Size = new System.Drawing.Size(251, 24);
             this.comboBoxCategorias.TabIndex = 0;
+            this.comboBoxCategorias.Tag = "27";
             this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // txtPassword
@@ -57,6 +58,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(251, 22);
             this.txtPassword.TabIndex = 1;
+            this.txtPassword.Tag = "25";
             // 
             // txtUsername
             // 
@@ -65,15 +67,17 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(251, 22);
             this.txtUsername.TabIndex = 2;
+            this.txtUsername.Tag = "23";
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
             this.lblUsername.Location = new System.Drawing.Point(195, 124);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(70, 16);
+            this.lblUsername.Size = new System.Drawing.Size(122, 16);
             this.lblUsername.TabIndex = 3;
-            this.lblUsername.Text = "Username";
+            this.lblUsername.Tag = "22";
+            this.lblUsername.Text = "Nombre de usuario";
             this.lblUsername.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblPassword
@@ -81,9 +85,10 @@
             this.lblPassword.AutoSize = true;
             this.lblPassword.Location = new System.Drawing.Point(195, 191);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(67, 16);
+            this.lblPassword.Size = new System.Drawing.Size(76, 16);
             this.lblPassword.TabIndex = 4;
-            this.lblPassword.Text = "Password";
+            this.lblPassword.Tag = "24";
+            this.lblPassword.Text = "Contraseña";
             // 
             // lblCategoria
             // 
@@ -92,6 +97,7 @@
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(66, 16);
             this.lblCategoria.TabIndex = 5;
+            this.lblCategoria.Tag = "26";
             this.lblCategoria.Text = "Categoria";
             this.lblCategoria.Click += new System.EventHandler(this.label1_Click_1);
             // 
@@ -102,6 +108,7 @@
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(201, 86);
             this.btnRegistrar.TabIndex = 7;
+            this.btnRegistrar.Tag = "28";
             this.btnRegistrar.Text = "Registrar";
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
@@ -110,7 +117,7 @@
             // 
             this.usuarioBLLBindingSource.DataSource = typeof(IngenieriaSoftware.BLL.UsuarioBLL);
             // 
-            // RegistrarUsuario
+            // FormRegistrarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -123,7 +130,8 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.comboBoxCategorias);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "RegistrarUsuario";
+            this.Name = "FormRegistrarUsuario";
+            this.Tag = "21";
             this.Text = "GestionUsuarios";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GestionUsuarios_Load);

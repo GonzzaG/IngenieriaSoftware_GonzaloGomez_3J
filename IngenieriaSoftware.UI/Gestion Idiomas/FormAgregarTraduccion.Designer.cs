@@ -49,6 +49,7 @@
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
             this.comboBoxIdiomas.Size = new System.Drawing.Size(192, 24);
             this.comboBoxIdiomas.TabIndex = 0;
+            this.comboBoxIdiomas.Tag = "51";
             // 
             // txtNuevaEtiqueta
             // 
@@ -56,6 +57,7 @@
             this.txtNuevaEtiqueta.Name = "txtNuevaEtiqueta";
             this.txtNuevaEtiqueta.Size = new System.Drawing.Size(185, 22);
             this.txtNuevaEtiqueta.TabIndex = 1;
+            this.txtNuevaEtiqueta.Tag = "59";
             // 
             // btnAgregarTraduccion
             // 
@@ -63,6 +65,7 @@
             this.btnAgregarTraduccion.Name = "btnAgregarTraduccion";
             this.btnAgregarTraduccion.Size = new System.Drawing.Size(168, 55);
             this.btnAgregarTraduccion.TabIndex = 2;
+            this.btnAgregarTraduccion.Tag = "56";
             this.btnAgregarTraduccion.Text = "Agregar traducción";
             this.btnAgregarTraduccion.UseVisualStyleBackColor = true;
             // 
@@ -73,6 +76,7 @@
             this.lblIdioma.Name = "lblIdioma";
             this.lblIdioma.Size = new System.Drawing.Size(55, 16);
             this.lblIdioma.TabIndex = 3;
+            this.lblIdioma.Tag = "50";
             this.lblIdioma.Text = "Idiomas";
             // 
             // lblEtiqueta
@@ -82,6 +86,7 @@
             this.lblEtiqueta.Name = "lblEtiqueta";
             this.lblEtiqueta.Size = new System.Drawing.Size(56, 16);
             this.lblEtiqueta.TabIndex = 5;
+            this.lblEtiqueta.Tag = "52";
             this.lblEtiqueta.Text = "Etiqueta";
             // 
             // comboBoxEtiqueta
@@ -91,6 +96,7 @@
             this.comboBoxEtiqueta.Name = "comboBoxEtiqueta";
             this.comboBoxEtiqueta.Size = new System.Drawing.Size(192, 24);
             this.comboBoxEtiqueta.TabIndex = 4;
+            this.comboBoxEtiqueta.Tag = "53";
             // 
             // txtTraduccion
             // 
@@ -98,6 +104,7 @@
             this.txtTraduccion.Name = "txtTraduccion";
             this.txtTraduccion.Size = new System.Drawing.Size(192, 22);
             this.txtTraduccion.TabIndex = 6;
+            this.txtTraduccion.Tag = "55";
             // 
             // lblTraduccion
             // 
@@ -106,6 +113,7 @@
             this.lblTraduccion.Name = "lblTraduccion";
             this.lblTraduccion.Size = new System.Drawing.Size(75, 16);
             this.lblTraduccion.TabIndex = 7;
+            this.lblTraduccion.Tag = "54";
             this.lblTraduccion.Text = "Traducción";
             // 
             // lblNuevaEtiqueta
@@ -115,6 +123,7 @@
             this.lblNuevaEtiqueta.Name = "lblNuevaEtiqueta";
             this.lblNuevaEtiqueta.Size = new System.Drawing.Size(98, 16);
             this.lblNuevaEtiqueta.TabIndex = 8;
+            this.lblNuevaEtiqueta.Tag = "58";
             this.lblNuevaEtiqueta.Text = "Nueva etiqueta";
             // 
             // btnAgregarEtiqueta
@@ -123,6 +132,7 @@
             this.btnAgregarEtiqueta.Name = "btnAgregarEtiqueta";
             this.btnAgregarEtiqueta.Size = new System.Drawing.Size(126, 55);
             this.btnAgregarEtiqueta.TabIndex = 9;
+            this.btnAgregarEtiqueta.Tag = "60";
             this.btnAgregarEtiqueta.Text = "Agregar etiqueta";
             this.btnAgregarEtiqueta.UseVisualStyleBackColor = true;
             // 
@@ -132,8 +142,9 @@
             this.lblNuevaTraduccionTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNuevaTraduccionTitulo.Location = new System.Drawing.Point(69, 43);
             this.lblNuevaTraduccionTitulo.Name = "lblNuevaTraduccionTitulo";
-            this.lblNuevaTraduccionTitulo.Size = new System.Drawing.Size(260, 32);
+            this.lblNuevaTraduccionTitulo.Size = new System.Drawing.Size(203, 26);
             this.lblNuevaTraduccionTitulo.TabIndex = 10;
+            this.lblNuevaTraduccionTitulo.Tag = "49";
             this.lblNuevaTraduccionTitulo.Text = "Nueva Traducción";
             // 
             // lblNuevaEtiquetaTitulo
@@ -142,8 +153,9 @@
             this.lblNuevaEtiquetaTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNuevaEtiquetaTitulo.Location = new System.Drawing.Point(504, 43);
             this.lblNuevaEtiquetaTitulo.Name = "lblNuevaEtiquetaTitulo";
-            this.lblNuevaEtiquetaTitulo.Size = new System.Drawing.Size(223, 32);
+            this.lblNuevaEtiquetaTitulo.Size = new System.Drawing.Size(175, 26);
             this.lblNuevaEtiquetaTitulo.TabIndex = 11;
+            this.lblNuevaEtiquetaTitulo.Tag = "57";
             this.lblNuevaEtiquetaTitulo.Text = "Nueva Etiqueta";
             // 
             // AgregarIdioma
@@ -164,6 +176,7 @@
             this.Controls.Add(this.txtNuevaEtiqueta);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Name = "AgregarIdioma";
+            this.Tag = "61";
             this.Text = "AgregarTraduccion";
             this.Load += new System.EventHandler(this.AgregarIdioma_Load);
             this.ResumeLayout(false);

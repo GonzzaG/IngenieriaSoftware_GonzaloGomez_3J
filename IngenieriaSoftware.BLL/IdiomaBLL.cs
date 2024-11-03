@@ -21,6 +21,36 @@ namespace IngenieriaSoftware.BLL
             return _idiomaDAL.ObtenerIdiomas();
         }
 
+
+
+
+        public void GuardarEtiquetas(List<EtiquetaDTO> etiquetas)
+        {
+            try
+            {
+                _idiomaDAL.GuardarEtiquetas(etiquetas);
+            }
+            catch(Exception ex)
+            {
+                throw ex;   
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void AgregarEtiqueta(List<EtiquetaDTO> etiquetasEnMemoria)
         {
             try

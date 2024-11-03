@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI
 {
-    partial class InicioSesion
+    partial class FormInicioSesion
     {
         /// <summary>
         /// Required designer variable.
@@ -45,6 +45,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(211, 22);
             this.txtUsuario.TabIndex = 0;
+            this.txtUsuario.Tag = "17";
             // 
             // btnIngresar
             // 
@@ -53,6 +54,7 @@
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(201, 86);
             this.btnIngresar.TabIndex = 2;
+            this.btnIngresar.Tag = "20";
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
             this.btnIngresar.Click += new System.EventHandler(this.LogIn);
@@ -64,6 +66,7 @@
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(57, 16);
             this.lblUsuario.TabIndex = 3;
+            this.lblUsuario.Tag = "16";
             this.lblUsuario.Text = "Usuario:";
             // 
             // lblContrasena
@@ -73,6 +76,7 @@
             this.lblContrasena.Name = "lblContrasena";
             this.lblContrasena.Size = new System.Drawing.Size(79, 16);
             this.lblContrasena.TabIndex = 4;
+            this.lblContrasena.Tag = "18";
             this.lblContrasena.Text = "Contrasena:";
             // 
             // txtContrasena
@@ -82,6 +86,7 @@
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.Size = new System.Drawing.Size(211, 22);
             this.txtContrasena.TabIndex = 5;
+            this.txtContrasena.Tag = "19";
             // 
             // fileSystemWatcher1
             // 
@@ -95,9 +100,10 @@
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
             this.comboBoxIdiomas.Size = new System.Drawing.Size(96, 24);
             this.comboBoxIdiomas.TabIndex = 6;
+            this.comboBoxIdiomas.Tag = "62";
             this.comboBoxIdiomas.SelectedIndexChanged += new System.EventHandler(this.comboBoxIdiomas_SelectedIndexChanged);
             // 
-            // InicioSesion
+            // FormInicioSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -110,7 +116,8 @@
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.txtUsuario);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "InicioSesion";
+            this.Name = "FormInicioSesion";
+            this.Tag = "15";
             this.Text = "Inicio";
             this.Load += new System.EventHandler(this.Inicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();

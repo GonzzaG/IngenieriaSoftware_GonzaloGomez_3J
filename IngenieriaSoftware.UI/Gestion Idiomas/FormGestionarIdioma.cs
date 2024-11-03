@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class GestionarIdioma : Form
+    public partial class FormGestionarIdioma : Form
     {
-        public GestionarIdioma()
+        public FormGestionarIdioma()
         {
             InitializeComponent();
         }

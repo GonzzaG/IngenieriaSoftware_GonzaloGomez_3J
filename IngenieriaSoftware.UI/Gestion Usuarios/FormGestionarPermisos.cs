@@ -14,10 +14,10 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 namespace IngenieriaSoftware.UI
 {
-    public partial class GestionarPermisos : Form
+    public partial class FormGestionarPermisos : Form
     {
         private readonly UsuarioBLL _usuarioBLL;
-        public GestionarPermisos()
+        public FormGestionarPermisos()
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
@@ -157,7 +157,7 @@ namespace IngenieriaSoftware.UI
 
         private void GestionarPermisos_FormClosed(object sender, FormClosedEventArgs e)
         {
-            var formPadre = this.MdiParent as MDI;
+            var formPadre = this.MdiParent as FormMDI;
             formPadre.AbrirFormMenu();
         }
     }

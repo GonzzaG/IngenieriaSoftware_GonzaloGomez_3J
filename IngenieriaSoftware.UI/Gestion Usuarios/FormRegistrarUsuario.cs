@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class RegistrarUsuario : Form
+    public partial class FormRegistrarUsuario : Form
     {
         private readonly AuthService _authService = new AuthService();
         private readonly UsuarioBLL _usuarioBLL;
-        public RegistrarUsuario()
+        public FormRegistrarUsuario()
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();

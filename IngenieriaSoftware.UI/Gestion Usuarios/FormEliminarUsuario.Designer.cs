@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI
 {
-    partial class EliminarUsuario
+    partial class FormEliminarUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -40,6 +40,7 @@
             this.btnEliminarUsuario.Name = "btnEliminarUsuario";
             this.btnEliminarUsuario.Size = new System.Drawing.Size(160, 40);
             this.btnEliminarUsuario.TabIndex = 11;
+            this.btnEliminarUsuario.Tag = "40";
             this.btnEliminarUsuario.Text = "Eliminar usuario";
             this.btnEliminarUsuario.UseVisualStyleBackColor = true;
             this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
@@ -51,6 +52,7 @@
             this.lblUsuarios.Name = "lblUsuarios";
             this.lblUsuarios.Size = new System.Drawing.Size(61, 16);
             this.lblUsuarios.TabIndex = 10;
+            this.lblUsuarios.Tag = "38";
             this.lblUsuarios.Text = "Usuarios";
             // 
             // comboBoxUsuarios
@@ -61,8 +63,10 @@
             this.comboBoxUsuarios.Name = "comboBoxUsuarios";
             this.comboBoxUsuarios.Size = new System.Drawing.Size(251, 24);
             this.comboBoxUsuarios.TabIndex = 9;
+            this.comboBoxUsuarios.Tag = "37";
+            this.comboBoxUsuarios.SelectedIndexChanged += new System.EventHandler(this.comboBoxUsuarios_SelectedIndexChanged);
             // 
-            // EliminarUsuario
+            // FormEliminarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -70,7 +74,8 @@
             this.Controls.Add(this.btnEliminarUsuario);
             this.Controls.Add(this.lblUsuarios);
             this.Controls.Add(this.comboBoxUsuarios);
-            this.Name = "EliminarUsuario";
+            this.Name = "FormEliminarUsuario";
+            this.Tag = "39";
             this.Text = "EliminarUsuario";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.EliminarUsuario_Load);

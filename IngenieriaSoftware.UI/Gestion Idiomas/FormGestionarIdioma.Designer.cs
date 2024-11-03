@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI
 {
-    partial class GestionarIdioma
+    partial class FormGestionarIdioma
     {
         /// <summary>
         /// Required designer variable.
@@ -47,6 +47,7 @@
             this.dataGridViewIdiomas.RowTemplate.Height = 24;
             this.dataGridViewIdiomas.Size = new System.Drawing.Size(318, 342);
             this.dataGridViewIdiomas.TabIndex = 0;
+            this.dataGridViewIdiomas.Tag = "47";
             // 
             // lblIdiomas
             // 
@@ -55,15 +56,18 @@
             this.lblIdiomas.Name = "lblIdiomas";
             this.lblIdiomas.Size = new System.Drawing.Size(55, 16);
             this.lblIdiomas.TabIndex = 1;
+            this.lblIdiomas.Tag = "48";
             this.lblIdiomas.Text = "Idiomas";
             // 
             // comboBoxUsuario
             // 
+            this.comboBoxUsuario.DisplayMember = "comboBoxUsuario";
             this.comboBoxUsuario.FormattingEnabled = true;
             this.comboBoxUsuario.Location = new System.Drawing.Point(70, 93);
             this.comboBoxUsuario.Name = "comboBoxUsuario";
             this.comboBoxUsuario.Size = new System.Drawing.Size(199, 24);
             this.comboBoxUsuario.TabIndex = 2;
+            this.comboBoxUsuario.Tag = "42";
             // 
             // btnAgregarIdioma
             // 
@@ -71,6 +75,7 @@
             this.btnAgregarIdioma.Name = "btnAgregarIdioma";
             this.btnAgregarIdioma.Size = new System.Drawing.Size(149, 78);
             this.btnAgregarIdioma.TabIndex = 3;
+            this.btnAgregarIdioma.Tag = "46";
             this.btnAgregarIdioma.Text = "Agregar idioma";
             this.btnAgregarIdioma.UseVisualStyleBackColor = true;
             // 
@@ -80,6 +85,7 @@
             this.txtIdioma.Name = "txtIdioma";
             this.txtIdioma.Size = new System.Drawing.Size(175, 22);
             this.txtIdioma.TabIndex = 4;
+            this.txtIdioma.Tag = "45";
             // 
             // lblUsuario
             // 
@@ -88,6 +94,7 @@
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(54, 16);
             this.lblUsuario.TabIndex = 5;
+            this.lblUsuario.Tag = "43";
             this.lblUsuario.Text = "Usuario";
             // 
             // lblIdioma
@@ -97,9 +104,10 @@
             this.lblIdioma.Name = "lblIdioma";
             this.lblIdioma.Size = new System.Drawing.Size(48, 16);
             this.lblIdioma.TabIndex = 6;
+            this.lblIdioma.Tag = "44";
             this.lblIdioma.Text = "Idioma";
             // 
-            // GestionarIdioma
+            // FormGestionarIdioma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,7 +119,8 @@
             this.Controls.Add(this.comboBoxUsuario);
             this.Controls.Add(this.lblIdiomas);
             this.Controls.Add(this.dataGridViewIdiomas);
-            this.Name = "GestionarIdioma";
+            this.Name = "FormGestionarIdioma";
+            this.Tag = "41";
             this.Text = "GestionarIdioma";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIdiomas)).EndInit();
             this.ResumeLayout(false);

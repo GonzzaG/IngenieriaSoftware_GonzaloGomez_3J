@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI
 {
-    partial class GestionarPermisos
+    partial class FormGestionarPermisos
     {
         /// <summary>
         /// Required designer variable.
@@ -45,6 +45,7 @@
             this.btnAsignarPermiso.Name = "btnAsignarPermiso";
             this.btnAsignarPermiso.Size = new System.Drawing.Size(201, 86);
             this.btnAsignarPermiso.TabIndex = 14;
+            this.btnAsignarPermiso.Tag = "32";
             this.btnAsignarPermiso.Text = "Asignar permiso";
             this.btnAsignarPermiso.UseVisualStyleBackColor = true;
             this.btnAsignarPermiso.Click += new System.EventHandler(this.btnAsignarPermiso_Click);
@@ -56,6 +57,7 @@
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(54, 16);
             this.lblUsuario.TabIndex = 13;
+            this.lblUsuario.Tag = "30";
             this.lblUsuario.Text = "Usuario";
             // 
             // lblTodosLosPermisos
@@ -65,6 +67,7 @@
             this.lblTodosLosPermisos.Name = "lblTodosLosPermisos";
             this.lblTodosLosPermisos.Size = new System.Drawing.Size(127, 16);
             this.lblTodosLosPermisos.TabIndex = 11;
+            this.lblTodosLosPermisos.Tag = "36";
             this.lblTodosLosPermisos.Text = "Todos los permisos";
             // 
             // comboBoxUsuario
@@ -75,6 +78,7 @@
             this.comboBoxUsuario.Name = "comboBoxUsuario";
             this.comboBoxUsuario.Size = new System.Drawing.Size(251, 24);
             this.comboBoxUsuario.TabIndex = 8;
+            this.comboBoxUsuario.Tag = "31";
             this.comboBoxUsuario.SelectedIndexChanged += new System.EventHandler(this.comboBoxUsuario_SelectedIndexChanged);
             // 
             // treeViewPermisos
@@ -84,6 +88,7 @@
             this.treeViewPermisos.Name = "treeViewPermisos";
             this.treeViewPermisos.Size = new System.Drawing.Size(248, 312);
             this.treeViewPermisos.TabIndex = 18;
+            this.treeViewPermisos.Tag = "64";
             // 
             // treeViewPermisoUsuario
             // 
@@ -92,6 +97,7 @@
             this.treeViewPermisoUsuario.Name = "treeViewPermisoUsuario";
             this.treeViewPermisoUsuario.Size = new System.Drawing.Size(248, 312);
             this.treeViewPermisoUsuario.TabIndex = 20;
+            this.treeViewPermisoUsuario.Tag = "35";
             // 
             // lblPermisosUsuario
             // 
@@ -100,6 +106,7 @@
             this.lblPermisosUsuario.Name = "lblPermisosUsuario";
             this.lblPermisosUsuario.Size = new System.Drawing.Size(133, 16);
             this.lblPermisosUsuario.TabIndex = 19;
+            this.lblPermisosUsuario.Tag = "34";
             this.lblPermisosUsuario.Text = "Permisos del usuario";
             // 
             // btnDesasignarPermiso
@@ -109,11 +116,12 @@
             this.btnDesasignarPermiso.Name = "btnDesasignarPermiso";
             this.btnDesasignarPermiso.Size = new System.Drawing.Size(201, 86);
             this.btnDesasignarPermiso.TabIndex = 21;
+            this.btnDesasignarPermiso.Tag = "33";
             this.btnDesasignarPermiso.Text = "Desasignar permiso";
             this.btnDesasignarPermiso.UseVisualStyleBackColor = true;
             this.btnDesasignarPermiso.Click += new System.EventHandler(this.btnDesasignarPermiso_Click);
             // 
-            // GestionarPermisos
+            // FormGestionarPermisos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -127,7 +135,8 @@
             this.Controls.Add(this.lblTodosLosPermisos);
             this.Controls.Add(this.comboBoxUsuario);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "GestionarPermisos";
+            this.Name = "FormGestionarPermisos";
+            this.Tag = "29";
             this.Text = "GestionarPermisos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GestionarPermisos_FormClosed);

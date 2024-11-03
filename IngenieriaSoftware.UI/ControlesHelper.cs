@@ -11,18 +11,176 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    internal class ControlesHelper
+    public class ControlesHelper
     {
+
+        public static List<EtiquetaDTO> ObtenerEtiquetas(Control.ControlCollection controles)
+        {
+            var etiquetas = new List<EtiquetaDTO>();
+            ObtenerEtiquetasRecursivo(controles, etiquetas);
+            return etiquetas;
+        }
+
+        private static void ObtenerEtiquetasRecursivo(Control.ControlCollection controles, List<EtiquetaDTO> etiquetas)
+        {
+            // Recorrer todos los controles en el formulario
+            foreach (Control c in controles)
+            {
+                // Comprobar que el Tag sea un entero y el Name no sea nulo o vacío
+                if (Convert.ToInt32(c.Tag) is int etiquetaId && !string.IsNullOrEmpty(c.Name))
+                {
+                    etiquetas.Add(new EtiquetaDTO
+                    {
+                        Id = etiquetaId,
+                        Nombre = c.Name
+                    });
+                }
+
+                // Si el control tiene hijos, recorrerlos recursivamente
+                ObtenerEtiquetasRecursivo(c.Controls, etiquetas);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static Dictionary<string, object> ControlesRegistrados = new Dictionary<string, object>();
+
+        public static void RegistrarControles(Control control, List<EtiquetaDTO> etiquetas)
+        {
+            foreach (Control c in control.Controls)
+            {
+                // Si el control es un MenuStrip, procesar sus elementos de menú
+                if (c is MenuStrip menuStrip)
+                {
+                    foreach (ToolStripItem menuItem in menuStrip.Items)
+                    {
+                        RegistrarElementoMenu(menuItem, etiquetas);
+                    }
+                }
+                else
+                {
+                    // Para controles normales, buscar la etiqueta y asignar el Tag si hay coincidencia
+                    var etiqueta = etiquetas.FirstOrDefault(e => e.Nombre == c.Name);
+                    if (etiqueta != null)
+                    {
+                        c.Tag = etiqueta.Id;
+                        string claveUnica = $"{etiqueta.Id}_{etiqueta.Nombre}";
+
+                        if (!ControlesRegistrados.ContainsKey(claveUnica))
+                        {
+                            ControlesRegistrados[claveUnica] = c;
+                        }
+                    }
+
+                    // Llamada recursiva para subcontroles
+                    if (c.HasChildren)
+                    {
+                        RegistrarControles(c, etiquetas);
+                    }
+                }
+            }
+        }
+
+        // Método auxiliar para registrar los elementos de menú recursivamente
+        private static void RegistrarElementoMenu(ToolStripItem menuItem, List<EtiquetaDTO> etiquetas)
+        {
+            var etiqueta = etiquetas.FirstOrDefault(e => e.Nombre == menuItem.Name);
+            if (etiqueta != null)
+            {
+                // Asignar el etiqueta_id al Tag del elemento de menú
+                menuItem.Tag = etiqueta.Id;
+                string claveUnica = $"{etiqueta.Id}_{etiqueta.Nombre}";
+
+                if (!ControlesRegistrados.ContainsKey(claveUnica))
+                {
+                    ControlesRegistrados[claveUnica] = menuItem;
+                }
+            }
+
+            // Si el elemento es un ToolStripMenuItem, verificar si tiene subelementos
+            if (menuItem is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.DropDownItems.Count > 0)
+            {
+                foreach (ToolStripItem subItem in toolStripMenuItem.DropDownItems)
+                {
+                    RegistrarElementoMenu(subItem, etiquetas);
+                }
+            }
+        }
+
+        //le paso como parametro la lista de traducciones traida de la BD
+        public static void AplicarTraducciones(Dictionary<string, string> traducciones)
+        {
+            foreach (var entry in ControlesRegistrados)
+            {
+                string claveUnica = entry.Key;
+                Control control = (Control)entry.Value;
+
+                // Verificar si existe una traducción para la clave
+                if (traducciones.ContainsKey(claveUnica))
+                {
+                    control.Text = traducciones[claveUnica];
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private static Dictionary<string, string> etiquetasPorNombre = new Dictionary<string, string>();
 
-
-        #region Tags
-        // Método para establecer el Tag de cada control en función de su Nombre
+        #region Tagsablecer el Tag de cada control en función de su Nombre
         public static void EstablecerTags(Control control)
         {
             foreach (Control c in control.Controls)
             {
  
+        // Método para est
                 if (c.HasChildren)
                 {
                     EstablecerTags(c);
