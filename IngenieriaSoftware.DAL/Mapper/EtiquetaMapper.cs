@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,12 +11,12 @@ namespace IngenieriaSoftware.DAL
 {
     internal class EtiquetaMapper
     {
-        public List<Etiqueta> MapearEtiquetasDesdeDataSet(DataSet pDS)
+        public List<EtiquetaDTO> MapearEtiquetasDesdeDataSet(DataSet pDS)
         {
-            List<Etiqueta> etiquetas = new List<Etiqueta>();
+            List<EtiquetaDTO> etiquetas = new List<EtiquetaDTO>();
             foreach (DataRow row in pDS.Tables[0].Rows)
             {
-                Etiqueta etiqueta = new Etiqueta();
+                EtiquetaDTO etiqueta = new EtiquetaDTO();
                 etiqueta.Id = (int)row["etiqueta_id"];
                 etiqueta.Nombre = row["nombre"].ToString();
 

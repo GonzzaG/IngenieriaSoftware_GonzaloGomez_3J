@@ -34,6 +34,7 @@
             this.lblContrasena = new System.Windows.Forms.Label();
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,12 +88,22 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // comboBoxIdiomas
+            // 
+            this.comboBoxIdiomas.FormattingEnabled = true;
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(475, 528);
+            this.comboBoxIdiomas.Name = "comboBoxIdiomas";
+            this.comboBoxIdiomas.Size = new System.Drawing.Size(96, 24);
+            this.comboBoxIdiomas.TabIndex = 6;
+            this.comboBoxIdiomas.SelectedIndexChanged += new System.EventHandler(this.comboBoxIdiomas_SelectedIndexChanged);
+            // 
             // InicioSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(624, 597);
+            this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.txtContrasena);
             this.Controls.Add(this.lblContrasena);
             this.Controls.Add(this.lblUsuario);
@@ -116,6 +127,7 @@
         private System.Windows.Forms.Label lblContrasena;
         private System.Windows.Forms.TextBox txtContrasena;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.ComboBox comboBoxIdiomas;
     }
 }
 

@@ -130,6 +130,7 @@
             this.Name = "GestionarPermisos";
             this.Text = "GestionarPermisos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GestionarPermisos_FormClosed);
             this.Load += new System.EventHandler(this.GestionarPermisos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

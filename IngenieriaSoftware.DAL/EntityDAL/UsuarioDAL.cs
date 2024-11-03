@@ -119,12 +119,7 @@ namespace IngenieriaSoftware.DAL
         public List<PermisoDTO> ObtenerPermisosDelUsuarioEnMemoria(string pUsername)
         {
             UsuarioDTO usuario = _usuarioGlobales.Find(u => u.Username == pUsername);
-            return usuario.Permisos.Select(p => new PermisoDTO
-            {
-                Id = p.Id,
-                Nombre = p.Nombre,
-                // Otros campos que necesites
-            }).ToList();
+            return usuario.Permisos;
         }
 
         public List<PermisoDTO> ObtenerPermisosDelUsuarioPorUsername(string pUsuarioNombre)

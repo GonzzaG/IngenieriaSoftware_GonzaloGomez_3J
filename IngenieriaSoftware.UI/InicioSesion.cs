@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.Servicios.DTOs;
 
 
 namespace IngenieriaSoftware.UI
@@ -16,6 +17,7 @@ namespace IngenieriaSoftware.UI
     public partial class InicioSesion : Form
     {
         private readonly AuthService _authService = new AuthService();
+        internal List<IdiomaDTO> _idiomas;
 
         public InicioSesion()
         {
@@ -23,8 +25,33 @@ namespace IngenieriaSoftware.UI
 
             this.StartPosition = FormStartPosition.CenterScreen;
             this.DialogResult = DialogResult.No;
+            _idiomas = new List<IdiomaDTO>();
+
+        }
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            //var formPadre = this.MdiParent as MDI;
+           // formPadre.PruebaAsignarIdsAControles(this);
+            _idiomas =CargarIdiomas();
+            ListarIdiomas(_idiomas);
+            //ControlesHelper.CargarTraducciones(this);
         }
 
+        public List<IdiomaDTO> CargarIdiomas()
+        {
+            return new IdiomaBLL().ObtenerIdiomas();
+        }
+
+        public void ListarIdiomas(List<IdiomaDTO> idiomas)
+        {
+            comboBoxIdiomas.Items.Clear();
+            foreach (IdiomaDTO idioma in idiomas)
+            {
+                comboBoxIdiomas.Items.Add(idioma.Nombre);
+            }
+        }
+
+        #region LogIn LogOut
         private void LogIn(object sender, EventArgs e)
         {
             try
@@ -61,11 +88,18 @@ namespace IngenieriaSoftware.UI
 
           
         }
+        #endregion
 
-        private void Inicio_Load(object sender, EventArgs e)
+        private void comboBoxIdiomas_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+            if (comboBoxIdiomas.SelectedItem == null) return;
+            var nombreIdioma = comboBoxIdiomas.SelectedItem.ToString();
+            
         }
 
+        //public List<IdiomaDTO> CambiarIdioma(string idiomaNombre)
+        //{
+        //    var nombreIdioma = _idiomas.Find(i => i.Nombre == idiomaNombre);
+        //}
     }
 }

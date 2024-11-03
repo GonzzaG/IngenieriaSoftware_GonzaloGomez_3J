@@ -1,11 +1,13 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,13 @@ namespace IngenieriaSoftware.UI
         UsuarioBLL usuarioBLL;
         PermisoBLL permisoBLL;
         IdiomaBLL idiomaBLL;
+        TraduccionBLL traduccionBLL;
+
         List<PermisoDTO> permisosUsuario;
         SessionManager _sessionManager;
         private readonly AuthService _authService = new AuthService();
+
+        List<EtiquetaDTO> _etiquetas;
 
         private string idiomaActual;
 
@@ -31,18 +37,80 @@ namespace IngenieriaSoftware.UI
             this.StartPosition = FormStartPosition.CenterScreen;
             usuarioBLL = new UsuarioBLL();  
             permisoBLL = new PermisoBLL();
-            
-
+            idiomaBLL = new IdiomaBLL();
+            _etiquetas = new List<EtiquetaDTO>();
+            traduccionBLL = new TraduccionBLL();
         }
 
         private void MDI_Load(object sender, EventArgs e)
         {
-            ControlesHelper.EstablecerTags(this);
+            inicializarEtiquetas(this);
+           // PruebaAsignarIdsAControles();
             Actualizar();
-         
+            
         }
 
 
+
+        public void InicializarEtiquetas()
+        {
+            var etiquetas = ActualizarEtiquetas();
+            //una vez obtenido las etiquetas, vamos a ir a bd a traer las etiquetas en base de datos
+            new IdiomaBLL().AgregarEtiqueta(etiquetas);
+        }
+
+
+
+        public void PruebaAsignarIdsAControles(Control control)
+        {
+
+            
+
+
+
+            _etiquetas = idiomaBLL.ObtenerTodasLasEtiquetasEnBD();
+            ControlesHelper.AsignarEtiquetaIdsAControles(control, _etiquetas);
+            //una vez que los controles en el formulario tienen id, ahora podemos traducirlas con las traducciones que tiene el dictionary en la dal
+            idiomaActual = "Ingles";
+            var traducciones = traduccionBLL.ObtenerTraducciones(idiomaActual);
+            //ahora que tengo la lista de etiquetas y el dictinary con etiqueta_id, nombre, y la traducicon
+            ControlesHelper.ActualizarControlesConTraducciones(control, traducciones, _etiquetas);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void inicializarEtiquetas(Form formPadre)
+        {
+            // ControlesHelper.EstablecerTags(formPadre);
+
+            var etiquetas = ActualizarEtiquetas();
+            //una vez obtenido las etiquetas, vamos a ir a bd a traer las etiquetas en base de datos
+            new IdiomaBLL().AgregarEtiqueta(etiquetas);
+            var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
+            idiomaActual = "Ingles";
+            ObtenerTraduccionesPorIdioma(idiomaActual);    
+
+        }
+        private Dictionary<string, string> ObtenerTraduccionesPorIdioma(string idiomaNombre)
+        {
+           
+            var traducciones = traduccionBLL.ObtenerTraducciones(idiomaNombre); // Llama a la DAL, que ejecuta el SP
+
+           // ControlesHelper.CargarTraducciones(this, traducciones);
+
+            return traducciones;
+        }
 
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -50,10 +118,7 @@ namespace IngenieriaSoftware.UI
         }
 
         private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            CerrarFormulariosHijos();
-            
+        {         
             RegistrarUsuario formRegistrarUsuario = new RegistrarUsuario();
             AbrirFormHijo(formRegistrarUsuario);
 
@@ -63,11 +128,10 @@ namespace IngenieriaSoftware.UI
         }
 
         private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
-        {         
+        {
             GestionarPermisos formGestionPermisos = new GestionarPermisos();
             AbrirFormHijo(formGestionPermisos);
-           // formGestionPermisos.ShowDialog();
-            //AbrirFormMenu();
+
         }
 
         private void gestionIdiomasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,6 +141,8 @@ namespace IngenieriaSoftware.UI
 
         private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CerrarFormulariosHijos();
+
             EliminarUsuario formEliminarUsuario = new EliminarUsuario();
             AbrirFormHijo(formEliminarUsuario);
 
@@ -86,7 +152,8 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                
+                CerrarFormulariosHijos();
+
                 _authService.LogOut();
 
                 Actualizar();
@@ -101,7 +168,11 @@ namespace IngenieriaSoftware.UI
         private void Actualizar()
         {
             InicioSesion FormInicio = new InicioSesion();
-            ControlesHelper.EstablecerTags(FormInicio);
+            PruebaAsignarIdsAControles(this);
+            AbrirFormInicioSesion(FormInicio);
+            PruebaAsignarIdsAControles(FormInicio);
+            //ControlesHelper.EstablecerTags(FormInicio);
+            FormInicio.MdiParent = null;
             if (FormInicio.ShowDialog(this) == DialogResult.OK)
             {
                 // Si el inicio de sesion es correcto, se abre el formulario menu
@@ -114,7 +185,7 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        private void AbrirFormMenu()
+        internal void AbrirFormMenu()
         {
          
             
@@ -124,6 +195,21 @@ namespace IngenieriaSoftware.UI
             permisosUsuario = usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
+        }
+
+        private void AbrirFormInicioSesion(Form formHijo)
+        {
+            CerrarFormulariosHijos();
+
+            formHijo.MdiParent = this;
+            formHijo.WindowState = FormWindowState.Maximized;
+            formHijo.StartPosition = FormStartPosition.CenterScreen;
+            formHijo.Size = this.Size;
+          //  formHijo.Show();
+
+         //   ControlesHelper.AsignarEtiquetaIdsAControles(formHijo, _etiquetas);
+
+            // CargarIdiomas(); // Llamar para traducir controles después de abrir
         }
 
         private void AbrirFormHijo(Form formHijo)
@@ -136,32 +222,12 @@ namespace IngenieriaSoftware.UI
             formHijo.Size = this.Size;
             formHijo.Show();
 
-            ControlesHelper.EstablecerTags(formHijo);
+            ControlesHelper.AsignarEtiquetaIdsAControles(formHijo, _etiquetas);
 
-           // CargarTraducciones(); // Llamar para traducir controles después de abrir
+           // CargarIdiomas(); // Llamar para traducir controles después de abrir
         }
 
         #region Traducciones
-        //public void CargarTraducciones()
-        //{
-        //    // Lógica para cargar traducciones desde la base de datos
-        //    // y aplicar los nombres a los controles
-
-        //    //Dictionary<string, string> traducciones = ObtenerTraduccionesDesdeBD(idiomaActual);
-
-        //    // Aplicar traducciones a los controles del formulario
-        //    foreach (Control control in this.Controls)
-        //    {
-        //        if (control.Tag != null && traducciones.ContainsKey(control.Tag.ToString()))
-        //        {
-        //            control.Text = traducciones[control.Tag.ToString()];
-        //        }
-        //    }
-        //}
-
-
-        //esto va a ir en la DALIDIOMA
-
         private Dictionary<string, string> ObtenerTraduccionesDesdeBD(string idioma)
         {
             // Lógica para consultar la base de datos y obtener las traducciones
@@ -390,8 +456,9 @@ namespace IngenieriaSoftware.UI
             if (respuesta == DialogResult.No) return;
             else if (respuesta == DialogResult.Yes)
             {
-                ActualizarEtiquetas();
-
+                var etiquetas = ActualizarEtiquetas();
+                //una vez obtenido las etiquetas, vamos a ir a bd a traer las etiquetas en base de datos
+                new IdiomaBLL().AgregarEtiqueta(etiquetas);
             }
             // Este boton preguntara si esta seguro que desea continuar
             //este evento instanciara todos los formularios agregandolos a una List<Form>
@@ -403,24 +470,29 @@ namespace IngenieriaSoftware.UI
             //esto agregara todas las etiquetas en memoria que no existen en bd
         }
 
-        private void ActualizarEtiquetas()
+        private List<EtiquetaDTO> ActualizarEtiquetas()
         {
             var formulariosHijos = FormHelper.InstanciarTodosLosFormularios(this);
+            var etiquetas = idiomaBLL.ObtenerTodasLasEtiquetasEnBD();
+          //  foreach (Form f in formulariosHijos)
+           // {
+           //     ControlesHelper.AsignarEtiquetaIdsAControles(this, todasLasEtiquetas);
+           // }
 
-            foreach (Form f in formulariosHijos)
-            {
-                ControlesHelper.EstablecerTags(f);
-            }
 
-            List<string> etiquetas =ControlesHelper.ObtenerTagsDeTodosLosControles(this);
-             new IdiomaBLL().AgregarEtiqueta(etiquetas);
-            //una vez obtenido las etiquetas, vamos a ir a bd a traer las etiquetas en base de datos
+            return etiquetas;
+          
         }
 
         private void agregarTraduccionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AgregarIdioma formAgregarIdioma = new AgregarIdioma();
             AbrirFormHijo(formAgregarIdioma);
+        }
+
+        private void comandasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

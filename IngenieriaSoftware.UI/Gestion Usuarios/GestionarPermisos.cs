@@ -118,6 +118,7 @@ namespace IngenieriaSoftware.UI
                 permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
                 
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+              
 
             }
             catch(Exception ex)
@@ -139,7 +140,12 @@ namespace IngenieriaSoftware.UI
                 ActualizarFormulario();
                 var permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
 
+                if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.UsuarioActual.Username)
+                {
+                    this.Close();
+                }
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+
 
             }
             catch (Exception ex)
@@ -147,6 +153,12 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void GestionarPermisos_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var formPadre = this.MdiParent as MDI;
+            formPadre.AbrirFormMenu();
         }
     }
 }

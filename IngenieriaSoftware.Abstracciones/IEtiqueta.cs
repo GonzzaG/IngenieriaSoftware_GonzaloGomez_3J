@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Abstracciones
 {
-    public interface IUsuario
+    public interface IEtiqueta
     {
         int Id { get; set; }
-        string Username { get; set; }
-        DateTime FechaCreacion { get; set; }
-        int IdiomaId {  get; set; }  
-
-       // List<IPermiso> Permisos { get; set; }
+        string Tag { get; set; }
+        string Nombre { get; set; }
     }
 }

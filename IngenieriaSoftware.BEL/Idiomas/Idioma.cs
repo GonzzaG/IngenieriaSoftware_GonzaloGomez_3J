@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IngenieriaSoftware.Abstracciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Idioma : ISujeto
+    public class Idioma : IIdioma ,ISujeto
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Codigo { get; set; }
         public Dictionary<string, string> Traducciones { get; set; }
+        public bool Habilitado { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         // Lista de observadores (usuarios suscritos)
         private List<IObserver> observadores;

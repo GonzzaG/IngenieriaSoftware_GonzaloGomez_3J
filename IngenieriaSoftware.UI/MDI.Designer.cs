@@ -37,10 +37,10 @@
             this.eliminarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionIdiomasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarEtiquetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarTraduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +78,7 @@
             this.comandasToolStripMenuItem.Name = "comandasToolStripMenuItem";
             this.comandasToolStripMenuItem.Size = new System.Drawing.Size(93, 24);
             this.comandasToolStripMenuItem.Text = "Comandas";
+            this.comandasToolStripMenuItem.Click += new System.EventHandler(this.comandasToolStripMenuItem_Click);
             // 
             // gestionUsuariosToolStripMenuItem
             // 
@@ -93,21 +94,21 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
             // 
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
             // 
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem_Click);
             // 
@@ -121,6 +122,21 @@
             this.gestionIdiomasToolStripMenuItem.Text = "Gestion Idiomas";
             this.gestionIdiomasToolStripMenuItem.Click += new System.EventHandler(this.gestionIdiomasToolStripMenuItem_Click);
             // 
+            // actualizarEtiquetasToolStripMenuItem
+            // 
+            this.actualizarEtiquetasToolStripMenuItem.BackColor = System.Drawing.Color.Red;
+            this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
+            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
+            this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
+            // 
+            // agregarTraduccionToolStripMenuItem
+            // 
+            this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
+            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
+            this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
+            // 
             // estadisticasToolStripMenuItem
             // 
             this.estadisticasToolStripMenuItem.Name = "estadisticasToolStripMenuItem";
@@ -133,21 +149,6 @@
             this.LogOutgestionUsuariosToolStripMenuItem.Size = new System.Drawing.Size(110, 24);
             this.LogOutgestionUsuariosToolStripMenuItem.Text = "Cerrar Sesion";
             this.LogOutgestionUsuariosToolStripMenuItem.Click += new System.EventHandler(this.LogOutgestionUsuariosToolStripMenuItem_Click);
-            // 
-            // actualizarEtiquetasToolStripMenuItem
-            // 
-            this.actualizarEtiquetasToolStripMenuItem.BackColor = System.Drawing.Color.Red;
-            this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
-            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
-            this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
-            // 
-            // agregarTraduccionToolStripMenuItem
-            // 
-            this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
-            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
-            this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
             // 
             // MDI
             // 

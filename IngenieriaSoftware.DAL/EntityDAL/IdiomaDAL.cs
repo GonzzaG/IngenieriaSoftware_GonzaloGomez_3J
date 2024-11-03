@@ -6,42 +6,66 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.Servicios.DTOs;
 
 namespace IngenieriaSoftware.DAL
 {
     public class IdiomaDAL
     {
         DAO _dao;
-    
+        public List<EtiquetaDTO> etiquetas;
         public IdiomaDAL()
         {
             _dao = new DAO();
+            etiquetas = new List<EtiquetaDTO>();
         }
 
-        public int AgregarEtiqueta(List<string> etiquetasMemoria)
+        #region Idioma
+
+        public List<IdiomaDTO> ObtenerIdiomas()
         {
-            List<Etiqueta> etiquetasBD = ObtenerTodasLasEtiquetasEnBD();
+            try
+            {
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosIdiomas", null);
+                return new IdiomaMapper().MapearIdiomasDesdeDataSet(mDs);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+
+
+        #region Etiqueta
+
+        public int AgregarEtiqueta(List<EtiquetaDTO> etiquetasMemoria)
+        {
+            List<EtiquetaDTO> etiquetasBD = ObtenerTodasLasEtiquetasEnBD();
 
             // Llamar al método que compara y modifica etiquetasMemoria
             CompararEtiquetas(etiquetasMemoria, etiquetasBD);
 
             // Guardar las etiquetas restantes en la base de datos
-            foreach (string etiqueta in etiquetasMemoria)
+            foreach (EtiquetaDTO etiqueta in etiquetasMemoria)
             {
-                if (etiqueta.Length > 0)
-                    AgregarEtiquetaEnBD(etiqueta);
+                if (etiqueta.Nombre.Length > 0)
+                    AgregarEtiquetaEnBD(etiqueta.Nombre);
             }
 
             return etiquetasMemoria.Count; // O el número de etiquetas que se agregaron a la base de datos
         }
 
-        private void CompararEtiquetas(List<string> etiquetasMemoria, List<Etiqueta> etiquetasBD)
+        private void CompararEtiquetas(List<EtiquetaDTO> etiquetasMemoria, List<EtiquetaDTO> etiquetasBD)
         {
             // Obtener una lista de los nombres de las etiquetas en la base de datos
             var nombresEtiquetasBD = etiquetasBD.Select(e => e.Nombre).ToList();
 
             // Remover etiquetas de memoria que ya existen en la base de datos
-            etiquetasMemoria.RemoveAll(etiqueta => nombresEtiquetasBD.Contains(etiqueta));
+            etiquetasMemoria.RemoveAll(etiqueta => nombresEtiquetasBD.Contains(etiqueta.Nombre));
         }
 
 
@@ -66,7 +90,7 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        private List<Etiqueta> ObtenerTodasLasEtiquetasEnBD()
+        public List<EtiquetaDTO> ObtenerTodasLasEtiquetasEnBD()
         {
             try
             {
@@ -79,6 +103,8 @@ namespace IngenieriaSoftware.DAL
                 throw ex; 
             }
         }
+
+        #endregion
 
     }
 }
