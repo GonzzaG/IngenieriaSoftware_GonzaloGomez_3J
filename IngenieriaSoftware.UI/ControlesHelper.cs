@@ -32,7 +32,8 @@ namespace IngenieriaSoftware.UI
                     etiquetas.Add(new EtiquetaDTO
                     {
                         Id = etiquetaId,
-                        Nombre = c.Name
+                        Nombre = c.Name,
+                        Tag = c.Tag.ToString() 
                     });
                 }
 

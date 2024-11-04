@@ -24,7 +24,7 @@ namespace IngenieriaSoftware.BLL
 
 
 
-        public void GuardarEtiquetas(List<EtiquetaDTO> etiquetas)
+        public void GuardarEtiquetas(Dictionary<string, string> etiquetas)     //(List<EtiquetaDTO> etiquetas)
         {
             try
             {

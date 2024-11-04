@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,17 +12,24 @@ namespace IngenieriaSoftware.Servicios
 {
     public class IdiomaObserver
     {
-        private int idiomaId;
+        public int idiomaId;
 
         private readonly List<IdiomaSuscriptorDTO> Suscriptores = new List<IdiomaSuscriptorDTO>();
 
-        public event Action<IdiomaSuscriptorDTO> IdiomaCambiado;
+        public event Action<Dictionary<string, string>> IdiomaCambiado;
+
+        private readonly ITraduccionServicio _traduccionService;
 
 
-        public IdiomaObserver(int idiomaInicialId)
+
+
+        public IdiomaObserver(int idiomaInicialId, ITraduccionServicio traduccionService)
         {
             idiomaId = idiomaInicialId;
+            _traduccionService = traduccionService;
         }
+        
+
 
         public void Suscribir(IdiomaSuscriptorDTO control)
         {
@@ -32,48 +40,19 @@ namespace IngenieriaSoftware.Servicios
             }
         }
 
-        public void Notificar (IdiomaSuscriptorDTO languageChangeDto)
-        {
-            foreach (var suscriptor in Suscriptores)
-            {
-                if (suscriptor.Tag == languageChangeDto.Tag)
-                {
-                    suscriptor.Actualizar(languageChangeDto.Traduccion);
-                }
-            }
-        }
-
-        public void CambiarIdioma(int nuevoIdiomaId)
+        public void Notificar(int nuevoIdiomaId)
         {
             idiomaId = nuevoIdiomaId;
-
-            var traducciones = ObtenerTraducciones(idiomaId);
-            foreach (var traduccion in traducciones)
+            var traducciones = _traduccionService.ObtenerTraduccionesPorIdioma(idiomaId);
+            foreach (var suscriptor in Suscriptores)
             {
-     
-                IdiomaCambiado?.Invoke(new IdiomaSuscriptorDTO { Tag = traduccion.Key, Traduccion = traduccion.Value });
-            }
+                if (traducciones.ContainsKey(suscriptor.Tag))
+                {
+                    suscriptor.Actualizar(traducciones[suscriptor.Tag]);
+                }
+            }     
         }
 
 
-
-
-
-
-
-
-
-
-
-        private Dictionary<string, string> ObtenerTraducciones(int idiomaId)
-        {
-            var traducciones = new List<TraduccionDTO>
-            {
-                new TraduccionDTO { EtiquetaId = 1, IdiomaId = idiomaId, Texto = idiomaId == 1 ? "Nombre" : "Name" },
-                new TraduccionDTO { EtiquetaId = 2, IdiomaId = idiomaId, Texto = idiomaId == 1 ? "Apellido" : "Surname" }
-            };
-
-            return traducciones.ToDictionary(t => t.EtiquetaId.ToString(), t => t.Texto);
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.Servicios.DTOs;
+﻿using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,10 +10,12 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {
-    public class TraduccionDAL
+    public class TraduccionDAL 
     {
         private readonly DAO _dao;
         public Dictionary<string, string> _traducciones;
+
+
 
         public TraduccionDAL()
         {
@@ -22,13 +25,13 @@ namespace IngenieriaSoftware.DAL
 
         #region Traduccion
 
-        public Dictionary<string, string> ObtenerTraduccionesPorIdioma(string idiomaNombre)
+        public Dictionary<string, string> ObtenerTraduccionesPorIdioma(int idiomaId)
         {
             try
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@idioma", idiomaNombre)
+                    new SqlParameter("@idiomaId", idiomaId)
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTraduccionesPorIdioma", parametros);

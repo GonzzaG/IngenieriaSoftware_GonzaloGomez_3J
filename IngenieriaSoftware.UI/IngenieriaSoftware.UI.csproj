@@ -90,6 +90,7 @@
     <Compile Include="FormMDI.Designer.cs">
       <DependentUpon>FormMDI.cs</DependentUpon>
     </Compile>
+    <Compile Include="IdiomaSuscriptorDTO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Gestion Idiomas\FormAgregarTraduccion.resx">

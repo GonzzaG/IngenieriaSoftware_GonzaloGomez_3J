@@ -14,10 +14,12 @@ namespace IngenieriaSoftware.DAL
     {
         DAO _dao;
         public List<EtiquetaDTO> etiquetas;
+
         public IdiomaDAL()
         {
             _dao = new DAO();
             etiquetas = new List<EtiquetaDTO>();
+       
         }
 
         #region Idioma
@@ -42,7 +44,7 @@ namespace IngenieriaSoftware.DAL
 
         #region Etiqueta
 
-        public void GuardarEtiquetas(List<EtiquetaDTO> etiquetas)
+        public void GuardarEtiquetas(Dictionary<string, string> etiquetas)     //(List<EtiquetaDTO> etiquetas)
         {
             try
             {
@@ -50,8 +52,8 @@ namespace IngenieriaSoftware.DAL
                 { 
                     SqlParameter[] parametros = new SqlParameter[]
                     {
-                        new SqlParameter("@etiquetaId", etiqueta.Id),
-                        new SqlParameter("@nombre", etiqueta.Nombre)
+                        new SqlParameter("@etiquetaId", int.Parse(etiqueta.Key)),
+                        new SqlParameter("@nombre", etiqueta.Value)
                     };
 
                     DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarEtiqueta", parametros);

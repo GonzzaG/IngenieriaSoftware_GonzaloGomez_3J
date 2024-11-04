@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.DAL;
+using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,21 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL
 {
-    public class TraduccionBLL
+    public class TraduccionBLL : ITraduccionServicio
     {
         private readonly TraduccionDAL _traduccionDAL;
+      //  private readonly ITraduccionServicio _traduccionServicio;
 
         public TraduccionBLL()
         {
             _traduccionDAL = new TraduccionDAL();
+          //  _traduccionServicio = traduccionServicio;
         }
 
-        public Dictionary<string, string> ObtenerTraducciones(string idiomaNombre)
+
+        public Dictionary<string, string> ObtenerTraduccionesPorIdioma(int idiomaId)
         {
-            var traducciones = _traduccionDAL._traducciones;
-            if (traducciones.Count == 0)
-            {
-                return _traduccionDAL.ObtenerTraduccionesPorIdioma(idiomaNombre);
-            }
-            else
-            {
-                return traducciones;
-            }
+            return _traduccionDAL.ObtenerTraduccionesPorIdioma(idiomaId);
         }
 
     }

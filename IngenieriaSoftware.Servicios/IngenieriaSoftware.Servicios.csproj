@@ -48,11 +48,13 @@
     <Compile Include="EncryptionManager.cs" />
     <Compile Include="HashingManager.cs" />
     <Compile Include="IdiomaObserver.cs" />
+    <Compile Include="ITraduccionServicio.cs" />
     <Compile Include="PermisoChecker.cs" />
     <Compile Include="DTOs\PermisoDTO.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DTOs\UsuarioDTO.cs" />
+    <Compile Include="TraduccionServicio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">

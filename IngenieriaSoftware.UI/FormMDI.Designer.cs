@@ -57,7 +57,8 @@
             this.LogOutgestionUsuariosToolStripMenuItem});
             this.menuStripMDI.Location = new System.Drawing.Point(0, 0);
             this.menuStripMDI.Name = "menuStripMDI";
-            this.menuStripMDI.Size = new System.Drawing.Size(1067, 24);
+            this.menuStripMDI.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStripMDI.Size = new System.Drawing.Size(800, 24);
             this.menuStripMDI.TabIndex = 1;
             this.menuStripMDI.Tag = "1";
             this.menuStripMDI.Text = "menuStrip1";
@@ -100,7 +101,7 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
@@ -108,7 +109,7 @@
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
@@ -116,7 +117,7 @@
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.asignarPermisosToolStripMenuItem.Tag = "9";
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem_Click);
@@ -138,13 +139,13 @@
             this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
             this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.actualizarEtiquetasToolStripMenuItem.Tag = "11";
-            this.actualizarEtiquetasToolStripMenuItem.Text = "VolverAIniciarSesion Etiquetas";
+            this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
             this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
             // 
             // agregarTraduccionToolStripMenuItem
             // 
             this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
-            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.agregarTraduccionToolStripMenuItem.Tag = "12";
             this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
             this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
@@ -166,13 +167,12 @@
             // 
             // FormMDI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 638);
             this.Controls.Add(this.menuStripMDI);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripMDI;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMDI";
             this.Tag = "2";
             this.Text = "MDI";

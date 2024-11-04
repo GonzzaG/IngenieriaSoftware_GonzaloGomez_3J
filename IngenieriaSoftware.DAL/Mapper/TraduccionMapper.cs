@@ -10,6 +10,40 @@ namespace IngenieriaSoftware.DAL
 {
     public class TraduccionMapper
     {
+        public Dictionary<string, string> MapearTraduccionesPorIdiomaDesdeDataSet(DataSet dataSet)
+        {
+            var traducciones = new Dictionary<string, string>();
+
+            // Suponiendo que los datos vienen en la primera tabla del DataSet
+            if (dataSet.Tables.Count > 0)
+            {
+                DataTable tabla = dataSet.Tables[0];
+
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    // Suponiendo que la tabla tiene columnas "EtiquetaId" y "Texto"
+                    int etiquetaId = Convert.ToInt32(fila["etiqueta_id"]);
+                    string texto = Convert.ToString(fila["traduccion"]);
+
+                    // Agregar al diccionario
+                    traducciones.Add(etiquetaId.ToString(), texto);
+                }
+            }
+
+            return traducciones;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         public Dictionary<string, string> MapearTraduccionesDesdeDataSet(DataSet dataSet)
         {
             var traducciones = new Dictionary<string, string>();
@@ -33,29 +67,7 @@ namespace IngenieriaSoftware.DAL
             return traducciones;
         }
 
-        public Dictionary<string, string> MapearTraduccionesPorIdiomaDesdeDataSet(DataSet dataSet)
-        {
-            Dictionary<string, string> traducciones = new Dictionary<string, string>();
-
-            if (dataSet != null && dataSet.Tables.Count > 0)
-            {
-                DataTable table = dataSet.Tables[0];
-
-                foreach (DataRow row in dataSet.Tables[0].Rows)
-                {
-                    string etiquetaId = row["etiqueta_id"].ToString();
-                    string nombreEtiqueta = row["nombre"].ToString();
-                    string textoTraduccion = row["traduccion"].ToString();
-
-                    string claveUnica = $"{etiquetaId}_{nombreEtiqueta}";
-                    traducciones[claveUnica] = textoTraduccion;
-
-                }
-            }
-
-            return traducciones;
-
-        }
+       
 
     }
 }
