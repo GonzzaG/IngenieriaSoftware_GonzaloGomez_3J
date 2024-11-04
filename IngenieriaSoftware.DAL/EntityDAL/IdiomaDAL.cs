@@ -98,7 +98,7 @@ namespace IngenieriaSoftware.DAL
             foreach (EtiquetaDTO etiqueta in etiquetasMemoria)
             {
                 if (etiqueta.Nombre.Length > 0)
-                    AgregarEtiquetaEnBD(etiqueta.Nombre);
+                    GuardarEtiquetas(int.Parse(etiqueta.Tag), etiqueta.Nombre);
             }
 
             return etiquetasMemoria.Count; // O el número de etiquetas que se agregaron a la base de datos
@@ -114,25 +114,23 @@ namespace IngenieriaSoftware.DAL
         }
 
 
-        private int AgregarEtiquetaEnBD(string nombre)
+        private void GuardarEtiquetas(int etiqueta_id, string nombre)
         {
             try
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                new SqlParameter("@Nombre", nombre)
+                    new SqlParameter("@etiquetaId", etiqueta_id),
+                    new SqlParameter("@nombre", nombre)
                 };
 
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_AgregarEtiqueta", parametros);
-                int id = int.Parse(mDs.Tables[0].Rows[0]["etiqueta_id"].ToString());
-
-                return id;
-
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarEtiqueta", parametros);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
         }
 
         public List<EtiquetaDTO> ObtenerTodasLasEtiquetasEnBD()

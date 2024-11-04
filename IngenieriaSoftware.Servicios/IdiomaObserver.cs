@@ -14,24 +14,22 @@ namespace IngenieriaSoftware.Servicios
     {
         public int idiomaId;
 
-        private readonly List<IdiomaSuscriptorDTO> Suscriptores = new List<IdiomaSuscriptorDTO>();
+        private readonly List<IIdiomaSuscriptor> Suscriptores = new List<IIdiomaSuscriptor>();
 
         public event Action<Dictionary<string, string>> IdiomaCambiado;
 
-        private readonly ITraduccionServicio _traduccionService;
+        private readonly ITraduccionServicio _traduccionServicio;
 
 
-
-
-        public IdiomaObserver(int idiomaInicialId, ITraduccionServicio traduccionService)
+        public IdiomaObserver(int idiomaInicialId, ITraduccionServicio traduccionServicio)
         {
             idiomaId = idiomaInicialId;
-            _traduccionService = traduccionService;
+            _traduccionServicio = traduccionServicio;
         }
         
 
 
-        public void Suscribir(IdiomaSuscriptorDTO control)
+        public void Suscribir(IIdiomaSuscriptor control)
         {
             if (!Suscriptores.Contains(control))
             {
@@ -43,7 +41,7 @@ namespace IngenieriaSoftware.Servicios
         public void Notificar(int nuevoIdiomaId)
         {
             idiomaId = nuevoIdiomaId;
-            var traducciones = _traduccionService.ObtenerTraduccionesPorIdioma(idiomaId);
+            var traducciones = _traduccionServicio.ObtenerTraduccionesPorIdioma(idiomaId);
             foreach (var suscriptor in Suscriptores)
             {
                 if (traducciones.ContainsKey(suscriptor.Tag))

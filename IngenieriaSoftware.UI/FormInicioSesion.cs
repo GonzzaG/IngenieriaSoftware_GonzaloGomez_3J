@@ -33,33 +33,34 @@ namespace IngenieriaSoftware.UI
             _idiomas = new List<IdiomaDTO>();
             _idiomaObserver = idiomaObserver;
 
-            Inicializar();
+           // SuscribirControles();
         }
 
-        private void Inicializar()
-        {
-            //listo los controles del formulario
-            var controlesForm = FormHelper.ListarControles(this);
+        //private void SuscribirControles()
+        //{
+        //    var controlesForm = FormHelper.ListarControles(this);
 
+        //  //  new IdiomaBLL().GuardarEtiquetas(controlesForm);
 
-            //guardamos las etiquetas en base de datos, comparandolas con las que ya existen para no repetir
-            new IdiomaBLL().GuardarEtiquetas(controlesForm);
+        //    foreach (var etiqueta in controlesForm)
+        //    {
+        //        var tag = etiqueta.Key;
+        //        var control = etiqueta.Value;
 
-            foreach (var control in controlesForm)
-            {
-                // Crear un IdiomaSuscriptorDTO para cada etiqueta y suscribirlo al observador
-                var suscriptorDTO = new IdiomaSuscriptorDTO { Tag = control.Key, Traduccion = control.Value};
-                _idiomaObserver.Suscribir(suscriptorDTO);
-            }
-        }
+        //        var suscriptorDTO = new IdiomaSuscriptorDTO
+        //        {
+        //            Tag = tag,
+        //            Control = control // Asignar el control encontrado
+        //        };
+
+        //        _idiomaObserver.Suscribir(suscriptorDTO);
+        //    }
+        //}
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            //var formPadre = this.MdiParent as MDI;
-           // formPadre.PruebaAsignarIdsAControles(this);
-            _idiomas =CargarIdiomas();
+            _idiomas = CargarIdiomas();
             ListarIdiomas(_idiomas);
-            //ControlesHelper.CargarTraducciones(this);
         }
 
         public List<IdiomaDTO> CargarIdiomas()
@@ -127,10 +128,5 @@ namespace IngenieriaSoftware.UI
 
 
         }
-
-        //public List<IdiomaDTO> CambiarIdioma(string idiomaNombre)
-        //{
-        //    var nombreIdioma = _idiomas.Find(i => i.Nombre == idiomaNombre);
-        //}
     }
 }

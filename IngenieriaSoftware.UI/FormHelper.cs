@@ -48,31 +48,31 @@ namespace IngenieriaSoftware.UI
 
         #region ObtenerControlesDeFormulario
 
-        public static Dictionary<string, string> ListarControles(Control formulario)
+        public static Dictionary<string, Control> ListarControles(Control formulario)
         {
-            Dictionary<string, string> controlesDict = new Dictionary<string, string>();
+            Dictionary<string, Control> controles = new Dictionary<string, Control>();
 
             // Llamada recursiva para listar controles
-            RecorrerControles(formulario, controlesDict);
+            RecorrerControles(formulario, controles);
 
-            return controlesDict;
-       }
-
-        private static void RecorrerControles(Control control, Dictionary<string, string> controlesDict)
+            return controles;
+        }
+        private static void RecorrerControles(Control control, Dictionary<string, Control> controles)
         {
             // Solo añadir si el Tag no es nulo o vacío
             if (!string.IsNullOrEmpty(control.Tag?.ToString()))
             {
-                // Agregar el Tag y Name al diccionario
-                controlesDict[control.Tag.ToString()] = control.Name;
+                // Agregar el Tag y el Control al diccionario
+                controles[control.Tag.ToString()] = control;
             }
 
             // Recorrer los controles hijos
             foreach (Control hijo in control.Controls)
             {
-                RecorrerControles(hijo, controlesDict);
+                RecorrerControles(hijo, controles);
             }
         }
+
         #endregion
 
 
@@ -118,24 +118,5 @@ namespace IngenieriaSoftware.UI
             return formularios;
         }
 
-
-
-        public static void IdiomaCambiado(IdiomaSuscriptorDTO traduccionDto, Control.ControlCollection controles)
-        {
-
-            // Busca el control correspondiente al tag
-            Control control = controles.OfType<Control>()
-                                        .FirstOrDefault(c => c.Tag != null && c.Tag.ToString() == traduccionDto.Tag);
-
-            // Si se encuentra un control con el Tag correspondiente, se actualiza su texto
-            if (control != null)
-            {
-                control.Text = traduccionDto.Traduccion; // Actualiza el texto del control
-            }
-            else
-            {
-                Console.WriteLine($"No se encontró control con Tag: {traduccionDto.Tag}");
-            }
-        }
     }
 }
