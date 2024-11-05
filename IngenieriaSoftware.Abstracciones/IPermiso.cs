@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngenieriaSoftware.Abstracciones
+﻿namespace IngenieriaSoftware.Abstracciones
 {
     public interface IPermiso
     {
@@ -16,6 +10,6 @@ namespace IngenieriaSoftware.Abstracciones
         string TipoPermiso { get; set; } //ver si dejarlo o sacarlo
         int? PermisoPadreId { get; set; }
 
-       // List<IPermiso> permisosHijos { get; set; }
+        // List<IPermiso> permisosHijos { get; set; }
     }
 }

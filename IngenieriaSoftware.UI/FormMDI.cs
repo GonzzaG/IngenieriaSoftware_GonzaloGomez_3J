@@ -1,42 +1,32 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace IngenieriaSoftware.UI
 {
     public partial class FormMDI : Form
     {
-        UsuarioBLL usuarioBLL;
-        PermisoBLL permisoBLL;
-        IdiomaBLL idiomaBLL;
-        TraduccionBLL traduccionBLL;
-        List<PermisoDTO> permisosUsuario;    
-        SessionManager _sessionManager;
-        readonly AuthService _authService;
-        ITraduccionServicio ItraduccionServicio;
+        private UsuarioBLL usuarioBLL;
+        private PermisoBLL permisoBLL;
+        private IdiomaBLL idiomaBLL;
+        private TraduccionBLL traduccionBLL;
+        private List<PermisoDTO> permisosUsuario;
+        private SessionManager _sessionManager;
+        private readonly AuthService _authService;
+        private ITraduccionServicio ItraduccionServicio;
 
-        IdiomaObserver idiomaObserver;
-        
+        private IdiomaObserver idiomaObserver;
 
         public FormMDI()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            usuarioBLL = new UsuarioBLL();  
+            usuarioBLL = new UsuarioBLL();
             permisoBLL = new PermisoBLL();
             idiomaBLL = new IdiomaBLL();
             traduccionBLL = new TraduccionBLL();
@@ -46,86 +36,78 @@ namespace IngenieriaSoftware.UI
         }
 
         private void Inicializar()
-        {          
+        {
             ItraduccionServicio = new TraduccionBLL();
             //aca voy a tener que pasar como parametro el idimoaId
             idiomaObserver = new IdiomaObserver(idiomaInicialId: 1, ItraduccionServicio);
-        
         }
-       
+
         private void SuscribirControles(Form form)
         {
-            var controlesForm = FormHelper.ListarControles(form);
+            var controlesForm = HelperForms.ListarControles(form);
 
             //  new IdiomaBLL().GuardarEtiquetas(controlesForm);
 
             foreach (var etiqueta in controlesForm)
             {
                 var tag = etiqueta.Key;
-                var control = etiqueta.Value;
+                var suscriptor = etiqueta.Value;
 
                 var suscriptorDTO = new IdiomaSuscriptorDTO
                 {
                     Tag = tag,
-                    Control = control // Asignar el control encontrado
+                    Control = suscriptor.Control, // Asignar el control encontrado
+                    MenuItem = suscriptor.MenuItem,
+                    Name = suscriptor.Name
                 };
 
                 idiomaObserver.Suscribir(suscriptorDTO);
             }
         }
 
-
-
         private void MDI_Load(object sender, EventArgs e)
         {
             VolverAIniciarSesion();
-
         }
 
         internal void AbrirFormMenu()
         {
             this.menuStripMDI.Visible = true;
             SuscribirControles(this);
-           
-            var nombreUsuario =  SessionManager.UsuarioActual.Username;
+
+            var nombreUsuario = SessionManager.UsuarioActual.Username;
             permisosUsuario = usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
         }
+
         private void inicializarEtiquetas(Form formPadre)
         {
-
             var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
             idiomaActual = "Ingles";
-
-
         }
-    
+
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {         
+        {
             FormRegistrarUsuario formRegistrarUsuario = new FormRegistrarUsuario();
             AbrirFormHijo(formRegistrarUsuario);
 
-           // formRegistrarUsuario.ShowDialog();
-           //AbrirFormMenu();
-
+            // formRegistrarUsuario.ShowDialog();
+            //AbrirFormMenu();
         }
 
         private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormGestionarPermisos formGestionPermisos = new FormGestionarPermisos();
             AbrirFormHijo(formGestionPermisos);
-
         }
 
         private void gestionIdiomasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,7 +116,6 @@ namespace IngenieriaSoftware.UI
 
             FormEliminarUsuario formEliminarUsuario = new FormEliminarUsuario();
             AbrirFormHijo(formEliminarUsuario);
-
         }
 
         private void LogOutgestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,6 +135,7 @@ namespace IngenieriaSoftware.UI
         }
 
         #region Metodos privados
+
         private void VolverAIniciarSesion()
         {
             this.menuStripMDI.Visible = false;
@@ -162,10 +144,10 @@ namespace IngenieriaSoftware.UI
             SuscribirControles(formInicio);
             formInicio.WindowState = FormWindowState.Maximized;
             formInicio.MaximizeBox = false;
-            formInicio.MdiParent = this; 
+            formInicio.MdiParent = this;
             formInicio.Size = this.Size;
-            formInicio.InicioSesionExitoso += AbrirFormMenu; 
-            formInicio.Show(); 
+            formInicio.InicioSesionExitoso += AbrirFormMenu;
+            formInicio.Show();
         }
 
         private void AbrirFormHijo(Form formHijo)
@@ -174,7 +156,7 @@ namespace IngenieriaSoftware.UI
 
             CerrarFormulariosHijos();
 
-            var etiquetas = ControlesHelper.ObtenerEtiquetas(formHijo.Controls);
+            //var etiquetas = ControlesHelper.ObtenerEtiquetas(formHijo.Controls);
 
             formHijo.WindowState = FormWindowState.Maximized;
             formHijo.MaximizeBox = false;
@@ -183,13 +165,8 @@ namespace IngenieriaSoftware.UI
             formHijo.StartPosition = FormStartPosition.CenterScreen;
             formHijo.Size = this.Size;
             formHijo.Show();
-
         }
 
-        #region Traducciones
-
-
-        #endregion
         private void VerificarPermisosRoles(List<PermisoDTO> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
@@ -207,11 +184,9 @@ namespace IngenieriaSoftware.UI
 
                 gestionUsuariosToolStripMenuItem.Visible = true;
                 gestionIdiomasToolStripMenuItem.Visible = true;
-
             }
             else //no es admin
             {
-
                 gestionUsuariosToolStripMenuItem.Visible = false;
                 gestionIdiomasToolStripMenuItem.Visible = false;
 
@@ -248,11 +223,10 @@ namespace IngenieriaSoftware.UI
                     comandasToolStripMenuItem.Visible = false;
                 }
             }
-            
-            if(permisos.Count == 0)
+
+            if (permisos.Count == 0)
             {
                 //Usuario no tiene permisos
-                
             }
 
             mostrarPermisosDelUsuario(permisosPermitidos);
@@ -309,7 +283,7 @@ namespace IngenieriaSoftware.UI
             if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_COMANDAS"))
             {
                 permisosPermitidos.Add("PERM_GEST_COMANDAS");
-                
+
                 comandasToolStripMenuItem.Visible = true;
             }
             else
@@ -385,16 +359,16 @@ namespace IngenieriaSoftware.UI
             string mensajeFinal = string.Join("\n", permisos);
             MessageBox.Show(mensajeFinal, "Lista de Permisos");
         }
+
         private void CerrarFormulariosHijos()
         {
             foreach (Form childForm in this.MdiChildren)
             {
                 childForm.Close();
             }
-
         }
 
-        #endregion
+        #endregion Metodos privados
 
         private void actualizarEtiquetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -403,9 +377,7 @@ namespace IngenieriaSoftware.UI
             if (respuesta == DialogResult.No) return;
             else if (respuesta == DialogResult.Yes)
             {
-               
                 ActualizarEtiquetas();
-   
             }
             // Este boton preguntara si esta seguro que desea continuar
             //este evento instanciara todos los formularios agregandolos a una List<Form>
@@ -417,31 +389,21 @@ namespace IngenieriaSoftware.UI
             //esto agregara todas las etiquetas en memoria que no existen en bd
         }
 
-
-
-
-
         public void ActualizarEtiquetas()
         {
             // Instanciar todos los formularios
-            var formulariosHijos = FormHelper.InstanciarTodosLosFormularios(this);
+            var formularios = HelperForms.InstanciarTodosLosFormularios(this);
 
-            // Obtener todas las etiquetas existentes en la base de datos
-            var etiquetasEnBD = idiomaBLL.ObtenerTodasLasEtiquetasEnBD();
-            var etiquetasNuevas = new List<EtiquetaDTO>();
-
-            // Recorrer el formulario principal y todos los formularios hijos
-            foreach (Form formulario in formulariosHijos)
-            {
-                // Recorrer todos los controles del formulario, incluyendo elementos de menú
-                RegistrarEtiquetasDeControles(formulario, etiquetasEnBD, etiquetasNuevas);
-            }
+            //agregamos el formulario mdi
+            formularios.Add(this); 
+            
+            // ListarControles devuelve un Dictionary<string, IdiomaSuscriptorDTO
+            //Asi que, lo paso a un Dictionary<string, IIdiomaSusctriptor, para poder pasarlo como argumento en AgregarEtiqueta
+            Dictionary<string, IIdiomaSuscriptor> etiquetasEnMemoria = HelperForms.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaSuscriptor)p.Value); 
 
             // Guardar etiquetas nuevas en la base de datos si hay alguna
-            if (etiquetasNuevas.Any())
-            {
-                idiomaBLL.AgregarEtiqueta(etiquetasNuevas); // Método para guardar en la BD
-            }
+            idiomaBLL.AgregarEtiqueta(etiquetasEnMemoria); 
+            
         }
 
         private void RegistrarEtiquetasDeControles(Control control, List<EtiquetaDTO> etiquetasEnBD, List<EtiquetaDTO> etiquetasNuevas)
@@ -452,7 +414,7 @@ namespace IngenieriaSoftware.UI
                 if (!etiquetasEnBD.Any(e => e.Nombre == c.Name))
                 {
                     // Si no existe, crear una nueva etiqueta y agregarla a la lista de etiquetas nuevas
-                    var nuevaEtiqueta = new EtiquetaDTO {Tag = (string)c.Tag , Nombre = c.Name };
+                    var nuevaEtiqueta = new EtiquetaDTO { Tag = (int)c.Tag, Nombre = c.Name };
                     etiquetasNuevas.Add(nuevaEtiqueta);
                 }
 
@@ -493,6 +455,7 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
+
         private void agregarTraduccionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AgregarIdioma formAgregarIdioma = new AgregarIdioma();
@@ -501,12 +464,10 @@ namespace IngenieriaSoftware.UI
 
         private void comandasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void mesasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
         }
     }
 }

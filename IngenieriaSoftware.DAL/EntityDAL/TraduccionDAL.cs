@@ -1,21 +1,14 @@
-﻿using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {
-    public class TraduccionDAL 
+    public class TraduccionDAL
     {
         private readonly DAO _dao;
         public Dictionary<string, string> _traducciones;
-
-
 
         public TraduccionDAL()
         {
@@ -37,7 +30,6 @@ namespace IngenieriaSoftware.DAL
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTraduccionesPorIdioma", parametros);
                 _traducciones = new TraduccionMapper().MapearTraduccionesPorIdiomaDesdeDataSet(mDs);
 
-
                 return _traducciones;
             }
             catch (Exception ex)
@@ -46,8 +38,6 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        #endregion
-
-
+        #endregion Traduccion
     }
 }

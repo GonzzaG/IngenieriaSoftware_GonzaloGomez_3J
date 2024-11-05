@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IngenieriaSoftware.BEL;
+﻿using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace IngenieriaSoftware.DAL
 {
     public class IdiomaDAL
     {
-        DAO _dao;
+        private DAO _dao;
         public List<EtiquetaDTO> etiquetas;
 
         public IdiomaDAL()
         {
             _dao = new DAO();
             etiquetas = new List<EtiquetaDTO>();
-       
         }
 
         #region Idioma
@@ -30,7 +27,6 @@ namespace IngenieriaSoftware.DAL
             {
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosIdiomas", null);
                 return new IdiomaMapper().MapearIdiomasDesdeDataSet(mDs);
-
             }
             catch (Exception ex)
             {
@@ -38,9 +34,7 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        #endregion
-
-
+        #endregion Idioma
 
         #region Etiqueta
 
@@ -49,7 +43,7 @@ namespace IngenieriaSoftware.DAL
             try
             {
                 foreach (var etiqueta in etiquetas)
-                { 
+                {
                     SqlParameter[] parametros = new SqlParameter[]
                     {
                         new SqlParameter("@etiquetaId", int.Parse(etiqueta.Key)),
@@ -57,62 +51,56 @@ namespace IngenieriaSoftware.DAL
                     };
 
                     DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarEtiqueta", parametros);
-                             
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public int AgregarEtiqueta(List<EtiquetaDTO> etiquetasMemoria)
+        public int AgregarEtiqueta(Dictionary<string, IIdiomaSuscriptor> etiquetasEnMemoria)
         {
             List<EtiquetaDTO> etiquetasBD = ObtenerTodasLasEtiquetasEnBD();
 
-            // Llamar al método que compara y modifica etiquetasMemoria
+            // Convertir el diccionario de suscriptores a una lista de EtiquetaDTO, asegurando que `Name` no esté vacío o nulo
+            List<EtiquetaDTO> etiquetasMemoria = etiquetasEnMemoria
+                .Where(e => !string.IsNullOrEmpty(e.Value.Name))  // Filtrar suscriptores con Name válido
+                .Select(e => new EtiquetaDTO
+                {
+                    Tag = int.Parse(e.Key),
+                    Nombre = e.Value.Name
+                })
+                .ToList();
+
+            // Comparar y modificar etiquetasMemoria
             CompararEtiquetas(etiquetasMemoria, etiquetasBD);
 
             // Guardar las etiquetas restantes en la base de datos
             foreach (EtiquetaDTO etiqueta in etiquetasMemoria)
             {
-                if (etiqueta.Nombre.Length > 0)
-                    GuardarEtiquetas(int.Parse(etiqueta.Tag), etiqueta.Nombre);
+                if (!string.IsNullOrEmpty(etiqueta.Nombre))
+                {
+                    GuardarEtiquetas(etiqueta.Tag, etiqueta.Nombre);
+                }
             }
 
-            return etiquetasMemoria.Count; // O el número de etiquetas que se agregaron a la base de datos
+            return etiquetasMemoria.Count;
         }
 
         private void CompararEtiquetas(List<EtiquetaDTO> etiquetasMemoria, List<EtiquetaDTO> etiquetasBD)
         {
             // Obtener una lista de los nombres de las etiquetas en la base de datos
-            var nombresEtiquetasBD = etiquetasBD.Select(e => e.Nombre).ToList();
+            var nombresEtiquetasBD = etiquetasBD.Select(e => e.Tag).ToList();
 
-            // Remover etiquetas de memoria que ya existen en la base de datos
-            etiquetasMemoria.RemoveAll(etiqueta => nombresEtiquetasBD.Contains(etiqueta.Nombre));
+            for(int i = etiquetasMemoria.Count - 1; i>=0; i--)
+            {
+                if (nombresEtiquetasBD.Contains(etiquetasMemoria[i].Tag))
+                {
+                    etiquetasMemoria.RemoveAt(i);
+                }
+            }
         }
-
 
         private void GuardarEtiquetas(int etiqueta_id, string nombre)
         {
@@ -124,13 +112,12 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@nombre", nombre)
                 };
 
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarEtiqueta", parametros);
+                _dao.ExecuteNonQuery("sp_InsertarEtiqueta", parametros);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
         public List<EtiquetaDTO> ObtenerTodasLasEtiquetasEnBD()
@@ -138,16 +125,15 @@ namespace IngenieriaSoftware.DAL
             try
             {
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodasLasEtiquetas", null);
-               
-                return new EtiquetaMapper().MapearEtiquetasDesdeDataSet(mDs); ; 
+
+                return new EtiquetaMapper().MapearEtiquetasDesdeDataSet(mDs); ;
             }
             catch (Exception ex)
             {
-                throw ex; 
+                throw ex;
             }
         }
 
-        #endregion
-
+        #endregion Etiqueta
     }
 }

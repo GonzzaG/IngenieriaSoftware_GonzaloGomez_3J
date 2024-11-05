@@ -1,9 +1,7 @@
 ﻿using IngenieriaSoftware.DAL;
-using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -13,6 +11,7 @@ namespace IngenieriaSoftware.BLL
         private List<PermisoDTO> _permisoRaiz = new List<PermisoDTO>(); // Cambiado a PermisoDTO
 
         #region Eliminar Usuarios Metodos
+
         public List<UsuarioDTO> EliminarUsuario(List<UsuarioDTO> usuarios, string usuarioAEliminarNombre)
         {
             try
@@ -24,16 +23,17 @@ namespace IngenieriaSoftware.BLL
                 //eliminar usuario de lista
                 usuarios.Remove(usuarioAEliminar);
                 return usuarios;
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        #endregion
+
+        #endregion Eliminar Usuarios Metodos
 
         #region Usuarios permisos Metodos
+
         public List<PermisoDTO> ObtenerPermisosDelUsuarioEnMemoria(string pUserName) // Cambiado a PermisoDTO
         {
             var permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
@@ -117,7 +117,7 @@ namespace IngenieriaSoftware.BLL
         {
             try
             {
-                _usuarioDAL.AsignarPermisoPorCod(username, permisoCod) ;
+                _usuarioDAL.AsignarPermisoPorCod(username, permisoCod);
             }
             catch (Exception ex)
             {
@@ -136,9 +136,11 @@ namespace IngenieriaSoftware.BLL
                 throw ex;
             }
         }
-        #endregion
+
+        #endregion Usuarios permisos Metodos
 
         #region Login LogOut
+
         public bool RegistrarUsuario(UsuarioDTO pUsuario, DateTime FechaInicio)
         {
             UsuarioDTO mUsuario = _usuarioDAL.ObtenerUsuarioPorNombre(pUsuario.Username);
@@ -177,6 +179,7 @@ namespace IngenieriaSoftware.BLL
         {
             SessionManager.LogOut();
         }
-        #endregion
+
+        #endregion Login LogOut
     }
 }

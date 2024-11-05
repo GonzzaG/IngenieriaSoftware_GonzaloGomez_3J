@@ -1,33 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
 namespace IngenieriaSoftware.UI
 {
     public partial class FormGestionarPermisos : Form
     {
         private readonly UsuarioBLL _usuarioBLL;
+
         public FormGestionarPermisos()
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
-            
         }
 
         private void GestionarPermisos_Load(object sender, EventArgs e)
         {
-            ActualizarFormulario(); 
-           
+            ActualizarFormulario();
         }
 
         private void CargarUsuariosPermisos()
@@ -39,7 +30,7 @@ namespace IngenieriaSoftware.UI
         public void listarUsuarios(List<UsuarioDTO> pUsuarios)
         {
             comboBoxUsuario.Items.Clear();
-            foreach(UsuarioDTO usuario in pUsuarios)
+            foreach (UsuarioDTO usuario in pUsuarios)
             {
                 comboBoxUsuario.Items.Add(usuario.Username);
             }
@@ -51,13 +42,12 @@ namespace IngenieriaSoftware.UI
             ListarTreeView();
         }
 
-
         private void ListarTreeView()
-        { 
+        {
             var permisos = _usuarioBLL.ObtenerPermisosGlobales();
             FillTreeView(permisos, treeViewPermisos);
-
         }
+
         private void FillTreeView(List<PermisoDTO> permisosJerarquizados, TreeView treeViewPermisos)
         {
             // Limpiar el TreeView antes de llenarlo
@@ -94,8 +84,6 @@ namespace IngenieriaSoftware.UI
             return nodo;
         }
 
-
-
         private void comboBoxUsuario_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxUsuario.SelectedItem == null) return;
@@ -116,16 +104,13 @@ namespace IngenieriaSoftware.UI
 
                 ActualizarFormulario();
                 permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
-                
-                FillTreeView(permisosUsuario, treeViewPermisoUsuario);
-              
 
+                FillTreeView(permisosUsuario, treeViewPermisoUsuario);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void btnDesasignarPermiso_Click(object sender, EventArgs e)
@@ -145,14 +130,11 @@ namespace IngenieriaSoftware.UI
                     this.Close();
                 }
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void GestionarPermisos_FormClosed(object sender, FormClosedEventArgs e)

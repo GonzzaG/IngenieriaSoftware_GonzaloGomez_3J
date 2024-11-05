@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios;
+﻿using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,6 +15,7 @@ namespace IngenieriaSoftware.DAL
 
         // DataSet donde se almacenan usuarios, permisos, y relaciones entre ellos.
         internal static DataSet UsuariosPermisosDataSet { get; set; } = new DataSet();
+
         private static int mId;
 
         public UsuarioDAL()
@@ -31,12 +31,11 @@ namespace IngenieriaSoftware.DAL
 
         #region Métodos para manejar usuarios
 
-
         public List<UsuarioDTO> ObtenerUsuariosGlobales()
         {
             return _usuarioGlobales;
         }
-        
+
         public void EliminarUsuario(int usuarioId)
         {
             try
@@ -102,7 +101,7 @@ namespace IngenieriaSoftware.DAL
             return _dao.ExecuteNonQuery("sp_GuardarUsuario", parametros);
         }
 
-        #endregion
+        #endregion Métodos para manejar usuarios
 
         #region Métodos para manejar permisos
 
@@ -139,6 +138,7 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception("Error al obtener permisos del usuario: " + ex.Message, ex);
             }
         }
+
         public void AsignarPermisoPorCod(string username, string permisoCod)
         {
             try
@@ -149,7 +149,6 @@ namespace IngenieriaSoftware.DAL
             {
                 throw ex;
             }
-
         }
 
         public void AsignarPermiso(int usuarioId, int permisoId)
@@ -199,7 +198,7 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        #endregion
+        #endregion Métodos para manejar permisos
 
         #region Métodos para cargar usuarios y permisos
 
@@ -288,6 +287,6 @@ namespace IngenieriaSoftware.DAL
             return false; // Si no se encontró el permiso buscado en el permiso actual ni en sus hijos.
         }
 
-        #endregion
+        #endregion Métodos para cargar usuarios y permisos
     }
 }

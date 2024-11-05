@@ -1,13 +1,10 @@
 ﻿using IngenieriaSoftware.Abstracciones;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Idioma : IIdioma ,ISujeto
+    public class Idioma : IIdioma, ISujeto
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -35,6 +32,7 @@ namespace IngenieriaSoftware.BEL
         {
             observadores.Remove(usuario);
         }
+
         public void ActualizarTraduccion(string clave, string valor)
         {
             Traducciones[clave] = valor;

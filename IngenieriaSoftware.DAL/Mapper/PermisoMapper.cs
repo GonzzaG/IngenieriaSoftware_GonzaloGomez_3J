@@ -1,12 +1,7 @@
-﻿using IngenieriaSoftware.BEL;
+﻿using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IngenieriaSoftware.Servicios;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -15,7 +10,6 @@ namespace IngenieriaSoftware.DAL
         public List<PermisoDTO> MapearPermisosDesdeDataSet(DataSet pDS)
         {
             var permisos = new List<PermisoDTO>();
-
 
             foreach (DataRow row in pDS.Tables[0].Rows)
             {
@@ -32,6 +26,5 @@ namespace IngenieriaSoftware.DAL
 
             return permisos;
         }
-
     }
 }

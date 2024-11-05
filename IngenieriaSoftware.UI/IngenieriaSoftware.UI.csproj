@@ -46,36 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlesHelper.cs" />
-    <Compile Include="FormHelper.cs" />
-    <Compile Include="Gestion Idiomas\FormAgregarTraduccion.cs">
+    <Compile Include="HelperControles.cs" />
+    <Compile Include="HelperForms.cs" />
+    <Compile Include="FormAgregarTraduccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Idiomas\FormAgregarTraduccion.Designer.cs">
+    <Compile Include="FormAgregarTraduccion.Designer.cs">
       <DependentUpon>FormAgregarTraduccion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Usuarios\FormEliminarUsuario.cs">
+    <Compile Include="FormEliminarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Usuarios\FormEliminarUsuario.Designer.cs">
+    <Compile Include="FormEliminarUsuario.Designer.cs">
       <DependentUpon>FormEliminarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Idiomas\FormGestionarIdioma.cs">
+    <Compile Include="FormGestionarIdioma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Idiomas\FormGestionarIdioma.Designer.cs">
+    <Compile Include="FormGestionarIdioma.Designer.cs">
       <DependentUpon>FormGestionarIdioma.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Usuarios\FormGestionarPermisos.cs">
+    <Compile Include="FormGestionarPermisos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Usuarios\FormGestionarPermisos.Designer.cs">
+    <Compile Include="FormGestionarPermisos.Designer.cs">
       <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Usuarios\FormRegistrarUsuario.cs">
+    <Compile Include="FormRegistrarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Usuarios\FormRegistrarUsuario.Designer.cs">
+    <Compile Include="FormRegistrarUsuario.Designer.cs">
       <DependentUpon>FormRegistrarUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="FormInicioSesion.cs">
@@ -93,19 +93,19 @@
     <Compile Include="IdiomaSuscriptorDTO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Gestion Idiomas\FormAgregarTraduccion.resx">
+    <EmbeddedResource Include="FormAgregarTraduccion.resx">
       <DependentUpon>FormAgregarTraduccion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Usuarios\FormEliminarUsuario.resx">
+    <EmbeddedResource Include="FormEliminarUsuario.resx">
       <DependentUpon>FormEliminarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Idiomas\FormGestionarIdioma.resx">
+    <EmbeddedResource Include="FormGestionarIdioma.resx">
       <DependentUpon>FormGestionarIdioma.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Usuarios\FormGestionarPermisos.resx">
+    <EmbeddedResource Include="FormGestionarPermisos.resx">
       <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Usuarios\FormRegistrarUsuario.resx">
+    <EmbeddedResource Include="FormRegistrarUsuario.resx">
       <DependentUpon>FormRegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormInicioSesion.resx">
@@ -152,6 +152,10 @@
       <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Gestion Idiomas\" />
+    <Folder Include="Gestion Usuarios\" />
+    <Folder Include="Helpers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

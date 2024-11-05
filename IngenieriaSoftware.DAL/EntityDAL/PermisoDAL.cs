@@ -1,13 +1,9 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios;
+﻿using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -91,7 +87,7 @@ namespace IngenieriaSoftware.DAL
         private PermisoDTO BuscarPermisoEnHijos(PermisoDTO permiso, int idPermiso)
         {
             if (permiso.permisosHijos != null && permiso.permisosHijos.Count > 0)
-            {   
+            {
                 foreach (PermisoDTO hijo in permiso.permisosHijos)
                 {
                     if (hijo.Id == idPermiso)

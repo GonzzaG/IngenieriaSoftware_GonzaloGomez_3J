@@ -1,15 +1,8 @@
-﻿using IngenieriaSoftware.Abstracciones;
-using System;
-using System.Collections.Generic;
-using System.Data.OleDb;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IngenieriaSoftware.Servicios
 {
-
-    public class PermisoChecker 
+    public class PermisoChecker
     {
         public static bool TienePermiso(List<PermisoDTO> permisosUsuario, string codPermisoRequerido)
         {

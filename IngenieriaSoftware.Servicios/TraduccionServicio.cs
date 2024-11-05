@@ -1,9 +1,4 @@
-﻿using IngenieriaSoftware.Servicios.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IngenieriaSoftware.Servicios
 {
@@ -18,7 +13,7 @@ namespace IngenieriaSoftware.Servicios
 
         public Dictionary<string, string> ObtenerTraduccionesPorIdioma(int idiomaId)
         {
-            return _traduccionRepositorio.ObtenerTraduccionesPorIdioma(idiomaId);   
+            return _traduccionRepositorio.ObtenerTraduccionesPorIdioma(idiomaId);
         }
     }
 }

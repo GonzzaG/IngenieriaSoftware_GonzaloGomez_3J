@@ -1,12 +1,5 @@
-﻿using IngenieriaSoftware.Abstracciones;
-using IngenieriaSoftware.Servicios.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios
 {
@@ -20,21 +13,17 @@ namespace IngenieriaSoftware.Servicios
 
         private readonly ITraduccionServicio _traduccionServicio;
 
-
         public IdiomaObserver(int idiomaInicialId, ITraduccionServicio traduccionServicio)
         {
             idiomaId = idiomaInicialId;
             _traduccionServicio = traduccionServicio;
         }
-        
-
 
         public void Suscribir(IIdiomaSuscriptor control)
         {
             if (!Suscriptores.Contains(control))
             {
                 Suscriptores.Add(control);
-
             }
         }
 
@@ -48,9 +37,7 @@ namespace IngenieriaSoftware.Servicios
                 {
                     suscriptor.Actualizar(traducciones[suscriptor.Tag]);
                 }
-            }     
+            }
         }
-
-
     }
 }

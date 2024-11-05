@@ -1,11 +1,7 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios;
+﻿using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -28,7 +24,7 @@ namespace IngenieriaSoftware.DAL
                     });
                 }
             }
-            catch(Exception ex) //excepcion no encuentra table 1
+            catch (Exception ex) //excepcion no encuentra table 1
             {
                 foreach (DataRow row in pDS.Tables[0].Rows)
                 {
@@ -50,15 +46,14 @@ namespace IngenieriaSoftware.DAL
             UsuarioDTO usuario = new UsuarioDTO();
             foreach (DataRow row in pDS.Tables[0].Rows)
             {
-                  usuario.Id = (int)row["id_usuario"];
-                  usuario.Username = row["Username"].ToString();
-                  usuario._passwordHash = row["PasswordHash"].ToString();
-                  usuario.FechaCreacion = (DateTime)row["FechaCreacion"];
+                usuario.Id = (int)row["id_usuario"];
+                usuario.Username = row["Username"].ToString();
+                usuario._passwordHash = row["PasswordHash"].ToString();
+                usuario.FechaCreacion = (DateTime)row["FechaCreacion"];
                 usuario.IdiomaId = (int)row["idioma_id"];
             }
-            if (usuario.Id == 0) {return null;}
+            if (usuario.Id == 0) { return null; }
             return usuario;
         }
-
     }
 }

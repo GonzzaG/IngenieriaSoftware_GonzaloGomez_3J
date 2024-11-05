@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlTypes;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -16,7 +11,6 @@ namespace IngenieriaSoftware.DAL
 
         public void Conectar()
         {
-          
             string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
             // Validar si la variable está definida
@@ -59,7 +53,6 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-
         public DataSet ExecuteStoredProcedure(string pNombreStoreProcedure, SqlParameter[] pParametros)
         {
             try
@@ -71,7 +64,7 @@ namespace IngenieriaSoftware.DAL
                     CommandType = CommandType.StoredProcedure
                 };
 
-                if(pParametros != null)
+                if (pParametros != null)
                 {
                     mComm.Parameters.AddRange(pParametros);
                 }
@@ -82,17 +75,16 @@ namespace IngenieriaSoftware.DAL
 
                 return mDs;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             finally
             {
-                if(mCon.State != ConnectionState.Closed)
+                if (mCon.State != ConnectionState.Closed)
                     mCon.Close();
             }
         }
-
 
         public int ObtenerUltimoId(string pTabla, string pColumnaId)
         {

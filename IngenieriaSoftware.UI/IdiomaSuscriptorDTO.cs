@@ -1,32 +1,42 @@
 ﻿using IngenieriaSoftware.Servicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public class IdiomaSuscriptorDTO: IIdiomaSuscriptor
+    public class IdiomaSuscriptorDTO : IIdiomaSuscriptor
     {
         public string Tag { get; set; }
-        public Control Control {  get; set; }
-    
+        public Control Control { get; set; }
+        public ToolStripMenuItem MenuItem { get; set; } 
+        public string Name { get; set; }
+
         public void Actualizar(string nuevoTexto)
         {
-            if (Regex.IsMatch(Control.Name, @"(txt)", RegexOptions.IgnoreCase))
+            // Si es un Control, aplicar el texto según las reglas establecidas
+            if (Control != null)
             {
-               // Si contiene una de las cadenas ingresdas, ej "txt" el texto estara vacio
-                Control.Text = string.Empty;
+                if (Regex.IsMatch(Control.Name, @"(txt)", RegexOptions.IgnoreCase))
+                {
+                    Control.Text = string.Empty;
+                }
+                else
+                {
+                    Control.Text = nuevoTexto;
+                }
             }
-            else
+            // Si es un ToolStripMenuItem, asignar el texto directamente
+            else if (MenuItem != null)
             {
-                // Si no contiene "txt" ni "lbl", asignar el nuevo texto
-                Control.Text = nuevoTexto;
+                if (Regex.IsMatch(MenuItem.Name, @"(txt)", RegexOptions.IgnoreCase))
+                {
+                    MenuItem.Text = string.Empty;
+                }
+                else
+                {
+                    MenuItem.Text = nuevoTexto;
+                }
             }
         }
     }
-
 }

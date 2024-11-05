@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -33,17 +29,6 @@ namespace IngenieriaSoftware.DAL
             return traducciones;
         }
 
-
-
-
-
-
-
-
-
-
-
-
         public Dictionary<string, string> MapearTraduccionesDesdeDataSet(DataSet dataSet)
         {
             var traducciones = new Dictionary<string, string>();
@@ -66,8 +51,5 @@ namespace IngenieriaSoftware.DAL
 
             return traducciones;
         }
-
-       
-
     }
 }

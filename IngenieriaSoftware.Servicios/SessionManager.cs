@@ -14,7 +14,6 @@ namespace IngenieriaSoftware.Servicios
 
         public static int idiomaActual;
 
-
         public UsuarioDTO ObtenerUsuarioActual()
         {
             if (_Session == null || _Session.Usuario == null)

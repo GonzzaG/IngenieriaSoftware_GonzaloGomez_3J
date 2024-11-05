@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios
 {
@@ -26,7 +23,7 @@ namespace IngenieriaSoftware.Servicios
                 // El IV es un conjunto de bytes que se utiliza junto con la clave para proporcionar un nivel adicional de seguridad
                 // La misma entrada encriptada dos veces no producira el mismo resultado
                 aesAlgoritmo.GenerateIV();
-                
+
                 // Realizamos encriptacion, usando la clave y el vectro de inicializacoin
                 ICryptoTransform encryptor = aesAlgoritmo.CreateEncryptor(aesAlgoritmo.Key, aesAlgoritmo.IV);
 
@@ -34,10 +31,9 @@ namespace IngenieriaSoftware.Servicios
                 using (var msEncrypt = new MemoryStream())
                 {
                     // CryptoStream permite realizar operaciones de encriptación en el flujo de memoria.
-                    // Este flujo se conecta al MemoryStream y utiliza el encryptor creado 
+                    // Este flujo se conecta al MemoryStream y utiliza el encryptor creado
                     using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-
                         //StreamWriter para escribir en el CryptoStream
                         using (var swEncrypt = new StreamWriter(csEncrypt))
                         {
