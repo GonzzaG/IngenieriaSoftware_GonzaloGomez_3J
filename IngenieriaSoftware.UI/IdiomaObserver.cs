@@ -1,8 +1,11 @@
-﻿using IngenieriaSoftware.Servicios.DTOs;
+﻿using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace IngenieriaSoftware.Servicios
+namespace IngenieriaSoftware.UI
 {
     public class IdiomaObserver : IIdiomaSujeto
     {
@@ -15,9 +18,9 @@ namespace IngenieriaSoftware.Servicios
         public IdiomaObserver(ITraduccionServicio traduccionServicio)//(int idiomaInicialId, ITraduccionServicio traduccionServicio)
         {
             //idiomaId = idiomaInicialId;
-            
+
             _traduccionServicio = traduccionServicio;
-           
+
         }
 
         public void Suscribir(IIdiomaObservador control)
@@ -35,13 +38,13 @@ namespace IngenieriaSoftware.Servicios
             var idiomaId = IdiomaData.IdiomaActual.Id;
 
             var traducciones = _traduccionServicio.ObtenerTraduccionesPorIdioma(idiomaId);
-             foreach (var suscriptor in Suscriptores)
-             {
+            foreach (var suscriptor in Suscriptores)
+            {
                 if (traducciones.ContainsKey(suscriptor.Tag))
                 {
                     suscriptor.Actualizar(traducciones[suscriptor.Tag]);
                 }
-             }
+            }
         }
     }
 }

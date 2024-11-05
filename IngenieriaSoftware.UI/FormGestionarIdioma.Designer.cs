@@ -42,7 +42,7 @@
             // 
             this.dataGridViewIdiomas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewIdiomas.Location = new System.Drawing.Point(371, 51);
-            this.dataGridViewIdiomas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewIdiomas.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewIdiomas.Name = "dataGridViewIdiomas";
             this.dataGridViewIdiomas.RowHeadersWidth = 51;
             this.dataGridViewIdiomas.RowTemplate.Height = 24;
@@ -66,7 +66,7 @@
             this.comboBoxUsuario.DisplayMember = "comboBoxUsuario";
             this.comboBoxUsuario.FormattingEnabled = true;
             this.comboBoxUsuario.Location = new System.Drawing.Point(52, 76);
-            this.comboBoxUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxUsuario.Name = "comboBoxUsuario";
             this.comboBoxUsuario.Size = new System.Drawing.Size(150, 21);
             this.comboBoxUsuario.TabIndex = 2;
@@ -75,7 +75,7 @@
             // btnAgregarIdioma
             // 
             this.btnAgregarIdioma.Location = new System.Drawing.Point(63, 251);
-            this.btnAgregarIdioma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAgregarIdioma.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarIdioma.Name = "btnAgregarIdioma";
             this.btnAgregarIdioma.Size = new System.Drawing.Size(112, 63);
             this.btnAgregarIdioma.TabIndex = 3;
@@ -86,7 +86,7 @@
             // txtIdioma
             // 
             this.txtIdioma.Location = new System.Drawing.Point(54, 159);
-            this.txtIdioma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIdioma.Margin = new System.Windows.Forms.Padding(2);
             this.txtIdioma.Name = "txtIdioma";
             this.txtIdioma.Size = new System.Drawing.Size(132, 20);
             this.txtIdioma.TabIndex = 4;
@@ -126,7 +126,7 @@
             this.Controls.Add(this.comboBoxUsuario);
             this.Controls.Add(this.lblIdiomas);
             this.Controls.Add(this.dataGridViewIdiomas);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormGestionarIdioma";
             this.Tag = "41";
             this.Text = "GestionarIdioma";

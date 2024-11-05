@@ -40,10 +40,10 @@
             // 
             // btnAsignarPermiso
             // 
-            this.btnAsignarPermiso.Location = new System.Drawing.Point(79, 245);
-            this.btnAsignarPermiso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAsignarPermiso.Location = new System.Drawing.Point(59, 199);
+            this.btnAsignarPermiso.Margin = new System.Windows.Forms.Padding(2);
             this.btnAsignarPermiso.Name = "btnAsignarPermiso";
-            this.btnAsignarPermiso.Size = new System.Drawing.Size(201, 86);
+            this.btnAsignarPermiso.Size = new System.Drawing.Size(151, 70);
             this.btnAsignarPermiso.TabIndex = 14;
             this.btnAsignarPermiso.Tag = "32";
             this.btnAsignarPermiso.Text = "Asignar permiso";
@@ -53,9 +53,10 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(62, 126);
+            this.lblUsuario.Location = new System.Drawing.Point(46, 102);
+            this.lblUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(54, 16);
+            this.lblUsuario.Size = new System.Drawing.Size(43, 13);
             this.lblUsuario.TabIndex = 13;
             this.lblUsuario.Tag = "30";
             this.lblUsuario.Text = "Usuario";
@@ -63,9 +64,10 @@
             // lblTodosLosPermisos
             // 
             this.lblTodosLosPermisos.AutoSize = true;
-            this.lblTodosLosPermisos.Location = new System.Drawing.Point(760, 68);
+            this.lblTodosLosPermisos.Location = new System.Drawing.Point(570, 55);
+            this.lblTodosLosPermisos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTodosLosPermisos.Name = "lblTodosLosPermisos";
-            this.lblTodosLosPermisos.Size = new System.Drawing.Size(127, 16);
+            this.lblTodosLosPermisos.Size = new System.Drawing.Size(97, 13);
             this.lblTodosLosPermisos.TabIndex = 11;
             this.lblTodosLosPermisos.Tag = "36";
             this.lblTodosLosPermisos.Text = "Todos los permisos";
@@ -73,48 +75,46 @@
             // comboBoxUsuario
             // 
             this.comboBoxUsuario.FormattingEnabled = true;
-            this.comboBoxUsuario.Location = new System.Drawing.Point(54, 145);
-            this.comboBoxUsuario.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxUsuario.Location = new System.Drawing.Point(40, 118);
             this.comboBoxUsuario.Name = "comboBoxUsuario";
-            this.comboBoxUsuario.Size = new System.Drawing.Size(251, 24);
+            this.comboBoxUsuario.Size = new System.Drawing.Size(189, 21);
             this.comboBoxUsuario.TabIndex = 8;
             this.comboBoxUsuario.Tag = "31";
             this.comboBoxUsuario.SelectedIndexChanged += new System.EventHandler(this.comboBoxUsuario_SelectedIndexChanged);
             // 
             // treeViewPermisos
             // 
-            this.treeViewPermisos.Location = new System.Drawing.Point(763, 98);
-            this.treeViewPermisos.Margin = new System.Windows.Forms.Padding(4);
+            this.treeViewPermisos.Location = new System.Drawing.Point(572, 80);
             this.treeViewPermisos.Name = "treeViewPermisos";
-            this.treeViewPermisos.Size = new System.Drawing.Size(248, 312);
+            this.treeViewPermisos.Size = new System.Drawing.Size(187, 254);
             this.treeViewPermisos.TabIndex = 18;
             this.treeViewPermisos.Tag = "64";
             // 
             // treeViewPermisoUsuario
             // 
-            this.treeViewPermisoUsuario.Location = new System.Drawing.Point(435, 98);
-            this.treeViewPermisoUsuario.Margin = new System.Windows.Forms.Padding(4);
+            this.treeViewPermisoUsuario.Location = new System.Drawing.Point(326, 80);
             this.treeViewPermisoUsuario.Name = "treeViewPermisoUsuario";
-            this.treeViewPermisoUsuario.Size = new System.Drawing.Size(248, 312);
+            this.treeViewPermisoUsuario.Size = new System.Drawing.Size(187, 254);
             this.treeViewPermisoUsuario.TabIndex = 20;
             this.treeViewPermisoUsuario.Tag = "35";
             // 
             // lblPermisosUsuario
             // 
             this.lblPermisosUsuario.AutoSize = true;
-            this.lblPermisosUsuario.Location = new System.Drawing.Point(432, 68);
+            this.lblPermisosUsuario.Location = new System.Drawing.Point(324, 55);
+            this.lblPermisosUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPermisosUsuario.Name = "lblPermisosUsuario";
-            this.lblPermisosUsuario.Size = new System.Drawing.Size(133, 16);
+            this.lblPermisosUsuario.Size = new System.Drawing.Size(103, 13);
             this.lblPermisosUsuario.TabIndex = 19;
             this.lblPermisosUsuario.Tag = "34";
             this.lblPermisosUsuario.Text = "Permisos del usuario";
             // 
             // btnDesasignarPermiso
             // 
-            this.btnDesasignarPermiso.Location = new System.Drawing.Point(79, 350);
-            this.btnDesasignarPermiso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDesasignarPermiso.Location = new System.Drawing.Point(59, 284);
+            this.btnDesasignarPermiso.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesasignarPermiso.Name = "btnDesasignarPermiso";
-            this.btnDesasignarPermiso.Size = new System.Drawing.Size(201, 86);
+            this.btnDesasignarPermiso.Size = new System.Drawing.Size(151, 70);
             this.btnDesasignarPermiso.TabIndex = 21;
             this.btnDesasignarPermiso.Tag = "33";
             this.btnDesasignarPermiso.Text = "Desasignar permiso";
@@ -123,9 +123,9 @@
             // 
             // FormGestionarPermisos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 577);
+            this.ClientSize = new System.Drawing.Size(812, 469);
             this.Controls.Add(this.btnDesasignarPermiso);
             this.Controls.Add(this.treeViewPermisoUsuario);
             this.Controls.Add(this.lblPermisosUsuario);
@@ -134,7 +134,6 @@
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.lblTodosLosPermisos);
             this.Controls.Add(this.comboBoxUsuario);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormGestionarPermisos";
             this.Tag = "29";
             this.Text = "GestionarPermisos";

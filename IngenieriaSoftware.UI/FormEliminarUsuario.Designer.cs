@@ -35,10 +35,10 @@
             // 
             // btnEliminarUsuario
             // 
-            this.btnEliminarUsuario.Location = new System.Drawing.Point(169, 159);
-            this.btnEliminarUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEliminarUsuario.Location = new System.Drawing.Point(127, 129);
+            this.btnEliminarUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminarUsuario.Name = "btnEliminarUsuario";
-            this.btnEliminarUsuario.Size = new System.Drawing.Size(160, 40);
+            this.btnEliminarUsuario.Size = new System.Drawing.Size(120, 32);
             this.btnEliminarUsuario.TabIndex = 11;
             this.btnEliminarUsuario.Tag = "40";
             this.btnEliminarUsuario.Text = "Eliminar usuario";
@@ -48,9 +48,10 @@
             // lblUsuarios
             // 
             this.lblUsuarios.AutoSize = true;
-            this.lblUsuarios.Location = new System.Drawing.Point(146, 48);
+            this.lblUsuarios.Location = new System.Drawing.Point(110, 39);
+            this.lblUsuarios.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsuarios.Name = "lblUsuarios";
-            this.lblUsuarios.Size = new System.Drawing.Size(61, 16);
+            this.lblUsuarios.Size = new System.Drawing.Size(48, 13);
             this.lblUsuarios.TabIndex = 10;
             this.lblUsuarios.Tag = "38";
             this.lblUsuarios.Text = "Usuarios";
@@ -58,22 +59,22 @@
             // comboBoxUsuarios
             // 
             this.comboBoxUsuarios.FormattingEnabled = true;
-            this.comboBoxUsuarios.Location = new System.Drawing.Point(136, 67);
-            this.comboBoxUsuarios.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxUsuarios.Location = new System.Drawing.Point(102, 54);
             this.comboBoxUsuarios.Name = "comboBoxUsuarios";
-            this.comboBoxUsuarios.Size = new System.Drawing.Size(251, 24);
+            this.comboBoxUsuarios.Size = new System.Drawing.Size(189, 21);
             this.comboBoxUsuarios.TabIndex = 9;
             this.comboBoxUsuarios.Tag = "37";
             this.comboBoxUsuarios.SelectedIndexChanged += new System.EventHandler(this.comboBoxUsuarios_SelectedIndexChanged);
             // 
             // FormEliminarUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 297);
+            this.ClientSize = new System.Drawing.Size(408, 241);
             this.Controls.Add(this.btnEliminarUsuario);
             this.Controls.Add(this.lblUsuarios);
             this.Controls.Add(this.comboBoxUsuarios);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormEliminarUsuario";
             this.Tag = "39";
             this.Text = "EliminarUsuario";

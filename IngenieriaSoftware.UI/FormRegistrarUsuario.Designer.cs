@@ -43,38 +43,38 @@
             // comboBoxCategorias
             // 
             this.comboBoxCategorias.FormattingEnabled = true;
-            this.comboBoxCategorias.Location = new System.Drawing.Point(185, 295);
-            this.comboBoxCategorias.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxCategorias.Location = new System.Drawing.Point(139, 240);
             this.comboBoxCategorias.Name = "comboBoxCategorias";
-            this.comboBoxCategorias.Size = new System.Drawing.Size(251, 24);
+            this.comboBoxCategorias.Size = new System.Drawing.Size(189, 21);
             this.comboBoxCategorias.TabIndex = 0;
             this.comboBoxCategorias.Tag = "27";
             this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(185, 210);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPassword.Location = new System.Drawing.Point(139, 171);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(251, 22);
+            this.txtPassword.Size = new System.Drawing.Size(189, 20);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.Tag = "25";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(185, 142);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtUsername.Location = new System.Drawing.Point(139, 115);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(251, 22);
+            this.txtUsername.Size = new System.Drawing.Size(189, 20);
             this.txtUsername.TabIndex = 2;
             this.txtUsername.Tag = "23";
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(195, 124);
+            this.lblUsername.Location = new System.Drawing.Point(146, 101);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(122, 16);
+            this.lblUsername.Size = new System.Drawing.Size(96, 13);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Tag = "22";
             this.lblUsername.Text = "Nombre de usuario";
@@ -83,9 +83,10 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(195, 191);
+            this.lblPassword.Location = new System.Drawing.Point(146, 155);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(76, 16);
+            this.lblPassword.Size = new System.Drawing.Size(61, 13);
             this.lblPassword.TabIndex = 4;
             this.lblPassword.Tag = "24";
             this.lblPassword.Text = "Contraseña";
@@ -93,9 +94,10 @@
             // lblCategoria
             // 
             this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new System.Drawing.Point(195, 276);
+            this.lblCategoria.Location = new System.Drawing.Point(146, 224);
+            this.lblCategoria.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new System.Drawing.Size(66, 16);
+            this.lblCategoria.Size = new System.Drawing.Size(52, 13);
             this.lblCategoria.TabIndex = 5;
             this.lblCategoria.Tag = "26";
             this.lblCategoria.Text = "Categoria";
@@ -103,10 +105,10 @@
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(211, 378);
-            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRegistrar.Location = new System.Drawing.Point(158, 307);
+            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(2);
             this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(201, 86);
+            this.btnRegistrar.Size = new System.Drawing.Size(151, 70);
             this.btnRegistrar.TabIndex = 7;
             this.btnRegistrar.Tag = "28";
             this.btnRegistrar.Text = "Registrar";
@@ -119,9 +121,9 @@
             // 
             // FormRegistrarUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 587);
+            this.ClientSize = new System.Drawing.Size(497, 477);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.lblCategoria);
             this.Controls.Add(this.lblPassword);
@@ -129,7 +131,6 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.comboBoxCategorias);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormRegistrarUsuario";
             this.Tag = "21";
             this.Text = "GestionUsuarios";

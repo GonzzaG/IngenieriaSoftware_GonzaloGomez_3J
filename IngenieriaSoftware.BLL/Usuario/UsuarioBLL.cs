@@ -166,7 +166,14 @@ namespace IngenieriaSoftware.BLL
 
                 if (HashingManager.VerificarHash(password, storedHash))
                 {
-                    UsuarioDTO usuario = new UsuarioDTO { Username = username };
+                    UsuarioDTO usuario = new UsuarioDTO 
+                    { 
+                        Id = mUsuario.Id, Username = mUsuario.Username,
+                        FechaCreacion = mUsuario.FechaCreacion,
+                        IdiomaId = mUsuario.IdiomaId,
+                        Permisos = mUsuario.Permisos,   
+                        _passwordHash = mUsuario._passwordHash
+                    };
                     SessionManager.LogIn(usuario);
                     return true; // Login exitoso
                 }

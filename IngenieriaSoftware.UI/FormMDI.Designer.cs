@@ -41,6 +41,7 @@
             this.agregarTraduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,7 +138,7 @@
             // 
             this.actualizarEtiquetasToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
-            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.actualizarEtiquetasToolStripMenuItem.Tag = "11";
             this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
             this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
@@ -145,7 +146,7 @@
             // agregarTraduccionToolStripMenuItem
             // 
             this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
-            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.agregarTraduccionToolStripMenuItem.Tag = "12";
             this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
             this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
@@ -165,11 +166,23 @@
             this.LogOutgestionUsuariosToolStripMenuItem.Text = "Cerrar Sesion";
             this.LogOutgestionUsuariosToolStripMenuItem.Click += new System.EventHandler(this.LogOutgestionUsuariosToolStripMenuItem_Click);
             // 
+            // comboBoxIdiomas
+            // 
+            this.comboBoxIdiomas.FormattingEnabled = true;
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(637, 395);
+            this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxIdiomas.Name = "comboBoxIdiomas";
+            this.comboBoxIdiomas.Size = new System.Drawing.Size(73, 21);
+            this.comboBoxIdiomas.TabIndex = 7;
+            this.comboBoxIdiomas.Tag = "62";
+            this.comboBoxIdiomas.SelectedIndexChanged += new System.EventHandler(this.comboBoxIdiomas_SelectedIndexChanged_1);
+            // 
             // FormMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 638);
+            this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.menuStripMDI);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripMDI;
@@ -199,5 +212,6 @@
         private System.Windows.Forms.ToolStripMenuItem agregarTraduccionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mesasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cobrosToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBoxIdiomas;
     }
 }

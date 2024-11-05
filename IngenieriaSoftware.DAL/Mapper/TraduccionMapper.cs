@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IngenieriaSoftware.Servicios.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -29,9 +30,9 @@ namespace IngenieriaSoftware.DAL
             return traducciones;
         }
 
-        public Dictionary<string, string> MapearTraduccionesDesdeDataSet(DataSet dataSet)
+        public List<TraduccionDTO> MapearTraduccionesDesdeDataSet(DataSet dataSet)
         {
-            var traducciones = new Dictionary<string, string>();
+            var traducciones = new List<TraduccionDTO>();
 
             if (dataSet != null && dataSet.Tables.Count > 0)
             {
@@ -39,13 +40,14 @@ namespace IngenieriaSoftware.DAL
 
                 foreach (DataRow row in table.Rows)
                 {
-                    var nombreEtiqueta = row["NombreEtiqueta"].ToString();
-                    var texto = row["Texto"].ToString();
-
-                    if (!traducciones.ContainsKey(nombreEtiqueta))
+                    var traduccion = new TraduccionDTO()
                     {
-                        traducciones.Add(nombreEtiqueta, texto);
-                    }
+                        EtiquetaId = (int)row["etiqueta_id"],
+                        IdiomaId = (int)row["idioma_id"],
+                        Texto = row["Texto"].ToString()
+                    };
+
+                    traducciones.Add(traduccion);
                 }
             }
 

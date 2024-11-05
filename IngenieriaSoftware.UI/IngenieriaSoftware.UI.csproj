@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelperControles.cs" />
-    <Compile Include="HelperForms.cs" />
+    <Compile Include="Helpers\HelperControles.cs" />
+    <Compile Include="Helpers\HelperForms.cs" />
     <Compile Include="FormAgregarTraduccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,7 +90,10 @@
     <Compile Include="FormMDI.Designer.cs">
       <DependentUpon>FormMDI.cs</DependentUpon>
     </Compile>
-    <Compile Include="IdiomaSuscriptorDTO.cs" />
+    <Compile Include="IdiomaObservadorDTO.cs" />
+    <Compile Include="IActualizable.cs" />
+    <Compile Include="IdiomaObserver.cs" />
+    <Compile Include="MensajeDTO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAgregarTraduccion.resx">
@@ -152,10 +155,6 @@
       <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Gestion Idiomas\" />
-    <Folder Include="Gestion Usuarios\" />
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

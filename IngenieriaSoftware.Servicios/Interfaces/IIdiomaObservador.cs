@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.Servicios
 {
-    public interface IIdiomaSuscriptor
+    public interface IIdiomaObservador
     {
         string Tag { get; set; }
         string Name { get; set; }   

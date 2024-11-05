@@ -15,16 +15,22 @@ namespace IngenieriaSoftware.BLL
             _idiomaDAL = new IdiomaDAL();
         }
 
-        public List<IdiomaDTO> ObtenerIdiomas()
-        {
-            return _idiomaDAL.ObtenerIdiomas();
-        }
-
-        public void GuardarEtiquetas(Dictionary<string, string> etiquetas)     //(List<EtiquetaDTO> etiquetas)
+        public Dictionary<EtiquetaDTO, TraduccionDTO> ObtenerEtiquetasConTraduccion(int idioma_id)
         {
             try
             {
-                _idiomaDAL.GuardarEtiquetas(etiquetas);
+                return _idiomaDAL.ObtenerEtiquetasConTraduccion(idioma_id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<EtiquetaDTO> ObtenerEtiquetasSinTraduccion(int idioma_id)
+        {
+            try
+            {
+                return _idiomaDAL.ObtenerEtiquetasSinTraduccion(idioma_id);
             }
             catch (Exception ex)
             {
@@ -32,7 +38,12 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public void AgregarEtiqueta(Dictionary<string, IIdiomaSuscriptor> etiquetasEnMemoria)//(List<EtiquetaDTO> etiquetasEnMemoria)
+        public List<IdiomaDTO> ObtenerIdiomas()
+        {
+            return _idiomaDAL.ObtenerIdiomas();
+        }
+
+        public void AgregarEtiqueta(Dictionary<string, IIdiomaObservador> etiquetasEnMemoria)//(List<EtiquetaDTO> etiquetasEnMemoria)
         {
             try
             {

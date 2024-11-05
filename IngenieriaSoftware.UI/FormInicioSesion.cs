@@ -7,14 +7,13 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormInicioSesion : Form
+    public partial class FormInicioSesion : Form, IActualizable
     {
         private readonly AuthService _authService = new AuthService();
-        internal List<IdiomaDTO> _idiomas;
 
         public event Action InicioSesionExitoso;
 
-        private IdiomaObserver _idiomaObserver;
+        private readonly IdiomaObserver _idiomaObserver;
 
         public FormInicioSesion() { InitializeComponent(); }
         public FormInicioSesion(IdiomaObserver idiomaObserver)
@@ -23,34 +22,34 @@ namespace IngenieriaSoftware.UI
 
             this.StartPosition = FormStartPosition.CenterScreen;
             this.DialogResult = DialogResult.No;
-            _idiomas = new List<IdiomaDTO>();
+
             _idiomaObserver = idiomaObserver;
 
-            // SuscribirControles();
+        }
+
+        #region Metodos de Interfaz
+
+        public void Actualizar()
+        {
+            
+        }
+        #endregion
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            if (this.MdiParent is FormMDI formPrincipal && this is IActualizable actualizableForm)
+            {
+                formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
+            }
+            base.OnFormClosed(e);
         }
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            _idiomas = CargarIdiomas();
-            ListarIdiomas(_idiomas);
-        }
 
-        public List<IdiomaDTO> CargarIdiomas()
-        {
-            return new IdiomaBLL().ObtenerIdiomas();
-        }
-
-        public void ListarIdiomas(List<IdiomaDTO> idiomas)
-        {
-            comboBoxIdiomas.Items.Clear();
-            foreach (IdiomaDTO idioma in idiomas)
-            {
-                comboBoxIdiomas.Items.Add(idioma.Nombre);
-            }
         }
 
         #region LogIn LogOut
-
         private void LogIn(object sender, EventArgs e)
         {
             try
@@ -58,6 +57,12 @@ namespace IngenieriaSoftware.UI
                 if (_authService.LogIn(txtUsuario.Text, txtContrasena.Text))
                 {
                     InicioSesionExitoso?.Invoke();
+
+                    //obtenemos el usuario que inicio sesion
+                    var usuario = SessionManager.GetInstance.Usuario;
+
+                    //cambiamos el idioma el cual tiene el usuario
+                    IdiomaData.CambiarIdioma(usuario.IdiomaId);
                     this.Close();
                 }
             }
@@ -66,29 +71,6 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void LogOut(object sender, EventArgs e)
-        {
-            try
-            {
-                _authService.LogOut();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        #endregion LogIn LogOut
-
-        private void comboBoxIdiomas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxIdiomas.SelectedItem == null) return;
-
-            //Obtengo el idiomaId de la lista de idiomas, comparando el nombre del idioma con el del combo box, item seleccionado, y retorno el id
-            var idiomaId = (_idiomas.Find(I => I.Nombre == comboBoxIdiomas.SelectedItem.ToString())).Id;
-
-            _idiomaObserver.Notificar(idiomaId);
-        }
+        #endregion
     }
 }

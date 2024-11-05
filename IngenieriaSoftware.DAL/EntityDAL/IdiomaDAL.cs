@@ -12,11 +12,14 @@ namespace IngenieriaSoftware.DAL
     {
         private DAO _dao;
         public List<EtiquetaDTO> etiquetas;
-
+        private EtiquetaMapper _etiquetaMapper;
+        private TraduccionMapper _traduccionMapper;
         public IdiomaDAL()
         {
             _dao = new DAO();
             etiquetas = new List<EtiquetaDTO>();
+            _etiquetaMapper = new EtiquetaMapper();
+            _traduccionMapper = new TraduccionMapper();
         }
 
         #region Idioma
@@ -59,7 +62,7 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public int AgregarEtiqueta(Dictionary<string, IIdiomaSuscriptor> etiquetasEnMemoria)
+        public int AgregarEtiqueta(Dictionary<string, IIdiomaObservador> etiquetasEnMemoria)
         {
             List<EtiquetaDTO> etiquetasBD = ObtenerTodasLasEtiquetasEnBD();
 
@@ -127,6 +130,61 @@ namespace IngenieriaSoftware.DAL
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodasLasEtiquetas", null);
 
                 return new EtiquetaMapper().MapearEtiquetasDesdeDataSet(mDs); ;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Dictionary<EtiquetaDTO, TraduccionDTO> ObtenerEtiquetasConTraduccion(int idioma_id)
+        {
+            try
+            {
+                
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@idioma_id", idioma_id)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerEtiquetasConTraduccion", parametros);
+
+                List<EtiquetaDTO> etiquetas = _etiquetaMapper.MapearEtiquetasDesdeDataSet(mDs);
+                List<TraduccionDTO> traducciones = _traduccionMapper.MapearTraduccionesDesdeDataSet(mDs);
+
+                Dictionary<EtiquetaDTO, TraduccionDTO> etiquetasTraduccion = new Dictionary<EtiquetaDTO, TraduccionDTO>();
+
+                foreach(var etiqueta in etiquetas)
+                {
+                    var traduccion = traducciones.FirstOrDefault(t => t.EtiquetaId == etiqueta.Tag);
+
+                    if(traduccion != null)
+                    {
+                        etiquetasTraduccion[etiqueta] = traduccion;
+                    }
+                }
+
+                return etiquetasTraduccion;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<EtiquetaDTO> ObtenerEtiquetasSinTraduccion(int idioma_id)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@idioma_id", idioma_id)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerEtiquetasSinTraduccion", parametros);
+                List<EtiquetaDTO> etiquetas = _etiquetaMapper.MapearEtiquetasDesdeDataSet(mDs);
+
+                return etiquetas;
             }
             catch (Exception ex)
             {

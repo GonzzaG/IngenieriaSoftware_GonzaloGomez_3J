@@ -2,18 +2,36 @@
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarPermisos : Form
+    public partial class FormGestionarPermisos : Form, IActualizable
     {
         private readonly UsuarioBLL _usuarioBLL;
-
+        private readonly IdiomaObserver _idiomaObserver;
         public FormGestionarPermisos()
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
+        }
+
+        #region Metodos de Interfaz
+
+        public void Actualizar()
+        {
+
+        }
+        #endregion
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            if (this.MdiParent is FormMDI formPrincipal && this is IActualizable actualizableForm)
+            {
+                formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
+            }
+            base.OnFormClosed(e);
         }
 
         private void GestionarPermisos_Load(object sender, EventArgs e)
@@ -69,7 +87,7 @@ namespace IngenieriaSoftware.UI
         private TreeNode CrearNodoRecursivo(PermisoDTO permiso)
         {
             // Crear un nodo para el permiso actual
-            TreeNode nodo = new TreeNode(permiso.Nombre)
+            TreeNode nodo = new TreeNode(permiso.CodPermiso)
             {
                 Tag = permiso.Id // Asignar el ID del permiso al Tag del nodo
             };

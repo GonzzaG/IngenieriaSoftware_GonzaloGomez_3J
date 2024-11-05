@@ -16,6 +16,7 @@ namespace IngenieriaSoftware.BLL
             if (new UsuarioBLL().LogIn(_Usuario.Username, _Usuario._passwordHash))
             {
                 // SessionManager.LogIn(_Usuario);
+              
 
                 return true;
             }

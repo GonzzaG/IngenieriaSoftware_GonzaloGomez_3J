@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public class IdiomaSuscriptorDTO : IIdiomaSuscriptor
+    public class IdiomaObservadorDTO : IIdiomaObservador
     {
         public string Tag { get; set; }
         public Control Control { get; set; }
