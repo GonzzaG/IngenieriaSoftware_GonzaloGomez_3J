@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.OleDb;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IngenieriaSoftware.Servicios
 {
-
-    public class PermisoChecker 
+    public class PermisoChecker
     {
-
-        public static bool TienePermiso(List<IPermiso> permisosUsuario, string codPermisoRequerido)
+        public static bool TienePermiso(List<PermisoDTO> permisosUsuario, string codPermisoRequerido)
         {
             foreach (var permiso in permisosUsuario)
             {
@@ -23,20 +16,23 @@ namespace IngenieriaSoftware.Servicios
             return false;
         }
 
-        private static bool VerificarPermiso(IPermiso permiso, string codPermisoRequerido)
+        private static bool VerificarPermiso(PermisoDTO permiso, string codPermisoRequerido)
         {
-            // Si el permiso es un rol o está habilitado y coincide con el código requerido, se concede el acceso.
+            // Si el permiso está habilitado y coincide con el código requerido, se concede el acceso.
             if (permiso.Habilitado && permiso.CodPermiso == codPermisoRequerido)
             {
                 return true;
             }
 
             // Verificar permisos hijos si los hay
-            foreach (var permisoHijo in permiso.permisosHijos)
+            if (permiso.permisosHijos != null)
             {
-                if (VerificarPermiso(permisoHijo, codPermisoRequerido))
+                foreach (var permisoHijo in permiso.permisosHijos)
                 {
-                    return true;
+                    if (VerificarPermiso(permisoHijo, codPermisoRequerido))
+                    {
+                        return true;
+                    }
                 }
             }
 

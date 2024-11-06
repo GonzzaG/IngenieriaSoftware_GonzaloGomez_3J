@@ -46,72 +46,79 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlesHelper.cs" />
-    <Compile Include="FormHelper.cs" />
-    <Compile Include="Gestion Idiomas\AgregarTraduccion.cs">
+    <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
+    <Compile Include="Helpers\HelperControles.cs" />
+    <Compile Include="Helpers\HelperForms.cs" />
+    <Compile Include="FormAgregarTraduccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Idiomas\AgregarTraduccion.Designer.cs">
-      <DependentUpon>AgregarTraduccion.cs</DependentUpon>
+    <Compile Include="FormAgregarTraduccion.Designer.cs">
+      <DependentUpon>FormAgregarTraduccion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Usuarios\EliminarUsuario.cs">
+    <Compile Include="FormEliminarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Usuarios\EliminarUsuario.Designer.cs">
-      <DependentUpon>EliminarUsuario.cs</DependentUpon>
+    <Compile Include="FormEliminarUsuario.Designer.cs">
+      <DependentUpon>FormEliminarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Idiomas\GestionarIdioma.cs">
+    <Compile Include="FormGestionarIdioma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Idiomas\GestionarIdioma.Designer.cs">
-      <DependentUpon>GestionarIdioma.cs</DependentUpon>
+    <Compile Include="FormGestionarIdioma.Designer.cs">
+      <DependentUpon>FormGestionarIdioma.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Usuarios\GestionarPermisos.cs">
+    <Compile Include="FormGestionarPermisos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Usuarios\GestionarPermisos.Designer.cs">
-      <DependentUpon>GestionarPermisos.cs</DependentUpon>
+    <Compile Include="FormGestionarPermisos.Designer.cs">
+      <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion Usuarios\RegistrarUsuario.cs">
+    <Compile Include="FormRegistrarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion Usuarios\RegistrarUsuario.Designer.cs">
-      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
+    <Compile Include="FormRegistrarUsuario.Designer.cs">
+      <DependentUpon>FormRegistrarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="InicioSesion.cs">
+    <Compile Include="FormInicioSesion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InicioSesion.Designer.cs">
-      <DependentUpon>InicioSesion.cs</DependentUpon>
+    <Compile Include="FormInicioSesion.Designer.cs">
+      <DependentUpon>FormInicioSesion.cs</DependentUpon>
     </Compile>
-    <Compile Include="MDI.cs">
+    <Compile Include="FormMDI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MDI.Designer.cs">
-      <DependentUpon>MDI.cs</DependentUpon>
+    <Compile Include="FormMDI.Designer.cs">
+      <DependentUpon>FormMDI.cs</DependentUpon>
     </Compile>
+    <Compile Include="IdiomaObservadorDTO.cs" />
+    <Compile Include="Interfaces\IActualizable.cs" />
+    <Compile Include="IdiomaSujeto.cs" />
+    <Compile Include="Adaptadores\LabelIdiomaAdaptador.cs" />
+    <Compile Include="MensajeDTO.cs" />
+    <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Gestion Idiomas\AgregarTraduccion.resx">
-      <DependentUpon>AgregarTraduccion.cs</DependentUpon>
+    <EmbeddedResource Include="FormAgregarTraduccion.resx">
+      <DependentUpon>FormAgregarTraduccion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Usuarios\EliminarUsuario.resx">
-      <DependentUpon>EliminarUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="FormEliminarUsuario.resx">
+      <DependentUpon>FormEliminarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Idiomas\GestionarIdioma.resx">
-      <DependentUpon>GestionarIdioma.cs</DependentUpon>
+    <EmbeddedResource Include="FormGestionarIdioma.resx">
+      <DependentUpon>FormGestionarIdioma.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Usuarios\GestionarPermisos.resx">
-      <DependentUpon>GestionarPermisos.cs</DependentUpon>
+    <EmbeddedResource Include="FormGestionarPermisos.resx">
+      <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion Usuarios\RegistrarUsuario.resx">
-      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="FormRegistrarUsuario.resx">
+      <DependentUpon>FormRegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InicioSesion.resx">
-      <DependentUpon>InicioSesion.cs</DependentUpon>
+    <EmbeddedResource Include="FormInicioSesion.resx">
+      <DependentUpon>FormInicioSesion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MDI.resx">
-      <DependentUpon>MDI.cs</DependentUpon>
+    <EmbeddedResource Include="FormMDI.resx">
+      <DependentUpon>FormMDI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

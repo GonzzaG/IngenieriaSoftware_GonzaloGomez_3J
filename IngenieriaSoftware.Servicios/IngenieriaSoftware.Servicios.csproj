@@ -41,13 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\EtiquetaDTO.cs" />
+    <Compile Include="DTOs\IdiomaDTO.cs" />
+    <Compile Include="DTOs\TraduccionDTO.cs" />
     <Compile Include="EncryptionManager.cs" />
     <Compile Include="HashingManager.cs" />
-    <Compile Include="IPermiso.cs" />
-    <Compile Include="IUsuarioConPermisos.cs" />
+    <Compile Include="IdiomaData.cs" />
+    <Compile Include="Interfaces\IIdiomaObservador.cs" />
+    <Compile Include="Interfaces\IIdiomaSujeto.cs" />
+    <Compile Include="Interfaces\ITraduccionServicio.cs" />
     <Compile Include="PermisoChecker.cs" />
+    <Compile Include="DTOs\PermisoDTO.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DTOs\UsuarioDTO.cs" />
+    <Compile Include="TraduccionServicio.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">
+      <Project>{524e8d24-0d9c-46ad-9a55-4e42dce5fa5f}</Project>
+      <Name>IngenieriaSoftware.Abstracciones</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
