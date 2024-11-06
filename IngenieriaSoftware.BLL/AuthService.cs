@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios;
+﻿using IngenieriaSoftware.Servicios;
+using System;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -12,15 +7,16 @@ namespace IngenieriaSoftware.BLL
     {
         public bool LogIn(string pNombreUsuario, string pContrasena)
         {
-            Usuario _Usuario = new Usuario
+            UsuarioDTO _Usuario = new UsuarioDTO
             {
                 Username = pNombreUsuario,
-                _passwordHash = pContrasena
+                _passwordHash = HashingManager.GenerarHash(pContrasena)
             };
 
             if (new UsuarioBLL().LogIn(_Usuario.Username, _Usuario._passwordHash))
             {
-                SessionManager.LogIn(_Usuario);
+                // SessionManager.LogIn(_Usuario);
+              
 
                 return true;
             }
@@ -28,8 +24,6 @@ namespace IngenieriaSoftware.BLL
             {
                 throw new Exception("Fallo en las credenciales.");
             }
-
-            //new UsuarioBLL().RegistrarUsuario(_Usuario, SessionManager.GetInstance);
         }
 
         public void LogOut()
@@ -39,10 +33,10 @@ namespace IngenieriaSoftware.BLL
 
         public bool RegistrarUsuario(string pNombreUsuario, string pContrasena) //string categoria)
         {
-            Usuario _Usuario = new Usuario
+            UsuarioDTO _Usuario = new UsuarioDTO
             {
                 Username = pNombreUsuario,
-                _passwordHash = pContrasena
+                _passwordHash = HashingManager.GenerarHash(pContrasena)
             };
 
             if (new UsuarioBLL().RegistrarUsuario(_Usuario, DateTime.Now))

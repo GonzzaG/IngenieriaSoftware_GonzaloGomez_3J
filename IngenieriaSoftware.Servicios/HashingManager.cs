@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios
 {
@@ -22,15 +19,15 @@ namespace IngenieriaSoftware.Servicios
                 return builder.ToString();
             }
         }
+
         public string GenerarPasswordHash(string password)
         {
             return HashingManager.GenerarHash(password);
         }
 
-
         public static bool VerificarHash(string pPassword, string pHashedPassword)
         {
-           // string mHashDeEntrada = GenerarHash(pPassword);
+            // string mHashDeEntrada = GenerarHash(pPassword);
             return StringComparer.OrdinalIgnoreCase.Compare(pPassword, pHashedPassword) == 0;
         }
     }

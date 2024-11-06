@@ -1,35 +1,47 @@
 ﻿using System;
-using IngenieriaSoftware.BEL;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios
 {
     public class SessionManager
     {
         public static object _lock = new Object();
-
         private static SessionManager _Session;
 
-        public Usuario Usuario { get; set; }
+        // Cambia la propiedad para usar UsuarioDTO en lugar de IUsuario
+        public UsuarioDTO Usuario { get; private set; }
 
-        public DateTime FechaInicio { get; set; }
+        public DateTime FechaInicio { get; private set; }
+
+        public static int idiomaActual;
+
+        public UsuarioDTO ObtenerUsuarioActual()
+        {
+            if (_Session == null || _Session.Usuario == null)
+                throw new Exception("Sesión no iniciada.");
+
+            // Retorna el UsuarioDTO actual
+            return _Session.Usuario;
+        }
+
+        public static UsuarioDTO UsuarioActual
+        {
+            get
+            {
+                if (_Session == null) throw new Exception("Sesión no iniciada.");
+                return _Session.Usuario;
+            }
+        }
 
         public static SessionManager GetInstance
         {
             get
             {
-                if (_Session == null) throw new Exception("Sesion no iniciada.");
-
+                if (_Session == null) throw new Exception("Sesión no iniciada.");
                 return _Session;
             }
-
         }
 
-
-        public static void LogIn(Usuario pUsuario)
+        public static void LogIn(UsuarioDTO pUsuario)
         {
             lock (_lock)
             {
@@ -43,11 +55,9 @@ namespace IngenieriaSoftware.Servicios
                 }
                 else
                 {
-                    //throw new Exception("Sesion ya iniciada.");
+                    throw new Exception("Sesión ya iniciada.");
                 }
             }
-
-
         }
 
         public static void LogOut()
@@ -60,15 +70,13 @@ namespace IngenieriaSoftware.Servicios
                 }
                 else
                 {
-                    throw new Exception("Sesion no iniciada.");
+                    throw new Exception("Sesión no iniciada.");
                 }
             }
         }
 
         private SessionManager()
         {
-
         }
-
     }
 }

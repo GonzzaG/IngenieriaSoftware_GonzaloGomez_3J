@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngenieriaSoftware.BEL
+﻿namespace IngenieriaSoftware.BEL
 {
     public class Constantes
     {
-        public enum Categoria { Admin, Cajero, Mesero, Cocina, Ninguna };
+        public enum Categoria
+        { Admin, Cajero, Mesero, Cocina, Ninguna };
     }
 }
