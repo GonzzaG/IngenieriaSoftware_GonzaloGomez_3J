@@ -24,9 +24,10 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar(string nuevoTexto)
         {
-            if (Regex.IsMatch(_control.Name, @"(txt)", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(_control.Name, @"(txt|comboBox)", RegexOptions.IgnoreCase))
             {
-                _control.Text = string.Empty;
+                //si es un textBox o un ComboBox, no lo modificamos
+                //Control.Text = string.Empty;
             }
             else
             {

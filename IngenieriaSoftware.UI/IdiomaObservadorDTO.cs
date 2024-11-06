@@ -18,9 +18,10 @@ namespace IngenieriaSoftware.UI
             // Si es un Control, aplicar el texto según las reglas establecidas
             if (Control != null)
             {
-                if (Regex.IsMatch(Control.Name, @"(txt)", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(Control.Name, @"(txt|comboBox)", RegexOptions.IgnoreCase))
                 {
-                    Control.Text = string.Empty;
+                    //si es un textBox o un ComboBox, no lo modificamos
+                    //Control.Text = string.Empty;
                 }
                 else
                 {
@@ -32,7 +33,8 @@ namespace IngenieriaSoftware.UI
             {
                 if (Regex.IsMatch(MenuItem.Name, @"(txt)", RegexOptions.IgnoreCase))
                 {
-                    MenuItem.Text = string.Empty;
+                    //si es un textBox o un ComboBox, no lo modificamos
+                    //MenuItem.Text = string.Empty;
                 }
                 else
                 {

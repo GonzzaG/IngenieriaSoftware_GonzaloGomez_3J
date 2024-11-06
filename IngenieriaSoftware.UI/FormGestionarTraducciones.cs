@@ -25,6 +25,12 @@ namespace IngenieriaSoftware.UI
             _traduccionBLL = new TraduccionBLL();
             
         }
+        private void AgregarIdioma_Load(object sender, EventArgs e)
+        {
+            formPadre = this.MdiParent as FormMDI;
+            Actualizar();
+        }
+
 
         #region Metodos de Interfaz
 
@@ -43,21 +49,9 @@ namespace IngenieriaSoftware.UI
 
             dataGridViewEtiquetasConTraduccion.DataSource = etiquetasConTraduccion.Keys.OrderBy(e => e.Tag).ToList();
             dataGridViewEtiquetasSinTraduccion.DataSource = etiquetasSinTraduccion.OrderBy(e => e.Tag).ToList();
-
-            
         }
 
-        public void ObtenerYListarIdiomas()
-        {
 
-            IdiomaData.Idiomas = formPadre.idiomaBLL.ObtenerIdiomas();
-
-            comboBoxIdiomas.Items.Clear();
-            foreach (IdiomaDTO idioma in IdiomaData.Idiomas)
-            {
-                comboBoxIdiomas.Items.Add(idioma.Nombre);
-            }
-        }
         #endregion
 
         protected override void OnFormClosed(FormClosedEventArgs e)
@@ -67,13 +61,6 @@ namespace IngenieriaSoftware.UI
                 formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
             }
             base.OnFormClosed(e);
-        }
-
-        private void AgregarIdioma_Load(object sender, EventArgs e)
-        {
-            formPadre = this.MdiParent as FormMDI;
-            Actualizar();
-            ObtenerYListarIdiomas();
         }
 
         private void dataGridViewEtiquetasConTraduccion_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -111,8 +98,7 @@ namespace IngenieriaSoftware.UI
             // Vamos a agregar una nueva traduccion, indicando idioma_id, etiqueta_id, texto(nuevatraduccion)
             // Tambien verificar si ya existia una traduccion, para saber si hacer un UPDATE o un INSERT
             //validacion para saber que se completaron los campos necesarios
-            if (comboBoxIdiomas.SelectedItem == null 
-                || (dataGridViewEtiquetasConTraduccion.SelectedRows == null && dataGridViewEtiquetasSinTraduccion.SelectedRows == null) 
+            if ((dataGridViewEtiquetasConTraduccion.SelectedRows == null && dataGridViewEtiquetasSinTraduccion.SelectedRows == null) 
                 || txtTraduccion.Text.Length == 0) 
             {
                 MessageBox.Show("Por favor, complete todos los campos");
@@ -123,13 +109,14 @@ namespace IngenieriaSoftware.UI
                 var traduccion = new TraduccionDTO
                 {
                     EtiquetaId = etiquetaSeleccionada.Tag,
-                    IdiomaId = IdiomaData.Idiomas.Find(i => i.Nombre == comboBoxIdiomas.Text).Id,
+                    IdiomaId = IdiomaData.IdiomaActual.Id,
                     Texto = txtTraduccion.Text
                 };
                 // Implementacion para guardar la traduccion
                 _traduccionBLL.InsertarTraduccion(traduccion);
 
                 Actualizar();
+
             }
 
 

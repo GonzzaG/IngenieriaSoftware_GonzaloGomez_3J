@@ -47,7 +47,7 @@ namespace IngenieriaSoftware.UI
 
         private void Inicializar()
         {
-            
+            _controlesHelper.SuscribirControles(this);
             //aca voy a tener que pasar como parametro el idimoaId
             IdiomaData.Idiomas = CargarIdiomas();
             ListarIdiomas(IdiomaData.Idiomas);
@@ -55,8 +55,8 @@ namespace IngenieriaSoftware.UI
             // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
             var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
             IdiomaData.CambiarIdioma(idiomaActual);
-            
 
+            comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
         }
 
         #region Metodos de Interfaz
@@ -69,6 +69,7 @@ namespace IngenieriaSoftware.UI
             // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
             var idiomaActual = _sessionManager.Usuario.IdiomaId;
             IdiomaData.CambiarIdioma(idiomaActual);
+
         }
         #endregion
 
@@ -102,9 +103,8 @@ namespace IngenieriaSoftware.UI
 
         internal void AbrirFormMenu()
         {
-            this.menuStripMDI.Visible = true;   
-
-            _controlesHelper.SuscribirControles(this);
+            this.menuStripMDI.Visible = true;
+            //_controlesHelper.SuscribirControles(this);
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 

@@ -10,6 +10,6 @@ namespace IngenieriaSoftware.Servicios.Interfaces
     {
         void Suscribir(IIdiomaObservador suscriptor);
         void Desuscribir(IIdiomaObservador suscriptor);
-        void Notificar();
+        void CambiarEstado(int nuevoIdiomaId);
     }
 }

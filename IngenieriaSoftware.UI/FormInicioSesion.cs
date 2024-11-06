@@ -65,7 +65,7 @@ namespace IngenieriaSoftware.UI
                     var usuario = SessionManager.GetInstance.Usuario;
 
                     //cambiamos el idioma el cual tiene el usuario
-                    IdiomaData.CambiarIdioma(usuario.IdiomaId);
+                    _idiomaObserver.CambiarEstado(usuario.Id);
                     this.Close();
                 }
             }
