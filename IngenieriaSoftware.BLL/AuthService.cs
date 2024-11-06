@@ -36,7 +36,8 @@ namespace IngenieriaSoftware.BLL
             UsuarioDTO _Usuario = new UsuarioDTO
             {
                 Username = pNombreUsuario,
-                _passwordHash = HashingManager.GenerarHash(pContrasena)
+                _passwordHash = HashingManager.GenerarHash(pContrasena),
+                IdiomaId = IdiomaData.IdiomaActual.Id
             };
 
             if (new UsuarioBLL().RegistrarUsuario(_Usuario, DateTime.Now))

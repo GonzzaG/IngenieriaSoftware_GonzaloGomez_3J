@@ -42,6 +42,7 @@
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
+            this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -177,11 +178,22 @@
             this.comboBoxIdiomas.Tag = "62";
             this.comboBoxIdiomas.SelectedIndexChanged += new System.EventHandler(this.comboBoxIdiomas_SelectedIndexChanged_1);
             // 
+            // lblIdiomaActual
+            // 
+            this.lblIdiomaActual.AutoSize = true;
+            this.lblIdiomaActual.Location = new System.Drawing.Point(610, 377);
+            this.lblIdiomaActual.Name = "lblIdiomaActual";
+            this.lblIdiomaActual.Size = new System.Drawing.Size(71, 13);
+            this.lblIdiomaActual.TabIndex = 9;
+            this.lblIdiomaActual.Tag = "69";
+            this.lblIdiomaActual.Text = "Idioma Actual";
+            // 
             // FormMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 638);
+            this.Controls.Add(this.lblIdiomaActual);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.menuStripMDI);
             this.IsMdiContainer = true;
@@ -213,5 +225,6 @@
         private System.Windows.Forms.ToolStripMenuItem mesasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cobrosToolStripMenuItem;
         private System.Windows.Forms.ComboBox comboBoxIdiomas;
+        private System.Windows.Forms.Label lblIdiomaActual;
     }
 }
