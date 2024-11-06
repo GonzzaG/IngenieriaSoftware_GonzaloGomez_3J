@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.btnAgregarTraduccion = new System.Windows.Forms.Button();
-            this.lblIdioma = new System.Windows.Forms.Label();
             this.lblEtiqueta = new System.Windows.Forms.Label();
             this.txtTraduccion = new System.Windows.Forms.TextBox();
             this.lblTraduccion = new System.Windows.Forms.Label();
@@ -44,16 +42,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEtiquetasSinTraduccion)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBoxIdiomas
-            // 
-            this.comboBoxIdiomas.FormattingEnabled = true;
-            this.comboBoxIdiomas.Location = new System.Drawing.Point(71, 87);
-            this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBoxIdiomas.Name = "comboBoxIdiomas";
-            this.comboBoxIdiomas.Size = new System.Drawing.Size(145, 21);
-            this.comboBoxIdiomas.TabIndex = 0;
-            this.comboBoxIdiomas.Tag = "51";
-            // 
             // btnAgregarTraduccion
             // 
             this.btnAgregarTraduccion.Location = new System.Drawing.Point(78, 256);
@@ -66,21 +54,10 @@
             this.btnAgregarTraduccion.UseVisualStyleBackColor = true;
             this.btnAgregarTraduccion.Click += new System.EventHandler(this.btnAgregarTraduccion_Click);
             // 
-            // lblIdioma
-            // 
-            this.lblIdioma.AutoSize = true;
-            this.lblIdioma.Location = new System.Drawing.Point(69, 72);
-            this.lblIdioma.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblIdioma.Name = "lblIdioma";
-            this.lblIdioma.Size = new System.Drawing.Size(43, 13);
-            this.lblIdioma.TabIndex = 3;
-            this.lblIdioma.Tag = "50";
-            this.lblIdioma.Text = "Idiomas";
-            // 
             // lblEtiqueta
             // 
             this.lblEtiqueta.AutoSize = true;
-            this.lblEtiqueta.Location = new System.Drawing.Point(69, 127);
+            this.lblEtiqueta.Location = new System.Drawing.Point(76, 97);
             this.lblEtiqueta.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEtiqueta.Name = "lblEtiqueta";
             this.lblEtiqueta.Size = new System.Drawing.Size(46, 13);
@@ -90,7 +67,7 @@
             // 
             // txtTraduccion
             // 
-            this.txtTraduccion.Location = new System.Drawing.Point(71, 194);
+            this.txtTraduccion.Location = new System.Drawing.Point(78, 164);
             this.txtTraduccion.Margin = new System.Windows.Forms.Padding(2);
             this.txtTraduccion.Name = "txtTraduccion";
             this.txtTraduccion.Size = new System.Drawing.Size(145, 20);
@@ -100,7 +77,7 @@
             // lblTraduccion
             // 
             this.lblTraduccion.AutoSize = true;
-            this.lblTraduccion.Location = new System.Drawing.Point(69, 179);
+            this.lblTraduccion.Location = new System.Drawing.Point(76, 149);
             this.lblTraduccion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTraduccion.Name = "lblTraduccion";
             this.lblTraduccion.Size = new System.Drawing.Size(61, 13);
@@ -175,7 +152,7 @@
             // txtEtiqueta
             // 
             this.txtEtiqueta.Enabled = false;
-            this.txtEtiqueta.Location = new System.Drawing.Point(71, 142);
+            this.txtEtiqueta.Location = new System.Drawing.Point(78, 112);
             this.txtEtiqueta.Margin = new System.Windows.Forms.Padding(2);
             this.txtEtiqueta.Name = "txtEtiqueta";
             this.txtEtiqueta.Size = new System.Drawing.Size(145, 20);
@@ -196,9 +173,7 @@
             this.Controls.Add(this.lblTraduccion);
             this.Controls.Add(this.txtTraduccion);
             this.Controls.Add(this.lblEtiqueta);
-            this.Controls.Add(this.lblIdioma);
             this.Controls.Add(this.btnAgregarTraduccion);
-            this.Controls.Add(this.comboBoxIdiomas);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AgregarIdioma";
             this.Tag = "61";
@@ -212,10 +187,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboBoxIdiomas;
         private System.Windows.Forms.Button btnAgregarTraduccion;
-        private System.Windows.Forms.Label lblIdioma;
         private System.Windows.Forms.Label lblEtiqueta;
         private System.Windows.Forms.TextBox txtTraduccion;
         private System.Windows.Forms.Label lblTraduccion;

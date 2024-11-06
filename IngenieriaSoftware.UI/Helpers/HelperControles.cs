@@ -10,6 +10,9 @@ namespace IngenieriaSoftware.UI
 {
     public class ControlesHelper
     {
+        // Contador global para el Tag
+        private static int TagContador = 1;
+
         private readonly IIdiomaSujeto _idiomaSujeto;
 
         public ControlesHelper(IIdiomaSujeto idiomaSujeto)
@@ -17,24 +20,19 @@ namespace IngenieriaSoftware.UI
             _idiomaSujeto = idiomaSujeto;
         }
 
-        #region ObtenerSuscriptores
+        #region Suscribir Controles
         public void SuscribirControles(Form formulario)
         {
             foreach (Control control in formulario.Controls)
             {
-                // Suscribir controles simples (que tienen un Tag que se puede usar como ID)
+                // Suscribir controles comunes usando adaptador
                 if (control.Tag != null && int.TryParse(control.Tag.ToString(), out int _))
                 {
-                    var idiomaObservador = new IdiomaObservadorDTO
-                    {
-                        Control = control,
-                        Tag = int.Parse(control.Tag.ToString()), // Asumiendo que el Tag contiene el ID del idioma
-                        Name = control.Name,
-                    };
-                    _idiomaSujeto.Suscribir(idiomaObservador);
+                    var controlAdaptador = new ControlIdiomaAdaptador(control);
+                    _idiomaSujeto.Suscribir(controlAdaptador);
                 }
 
-                // Suscribir los elementos de menú dentro del menú strip
+                // Suscribir los elementos de menú dentro del MenuStrip usando adaptador
                 if (control is MenuStrip menuStrip)
                 {
                     foreach (ToolStripMenuItem menuItem in menuStrip.Items)
@@ -50,16 +48,10 @@ namespace IngenieriaSoftware.UI
 
         private void SuscribirMenuItems(ToolStripMenuItem menuItem)
         {
-            if (menuItem.Tag != null && int.TryParse(menuItem.Tag.ToString(), out int tag))
+            if (menuItem.Tag != null && int.TryParse(menuItem.Tag.ToString(), out int _))
             {
-                var idiomaObservador = new IdiomaObservadorDTO
-                {
-                    MenuItem = menuItem,
-                    Tag = tag,
-                    Name = menuItem.Name,
-                };
-
-                _idiomaSujeto.Suscribir(idiomaObservador);
+                var menuItemAdaptador = new MenuItemIdiomaAdaptador(menuItem);
+                _idiomaSujeto.Suscribir(menuItemAdaptador);
             }
 
             // Si el menú tiene submenús, suscribir también
@@ -73,53 +65,59 @@ namespace IngenieriaSoftware.UI
         {
             foreach (Control control in parentControl.Controls)
             {
-                if (control.Tag != null && int.TryParse(control.Tag.ToString(), out int tag))
+                if (control.Tag != null && int.TryParse(control.Tag.ToString(), out int _))
                 {
-                    var idiomaObservador = new IdiomaObservadorDTO
-                    {
-                        Control = control,
-                        Tag = tag,
-                        Name = control.Name,
-                    };
-
-                    _idiomaSujeto.Suscribir(idiomaObservador);
+                    var controlAdaptador = new ControlIdiomaAdaptador(control);
+                    _idiomaSujeto.Suscribir(controlAdaptador);
                 }
 
                 // Recursivamente suscribir controles hijos
                 SuscribirControlesRecursivos(control);
             }
         }
-
-    #endregion
-
+        #endregion
 
 
-    #region ObtenerControlesDeFormulario
+
+        #region Obtener Controles Del Formulario
         public static Dictionary<string, IdiomaObservadorDTO> ListarControles(Control formulario)
         {
             Dictionary<string, IdiomaObservadorDTO> controles = new Dictionary<string, IdiomaObservadorDTO>();
 
-            // Llamada recursiva para listar controles
             RecorrerControles(formulario, controles);
+
+            TagContador = 1;
 
             return controles;
         }
 
         private static void RecorrerControles(Control control, Dictionary<string, IdiomaObservadorDTO> controles)
         {
-            // Solo añadir si el Tag no es nulo o vacío
-            if (!string.IsNullOrEmpty(control.Tag.ToString()))
+            // Si el control tiene un Tag, lo usamos, si no, asignamos uno nuevo usando el TagContador
+            if(control.Tag == null) { control.Tag = 0; }
+            if (int.Parse(control.Tag.ToString()) is int tagValue)
             {
-                // Crear y agregar el IdiomaSuscriptorDTO con el Control
-                controles[control.Tag.ToString()] = new IdiomaObservadorDTO
+                controles[tagValue.ToString()] = new IdiomaObservadorDTO
                 {
-                    Tag = int.Parse(control.Tag.ToString()),
+                    Tag = tagValue,
+                    Control = control,
+                    Name = control.Name
+                };
+            }
+            else
+            {
+                // Asignar un nuevo Tag si el control no tiene uno
+                int nuevoTag = controles.Count() + TagContador++;
+                control.Tag = nuevoTag;  // Asignamos el Tag al control
+                controles[nuevoTag.ToString()] = new IdiomaObservadorDTO
+                {
+                    Tag = nuevoTag,
                     Control = control,
                     Name = control.Name
                 };
             }
 
-            // Si el control es un MenuStrip, recorrer sus items
+            // Si el control es un MenuStrip, recorremos sus items
             if (control is MenuStrip menuStrip)
             {
                 foreach (ToolStripMenuItem item in menuStrip.Items)
@@ -135,19 +133,21 @@ namespace IngenieriaSoftware.UI
             }
         }
 
+        // Recursivamente recorrer los items del MenuStrip
         private static void RecorrerMenuItems(ToolStripMenuItem item, Dictionary<string, IdiomaObservadorDTO> controles)
         {
-            // Agregar el item si tiene un Tag válido
-            if (!string.IsNullOrEmpty(item.Tag?.ToString()))
+            // Si el Tag del item es nulo o vacío, asignamos uno nuevo
+            if (int.Parse(item.Tag.ToString()) == 0 || item.Tag == null)
             {
-                // Crear y agregar el IdiomaSuscriptorDTO con el ToolStripMenuItem
-                controles[item.Tag.ToString()] = new IdiomaObservadorDTO
-                {
-                    Tag = (int)item.Tag,
-                    MenuItem = item,
-                    Name = item.Name
-                };
+                item.Tag = controles.Count() + TagContador++;
             }
+
+            controles[item.Tag.ToString()] = new IdiomaObservadorDTO
+            {
+                Tag = int.Parse(item.Tag.ToString()),
+                MenuItem = item,
+                Name = item.Name
+            };
 
             // Recursivamente recorrer sub-items
             foreach (ToolStripItem subItem in item.DropDownItems)
@@ -158,7 +158,6 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
-
         #endregion
 
     }

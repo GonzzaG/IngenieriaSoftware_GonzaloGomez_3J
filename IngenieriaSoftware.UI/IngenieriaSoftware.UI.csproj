@@ -49,11 +49,11 @@
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Helpers\HelperControles.cs" />
     <Compile Include="Helpers\HelperForms.cs" />
-    <Compile Include="FormAgregarTraduccion.cs">
+    <Compile Include="FormGestionarTraducciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAgregarTraduccion.Designer.cs">
-      <DependentUpon>FormAgregarTraduccion.cs</DependentUpon>
+    <Compile Include="FormGestionarTraducciones.Designer.cs">
+      <DependentUpon>FormGestionarTraducciones.cs</DependentUpon>
     </Compile>
     <Compile Include="FormEliminarUsuario.cs">
       <SubType>Form</SubType>
@@ -94,13 +94,12 @@
     <Compile Include="IdiomaObservadorDTO.cs" />
     <Compile Include="Interfaces\IActualizable.cs" />
     <Compile Include="IdiomaSujeto.cs" />
-    <Compile Include="Adaptadores\LabelIdiomaAdaptador.cs" />
     <Compile Include="MensajeDTO.cs" />
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormAgregarTraduccion.resx">
-      <DependentUpon>FormAgregarTraduccion.cs</DependentUpon>
+    <EmbeddedResource Include="FormGestionarTraducciones.resx">
+      <DependentUpon>FormGestionarTraducciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEliminarUsuario.resx">
       <DependentUpon>FormEliminarUsuario.cs</DependentUpon>
