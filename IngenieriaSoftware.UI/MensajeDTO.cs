@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,15 @@ namespace IngenieriaSoftware.UI
 {
     internal class MensajeDTO : IIdiomaObservador
     {
-        public string Tag { get; set; }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        string Mensaje {  get; set; }
+        public int Tag { get; set; }
+        public string Name { get; set; }
 
         public void Actualizar(string texto)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IIdiomaObservador.Actualizar(string nuevoTexto)
         {
             throw new NotImplementedException();
         }

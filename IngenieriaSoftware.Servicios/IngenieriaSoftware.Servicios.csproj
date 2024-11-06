@@ -47,9 +47,8 @@
     <Compile Include="EncryptionManager.cs" />
     <Compile Include="HashingManager.cs" />
     <Compile Include="IdiomaData.cs" />
-    <Compile Include="IdiomaObserver.cs" />
-    <Compile Include="Interfaces\IIdiomaSujeto.cs" />
     <Compile Include="Interfaces\IIdiomaObservador.cs" />
+    <Compile Include="Interfaces\IIdiomaSujeto.cs" />
     <Compile Include="Interfaces\ITraduccionServicio.cs" />
     <Compile Include="PermisoChecker.cs" />
     <Compile Include="DTOs\PermisoDTO.cs" />

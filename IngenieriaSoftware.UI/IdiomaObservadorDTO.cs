@@ -1,4 +1,6 @@
 ﻿using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.Interfaces;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -6,9 +8,9 @@ namespace IngenieriaSoftware.UI
 {
     public class IdiomaObservadorDTO : IIdiomaObservador
     {
-        public string Tag { get; set; }
         public Control Control { get; set; }
-        public ToolStripMenuItem MenuItem { get; set; } 
+        public ToolStripMenuItem MenuItem { get; set; }
+        public int Tag { get; set; }
         public string Name { get; set; }
 
         public void Actualizar(string nuevoTexto)
@@ -38,5 +40,6 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
+
     }
 }

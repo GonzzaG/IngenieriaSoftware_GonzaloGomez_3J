@@ -13,10 +13,10 @@ namespace IngenieriaSoftware.UI
 
         public event Action InicioSesionExitoso;
 
-        private readonly IdiomaObserver _idiomaObserver;
+        private readonly IdiomaSujeto _idiomaObserver;
 
         public FormInicioSesion() { InitializeComponent(); }
-        public FormInicioSesion(IdiomaObserver idiomaObserver)
+        public FormInicioSesion(IdiomaSujeto idiomaObserver)
         {
             InitializeComponent();
 
@@ -24,6 +24,8 @@ namespace IngenieriaSoftware.UI
             this.DialogResult = DialogResult.No;
 
             _idiomaObserver = idiomaObserver;
+
+          
 
         }
 
@@ -46,7 +48,8 @@ namespace IngenieriaSoftware.UI
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-
+            txtUsuario.Text = "gonza2";
+            txtContrasena.Text = "gonza";
         }
 
         #region LogIn LogOut

@@ -125,8 +125,10 @@
             this.dataGridViewEtiquetasConTraduccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEtiquetasConTraduccion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewEtiquetasConTraduccion.Location = new System.Drawing.Point(265, 72);
+            this.dataGridViewEtiquetasConTraduccion.MultiSelect = false;
             this.dataGridViewEtiquetasConTraduccion.Name = "dataGridViewEtiquetasConTraduccion";
             this.dataGridViewEtiquetasConTraduccion.RowHeadersVisible = false;
+            this.dataGridViewEtiquetasConTraduccion.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewEtiquetasConTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewEtiquetasConTraduccion.Size = new System.Drawing.Size(265, 229);
             this.dataGridViewEtiquetasConTraduccion.TabIndex = 11;
@@ -160,8 +162,10 @@
             this.dataGridViewEtiquetasSinTraduccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEtiquetasSinTraduccion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewEtiquetasSinTraduccion.Location = new System.Drawing.Point(555, 72);
+            this.dataGridViewEtiquetasSinTraduccion.MultiSelect = false;
             this.dataGridViewEtiquetasSinTraduccion.Name = "dataGridViewEtiquetasSinTraduccion";
             this.dataGridViewEtiquetasSinTraduccion.RowHeadersVisible = false;
+            this.dataGridViewEtiquetasSinTraduccion.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewEtiquetasSinTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewEtiquetasSinTraduccion.Size = new System.Drawing.Size(282, 229);
             this.dataGridViewEtiquetasSinTraduccion.TabIndex = 13;

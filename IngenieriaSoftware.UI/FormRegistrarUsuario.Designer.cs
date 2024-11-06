@@ -77,7 +77,7 @@
             this.lblUsername.Size = new System.Drawing.Size(96, 13);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Tag = "22";
-            this.lblUsername.Text = "Nombre de usuario";
+            this.lblUsername.Text = "Name de usuario";
             this.lblUsername.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblPassword

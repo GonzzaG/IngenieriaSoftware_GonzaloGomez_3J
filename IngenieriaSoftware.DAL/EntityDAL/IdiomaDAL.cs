@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
+using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -72,7 +73,7 @@ namespace IngenieriaSoftware.DAL
                 .Select(e => new EtiquetaDTO
                 {
                     Tag = int.Parse(e.Key),
-                    Nombre = e.Value.Name
+                    Name = e.Value.Name
                 })
                 .ToList();
 
@@ -82,9 +83,9 @@ namespace IngenieriaSoftware.DAL
             // Guardar las etiquetas restantes en la base de datos
             foreach (EtiquetaDTO etiqueta in etiquetasMemoria)
             {
-                if (!string.IsNullOrEmpty(etiqueta.Nombre))
+                if (!string.IsNullOrEmpty(etiqueta.Name))
                 {
-                    GuardarEtiquetas(etiqueta.Tag, etiqueta.Nombre);
+                    GuardarEtiquetas(etiqueta.Tag, etiqueta.Name);
                 }
             }
 

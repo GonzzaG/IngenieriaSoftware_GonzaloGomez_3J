@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IngenieriaSoftware.Servicios
+namespace IngenieriaSoftware.Servicios.Interfaces
 {
     public interface IIdiomaSujeto
     {
         void Suscribir(IIdiomaObservador suscriptor);
-        void Notificar(int nuevoIdiomaId);
+        void Desuscribir(IIdiomaObservador suscriptor);
+        void Notificar();
     }
 }

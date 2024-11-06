@@ -4,6 +4,6 @@
     {
         //int Id { get; set; }
         int Tag { get; set; }
-        string Nombre { get; set; }
+        string Name { get; set; }
     }
 }

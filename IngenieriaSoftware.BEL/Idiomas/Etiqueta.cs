@@ -6,6 +6,6 @@ namespace IngenieriaSoftware.BEL
     {
         //public int Id { get; set; }
         public int Tag { get; set; }
-        public string Nombre { get; set; }
+        public string Name { get; set; }
     }
 }

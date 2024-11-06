@@ -1,5 +1,7 @@
 ﻿using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.DTOs;
+using System;
 using System.Collections.Generic;
 
 namespace IngenieriaSoftware.BLL
@@ -17,7 +19,27 @@ namespace IngenieriaSoftware.BLL
 
         public Dictionary<string, string> ObtenerTraduccionesPorIdioma(int idiomaId)
         {
-            return _traduccionDAL.ObtenerTraduccionesPorIdioma(idiomaId);
+            try
+            {
+                return _traduccionDAL.ObtenerTraduccionesPorIdioma(idiomaId);
+            }
+            catch( Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public void InsertarTraduccion (TraduccionDTO traduccion)
+        {
+            try
+            {
+               _traduccionDAL.InsertarTraduccion(traduccion);
+            }
+            catch (Exception ex)
+            {
+                throw ex;   
+            }
         }
     }
 }

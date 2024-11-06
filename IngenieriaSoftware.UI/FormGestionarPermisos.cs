@@ -10,7 +10,7 @@ namespace IngenieriaSoftware.UI
     public partial class FormGestionarPermisos : Form, IActualizable
     {
         private readonly UsuarioBLL _usuarioBLL;
-        private readonly IdiomaObserver _idiomaObserver;
+        private readonly IdiomaSujeto _idiomaObserver;
         public FormGestionarPermisos()
         {
             InitializeComponent();

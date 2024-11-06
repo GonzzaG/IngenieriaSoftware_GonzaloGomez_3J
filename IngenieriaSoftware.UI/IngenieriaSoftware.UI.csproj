@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Helpers\HelperControles.cs" />
     <Compile Include="Helpers\HelperForms.cs" />
     <Compile Include="FormAgregarTraduccion.cs">
@@ -91,9 +92,11 @@
       <DependentUpon>FormMDI.cs</DependentUpon>
     </Compile>
     <Compile Include="IdiomaObservadorDTO.cs" />
-    <Compile Include="IActualizable.cs" />
-    <Compile Include="IdiomaObserver.cs" />
+    <Compile Include="Interfaces\IActualizable.cs" />
+    <Compile Include="IdiomaSujeto.cs" />
+    <Compile Include="Adaptadores\LabelIdiomaAdaptador.cs" />
     <Compile Include="MensajeDTO.cs" />
+    <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAgregarTraduccion.resx">

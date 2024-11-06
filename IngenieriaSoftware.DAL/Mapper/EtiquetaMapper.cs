@@ -13,7 +13,7 @@ namespace IngenieriaSoftware.DAL
             {
                 EtiquetaDTO etiqueta = new EtiquetaDTO();
                 etiqueta.Tag = (int)row["etiqueta_id"];
-                etiqueta.Nombre = row["nombre"].ToString();
+                etiqueta.Name = row["nombre"].ToString();
 
                 etiquetas.Add(etiqueta);
             }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.Servicios.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -35,6 +37,27 @@ namespace IngenieriaSoftware.DAL
             catch (Exception ex)
             {
                 throw new Exception("Error al obtener traducciones por idioma.", ex);
+            }
+        }
+
+        public void InsertarTraduccion(TraduccionDTO traduccion)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@idiomaId", traduccion.IdiomaId),
+                    new SqlParameter("@etiqueta_id", traduccion.EtiquetaId),
+                    new SqlParameter("@texto", traduccion.Texto)
+
+                };
+
+                _dao.ExecuteNonQuery("sp_AsignarTraduccion", parametros);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

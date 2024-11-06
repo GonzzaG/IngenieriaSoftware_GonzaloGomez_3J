@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
+using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
 

@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
+using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,9 +21,11 @@ namespace IngenieriaSoftware.UI
         private readonly AuthService _authService;
         private ITraduccionServicio ItraduccionServicio;
 
-        private IdiomaObserver _idiomaObserver;
+        private readonly ControlesHelper _controlesHelper;
+        private IdiomaSujeto _idiomaObserver;
 
         public event Action ActualizarFormsHijos;
+
 
         public FormMDI()
         {
@@ -34,6 +37,9 @@ namespace IngenieriaSoftware.UI
             idiomaBLL = new IdiomaBLL();
             traduccionBLL = new TraduccionBLL();
             _authService = new AuthService();
+            ItraduccionServicio = new TraduccionBLL();
+            _idiomaObserver = new IdiomaSujeto(ItraduccionServicio);
+            _controlesHelper = new ControlesHelper(_idiomaObserver);
 
             Inicializar();
             AbrirIniciarSesion();
@@ -41,7 +47,7 @@ namespace IngenieriaSoftware.UI
 
         private void Inicializar()
         {
-            ItraduccionServicio = new TraduccionBLL();
+            
             //aca voy a tener que pasar como parametro el idimoaId
             IdiomaData.Idiomas = CargarIdiomas();
             ListarIdiomas(IdiomaData.Idiomas);
@@ -49,7 +55,7 @@ namespace IngenieriaSoftware.UI
             // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
             var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
             IdiomaData.CambiarIdioma(idiomaActual);
-            _idiomaObserver = new IdiomaObserver(ItraduccionServicio);
+            
 
         }
 
@@ -75,27 +81,6 @@ namespace IngenieriaSoftware.UI
             base.OnFormClosed(e);
         }
 
-        private void SuscribirControles(Form form)
-        {
-            var controlesForm = ControlesHelper.ListarControles(form);
-
-            foreach (var etiqueta in controlesForm)
-            {
-                var tag = etiqueta.Key;
-                var suscriptor = etiqueta.Value;
-
-                var suscriptorDTO = new IdiomaObservadorDTO
-                {
-                    Tag = tag,
-                    Control = suscriptor.Control, // Asignar el control encontrado
-                    MenuItem = suscriptor.MenuItem,
-                    Name = suscriptor.Name
-                };
-
-                _idiomaObserver.Suscribir(suscriptorDTO);
-            }
-        }
-
         private void MDI_Load(object sender, EventArgs e)
         {        
 
@@ -117,11 +102,11 @@ namespace IngenieriaSoftware.UI
 
         internal void AbrirFormMenu()
         {
-            this.menuStripMDI.Visible = true;
-            SuscribirControles(this);
+            this.menuStripMDI.Visible = true;   
 
+            _controlesHelper.SuscribirControles(this);
             // Notificamos a los suscriptores del cambio de idioma
-            _idiomaObserver.Notificar(IdiomaData.IdiomaActual.Id);
+            _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
             var nombreUsuario = SessionManager.UsuarioActual.Username;
             permisosUsuario = usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
@@ -182,10 +167,11 @@ namespace IngenieriaSoftware.UI
             this.menuStripMDI.Visible = false;
 
             FormInicioSesion formInicio = new FormInicioSesion(_idiomaObserver);
-            SuscribirControles(formInicio);
+            //SuscribirControles(formInicio);
+            _controlesHelper.SuscribirControles(formInicio);
 
             // Notificamos a los suscriptores del cambio de idioma
-            _idiomaObserver.Notificar(IdiomaData.IdiomaActual.Id);
+            _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
             formInicio.MdiParent = this;
             formInicio.WindowState = FormWindowState.Maximized;
@@ -197,12 +183,12 @@ namespace IngenieriaSoftware.UI
 
         private void AbrirFormHijo(Form formHijo)
         {
-            SuscribirControles(formHijo);
+            //SuscribirControles(formHijo);
+            _controlesHelper.SuscribirControles(formHijo);
 
             CerrarFormulariosHijos();
-            var idiomaAct = SessionManager.GetInstance.Usuario.IdiomaId;
             // Notificamos a los suscriptores del cambio de idioma
-            _idiomaObserver.Notificar(IdiomaData.IdiomaActual.Id);
+            _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
             // Lo suscribo al evento para que el formHijo se actualice si cambia el idioma
             if(formHijo is IActualizable formActualizable)
@@ -462,10 +448,10 @@ namespace IngenieriaSoftware.UI
             foreach (Control c in control.Controls)
             {
                 // Verificar si ya existe una etiqueta con el nombre del control en la base de datos
-                if (!etiquetasEnBD.Any(e => e.Nombre == c.Name))
+                if (!etiquetasEnBD.Any(e => e.Name == c.Name))
                 {
                     // Si no existe, crear una nueva etiqueta y agregarla a la lista de etiquetas nuevas
-                    var nuevaEtiqueta = new EtiquetaDTO { Tag = (int)c.Tag, Nombre = c.Name };
+                    var nuevaEtiqueta = new EtiquetaDTO { Tag = (int)c.Tag, Name = c.Name };
                     etiquetasNuevas.Add(nuevaEtiqueta);
                 }
 
@@ -490,10 +476,10 @@ namespace IngenieriaSoftware.UI
         private void RegistrarEtiquetasDeMenu(ToolStripItem menuItem, List<EtiquetaDTO> etiquetasEnBD, List<EtiquetaDTO> etiquetasNuevas)
         {
             // Verificar si ya existe una etiqueta con el nombre del elemento de menú en la base de datos
-            if (!etiquetasEnBD.Any(e => e.Nombre == menuItem.Name))
+            if (!etiquetasEnBD.Any(e => e.Name == menuItem.Name))
             {
                 // Si no existe, crear una nueva etiqueta y agregarla a la lista de etiquetas nuevas
-                var nuevaEtiqueta = new EtiquetaDTO { Nombre = menuItem.Name };
+                var nuevaEtiqueta = new EtiquetaDTO { Name = menuItem.Name };
                 etiquetasNuevas.Add(nuevaEtiqueta);
             }
 
@@ -526,7 +512,8 @@ namespace IngenieriaSoftware.UI
             if (comboBoxIdiomas.SelectedItem == null) return;
             //Obtengo el idiomaId de la lista de idiomas, comparando el nombre del idioma con el del combo box, item seleccionado, y retorno el id
             var idiomaId = (IdiomaData.Idiomas.Find(I => I.Nombre == comboBoxIdiomas.SelectedItem.ToString())).Id;
-            _idiomaObserver.Notificar(idiomaId);
+           
+            _idiomaObserver.CambiarEstado(idiomaId);
 
             
             ActualizarFormsHijos?.Invoke();
