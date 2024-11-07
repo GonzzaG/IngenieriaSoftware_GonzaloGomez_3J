@@ -20,11 +20,6 @@ namespace IngenieriaSoftware.Servicios
             }
         }
 
-        public string GenerarPasswordHash(string password)
-        {
-            return HashingManager.GenerarHash(password);
-        }
-
         public static bool VerificarHash(string pPassword, string pHashedPassword)
         {
             // string mHashDeEntrada = GenerarHash(pPassword);

@@ -170,10 +170,10 @@
             // comboBoxIdiomas
             // 
             this.comboBoxIdiomas.FormattingEnabled = true;
-            this.comboBoxIdiomas.Location = new System.Drawing.Point(613, 392);
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(598, 487);
             this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
-            this.comboBoxIdiomas.Size = new System.Drawing.Size(128, 21);
+            this.comboBoxIdiomas.Size = new System.Drawing.Size(157, 21);
             this.comboBoxIdiomas.TabIndex = 7;
             this.comboBoxIdiomas.Tag = "62";
             this.comboBoxIdiomas.SelectedIndexChanged += new System.EventHandler(this.comboBoxIdiomas_SelectedIndexChanged_1);
@@ -181,7 +181,7 @@
             // lblIdiomaActual
             // 
             this.lblIdiomaActual.AutoSize = true;
-            this.lblIdiomaActual.Location = new System.Drawing.Point(610, 377);
+            this.lblIdiomaActual.Location = new System.Drawing.Point(613, 472);
             this.lblIdiomaActual.Name = "lblIdiomaActual";
             this.lblIdiomaActual.Size = new System.Drawing.Size(71, 13);
             this.lblIdiomaActual.TabIndex = 9;

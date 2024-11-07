@@ -11,7 +11,6 @@ namespace IngenieriaSoftware.UI
 {
     public class IdiomaSujeto : IIdiomaSujeto
     {
-
         private readonly List<IIdiomaObservador> Suscriptores = new List<IIdiomaObservador>();
 
         private readonly ITraduccionServicio _traduccionServicio;
@@ -29,18 +28,6 @@ namespace IngenieriaSoftware.UI
             IdiomaData.CambiarIdioma(nuevoIdiomaId);
             Notificar();
         }
-
-        //protected void Notificar()
-        //{
-        //    var traducciones = _traduccionServicio.ObtenerTraduccionesPorIdioma(IdiomaData.IdiomaActual.Id);
-        //    foreach (var suscriptor in Suscriptores)
-        //    {
-        //        if (traducciones.ContainsKey(suscriptor.Tag.ToString()))
-        //        {
-        //            suscriptor.Actualizar(traducciones[suscriptor.Tag.ToString()]);
-        //        }
-        //    }
-        //}
 
         protected void Notificar()
         {
@@ -74,10 +61,8 @@ namespace IngenieriaSoftware.UI
             {
                 Suscriptores.Remove(suscriptor);
             }
-        }
+        } 
 
-
-    
         public void Suscribir(IIdiomaObservador suscriptor)
         {
             if (!Suscriptores.Contains(suscriptor))
@@ -85,7 +70,6 @@ namespace IngenieriaSoftware.UI
                 Suscriptores.Add(suscriptor);
             }
         }
-
         #endregion
     }
 }

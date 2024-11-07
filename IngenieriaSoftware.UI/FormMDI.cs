@@ -2,6 +2,7 @@
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
+using IngenieriaSoftware.UI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -108,8 +109,7 @@ namespace IngenieriaSoftware.UI
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
-            var nombreUsuario = SessionManager.UsuarioActual.Username;
-            permisosUsuario = usuarioBLL.ObtenerPermisosDelUsuario(nombreUsuario);
+            var permisosUsuario = AuthService.PermisosUsuario;
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
         }
@@ -436,7 +436,13 @@ namespace IngenieriaSoftware.UI
             
             // ListarControles devuelve un Dictionary<string, IdiomaSuscriptorDTO
             //Asi que, lo paso a un Dictionary<string, IIdiomaSusctriptor, para poder pasarlo como argumento en AgregarEtiqueta
-            Dictionary<string, IIdiomaObservador> etiquetasEnMemoria = ControlesHelper.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaObservador)p.Value); 
+            Dictionary<string, IIdiomaObservador> etiquetasEnMemoria = ControlesHelper.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaObservador)p.Value);
+
+            var etiquetasExcepciones = HelperExcepciones.ListarExcepciones();
+            foreach(var etiquetaExcepcion in etiquetasExcepciones)
+            {
+                etiquetasEnMemoria[etiquetaExcepcion.Key] = etiquetaExcepcion.Value;
+            }
 
             // Guardar etiquetas nuevas en la base de datos si hay alguna
             idiomaBLL.AgregarEtiqueta(etiquetasEnMemoria); 
