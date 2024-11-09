@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -23,6 +24,7 @@ namespace IngenieriaSoftware.UI
         private ITraduccionServicio ItraduccionServicio;
 
         private readonly ControlesHelper _controlesHelper;
+        private readonly HelperExcepciones _helperExcepciones;
         private IdiomaSujeto _idiomaObserver;
 
         public event Action ActualizarFormsHijos;
@@ -41,7 +43,7 @@ namespace IngenieriaSoftware.UI
             ItraduccionServicio = new TraduccionBLL();
             _idiomaObserver = new IdiomaSujeto(ItraduccionServicio);
             _controlesHelper = new ControlesHelper(_idiomaObserver);
-
+            _helperExcepciones = new HelperExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
         }
@@ -49,6 +51,7 @@ namespace IngenieriaSoftware.UI
         private void Inicializar()
         {
             _controlesHelper.SuscribirControles(this);
+            _helperExcepciones.SuscribirExcepciones();
             //aca voy a tener que pasar como parametro el idimoaId
             IdiomaData.Idiomas = CargarIdiomas();
             ListarIdiomas(IdiomaData.Idiomas);
@@ -112,9 +115,10 @@ namespace IngenieriaSoftware.UI
             var permisosUsuario = AuthService.PermisosUsuario;
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
-        }
 
-       
+            
+            
+        }
 
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -167,11 +171,11 @@ namespace IngenieriaSoftware.UI
             this.menuStripMDI.Visible = false;
 
             FormInicioSesion formInicio = new FormInicioSesion(_idiomaObserver);
-            //SuscribirControles(formInicio);
+
             _controlesHelper.SuscribirControles(formInicio);
 
             // Notificamos a los suscriptores del cambio de idioma
-            _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
+            //_idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
             formInicio.MdiParent = this;
             formInicio.WindowState = FormWindowState.Maximized;

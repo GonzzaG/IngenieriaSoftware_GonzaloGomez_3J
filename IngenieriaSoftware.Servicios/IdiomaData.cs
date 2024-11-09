@@ -10,7 +10,7 @@ namespace IngenieriaSoftware.Servicios
 {
     public class IdiomaData
     {
-        public static Dictionary<EtiquetaDTO, TraduccionDTO> EtiquetaTraducciones { get; set; }
+        public static Dictionary<string, string> TagTraducciones { get; set; }
         private static IdiomaDTO _idiomaActual;
         public static List<IdiomaDTO> Idiomas { get; set; } = new List<IdiomaDTO>();
 

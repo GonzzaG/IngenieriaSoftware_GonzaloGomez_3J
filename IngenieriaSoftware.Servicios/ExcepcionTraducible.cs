@@ -15,6 +15,7 @@ namespace IngenieriaSoftware.Servicios
         protected ExcepcionTraducible(int tag, string mensaje) : base(mensaje)
         {
             Tag = tag;
+            Name = this.Name;
         }
 
         public virtual void Actualizar(string nuevoMensaje)

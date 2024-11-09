@@ -39,8 +39,8 @@ namespace IngenieriaSoftware.UI
             //tengo que cargar la grid view de etiquetas con y sin traduccion
             //debo poner que en cada textbox se etiqueten todas las etiquetas de los grid view (los 2)
             //deberia traer tanto la etiqueta, los idiomas, y las traducciones
-            
 
+            LimpiarCampos();
             // Obtenemos diccionario con etiquetas y traducciones
             etiquetasConTraduccion = formPadre.idiomaBLL.ObtenerEtiquetasConTraduccion(IdiomaData.IdiomaActual.Id);
 
@@ -67,8 +67,8 @@ namespace IngenieriaSoftware.UI
         {
             if (dataGridViewEtiquetasConTraduccion.SelectedRows.Count > 0)
             {
-                int etiquetaId = (int)dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells["Tag"].Value;
-                string etiquetaNombre = dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells["Name"].Value.ToString();
+                int etiquetaId = (int)dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells[0].Value;
+                string etiquetaNombre = dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells[1].Value.ToString();
 
                 etiquetaSeleccionada = etiquetasConTraduccion.Keys.FirstOrDefault(et => et.Tag == etiquetaId);                                                                                             
                 // Buscamos en el diccionario, la etiqueta que fue seleciconada segun el nombre en la gridView
@@ -83,8 +83,8 @@ namespace IngenieriaSoftware.UI
         {
             if (dataGridViewEtiquetasSinTraduccion.SelectedRows.Count > 0)
             {           
-                int etiquetaId = (int)dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells["Tag"].Value;
-                var etiquetaNombre = dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells["Name"].Value.ToString();
+                int etiquetaId = (int)dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells[0].Value;
+                var etiquetaNombre = dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells[1].Value.ToString();
                 txtEtiqueta.Text = etiquetaNombre;
                 etiquetaSeleccionada = etiquetasSinTraduccion.Find(et => et.Tag == etiquetaId);
 
@@ -116,10 +116,16 @@ namespace IngenieriaSoftware.UI
                 _traduccionBLL.InsertarTraduccion(traduccion);
 
                 Actualizar();
-
+                LimpiarCampos();
             }
 
 
+        }
+
+        public void LimpiarCampos()
+        {
+            txtEtiqueta.Text = string.Empty;
+            txtTraduccion.Text = string.Empty;
         }
     }
 }

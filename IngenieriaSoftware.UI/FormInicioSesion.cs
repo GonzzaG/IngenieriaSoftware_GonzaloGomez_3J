@@ -68,14 +68,13 @@ namespace IngenieriaSoftware.UI
                     //cambiamos el idioma el cual tiene el usuario
                     _idiomaObserver.CambiarEstado(usuario.Id);
 
-
                     this.Close();
                 }
             }
             catch (FalloCredencialesException ex)
             {
-                _idiomaObserver.Suscribir(ex);
-                MessageBox.Show(ex.Message);
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Message);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
             }
         }
         #endregion

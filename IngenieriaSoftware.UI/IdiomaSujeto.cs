@@ -15,6 +15,7 @@ namespace IngenieriaSoftware.UI
 
         private readonly ITraduccionServicio _traduccionServicio;
 
+   
         public IdiomaSujeto(ITraduccionServicio traduccionServicio)//(int idiomaInicialId, ITraduccionServicio traduccionServicio)
         {
             //idiomaId = idiomaInicialId;
@@ -31,9 +32,9 @@ namespace IngenieriaSoftware.UI
 
         protected void Notificar()
         {
-            var traducciones = _traduccionServicio.ObtenerTraduccionesPorIdioma(IdiomaData.IdiomaActual.Id);
+             IdiomaData.TagTraducciones = _traduccionServicio.ObtenerTraduccionesPorIdioma(IdiomaData.IdiomaActual.Id) ?? new Dictionary<string, string>();
 
-            if (traducciones == null || traducciones.Count == 0)
+            if (IdiomaData.TagTraducciones == null || IdiomaData.TagTraducciones.Count == 0)
             {
                 Console.WriteLine("No se han encontrado traducciones para el idioma actual.");
                 return;
@@ -46,7 +47,7 @@ namespace IngenieriaSoftware.UI
                     string traduccion;
 
                     // Se intenta obtener la traduccion del diccionario de traducciones
-                    if (traducciones.TryGetValue(suscriptor.Tag.ToString(), out traduccion) && traduccion != null)
+                    if (IdiomaData.TagTraducciones.TryGetValue(suscriptor.Tag.ToString(), out traduccion) && traduccion != null)
                     {
                         suscriptor.Actualizar(traduccion);
                     }

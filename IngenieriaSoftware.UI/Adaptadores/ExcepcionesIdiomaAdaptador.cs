@@ -1,34 +1,45 @@
-﻿using IngenieriaSoftware.Servicios.Interfaces;
+﻿using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Adaptadores
 {
-    public class ExcepcionesIdiomaAdaptador
+    public class ExcepcionesIdiomaAdaptador : ExcepcionTraducible ,IIdiomaObservador
     {
-        private readonly IIdiomaSujeto _idiomaSujeto;
-        private readonly List<ExcepcionTraducible> _excepciones = new List<ExcepcionTraducible>();
+        //private readonly IdiomaSujeto _idiomaSujeto;
 
-        public ExcepcionesIdiomaAdaptador(IIdiomaSujeto idiomaSujeto)
+        public int Tag { get; set; }
+
+        public ExcepcionesIdiomaAdaptador(int tag, string mensaje) : base(tag, mensaje)
         {
-            _idiomaSujeto = idiomaSujeto;
+            Tag = tag;
+         //   this.HelpLink = ObtenerMensajeTraducido();
         }
 
-        public void RegistrarExcepcion(ExcepcionTraducible excepcion)
+        public void Actualizar(string nuevoTexto)
         {
-            _excepciones.Add(excepcion);
-            _idiomaSujeto.Suscribir(excepcion);
+            if(IdiomaData.TagTraducciones.TryGetValue(this.Tag.ToString(), out var traduccion))
+            {
+                this.HelpLink = traduccion;
+            }
         }
 
-        public void DesuscribirExcepcion(ExcepcionTraducible excepcion)
+        public string ObtenerMensajeTraducido()
         {
-            _excepciones.Remove(excepcion);
-            _idiomaSujeto.Desuscribir(excepcion);
+            if(IdiomaData.TagTraducciones == null) { return this.Message; }
+            if (IdiomaData.TagTraducciones.TryGetValue(this.Tag.ToString(), out string traduccion))
+            {
+                this.HelpLink = traduccion;
+            }
+            return this.HelpLink;
         }
     }
-
 }
+
+

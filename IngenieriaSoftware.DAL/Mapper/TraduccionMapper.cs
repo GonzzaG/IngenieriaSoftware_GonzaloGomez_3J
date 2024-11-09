@@ -18,7 +18,7 @@ namespace IngenieriaSoftware.DAL
 
                 foreach (DataRow fila in tabla.Rows)
                 {
-                    // Suponiendo que la tabla tiene columnas "EtiquetaId" y "Texto"
+                    // Suponiendo que la tabla tiene columnas "EtiquetaId" y "Name"
                     int etiquetaId = Convert.ToInt32(fila["etiqueta_id"]);
                     string texto = Convert.ToString(fila["traduccion"]);
 

@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
-    <Compile Include="ExcepcionTraducible.cs" />
     <Compile Include="Helpers\HelperControles.cs" />
     <Compile Include="Helpers\HelperExcepciones.cs" />
     <Compile Include="Helpers\HelperForms.cs" />
