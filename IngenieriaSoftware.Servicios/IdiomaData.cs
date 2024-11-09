@@ -10,7 +10,7 @@ namespace IngenieriaSoftware.Servicios
 {
     public class IdiomaData
     {
-        public static Dictionary<EtiquetaDTO, TraduccionDTO> EtiquetaTraducciones { get; set; }
+        public static Dictionary<string, string> TagTraducciones { get; set; }
         private static IdiomaDTO _idiomaActual;
         public static List<IdiomaDTO> Idiomas { get; set; } = new List<IdiomaDTO>();
 
@@ -19,11 +19,11 @@ namespace IngenieriaSoftware.Servicios
             {
                 if (_idiomaActual == null)
                 {
-                    if(SessionManager.UsuarioActual.IdiomaId == 0)
+                    if(SessionManager.GetInstance.Usuario.IdiomaId == 0)
                         _idiomaActual = Idiomas.Find(i => i.Nombre == CultureInfo.CurrentCulture.DisplayName);
 
                     else
-                        _idiomaActual = Idiomas.Find(i => i.Id == SessionManager.UsuarioActual.IdiomaId);
+                        _idiomaActual = Idiomas.Find(i => i.Id == SessionManager.GetInstance.Usuario.IdiomaId);
 
                     if (_idiomaActual == null)
                         _idiomaActual = Idiomas.FirstOrDefault(); 

@@ -45,16 +45,20 @@
     <Compile Include="DTOs\IdiomaDTO.cs" />
     <Compile Include="DTOs\TraduccionDTO.cs" />
     <Compile Include="EncryptionManager.cs" />
+    <Compile Include="ExcepcionesServicio.cs" />
+    <Compile Include="ExcepcionTraducible.cs" />
     <Compile Include="HashingManager.cs" />
     <Compile Include="IdiomaData.cs" />
     <Compile Include="Interfaces\IIdiomaObservador.cs" />
     <Compile Include="Interfaces\IIdiomaSujeto.cs" />
+    <Compile Include="Interfaces\ITraduccionExcepcion.cs" />
     <Compile Include="Interfaces\ITraduccionServicio.cs" />
     <Compile Include="PermisoChecker.cs" />
     <Compile Include="DTOs\PermisoDTO.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DTOs\UsuarioDTO.cs" />
+    <Compile Include="TagAtributo.cs" />
     <Compile Include="TraduccionServicio.cs" />
   </ItemGroup>
   <ItemGroup>

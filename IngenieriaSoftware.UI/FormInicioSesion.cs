@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
+using IngenieriaSoftware.UI.Adaptadores;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -66,13 +67,21 @@ namespace IngenieriaSoftware.UI
 
                     //cambiamos el idioma el cual tiene el usuario
                     _idiomaObserver.CambiarEstado(usuario.Id);
-                    this.Close();
+                    throw new CredencialesCorrectasException();
                 }
             }
-            catch (Exception ex)
+            catch (FalloCredencialesException ex)
             {
-                MessageBox.Show(ex.Message);
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
             }
+            catch (CredencialesCorrectasException ex)
+            {
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+                this.Close();
+            }
+
         }
         #endregion
     }

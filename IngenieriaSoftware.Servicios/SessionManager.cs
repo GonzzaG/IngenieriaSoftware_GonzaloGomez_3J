@@ -12,25 +12,6 @@ namespace IngenieriaSoftware.Servicios
 
         public DateTime FechaInicio { get; private set; }
 
-        public static int idiomaActual;
-
-        public UsuarioDTO ObtenerUsuarioActual()
-        {
-            if (_Session == null || _Session.Usuario == null)
-                throw new Exception("Sesión no iniciada.");
-
-            // Retorna el UsuarioDTO actual
-            return _Session.Usuario;
-        }
-
-        public static UsuarioDTO UsuarioActual
-        {
-            get
-            {
-                if (_Session == null) throw new Exception("Sesión no iniciada.");
-                return _Session.Usuario;
-            }
-        }
 
         public static SessionManager GetInstance
         {

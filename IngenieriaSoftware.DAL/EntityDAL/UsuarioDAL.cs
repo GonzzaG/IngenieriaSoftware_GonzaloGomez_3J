@@ -121,24 +121,6 @@ namespace IngenieriaSoftware.DAL
             return usuario.Permisos;
         }
 
-        public List<PermisoDTO> ObtenerPermisosDelUsuarioPorUsername(string pUsuarioNombre)
-        {
-            try
-            {
-                SqlParameter[] parametros = new SqlParameter[]
-                {
-                    new SqlParameter("@UserName", pUsuarioNombre)
-                };
-
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosUsuarioPorUsername", parametros);
-                return new PermisoMapper().MapearPermisosDesdeDataSet(mDs);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener permisos del usuario: " + ex.Message, ex);
-            }
-        }
-
         public void AsignarPermisoPorCod(string username, string permisoCod)
         {
             try

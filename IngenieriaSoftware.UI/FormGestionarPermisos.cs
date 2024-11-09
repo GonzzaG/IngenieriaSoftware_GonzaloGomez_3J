@@ -143,7 +143,7 @@ namespace IngenieriaSoftware.UI
                 ActualizarFormulario();
                 var permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
 
-                if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.UsuarioActual.Username)
+                if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.GetInstance.Usuario.Username)
                 {
                     this.Close();
                 }

@@ -40,18 +40,6 @@ namespace IngenieriaSoftware.BLL
             return permisosUsuario;
         }
 
-        public List<PermisoDTO> CargarPermisosDelUsuario(string pUserName) // Cambiado a PermisoDTO
-        {
-            List<PermisoDTO> permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioEnMemoria(pUserName);
-            return permisosUsuario;
-        }
-
-        public List<PermisoDTO> ObtenerPermisosDelUsuario(string pUserName) // Cambiado a PermisoDTO
-        {
-            List<PermisoDTO> permisosUsuario = _usuarioDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
-            return permisosUsuario;
-        }
-
         public List<UsuarioDTO> CargarUsuarios()
         {
             List<UsuarioDTO> _usuariosGlobales = _usuarioDAL.ObtenerTodosLosUsuarios();

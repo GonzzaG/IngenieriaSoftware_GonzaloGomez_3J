@@ -44,10 +44,10 @@
             // 
             // btnAgregarTraduccion
             // 
-            this.btnAgregarTraduccion.Location = new System.Drawing.Point(78, 256);
-            this.btnAgregarTraduccion.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAgregarTraduccion.Location = new System.Drawing.Point(104, 315);
+            this.btnAgregarTraduccion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregarTraduccion.Name = "btnAgregarTraduccion";
-            this.btnAgregarTraduccion.Size = new System.Drawing.Size(126, 45);
+            this.btnAgregarTraduccion.Size = new System.Drawing.Size(168, 55);
             this.btnAgregarTraduccion.TabIndex = 2;
             this.btnAgregarTraduccion.Tag = "56";
             this.btnAgregarTraduccion.Text = "Agregar traducción";
@@ -57,30 +57,28 @@
             // lblEtiqueta
             // 
             this.lblEtiqueta.AutoSize = true;
-            this.lblEtiqueta.Location = new System.Drawing.Point(76, 97);
-            this.lblEtiqueta.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEtiqueta.Location = new System.Drawing.Point(101, 119);
             this.lblEtiqueta.Name = "lblEtiqueta";
-            this.lblEtiqueta.Size = new System.Drawing.Size(46, 13);
+            this.lblEtiqueta.Size = new System.Drawing.Size(56, 16);
             this.lblEtiqueta.TabIndex = 5;
             this.lblEtiqueta.Tag = "52";
             this.lblEtiqueta.Text = "Etiqueta";
             // 
             // txtTraduccion
             // 
-            this.txtTraduccion.Location = new System.Drawing.Point(78, 164);
-            this.txtTraduccion.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTraduccion.Location = new System.Drawing.Point(104, 202);
+            this.txtTraduccion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTraduccion.Name = "txtTraduccion";
-            this.txtTraduccion.Size = new System.Drawing.Size(145, 20);
+            this.txtTraduccion.Size = new System.Drawing.Size(192, 22);
             this.txtTraduccion.TabIndex = 6;
             this.txtTraduccion.Tag = "55";
             // 
             // lblTraduccion
             // 
             this.lblTraduccion.AutoSize = true;
-            this.lblTraduccion.Location = new System.Drawing.Point(76, 149);
-            this.lblTraduccion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTraduccion.Location = new System.Drawing.Point(101, 183);
             this.lblTraduccion.Name = "lblTraduccion";
-            this.lblTraduccion.Size = new System.Drawing.Size(61, 13);
+            this.lblTraduccion.Size = new System.Drawing.Size(75, 16);
             this.lblTraduccion.TabIndex = 7;
             this.lblTraduccion.Tag = "54";
             this.lblTraduccion.Text = "Traducción";
@@ -89,10 +87,9 @@
             // 
             this.lblNuevaTraduccionTitulo.AutoSize = true;
             this.lblNuevaTraduccionTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNuevaTraduccionTitulo.Location = new System.Drawing.Point(52, 35);
-            this.lblNuevaTraduccionTitulo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNuevaTraduccionTitulo.Location = new System.Drawing.Point(69, 43);
             this.lblNuevaTraduccionTitulo.Name = "lblNuevaTraduccionTitulo";
-            this.lblNuevaTraduccionTitulo.Size = new System.Drawing.Size(203, 26);
+            this.lblNuevaTraduccionTitulo.Size = new System.Drawing.Size(260, 32);
             this.lblNuevaTraduccionTitulo.TabIndex = 10;
             this.lblNuevaTraduccionTitulo.Tag = "49";
             this.lblNuevaTraduccionTitulo.Text = "Nueva Traducción";
@@ -101,13 +98,15 @@
             // 
             this.dataGridViewEtiquetasConTraduccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEtiquetasConTraduccion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewEtiquetasConTraduccion.Location = new System.Drawing.Point(265, 72);
+            this.dataGridViewEtiquetasConTraduccion.Location = new System.Drawing.Point(353, 89);
+            this.dataGridViewEtiquetasConTraduccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridViewEtiquetasConTraduccion.MultiSelect = false;
             this.dataGridViewEtiquetasConTraduccion.Name = "dataGridViewEtiquetasConTraduccion";
             this.dataGridViewEtiquetasConTraduccion.RowHeadersVisible = false;
+            this.dataGridViewEtiquetasConTraduccion.RowHeadersWidth = 51;
             this.dataGridViewEtiquetasConTraduccion.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewEtiquetasConTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEtiquetasConTraduccion.Size = new System.Drawing.Size(265, 229);
+            this.dataGridViewEtiquetasConTraduccion.Size = new System.Drawing.Size(353, 282);
             this.dataGridViewEtiquetasConTraduccion.TabIndex = 11;
             this.dataGridViewEtiquetasConTraduccion.Tag = "66";
             this.dataGridViewEtiquetasConTraduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEtiquetasConTraduccion_RowEnter);
@@ -115,10 +114,9 @@
             // lblEtiquetasConTraduccion
             // 
             this.lblEtiquetasConTraduccion.AutoSize = true;
-            this.lblEtiquetasConTraduccion.Location = new System.Drawing.Point(262, 56);
-            this.lblEtiquetasConTraduccion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEtiquetasConTraduccion.Location = new System.Drawing.Point(349, 69);
             this.lblEtiquetasConTraduccion.Name = "lblEtiquetasConTraduccion";
-            this.lblEtiquetasConTraduccion.Size = new System.Drawing.Size(125, 13);
+            this.lblEtiquetasConTraduccion.Size = new System.Drawing.Size(153, 16);
             this.lblEtiquetasConTraduccion.TabIndex = 12;
             this.lblEtiquetasConTraduccion.Tag = "65";
             this.lblEtiquetasConTraduccion.Text = "Etiquetas con traduccion";
@@ -126,25 +124,27 @@
             // lblEtiquetasSinTraduccion
             // 
             this.lblEtiquetasSinTraduccion.AutoSize = true;
-            this.lblEtiquetasSinTraduccion.Location = new System.Drawing.Point(552, 56);
-            this.lblEtiquetasSinTraduccion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEtiquetasSinTraduccion.Location = new System.Drawing.Point(736, 69);
             this.lblEtiquetasSinTraduccion.Name = "lblEtiquetasSinTraduccion";
-            this.lblEtiquetasSinTraduccion.Size = new System.Drawing.Size(120, 13);
+            this.lblEtiquetasSinTraduccion.Size = new System.Drawing.Size(148, 16);
             this.lblEtiquetasSinTraduccion.TabIndex = 14;
             this.lblEtiquetasSinTraduccion.Tag = "67";
             this.lblEtiquetasSinTraduccion.Text = "Etiquetas sin traduccion";
             // 
             // dataGridViewEtiquetasSinTraduccion
             // 
+            this.dataGridViewEtiquetasSinTraduccion.AllowUserToResizeRows = false;
             this.dataGridViewEtiquetasSinTraduccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEtiquetasSinTraduccion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewEtiquetasSinTraduccion.Location = new System.Drawing.Point(555, 72);
+            this.dataGridViewEtiquetasSinTraduccion.Location = new System.Drawing.Point(740, 89);
+            this.dataGridViewEtiquetasSinTraduccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridViewEtiquetasSinTraduccion.MultiSelect = false;
             this.dataGridViewEtiquetasSinTraduccion.Name = "dataGridViewEtiquetasSinTraduccion";
             this.dataGridViewEtiquetasSinTraduccion.RowHeadersVisible = false;
+            this.dataGridViewEtiquetasSinTraduccion.RowHeadersWidth = 51;
             this.dataGridViewEtiquetasSinTraduccion.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewEtiquetasSinTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEtiquetasSinTraduccion.Size = new System.Drawing.Size(282, 229);
+            this.dataGridViewEtiquetasSinTraduccion.Size = new System.Drawing.Size(376, 282);
             this.dataGridViewEtiquetasSinTraduccion.TabIndex = 13;
             this.dataGridViewEtiquetasSinTraduccion.Tag = "68";
             this.dataGridViewEtiquetasSinTraduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEtiquetasSinTraduccion_RowEnter);
@@ -152,18 +152,18 @@
             // txtEtiqueta
             // 
             this.txtEtiqueta.Enabled = false;
-            this.txtEtiqueta.Location = new System.Drawing.Point(78, 112);
-            this.txtEtiqueta.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEtiqueta.Location = new System.Drawing.Point(104, 138);
+            this.txtEtiqueta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtEtiqueta.Name = "txtEtiqueta";
-            this.txtEtiqueta.Size = new System.Drawing.Size(145, 20);
+            this.txtEtiqueta.Size = new System.Drawing.Size(192, 22);
             this.txtEtiqueta.TabIndex = 15;
             this.txtEtiqueta.Tag = "55";
             // 
             // AgregarIdioma
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 469);
+            this.ClientSize = new System.Drawing.Size(1183, 577);
             this.Controls.Add(this.txtEtiqueta);
             this.Controls.Add(this.lblEtiquetasSinTraduccion);
             this.Controls.Add(this.dataGridViewEtiquetasSinTraduccion);
@@ -174,7 +174,7 @@
             this.Controls.Add(this.txtTraduccion);
             this.Controls.Add(this.lblEtiqueta);
             this.Controls.Add(this.btnAgregarTraduccion);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AgregarIdioma";
             this.Tag = "61";
             this.Text = "AgregarTraduccion";
