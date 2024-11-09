@@ -12,10 +12,10 @@ namespace IngenieriaSoftware.Servicios
         public int Tag { get; set; }
         public string Name { get; set; } //no es necesario
 
-        protected ExcepcionTraducible(int tag, string mensaje) : base(mensaje)
+        protected ExcepcionTraducible(int tag, string name) 
         {
             Tag = tag;
-            Name = this.Name;
+            Name = name;
         }
 
         public virtual void Actualizar(string nuevoMensaje)

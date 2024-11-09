@@ -71,9 +71,11 @@ namespace IngenieriaSoftware.UI
             ListarIdiomas(IdiomaData.Idiomas);
 
             // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
+
             var idiomaActual = _sessionManager.Usuario.IdiomaId;
             IdiomaData.CambiarIdioma(idiomaActual);
 
+            //comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
         }
         #endregion
 
@@ -108,6 +110,8 @@ namespace IngenieriaSoftware.UI
         internal void AbrirFormMenu()
         {
             this.menuStripMDI.Visible = true;
+            comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
+
             //_controlesHelper.SuscribirControles(this);
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
@@ -116,8 +120,7 @@ namespace IngenieriaSoftware.UI
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
 
-            
-            
+
         }
 
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,10 +156,13 @@ namespace IngenieriaSoftware.UI
             try
             {
                 CerrarFormulariosHijos();
+                
+               // Actualizar();
 
                 _authService.LogOut();
 
                 AbrirIniciarSesion();
+                
             }
             catch (Exception ex)
             {

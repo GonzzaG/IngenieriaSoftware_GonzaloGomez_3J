@@ -16,7 +16,7 @@ namespace IngenieriaSoftware.UI.Adaptadores
 
         public int Tag { get; set; }
 
-        public ExcepcionesIdiomaAdaptador(int tag, string mensaje) : base(tag, mensaje)
+        public ExcepcionesIdiomaAdaptador(int tag, string name) : base(tag, name)
         {
             Tag = tag;
          //   this.HelpLink = ObtenerMensajeTraducido();

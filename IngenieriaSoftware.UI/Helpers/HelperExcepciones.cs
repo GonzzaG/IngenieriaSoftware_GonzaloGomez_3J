@@ -37,20 +37,19 @@ namespace IngenieriaSoftware.UI.Helpers
 
                 int tag = tagAttribute.Tag; // Obtener el tag desde el atributo
 
-                // Crear una instancia de la excepción para obtener el mensaje
-                string mensajeExcepcion;
+                string nameExcepcion;
                 try
                 {
                     var excepcion = (ExcepcionTraducible)Activator.CreateInstance(tipoExcepcion);
-                    mensajeExcepcion = excepcion.Message;
+                    nameExcepcion = excepcion.Name;
                 }
                 catch (Exception ex)
                 {
-                    mensajeExcepcion = ex.Message;
+                    nameExcepcion = ex.Source;
                 }
 
                 // Crear el adaptador para la excepción y añadirlo al diccionario
-                var excepcionAdaptador = new ExcepcionesIdiomaAdaptador(tag, mensajeExcepcion);
+                var excepcionAdaptador = new ExcepcionesIdiomaAdaptador(tag, nameExcepcion);
                 excepciones[tag.ToString()] = excepcionAdaptador;
             }
 

@@ -67,15 +67,21 @@ namespace IngenieriaSoftware.UI
 
                     //cambiamos el idioma el cual tiene el usuario
                     _idiomaObserver.CambiarEstado(usuario.Id);
-
-                    this.Close();
+                    throw new CredencialesCorrectasException();
                 }
             }
             catch (FalloCredencialesException ex)
             {
-                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Message);
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
             }
+            catch (CredencialesCorrectasException ex)
+            {
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+                this.Close();
+            }
+
         }
         #endregion
     }
