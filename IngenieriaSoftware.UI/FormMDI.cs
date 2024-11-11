@@ -543,5 +543,11 @@ namespace IngenieriaSoftware.UI
             FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
             AbrirFormHijo(formGestionarMesas);
         }
+
+        private void aBMMesasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormABMMesas formGestionarMesas = new FormABMMesas();
+            AbrirFormHijo(formGestionarMesas);
+        }
     }
 }

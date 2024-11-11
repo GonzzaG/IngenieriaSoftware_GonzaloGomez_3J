@@ -11,6 +11,6 @@ namespace IngenieriaSoftware.BEL.Negocio
         public int ComandaId { get; set; }
         public int MesaId { get; set; }
         public DateTime FechaHoraCreacion { get; set; }
-        public List<ComandaProducto> Productos { get; set; } = new List
+        public List<ComandaProducto> Productos { get; set; } = new List<ComandaProducto>();
     }
 }

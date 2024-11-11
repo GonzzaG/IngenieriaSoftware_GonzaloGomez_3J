@@ -22,7 +22,6 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.DialogResult = DialogResult.No;
 
             _idiomaObserver = idiomaObserver;
 

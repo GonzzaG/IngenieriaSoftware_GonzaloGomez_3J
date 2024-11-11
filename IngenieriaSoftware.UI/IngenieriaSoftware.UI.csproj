@@ -48,11 +48,23 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
+    <Compile Include="FormABMMesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormABMMesas.Designer.cs">
+      <DependentUpon>FormABMMesas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGestionarMesas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormGestionarMesas.Designer.cs">
       <DependentUpon>FormGestionarMesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNuevaMesa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNuevaMesa.Designer.cs">
+      <DependentUpon>FormNuevaMesa.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperControles.cs" />
     <Compile Include="Helpers\HelperExcepciones.cs" />
@@ -106,6 +118,9 @@
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormABMMesas.resx">
+      <DependentUpon>FormABMMesas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarMesas.resx">
       <DependentUpon>FormGestionarMesas.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarPermisos.resx">
       <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNuevaMesa.resx">
+      <DependentUpon>FormNuevaMesa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRegistrarUsuario.resx">
       <DependentUpon>FormRegistrarUsuario.cs</DependentUpon>

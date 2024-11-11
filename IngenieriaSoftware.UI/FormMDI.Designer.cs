@@ -30,6 +30,7 @@
         {
             this.menuStripMDI = new System.Windows.Forms.MenuStrip();
             this.mesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionarMesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cobrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comandasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,7 @@
             this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.lblIdiomaActual = new System.Windows.Forms.Label();
-            this.gestionarMesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aBMMesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +62,7 @@
             this.menuStripMDI.Location = new System.Drawing.Point(0, 0);
             this.menuStripMDI.Name = "menuStripMDI";
             this.menuStripMDI.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStripMDI.Size = new System.Drawing.Size(1067, 28);
+            this.menuStripMDI.Size = new System.Drawing.Size(1219, 28);
             this.menuStripMDI.TabIndex = 1;
             this.menuStripMDI.Tag = "1";
             this.menuStripMDI.Text = "menuStrip1";
@@ -69,12 +70,21 @@
             // mesasToolStripMenuItem
             // 
             this.mesasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gestionarMesasToolStripMenuItem});
+            this.gestionarMesasToolStripMenuItem,
+            this.aBMMesasToolStripMenuItem});
             this.mesasToolStripMenuItem.Name = "mesasToolStripMenuItem";
             this.mesasToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.mesasToolStripMenuItem.Tag = "3";
             this.mesasToolStripMenuItem.Text = "Mesas";
             this.mesasToolStripMenuItem.Click += new System.EventHandler(this.mesasToolStripMenuItem_Click);
+            // 
+            // gestionarMesasToolStripMenuItem
+            // 
+            this.gestionarMesasToolStripMenuItem.Name = "gestionarMesasToolStripMenuItem";
+            this.gestionarMesasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gestionarMesasToolStripMenuItem.Tag = "75";
+            this.gestionarMesasToolStripMenuItem.Text = "Gestionar Mesas";
+            this.gestionarMesasToolStripMenuItem.Click += new System.EventHandler(this.gestionarMesasToolStripMenuItem_Click);
             // 
             // cobrosToolStripMenuItem
             // 
@@ -106,7 +116,7 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
@@ -114,7 +124,7 @@
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
@@ -122,7 +132,7 @@
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.asignarPermisosToolStripMenuItem.Tag = "9";
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem_Click);
@@ -142,7 +152,7 @@
             // 
             this.actualizarEtiquetasToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
-            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.actualizarEtiquetasToolStripMenuItem.Tag = "11";
             this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
             this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
@@ -150,7 +160,7 @@
             // agregarTraduccionToolStripMenuItem
             // 
             this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
-            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.agregarTraduccionToolStripMenuItem.Tag = "12";
             this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
             this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
@@ -173,7 +183,7 @@
             // comboBoxIdiomas
             // 
             this.comboBoxIdiomas.FormattingEnabled = true;
-            this.comboBoxIdiomas.Location = new System.Drawing.Point(797, 599);
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(892, 609);
             this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
             this.comboBoxIdiomas.Size = new System.Drawing.Size(208, 24);
@@ -184,7 +194,7 @@
             // lblIdiomaActual
             // 
             this.lblIdiomaActual.AutoSize = true;
-            this.lblIdiomaActual.Location = new System.Drawing.Point(817, 581);
+            this.lblIdiomaActual.Location = new System.Drawing.Point(912, 591);
             this.lblIdiomaActual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIdiomaActual.Name = "lblIdiomaActual";
             this.lblIdiomaActual.Size = new System.Drawing.Size(88, 16);
@@ -192,24 +202,25 @@
             this.lblIdiomaActual.Tag = "69";
             this.lblIdiomaActual.Text = "Idioma Actual";
             // 
-            // gestionarMesasToolStripMenuItem
+            // aBMMesasToolStripMenuItem
             // 
-            this.gestionarMesasToolStripMenuItem.Name = "gestionarMesasToolStripMenuItem";
-            this.gestionarMesasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.gestionarMesasToolStripMenuItem.Text = "Gestionar Mesas";
-            this.gestionarMesasToolStripMenuItem.Click += new System.EventHandler(this.gestionarMesasToolStripMenuItem_Click);
+            this.aBMMesasToolStripMenuItem.Name = "aBMMesasToolStripMenuItem";
+            this.aBMMesasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aBMMesasToolStripMenuItem.Tag = "76";
+            this.aBMMesasToolStripMenuItem.Text = "ABM Mesas";
+            this.aBMMesasToolStripMenuItem.Click += new System.EventHandler(this.aBMMesasToolStripMenuItem_Click);
             // 
             // FormMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 785);
+            this.ClientSize = new System.Drawing.Size(1219, 785);
             this.Controls.Add(this.lblIdiomaActual);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.menuStripMDI);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripMDI;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMDI";
             this.Tag = "2";
             this.Text = "MDI";
@@ -239,5 +250,6 @@
         private System.Windows.Forms.ComboBox comboBoxIdiomas;
         private System.Windows.Forms.Label lblIdiomaActual;
         private System.Windows.Forms.ToolStripMenuItem gestionarMesasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aBMMesasToolStripMenuItem;
     }
 }

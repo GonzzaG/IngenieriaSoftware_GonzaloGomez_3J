@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constantes\EstadoProducto.cs" />
     <Compile Include="Empleados\Administrador.cs" />
     <Compile Include="Constantes\EstadoMesa.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="ISujeto.cs" />
     <Compile Include="Negocio\Comanda.cs" />
     <Compile Include="Negocio\ComandaProducto.cs" />
+    <Compile Include="Negocio\Mesa.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Negocio\Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

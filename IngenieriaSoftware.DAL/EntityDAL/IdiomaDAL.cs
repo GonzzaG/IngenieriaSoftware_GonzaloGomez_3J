@@ -11,7 +11,7 @@ namespace IngenieriaSoftware.DAL
 {
     public class IdiomaDAL
     {
-        private DAO _dao;
+        private readonly DAO _dao;
         public List<EtiquetaDTO> etiquetas;
         private EtiquetaMapper _etiquetaMapper;
         private TraduccionMapper _traduccionMapper;
