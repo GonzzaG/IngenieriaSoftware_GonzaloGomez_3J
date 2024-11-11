@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AuthService.cs" />
     <Compile Include="IdiomaBLL.cs" />
+    <Compile Include="Mesas\MesasBLL.cs" />
     <Compile Include="Permiso\PermisoBLL.cs" />
     <Compile Include="Permiso\PermisoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

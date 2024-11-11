@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
+    <Compile Include="FormGestionarMesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarMesas.Designer.cs">
+      <DependentUpon>FormGestionarMesas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\HelperControles.cs" />
     <Compile Include="Helpers\HelperExcepciones.cs" />
     <Compile Include="Helpers\HelperForms.cs" />
@@ -100,6 +106,9 @@
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormGestionarMesas.resx">
+      <DependentUpon>FormGestionarMesas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarTraducciones.resx">
       <DependentUpon>FormGestionarTraducciones.cs</DependentUpon>
     </EmbeddedResource>

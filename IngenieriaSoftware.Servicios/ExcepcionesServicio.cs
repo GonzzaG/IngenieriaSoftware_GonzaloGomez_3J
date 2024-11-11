@@ -39,4 +39,14 @@ namespace IngenieriaSoftware.Servicios
     {
         public guaguExcepction() : base(203, "guaguExcepction") { }
     }
+    [TagAtributo(204)]
+    public class MesaNoDisponibleException : ExcepcionTraducible
+    {
+        public MesaNoDisponibleException() : base(204, "Esta mesa no se encuentra disponible.") { }
+    }
+    [TagAtributo(205)]
+    public class MesaAsignadaException : ExcepcionTraducible
+    {
+        public MesaAsignadaException() : base(205, "Mesa asignada correctamente.") { }
+    }
 }
