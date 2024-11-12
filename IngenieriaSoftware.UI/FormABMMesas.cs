@@ -33,14 +33,11 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if(dataGridViewMesas.SelectedRows.Count == 0)
-                {
-                    //Excepcion para completar los campos correctamente
-                    return;
-                }
                 FormNuevaMesa formNuevaMesa = new FormNuevaMesa();
                 formNuevaMesa.StartPosition = FormStartPosition.CenterScreen;
-                formNuevaMesa.Show();
+                formNuevaMesa.ShowDialog();
+
+                Actualizar();
             }
             catch(Exception ex)
             {
@@ -99,11 +96,11 @@ namespace IngenieriaSoftware.UI
                 var mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
                 var mesa = _mesaBLL.Mesas().Find(m => m.MesaId == mesaId);
 
-                FormNuevaMesa formNuevaMesa = new FormNuevaMesa();
+                FormNuevaMesa formNuevaMesa = new FormNuevaMesa(mesa);
                 formNuevaMesa.StartPosition = FormStartPosition.CenterScreen;
-                formNuevaMesa.Show();
+                formNuevaMesa.ShowDialog();
 
-                _mesaBLL.ModificarMesa(mesa);
+                Actualizar();
             }
             catch (Exception ex)
             {

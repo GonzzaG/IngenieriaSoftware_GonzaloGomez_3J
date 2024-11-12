@@ -24,41 +24,59 @@ namespace IngenieriaSoftware.BLL.Mesas
             return _mesas;
         }
 
+        public bool MesaOcupada(int mesaId)
+        {
+            var mesa = ObtenerMesaDisponiblePorId(mesaId);
+            if (mesa.EstadoMesa == EstadoMesa.Estado.Ocupada)
+                return true;
+            else
+                return false;
+
+        }
+
         public void AsignarMesa(int mesaId)
         {
-            var mesa = _mesas.Find(m => m.MesaId == mesaId);
-            if (mesa.EstadoMesa == EstadoMesa.Estado.Ocupada)
+            int resultado = _mesaDAL.AsignarMesa(mesaId);
+
+            if (resultado == 1) // No se pudo asignar la mesa
             {
                 throw new MesaNoDisponibleException();
             }
-            else 
+            else //==0 se pudo asignar la mesa
             {
+                var mesa = Mesas().Find(m => m.MesaId == mesaId);
                 mesa.EstadoMesa = EstadoMesa.Estado.Ocupada;
+
                 throw new MesaAsignadaException();
             }
         }
+        
         public List<Mesa> GuardarMesa(Mesa mesa)
         {
             _mesas = _mesaDAL.GuardarMesa(mesa);
             return _mesas;
         }
-        public List<Mesa> ObtenerMesasDisponibles()
-        {
-            _mesas = _mesaDAL.ObtenerMesasDisponibles((int)EstadoMesa.Estado.FueraDeServicio);
-            return _mesas;
-        }
+         
         public List<Mesa> ObtenerTodasLasMesas()
         {
             _mesas = _mesaDAL.ObtenerTodasLasMesas();
             return _mesas;
         }
+        
+        public List<Mesa> ObtenerMesasDisponibles()
+        {
+            _mesas = _mesaDAL.ObtenerMesasDisponibles((int)EstadoMesa.Estado.FueraDeServicio);
+            return _mesas;
+        }
+
+        public Mesa ObtenerMesaDisponiblePorId(int mesaId)
+        {
+            return _mesaDAL.ObtenerMesaDisponiblePorId(mesaId, (int)EstadoMesa.Estado.FueraDeServicio);
+        }
+
         public void EliminarMesa(int mesaId)
         {
             _mesaDAL.EliminarMesa(mesaId);
-        }
-        public void ModificarMesa(Mesa mesa)
-        {
-            _mesaDAL.ModificarMesa(mesa);
         }
     }
 }

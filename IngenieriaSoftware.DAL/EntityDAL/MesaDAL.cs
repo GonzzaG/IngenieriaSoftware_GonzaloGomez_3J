@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,10 +25,22 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 {
                     new SqlParameter("@mesa_id", mesa.MesaId),
                     new SqlParameter("@capacidadMaxima", mesa.CapacidadMaxima),
-                    new SqlParameter("@fecha_reserva", mesa.FechaReserva),
                     new SqlParameter("@estado_mesa", (int)mesa.EstadoMesa)
                 };
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_GuardarMesa", parametros);
+                return _mesaMapper.MapearMesasDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Mesa> ObtenerTodasLasMesas()
+        {
+            try
+            {
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodasLasMesas", null);
                 return _mesaMapper.MapearMesasDesdeDataSet(mDs);
             }
             catch (Exception ex)
@@ -53,12 +66,18 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-        public List<Mesa> ObtenerTodasLasMesas()
+        public Mesa ObtenerMesaDisponiblePorId(int mesaId,int estadoFueraDeServicio)
         {
             try
             {
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodasLasMesas", null);
-                return _mesaMapper.MapearMesasDesdeDataSet(mDs);
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@mesa_id", mesaId),
+                    new SqlParameter("@estadoMesa", estadoFueraDeServicio)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerMesaDisponiblePorId", parametros);
+                return _mesaMapper.MapearMesasDesdeDataSet(mDs).FirstOrDefault(m => m.MesaId == mesaId);
             }
             catch (Exception ex)
             {
@@ -82,17 +101,22 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
-        public void ModificarMesa(Mesa mesa)
+
+        public int AsignarMesa(int mesaId)
         {
             try
             {
+                SqlParameter retornoParametro = new SqlParameter();
+                retornoParametro.Direction = ParameterDirection.ReturnValue;
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@mesa_id", mesa.MesaId),
-                    new SqlParameter("@capacidadMaxima", mesa.CapacidadMaxima),
-                    new SqlParameter("@estado_mesa", (int)mesa.EstadoMesa)
+                    new SqlParameter("@mesa_id", mesaId),
+                    new SqlParameter("@numero_estado_asignado", (int)EstadoMesa.Estado.Ocupada),
+                    retornoParametro
                 };
-                _dao.ExecuteNonQuery("sp_ModificarMesa", parametros);
+
+                _dao.ExecuteNonQuery("sp_AsignarMesa", parametros);
+                return (int)retornoParametro.Value;
             }
             catch (Exception ex)
             {

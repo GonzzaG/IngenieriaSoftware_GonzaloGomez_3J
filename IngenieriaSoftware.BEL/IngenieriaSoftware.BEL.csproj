@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constantes\EstadoProducto.cs" />
+    <Compile Include="Constantes\TipoProducto.cs" />
     <Compile Include="Empleados\Administrador.cs" />
     <Compile Include="Constantes\EstadoMesa.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />

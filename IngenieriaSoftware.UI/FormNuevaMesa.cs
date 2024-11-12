@@ -20,23 +20,28 @@ namespace IngenieriaSoftware.UI
         public FormNuevaMesa()
         {
             InitializeComponent();
-     
-
+            Inicializar();
         }
+        public FormNuevaMesa(Mesa mesa)
+        {
+            InitializeComponent();
+            Inicializar(mesa);
+        }
+
         private void btnGuardarMesa_Click(object sender, EventArgs e)
         {
             try
             {
-                if(txtNumMesa.Text.Length == 0)
+                if(numericUpDownNumMesa.Value == 0)
                 {
                     //aca lanzo la excepcionpersonalizada
                     return;
                 }
+
                 var mesa = new Mesa
                 {
-                    MesaId = int.Parse(txtNumMesa.Text),
-                    CapacidadMaxima = (int)numericUpDownCapacidadMaxima.Value,
-                    FechaReserva = null 
+                    MesaId = (int)numericUpDownNumMesa.Value,
+                    CapacidadMaxima = (int)numericUpDownCapacidadMaxima.Value
                     //la reserva es null ya que eso se guardara cuando se asigne una mesa
                     //Cuando la mesa se desocupe, se tendra que sacar el estado de la mesa
                 };
@@ -52,16 +57,32 @@ namespace IngenieriaSoftware.UI
                 //excepcion personalizada por si se pudo guardar la mesa
                 //Excepcion 3
                 //excepcion personalizada por si no se pudo guardar la mesa
-
             }
 
         }
 
-        private void Inicializar(TipoForm tipoForm)
+
+        //Inicializar para Alta
+        private void Inicializar()
         {
-       
+            lblModificarMesa.Visible = false; 
+            lblNuevaMesa.Visible = true;
+            lblNuevaMesa.Visible = true;
+            numericUpDownNumMesa.Visible = true;
+            numericUpDownNumMesa.Enabled = true;
         }
 
+        //Inicializar Para modificacion
+        private void Inicializar(Mesa mesa)
+        {
+            numericUpDownCapacidadMaxima.Value = mesa.CapacidadMaxima;
+            numericUpDownNumMesa.Value = mesa.MesaId;
+            lblModificarMesa.Visible = true;
+            lblNuevaMesa.Visible = false;
+            lblNuevaMesa.Visible = false;
+            numericUpDownNumMesa.Visible = true;
+            numericUpDownNumMesa.Enabled = false;
+        }
         public void Actualizar()
         {
             throw new NotImplementedException();
@@ -69,7 +90,7 @@ namespace IngenieriaSoftware.UI
 
         private void FormNuevaMesa_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

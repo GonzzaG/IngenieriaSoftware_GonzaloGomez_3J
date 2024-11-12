@@ -21,12 +21,17 @@ namespace IngenieriaSoftware.UI
         public FormGestionarMesas()
         {
             InitializeComponent();
+            _mesasBLL = new MesaBLL();
             Actualizar();
         }
         public void Actualizar()
         {
             dataGridViewMesas.DataSource = null;
             dataGridViewMesas.DataSource = _mesasBLL.ObtenerMesasDisponibles();
+
+            dataGridViewMesas.Columns[0].HeaderText = "Numero de mesa";
+            dataGridViewMesas.Columns[1].HeaderText = "Capacidad maxima";
+            dataGridViewMesas.Columns[2].HeaderText = "Fecha de reserva";
         }
 
         private void FormGestionarMesas_Load(object sender, EventArgs e)
@@ -45,7 +50,7 @@ namespace IngenieriaSoftware.UI
                 _mesasBLL.AsignarMesa(mesaId);
 
 
-                Actualizar();
+               Actualizar(); //sacar cuando implemente 
             }
             catch (MesaNoDisponibleException ex)
             {
@@ -64,6 +69,29 @@ namespace IngenieriaSoftware.UI
 
         private void btnRealizarComanda_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
+                if (_mesasBLL.MesaOcupada(mesaId))
+                {
+                    FormRealizarComanda formRealizarComanda = new FormRealizarComanda();    
+                    formRealizarComanda.ShowDialog();
+
+                    Actualizar();
+                }
+                else
+                {
+                    //aca se podria agregar una excepcion de que se necesita asignar la mesa
+                    MessageBox.Show("Debe asignar la mesa antes de realizar una comanda");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //excepcion personalizada por si la mesa no esta ocupada, por lo tanto hace falta asignarla
+            }
+
+            
 
         }
     }

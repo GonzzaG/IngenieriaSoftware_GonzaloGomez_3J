@@ -19,7 +19,6 @@ namespace IngenieriaSoftware.DAL.Mapper
                 Mesa mesa = new Mesa();
                 mesa.MesaId = (int)row["mesa_id"];
                 mesa.CapacidadMaxima = (int)row["capacidadMaxima"];
-                mesa.FechaReserva = row["fecha_reserva"] == DBNull.Value ? (DateTime?)null : (DateTime)row["fecha_reserva"];
                 var numEstadoMesa = int.Parse(row["estado_mesa"].ToString());
                 mesa.EstadoMesa = (EstadoMesa.Estado)numEstadoMesa;
                 mesas.Add(mesa);
