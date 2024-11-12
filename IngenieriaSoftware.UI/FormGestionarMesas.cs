@@ -74,8 +74,12 @@ namespace IngenieriaSoftware.UI
                 int mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
                 if (_mesasBLL.MesaOcupada(mesaId))
                 {
-                    FormRealizarComanda formRealizarComanda = new FormRealizarComanda();    
-                    formRealizarComanda.ShowDialog();
+                    var mesa = _mesasBLL.Mesas().Find(m => m.MesaId == mesaId);
+                    var padre = this.MdiParent as FormMDI;
+
+                    FormRealizarComanda formRealizarComanda = new FormRealizarComanda(mesa);
+                    //formRealizarComanda.MdiParent = padre;
+                    padre.AbrirFormHijo(formRealizarComanda);
 
                     Actualizar();
                 }

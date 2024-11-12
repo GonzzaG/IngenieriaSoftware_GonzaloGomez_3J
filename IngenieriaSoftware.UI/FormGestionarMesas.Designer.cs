@@ -39,14 +39,14 @@
             // 
             this.dataGridViewMesas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMesas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewMesas.Location = new System.Drawing.Point(51, 84);
+            this.dataGridViewMesas.Location = new System.Drawing.Point(48, 68);
             this.dataGridViewMesas.MultiSelect = false;
             this.dataGridViewMesas.Name = "dataGridViewMesas";
             this.dataGridViewMesas.RowHeadersVisible = false;
             this.dataGridViewMesas.RowHeadersWidth = 51;
             this.dataGridViewMesas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewMesas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewMesas.Size = new System.Drawing.Size(391, 401);
+            this.dataGridViewMesas.Size = new System.Drawing.Size(379, 401);
             this.dataGridViewMesas.TabIndex = 12;
             this.dataGridViewMesas.Tag = "71";
             // 
@@ -54,7 +54,7 @@
             // 
             this.lblMesas.AutoSize = true;
             this.lblMesas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMesas.Location = new System.Drawing.Point(58, 38);
+            this.lblMesas.Location = new System.Drawing.Point(58, 30);
             this.lblMesas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMesas.Name = "lblMesas";
             this.lblMesas.Size = new System.Drawing.Size(81, 26);
@@ -64,8 +64,8 @@
             // 
             // btnAsignarMesa
             // 
-            this.btnAsignarMesa.Location = new System.Drawing.Point(489, 124);
-            this.btnAsignarMesa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAsignarMesa.Location = new System.Drawing.Point(489, 116);
+            this.btnAsignarMesa.Margin = new System.Windows.Forms.Padding(2);
             this.btnAsignarMesa.Name = "btnAsignarMesa";
             this.btnAsignarMesa.Size = new System.Drawing.Size(162, 45);
             this.btnAsignarMesa.TabIndex = 14;
@@ -76,8 +76,8 @@
             // 
             // btnRealizarComanda
             // 
-            this.btnRealizarComanda.Location = new System.Drawing.Point(489, 200);
-            this.btnRealizarComanda.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRealizarComanda.Location = new System.Drawing.Point(489, 192);
+            this.btnRealizarComanda.Margin = new System.Windows.Forms.Padding(2);
             this.btnRealizarComanda.Name = "btnRealizarComanda";
             this.btnRealizarComanda.Size = new System.Drawing.Size(162, 45);
             this.btnRealizarComanda.TabIndex = 15;
@@ -95,7 +95,7 @@
             this.Controls.Add(this.btnAsignarMesa);
             this.Controls.Add(this.lblMesas);
             this.Controls.Add(this.dataGridViewMesas);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormGestionarMesas";
             this.Tag = "73";
             this.Text = "FormGestionarMesas";

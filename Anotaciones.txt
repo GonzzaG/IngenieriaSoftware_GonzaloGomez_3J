@@ -46,6 +46,9 @@ Observaciones   varchar      -- Notas o requerimientos especiales
 como parametron al constructor, pongo como visible uno u otro, asi me despreocupo por varias traducciones en un label, puedo
 hacer lo mismo con el boton. 
 - Tengo que rellenar Tambien los campos que esten completos en el formulario de modificarMesa
+- OPCIONAL--- colocar la cantidad de comensales con un numeric en FormGestionarMesas, que se asignen a la mesa correspondiente
+- una mesa va a tener una unica comanda la cual se pueden ir agregando cosas a ella a medida que se va solicitando y luego lo que debo hacer es ir obteniendo siempre esa tabla para obtener los productos que posee la comanda de dicha mesa. y si quiero agregar productosComanda. habran algunos que ya fueron entregados, por ende esos no iran a cocina, pero iran como una lista  normal, no les pasare tooda la comanda.
 
+ULTIMO TAG 90
 
 

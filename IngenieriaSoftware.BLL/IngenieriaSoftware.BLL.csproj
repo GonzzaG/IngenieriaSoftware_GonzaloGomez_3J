@@ -46,6 +46,7 @@
     <Compile Include="Mesas\MesaBLL.cs" />
     <Compile Include="Permiso\PermisoBLL.cs" />
     <Compile Include="Permiso\PermisoManager.cs" />
+    <Compile Include="ProductoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraduccionBLL.cs" />
     <Compile Include="Usuario\UsuarioBLL.cs" />
