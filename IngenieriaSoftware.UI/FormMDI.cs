@@ -192,7 +192,7 @@ namespace IngenieriaSoftware.UI
             formInicio.Show();
         }
 
-        private void AbrirFormHijo(Form formHijo)
+        internal void AbrirFormHijo(Form formHijo)
         {
             //SuscribirControles(formHijo);
             _controlesHelper.SuscribirControles(formHijo);
@@ -542,6 +542,8 @@ namespace IngenieriaSoftware.UI
         {
             FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
             AbrirFormHijo(formGestionarMesas);
+            //FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
+            //AbrirFormHijo(formGestionarMesas);
         }
 
         private void aBMMesasToolStripMenuItem_Click(object sender, EventArgs e)

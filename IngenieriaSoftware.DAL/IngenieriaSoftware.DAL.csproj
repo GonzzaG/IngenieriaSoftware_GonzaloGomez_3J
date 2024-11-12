@@ -45,11 +45,13 @@
     <Compile Include="DAO.cs" />
     <Compile Include="EntityDAL\IdiomaDAL.cs" />
     <Compile Include="EntityDAL\MesaDAL.cs" />
+    <Compile Include="EntityDAL\ProductoDAL.cs" />
     <Compile Include="Mapper\EtiquetaMapper.cs" />
     <Compile Include="Mapper\IdiomaMapper.cs" />
     <Compile Include="EntityDAL\PermisoDAL.cs" />
     <Compile Include="Mapper\MesaMapper.cs" />
     <Compile Include="Mapper\PermisoMapper.cs" />
+    <Compile Include="Mapper\ProductoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityDAL\TraduccionDAL.cs" />
     <Compile Include="Mapper\TraduccionMapper.cs" />
