@@ -36,8 +36,10 @@ namespace IngenieriaSoftware.UI.Adaptadores
             if (IdiomaData.TagTraducciones.TryGetValue(this.Tag.ToString(), out string traduccion))
             {
                 this.HelpLink = traduccion;
+                return this.HelpLink;
             }
-            return this.HelpLink;
+
+            return this.Name.ToString(); 
         }
     }
 }

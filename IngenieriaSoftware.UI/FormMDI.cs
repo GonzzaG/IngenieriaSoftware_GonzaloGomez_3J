@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
@@ -90,7 +91,7 @@ namespace IngenieriaSoftware.UI
 
         private void MDI_Load(object sender, EventArgs e)
         {        
-
+          
         }
 
         public List<IdiomaDTO> CargarIdiomas()
@@ -537,6 +538,16 @@ namespace IngenieriaSoftware.UI
             
         }
 
-    
+        private void gestionarMesasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
+            AbrirFormHijo(formGestionarMesas);
+        }
+
+        private void aBMMesasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormABMMesas formGestionarMesas = new FormABMMesas();
+            AbrirFormHijo(formGestionarMesas);
+        }
     }
 }
