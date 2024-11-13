@@ -33,7 +33,7 @@
             this.dataGridViewComandasPendientes = new System.Windows.Forms.DataGridView();
             this.dataGridViewComandaProductos = new System.Windows.Forms.DataGridView();
             this.lblProductosComanda = new System.Windows.Forms.Label();
-            this.btnPedidoListo = new System.Windows.Forms.Button();
+            this.btnComandaLista = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandasPendientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandaProductos)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +73,7 @@
             this.dataGridViewComandasPendientes.RowHeadersWidth = 51;
             this.dataGridViewComandasPendientes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewComandasPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewComandasPendientes.Size = new System.Drawing.Size(334, 297);
+            this.dataGridViewComandasPendientes.Size = new System.Drawing.Size(302, 297);
             this.dataGridViewComandasPendientes.TabIndex = 26;
             this.dataGridViewComandasPendientes.Tag = "71";
             this.dataGridViewComandasPendientes.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewComandasPendientes_RowEnter);
@@ -82,14 +82,15 @@
             // 
             this.dataGridViewComandaProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewComandaProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewComandaProductos.Location = new System.Drawing.Point(436, 73);
+            this.dataGridViewComandaProductos.Enabled = false;
+            this.dataGridViewComandaProductos.Location = new System.Drawing.Point(398, 73);
             this.dataGridViewComandaProductos.MultiSelect = false;
             this.dataGridViewComandaProductos.Name = "dataGridViewComandaProductos";
             this.dataGridViewComandaProductos.RowHeadersVisible = false;
             this.dataGridViewComandaProductos.RowHeadersWidth = 51;
             this.dataGridViewComandaProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewComandaProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewComandaProductos.Size = new System.Drawing.Size(512, 297);
+            this.dataGridViewComandaProductos.Size = new System.Drawing.Size(550, 297);
             this.dataGridViewComandaProductos.TabIndex = 29;
             this.dataGridViewComandaProductos.Tag = "71";
             // 
@@ -105,23 +106,24 @@
             this.lblProductosComanda.Tag = "70";
             this.lblProductosComanda.Text = "Productos de la comanda";
             // 
-            // btnPedidoListo
+            // btnComandaLista
             // 
-            this.btnPedidoListo.Location = new System.Drawing.Point(786, 396);
-            this.btnPedidoListo.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPedidoListo.Name = "btnPedidoListo";
-            this.btnPedidoListo.Size = new System.Drawing.Size(162, 45);
-            this.btnPedidoListo.TabIndex = 31;
-            this.btnPedidoListo.Tag = "74";
-            this.btnPedidoListo.Text = "Pedido listo";
-            this.btnPedidoListo.UseVisualStyleBackColor = true;
+            this.btnComandaLista.Location = new System.Drawing.Point(786, 396);
+            this.btnComandaLista.Margin = new System.Windows.Forms.Padding(2);
+            this.btnComandaLista.Name = "btnComandaLista";
+            this.btnComandaLista.Size = new System.Drawing.Size(162, 45);
+            this.btnComandaLista.TabIndex = 31;
+            this.btnComandaLista.Tag = "74";
+            this.btnComandaLista.Text = "Comanda lista";
+            this.btnComandaLista.UseVisualStyleBackColor = true;
+            this.btnComandaLista.Click += new System.EventHandler(this.btnComandaLista_Click);
             // 
             // FormGestionarComandas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 532);
-            this.Controls.Add(this.btnPedidoListo);
+            this.Controls.Add(this.btnComandaLista);
             this.Controls.Add(this.lblProductosComanda);
             this.Controls.Add(this.dataGridViewComandaProductos);
             this.Controls.Add(this.btnComandaEnPreparacion);
@@ -143,6 +145,6 @@
         private System.Windows.Forms.DataGridView dataGridViewComandasPendientes;
         private System.Windows.Forms.DataGridView dataGridViewComandaProductos;
         private System.Windows.Forms.Label lblProductosComanda;
-        private System.Windows.Forms.Button btnPedidoListo;
+        private System.Windows.Forms.Button btnComandaLista;
     }
 }

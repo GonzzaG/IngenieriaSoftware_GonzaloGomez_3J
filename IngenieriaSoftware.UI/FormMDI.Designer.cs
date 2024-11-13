@@ -45,6 +45,8 @@
             this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.lblIdiomaActual = new System.Windows.Forms.Label();
+            this.comandasCocinaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comandasAEntregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +105,9 @@
             // 
             // comandasToolStripMenuItem
             // 
+            this.comandasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.comandasCocinaToolStripMenuItem,
+            this.comandasAEntregarToolStripMenuItem});
             this.comandasToolStripMenuItem.Name = "comandasToolStripMenuItem";
             this.comandasToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.comandasToolStripMenuItem.Tag = "5";
@@ -191,8 +196,8 @@
             // comboBoxIdiomas
             // 
             this.comboBoxIdiomas.FormattingEnabled = true;
-            this.comboBoxIdiomas.Location = new System.Drawing.Point(944, 3);
-            this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(951, 3);
+            this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
             this.comboBoxIdiomas.Size = new System.Drawing.Size(157, 21);
             this.comboBoxIdiomas.TabIndex = 7;
@@ -202,12 +207,25 @@
             // lblIdiomaActual
             // 
             this.lblIdiomaActual.AutoSize = true;
-            this.lblIdiomaActual.Location = new System.Drawing.Point(868, 6);
+            this.lblIdiomaActual.Location = new System.Drawing.Point(847, 6);
             this.lblIdiomaActual.Name = "lblIdiomaActual";
             this.lblIdiomaActual.Size = new System.Drawing.Size(71, 13);
             this.lblIdiomaActual.TabIndex = 9;
             this.lblIdiomaActual.Tag = "69";
             this.lblIdiomaActual.Text = "Idioma Actual";
+            // 
+            // comandasCocinaToolStripMenuItem
+            // 
+            this.comandasCocinaToolStripMenuItem.Name = "comandasCocinaToolStripMenuItem";
+            this.comandasCocinaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.comandasCocinaToolStripMenuItem.Text = "Comandas Cocina";
+            this.comandasCocinaToolStripMenuItem.Click += new System.EventHandler(this.comandasCocinaToolStripMenuItem_Click);
+            // 
+            // comandasAEntregarToolStripMenuItem
+            // 
+            this.comandasAEntregarToolStripMenuItem.Name = "comandasAEntregarToolStripMenuItem";
+            this.comandasAEntregarToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.comandasAEntregarToolStripMenuItem.Text = "Comandas a entregar";
             // 
             // FormMDI
             // 
@@ -249,5 +267,7 @@
         private System.Windows.Forms.Label lblIdiomaActual;
         private System.Windows.Forms.ToolStripMenuItem gestionarMesasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBMMesasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem comandasCocinaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem comandasAEntregarToolStripMenuItem;
     }
 }

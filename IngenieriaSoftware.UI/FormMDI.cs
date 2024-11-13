@@ -518,10 +518,7 @@ namespace IngenieriaSoftware.UI
 
         private void comandasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //aca es donde la cocina podra visualizar las comandas que esten en espera de preparacion, en preparacion
-            // tambien es donde podran confirmarlas
-            FormGestionarComandas formGestionarComandas = new FormGestionarComandas();
-            AbrirFormHijo(formGestionarComandas);
+          
         }
 
         private void mesasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -554,6 +551,14 @@ namespace IngenieriaSoftware.UI
         {
             FormABMMesas formGestionarMesas = new FormABMMesas();
             AbrirFormHijo(formGestionarMesas);
+        }
+
+        private void comandasCocinaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //aca es donde la cocina podra visualizar las comandas que esten en espera de preparacion, en preparacion
+            // tambien es donde podran confirmarlas
+            FormGestionarComandas formGestionarComandas = new FormGestionarComandas();
+            AbrirFormHijo(formGestionarComandas);
         }
     }
 }

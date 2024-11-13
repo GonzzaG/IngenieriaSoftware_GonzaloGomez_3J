@@ -18,9 +18,6 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         private readonly ComandaMapper _comandaMapper = new ComandaMapper();
         public ComandaDAL() { }
 
-    
-
-
         public int InsertarComanda(int mesaId)
         {
             try
@@ -110,9 +107,33 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public void ActualizarEstadoComandaProducto(List<ComandaProducto> productos, int nuevoEstado)
+        {
+            try
+            {
+                DataTable table = CrearComandaProductoDataTable(productos);
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@ComandaProductos", SqlDbType.Structured)
+                    {
+                        TypeName = "dbo.ComandaProductoType", 
+                        Value = table
+                    },  
+                    new SqlParameter("@NuevoEstado", nuevoEstado)
+                };
+
+                _dao.ExecuteStoredProcedure("sp_ActualizarEstadoComandaProducto", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         private DataTable CrearComandaProductoDataTable(List<ComandaProducto> comandaProductos)
         {
+            if(comandaProductos == null) {return null;}
             DataTable table = new DataTable();
             table.Columns.Add("comanda_id", typeof(int));
             table.Columns.Add("producto_id", typeof(int));
@@ -120,10 +141,19 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             table.Columns.Add("cantidad", typeof(int));
             table.Columns.Add("precio_unitario", typeof(decimal));
 
+      
             foreach (var comandaProducto in comandaProductos)
             {
-                table.Rows.Add(comandaProducto.ComandaId, comandaProducto.Producto.ProductoId, (int)comandaProducto.EstadoProducto,
+                if(comandaProducto.Producto == null)
+                {
+                    table.Rows.Add(comandaProducto.ComandaId, comandaProducto.ProductoId, (int)comandaProducto.EstadoProducto,
                                comandaProducto.Cantidad, comandaProducto.PrecioUnitario);
+                }
+                else
+                {
+                    table.Rows.Add(comandaProducto.ComandaId, comandaProducto.Producto.ProductoId, (int)comandaProducto.EstadoProducto,
+                                   comandaProducto.Cantidad, comandaProducto.PrecioUnitario);
+                }
             }
 
             return table;

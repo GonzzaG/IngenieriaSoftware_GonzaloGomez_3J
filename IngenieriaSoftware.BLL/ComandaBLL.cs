@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.EntityDAL;
 using System;
@@ -12,6 +13,7 @@ namespace IngenieriaSoftware.BLL
     public class ComandaBLL
     {
         private readonly ComandaDAL _comandaDAL = new ComandaDAL();
+        private readonly NotificacionDAL _notificacionDAL = new NotificacionDAL();
         public List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
 
         public List<Comanda> ObtenerComandasPendientes()
@@ -19,6 +21,21 @@ namespace IngenieriaSoftware.BLL
             return _comandaDAL.ObtenerComandasPendientes();
         }
 
+        public void MarcarProductosEnPreparacion(List<ComandaProducto> productos)
+        {
+            _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.En_Preparacion);
+        }
+
+        public void MarcarProductoslistos(List<ComandaProducto> productos)
+        {
+            _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.Lista);
+        }
+
+        public void NotificarComandaLista(Comanda comanda)
+        {
+            //Voy a insertar una nueva notificacion con los datos de la comanda
+            _notificacionDAL.InsertarNotificacion(comanda.MesaId, comanda.ComandaId);
+        }
         public void NuevoComandaProducto(Producto producto, int comandaId, int cantidad)
         {
             var comandaProducto = new ComandaProducto
@@ -67,6 +84,11 @@ namespace IngenieriaSoftware.BLL
         public List<ComandaProducto> ObtenerComandaProductosPendientes(int mesaId, int comandaId)
         {
             return _comandaDAL.ObtenerComandaProductosPendientes(mesaId, comandaId);
+        }
+
+        private void ObtenerNotificacionesNoVistas(int mesaId, int comandaId)
+        {
+            _notificacionDAL.ObtenerNotificacionesNoVistas(mesaId, comandaId);
         }
     }
 }

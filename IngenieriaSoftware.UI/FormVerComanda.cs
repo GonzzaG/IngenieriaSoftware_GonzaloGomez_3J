@@ -55,6 +55,8 @@ namespace IngenieriaSoftware.UI
                 _comandaBLL.InsertarComandaProductos(_comandaProductos);
 
             }
+           
+                this.Close();
 
         }
 

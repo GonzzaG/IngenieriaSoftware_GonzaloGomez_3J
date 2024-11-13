@@ -34,6 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,13 +48,21 @@
     <Compile Include="EntityDAL\ComandaDAL.cs" />
     <Compile Include="EntityDAL\IdiomaDAL.cs" />
     <Compile Include="EntityDAL\MesaDAL.cs" />
+    <Compile Include="EntityDAL\NotificacionDAL.cs" />
     <Compile Include="EntityDAL\ProductoDAL.cs" />
+    <Compile Include="FormComandasAEntregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormComandasAEntregar.Designer.cs">
+      <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mapper\ComandaMapper.cs" />
     <Compile Include="Mapper\ComandaProductoMapper.cs" />
     <Compile Include="Mapper\EtiquetaMapper.cs" />
     <Compile Include="Mapper\IdiomaMapper.cs" />
     <Compile Include="EntityDAL\PermisoDAL.cs" />
     <Compile Include="Mapper\MesaMapper.cs" />
+    <Compile Include="Mapper\NotificacionMapper.cs" />
     <Compile Include="Mapper\PermisoMapper.cs" />
     <Compile Include="Mapper\ProductoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +80,11 @@
       <Project>{88779aa0-50fe-4fae-af75-2374a220469d}</Project>
       <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormComandasAEntregar.resx">
+      <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

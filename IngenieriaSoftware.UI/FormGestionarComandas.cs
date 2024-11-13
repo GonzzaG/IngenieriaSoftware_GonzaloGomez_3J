@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BEL.Negocio;
+using IngenieriaSoftware.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,21 @@ namespace IngenieriaSoftware.UI
                 var comanda = _comadaBLL.ObtenerComandasPendientes();
                 dataGridViewComandasPendientes.DataSource = null;
                 dataGridViewComandasPendientes.DataSource = comanda;
+
+                if(dataGridViewComandasPendientes.RowCount > 0)
+                {
+                    int comandaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[0].Value;
+                    int mesaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[1].Value;
+                    var productosComanda = _comadaBLL.ObtenerComandaProductosPendientes(mesaId, comandaId);
+
+                    dataGridViewComandaProductos.DataSource = null;
+                    dataGridViewComandaProductos.DataSource = productosComanda;
+                }
+                else
+                {
+                    dataGridViewComandaProductos.DataSource = null;
+                }
+
             }
             catch(Exception ex)
             {
@@ -48,7 +64,12 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if(dataGridViewComandasPendientes.SelectedRows.Count == 0) { return; } 
+                if(dataGridViewComandasPendientes.SelectedRows.Count == 0) 
+                {             
+                    dataGridViewComandaProductos.ClearSelection();
+                 
+                    return; 
+                }
                 //mostramos los productos que no esten listos ni entregados mediante la mesa_id y comanda_id de la comanda seleccionada
                 int comandaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[0].Value;
                 int mesaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[1].Value;
@@ -67,6 +88,30 @@ namespace IngenieriaSoftware.UI
         private void btnComandaEnPreparacion_Click(object sender, EventArgs e)
         {
             //cuando aprete este botonn marcare todos los productos en la lista de la derecha en preparacion en la base de datos
+            var comandaProductos = (List<ComandaProducto>)dataGridViewComandaProductos.DataSource;
+            _comadaBLL.MarcarProductosEnPreparacion(comandaProductos);
+
+            Actualizar();
+
+        }
+
+        private void btnComandaLista_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var comandaProductos = (List<ComandaProducto>)dataGridViewComandaProductos.DataSource;
+                var comanda = dataGridViewComandasPendientes.SelectedRows[0].DataBoundItem as Comanda;
+
+                _comadaBLL.MarcarProductoslistos(comandaProductos);
+                _comadaBLL.NotificarComandaLista(comanda);
+
+
+                Actualizar();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
     }
 }
