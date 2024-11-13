@@ -27,9 +27,27 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
             _mesa = mesa;
             _comandaId = comandaId;
+
+
             Inicializar();
         }
 
+        private async Task CargarDatosAsync()
+        {
+            try
+            {
+                loadingIndicator.Visible = true;
+
+                var datos = await Task.Run(() => CargarDatosDesdeBaseDeDatos());
+
+                myDataGridView.DataSource = datos;
+            }
+            finally
+            {
+                // Ocultar el indicador de carga una vez que los datos se han cargado
+                loadingIndicator.Visible = false;
+            }
+        }
         private void Inicializar()
         {
             try

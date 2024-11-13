@@ -38,6 +38,11 @@ namespace IngenieriaSoftware.BLL
 
         }
 
+        public void InsertarComandaProductos(List<ComandaProducto> comandaProductos)
+        {
+            _comandaDAL.InsertarComandaProductos(comandaProductos);    
+        }
+
         public int InsertarComanda(int mesaId)
         {
             return _comandaDAL.InsertarComanda(mesaId);

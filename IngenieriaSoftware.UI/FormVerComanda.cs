@@ -29,10 +29,10 @@ namespace IngenieriaSoftware.UI
         private void Inicializar(int mesaId)
         {
             // En este boton debemos mostrar la lista de comandaProductos de la mesa actual. 
-            _comandaProductos = _comandaBLL.ObtenerComandaProducto(mesaId);
+            var comandaGeneral= _comandaBLL.ObtenerComandaProducto(mesaId);
 
             dataGridViewComandaGeneral.DataSource = null;
-            dataGridViewComandaGeneral.DataSource = _comandaProductos;
+            dataGridViewComandaGeneral.DataSource = comandaGeneral;
 
             //en la otra gridview tengo que listar los productos elegidos en la pantalla anterior
             dataGridViewComandaActual.DataSource = null;
@@ -50,6 +50,7 @@ namespace IngenieriaSoftware.UI
             //vamos a enviar la comanda actual a cocina
             //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
             //se actualizara la gridview de la izquierda
+            _comandaBLL.InsertarComandaProductos(_comandaProductos);
 
         }
 
