@@ -107,6 +107,23 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public void MarcarComandaProductosComoEntregados(int comandaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@comanda_id", comandaId)
+                };
+
+                _dao.ExecuteNonQuery("sp_MarcarComandaProductosComoEntregados", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void ActualizarEstadoComandaProducto(List<ComandaProducto> productos, int nuevoEstado)
         {
             try

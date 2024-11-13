@@ -251,6 +251,7 @@ namespace IngenieriaSoftware.UI
 
                 if (PermisoChecker.TienePermiso(permisos, "PERM_MESERO"))
                 {
+                    //aca se va a suscribir al evento que lo notifique 
                     permisosPermitidos.Add("PERM_GEST_MESAS");
                     mesasToolStripMenuItem.Visible = true;
                 }
@@ -439,14 +440,8 @@ namespace IngenieriaSoftware.UI
 
         public void ActualizarEtiquetas()
         {
-            // Instanciar todos los formularios
             var formularios = HelperForms.InstanciarTodosLosFormularios(this);
-
-            //agregamos el formulario mdi
             formularios.Add(this); 
-            
-            // ListarControles devuelve un Dictionary<string, IdiomaSuscriptorDTO
-            //Asi que, lo paso a un Dictionary<string, IIdiomaSusctriptor, para poder pasarlo como argumento en AgregarEtiqueta
             Dictionary<string, IIdiomaObservador> etiquetasEnMemoria = ControlesHelper.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaObservador)p.Value);
 
             var etiquetasExcepciones = HelperExcepciones.ListarExcepciones();
@@ -454,8 +449,6 @@ namespace IngenieriaSoftware.UI
             {
                 etiquetasEnMemoria[etiquetaExcepcion.Key] = etiquetaExcepcion.Value;
             }
-
-            // Guardar etiquetas nuevas en la base de datos si hay alguna
             idiomaBLL.AgregarEtiqueta(etiquetasEnMemoria); 
             
         }
@@ -464,15 +457,11 @@ namespace IngenieriaSoftware.UI
         {
             foreach (Control c in control.Controls)
             {
-                // Verificar si ya existe una etiqueta con el nombre del control en la base de datos
                 if (!etiquetasEnBD.Any(e => e.Name == c.Name))
                 {
-                    // Si no existe, crear una nueva etiqueta y agregarla a la lista de etiquetas nuevas
                     var nuevaEtiqueta = new EtiquetaDTO { Tag = (int)c.Tag, Name = c.Name };
                     etiquetasNuevas.Add(nuevaEtiqueta);
                 }
-
-                // Si el control es un MenuStrip, registrar los elementos de menú
                 if (c is MenuStrip menuStrip)
                 {
                     foreach (ToolStripItem menuItem in menuStrip.Items)
@@ -480,8 +469,6 @@ namespace IngenieriaSoftware.UI
                         RegistrarEtiquetasDeMenu(menuItem, etiquetasEnBD, etiquetasNuevas);
                     }
                 }
-
-                // Llamada recursiva para controles hijos
                 if (c.HasChildren)
                 {
                     RegistrarEtiquetasDeControles(c, etiquetasEnBD, etiquetasNuevas);
@@ -489,18 +476,14 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        // Método auxiliar para registrar etiquetas de los elementos de menú
         private void RegistrarEtiquetasDeMenu(ToolStripItem menuItem, List<EtiquetaDTO> etiquetasEnBD, List<EtiquetaDTO> etiquetasNuevas)
         {
-            // Verificar si ya existe una etiqueta con el nombre del elemento de menú en la base de datos
             if (!etiquetasEnBD.Any(e => e.Name == menuItem.Name))
             {
-                // Si no existe, crear una nueva etiqueta y agregarla a la lista de etiquetas nuevas
                 var nuevaEtiqueta = new EtiquetaDTO { Name = menuItem.Name };
                 etiquetasNuevas.Add(nuevaEtiqueta);
             }
 
-            // Si el elemento de menú es un ToolStripMenuItem, verificar si tiene subelementos
             if (menuItem is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.DropDownItems.Count > 0)
             {
                 foreach (ToolStripItem subItem in toolStripMenuItem.DropDownItems)
@@ -532,19 +515,13 @@ namespace IngenieriaSoftware.UI
             var idiomaId = (IdiomaData.Idiomas.Find(I => I.Nombre == comboBoxIdiomas.SelectedItem.ToString())).Id;
            
             _idiomaObserver.CambiarEstado(idiomaId);
-
-            
-            ActualizarFormsHijos?.Invoke();
-   
-            
+            ActualizarFormsHijos?.Invoke();         
         }
 
         private void gestionarMesasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
             AbrirFormHijo(formGestionarMesas);
-            //FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
-            //AbrirFormHijo(formGestionarMesas);
         }
 
         private void aBMMesasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -559,6 +536,12 @@ namespace IngenieriaSoftware.UI
             // tambien es donde podran confirmarlas
             FormGestionarComandas formGestionarComandas = new FormGestionarComandas();
             AbrirFormHijo(formGestionarComandas);
+        }
+
+        private void comandasAEntregarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormComandasAEntregar formComandasAEntregar = new FormComandasAEntregar();
+            AbrirFormHijo(formComandasAEntregar);
         }
     }
 }

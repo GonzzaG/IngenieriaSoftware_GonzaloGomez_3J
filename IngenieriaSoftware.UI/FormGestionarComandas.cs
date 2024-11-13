@@ -87,12 +87,18 @@ namespace IngenieriaSoftware.UI
 
         private void btnComandaEnPreparacion_Click(object sender, EventArgs e)
         {
-            //cuando aprete este botonn marcare todos los productos en la lista de la derecha en preparacion en la base de datos
-            var comandaProductos = (List<ComandaProducto>)dataGridViewComandaProductos.DataSource;
-            _comadaBLL.MarcarProductosEnPreparacion(comandaProductos);
+            try
+            {
+                //cuando aprete este botonn marcare todos los productos en la lista de la derecha en preparacion en la base de datos
+                var comandaProductos = (List<ComandaProducto>)dataGridViewComandaProductos.DataSource;
+                _comadaBLL.MarcarProductosEnPreparacion(comandaProductos);
 
-            Actualizar();
-
+                Actualizar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("La comanda tiene que estar en estado 'pendiente' para marcarlo como listos");
+            }
         }
 
         private void btnComandaLista_Click(object sender, EventArgs e)
@@ -101,7 +107,6 @@ namespace IngenieriaSoftware.UI
             {
                 var comandaProductos = (List<ComandaProducto>)dataGridViewComandaProductos.DataSource;
                 var comanda = dataGridViewComandasPendientes.SelectedRows[0].DataBoundItem as Comanda;
-
                 _comadaBLL.MarcarProductoslistos(comandaProductos);
                 _comadaBLL.NotificarComandaLista(comanda);
 
@@ -110,7 +115,7 @@ namespace IngenieriaSoftware.UI
             }
             catch(Exception ex)
             {
-
+                MessageBox.Show("La comanda tiene que estar 'en preparacion' para marcarlo como listos");
             }
         }
     }

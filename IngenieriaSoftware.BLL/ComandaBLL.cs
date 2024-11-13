@@ -4,6 +4,7 @@ using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.EntityDAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,54 @@ namespace IngenieriaSoftware.BLL
 
         public void MarcarProductosEnPreparacion(List<ComandaProducto> productos)
         {
-            _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.En_Preparacion);
+            var productosAux = productos;
+
+            for (int i = productos.Count - 1; i >= 0; i--)
+            {
+                if (productos[i].EstadoProducto != EstadoComandaProductos.Estado.Propuesta &&
+                    productos[i].EstadoProducto != EstadoComandaProductos.Estado.Pendiente)
+                {
+                    productos.RemoveAt(i);
+                }
+            }
+
+            if (productos != null)
+            {
+                _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.En_Preparacion);
+            }
+            else
+            {
+                throw new Exception();
+            }
+            
         }
 
         public void MarcarProductoslistos(List<ComandaProducto> productos)
         {
-            _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.Lista);
+            var productosAux = productos;
+
+            for (int i = productos.Count - 1; i >= 0; i--)
+            {
+                if (productos[i].EstadoProducto != EstadoComandaProductos.Estado.En_Preparacion)
+                {
+                    productos.RemoveAt(i);
+                }
+            }
+
+            if (productos != null)
+            {
+                _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.Lista);
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+        public void MarcarProductosEntregados(int comandaId)
+        {
+            //tenemos que obtener todos los comandaProducto que se encuentren en estado 'listo' de la bd y que esten
+            //con la comandaId 
+            _comandaDAL.MarcarComandaProductosComoEntregados(comandaId);
         }
 
         public void NotificarComandaLista(Comanda comanda)
@@ -86,9 +129,9 @@ namespace IngenieriaSoftware.BLL
             return _comandaDAL.ObtenerComandaProductosPendientes(mesaId, comandaId);
         }
 
-        private void ObtenerNotificacionesNoVistas(int mesaId, int comandaId)
+        public List<Notificacion> ObtenerNotificacionesNoVistas()
         {
-            _notificacionDAL.ObtenerNotificacionesNoVistas(mesaId, comandaId);
+           return _notificacionDAL.ObtenerNotificacionesNoVistas();
         }
     }
 }

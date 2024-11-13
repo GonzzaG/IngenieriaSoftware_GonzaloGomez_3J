@@ -226,6 +226,7 @@
             this.comandasAEntregarToolStripMenuItem.Name = "comandasAEntregarToolStripMenuItem";
             this.comandasAEntregarToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.comandasAEntregarToolStripMenuItem.Text = "Comandas a entregar";
+            this.comandasAEntregarToolStripMenuItem.Click += new System.EventHandler(this.comandasAEntregarToolStripMenuItem_Click);
             // 
             // FormMDI
             // 

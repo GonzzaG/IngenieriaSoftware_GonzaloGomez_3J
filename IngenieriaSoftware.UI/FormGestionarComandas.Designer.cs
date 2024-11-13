@@ -90,7 +90,7 @@
             this.dataGridViewComandaProductos.RowHeadersWidth = 51;
             this.dataGridViewComandaProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewComandaProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewComandaProductos.Size = new System.Drawing.Size(550, 297);
+            this.dataGridViewComandaProductos.Size = new System.Drawing.Size(677, 297);
             this.dataGridViewComandaProductos.TabIndex = 29;
             this.dataGridViewComandaProductos.Tag = "71";
             // 
@@ -98,7 +98,7 @@
             // 
             this.lblProductosComanda.AutoSize = true;
             this.lblProductosComanda.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductosComanda.Location = new System.Drawing.Point(666, 27);
+            this.lblProductosComanda.Location = new System.Drawing.Point(793, 27);
             this.lblProductosComanda.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductosComanda.Name = "lblProductosComanda";
             this.lblProductosComanda.Size = new System.Drawing.Size(282, 26);
@@ -122,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 532);
+            this.ClientSize = new System.Drawing.Size(1170, 532);
             this.Controls.Add(this.btnComandaLista);
             this.Controls.Add(this.lblProductosComanda);
             this.Controls.Add(this.dataGridViewComandaProductos);

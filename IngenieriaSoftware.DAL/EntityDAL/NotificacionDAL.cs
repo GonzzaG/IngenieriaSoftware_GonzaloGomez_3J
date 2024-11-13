@@ -33,17 +33,11 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-        public List<Notificacion> ObtenerNotificacionesNoVistas(int mesaId, int comandaId)
+        public List<Notificacion> ObtenerNotificacionesNoVistas()
         {
             try
-            {
-                SqlParameter[] parametros = new SqlParameter[]
-                {
-                    new SqlParameter("@mesa_id", mesaId),
-                    new SqlParameter("@comanda_id", comandaId),
-                };
-                    
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerNotificacionesNoVistas", parametros);
+            {                  
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerNotificacionesNoVistas", null);
                 return _notificacionMapper.MapearComandasDesdeDataSet(mDs);
 
             }

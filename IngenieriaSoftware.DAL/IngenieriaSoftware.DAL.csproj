@@ -50,12 +50,6 @@
     <Compile Include="EntityDAL\MesaDAL.cs" />
     <Compile Include="EntityDAL\NotificacionDAL.cs" />
     <Compile Include="EntityDAL\ProductoDAL.cs" />
-    <Compile Include="FormComandasAEntregar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormComandasAEntregar.Designer.cs">
-      <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Mapper\ComandaMapper.cs" />
     <Compile Include="Mapper\ComandaProductoMapper.cs" />
     <Compile Include="Mapper\EtiquetaMapper.cs" />
@@ -80,11 +74,6 @@
       <Project>{88779aa0-50fe-4fae-af75-2374a220469d}</Project>
       <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="FormComandasAEntregar.resx">
-      <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
