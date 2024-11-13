@@ -50,7 +50,11 @@ namespace IngenieriaSoftware.UI
             //vamos a enviar la comanda actual a cocina
             //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
             //se actualizara la gridview de la izquierda
-            _comandaBLL.InsertarComandaProductos(_comandaProductos);
+            if(_comandaProductos.Count > 0)
+            {
+                _comandaBLL.InsertarComandaProductos(_comandaProductos);
+
+            }
 
         }
 

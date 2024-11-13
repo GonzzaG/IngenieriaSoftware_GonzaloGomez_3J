@@ -14,6 +14,11 @@ namespace IngenieriaSoftware.BLL
         private readonly ComandaDAL _comandaDAL = new ComandaDAL();
         public List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
 
+        public List<Comanda> ObtenerComandasPendientes()
+        {
+            return _comandaDAL.ObtenerComandasPendientes();
+        }
+
         public void NuevoComandaProducto(Producto producto, int comandaId, int cantidad)
         {
             var comandaProducto = new ComandaProducto
@@ -21,7 +26,7 @@ namespace IngenieriaSoftware.BLL
                 ComandaId = comandaId,
                 Producto = producto,
                 Cantidad = cantidad,
-                EstadoProducto = BEL.Constantes.EstadoProducto.Estado.Propuesta,
+                EstadoProducto = BEL.Constantes.EstadoComandaProductos.Estado.Propuesta,
                 PrecioUnitario = producto.Precio
             };
             
@@ -57,6 +62,11 @@ namespace IngenieriaSoftware.BLL
         private List<ComandaProducto> ObtenerComandaProductoPorMesaId(int mesaId)
         {
             return _comandaDAL.ObtenerComandaProductoPorMesaId(mesaId);
+        }
+
+        public List<ComandaProducto> ObtenerComandaProductosPendientes(int mesaId, int comandaId)
+        {
+            return _comandaDAL.ObtenerComandaProductosPendientes(mesaId, comandaId);
         }
     }
 }

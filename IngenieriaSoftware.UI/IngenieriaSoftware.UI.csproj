@@ -54,6 +54,12 @@
     <Compile Include="FormABMMesas.Designer.cs">
       <DependentUpon>FormABMMesas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGestionarComandas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarComandas.Designer.cs">
+      <DependentUpon>FormGestionarComandas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGestionarMesas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormABMMesas.resx">
       <DependentUpon>FormABMMesas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionarComandas.resx">
+      <DependentUpon>FormGestionarComandas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarMesas.resx">
       <DependentUpon>FormGestionarMesas.cs</DependentUpon>

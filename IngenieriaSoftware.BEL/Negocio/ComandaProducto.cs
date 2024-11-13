@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL.Negocio
 {
-    public class ComandaProducto : Producto
+    public class ComandaProducto 
     {
         public int ComandaId { get; set; }
         public Producto Producto { get; set; }
-        public EstadoProducto.Estado EstadoProducto { get; set; } = Constantes.EstadoProducto.Estado.Propuesta;
+        public int ProductoId { get; set; }
+        public EstadoComandaProductos.Estado EstadoProducto { get; set; } = Constantes.EstadoComandaProductos.Estado.Propuesta;
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
         public decimal Subtotal => Cantidad * PrecioUnitario;

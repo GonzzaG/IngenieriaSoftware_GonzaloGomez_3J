@@ -11,23 +11,25 @@ namespace IngenieriaSoftware.DAL.Mapper
 {
     public class ComandaMapper
     {
-        public List<ComandaProducto> MapearComandaProductosDesdeDataSet(DataSet pDs)
+        public List<Comanda> MapearComandasDesdeDataSet(DataSet mDs)
         {
-            List<ComandaProducto> comandaProductos = new List<ComandaProducto>();
+            List<Comanda> comandas = new List<Comanda>();
 
-            foreach (DataRow row in pDs.Tables[0].Rows)
+            if (mDs.Tables.Count > 0 && mDs.Tables[0].Rows.Count > 0)
             {
-                ComandaProducto comandaProducto = new ComandaProducto();
-                comandaProducto.ComandaId = (int)row["comanda_id"];
-                comandaProducto.ProductoId = (int)row["producto_id"];
-                comandaProducto.EstadoProducto = (EstadoProducto.Estado)(int)row["estado_producto"];
-                comandaProducto.Cantidad = (int)row["cantidad"];
-                comandaProducto.PrecioUnitario = (decimal)row["precio_unitario"];
-
-                comandaProductos.Add(comandaProducto);
+                foreach (DataRow row in mDs.Tables[0].Rows)
+                {
+                    comandas.Add(new Comanda
+                    {
+                        ComandaId = Convert.ToInt32(row["comanda_id"]),
+                        MesaId = Convert.ToInt32(row["mesa_id"]),
+                        FechaHoraCreacion = (DateTime)row["fecha_hora_creacion"],
+                        EstadoComanda = (EstadoComanda.Estado)(int)row["estado"]
+                    });
+                }
             }
 
-            return comandaProductos;
+            return comandas;
         }
 
     }

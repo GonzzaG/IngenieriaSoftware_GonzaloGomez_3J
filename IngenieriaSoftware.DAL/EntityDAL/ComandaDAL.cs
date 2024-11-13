@@ -15,6 +15,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
     {
         private readonly DAO _dao = new DAO();
         private readonly ComandaProductoMapper _comandaProductoMapper = new ComandaProductoMapper();
+        private readonly ComandaMapper _comandaMapper = new ComandaMapper();
         public ComandaDAL() { }
 
     
@@ -32,6 +33,38 @@ namespace IngenieriaSoftware.DAL.EntityDAL
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarComanda", parametros);
                 return Convert.ToInt32(mDs.Tables[0].Rows[0]["comanda_id"]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void InsertarComandaProductos(List<ComandaProducto> comandaProductos)
+        {
+            try
+            {
+                DataTable comandaProductoTable = CrearComandaProductoDataTable(comandaProductos);
+
+                SqlParameter parametroComandaProductos = new SqlParameter("@ComandaProductos", SqlDbType.Structured)
+                {
+                    TypeName = "dbo.ComandaProductoType",
+                    Value = comandaProductoTable
+                };
+
+                _dao.ExecuteStoredProcedure("sp_InsertarComandaProductos", new SqlParameter[] { parametroComandaProductos });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Comanda> ObtenerComandasPendientes()
+        {
+            try
+            {
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerComandasPendientes", null);
+                return _comandaMapper.MapearComandasDesdeDataSet(mDs);
             }
             catch (Exception ex)
             {
@@ -57,25 +90,27 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-        public void InsertarComandaProductos(List<ComandaProducto> comandaProductos)
+        public List<ComandaProducto> ObtenerComandaProductosPendientes (int mesaId, int comandaId)
         {
             try
             {
-                DataTable comandaProductoTable = CrearComandaProductoDataTable(comandaProductos);
-
-                SqlParameter parametroComandaProductos = new SqlParameter("@ComandaProductos", SqlDbType.Structured)
+                SqlParameter[] parametros = new SqlParameter[]
                 {
-                    TypeName = "dbo.ComandaProductoType",
-                    Value = comandaProductoTable
+                    new SqlParameter("@mesa_id", mesaId),
+                    new SqlParameter("@comanda_id", comandaId) 
                 };
 
-                _dao.ExecuteStoredProcedure("sp_InsertarComandaProductos", new SqlParameter[] { parametroComandaProductos });
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerComandaProductosPendientes", parametros);
+
+                return _comandaProductoMapper.MapearComandaProductoDesdeDataSet(mDs);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+
         private DataTable CrearComandaProductoDataTable(List<ComandaProducto> comandaProductos)
         {
             DataTable table = new DataTable();
@@ -85,10 +120,10 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             table.Columns.Add("cantidad", typeof(int));
             table.Columns.Add("precio_unitario", typeof(decimal));
 
-            foreach (var producto in comandaProductos)
+            foreach (var comandaProducto in comandaProductos)
             {
-                table.Rows.Add(producto.ComandaId, producto.ProductoId, producto.EstadoProducto,
-                               producto.Cantidad, producto.PrecioUnitario);
+                table.Rows.Add(comandaProducto.ComandaId, comandaProducto.Producto.ProductoId, (int)comandaProducto.EstadoProducto,
+                               comandaProducto.Cantidad, comandaProducto.PrecioUnitario);
             }
 
             return table;

@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IngenieriaSoftware.UI
 {
@@ -28,26 +29,11 @@ namespace IngenieriaSoftware.UI
             _mesa = mesa;
             _comandaId = comandaId;
 
-
             Inicializar();
         }
 
-        private async Task CargarDatosAsync()
-        {
-            try
-            {
-                loadingIndicator.Visible = true;
 
-                var datos = await Task.Run(() => CargarDatosDesdeBaseDeDatos());
 
-                myDataGridView.DataSource = datos;
-            }
-            finally
-            {
-                // Ocultar el indicador de carga una vez que los datos se han cargado
-                loadingIndicator.Visible = false;
-            }
-        }
         private void Inicializar()
         {
             try
@@ -108,6 +94,34 @@ namespace IngenieriaSoftware.UI
             // aca voy a mostrar todos los productos que tiene la mesa en su comanda hasta el momento (general)
             // tambien voy a mostrar la lista de productos seleccionados en la pantalla anterior (derecha)
             //esta pantalla de la derecha es la que luego se enviara a cocina
+            var productos = _productoBLL.ObtenerTodosLosProductos();
+            if (productos != null)
+            {
+                dataGridViewProductos.DataSource = null;
+                dataGridViewProductos.DataSource = productos;
+            }
+
+            lblNumeroMesa.Text = _mesa.MesaId.ToString();
+        }
+        private async void InicializarAsync()
+        {
+            try
+            {
+                var productos = await Task.Run(() => _productoBLL.ObtenerTodosLosProductos());
+
+   
+                if (productos != null)
+                {
+                    dataGridViewProductos.DataSource = null;
+                    dataGridViewProductos.DataSource = productos;
+                }
+
+                lblNumeroMesa.Text = _mesa.MesaId.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al cargar los productos: " + ex.Message);
+            }
         }
     }
 }

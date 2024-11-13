@@ -26,6 +26,7 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
             _mesasBLL = new MesaBLL();
             _comandaBLL = new ComandaBLL();
+           
             Actualizar();
         }
         public void Actualizar()
@@ -36,6 +37,29 @@ namespace IngenieriaSoftware.UI
             dataGridViewMesas.Columns[0].HeaderText = "Numero de mesa";
             dataGridViewMesas.Columns[1].HeaderText = "Capacidad maxima";
             dataGridViewMesas.Columns[2].HeaderText = "Fecha de reserva";
+        }
+
+        private async void ActualizarAsync()
+        {
+            try
+            {
+                var mesas = await Task.Run(() => _mesasBLL.ObtenerMesasDisponibles());
+
+
+                if (mesas != null)
+                {
+                    dataGridViewMesas.DataSource = null;
+                    dataGridViewMesas.DataSource = mesas;
+                }
+
+                dataGridViewMesas.Columns[0].HeaderText = "Numero de mesa";
+                dataGridViewMesas.Columns[1].HeaderText = "Capacidad maxima";
+                dataGridViewMesas.Columns[2].HeaderText = "Fecha de reserva";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al cargar los productos: " + ex.Message);
+            }
         }
 
         private void FormGestionarMesas_Load(object sender, EventArgs e)
