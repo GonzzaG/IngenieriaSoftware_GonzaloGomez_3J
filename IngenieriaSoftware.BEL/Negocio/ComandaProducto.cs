@@ -9,9 +9,7 @@ namespace IngenieriaSoftware.BEL.Negocio
 {
     public class ComandaProducto : Producto
     {
-        public int ComandaProductoId { get; set; }
         public int ComandaId { get; set; }
-
         public Producto Producto { get; set; }
         public EstadoProducto.Estado EstadoProducto { get; set; } = Constantes.EstadoProducto.Estado.Propuesta;
         public int Cantidad { get; set; }

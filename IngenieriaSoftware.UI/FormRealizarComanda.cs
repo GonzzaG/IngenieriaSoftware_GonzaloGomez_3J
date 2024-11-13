@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
 using System;
@@ -7,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,11 +18,15 @@ namespace IngenieriaSoftware.UI
     public partial class FormRealizarComanda : Form, IActualizable
     {
         private readonly ProductoBLL _productoBLL = new ProductoBLL();
+        private readonly ComandaBLL _comandaBLL = new ComandaBLL();
         private Mesa _mesa;
-        public FormRealizarComanda(Mesa mesa)
+        private int _comandaId;
+
+        public FormRealizarComanda(Mesa mesa, int comandaId)
         {
             InitializeComponent();
             _mesa = mesa;
+            _comandaId = comandaId;
             Inicializar();
         }
 
@@ -29,11 +35,11 @@ namespace IngenieriaSoftware.UI
             try
             {
                 //obtenemos todos los productos
-                var mesas = _productoBLL.ObtenerTodasLasMesas();
-                if (mesas != null)
+                var productos = _productoBLL.ObtenerTodosLosProductos();
+                if (productos != null)
                 {
                     dataGridViewProductos.DataSource = null;
-                    dataGridViewProductos.DataSource = mesas;
+                    dataGridViewProductos.DataSource = productos;
                 }
 
                 lblNumeroMesa.Text = _mesa.MesaId.ToString();
@@ -52,6 +58,17 @@ namespace IngenieriaSoftware.UI
         {
             //en este boton se agregara el producto seleccionado a la comanda de la mesa actual seleccionada
             //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
+            int indice = dataGridViewProductos.SelectedRows[0].Index;
+            Producto producto = ((List<Producto>)dataGridViewProductos.DataSource)[indice];
+
+            _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
+        }
+
+        private void NuevoProducto()
+        {
+           
+
+          
         }
 
         private void btnVerComanda_Click(object sender, EventArgs e)
@@ -60,8 +77,10 @@ namespace IngenieriaSoftware.UI
             
             var padre = this.MdiParent as FormMDI;
 
-            FormVerComanda formVerComanda = new FormVerComanda(_mesa);
-            padre.AbrirFormHijo(formVerComanda);
+            FormVerComanda formVerComanda = new FormVerComanda(_mesa, _comandaBLL._comandaProductos);
+            formVerComanda.StartPosition = FormStartPosition.CenterScreen;
+            formVerComanda.ShowDialog();
+          // padre.AbrirFormHijo(formVerComanda);
 
             Actualizar();
         }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constantes\EstadoComanda.cs" />
     <Compile Include="Constantes\EstadoProducto.cs" />
     <Compile Include="Constantes\TipoProducto.cs" />
     <Compile Include="Empleados\Administrador.cs" />

@@ -14,9 +14,9 @@ namespace IngenieriaSoftware.BLL
 
         public ProductoBLL() { }
 
-        public List<Producto> ObtenerTodasLasMesas()
+        public List<Producto> ObtenerTodosLosProductos()
         {
-            return _productoDAL.ObtenerTodasLasMesas(); 
+            return _productoDAL.ObtenerTodosLosProductos(); 
         }
 
     }

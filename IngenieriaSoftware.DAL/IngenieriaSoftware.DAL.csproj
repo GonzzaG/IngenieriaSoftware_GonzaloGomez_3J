@@ -43,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO.cs" />
+    <Compile Include="EntityDAL\ComandaDAL.cs" />
     <Compile Include="EntityDAL\IdiomaDAL.cs" />
     <Compile Include="EntityDAL\MesaDAL.cs" />
     <Compile Include="EntityDAL\ProductoDAL.cs" />
+    <Compile Include="Mapper\ComandaMapper.cs" />
+    <Compile Include="Mapper\ComandaProductoMapper.cs" />
     <Compile Include="Mapper\EtiquetaMapper.cs" />
     <Compile Include="Mapper\IdiomaMapper.cs" />
     <Compile Include="EntityDAL\PermisoDAL.cs" />

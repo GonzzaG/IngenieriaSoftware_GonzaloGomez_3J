@@ -1,4 +1,7 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Negocio;
+using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Mesas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,15 +16,29 @@ namespace IngenieriaSoftware.UI
 {
     public partial class FormVerComanda : Form
     {
-        public FormVerComanda(Mesa mesa)
+        private readonly ComandaBLL _comandaBLL = new ComandaBLL();
+        private List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
+
+        public FormVerComanda(Mesa mesa, List<ComandaProducto> productos)
         {
             InitializeComponent();
-            Inicializar();
+            _comandaProductos = productos;
+            Inicializar(mesa.MesaId);
         }
 
-        private void Inicializar()
+        private void Inicializar(int mesaId)
         {
             // En este boton debemos mostrar la lista de comandaProductos de la mesa actual. 
+            _comandaProductos = _comandaBLL.ObtenerComandaProducto(mesaId);
+
+            dataGridViewComandaGeneral.DataSource = null;
+            dataGridViewComandaGeneral.DataSource = _comandaProductos;
+
+            //en la otra gridview tengo que listar los productos elegidos en la pantalla anterior
+            dataGridViewComandaActual.DataSource = null;
+            dataGridViewComandaActual.DataSource = _comandaProductos;
+
+
         }
         private void FormVerComanda_Load(object sender, EventArgs e)
         {

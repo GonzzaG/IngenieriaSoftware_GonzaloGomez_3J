@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.UI.Adaptadores;
@@ -18,10 +19,13 @@ namespace IngenieriaSoftware.UI
     public partial class FormGestionarMesas : Form, IActualizable
     {
         private readonly MesaBLL _mesasBLL;
+        private readonly ComandaBLL _comandaBLL;
+
         public FormGestionarMesas()
         {
             InitializeComponent();
             _mesasBLL = new MesaBLL();
+            _comandaBLL = new ComandaBLL();
             Actualizar();
         }
         public void Actualizar()
@@ -77,11 +81,15 @@ namespace IngenieriaSoftware.UI
                     var mesa = _mesasBLL.Mesas().Find(m => m.MesaId == mesaId);
                     var padre = this.MdiParent as FormMDI;
 
-                    FormRealizarComanda formRealizarComanda = new FormRealizarComanda(mesa);
-                    //formRealizarComanda.MdiParent = padre;
+                    //voy a crear la comanda de la mesa, me retorna el id de la comanda
+                    int comandaId = _comandaBLL.InsertarComanda(mesaId);
+
+                    FormRealizarComanda formRealizarComanda = new FormRealizarComanda(mesa, comandaId);
                     padre.AbrirFormHijo(formRealizarComanda);
 
-                    Actualizar();
+
+
+                    //Actualizar();
                 }
                 else
                 {
