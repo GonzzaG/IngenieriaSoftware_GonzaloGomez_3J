@@ -45,7 +45,7 @@
             this.btnComandaEnPreparacion.Name = "btnComandaEnPreparacion";
             this.btnComandaEnPreparacion.Size = new System.Drawing.Size(162, 45);
             this.btnComandaEnPreparacion.TabIndex = 28;
-            this.btnComandaEnPreparacion.Tag = "74";
+            this.btnComandaEnPreparacion.Tag = "184";
             this.btnComandaEnPreparacion.Text = "Marcar en preparacion";
             this.btnComandaEnPreparacion.UseVisualStyleBackColor = true;
             this.btnComandaEnPreparacion.Click += new System.EventHandler(this.btnComandaEnPreparacion_Click);
@@ -59,7 +59,7 @@
             this.lblComandas.Name = "lblComandas";
             this.lblComandas.Size = new System.Drawing.Size(249, 26);
             this.lblComandas.TabIndex = 27;
-            this.lblComandas.Tag = "70";
+            this.lblComandas.Tag = "180";
             this.lblComandas.Text = "Comandas pendientes";
             // 
             // dataGridViewComandasPendientes
@@ -75,7 +75,7 @@
             this.dataGridViewComandasPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewComandasPendientes.Size = new System.Drawing.Size(302, 297);
             this.dataGridViewComandasPendientes.TabIndex = 26;
-            this.dataGridViewComandasPendientes.Tag = "71";
+            this.dataGridViewComandasPendientes.Tag = "182";
             this.dataGridViewComandasPendientes.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewComandasPendientes_RowEnter);
             // 
             // dataGridViewComandaProductos
@@ -92,7 +92,7 @@
             this.dataGridViewComandaProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewComandaProductos.Size = new System.Drawing.Size(677, 297);
             this.dataGridViewComandaProductos.TabIndex = 29;
-            this.dataGridViewComandaProductos.Tag = "71";
+            this.dataGridViewComandaProductos.Tag = "183";
             // 
             // lblProductosComanda
             // 
@@ -103,7 +103,7 @@
             this.lblProductosComanda.Name = "lblProductosComanda";
             this.lblProductosComanda.Size = new System.Drawing.Size(282, 26);
             this.lblProductosComanda.TabIndex = 30;
-            this.lblProductosComanda.Tag = "70";
+            this.lblProductosComanda.Tag = "181";
             this.lblProductosComanda.Text = "Productos de la comanda";
             // 
             // btnComandaLista
@@ -113,7 +113,7 @@
             this.btnComandaLista.Name = "btnComandaLista";
             this.btnComandaLista.Size = new System.Drawing.Size(162, 45);
             this.btnComandaLista.TabIndex = 31;
-            this.btnComandaLista.Tag = "74";
+            this.btnComandaLista.Tag = "185";
             this.btnComandaLista.Text = "Comanda lista";
             this.btnComandaLista.UseVisualStyleBackColor = true;
             this.btnComandaLista.Click += new System.EventHandler(this.btnComandaLista_Click);
@@ -130,6 +130,7 @@
             this.Controls.Add(this.lblComandas);
             this.Controls.Add(this.dataGridViewComandasPendientes);
             this.Name = "FormGestionarComandas";
+            this.Tag = "186";
             this.Text = "FormGestionarComandas";
             this.Load += new System.EventHandler(this.FormGestionarComandas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandasPendientes)).EndInit();

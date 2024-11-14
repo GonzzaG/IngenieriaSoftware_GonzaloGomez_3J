@@ -56,6 +56,7 @@ namespace IngenieriaSoftware.UI
              //   _comandaBLL.InsertarComandaProductos(_comandaProductos);
                 _comandaBLL.InsertarComandaProductos(_comandaBLL._comandaProductos);
                 _comandaBLL._comandaProductos = null;
+                MessageBox.Show("La comanda fue enviada a la cocina con exito.");
 
             }
            

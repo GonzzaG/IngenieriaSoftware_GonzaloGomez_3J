@@ -48,7 +48,7 @@
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(162, 45);
             this.btnConfirmar.TabIndex = 17;
-            this.btnConfirmar.Tag = "72";
+            this.btnConfirmar.Tag = "114";
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnSeleccionarMedioDePago_Click);
@@ -62,7 +62,7 @@
             this.lblSeleccioneMedioDePago.Name = "lblSeleccioneMedioDePago";
             this.lblSeleccioneMedioDePago.Size = new System.Drawing.Size(293, 26);
             this.lblSeleccioneMedioDePago.TabIndex = 16;
-            this.lblSeleccioneMedioDePago.Tag = "70";
+            this.lblSeleccioneMedioDePago.Tag = "107";
             this.lblSeleccioneMedioDePago.Text = "Seleccione medio de pago";
             // 
             // dataGridViewMediosDePago
@@ -78,7 +78,7 @@
             this.dataGridViewMediosDePago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMediosDePago.Size = new System.Drawing.Size(417, 240);
             this.dataGridViewMediosDePago.TabIndex = 15;
-            this.dataGridViewMediosDePago.Tag = "71";
+            this.dataGridViewMediosDePago.Tag = "108";
             // 
             // numericUpDownPropina
             // 
@@ -91,6 +91,7 @@
             this.numericUpDownPropina.Name = "numericUpDownPropina";
             this.numericUpDownPropina.Size = new System.Drawing.Size(75, 20);
             this.numericUpDownPropina.TabIndex = 18;
+            this.numericUpDownPropina.Tag = "110";
             // 
             // lblPropina
             // 
@@ -99,6 +100,7 @@
             this.lblPropina.Name = "lblPropina";
             this.lblPropina.Size = new System.Drawing.Size(43, 13);
             this.lblPropina.TabIndex = 19;
+            this.lblPropina.Tag = "109";
             this.lblPropina.Text = "Propina";
             // 
             // numericUpDownDescuento
@@ -107,6 +109,7 @@
             this.numericUpDownDescuento.Name = "numericUpDownDescuento";
             this.numericUpDownDescuento.Size = new System.Drawing.Size(75, 20);
             this.numericUpDownDescuento.TabIndex = 18;
+            this.numericUpDownDescuento.Tag = "112";
             // 
             // lblPorcentajeDescuento
             // 
@@ -115,6 +118,7 @@
             this.lblPorcentajeDescuento.Name = "lblPorcentajeDescuento";
             this.lblPorcentajeDescuento.Size = new System.Drawing.Size(59, 13);
             this.lblPorcentajeDescuento.TabIndex = 19;
+            this.lblPorcentajeDescuento.Tag = "111";
             this.lblPorcentajeDescuento.Text = "Descuento";
             // 
             // lblPorcentaje
@@ -124,6 +128,7 @@
             this.lblPorcentaje.Name = "lblPorcentaje";
             this.lblPorcentaje.Size = new System.Drawing.Size(15, 13);
             this.lblPorcentaje.TabIndex = 20;
+            this.lblPorcentaje.Tag = "113";
             this.lblPorcentaje.Text = "%";
             // 
             // FormSeleccionMedioDePago
@@ -140,6 +145,7 @@
             this.Controls.Add(this.lblSeleccioneMedioDePago);
             this.Controls.Add(this.dataGridViewMediosDePago);
             this.Name = "FormSeleccionMedioDePago";
+            this.Tag = "115";
             this.Text = "FormSeleccionMedioDePago";
             this.Load += new System.EventHandler(this.FormSeleccionMedioDePago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMediosDePago)).EndInit();

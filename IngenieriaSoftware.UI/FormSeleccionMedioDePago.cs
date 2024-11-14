@@ -94,7 +94,7 @@ namespace IngenieriaSoftware.UI
             if(clienteId > 0)
             {
                 _mesaBLL.CerrarMesa(_mesaId, propina, descuento, medioDePagoId, clienteId);
-
+                MessageBox.Show("La mesa fue cerrada y se guardo el cliente");
             }
         }
     }

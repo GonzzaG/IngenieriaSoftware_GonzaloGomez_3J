@@ -161,6 +161,13 @@ namespace IngenieriaSoftware.UI
                     DialogResult result = MessageBox.Show("Esta seguro que desea cerrar la mesa?", "Cerrar mesa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if(result  == DialogResult.Yes)
                     {
+                        string estado = dataGridViewMesas.SelectedRows[0].Cells[2].Value.ToString() ;
+                        if(estado != EstadoMesa.Estado.Ocupada.ToString())
+                        {
+                            MessageBox.Show("La mesa tiene que encontrarse en estado 'Ocupada' para poder solicitar la cuenta");
+                            return;
+                        }
+
                         int mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
                         var padre = this.MdiParent as FormMDI;
                         FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);

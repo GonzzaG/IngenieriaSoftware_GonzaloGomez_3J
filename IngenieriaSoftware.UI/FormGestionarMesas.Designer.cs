@@ -51,7 +51,7 @@
             this.dataGridViewMesas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMesas.Size = new System.Drawing.Size(379, 401);
             this.dataGridViewMesas.TabIndex = 12;
-            this.dataGridViewMesas.Tag = "71";
+            this.dataGridViewMesas.Tag = "166";
             // 
             // lblMesas
             // 
@@ -62,7 +62,7 @@
             this.lblMesas.Name = "lblMesas";
             this.lblMesas.Size = new System.Drawing.Size(81, 26);
             this.lblMesas.TabIndex = 13;
-            this.lblMesas.Tag = "70";
+            this.lblMesas.Tag = "167";
             this.lblMesas.Text = "Mesas";
             // 
             // btnAsignarMesa
@@ -72,7 +72,7 @@
             this.btnAsignarMesa.Name = "btnAsignarMesa";
             this.btnAsignarMesa.Size = new System.Drawing.Size(162, 45);
             this.btnAsignarMesa.TabIndex = 14;
-            this.btnAsignarMesa.Tag = "72";
+            this.btnAsignarMesa.Tag = "168";
             this.btnAsignarMesa.Text = "Asignar Mesa";
             this.btnAsignarMesa.UseVisualStyleBackColor = true;
             this.btnAsignarMesa.Click += new System.EventHandler(this.btnAsignarMesa_Click);
@@ -84,7 +84,7 @@
             this.btnRealizarComanda.Name = "btnRealizarComanda";
             this.btnRealizarComanda.Size = new System.Drawing.Size(162, 45);
             this.btnRealizarComanda.TabIndex = 15;
-            this.btnRealizarComanda.Tag = "74";
+            this.btnRealizarComanda.Tag = "169";
             this.btnRealizarComanda.Text = "Realizar Comanda";
             this.btnRealizarComanda.UseVisualStyleBackColor = true;
             this.btnRealizarComanda.Click += new System.EventHandler(this.btnRealizarComanda_Click);
@@ -96,7 +96,7 @@
             this.btnSolicitarCuenta.Name = "btnSolicitarCuenta";
             this.btnSolicitarCuenta.Size = new System.Drawing.Size(162, 45);
             this.btnSolicitarCuenta.TabIndex = 16;
-            this.btnSolicitarCuenta.Tag = "74";
+            this.btnSolicitarCuenta.Tag = "170";
             this.btnSolicitarCuenta.Text = "Solicitar Cuenta";
             this.btnSolicitarCuenta.UseVisualStyleBackColor = true;
             this.btnSolicitarCuenta.Click += new System.EventHandler(this.btnSolicitarCuenta_Click);
@@ -108,8 +108,8 @@
             this.btnEntregarFactura.Name = "btnEntregarFactura";
             this.btnEntregarFactura.Size = new System.Drawing.Size(162, 45);
             this.btnEntregarFactura.TabIndex = 17;
-            this.btnEntregarFactura.Tag = "74";
-            this.btnEntregarFactura.Text = "Cobrar";
+            this.btnEntregarFactura.Tag = "171";
+            this.btnEntregarFactura.Text = "Entregar Factura";
             this.btnEntregarFactura.UseVisualStyleBackColor = true;
             this.btnEntregarFactura.Click += new System.EventHandler(this.btnCobrar_Click);
             // 
@@ -126,7 +126,7 @@
             this.Controls.Add(this.dataGridViewMesas);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormGestionarMesas";
-            this.Tag = "73";
+            this.Tag = "172";
             this.Text = "FormGestionarMesas";
             this.Load += new System.EventHandler(this.FormGestionarMesas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesas)).EndInit();

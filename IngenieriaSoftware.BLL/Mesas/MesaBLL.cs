@@ -13,14 +13,16 @@ namespace IngenieriaSoftware.BLL.Mesas
 {
     public class MesaBLL
     {
-        private readonly MesaDAL _mesaDAL = new MesaDAL();
-        private readonly ComandaBLL _comandaBLL = new ComandaBLL();
-        private readonly FacturaBLL _facturaBLL = new FacturaBLL();
+        private readonly MesaDAL _mesaDAL;
+        private readonly ComandaBLL _comandaBLL;
+        private readonly FacturaBLL _facturaBLL;
         private List<Mesa> _mesas;
 
         public MesaBLL()
         {
-
+            _mesaDAL = new MesaDAL();
+            _comandaBLL = new ComandaBLL();
+            _facturaBLL = new FacturaBLL();
         }
         public List<Mesa> Mesas()
         {

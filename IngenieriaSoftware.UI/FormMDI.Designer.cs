@@ -34,6 +34,7 @@
             this.gestionarMesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBMMesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cobrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comandasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comandasCocinaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comandasAEntregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,8 +50,6 @@
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.toolTipNotificacion = new System.Windows.Forms.ToolTip(this.components);
-            this.facturasSolicitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,28 +86,35 @@
             // gestionarMesasToolStripMenuItem
             // 
             this.gestionarMesasToolStripMenuItem.Name = "gestionarMesasToolStripMenuItem";
-            this.gestionarMesasToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.gestionarMesasToolStripMenuItem.Tag = "75";
+            this.gestionarMesasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionarMesasToolStripMenuItem.Tag = "161";
             this.gestionarMesasToolStripMenuItem.Text = "Gestionar Mesas";
             this.gestionarMesasToolStripMenuItem.Click += new System.EventHandler(this.gestionarMesasToolStripMenuItem_Click);
             // 
             // aBMMesasToolStripMenuItem
             // 
             this.aBMMesasToolStripMenuItem.Name = "aBMMesasToolStripMenuItem";
-            this.aBMMesasToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.aBMMesasToolStripMenuItem.Tag = "76";
+            this.aBMMesasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aBMMesasToolStripMenuItem.Tag = "162";
             this.aBMMesasToolStripMenuItem.Text = "ABM Mesas";
             this.aBMMesasToolStripMenuItem.Click += new System.EventHandler(this.aBMMesasToolStripMenuItem_Click);
             // 
             // cobrosToolStripMenuItem
             // 
             this.cobrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.facturasSolicitToolStripMenuItem,
             this.fToolStripMenuItem});
             this.cobrosToolStripMenuItem.Name = "cobrosToolStripMenuItem";
             this.cobrosToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.cobrosToolStripMenuItem.Tag = "4";
             this.cobrosToolStripMenuItem.Text = "Cobros";
+            // 
+            // fToolStripMenuItem
+            // 
+            this.fToolStripMenuItem.Name = "fToolStripMenuItem";
+            this.fToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fToolStripMenuItem.Tag = "163";
+            this.fToolStripMenuItem.Text = "Ver Facturas";
+            this.fToolStripMenuItem.Click += new System.EventHandler(this.fToolStripMenuItem_Click);
             // 
             // comandasToolStripMenuItem
             // 
@@ -125,6 +131,7 @@
             // 
             this.comandasCocinaToolStripMenuItem.Name = "comandasCocinaToolStripMenuItem";
             this.comandasCocinaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.comandasCocinaToolStripMenuItem.Tag = "164";
             this.comandasCocinaToolStripMenuItem.Text = "Comandas Cocina";
             this.comandasCocinaToolStripMenuItem.Click += new System.EventHandler(this.comandasCocinaToolStripMenuItem_Click);
             // 
@@ -132,6 +139,7 @@
             // 
             this.comandasAEntregarToolStripMenuItem.Name = "comandasAEntregarToolStripMenuItem";
             this.comandasAEntregarToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.comandasAEntregarToolStripMenuItem.Tag = "165";
             this.comandasAEntregarToolStripMenuItem.Text = "Comandas a entregar";
             this.comandasAEntregarToolStripMenuItem.Click += new System.EventHandler(this.comandasAEntregarToolStripMenuItem_Click);
             // 
@@ -186,7 +194,7 @@
             // 
             this.actualizarEtiquetasToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
-            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.actualizarEtiquetasToolStripMenuItem.Tag = "11";
             this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
             this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
@@ -194,7 +202,7 @@
             // agregarTraduccionToolStripMenuItem
             // 
             this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
-            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarTraduccionToolStripMenuItem.Tag = "12";
             this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
             this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
@@ -234,19 +242,6 @@
             this.lblIdiomaActual.TabIndex = 9;
             this.lblIdiomaActual.Tag = "69";
             this.lblIdiomaActual.Text = "Idioma Actual";
-            // 
-            // facturasSolicitToolStripMenuItem
-            // 
-            this.facturasSolicitToolStripMenuItem.Name = "facturasSolicitToolStripMenuItem";
-            this.facturasSolicitToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.facturasSolicitToolStripMenuItem.Text = "Facturas pendientes de pago";
-            // 
-            // fToolStripMenuItem
-            // 
-            this.fToolStripMenuItem.Name = "fToolStripMenuItem";
-            this.fToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.fToolStripMenuItem.Text = "Ver Facturas";
-            this.fToolStripMenuItem.Click += new System.EventHandler(this.fToolStripMenuItem_Click);
             // 
             // FormMDI
             // 
@@ -291,7 +286,6 @@
         private System.Windows.Forms.ToolStripMenuItem comandasCocinaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comandasAEntregarToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipNotificacion;
-        private System.Windows.Forms.ToolStripMenuItem facturasSolicitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fToolStripMenuItem;
     }
 }

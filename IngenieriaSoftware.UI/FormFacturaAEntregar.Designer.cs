@@ -45,7 +45,7 @@
             this.btnFacturaEntregada.Name = "btnFacturaEntregada";
             this.btnFacturaEntregada.Size = new System.Drawing.Size(162, 45);
             this.btnFacturaEntregada.TabIndex = 35;
-            this.btnFacturaEntregada.Tag = "72";
+            this.btnFacturaEntregada.Tag = "192";
             this.btnFacturaEntregada.Text = "Entregada";
             this.btnFacturaEntregada.UseVisualStyleBackColor = true;
             this.btnFacturaEntregada.Click += new System.EventHandler(this.btnFacturaEntregada_Click);
@@ -61,7 +61,7 @@
             this.lblDetalleFactura.Name = "lblDetalleFactura";
             this.lblDetalleFactura.Size = new System.Drawing.Size(174, 26);
             this.lblDetalleFactura.TabIndex = 34;
-            this.lblDetalleFactura.Tag = "70";
+            this.lblDetalleFactura.Tag = "190";
             this.lblDetalleFactura.Text = "Detalle Factura";
             // 
             // dataGridViewDetalleFactura
@@ -78,7 +78,7 @@
             this.dataGridViewDetalleFactura.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDetalleFactura.Size = new System.Drawing.Size(769, 271);
             this.dataGridViewDetalleFactura.TabIndex = 33;
-            this.dataGridViewDetalleFactura.Tag = "71";
+            this.dataGridViewDetalleFactura.Tag = "191";
             // 
             // lblNumeroFactura
             // 
@@ -91,7 +91,7 @@
             this.lblNumeroFactura.Name = "lblNumeroFactura";
             this.lblNumeroFactura.Size = new System.Drawing.Size(25, 26);
             this.lblNumeroFactura.TabIndex = 36;
-            this.lblNumeroFactura.Tag = "70";
+            this.lblNumeroFactura.Tag = "188";
             this.lblNumeroFactura.Text = "0";
             // 
             // dataGridViewFacturaMesa
@@ -103,6 +103,7 @@
             this.dataGridViewFacturaMesa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewFacturaMesa.Size = new System.Drawing.Size(503, 81);
             this.dataGridViewFacturaMesa.TabIndex = 37;
+            this.dataGridViewFacturaMesa.Tag = "189";
             // 
             // lblFacturas
             // 
@@ -115,7 +116,7 @@
             this.lblFacturas.Name = "lblFacturas";
             this.lblFacturas.Size = new System.Drawing.Size(92, 26);
             this.lblFacturas.TabIndex = 38;
-            this.lblFacturas.Tag = "70";
+            this.lblFacturas.Tag = "187";
             this.lblFacturas.Text = "Factura";
             // 
             // FormFacturaAEntregar
@@ -130,6 +131,7 @@
             this.Controls.Add(this.btnFacturaEntregada);
             this.Controls.Add(this.lblDetalleFactura);
             this.Name = "FormFacturaAEntregar";
+            this.Tag = "193";
             this.Text = "FormFacturaAEntregar";
             this.Load += new System.EventHandler(this.FormFacturaAEntregar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetalleFactura)).EndInit();

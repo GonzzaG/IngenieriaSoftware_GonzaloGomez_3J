@@ -41,7 +41,7 @@
             this.btnComandaEntregada.Name = "btnComandaEntregada";
             this.btnComandaEntregada.Size = new System.Drawing.Size(162, 45);
             this.btnComandaEntregada.TabIndex = 31;
-            this.btnComandaEntregada.Tag = "74";
+            this.btnComandaEntregada.Tag = "196";
             this.btnComandaEntregada.Text = "Marcar como entregado";
             this.btnComandaEntregada.UseVisualStyleBackColor = true;
             this.btnComandaEntregada.Click += new System.EventHandler(this.btnComandaEntregada_Click);
@@ -55,7 +55,7 @@
             this.lblComandasAEntregar.Name = "lblComandasAEntregar";
             this.lblComandasAEntregar.Size = new System.Drawing.Size(275, 26);
             this.lblComandasAEntregar.TabIndex = 30;
-            this.lblComandasAEntregar.Tag = "70";
+            this.lblComandasAEntregar.Tag = "194";
             this.lblComandasAEntregar.Text = "Comandas para entregar";
             // 
             // dataGridViewComandasAEntregar
@@ -71,7 +71,7 @@
             this.dataGridViewComandasAEntregar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewComandasAEntregar.Size = new System.Drawing.Size(566, 297);
             this.dataGridViewComandasAEntregar.TabIndex = 29;
-            this.dataGridViewComandasAEntregar.Tag = "71";
+            this.dataGridViewComandasAEntregar.Tag = "195";
             // 
             // FormComandasAEntregar
             // 
@@ -82,6 +82,7 @@
             this.Controls.Add(this.lblComandasAEntregar);
             this.Controls.Add(this.dataGridViewComandasAEntregar);
             this.Name = "FormComandasAEntregar";
+            this.Tag = "197";
             this.Text = "Comandas a entregar";
             this.Load += new System.EventHandler(this.FormComandasAEntregar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandasAEntregar)).EndInit();

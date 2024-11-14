@@ -20,7 +20,7 @@ namespace IngenieriaSoftware.BLL
         private readonly FacturaDAL _facturaDAL = new FacturaDAL();
         private readonly ComandaBLL _comandaBLL = new ComandaBLL();
         private readonly MedioDePagoBLL _medioDePagoBLL = new MedioDePagoBLL();
-        private readonly MesaBLL _mesaBLL = new MesaBLL();
+       
 
         private Factura Factura;
         public FacturaBLL()
@@ -225,12 +225,12 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public void CambiarEstadoFacturaEntregada(int facturaId, int mesaId)
+        public void CambiarEstadoFacturaEntregada(int facturaId)
         {
             using (var transaction = new TransactionScope())
             {
                 _facturaDAL.CambiarEstadoFactura(facturaId, (int)EstadoFactura.Estado.Entregada);
-                _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
+               
                 transaction.Complete();
             }
         }

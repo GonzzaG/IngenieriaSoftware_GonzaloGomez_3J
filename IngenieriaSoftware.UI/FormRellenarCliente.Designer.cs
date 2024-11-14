@@ -54,7 +54,7 @@
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(151, 70);
             this.btnConfirmar.TabIndex = 14;
-            this.btnConfirmar.Tag = "28";
+            this.btnConfirmar.Tag = "132";
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
@@ -67,7 +67,7 @@
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(52, 13);
             this.lblDireccion.TabIndex = 13;
-            this.lblDireccion.Tag = "26";
+            this.lblDireccion.Tag = "120";
             this.lblDireccion.Text = "Direccion";
             // 
             // lblApellido
@@ -78,7 +78,7 @@
             this.lblApellido.Name = "lblApellido";
             this.lblApellido.Size = new System.Drawing.Size(44, 13);
             this.lblApellido.TabIndex = 12;
-            this.lblApellido.Tag = "24";
+            this.lblApellido.Tag = "118";
             this.lblApellido.Text = "Apellido";
             // 
             // lblNombre
@@ -89,7 +89,7 @@
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(44, 13);
             this.lblNombre.TabIndex = 11;
-            this.lblNombre.Tag = "22";
+            this.lblNombre.Tag = "116";
             this.lblNombre.Text = "Nombre";
             // 
             // txtNombre
@@ -99,7 +99,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(189, 20);
             this.txtNombre.TabIndex = 10;
-            this.txtNombre.Tag = "23";
+            this.txtNombre.Tag = "117";
             // 
             // txtApellido
             // 
@@ -108,7 +108,7 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(189, 20);
             this.txtApellido.TabIndex = 9;
-            this.txtApellido.Tag = "25";
+            this.txtApellido.Tag = "119";
             // 
             // label1
             // 
@@ -118,7 +118,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 18;
-            this.label1.Tag = "24";
+            this.label1.Tag = "126";
             this.label1.Text = "Telefono";
             // 
             // lblEmail
@@ -129,7 +129,7 @@
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(32, 13);
             this.lblEmail.TabIndex = 17;
-            this.lblEmail.Tag = "22";
+            this.lblEmail.Tag = "124";
             this.lblEmail.Text = "Email";
             // 
             // txtEmail
@@ -139,7 +139,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(189, 20);
             this.txtEmail.TabIndex = 16;
-            this.txtEmail.Tag = "23";
+            this.txtEmail.Tag = "125";
             // 
             // txtTelefono
             // 
@@ -148,7 +148,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(189, 20);
             this.txtTelefono.TabIndex = 15;
-            this.txtTelefono.Tag = "25";
+            this.txtTelefono.Tag = "127";
             // 
             // txtDireccion
             // 
@@ -157,7 +157,7 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(189, 20);
             this.txtDireccion.TabIndex = 19;
-            this.txtDireccion.Tag = "25";
+            this.txtDireccion.Tag = "121";
             // 
             // txtBancoEmisor
             // 
@@ -166,7 +166,7 @@
             this.txtBancoEmisor.Name = "txtBancoEmisor";
             this.txtBancoEmisor.Size = new System.Drawing.Size(189, 20);
             this.txtBancoEmisor.TabIndex = 25;
-            this.txtBancoEmisor.Tag = "25";
+            this.txtBancoEmisor.Tag = "131";
             // 
             // lblBancoEmisor
             // 
@@ -177,7 +177,7 @@
             this.lblBancoEmisor.Name = "lblBancoEmisor";
             this.lblBancoEmisor.Size = new System.Drawing.Size(71, 13);
             this.lblBancoEmisor.TabIndex = 24;
-            this.lblBancoEmisor.Tag = "26";
+            this.lblBancoEmisor.Tag = "130";
             this.lblBancoEmisor.Text = "Banco emisor";
             // 
             // lblTipoTarjeta
@@ -188,7 +188,7 @@
             this.lblTipoTarjeta.Name = "lblTipoTarjeta";
             this.lblTipoTarjeta.Size = new System.Drawing.Size(61, 13);
             this.lblTipoTarjeta.TabIndex = 23;
-            this.lblTipoTarjeta.Tag = "24";
+            this.lblTipoTarjeta.Tag = "128";
             this.lblTipoTarjeta.Text = "TipoTarjeta";
             // 
             // lblNumeroTarjeta
@@ -199,7 +199,7 @@
             this.lblNumeroTarjeta.Name = "lblNumeroTarjeta";
             this.lblNumeroTarjeta.Size = new System.Drawing.Size(83, 13);
             this.lblNumeroTarjeta.TabIndex = 22;
-            this.lblNumeroTarjeta.Tag = "22";
+            this.lblNumeroTarjeta.Tag = "122";
             this.lblNumeroTarjeta.Text = "Numero Tarjeta ";
             // 
             // txtNumeroTarjeta
@@ -209,7 +209,7 @@
             this.txtNumeroTarjeta.Name = "txtNumeroTarjeta";
             this.txtNumeroTarjeta.Size = new System.Drawing.Size(189, 20);
             this.txtNumeroTarjeta.TabIndex = 21;
-            this.txtNumeroTarjeta.Tag = "23";
+            this.txtNumeroTarjeta.Tag = "123";
             // 
             // txtTipoTarjeta
             // 
@@ -218,7 +218,7 @@
             this.txtTipoTarjeta.Name = "txtTipoTarjeta";
             this.txtTipoTarjeta.Size = new System.Drawing.Size(189, 20);
             this.txtTipoTarjeta.TabIndex = 20;
-            this.txtTipoTarjeta.Tag = "25";
+            this.txtTipoTarjeta.Tag = "129";
             // 
             // FormRellenarCliente
             // 
@@ -243,6 +243,7 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtApellido);
             this.Name = "FormRellenarCliente";
+            this.Tag = "133";
             this.Text = "FormRellenarCliente";
             this.ResumeLayout(false);
             this.PerformLayout();

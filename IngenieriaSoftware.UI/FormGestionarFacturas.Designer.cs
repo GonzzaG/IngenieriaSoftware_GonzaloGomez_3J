@@ -48,7 +48,7 @@
             this.lblFacturas.Name = "lblFacturas";
             this.lblFacturas.Size = new System.Drawing.Size(104, 26);
             this.lblFacturas.TabIndex = 26;
-            this.lblFacturas.Tag = "70";
+            this.lblFacturas.Tag = "173";
             this.lblFacturas.Text = "Facturas";
             // 
             // dataGridViewFacturas
@@ -64,7 +64,7 @@
             this.dataGridViewFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewFacturas.Size = new System.Drawing.Size(822, 314);
             this.dataGridViewFacturas.TabIndex = 25;
-            this.dataGridViewFacturas.Tag = "71";
+            this.dataGridViewFacturas.Tag = "174";
             // 
             // comboBoxFiltroEstado
             // 
@@ -73,6 +73,7 @@
             this.comboBoxFiltroEstado.Name = "comboBoxFiltroEstado";
             this.comboBoxFiltroEstado.Size = new System.Drawing.Size(207, 21);
             this.comboBoxFiltroEstado.TabIndex = 28;
+            this.comboBoxFiltroEstado.Tag = "176";
             this.comboBoxFiltroEstado.SelectedIndexChanged += new System.EventHandler(this.comboBoxFiltroEstado_SelectedIndexChanged);
             // 
             // lblFiltrar
@@ -82,6 +83,7 @@
             this.lblFiltrar.Name = "lblFiltrar";
             this.lblFiltrar.Size = new System.Drawing.Size(32, 13);
             this.lblFiltrar.TabIndex = 30;
+            this.lblFiltrar.Tag = "175";
             this.lblFiltrar.Text = "Filtrar";
             // 
             // btnMarcarComoPagado
@@ -91,7 +93,7 @@
             this.btnMarcarComoPagado.Name = "btnMarcarComoPagado";
             this.btnMarcarComoPagado.Size = new System.Drawing.Size(162, 45);
             this.btnMarcarComoPagado.TabIndex = 31;
-            this.btnMarcarComoPagado.Tag = "72";
+            this.btnMarcarComoPagado.Tag = "178";
             this.btnMarcarComoPagado.Text = "Marcar como pagado";
             this.btnMarcarComoPagado.UseVisualStyleBackColor = true;
             this.btnMarcarComoPagado.Click += new System.EventHandler(this.btnMarcarComoPagado_Click);
@@ -103,7 +105,7 @@
             this.btnPendienteDePago.Name = "btnPendienteDePago";
             this.btnPendienteDePago.Size = new System.Drawing.Size(162, 45);
             this.btnPendienteDePago.TabIndex = 32;
-            this.btnPendienteDePago.Tag = "72";
+            this.btnPendienteDePago.Tag = "177";
             this.btnPendienteDePago.Text = "Marcar como pendiente de pago";
             this.btnPendienteDePago.UseVisualStyleBackColor = true;
             this.btnPendienteDePago.Click += new System.EventHandler(this.btnPendienteDePago_Click_1);
@@ -120,6 +122,7 @@
             this.Controls.Add(this.lblFacturas);
             this.Controls.Add(this.dataGridViewFacturas);
             this.Name = "FormGestionarFacturas";
+            this.Tag = "179";
             this.Text = "FormGestionarFacturas";
             this.Load += new System.EventHandler(this.FormGestionarFacturas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFacturas)).EndInit();

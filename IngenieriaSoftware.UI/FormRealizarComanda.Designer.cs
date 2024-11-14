@@ -47,7 +47,7 @@
             this.btnVerComanda.Name = "btnVerComanda";
             this.btnVerComanda.Size = new System.Drawing.Size(162, 45);
             this.btnVerComanda.TabIndex = 25;
-            this.btnVerComanda.Tag = "74";
+            this.btnVerComanda.Tag = "151";
             this.btnVerComanda.Text = "Ver comanda";
             this.btnVerComanda.UseVisualStyleBackColor = true;
             this.btnVerComanda.Click += new System.EventHandler(this.btnVerComanda_Click);
@@ -59,7 +59,7 @@
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(162, 45);
             this.btnAgregarProducto.TabIndex = 24;
-            this.btnAgregarProducto.Tag = "72";
+            this.btnAgregarProducto.Tag = "150";
             this.btnAgregarProducto.Text = "Agregar producto";
             this.btnAgregarProducto.UseVisualStyleBackColor = true;
             this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
@@ -75,7 +75,7 @@
             this.lblProductos.Name = "lblProductos";
             this.lblProductos.Size = new System.Drawing.Size(119, 26);
             this.lblProductos.TabIndex = 23;
-            this.lblProductos.Tag = "70";
+            this.lblProductos.Tag = "142";
             this.lblProductos.Text = "Productos";
             // 
             // dataGridViewProductos
@@ -91,7 +91,7 @@
             this.dataGridViewProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewProductos.Size = new System.Drawing.Size(822, 325);
             this.dataGridViewProductos.TabIndex = 22;
-            this.dataGridViewProductos.Tag = "71";
+            this.dataGridViewProductos.Tag = "147";
             // 
             // lblMesa
             // 
@@ -104,7 +104,7 @@
             this.lblMesa.Name = "lblMesa";
             this.lblMesa.Size = new System.Drawing.Size(76, 26);
             this.lblMesa.TabIndex = 26;
-            this.lblMesa.Tag = "70";
+            this.lblMesa.Tag = "144";
             this.lblMesa.Text = "Mesa:";
             // 
             // lblNumeroMesa
@@ -118,7 +118,7 @@
             this.lblNumeroMesa.Name = "lblNumeroMesa";
             this.lblNumeroMesa.Size = new System.Drawing.Size(25, 26);
             this.lblNumeroMesa.TabIndex = 27;
-            this.lblNumeroMesa.Tag = "70";
+            this.lblNumeroMesa.Tag = "146";
             this.lblNumeroMesa.Text = "0";
             // 
             // numericUpDownCantidad
@@ -132,6 +132,7 @@
             this.numericUpDownCantidad.Name = "numericUpDownCantidad";
             this.numericUpDownCantidad.Size = new System.Drawing.Size(80, 20);
             this.numericUpDownCantidad.TabIndex = 28;
+            this.numericUpDownCantidad.Tag = "149";
             this.numericUpDownCantidad.Value = new decimal(new int[] {
             1,
             0,
@@ -145,6 +146,7 @@
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(49, 13);
             this.lblCantidad.TabIndex = 29;
+            this.lblCantidad.Tag = "148";
             this.lblCantidad.Text = "Cantidad";
             // 
             // FormRealizarComanda
@@ -161,6 +163,7 @@
             this.Controls.Add(this.lblProductos);
             this.Controls.Add(this.dataGridViewProductos);
             this.Name = "FormRealizarComanda";
+            this.Tag = "152";
             this.Text = "FormRealizarComanda";
             this.Load += new System.EventHandler(this.FormRealizarComanda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductos)).EndInit();

@@ -17,6 +17,7 @@ namespace IngenieriaSoftware.UI
     public partial class FormFacturaAEntregar : Form, IActualizable
     {
         private readonly FacturaBLL _facturaBLL = new FacturaBLL();
+        private readonly MesaBLL _mesaBLL = new MesaBLL();
        
         private int MesaId;
         private int ComandaId;
@@ -79,10 +80,10 @@ namespace IngenieriaSoftware.UI
         {
             
             var facturaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[0].Value;
-            _facturaBLL.CambiarEstadoFacturaEntregada(facturaId, MesaId);
+            _facturaBLL.CambiarEstadoFacturaEntregada(facturaId);
+            _mesaBLL.CambiarEstadoMesaDesocupada(MesaId);
 
-
-
+            MessageBox.Show("Factura Entregada con exito. Mesa desocupada");
             this.Close();
         }
     }

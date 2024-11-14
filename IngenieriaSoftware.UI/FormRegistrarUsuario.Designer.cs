@@ -47,7 +47,7 @@
             this.comboBoxCategorias.Name = "comboBoxCategorias";
             this.comboBoxCategorias.Size = new System.Drawing.Size(189, 21);
             this.comboBoxCategorias.TabIndex = 0;
-            this.comboBoxCategorias.Tag = "27";
+            this.comboBoxCategorias.Tag = "139";
             this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // txtPassword
@@ -57,7 +57,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(189, 20);
             this.txtPassword.TabIndex = 1;
-            this.txtPassword.Tag = "25";
+            this.txtPassword.Tag = "137";
             // 
             // txtUsername
             // 
@@ -66,7 +66,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(189, 20);
             this.txtUsername.TabIndex = 2;
-            this.txtUsername.Tag = "23";
+            this.txtUsername.Tag = "135";
             // 
             // lblUsername
             // 
@@ -74,9 +74,9 @@
             this.lblUsername.Location = new System.Drawing.Point(146, 101);
             this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(96, 13);
+            this.lblUsername.Size = new System.Drawing.Size(87, 13);
             this.lblUsername.TabIndex = 3;
-            this.lblUsername.Tag = "22";
+            this.lblUsername.Tag = "134";
             this.lblUsername.Text = "Name de usuario";
             this.lblUsername.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -88,7 +88,7 @@
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(61, 13);
             this.lblPassword.TabIndex = 4;
-            this.lblPassword.Tag = "24";
+            this.lblPassword.Tag = "136";
             this.lblPassword.Text = "Contraseña";
             // 
             // lblCategoria
@@ -99,7 +99,7 @@
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(52, 13);
             this.lblCategoria.TabIndex = 5;
-            this.lblCategoria.Tag = "26";
+            this.lblCategoria.Tag = "138";
             this.lblCategoria.Text = "Categoria";
             this.lblCategoria.Click += new System.EventHandler(this.label1_Click_1);
             // 
@@ -110,7 +110,7 @@
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(151, 70);
             this.btnRegistrar.TabIndex = 7;
-            this.btnRegistrar.Tag = "28";
+            this.btnRegistrar.Tag = "140";
             this.btnRegistrar.Text = "Registrar";
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
@@ -132,7 +132,7 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.comboBoxCategorias);
             this.Name = "FormRegistrarUsuario";
-            this.Tag = "21";
+            this.Tag = "141";
             this.Text = "GestionUsuarios";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GestionUsuarios_Load);
