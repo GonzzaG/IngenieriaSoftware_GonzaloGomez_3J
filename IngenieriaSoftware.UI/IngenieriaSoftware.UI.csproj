@@ -84,6 +84,12 @@
     <Compile Include="FormRealizarComanda.Designer.cs">
       <DependentUpon>FormRealizarComanda.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRellenarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRellenarCliente.Designer.cs">
+      <DependentUpon>FormRellenarCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSeleccionMedioDePago.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMDI.resx">
       <DependentUpon>FormMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRellenarCliente.resx">
+      <DependentUpon>FormRellenarCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSeleccionMedioDePago.resx">
       <DependentUpon>FormSeleccionMedioDePago.cs</DependentUpon>

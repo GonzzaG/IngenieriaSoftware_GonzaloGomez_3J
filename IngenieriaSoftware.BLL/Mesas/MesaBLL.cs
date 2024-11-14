@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace IngenieriaSoftware.BLL.Mesas
 {
@@ -53,17 +54,27 @@ namespace IngenieriaSoftware.BLL.Mesas
                 throw new MesaAsignadaException();
             }
         }
-        public void CerrarMesa(int mesaId, int comandaId, decimal propina, decimal descuento)
+
+
+        public void CerrarMesa(int mesaId, decimal propina, decimal descuento, int medioDePagoId)
         {
-            _mesaDAL.CambiarEstadoMesaCerrada(mesaId);
-
-            List<ComandaProducto> productosComanda = _comandaBLL.ObtenerComandaProductoPorComandaId(comandaId);
-            if (productosComanda == null || !productosComanda.Any())
+            using (var transaction = new TransactionScope())
             {
-                throw new Exception("No se encontraron productos para la comanda especificada.");
-            }
 
-           // Factura factura = _facturaBLL.GenerarFactura(comandaId, mesaId, propina, descuento);
+                var comanda = _comandaBLL.ObtenerComandaPorMesaId(mesaId);
+
+                _mesaDAL.CambiarEstadoMesaCerrada(mesaId);
+
+                List<ComandaProducto> productosComanda = _comandaBLL.ObtenerComandaProductoPorComandaId(comanda.ComandaId);
+                if (productosComanda == null || !productosComanda.Any())
+                {
+                    throw new Exception("No se encontraron productos para la comanda especificada.");
+                }
+
+                Factura factura = _facturaBLL.GenerarFactura(comanda.ComandaId, mesaId, propina, descuento, medioDePagoId);
+                
+                transaction.Complete();
+            }
         }
 
         private void CambiarEstadoMesaCerrada(int mesaId)

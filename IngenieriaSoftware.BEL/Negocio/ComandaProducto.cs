@@ -12,6 +12,7 @@ namespace IngenieriaSoftware.BEL.Negocio
         public int ComandaId { get; set; }
         public Producto Producto { get; set; }
         public int ProductoId { get; set; }
+        public string Nombre { get; set; }
         public EstadoComandaProductos.Estado EstadoProducto { get; set; } = Constantes.EstadoComandaProductos.Estado.Propuesta;
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }

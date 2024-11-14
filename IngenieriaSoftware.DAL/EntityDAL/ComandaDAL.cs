@@ -16,6 +16,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         private readonly DAO _dao = new DAO();
         private readonly ComandaProductoMapper _comandaProductoMapper = new ComandaProductoMapper();
         private readonly ComandaMapper _comandaMapper = new ComandaMapper();
+        private readonly ProductoMapper _productoMapper = new ProductoMapper();
         public ComandaDAL() { }
 
         public int InsertarComanda(int mesaId)
@@ -69,6 +70,24 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public Comanda ObtenerComandaPorMesaId(int mesaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+               {
+                    new SqlParameter("@mesa_id", mesaId),
+               };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerComandasPorMesaId", parametros);
+                return _comandaMapper.MapearComandasDesdeDataSet(mDs)[0];
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<ComandaProducto> ObtenerComandaProductoPorMesaId(int mesaId)
         {
             try
@@ -93,11 +112,13 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@mesa_id", comandaId),
+                    new SqlParameter("@comanda_id", comandaId),
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerComandaProductoPorComandaId", parametros);
-                return _comandaProductoMapper.MapearComandaProductoDesdeDataSet(mDs);
+                var comandaProducto = _comandaProductoMapper.MapearComandaProductoDesdeDataSet(mDs);
+
+                return comandaProducto;
             }
             catch (Exception ex)
             {
@@ -105,6 +126,25 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public List<ComandaProducto> ObtenerComandaProductoProductoPorComandaId(int comandaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@comanda_id", comandaId),
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerComandaProductoProductoPorComandaId", parametros);
+                var comandaProducto = _comandaProductoMapper.MapearComandaProductoDesdeDataSet(mDs);
+
+                return comandaProducto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<ComandaProducto> ObtenerComandaProductosPendientes (int mesaId, int comandaId)
         {
             try

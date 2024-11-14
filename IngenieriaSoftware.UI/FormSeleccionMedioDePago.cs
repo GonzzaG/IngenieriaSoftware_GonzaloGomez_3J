@@ -68,11 +68,15 @@ namespace IngenieriaSoftware.UI
         {
             // aca seleccionamos y obtenemos el metodo de pago
             // podemos hacer un switch dependiendo el metodo de pago
-            var descuento = (int)numericUpDownDescuento.Value;
-            var propina = (int)numericUpDownPropina.Value;
-            //_mesaBLL.CerrarMesa(mesaId);
-            
+            var descuento = numericUpDownDescuento.Value;
+            var propina = numericUpDownPropina.Value;
+            var medioDePagoId = (int)dataGridViewMediosDePago.SelectedRows[0].Cells[0].Value;
 
+            //tegno que crear un cliente y mostrar un formulario de datos si elije otra opcion que no sea
+            //efectivo
+
+
+            _mesaBLL.CerrarMesa(_mesaId, propina, descuento, medioDePagoId);
         }
     }
 }

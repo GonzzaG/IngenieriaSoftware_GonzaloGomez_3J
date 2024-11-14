@@ -113,6 +113,11 @@ namespace IngenieriaSoftware.BLL
             return _comandaDAL.InsertarComanda(mesaId);
         }
 
+        public Comanda ObtenerComandaPorMesaId(int mesaId)
+        {
+            return _comandaDAL.ObtenerComandaPorMesaId(mesaId);  
+        }
+
         public List<ComandaProducto> ObtenerComandaProducto(int mesaId)
         {
             return ObtenerComandaProductoPorMesaId(mesaId);
@@ -123,9 +128,15 @@ namespace IngenieriaSoftware.BLL
         {
             return _comandaDAL.ObtenerComandaProductoPorMesaId(mesaId);
         }
+
         public List<ComandaProducto> ObtenerComandaProductoPorComandaId(int mesaId)
         {
             return _comandaDAL.ObtenerComandaProductoPorComandaId(mesaId);
+        } 
+        
+        public List<ComandaProducto> ObtenerComandaProductoProductoPorComandaId(int mesaId)
+        {
+            return _comandaDAL.ObtenerComandaProductoProductoPorComandaId(mesaId);
         }
 
         public List<ComandaProducto> ObtenerComandaProductosPendientes(int mesaId, int comandaId)

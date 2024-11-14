@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO.cs" />
+    <Compile Include="EntityDAL\ClienteDAL.cs" />
     <Compile Include="EntityDAL\ComandaDAL.cs" />
     <Compile Include="EntityDAL\FacturaDAL.cs" />
     <Compile Include="EntityDAL\IdiomaDAL.cs" />

@@ -24,7 +24,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 {
                     new SqlParameter("@MedioDePagoId", medioDePagoId),
                 };
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerMedioDePagoPorId", null);
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerMedioDePagoPorId", parametros);
                 return _medioDePagoMapper.MapearMedioDePagoDesdeDataSet(mDs)[0];
             }
             catch (Exception ex)

@@ -1,12 +1,16 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.Negocio;
+using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.DAL.EntityDAL;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -23,10 +27,10 @@ namespace IngenieriaSoftware.BLL
             
         }
 
-
+       
         public Factura GenerarFactura(int comandaId, int mesaId, decimal propina, decimal descuento, int metodoPagoId)
         {
-            List<ComandaProducto> productosComanda = _comandaBLL.ObtenerComandaProductoPorComandaId(comandaId);
+            List<ComandaProducto> productosComanda = _comandaBLL.ObtenerComandaProductoProductoPorComandaId(comandaId);
 
             if (productosComanda == null || !productosComanda.Any())
             {
@@ -36,7 +40,7 @@ namespace IngenieriaSoftware.BLL
             List<ProductoFactura> productosFactura = productosComanda.Select(p => new ProductoFactura
             {
                 ProductoId = p.ProductoId,
-                NombreProducto = p.Producto.Nombre,
+                NombreProducto = p.Nombre,
                 Cantidad = p.Cantidad,
                 PrecioUnitario = p.PrecioUnitario
             }).ToList();
@@ -53,7 +57,6 @@ namespace IngenieriaSoftware.BLL
                 throw new Exception("El medio de pago especificado no existe.");
             }
 
-            // Crear la instancia de Factura
             Factura factura = new Factura
             {
                 NumeroFactura = GenerarNumeroFactura(),
@@ -66,8 +69,8 @@ namespace IngenieriaSoftware.BLL
                 ImpuestoTotal = impuestoTotal,
                 Propina = propina,
                 TotalFinal = totalFinal,
-                MetodoPagoId = medioDePago.MedioDePagoId,  
-                MetodoPago = medioDePago, 
+                MetodoPagoId = medioDePago.MedioDePagoId,
+                MetodoPago = medioDePago,
                 EstadoPago = EstadoFactura.Estado.Solicitada,
                 MontoPagado = 0,
                 Cambio = 0,
@@ -75,7 +78,21 @@ namespace IngenieriaSoftware.BLL
                 DivisionPago = false
             };
 
-            _facturaDAL.GuardarFactura(factura);
+            using (var transaction = new TransactionScope())
+            {
+                try
+                {
+                    int facturaId = _facturaDAL.GuardarFactura(factura);
+
+                    _facturaDAL.GuardarProductosFactura(facturaId, productosFactura);
+                    transaction.Complete();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ocurrió un error al generar la factura. Transacción revertida.", ex);
+                }
+            }
+
 
             return factura;
         }
@@ -83,6 +100,9 @@ namespace IngenieriaSoftware.BLL
         {
             return $"FAC-{DateTime.Now:yyyyMMddHHmmss}";
         }
+
+      
+
 
     }
 }

@@ -24,7 +24,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                     {
                         MedioDePagoId = Convert.ToInt32(row["MedioDePagoId"]),
                         Nombre = row["Nombre"].ToString(),
-                        Estado = (bool)row["estado"]
+                        Estado = (bool)row["Estado"]
                     });
                 }
             }

@@ -38,7 +38,7 @@ namespace IngenieriaSoftware.UI
 
             dataGridViewMesas.Columns[0].HeaderText = "Numero de mesa";
             dataGridViewMesas.Columns[1].HeaderText = "Capacidad maxima";
-            dataGridViewMesas.Columns[2].HeaderText = "Fecha de reserva";
+            dataGridViewMesas.Columns[2].HeaderText = "Estado de la mesa";
         }
 
         private async void ActualizarAsync()
