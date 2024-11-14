@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL.Constantes
 {
-    public class EstadoProducto
+    public class EstadoComandaProductos
     {
         public enum Estado
         {

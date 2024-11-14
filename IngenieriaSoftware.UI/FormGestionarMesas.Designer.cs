@@ -32,6 +32,9 @@
             this.lblMesas = new System.Windows.Forms.Label();
             this.btnAsignarMesa = new System.Windows.Forms.Button();
             this.btnRealizarComanda = new System.Windows.Forms.Button();
+            this.btnSolicitarCuenta = new System.Windows.Forms.Button();
+            this.btnEntregarFactura = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +51,7 @@
             this.dataGridViewMesas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMesas.Size = new System.Drawing.Size(379, 401);
             this.dataGridViewMesas.TabIndex = 12;
-            this.dataGridViewMesas.Tag = "71";
+            this.dataGridViewMesas.Tag = "166";
             // 
             // lblMesas
             // 
@@ -59,45 +62,71 @@
             this.lblMesas.Name = "lblMesas";
             this.lblMesas.Size = new System.Drawing.Size(81, 26);
             this.lblMesas.TabIndex = 13;
-            this.lblMesas.Tag = "70";
+            this.lblMesas.Tag = "167";
             this.lblMesas.Text = "Mesas";
             // 
             // btnAsignarMesa
             // 
-            this.btnAsignarMesa.Location = new System.Drawing.Point(489, 116);
+            this.btnAsignarMesa.Location = new System.Drawing.Point(489, 68);
             this.btnAsignarMesa.Margin = new System.Windows.Forms.Padding(2);
             this.btnAsignarMesa.Name = "btnAsignarMesa";
             this.btnAsignarMesa.Size = new System.Drawing.Size(162, 45);
             this.btnAsignarMesa.TabIndex = 14;
-            this.btnAsignarMesa.Tag = "72";
+            this.btnAsignarMesa.Tag = "168";
             this.btnAsignarMesa.Text = "Asignar Mesa";
             this.btnAsignarMesa.UseVisualStyleBackColor = true;
             this.btnAsignarMesa.Click += new System.EventHandler(this.btnAsignarMesa_Click);
             // 
             // btnRealizarComanda
             // 
-            this.btnRealizarComanda.Location = new System.Drawing.Point(489, 192);
+            this.btnRealizarComanda.Location = new System.Drawing.Point(489, 117);
             this.btnRealizarComanda.Margin = new System.Windows.Forms.Padding(2);
             this.btnRealizarComanda.Name = "btnRealizarComanda";
             this.btnRealizarComanda.Size = new System.Drawing.Size(162, 45);
             this.btnRealizarComanda.TabIndex = 15;
-            this.btnRealizarComanda.Tag = "74";
+            this.btnRealizarComanda.Tag = "169";
             this.btnRealizarComanda.Text = "Realizar Comanda";
             this.btnRealizarComanda.UseVisualStyleBackColor = true;
             this.btnRealizarComanda.Click += new System.EventHandler(this.btnRealizarComanda_Click);
+            // 
+            // btnSolicitarCuenta
+            // 
+            this.btnSolicitarCuenta.Location = new System.Drawing.Point(489, 366);
+            this.btnSolicitarCuenta.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSolicitarCuenta.Name = "btnSolicitarCuenta";
+            this.btnSolicitarCuenta.Size = new System.Drawing.Size(162, 45);
+            this.btnSolicitarCuenta.TabIndex = 16;
+            this.btnSolicitarCuenta.Tag = "170";
+            this.btnSolicitarCuenta.Text = "Solicitar Cuenta";
+            this.btnSolicitarCuenta.UseVisualStyleBackColor = true;
+            this.btnSolicitarCuenta.Click += new System.EventHandler(this.btnSolicitarCuenta_Click);
+            // 
+            // btnEntregarFactura
+            // 
+            this.btnEntregarFactura.Location = new System.Drawing.Point(489, 424);
+            this.btnEntregarFactura.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEntregarFactura.Name = "btnEntregarFactura";
+            this.btnEntregarFactura.Size = new System.Drawing.Size(162, 45);
+            this.btnEntregarFactura.TabIndex = 17;
+            this.btnEntregarFactura.Tag = "171";
+            this.btnEntregarFactura.Text = "Entregar Factura";
+            this.btnEntregarFactura.UseVisualStyleBackColor = true;
+            this.btnEntregarFactura.Click += new System.EventHandler(this.btnCobrar_Click);
             // 
             // FormGestionarMesas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 524);
+            this.Controls.Add(this.btnEntregarFactura);
+            this.Controls.Add(this.btnSolicitarCuenta);
             this.Controls.Add(this.btnRealizarComanda);
             this.Controls.Add(this.btnAsignarMesa);
             this.Controls.Add(this.lblMesas);
             this.Controls.Add(this.dataGridViewMesas);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormGestionarMesas";
-            this.Tag = "73";
+            this.Tag = "172";
             this.Text = "FormGestionarMesas";
             this.Load += new System.EventHandler(this.FormGestionarMesas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesas)).EndInit();
@@ -112,5 +141,8 @@
         private System.Windows.Forms.Label lblMesas;
         private System.Windows.Forms.Button btnAsignarMesa;
         private System.Windows.Forms.Button btnRealizarComanda;
+        private System.Windows.Forms.Button btnSolicitarCuenta;
+        private System.Windows.Forms.Button btnEntregarFactura;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

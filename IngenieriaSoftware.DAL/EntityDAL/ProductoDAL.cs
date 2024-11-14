@@ -14,7 +14,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         private readonly DAO _dao = new DAO();
         private readonly ProductoMapper _productoMapper = new ProductoMapper();
 
-        public List<Producto> ObtenerTodasLasMesas()
+        public List<Producto> ObtenerTodosLosProductos()
         {
             try
             {

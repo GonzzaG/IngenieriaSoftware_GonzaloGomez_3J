@@ -34,29 +34,32 @@
             this.dataGridViewProductos = new System.Windows.Forms.DataGridView();
             this.lblMesa = new System.Windows.Forms.Label();
             this.lblNumeroMesa = new System.Windows.Forms.Label();
+            this.numericUpDownCantidad = new System.Windows.Forms.NumericUpDown();
+            this.lblCantidad = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCantidad)).BeginInit();
             this.SuspendLayout();
             // 
             // btnVerComanda
             // 
-            this.btnVerComanda.Location = new System.Drawing.Point(256, 424);
+            this.btnVerComanda.Location = new System.Drawing.Point(256, 477);
             this.btnVerComanda.Margin = new System.Windows.Forms.Padding(2);
             this.btnVerComanda.Name = "btnVerComanda";
             this.btnVerComanda.Size = new System.Drawing.Size(162, 45);
             this.btnVerComanda.TabIndex = 25;
-            this.btnVerComanda.Tag = "74";
+            this.btnVerComanda.Tag = "151";
             this.btnVerComanda.Text = "Ver comanda";
             this.btnVerComanda.UseVisualStyleBackColor = true;
             this.btnVerComanda.Click += new System.EventHandler(this.btnVerComanda_Click);
             // 
             // btnAgregarProducto
             // 
-            this.btnAgregarProducto.Location = new System.Drawing.Point(58, 424);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(58, 477);
             this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(162, 45);
             this.btnAgregarProducto.TabIndex = 24;
-            this.btnAgregarProducto.Tag = "72";
+            this.btnAgregarProducto.Tag = "150";
             this.btnAgregarProducto.Text = "Agregar producto";
             this.btnAgregarProducto.UseVisualStyleBackColor = true;
             this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
@@ -72,7 +75,7 @@
             this.lblProductos.Name = "lblProductos";
             this.lblProductos.Size = new System.Drawing.Size(119, 26);
             this.lblProductos.TabIndex = 23;
-            this.lblProductos.Tag = "70";
+            this.lblProductos.Tag = "142";
             this.lblProductos.Text = "Productos";
             // 
             // dataGridViewProductos
@@ -88,7 +91,7 @@
             this.dataGridViewProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewProductos.Size = new System.Drawing.Size(822, 325);
             this.dataGridViewProductos.TabIndex = 22;
-            this.dataGridViewProductos.Tag = "71";
+            this.dataGridViewProductos.Tag = "147";
             // 
             // lblMesa
             // 
@@ -101,7 +104,7 @@
             this.lblMesa.Name = "lblMesa";
             this.lblMesa.Size = new System.Drawing.Size(76, 26);
             this.lblMesa.TabIndex = 26;
-            this.lblMesa.Tag = "70";
+            this.lblMesa.Tag = "144";
             this.lblMesa.Text = "Mesa:";
             // 
             // lblNumeroMesa
@@ -115,14 +118,44 @@
             this.lblNumeroMesa.Name = "lblNumeroMesa";
             this.lblNumeroMesa.Size = new System.Drawing.Size(25, 26);
             this.lblNumeroMesa.TabIndex = 27;
-            this.lblNumeroMesa.Tag = "70";
+            this.lblNumeroMesa.Tag = "146";
             this.lblNumeroMesa.Text = "0";
+            // 
+            // numericUpDownCantidad
+            // 
+            this.numericUpDownCantidad.Location = new System.Drawing.Point(64, 433);
+            this.numericUpDownCantidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownCantidad.Name = "numericUpDownCantidad";
+            this.numericUpDownCantidad.Size = new System.Drawing.Size(80, 20);
+            this.numericUpDownCantidad.TabIndex = 28;
+            this.numericUpDownCantidad.Tag = "149";
+            this.numericUpDownCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Location = new System.Drawing.Point(61, 417);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(49, 13);
+            this.lblCantidad.TabIndex = 29;
+            this.lblCantidad.Tag = "148";
+            this.lblCantidad.Text = "Cantidad";
             // 
             // FormRealizarComanda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 563);
+            this.Controls.Add(this.lblCantidad);
+            this.Controls.Add(this.numericUpDownCantidad);
             this.Controls.Add(this.lblNumeroMesa);
             this.Controls.Add(this.lblMesa);
             this.Controls.Add(this.btnVerComanda);
@@ -130,9 +163,11 @@
             this.Controls.Add(this.lblProductos);
             this.Controls.Add(this.dataGridViewProductos);
             this.Name = "FormRealizarComanda";
+            this.Tag = "152";
             this.Text = "FormRealizarComanda";
             this.Load += new System.EventHandler(this.FormRealizarComanda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCantidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,5 +180,7 @@
         private System.Windows.Forms.DataGridView dataGridViewProductos;
         private System.Windows.Forms.Label lblMesa;
         private System.Windows.Forms.Label lblNumeroMesa;
+        private System.Windows.Forms.NumericUpDown numericUpDownCantidad;
+        private System.Windows.Forms.Label lblCantidad;
     }
 }

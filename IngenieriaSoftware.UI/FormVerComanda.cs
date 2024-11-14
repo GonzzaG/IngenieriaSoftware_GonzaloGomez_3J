@@ -1,4 +1,7 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Negocio;
+using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Mesas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,15 +16,30 @@ namespace IngenieriaSoftware.UI
 {
     public partial class FormVerComanda : Form
     {
-        public FormVerComanda(Mesa mesa)
+        private readonly ComandaBLL _comandaBLL;
+       // private List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
+
+        public FormVerComanda(Mesa mesa, ComandaBLL comanda)
         {
             InitializeComponent();
-            Inicializar();
+           // _comandaProductos = productos;
+            _comandaBLL = comanda;
+            Inicializar(mesa.MesaId);
         }
 
-        private void Inicializar()
+        private void Inicializar(int mesaId)
         {
             // En este boton debemos mostrar la lista de comandaProductos de la mesa actual. 
+            var comandaGeneral= _comandaBLL.ObtenerComandaProducto(mesaId);
+
+            dataGridViewComandaGeneral.DataSource = null;
+            dataGridViewComandaGeneral.DataSource = comandaGeneral;
+
+            //en la otra gridview tengo que listar los productos elegidos en la pantalla anterior
+            dataGridViewComandaActual.DataSource = null;
+            dataGridViewComandaActual.DataSource = _comandaBLL._comandaProductos;
+
+
         }
         private void FormVerComanda_Load(object sender, EventArgs e)
         {
@@ -33,6 +51,16 @@ namespace IngenieriaSoftware.UI
             //vamos a enviar la comanda actual a cocina
             //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
             //se actualizara la gridview de la izquierda
+            if(_comandaBLL._comandaProductos.Count > 0)
+            {
+             //   _comandaBLL.InsertarComandaProductos(_comandaProductos);
+                _comandaBLL.InsertarComandaProductos(_comandaBLL._comandaProductos);
+                _comandaBLL._comandaProductos = null;
+                MessageBox.Show("La comanda fue enviada a la cocina con exito.");
+
+            }
+           
+                this.Close();
 
         }
 

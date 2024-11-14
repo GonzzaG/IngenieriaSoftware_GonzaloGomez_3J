@@ -124,5 +124,40 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public void CambiarEstadoMesaCerrada(int mesaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@mesa_id", mesaId),
+                };
+
+                _dao.ExecuteNonQuery("sp_CambiarEstadoMesaCerrada", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void CambiarEstadoMesa(int mesaId, int estado)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@MesaId ", mesaId),
+                    new SqlParameter("@EstadoMesa ", estado),
+                };
+
+                _dao.ExecuteNonQuery("sp_CambiarEstadoMesa", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace IngenieriaSoftware.UI
     public class ControlesHelper
     {
         // Contador global para el Tag
-        private static int TagContador = 1;
+        private static int TagContador = 500;
 
         private readonly IIdiomaSujeto _idiomaSujeto;
 
@@ -136,8 +136,8 @@ namespace IngenieriaSoftware.UI
         // Recursivamente recorrer los items del MenuStrip
         private static void RecorrerMenuItems(ToolStripMenuItem item, Dictionary<string, IdiomaObservadorDTO> controles)
         {
-            // Si el Tag del item es nulo o vacío, asignamos uno nuevo
-            if (int.Parse(item.Tag.ToString()) == 0 || item.Tag == null)
+            // Verificamos si el Tag es nulo o vacío, o si el valor es 0
+            if (item.Tag == null || string.IsNullOrEmpty(item.Tag.ToString()) || int.Parse(item.Tag.ToString()) == 0)
             {
                 item.Tag = controles.Count() + TagContador++;
             }

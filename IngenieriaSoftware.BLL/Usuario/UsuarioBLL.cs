@@ -68,20 +68,20 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public List<PermisoDTO> ObtenerPermisosGlobales() // Cambiado a PermisoDTO
+        public List<PermisoDTO> ObtenerPermisosGlobales() 
         {
             return _usuarioDAL.PermisosTree();
         }
 
-        public List<PermisoDTO> AsignarPermisoUsuario(int permisoId, string username) // Cambiado a PermisoDTO
+        public List<PermisoDTO> AsignarPermisoUsuario(int permisoId, string username) 
         {
             var permisosGlobales = _usuarioDAL.PermisosGlobales();
 
-            PermisoDTO permiso = permisosGlobales.Find(p => p.Id == permisoId); // Cambiado a PermisoDTO
+            PermisoDTO permiso = permisosGlobales.Find(p => p.Id == permisoId);
 
             var usuario = _usuarioDAL.ObtenerUsuariosGlobales().Find(u => u.Username == username);
 
-            if (_usuarioDAL.TienePermiso(usuario, permiso)) // Este método debería adaptarse para usar PermisoDTO
+            if (_usuarioDAL.TienePermiso(usuario, permiso)) 
             {
                 throw new Exception($"{username} ya tiene el permiso {permiso.Nombre}");
             }
@@ -89,7 +89,6 @@ namespace IngenieriaSoftware.BLL
             {
                 try
                 {
-                    // Si no tiene el permiso, se lo asignamos en base de datos
                     _usuarioDAL.AsignarPermiso(usuario.Id, permisoId);
                 }
                 catch (Exception ex)
@@ -98,7 +97,7 @@ namespace IngenieriaSoftware.BLL
                 }
             }
 
-            return usuario.Permisos; // Este debería ser adaptado para que devuelva permisos de tipo PermisoDTO
+            return usuario.Permisos;
         }
 
         public void AsignarPermisoPorCod(string username, string permisoCod)
@@ -163,11 +162,11 @@ namespace IngenieriaSoftware.BLL
                         _passwordHash = mUsuario._passwordHash
                     };
                     SessionManager.LogIn(usuario);
-                    return true; // Login exitoso
+                    return true; 
                 }
             }
 
-            return false; // Usuario no encontrado o contraseña incorrecta
+            return false;
         }
 
         public void LogOut()

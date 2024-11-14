@@ -45,7 +45,7 @@
             this.btnConfirmarComanda.Name = "btnConfirmarComanda";
             this.btnConfirmarComanda.Size = new System.Drawing.Size(162, 45);
             this.btnConfirmarComanda.TabIndex = 25;
-            this.btnConfirmarComanda.Tag = "74";
+            this.btnConfirmarComanda.Tag = "102";
             this.btnConfirmarComanda.Text = "Confirmar comanda";
             this.btnConfirmarComanda.UseVisualStyleBackColor = true;
             this.btnConfirmarComanda.Click += new System.EventHandler(this.btnConfirmarComanda_Click);
@@ -57,7 +57,7 @@
             this.btnEliminarProducto.Name = "btnEliminarProducto";
             this.btnEliminarProducto.Size = new System.Drawing.Size(162, 45);
             this.btnEliminarProducto.TabIndex = 24;
-            this.btnEliminarProducto.Tag = "72";
+            this.btnEliminarProducto.Tag = "103";
             this.btnEliminarProducto.Text = "Eliminar producto";
             this.btnEliminarProducto.UseVisualStyleBackColor = true;
             this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
@@ -71,7 +71,7 @@
             this.lblComandaGeneral.Name = "lblComandaGeneral";
             this.lblComandaGeneral.Size = new System.Drawing.Size(205, 26);
             this.lblComandaGeneral.TabIndex = 23;
-            this.lblComandaGeneral.Tag = "70";
+            this.lblComandaGeneral.Tag = "100";
             this.lblComandaGeneral.Text = "Comanda General";
             // 
             // dataGridViewComandaGeneral
@@ -87,7 +87,7 @@
             this.dataGridViewComandaGeneral.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewComandaGeneral.Size = new System.Drawing.Size(391, 401);
             this.dataGridViewComandaGeneral.TabIndex = 22;
-            this.dataGridViewComandaGeneral.Tag = "71";
+            this.dataGridViewComandaGeneral.Tag = "101";
             // 
             // lblComandaActual
             // 
@@ -98,7 +98,7 @@
             this.lblComandaActual.Name = "lblComandaActual";
             this.lblComandaActual.Size = new System.Drawing.Size(185, 26);
             this.lblComandaActual.TabIndex = 27;
-            this.lblComandaActual.Tag = "70";
+            this.lblComandaActual.Tag = "105";
             this.lblComandaActual.Text = "Comanda actual";
             // 
             // dataGridViewComandaActual
@@ -114,7 +114,7 @@
             this.dataGridViewComandaActual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewComandaActual.Size = new System.Drawing.Size(391, 401);
             this.dataGridViewComandaActual.TabIndex = 26;
-            this.dataGridViewComandaActual.Tag = "71";
+            this.dataGridViewComandaActual.Tag = "104";
             // 
             // FormVerComanda
             // 
@@ -128,6 +128,7 @@
             this.Controls.Add(this.lblComandaGeneral);
             this.Controls.Add(this.dataGridViewComandaGeneral);
             this.Name = "FormVerComanda";
+            this.Tag = "106";
             this.Text = "FormVerComanda";
             this.Load += new System.EventHandler(this.FormVerComanda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandaGeneral)).EndInit();

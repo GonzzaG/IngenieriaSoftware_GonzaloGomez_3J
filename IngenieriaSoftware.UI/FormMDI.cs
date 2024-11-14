@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
@@ -18,6 +19,7 @@ namespace IngenieriaSoftware.UI
         internal UsuarioBLL usuarioBLL;
         internal PermisoBLL permisoBLL;
         internal IdiomaBLL idiomaBLL;
+        internal ComandaBLL comandaBLL;
         internal TraduccionBLL traduccionBLL;
         private List<PermisoDTO> permisosUsuario;
         private SessionManager _sessionManager;
@@ -27,6 +29,8 @@ namespace IngenieriaSoftware.UI
         private readonly ControlesHelper _controlesHelper;
         private readonly HelperExcepciones _helperExcepciones;
         private IdiomaSujeto _idiomaObserver;
+
+        public NotificacionService _notificacionService => new NotificacionService();
 
         public event Action ActualizarFormsHijos;
 
@@ -39,6 +43,7 @@ namespace IngenieriaSoftware.UI
             usuarioBLL = new UsuarioBLL();
             permisoBLL = new PermisoBLL();
             idiomaBLL = new IdiomaBLL();
+            comandaBLL = new ComandaBLL();
             traduccionBLL = new TraduccionBLL();
             _authService = new AuthService();
             ItraduccionServicio = new TraduccionBLL();
@@ -90,8 +95,8 @@ namespace IngenieriaSoftware.UI
         }
 
         private void MDI_Load(object sender, EventArgs e)
-        {        
-          
+        {
+            VerificarNotificaciones();
         }
 
         public List<IdiomaDTO> CargarIdiomas()
@@ -117,10 +122,12 @@ namespace IngenieriaSoftware.UI
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
+           // PermisosData.Permisos = AuthService.PermisosUsuario;
             var permisosUsuario = AuthService.PermisosUsuario;
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
 
+           
 
         }
 
@@ -214,14 +221,46 @@ namespace IngenieriaSoftware.UI
             formHijo.Size = this.Size;
             formHijo.Show();
         }
+        private void MostrarNotificacion(string mensaje)
+        {
+            DialogResult result= MessageBox.Show(mensaje + " Quiere ir a la pantalla de comandas listas?", "Notificación", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+
+            if (result == DialogResult.Yes)
+            {
+                FormComandasAEntregar formComandasAEntregar = new FormComandasAEntregar();
+                formComandasAEntregar.ShowDialog();
+            }
+            else
+            {
+                
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void VerificarPermisosRoles(List<PermisoDTO> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
-
+            
             if (PermisoChecker.TienePermiso(permisos, "PERM_ADMIN"))
             {
                 //permisosPermitidos.Add( "PERM_ADMIN");
+                permisosPermitidos.Add("PERM_ADMIN");
+                permisosPermitidos.Add("PERM_CAJA");
+                permisosPermitidos.Add("PERM_MESERO");
+                permisosPermitidos.Add("PERM_COCINA");
                 permisosPermitidos.Add("PERM_GEST_USUARIO");
                 permisosPermitidos.Add("PERM_GEST_PERMISOS");
                 permisosPermitidos.Add("PERM_GEST_PERMISOS");
@@ -240,6 +279,7 @@ namespace IngenieriaSoftware.UI
 
                 if (PermisoChecker.TienePermiso(permisos, "PERM_CAJA"))
                 {
+                    permisosPermitidos.Add("PERM_CAJA");
                     permisosPermitidos.Add("PERM_GEST_COBROS");
                     cobrosToolStripMenuItem.Visible = true;
                 }
@@ -251,8 +291,11 @@ namespace IngenieriaSoftware.UI
 
                 if (PermisoChecker.TienePermiso(permisos, "PERM_MESERO"))
                 {
+                    //aca se va a suscribir al evento que lo notifique 
+                    permisosPermitidos.Add("PERM_MESERO");
                     permisosPermitidos.Add("PERM_GEST_MESAS");
                     mesasToolStripMenuItem.Visible = true;
+
                 }
                 else
                 {
@@ -262,6 +305,7 @@ namespace IngenieriaSoftware.UI
 
                 if (PermisoChecker.TienePermiso(permisos, "PERM_COCINA"))
                 {
+                    permisosPermitidos.Add("PERM_COCINA");
                     permisosPermitidos.Add("PERM_GEST_COMANDAS");
                     comandasToolStripMenuItem.Visible = true;
                 }
@@ -277,6 +321,7 @@ namespace IngenieriaSoftware.UI
                 //Usuario no tiene permisos
             }
 
+            PermisosData.Permisos = permisosPermitidos;
             mostrarPermisosDelUsuario(permisosPermitidos);
         }
 
@@ -410,9 +455,13 @@ namespace IngenieriaSoftware.UI
 
         private void CerrarFormulariosHijos()
         {
-            foreach (Form childForm in this.MdiChildren)
+            if (this.HasChildren)
             {
-                childForm.Close();
+                foreach (Form childForm in this.MdiChildren)
+                {
+                    childForm.Close();
+                }
+
             }
         }
 
@@ -439,14 +488,8 @@ namespace IngenieriaSoftware.UI
 
         public void ActualizarEtiquetas()
         {
-            // Instanciar todos los formularios
             var formularios = HelperForms.InstanciarTodosLosFormularios(this);
-
-            //agregamos el formulario mdi
             formularios.Add(this); 
-            
-            // ListarControles devuelve un Dictionary<string, IdiomaSuscriptorDTO
-            //Asi que, lo paso a un Dictionary<string, IIdiomaSusctriptor, para poder pasarlo como argumento en AgregarEtiqueta
             Dictionary<string, IIdiomaObservador> etiquetasEnMemoria = ControlesHelper.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaObservador)p.Value);
 
             var etiquetasExcepciones = HelperExcepciones.ListarExcepciones();
@@ -454,8 +497,6 @@ namespace IngenieriaSoftware.UI
             {
                 etiquetasEnMemoria[etiquetaExcepcion.Key] = etiquetaExcepcion.Value;
             }
-
-            // Guardar etiquetas nuevas en la base de datos si hay alguna
             idiomaBLL.AgregarEtiqueta(etiquetasEnMemoria); 
             
         }
@@ -464,15 +505,11 @@ namespace IngenieriaSoftware.UI
         {
             foreach (Control c in control.Controls)
             {
-                // Verificar si ya existe una etiqueta con el nombre del control en la base de datos
                 if (!etiquetasEnBD.Any(e => e.Name == c.Name))
                 {
-                    // Si no existe, crear una nueva etiqueta y agregarla a la lista de etiquetas nuevas
                     var nuevaEtiqueta = new EtiquetaDTO { Tag = (int)c.Tag, Name = c.Name };
                     etiquetasNuevas.Add(nuevaEtiqueta);
                 }
-
-                // Si el control es un MenuStrip, registrar los elementos de menú
                 if (c is MenuStrip menuStrip)
                 {
                     foreach (ToolStripItem menuItem in menuStrip.Items)
@@ -480,8 +517,6 @@ namespace IngenieriaSoftware.UI
                         RegistrarEtiquetasDeMenu(menuItem, etiquetasEnBD, etiquetasNuevas);
                     }
                 }
-
-                // Llamada recursiva para controles hijos
                 if (c.HasChildren)
                 {
                     RegistrarEtiquetasDeControles(c, etiquetasEnBD, etiquetasNuevas);
@@ -489,18 +524,14 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        // Método auxiliar para registrar etiquetas de los elementos de menú
         private void RegistrarEtiquetasDeMenu(ToolStripItem menuItem, List<EtiquetaDTO> etiquetasEnBD, List<EtiquetaDTO> etiquetasNuevas)
         {
-            // Verificar si ya existe una etiqueta con el nombre del elemento de menú en la base de datos
             if (!etiquetasEnBD.Any(e => e.Name == menuItem.Name))
             {
-                // Si no existe, crear una nueva etiqueta y agregarla a la lista de etiquetas nuevas
                 var nuevaEtiqueta = new EtiquetaDTO { Name = menuItem.Name };
                 etiquetasNuevas.Add(nuevaEtiqueta);
             }
 
-            // Si el elemento de menú es un ToolStripMenuItem, verificar si tiene subelementos
             if (menuItem is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.DropDownItems.Count > 0)
             {
                 foreach (ToolStripItem subItem in toolStripMenuItem.DropDownItems)
@@ -518,6 +549,7 @@ namespace IngenieriaSoftware.UI
 
         private void comandasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+          
         }
 
         private void mesasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -531,25 +563,57 @@ namespace IngenieriaSoftware.UI
             var idiomaId = (IdiomaData.Idiomas.Find(I => I.Nombre == comboBoxIdiomas.SelectedItem.ToString())).Id;
            
             _idiomaObserver.CambiarEstado(idiomaId);
-
-            
-            ActualizarFormsHijos?.Invoke();
-   
-            
+            ActualizarFormsHijos?.Invoke();         
         }
 
         private void gestionarMesasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
             AbrirFormHijo(formGestionarMesas);
-            //FormGestionarMesas formGestionarMesas = new FormGestionarMesas();
-            //AbrirFormHijo(formGestionarMesas);
         }
 
         private void aBMMesasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormABMMesas formGestionarMesas = new FormABMMesas();
             AbrirFormHijo(formGestionarMesas);
+        }
+
+        private void comandasCocinaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //aca es donde la cocina podra visualizar las comandas que esten en espera de preparacion, en preparacion
+            // tambien es donde podran confirmarlas
+            FormGestionarComandas formGestionarComandas = new FormGestionarComandas();
+            AbrirFormHijo(formGestionarComandas);
+        }
+
+        private void comandasAEntregarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormComandasAEntregar formComandasAEntregar = new FormComandasAEntregar();
+            AbrirFormHijo(formComandasAEntregar);
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+               PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
+        }
+
+        private void verFacturasPendientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestionarFacturas formGestionarFacturas = new FormGestionarFacturas();
+            AbrirFormHijo(formGestionarFacturas);
         }
     }
 }

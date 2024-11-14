@@ -5,10 +5,12 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormRegistrarUsuario : Form
+    public partial class FormRegistrarUsuario : Form, IActualizable
     {
         private readonly AuthService _authService = new AuthService();
         private readonly UsuarioBLL _usuarioBLL;
+
+        public NotificacionService _notificacionService => new NotificacionService();
 
         public FormRegistrarUsuario()
         {
@@ -38,6 +40,7 @@ namespace IngenieriaSoftware.UI
 
         private void GestionUsuarios_Load(object sender, EventArgs e)
         {
+            VerificarNotificaciones();
             comboBoxCategorias.Items.Add("Administrador");
             comboBoxCategorias.Items.Add("Mesero");
             comboBoxCategorias.Items.Add("Caja");
@@ -86,6 +89,19 @@ namespace IngenieriaSoftware.UI
 
         private void label1_Click_1(object sender, EventArgs e)
         {
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+                PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
     }
 }

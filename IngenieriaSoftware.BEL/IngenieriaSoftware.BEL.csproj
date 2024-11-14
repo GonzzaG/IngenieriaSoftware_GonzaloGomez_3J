@@ -41,20 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constantes\EstadoProducto.cs" />
+    <Compile Include="Constantes\EstadoComanda.cs" />
+    <Compile Include="Constantes\EstadoComandaProductos.cs" />
+    <Compile Include="Constantes\EstadoFactura.cs" />
     <Compile Include="Constantes\TipoProducto.cs" />
     <Compile Include="Empleados\Administrador.cs" />
     <Compile Include="Constantes\EstadoMesa.cs" />
+    <Compile Include="Factura.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />
     <Compile Include="Idiomas\Traduccion.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="ISujeto.cs" />
+    <Compile Include="MedioDePago.cs" />
+    <Compile Include="Negocio\Cliente.cs" />
     <Compile Include="Negocio\Comanda.cs" />
     <Compile Include="Negocio\ComandaProducto.cs" />
     <Compile Include="Negocio\Mesa.cs" />
+    <Compile Include="Negocio\Notificacion.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Negocio\Producto.cs" />
+    <Compile Include="ProductoFactura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

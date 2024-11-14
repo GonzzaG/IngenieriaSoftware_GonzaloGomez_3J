@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Constantes;
+using IngenieriaSoftware.BEL.Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,7 @@ namespace IngenieriaSoftware.DAL.Mapper
         public List<Producto> MapearProductosDesdeDataSet(DataSet pDs)
         {
             List<Producto> productos = new List<Producto>();
+
             foreach (DataRow row in pDs.Tables[0].Rows)
             {
                 Producto producto = new Producto();
@@ -31,5 +33,7 @@ namespace IngenieriaSoftware.DAL.Mapper
             }
             return productos;
         }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.Servicios;
+using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
@@ -9,10 +11,25 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
         }
 
+        public NotificacionService _notificacionService => new NotificacionService();
+
         #region Metodos de Interfaz
         public void Actualizar()
         {
 
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+                PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
         #endregion
 
@@ -26,7 +43,7 @@ namespace IngenieriaSoftware.UI
         }
         private void FormGestionarIdioma_Load(object sender, System.EventArgs e)
         {
-
+            VerificarNotificaciones();
         }
     }
 }

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,8 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthService.cs" />
+    <Compile Include="ClienteBLL.cs" />
+    <Compile Include="ComandaBLL.cs" />
+    <Compile Include="FacturaBLL.cs" />
     <Compile Include="IdiomaBLL.cs" />
+    <Compile Include="MedioDePagoBLL.cs" />
     <Compile Include="Mesas\MesaBLL.cs" />
+    <Compile Include="NotificacionService.cs" />
     <Compile Include="Permiso\PermisoBLL.cs" />
     <Compile Include="Permiso\PermisoManager.cs" />
     <Compile Include="ProductoBLL.cs" />

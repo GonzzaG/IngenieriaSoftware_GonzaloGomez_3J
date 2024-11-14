@@ -26,28 +26,28 @@ que no hay en memoria, las borramos. comparándolas por tag
 lo que pasa es que cuando cierro sesion, se muestra el form inicio de sesion en español y despues de aceptar se vuelve a cambiar
 - Hacer que cuando se elimine, agregue o modifique una mesa, aparezcan excepciones de si fue correcto o incorrecto la operacion
 - Actualizar las mesas cuando se agregue, elimine o modifique una mesa, tanto en formabm o formGestionarMesas
-
-- (DUDA) Cuando se asigne una mesa en FormGestionarMesa, modificar en base de datos la fecha que tiene dicha mesa
-lo que podria hacer es agregar una tabla Reserva de mesas y eliminar el campo reserva de la tabla mesas. asi puedo gestionar
-multiples reservas
-
-Reserva
--------------------------
-ReservaId       int          -- Identificador único de la reserva
-MesaId          int          -- Relación con Mesa
-ClienteId       int          -- Relación con Cliente (opcional)
-FechaHoraInicio datetime     -- Fecha y hora de inicio de la reserva
-FechaHoraFin    datetime     -- Fecha y hora de finalización de la reserva (opcional)
-Estado          varchar      -- Estado de la reserva (confirmada, en espera, cancelada, etc.)
-Observaciones   varchar      -- Notas o requerimientos especiales
-
-
 - En el formulario de nueva mesa, puedo poner 2 labels, uno de 'Nueva Mesa' otro de 'Modificar Mesa' Depende el estado que le pase
 como parametron al constructor, pongo como visible uno u otro, asi me despreocupo por varias traducciones en un label, puedo
 hacer lo mismo con el boton. 
 - Tengo que rellenar Tambien los campos que esten completos en el formulario de modificarMesa
 - OPCIONAL--- colocar la cantidad de comensales con un numeric en FormGestionarMesas, que se asignen a la mesa correspondiente
 - una mesa va a tener una unica comanda la cual se pueden ir agregando cosas a ella a medida que se va solicitando y luego lo que debo hacer es ir obteniendo siempre esa tabla para obtener los productos que posee la comanda de dicha mesa. y si quiero agregar productosComanda. habran algunos que ya fueron entregados, por ende esos no iran a cocina, pero iran como una lista  normal, no les pasare tooda la comanda.
+-RECORDATORIO... en el formulario de verComanda, al apretar aceptar la comanda, voy a tener que guardar todos los comandaproductos
+de la grid derecha en la base de datos, una vez aceptada, cerrare este formulario y la lista de comandaProductos en memoria se 
+limpiara. Ademas de aceptar la comanda, se le senviara al sector de cocina donde podra ver las comandas las cuales estan en espera
+para su preparacion.
+-Implementar que se pueda ver un resumen de lo que se lleva consumido hasta el momento (comandaproductos relacionadas a la mesa y comanda id correspondientes)
+-- IMPORTANTE-----antes de cerrar la cuenta, todos los comandaProductos de esa comanda tienen ue estar ene stado ENTREGADO
+
+
+
+
+--un formulario de cobros que me va a mostrar todas las facturas que no hayan sido abonadas (EstadoPago = 0)
+cuando seleccione uno, presiono para pagar y esta factura debe marcarse como (EstadoPago = 1)
+
+
+
+
 
 ULTIMO TAG 90
 

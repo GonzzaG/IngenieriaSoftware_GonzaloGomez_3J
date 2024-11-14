@@ -18,6 +18,8 @@ namespace IngenieriaSoftware.UI
 
         private FormMDI formPadre;
 
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public AgregarIdioma()
         {
             InitializeComponent();
@@ -29,6 +31,7 @@ namespace IngenieriaSoftware.UI
         {
             formPadre = this.MdiParent as FormMDI;
             Actualizar();
+            VerificarNotificaciones();
         }
 
 
@@ -126,6 +129,19 @@ namespace IngenieriaSoftware.UI
         {
             txtEtiqueta.Text = string.Empty;
             txtTraduccion.Text = string.Empty;
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+                PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
     }
 }
