@@ -50,11 +50,13 @@ namespace IngenieriaSoftware.UI
                     //Cuando la mesa se desocupe, se tendra que sacar el estado de la mesa
                 };
                 _mesaBLL.GuardarMesa(mesa);
-
+               
                 this.Close();
             }
             catch (Exception ex)
             {
+                MessageBox.Show("La mesa se creo con exito");
+           
                 //Excepcion 1
                 //excepcion personalizada por si no se completaron los campos correctamente
                 //Excepcion 2

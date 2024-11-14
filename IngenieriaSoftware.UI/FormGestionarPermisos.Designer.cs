@@ -64,7 +64,7 @@
             // lblTodosLosPermisos
             // 
             this.lblTodosLosPermisos.AutoSize = true;
-            this.lblTodosLosPermisos.Location = new System.Drawing.Point(570, 55);
+            this.lblTodosLosPermisos.Location = new System.Drawing.Point(673, 55);
             this.lblTodosLosPermisos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTodosLosPermisos.Name = "lblTodosLosPermisos";
             this.lblTodosLosPermisos.Size = new System.Drawing.Size(97, 13);
@@ -84,17 +84,17 @@
             // 
             // treeViewPermisos
             // 
-            this.treeViewPermisos.Location = new System.Drawing.Point(572, 80);
+            this.treeViewPermisos.Location = new System.Drawing.Point(663, 91);
             this.treeViewPermisos.Name = "treeViewPermisos";
-            this.treeViewPermisos.Size = new System.Drawing.Size(187, 254);
+            this.treeViewPermisos.Size = new System.Drawing.Size(285, 314);
             this.treeViewPermisos.TabIndex = 18;
             this.treeViewPermisos.Tag = "64";
             // 
             // treeViewPermisoUsuario
             // 
-            this.treeViewPermisoUsuario.Location = new System.Drawing.Point(326, 80);
+            this.treeViewPermisoUsuario.Location = new System.Drawing.Point(327, 91);
             this.treeViewPermisoUsuario.Name = "treeViewPermisoUsuario";
-            this.treeViewPermisoUsuario.Size = new System.Drawing.Size(187, 254);
+            this.treeViewPermisoUsuario.Size = new System.Drawing.Size(285, 314);
             this.treeViewPermisoUsuario.TabIndex = 20;
             this.treeViewPermisoUsuario.Tag = "35";
             // 
@@ -125,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 469);
+            this.ClientSize = new System.Drawing.Size(1156, 546);
             this.Controls.Add(this.btnDesasignarPermiso);
             this.Controls.Add(this.treeViewPermisoUsuario);
             this.Controls.Add(this.lblPermisosUsuario);

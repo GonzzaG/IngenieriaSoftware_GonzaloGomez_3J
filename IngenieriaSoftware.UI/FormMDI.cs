@@ -237,19 +237,6 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void VerificarPermisosRoles(List<PermisoDTO> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
@@ -268,6 +255,10 @@ namespace IngenieriaSoftware.UI
                 permisosPermitidos.Add("PERM_GEST_CAJA");
                 permisosPermitidos.Add("PERM_GEST_MESAS");
                 permisosPermitidos.Add("PERM_GEST_COBROS");
+                permisosPermitidos.Add("PERM_ABM_MESAS");
+                permisosPermitidos.Add("PERM_VER_FACTURAS");
+                permisosPermitidos.Add("PERM_COM_COCINA");
+                permisosPermitidos.Add("PERM_COM_ENTREGAR");
 
                 gestionUsuariosToolStripMenuItem.Visible = true;
                 gestionIdiomasToolStripMenuItem.Visible = true;
@@ -281,6 +272,8 @@ namespace IngenieriaSoftware.UI
                 {
                     permisosPermitidos.Add("PERM_CAJA");
                     permisosPermitidos.Add("PERM_GEST_COBROS");
+                    permisosPermitidos.Add("PERM_VER_FACTURAS");
+
                     cobrosToolStripMenuItem.Visible = true;
                 }
                 else
@@ -294,19 +287,24 @@ namespace IngenieriaSoftware.UI
                     //aca se va a suscribir al evento que lo notifique 
                     permisosPermitidos.Add("PERM_MESERO");
                     permisosPermitidos.Add("PERM_GEST_MESAS");
-                    mesasToolStripMenuItem.Visible = true;
+                    permisosPermitidos.Add("PERM_COM_ENTREGAR");
 
+                    mesasToolStripMenuItem.Visible = true;
+                    comandasToolStripMenuItem.Visible = true;
                 }
                 else
                 {
                     //no tiene permiso de gestionar Mesas
                     mesasToolStripMenuItem.Visible = false;
+                    comandasToolStripMenuItem.Visible = false;
                 }
 
                 if (PermisoChecker.TienePermiso(permisos, "PERM_COCINA"))
                 {
                     permisosPermitidos.Add("PERM_COCINA");
                     permisosPermitidos.Add("PERM_GEST_COMANDAS");
+                    permisosPermitidos.Add("PERM_COM_COCINA");
+
                     comandasToolStripMenuItem.Visible = true;
                 }
                 else
@@ -314,6 +312,7 @@ namespace IngenieriaSoftware.UI
                     //no tiene permiso de gestionar Mesas
                     comandasToolStripMenuItem.Visible = false;
                 }
+
             }
 
             if (permisos.Count == 0)
@@ -426,7 +425,6 @@ namespace IngenieriaSoftware.UI
                 //no tiene permiso de gestionar Mesas
                 asignarPermisosToolStripMenuItem.Visible = false;
             }
-
             if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_IDIOMAS"))
             {
                 permisosPermitidos.Add("PERM_GEST_IDIOMAS");
@@ -438,6 +436,50 @@ namespace IngenieriaSoftware.UI
                 gestionIdiomasToolStripMenuItem.Visible = false;
             }
 
+            if (PermisoChecker.TienePermiso(permisos, "PERM_ABM_MESAS"))
+            {
+                permisosPermitidos.Add("PERM_ABM_MESAS");
+                aBMMesasToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                //no tiene permiso de ABM MESASs
+                aBMMesasToolStripMenuItem.Visible = false;
+            }
+
+            if (PermisoChecker.TienePermiso(permisos, "PERM_VER_FACTURAS"))
+            {
+                permisosPermitidos.Add("PERM_VER_FACTURAS");
+                fToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                //no tiene permiso de ver facturas
+                fToolStripMenuItem.Visible = false;
+            }
+
+            if (PermisoChecker.TienePermiso(permisos, "PERM_COM_COCINA"))
+            {
+                permisosPermitidos.Add("PERM_COM_COCINA");
+                comandasCocinaToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                //no tiene permiso de ver comandas de la cocina
+                comandasCocinaToolStripMenuItem.Visible = false;
+            }
+
+            if (PermisoChecker.TienePermiso(permisos, "PERM_COM_ENTREGAR"))
+            {
+                permisosPermitidos.Add("PERM_COM_ENTREGAR");
+                comandasToolStripMenuItem.Visible = true;
+                comandasAEntregarToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                //no tiene permiso de ver comandas a entregar
+                comandasAEntregarToolStripMenuItem.Visible = false;
+            }
             mostrarPermisosDelUsuario(permisosPermitidos);
         }
 
