@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using IngenieriaSoftware.BLL.Mesas;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -19,6 +20,7 @@ namespace IngenieriaSoftware.BLL
         private readonly FacturaDAL _facturaDAL = new FacturaDAL();
         private readonly ComandaBLL _comandaBLL = new ComandaBLL();
         private readonly MedioDePagoBLL _medioDePagoBLL = new MedioDePagoBLL();
+        private readonly MesaBLL _mesaBLL = new MesaBLL();
 
         private Factura Factura;
         public FacturaBLL()
@@ -168,7 +170,7 @@ namespace IngenieriaSoftware.BLL
         {
             using(var transaction = new TransactionScope())
             {
-                var factura = _facturaDAL.ObtenerFacturasPorFacturaId(facturaId);
+                var factura = _facturaDAL.ObtenerFacturaPorFacturaId(facturaId);
 
                 if(factura != null && 
                    factura.EstadoPago is EstadoFactura.Estado.PendienteDePago)
@@ -188,7 +190,7 @@ namespace IngenieriaSoftware.BLL
         {
             using (var transaction = new TransactionScope())
             {
-                var factura = _facturaDAL.ObtenerFacturasPorFacturaId(facturaId);
+                var factura = _facturaDAL.ObtenerFacturaPorFacturaId(facturaId);
 
                 if (factura != null &&
                    factura.EstadoPago is EstadoFactura.Estado.Solicitada)
@@ -223,6 +225,41 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
+        public void CambiarEstadoFacturaEntregada(int facturaId, int mesaId)
+        {
+            using (var transaction = new TransactionScope())
+            {
+                _facturaDAL.CambiarEstadoFactura(facturaId, (int)EstadoFactura.Estado.Entregada);
+                _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
+                transaction.Complete();
+            }
+        }
 
+
+        public List<ProductoFactura> ObtenerProductosPorFacturaId(int facturaId)
+        {
+            using (var transaction = new TransactionScope())
+            {
+                var productosFactura = _facturaDAL.ObtenerProductosPorFacturaId(facturaId);
+                transaction.Complete();
+                return productosFactura;
+            }
+        }
+
+        public Factura ObtenerFacturaPorMesaYComanda(int mesaId, int comandaId)
+        {
+            using (var transaction = new TransactionScope())
+            {
+                var factura = _facturaDAL.ObtenerFacturaPorMesaYComanda(mesaId, comandaId);
+                if(factura.EstadoPago != EstadoFactura.Estado.Pagada)
+                {
+                    factura = null;
+                }
+                transaction.Complete();
+                return factura;
+            }
+        }
+
+   
     }
 }

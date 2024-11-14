@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -184,9 +186,43 @@ namespace IngenieriaSoftware.UI
 
         }
 
+        private PrintDocument printDocument = new PrintDocument();
+        private Bitmap memoryImage;
+
         private void btnCobrar_Click(object sender, EventArgs e)
         {
-            //veo si puedo imprimir la factura y tabmien marcarla como entregada
+            try
+            {
+                int mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
+                var mesas = (List<Mesa>)dataGridViewMesas.DataSource;
+                Mesa mesa = mesas
+                    .Where(m => m.MesaId == mesaId)
+                    .First(m => m.EstadoMesa == EstadoMesa.Estado.Cerrada);
+
+                if(mesa == null) { return; }
+                //veo si puedo imprimir la factura y tabmien marcarla como entregada
+                int comandaId = _comandaBLL.ObtenerComandaPorMesaId(mesa.MesaId).ComandaId;
+
+                var padre = this.MdiParent as FormMDI;
+                FormFacturaAEntregar formGestionarFacturas = new FormFacturaAEntregar(mesa.MesaId, comandaId);
+
+                padre.AbrirFormHijo(formGestionarFacturas);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("La mesa tiene que estar cerrada para cobrar");
+            }
+        }
+
+        private void CapturaDePantalla()
+        {
+            Graphics myGraphics = this.CreateGraphics();
+            Size s = this.Size;
+            memoryImage = new Bitmap(s.Width, s.Height, myGraphics);
+
+            // Dibujar el formulario en el bitmap
+            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
+            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
         }
     }
 }

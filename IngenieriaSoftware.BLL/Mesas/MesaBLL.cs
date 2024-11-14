@@ -18,6 +18,10 @@ namespace IngenieriaSoftware.BLL.Mesas
         private readonly FacturaBLL _facturaBLL = new FacturaBLL();
         private List<Mesa> _mesas;
 
+        public MesaBLL()
+        {
+
+        }
         public List<Mesa> Mesas()
         {
             if(_mesas == null)
@@ -77,11 +81,19 @@ namespace IngenieriaSoftware.BLL.Mesas
             }
         }
 
-        private void CambiarEstadoMesaCerrada(int mesaId)
+        public void CambiarEstadoMesaCerrada(int mesaId)
         {
             _mesaDAL.CambiarEstadoMesaCerrada(mesaId);
         }
+        public void CambiarEstadoMesaDesocupada(int mesaId)
+        {
+            using(var transaction = new TransactionScope())
+            {
+                _mesaDAL.CambiarEstadoMesa(mesaId, (int)EstadoMesa.Estado.Desocupada);
 
+                transaction.Complete();
+            }
+        }
         public List<Mesa> GuardarMesa(Mesa mesa)
         {
             _mesas = _mesaDAL.GuardarMesa(mesa);

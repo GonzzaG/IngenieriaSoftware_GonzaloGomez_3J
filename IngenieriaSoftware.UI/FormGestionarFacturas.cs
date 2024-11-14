@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BEL.Constantes;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
@@ -21,7 +22,7 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
 
         }
-
+    
         public NotificacionService _notificacionService =>  new NotificacionService();
 
         public void Actualizar()
@@ -34,6 +35,7 @@ namespace IngenieriaSoftware.UI
                 comboBoxFiltroEstado.Items.Add(e);
             }
 
+            //dataGridViewFacturas.DataSource = null;
         }
 
         public void VerificarNotificaciones()
@@ -60,6 +62,13 @@ namespace IngenieriaSoftware.UI
 
             var estadoNombre = comboBoxFiltroEstado.SelectedItem.ToString();
 
+          //  dataGridViewFacturas.DataSource = null;
+
+            ListarFacturas(estadoNombre);
+        }
+
+        private void ListarFacturas(string estadoNombre)
+        {
             dataGridViewFacturas.DataSource = null;
 
             if (Enum.TryParse(estadoNombre, out EstadoFactura.Estado estado))
@@ -95,15 +104,22 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-
         private void btnMarcarComoPagado_Click(object sender, EventArgs e)
         {
             if(dataGridViewFacturas.SelectedRows.Count == 0) { return; }
 
             var facturaId = (int)dataGridViewFacturas.SelectedRows[0].Cells[0].Value;
-            if(facturaId > 0)
+            CambiarEstadoFacturaPagada(facturaId);
+
+            string estado = (comboBoxFiltroEstado.SelectedItem.ToString());
+            ListarFacturas(estado);
+        }
+
+        private void CambiarEstadoFacturaPagada(int facturaId)
+        {
+            if (facturaId > 0)
             {
-                var esPendienteDePago =_facturaBLL.FacturaPendienteDePago(facturaId);
+                var esPendienteDePago = _facturaBLL.FacturaPendienteDePago(facturaId);
 
                 if (esPendienteDePago)
                 {
@@ -116,11 +132,8 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        private void btnPendienteDePago_Click_1(object sender, EventArgs e)
+        private void CambiarEstadoFacturaPendienteDePago(int facturaId)
         {
-            if (dataGridViewFacturas.SelectedRows.Count == 0) { return; }
-
-            var facturaId = (int)dataGridViewFacturas.SelectedRows[0].Cells[0].Value;
             if (facturaId > 0)
             {
                 var esSolicitada = _facturaBLL.FacturaSolicitada(facturaId);
@@ -134,6 +147,18 @@ namespace IngenieriaSoftware.UI
                     MessageBox.Show("La factura debe encontrarse 'Solicitada' para marcarla como pendiente de pago");
                 }
             }
+        }
+
+        private void btnPendienteDePago_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridViewFacturas.SelectedRows.Count == 0) { return; }
+
+            var facturaId = (int)dataGridViewFacturas.SelectedRows[0].Cells[0].Value;
+
+            CambiarEstadoFacturaPendienteDePago(facturaId);
+
+            string estado = (comboBoxFiltroEstado.SelectedItem.ToString());
+            ListarFacturas(estado);
         }
     }
 }

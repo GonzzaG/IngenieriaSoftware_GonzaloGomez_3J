@@ -15,6 +15,8 @@ namespace IngenieriaSoftware.DAL.EntityDAL
     {
         private readonly DAO _dao = new DAO();
         private readonly FacturaMapper _facturaMapper = new FacturaMapper();
+        private readonly ProductoFacturaMapper _productoFacturaMapper = new ProductoFacturaMapper();
+
         public FacturaDAL() { }
 
         public int GuardarFactura(Factura factura)
@@ -54,6 +56,87 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         }
 
 
+        public List<Factura> ObtenerFacturasPorEstado(int Estado)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Estado", Estado)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerFacturasPorEstado", parametros);
+
+                var facturas = _facturaMapper.MapearFacturasDesdeDataSet(mDs);
+
+                return facturas;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Factura ObtenerFacturaPorFacturaId(int facturaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@FacturaId", facturaId)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerFacturaPorId", parametros);
+
+                var factura = _facturaMapper.MapearFacturasDesdeDataSet(mDs)[0];
+
+                return factura;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Factura ObtenerFacturaPorMesaYComanda(int mesaId, int comandaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@MesaId", mesaId),
+                    new SqlParameter("@ComandaId", comandaId)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerFacturaPorMesaYComanda", parametros);
+                
+                var factura = _facturaMapper.MapearFacturasDesdeDataSet(mDs)[0];
+
+                return factura;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void CambiarEstadoFactura(int facturaId, int nuevoEstado)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@FacturaId", facturaId),
+                    new SqlParameter("@NuevoEstado", nuevoEstado)
+                };
+
+                _dao.ExecuteNonQuery("sp_CambiarEstadoFactura", parametros);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void GuardarProductosFactura(int facturaId, List<ProductoFactura> productosFactura)
         {
             try
@@ -86,20 +169,19 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-        public List<Factura> ObtenerFacturasPorEstado(int Estado)
+        public List<ProductoFactura> ObtenerProductosPorFacturaId(int facturaId)
         {
             try
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@Estado", Estado)
+            new SqlParameter("@FacturaId", facturaId)
                 };
 
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerFacturasPorEstado", parametros);
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerProductosPorFacturaId", parametros);
+                var productosFactura = _productoFacturaMapper.MapearProductosFacturaDesdeDataSet(mDs);
 
-                var facturas = _facturaMapper.MapearFacturasDesdeDataSet(mDs);
-
-                return facturas;
+                return productosFactura;
             }
             catch (Exception ex)
             {
@@ -107,44 +189,6 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-        public Factura ObtenerFacturasPorFacturaId(int facturaId)
-        {
-            try
-            {
-                SqlParameter[] parametros = new SqlParameter[]
-                {
-                    new SqlParameter("@FacturaId", facturaId)
-                };
 
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerFacturaPorId", parametros);
-
-                var factura = _facturaMapper.MapearFacturasDesdeDataSet(mDs)[0];
-
-                return factura;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public void CambiarEstadoFactura(int facturaId, int nuevoEstado)
-        {
-            try
-            {
-                SqlParameter[] parametros = new SqlParameter[]
-                {
-                    new SqlParameter("@FacturaId", facturaId),
-                    new SqlParameter("@NuevoEstado", nuevoEstado)
-                };
-
-                _dao.ExecuteNonQuery("sp_CambiarEstadoFactura", parametros);
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
     }
 }

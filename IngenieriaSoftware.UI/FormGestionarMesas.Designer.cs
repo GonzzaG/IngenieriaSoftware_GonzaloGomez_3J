@@ -34,6 +34,7 @@
             this.btnRealizarComanda = new System.Windows.Forms.Button();
             this.btnSolicitarCuenta = new System.Windows.Forms.Button();
             this.btnEntregarFactura = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,7 +91,7 @@
             // 
             // btnSolicitarCuenta
             // 
-            this.btnSolicitarCuenta.Location = new System.Drawing.Point(489, 375);
+            this.btnSolicitarCuenta.Location = new System.Drawing.Point(489, 366);
             this.btnSolicitarCuenta.Margin = new System.Windows.Forms.Padding(2);
             this.btnSolicitarCuenta.Name = "btnSolicitarCuenta";
             this.btnSolicitarCuenta.Size = new System.Drawing.Size(162, 45);
@@ -108,7 +109,7 @@
             this.btnEntregarFactura.Size = new System.Drawing.Size(162, 45);
             this.btnEntregarFactura.TabIndex = 17;
             this.btnEntregarFactura.Tag = "74";
-            this.btnEntregarFactura.Text = "Entregar Factura";
+            this.btnEntregarFactura.Text = "Cobrar";
             this.btnEntregarFactura.UseVisualStyleBackColor = true;
             this.btnEntregarFactura.Click += new System.EventHandler(this.btnCobrar_Click);
             // 
@@ -142,5 +143,6 @@
         private System.Windows.Forms.Button btnRealizarComanda;
         private System.Windows.Forms.Button btnSolicitarCuenta;
         private System.Windows.Forms.Button btnEntregarFactura;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
