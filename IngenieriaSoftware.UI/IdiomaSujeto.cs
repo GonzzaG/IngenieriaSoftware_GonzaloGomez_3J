@@ -46,7 +46,6 @@ namespace IngenieriaSoftware.UI
                 {
                     string traduccion;
 
-                    // Se intenta obtener la traduccion del diccionario de traducciones
                     if (IdiomaData.TagTraducciones.TryGetValue(suscriptor.Tag.ToString(), out traduccion) && traduccion != null)
                     {
                         suscriptor.Actualizar(traduccion);
