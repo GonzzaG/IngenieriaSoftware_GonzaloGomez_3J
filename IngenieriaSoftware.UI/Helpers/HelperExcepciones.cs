@@ -32,7 +32,7 @@ namespace IngenieriaSoftware.UI.Helpers
 
                 if (tagAttribute == null)
                 {
-                    continue; // Si no tiene el atributo Tag, saltamos esta excepción
+                    continue;
                 }
 
                 int tag = tagAttribute.Tag; // Obtener el tag desde el atributo

@@ -15,12 +15,11 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar(string nuevoTexto)
         {
-            // Si es un Control, aplicar el texto según las reglas establecidas
+         
             if (Control != null)
             {
                 if (Regex.IsMatch(Control.Name, @"(txt|comboBox)", RegexOptions.IgnoreCase))
                 {
-                    //si es un textBox o un ComboBox, no lo modificamos
                     //Control.Text = string.Empty;
                 }
                 else

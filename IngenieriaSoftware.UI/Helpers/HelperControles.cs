@@ -10,7 +10,7 @@ namespace IngenieriaSoftware.UI
 {
     public class ControlesHelper
     {
-        // Contador global para el Tag
+
         private static int TagContador = 500;
 
         private readonly IIdiomaSujeto _idiomaSujeto;
@@ -25,14 +25,13 @@ namespace IngenieriaSoftware.UI
         {
             foreach (Control control in formulario.Controls)
             {
-                // Suscribir controles comunes usando adaptador
+             
                 if (control.Tag != null && int.TryParse(control.Tag.ToString(), out int _))
                 {
                     var controlAdaptador = new ControlIdiomaAdaptador(control);
                     _idiomaSujeto.Suscribir(controlAdaptador);
                 }
 
-                // Suscribir los elementos de menú dentro del MenuStrip usando adaptador
                 if (control is MenuStrip menuStrip)
                 {
                     foreach (ToolStripMenuItem menuItem in menuStrip.Items)
@@ -41,7 +40,7 @@ namespace IngenieriaSoftware.UI
                     }
                 }
 
-                // Recursivamente suscribir a controles dentro de contenedores
+   
                 SuscribirControlesRecursivos(control);
             }
         }
@@ -108,7 +107,7 @@ namespace IngenieriaSoftware.UI
             {
                 // Asignar un nuevo Tag si el control no tiene uno
                 int nuevoTag = controles.Count() + TagContador++;
-                control.Tag = nuevoTag;  // Asignamos el Tag al control
+                control.Tag = nuevoTag;  
                 controles[nuevoTag.ToString()] = new IdiomaObservadorDTO
                 {
                     Tag = nuevoTag,
@@ -133,7 +132,7 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        // Recursivamente recorrer los items del MenuStrip
+   
         private static void RecorrerMenuItems(ToolStripMenuItem item, Dictionary<string, IdiomaObservadorDTO> controles)
         {
             // Verificamos si el Tag es nulo o vacío, o si el valor es 0
@@ -149,7 +148,6 @@ namespace IngenieriaSoftware.UI
                 Name = item.Name
             };
 
-            // Recursivamente recorrer sub-items
             foreach (ToolStripItem subItem in item.DropDownItems)
             {
                 if (subItem is ToolStripMenuItem menuItem)

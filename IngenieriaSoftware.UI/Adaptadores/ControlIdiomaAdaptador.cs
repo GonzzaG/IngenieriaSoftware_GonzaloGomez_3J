@@ -27,7 +27,7 @@ namespace IngenieriaSoftware.UI
         {
             if (Regex.IsMatch(_control.Name, @"(comboBox|txt)", RegexOptions.IgnoreCase))
             {
-                //si es un textBox o un ComboBox, no lo modificamos             
+                     
                 if (Regex.IsMatch(_control.Name, @"(Idioma)", RegexOptions.IgnoreCase))
                 {
                     _control.Text = IdiomaData.IdiomaActual.Nombre;
