@@ -56,7 +56,7 @@ namespace IngenieriaSoftware.BLL.Mesas
         }
 
 
-        public void CerrarMesa(int mesaId, decimal propina, decimal descuento, int medioDePagoId)
+        public void CerrarMesa(int mesaId, decimal propina, decimal descuento, int medioDePagoId, int clienteId)
         {
             using (var transaction = new TransactionScope())
             {
@@ -71,7 +71,7 @@ namespace IngenieriaSoftware.BLL.Mesas
                     throw new Exception("No se encontraron productos para la comanda especificada.");
                 }
 
-                Factura factura = _facturaBLL.GenerarFactura(comanda.ComandaId, mesaId, propina, descuento, medioDePagoId);
+                Factura factura = _facturaBLL.GenerarFactura(comanda.ComandaId, mesaId, propina, descuento, medioDePagoId, clienteId);
                 
                 transaction.Complete();
             }

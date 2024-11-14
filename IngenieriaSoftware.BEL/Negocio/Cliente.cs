@@ -14,6 +14,10 @@ namespace IngenieriaSoftware.BEL.Negocio
         public string Email { get; set; }           
         public string Telefono { get; set; }        
         public string Direccion { get; set; }       
+        public string numeroTarjetaUltimos4 { get; set; }
+        public string TipoTarjeta {  get; set; }
+        public string BancoEmisor {  get; set; }
+
 
         public Cliente()
         {

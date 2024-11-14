@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSeleccionarMedioDePago = new System.Windows.Forms.Button();
+            this.btnConfirmar = new System.Windows.Forms.Button();
             this.lblSeleccioneMedioDePago = new System.Windows.Forms.Label();
             this.dataGridViewMediosDePago = new System.Windows.Forms.DataGridView();
             this.numericUpDownPropina = new System.Windows.Forms.NumericUpDown();
@@ -41,17 +41,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDescuento)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnSeleccionarMedioDePago
+            // btnConfirmar
             // 
-            this.btnSeleccionarMedioDePago.Location = new System.Drawing.Point(508, 234);
-            this.btnSeleccionarMedioDePago.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSeleccionarMedioDePago.Name = "btnSeleccionarMedioDePago";
-            this.btnSeleccionarMedioDePago.Size = new System.Drawing.Size(162, 45);
-            this.btnSeleccionarMedioDePago.TabIndex = 17;
-            this.btnSeleccionarMedioDePago.Tag = "72";
-            this.btnSeleccionarMedioDePago.Text = "Seleccionar";
-            this.btnSeleccionarMedioDePago.UseVisualStyleBackColor = true;
-            this.btnSeleccionarMedioDePago.Click += new System.EventHandler(this.btnSeleccionarMedioDePago_Click);
+            this.btnConfirmar.Location = new System.Drawing.Point(508, 234);
+            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(162, 45);
+            this.btnConfirmar.TabIndex = 17;
+            this.btnConfirmar.Tag = "72";
+            this.btnConfirmar.Text = "Confirmar";
+            this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnSeleccionarMedioDePago_Click);
             // 
             // lblSeleccioneMedioDePago
             // 
@@ -136,7 +136,7 @@
             this.Controls.Add(this.lblPropina);
             this.Controls.Add(this.numericUpDownDescuento);
             this.Controls.Add(this.numericUpDownPropina);
-            this.Controls.Add(this.btnSeleccionarMedioDePago);
+            this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.lblSeleccioneMedioDePago);
             this.Controls.Add(this.dataGridViewMediosDePago);
             this.Name = "FormSeleccionMedioDePago";
@@ -152,7 +152,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnSeleccionarMedioDePago;
+        private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Label lblSeleccioneMedioDePago;
         private System.Windows.Forms.DataGridView dataGridViewMediosDePago;
         private System.Windows.Forms.NumericUpDown numericUpDownPropina;

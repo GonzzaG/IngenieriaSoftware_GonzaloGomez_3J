@@ -72,11 +72,30 @@ namespace IngenieriaSoftware.UI
             var propina = numericUpDownPropina.Value;
             var medioDePagoId = (int)dataGridViewMediosDePago.SelectedRows[0].Cells[0].Value;
 
+            //si no selecciona efectivo, vamos a mostrar el formulario de rellenar cliente
+            //if (medioDePagoId != 1)
+            //{
+            bool esBancario;
+            if (medioDePagoId == 1)
+                esBancario = false;
+            else
+                esBancario = true;
+
+                FormRellenarCliente formRellenarCliente = new FormRellenarCliente(esBancario);
+                formRellenarCliente.StartPosition = FormStartPosition.CenterScreen;
+                formRellenarCliente.ShowDialog();
+
+                var clienteId = formRellenarCliente.ClienteId;
+            //}
+
+
             //tegno que crear un cliente y mostrar un formulario de datos si elije otra opcion que no sea
             //efectivo
+            if(clienteId > 0)
+            {
+                _mesaBLL.CerrarMesa(_mesaId, propina, descuento, medioDePagoId, clienteId);
 
-
-            _mesaBLL.CerrarMesa(_mesaId, propina, descuento, medioDePagoId);
+            }
         }
     }
 }

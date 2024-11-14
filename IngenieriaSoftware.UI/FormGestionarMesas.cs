@@ -167,6 +167,7 @@ namespace IngenieriaSoftware.UI
                     }
                     else
                     {
+
                         return;
                     }
 
@@ -181,6 +182,11 @@ namespace IngenieriaSoftware.UI
 
 
 
+        }
+
+        private void btnCobrar_Click(object sender, EventArgs e)
+        {
+            //veo si puedo imprimir la factura y tabmien marcarla como entregada
         }
     }
 }

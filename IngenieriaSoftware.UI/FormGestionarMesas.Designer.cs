@@ -33,6 +33,7 @@
             this.btnAsignarMesa = new System.Windows.Forms.Button();
             this.btnRealizarComanda = new System.Windows.Forms.Button();
             this.btnSolicitarCuenta = new System.Windows.Forms.Button();
+            this.btnEntregarFactura = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +66,7 @@
             // 
             // btnAsignarMesa
             // 
-            this.btnAsignarMesa.Location = new System.Drawing.Point(489, 116);
+            this.btnAsignarMesa.Location = new System.Drawing.Point(489, 68);
             this.btnAsignarMesa.Margin = new System.Windows.Forms.Padding(2);
             this.btnAsignarMesa.Name = "btnAsignarMesa";
             this.btnAsignarMesa.Size = new System.Drawing.Size(162, 45);
@@ -77,7 +78,7 @@
             // 
             // btnRealizarComanda
             // 
-            this.btnRealizarComanda.Location = new System.Drawing.Point(489, 192);
+            this.btnRealizarComanda.Location = new System.Drawing.Point(489, 117);
             this.btnRealizarComanda.Margin = new System.Windows.Forms.Padding(2);
             this.btnRealizarComanda.Name = "btnRealizarComanda";
             this.btnRealizarComanda.Size = new System.Drawing.Size(162, 45);
@@ -89,7 +90,7 @@
             // 
             // btnSolicitarCuenta
             // 
-            this.btnSolicitarCuenta.Location = new System.Drawing.Point(489, 390);
+            this.btnSolicitarCuenta.Location = new System.Drawing.Point(489, 375);
             this.btnSolicitarCuenta.Margin = new System.Windows.Forms.Padding(2);
             this.btnSolicitarCuenta.Name = "btnSolicitarCuenta";
             this.btnSolicitarCuenta.Size = new System.Drawing.Size(162, 45);
@@ -99,11 +100,24 @@
             this.btnSolicitarCuenta.UseVisualStyleBackColor = true;
             this.btnSolicitarCuenta.Click += new System.EventHandler(this.btnSolicitarCuenta_Click);
             // 
+            // btnEntregarFactura
+            // 
+            this.btnEntregarFactura.Location = new System.Drawing.Point(489, 424);
+            this.btnEntregarFactura.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEntregarFactura.Name = "btnEntregarFactura";
+            this.btnEntregarFactura.Size = new System.Drawing.Size(162, 45);
+            this.btnEntregarFactura.TabIndex = 17;
+            this.btnEntregarFactura.Tag = "74";
+            this.btnEntregarFactura.Text = "Entregar Factura";
+            this.btnEntregarFactura.UseVisualStyleBackColor = true;
+            this.btnEntregarFactura.Click += new System.EventHandler(this.btnCobrar_Click);
+            // 
             // FormGestionarMesas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 524);
+            this.Controls.Add(this.btnEntregarFactura);
             this.Controls.Add(this.btnSolicitarCuenta);
             this.Controls.Add(this.btnRealizarComanda);
             this.Controls.Add(this.btnAsignarMesa);
@@ -127,5 +141,6 @@
         private System.Windows.Forms.Button btnAsignarMesa;
         private System.Windows.Forms.Button btnRealizarComanda;
         private System.Windows.Forms.Button btnSolicitarCuenta;
+        private System.Windows.Forms.Button btnEntregarFactura;
     }
 }

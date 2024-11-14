@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthService.cs" />
+    <Compile Include="ClienteBLL.cs" />
     <Compile Include="ComandaBLL.cs" />
     <Compile Include="FacturaBLL.cs" />
     <Compile Include="IdiomaBLL.cs" />

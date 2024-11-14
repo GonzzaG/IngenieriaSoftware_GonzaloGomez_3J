@@ -56,6 +56,7 @@
     <Compile Include="Mapper\ComandaMapper.cs" />
     <Compile Include="Mapper\ComandaProductoMapper.cs" />
     <Compile Include="Mapper\EtiquetaMapper.cs" />
+    <Compile Include="Mapper\FacturaMapper.cs" />
     <Compile Include="Mapper\IdiomaMapper.cs" />
     <Compile Include="EntityDAL\PermisoDAL.cs" />
     <Compile Include="Mapper\MedioDePagoMapper.cs" />

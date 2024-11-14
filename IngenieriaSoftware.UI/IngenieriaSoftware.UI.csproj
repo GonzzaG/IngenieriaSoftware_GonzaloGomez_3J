@@ -66,6 +66,12 @@
     <Compile Include="FormGestionarComandas.Designer.cs">
       <DependentUpon>FormGestionarComandas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGestionarFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarFacturas.Designer.cs">
+      <DependentUpon>FormGestionarFacturas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGestionarMesas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarComandas.resx">
       <DependentUpon>FormGestionarComandas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionarFacturas.resx">
+      <DependentUpon>FormGestionarFacturas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarMesas.resx">
       <DependentUpon>FormGestionarMesas.cs</DependentUpon>

@@ -604,5 +604,16 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
+
+        private void verFacturasPendientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestionarFacturas formGestionarFacturas = new FormGestionarFacturas();
+            AbrirFormHijo(formGestionarFacturas);
+        }
     }
 }
