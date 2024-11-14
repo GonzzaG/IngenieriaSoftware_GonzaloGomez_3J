@@ -16,13 +16,14 @@ namespace IngenieriaSoftware.UI
 {
     public partial class FormVerComanda : Form
     {
-        private readonly ComandaBLL _comandaBLL = new ComandaBLL();
-        private List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
+        private readonly ComandaBLL _comandaBLL;
+       // private List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
 
-        public FormVerComanda(Mesa mesa, List<ComandaProducto> productos)
+        public FormVerComanda(Mesa mesa, ComandaBLL comanda)
         {
             InitializeComponent();
-            _comandaProductos = productos;
+           // _comandaProductos = productos;
+            _comandaBLL = comanda;
             Inicializar(mesa.MesaId);
         }
 
@@ -36,7 +37,7 @@ namespace IngenieriaSoftware.UI
 
             //en la otra gridview tengo que listar los productos elegidos en la pantalla anterior
             dataGridViewComandaActual.DataSource = null;
-            dataGridViewComandaActual.DataSource = _comandaProductos;
+            dataGridViewComandaActual.DataSource = _comandaBLL._comandaProductos;
 
 
         }
@@ -50,9 +51,11 @@ namespace IngenieriaSoftware.UI
             //vamos a enviar la comanda actual a cocina
             //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
             //se actualizara la gridview de la izquierda
-            if(_comandaProductos.Count > 0)
+            if(_comandaBLL._comandaProductos.Count > 0)
             {
-                _comandaBLL.InsertarComandaProductos(_comandaProductos);
+             //   _comandaBLL.InsertarComandaProductos(_comandaProductos);
+                _comandaBLL.InsertarComandaProductos(_comandaBLL._comandaProductos);
+                _comandaBLL._comandaProductos = null;
 
             }
            

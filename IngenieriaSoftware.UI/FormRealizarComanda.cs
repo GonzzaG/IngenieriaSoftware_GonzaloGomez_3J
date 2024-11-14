@@ -2,6 +2,7 @@
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,8 @@ namespace IngenieriaSoftware.UI
         private Mesa _mesa;
         private int _comandaId;
 
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public FormRealizarComanda(Mesa mesa, int comandaId)
         {
             InitializeComponent();
@@ -30,6 +33,7 @@ namespace IngenieriaSoftware.UI
             _comandaId = comandaId;
 
             Inicializar();
+            
         }
 
 
@@ -55,7 +59,7 @@ namespace IngenieriaSoftware.UI
         }
         private void FormRealizarComanda_Load(object sender, EventArgs e)
         {
-
+            VerificarNotificaciones();
         }
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
@@ -81,7 +85,7 @@ namespace IngenieriaSoftware.UI
             
             var padre = this.MdiParent as FormMDI;
 
-            FormVerComanda formVerComanda = new FormVerComanda(_mesa, _comandaBLL._comandaProductos);
+            FormVerComanda formVerComanda = new FormVerComanda(_mesa, _comandaBLL);
             formVerComanda.StartPosition = FormStartPosition.CenterScreen;
             formVerComanda.ShowDialog();
           // padre.AbrirFormHijo(formVerComanda);
@@ -103,24 +107,17 @@ namespace IngenieriaSoftware.UI
 
             lblNumeroMesa.Text = _mesa.MesaId.ToString();
         }
-        private async void InicializarAsync()
+
+        public void VerificarNotificaciones()
         {
-            try
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+                PermisosData.Permisos.Contains("PERM_MESERO"))
             {
-                var productos = await Task.Run(() => _productoBLL.ObtenerTodosLosProductos());
-
-   
-                if (productos != null)
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
                 {
-                    dataGridViewProductos.DataSource = null;
-                    dataGridViewProductos.DataSource = productos;
+                    HelperForms.MostrarNotificacion(notificaciones, this);
                 }
-
-                lblNumeroMesa.Text = _mesa.MesaId.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error al cargar los productos: " + ex.Message);
             }
         }
     }

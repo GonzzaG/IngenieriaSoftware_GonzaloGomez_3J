@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,8 +18,9 @@ namespace IngenieriaSoftware.UI
         public FormComandasAEntregar()
         {
             InitializeComponent();
-            Actualizar();
         }
+
+        public NotificacionService _notificacionService => new NotificacionService();
 
         public void Actualizar()
         {
@@ -28,14 +30,35 @@ namespace IngenieriaSoftware.UI
             dataGridViewComandasAEntregar.DataSource = notificaciones;
         }
 
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+               PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
+        }
+
+
+
         private void btnComandaEntregada_Click(object sender, EventArgs e)
         {
             //vamos a marcar los productos como entregados
             //vamos a marcar la notificacion como vista
-            int comandaId = (int)dataGridViewComandasAEntregar.SelectedRows[0].Cells[1].Value;
-            _comandaBLL.MarcarProductosEntregados(comandaId);
+            int notificacionId = (int)dataGridViewComandasAEntregar.SelectedRows[0].Cells[0].Value;
+            _comandaBLL.MarcarProductosEntregados(notificacionId);
 
             Actualizar();
+        }
+
+        private void FormComandasAEntregar_Load(object sender, EventArgs e)
+        {
+            Actualizar();
+            VerificarNotificaciones();
         }
     }
 }

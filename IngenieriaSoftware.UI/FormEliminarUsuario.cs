@@ -11,6 +11,8 @@ namespace IngenieriaSoftware.UI
         private UsuarioBLL usuarioBLL;
         private List<UsuarioDTO> usuarios;
 
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public FormEliminarUsuario()
         {
             InitializeComponent();
@@ -38,6 +40,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
+                VerificarNotificaciones();
                 usuarios = usuarioBLL.CargarUsuarios();
                 listarUsuarios(usuarios);
             }
@@ -71,6 +74,19 @@ namespace IngenieriaSoftware.UI
 
         private void comboBoxUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+                PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
     }
 }

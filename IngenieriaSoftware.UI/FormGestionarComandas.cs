@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,9 @@ namespace IngenieriaSoftware.UI
     public partial class FormGestionarComandas : Form, IActualizable
     {
         private readonly ComandaBLL _comadaBLL = new ComandaBLL();
+
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public FormGestionarComandas()
         {
             InitializeComponent();
@@ -117,6 +121,24 @@ namespace IngenieriaSoftware.UI
             {
                 MessageBox.Show("La comanda tiene que estar 'en preparacion' para marcarlo como listos");
             }
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+               PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
+        }
+
+        private void FormGestionarComandas_Load(object sender, EventArgs e)
+        {
+            VerificarNotificaciones();
         }
     }
 }

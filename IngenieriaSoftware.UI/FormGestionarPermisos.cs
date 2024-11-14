@@ -11,6 +11,9 @@ namespace IngenieriaSoftware.UI
     {
         private readonly UsuarioBLL _usuarioBLL;
         private readonly IdiomaSujeto _idiomaObserver;
+
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public FormGestionarPermisos()
         {
             InitializeComponent();
@@ -37,6 +40,7 @@ namespace IngenieriaSoftware.UI
         private void GestionarPermisos_Load(object sender, EventArgs e)
         {
             ActualizarFormulario();
+            VerificarNotificaciones();
         }
 
         private void CargarUsuariosPermisos()
@@ -159,6 +163,18 @@ namespace IngenieriaSoftware.UI
         {
             var formPadre = this.MdiParent as FormMDI;
             formPadre.AbrirFormMenu();
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
     }
 }

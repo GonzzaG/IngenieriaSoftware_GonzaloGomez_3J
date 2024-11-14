@@ -87,6 +87,24 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public List<ComandaProducto> ObtenerComandaProductoPorComandaId(int comandaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@mesa_id", comandaId),
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerComandaProductoPorComandaId", parametros);
+                return _comandaProductoMapper.MapearComandaProductoDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<ComandaProducto> ObtenerComandaProductosPendientes (int mesaId, int comandaId)
         {
             try
@@ -107,13 +125,13 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-        public void MarcarComandaProductosComoEntregados(int comandaId)
+        public void MarcarComandaProductosComoEntregados(int notificacionId)
         {
             try
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@comanda_id", comandaId)
+                    new SqlParameter("@notificacion_id", notificacionId)
                 };
 
                 _dao.ExecuteNonQuery("sp_MarcarComandaProductosComoEntregados", parametros);

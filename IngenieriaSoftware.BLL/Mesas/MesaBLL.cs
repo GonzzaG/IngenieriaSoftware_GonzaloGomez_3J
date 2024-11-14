@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.EntityDAL;
 using IngenieriaSoftware.Servicios;
 using System;
@@ -12,6 +13,8 @@ namespace IngenieriaSoftware.BLL.Mesas
     public class MesaBLL
     {
         private readonly MesaDAL _mesaDAL = new MesaDAL();
+        private readonly ComandaBLL _comandaBLL = new ComandaBLL();
+        private readonly FacturaBLL _facturaBLL = new FacturaBLL();
         private List<Mesa> _mesas;
 
         public List<Mesa> Mesas()
@@ -50,7 +53,24 @@ namespace IngenieriaSoftware.BLL.Mesas
                 throw new MesaAsignadaException();
             }
         }
-        
+        public void CerrarMesa(int mesaId, int comandaId, decimal propina, decimal descuento)
+        {
+            _mesaDAL.CambiarEstadoMesaCerrada(mesaId);
+
+            List<ComandaProducto> productosComanda = _comandaBLL.ObtenerComandaProductoPorComandaId(comandaId);
+            if (productosComanda == null || !productosComanda.Any())
+            {
+                throw new Exception("No se encontraron productos para la comanda especificada.");
+            }
+
+           // Factura factura = _facturaBLL.GenerarFactura(comandaId, mesaId, propina, descuento);
+        }
+
+        private void CambiarEstadoMesaCerrada(int mesaId)
+        {
+            _mesaDAL.CambiarEstadoMesaCerrada(mesaId);
+        }
+
         public List<Mesa> GuardarMesa(Mesa mesa)
         {
             _mesas = _mesaDAL.GuardarMesa(mesa);

@@ -67,11 +67,11 @@ namespace IngenieriaSoftware.BLL
                 throw new Exception();
             }
         }
-        public void MarcarProductosEntregados(int comandaId)
+        public void MarcarProductosEntregados(int notificacionId)
         {
             //tenemos que obtener todos los comandaProducto que se encuentren en estado 'listo' de la bd y que esten
             //con la comandaId 
-            _comandaDAL.MarcarComandaProductosComoEntregados(comandaId);
+            _comandaDAL.MarcarComandaProductosComoEntregados(notificacionId);
         }
 
         public void NotificarComandaLista(Comanda comanda)
@@ -122,6 +122,10 @@ namespace IngenieriaSoftware.BLL
         private List<ComandaProducto> ObtenerComandaProductoPorMesaId(int mesaId)
         {
             return _comandaDAL.ObtenerComandaProductoPorMesaId(mesaId);
+        }
+        public List<ComandaProducto> ObtenerComandaProductoPorComandaId(int mesaId)
+        {
+            return _comandaDAL.ObtenerComandaProductoPorComandaId(mesaId);
         }
 
         public List<ComandaProducto> ObtenerComandaProductosPendientes(int mesaId, int comandaId)

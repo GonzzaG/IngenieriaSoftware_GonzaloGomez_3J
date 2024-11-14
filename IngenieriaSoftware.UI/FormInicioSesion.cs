@@ -16,6 +16,8 @@ namespace IngenieriaSoftware.UI
 
         private readonly IdiomaSujeto _idiomaObserver;
 
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public FormInicioSesion() { InitializeComponent(); }
         public FormInicioSesion(IdiomaSujeto idiomaObserver)
         {
@@ -81,6 +83,19 @@ namespace IngenieriaSoftware.UI
                 this.Close();
             }
 
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+                PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
         #endregion
     }

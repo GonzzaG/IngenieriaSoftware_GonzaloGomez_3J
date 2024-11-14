@@ -83,6 +83,7 @@
             this.Controls.Add(this.dataGridViewComandasAEntregar);
             this.Name = "FormComandasAEntregar";
             this.Text = "Comandas a entregar";
+            this.Load += new System.EventHandler(this.FormComandasAEntregar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandasAEntregar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

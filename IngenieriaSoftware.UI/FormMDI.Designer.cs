@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStripMDI = new System.Windows.Forms.MenuStrip();
             this.mesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarMesasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +48,7 @@
             this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.comandasCocinaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comandasAEntregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTipNotificacion = new System.Windows.Forms.ToolTip(this.components);
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +131,7 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
@@ -137,7 +139,7 @@
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
@@ -145,7 +147,7 @@
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.asignarPermisosToolStripMenuItem.Tag = "9";
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem_Click);
@@ -270,5 +272,6 @@
         private System.Windows.Forms.ToolStripMenuItem aBMMesasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comandasCocinaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comandasAEntregarToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTipNotificacion;
     }
 }

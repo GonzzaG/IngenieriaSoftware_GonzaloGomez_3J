@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.DAL.EntityDAL;
+﻿using IngenieriaSoftware.BEL.Negocio;
+using IngenieriaSoftware.DAL.EntityDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,18 @@ namespace IngenieriaSoftware.BLL
 {
     public class NotificacionService
     {
-        //private readonly ComandaDAL _comandaDAL;
+        private readonly ComandaBLL _comandaBLL = new ComandaBLL();
 
-        //public NotificacionService(ComandaDAL comandaDAL)
-        //{
-        //    _comandaDAL = comandaDAL;
-        //}
+        public List<Notificacion> ObtenerNotificaciones()
+        {
+            var notificaciones = _comandaBLL.ObtenerNotificacionesNoVistas();
+            if (notificaciones != null)
+            {
+                return notificaciones;
+            }
 
-        //// Método que consulta la base de datos para obtener las notificaciones no vistas.
-        //public List<NotificacionDTO> ObtenerNotificacionesPendientes(int meseroId)
-        //{
-        //    return _notificacionRepository.ObtenerNotificacionesPendientes(meseroId);
-        //}
+            return null;
 
-        //// Este método es utilizado por el servicio para revisar las notificaciones
-        //public bool ExistenNotificacionesPendientes(int meseroId)
-        //{
-        //    var notificaciones = ObtenerNotificacionesPendientes(meseroId);
-        //    return notificaciones.Any();
-        //}
+        }
     }
 }

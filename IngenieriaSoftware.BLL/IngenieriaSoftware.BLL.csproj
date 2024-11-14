@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="AuthService.cs" />
     <Compile Include="ComandaBLL.cs" />
+    <Compile Include="FacturaBLL.cs" />
     <Compile Include="IdiomaBLL.cs" />
+    <Compile Include="MedioDePagoBLL.cs" />
     <Compile Include="Mesas\MesaBLL.cs" />
     <Compile Include="NotificacionService.cs" />
     <Compile Include="Permiso\PermisoBLL.cs" />

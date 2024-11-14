@@ -131,6 +131,7 @@
             this.Controls.Add(this.dataGridViewComandasPendientes);
             this.Name = "FormGestionarComandas";
             this.Text = "FormGestionarComandas";
+            this.Load += new System.EventHandler(this.FormGestionarComandas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandasPendientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandaProductos)).EndInit();
             this.ResumeLayout(false);

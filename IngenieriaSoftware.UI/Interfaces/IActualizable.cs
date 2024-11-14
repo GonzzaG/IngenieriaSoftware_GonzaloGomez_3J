@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IngenieriaSoftware.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace IngenieriaSoftware.UI
 {
     internal interface IActualizable
     {
+        NotificacionService _notificacionService { get; }
         void Actualizar();
-        //ver si poner un metodo para desuscribir a los forms del evento actualizar
+
+        void VerificarNotificaciones();
     }
 }

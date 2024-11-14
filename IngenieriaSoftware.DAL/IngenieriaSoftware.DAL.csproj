@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="DAO.cs" />
     <Compile Include="EntityDAL\ComandaDAL.cs" />
+    <Compile Include="EntityDAL\FacturaDAL.cs" />
     <Compile Include="EntityDAL\IdiomaDAL.cs" />
+    <Compile Include="EntityDAL\MedioDePagoDAL.cs" />
     <Compile Include="EntityDAL\MesaDAL.cs" />
     <Compile Include="EntityDAL\NotificacionDAL.cs" />
     <Compile Include="EntityDAL\ProductoDAL.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Mapper\EtiquetaMapper.cs" />
     <Compile Include="Mapper\IdiomaMapper.cs" />
     <Compile Include="EntityDAL\PermisoDAL.cs" />
+    <Compile Include="Mapper\MedioDePagoMapper.cs" />
     <Compile Include="Mapper\MesaMapper.cs" />
     <Compile Include="Mapper\NotificacionMapper.cs" />
     <Compile Include="Mapper\PermisoMapper.cs" />

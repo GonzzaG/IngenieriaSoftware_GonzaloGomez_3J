@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
@@ -18,6 +19,7 @@ namespace IngenieriaSoftware.UI
         internal UsuarioBLL usuarioBLL;
         internal PermisoBLL permisoBLL;
         internal IdiomaBLL idiomaBLL;
+        internal ComandaBLL comandaBLL;
         internal TraduccionBLL traduccionBLL;
         private List<PermisoDTO> permisosUsuario;
         private SessionManager _sessionManager;
@@ -27,6 +29,8 @@ namespace IngenieriaSoftware.UI
         private readonly ControlesHelper _controlesHelper;
         private readonly HelperExcepciones _helperExcepciones;
         private IdiomaSujeto _idiomaObserver;
+
+        public NotificacionService _notificacionService => new NotificacionService();
 
         public event Action ActualizarFormsHijos;
 
@@ -39,6 +43,7 @@ namespace IngenieriaSoftware.UI
             usuarioBLL = new UsuarioBLL();
             permisoBLL = new PermisoBLL();
             idiomaBLL = new IdiomaBLL();
+            comandaBLL = new ComandaBLL();
             traduccionBLL = new TraduccionBLL();
             _authService = new AuthService();
             ItraduccionServicio = new TraduccionBLL();
@@ -90,8 +95,8 @@ namespace IngenieriaSoftware.UI
         }
 
         private void MDI_Load(object sender, EventArgs e)
-        {        
-          
+        {
+            VerificarNotificaciones();
         }
 
         public List<IdiomaDTO> CargarIdiomas()
@@ -117,10 +122,12 @@ namespace IngenieriaSoftware.UI
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
+           // PermisosData.Permisos = AuthService.PermisosUsuario;
             var permisosUsuario = AuthService.PermisosUsuario;
             VerificarPermisosRoles(permisosUsuario);
             VerificarPermisosIndividuales(permisosUsuario);
 
+           
 
         }
 
@@ -214,14 +221,46 @@ namespace IngenieriaSoftware.UI
             formHijo.Size = this.Size;
             formHijo.Show();
         }
+        private void MostrarNotificacion(string mensaje)
+        {
+            DialogResult result= MessageBox.Show(mensaje + " Quiere ir a la pantalla de comandas listas?", "Notificación", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+
+            if (result == DialogResult.Yes)
+            {
+                FormComandasAEntregar formComandasAEntregar = new FormComandasAEntregar();
+                formComandasAEntregar.ShowDialog();
+            }
+            else
+            {
+                
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void VerificarPermisosRoles(List<PermisoDTO> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
-
+            
             if (PermisoChecker.TienePermiso(permisos, "PERM_ADMIN"))
             {
                 //permisosPermitidos.Add( "PERM_ADMIN");
+                permisosPermitidos.Add("PERM_ADMIN");
+                permisosPermitidos.Add("PERM_CAJA");
+                permisosPermitidos.Add("PERM_MESERO");
+                permisosPermitidos.Add("PERM_COCINA");
                 permisosPermitidos.Add("PERM_GEST_USUARIO");
                 permisosPermitidos.Add("PERM_GEST_PERMISOS");
                 permisosPermitidos.Add("PERM_GEST_PERMISOS");
@@ -240,6 +279,7 @@ namespace IngenieriaSoftware.UI
 
                 if (PermisoChecker.TienePermiso(permisos, "PERM_CAJA"))
                 {
+                    permisosPermitidos.Add("PERM_CAJA");
                     permisosPermitidos.Add("PERM_GEST_COBROS");
                     cobrosToolStripMenuItem.Visible = true;
                 }
@@ -252,8 +292,10 @@ namespace IngenieriaSoftware.UI
                 if (PermisoChecker.TienePermiso(permisos, "PERM_MESERO"))
                 {
                     //aca se va a suscribir al evento que lo notifique 
+                    permisosPermitidos.Add("PERM_MESERO");
                     permisosPermitidos.Add("PERM_GEST_MESAS");
                     mesasToolStripMenuItem.Visible = true;
+
                 }
                 else
                 {
@@ -263,6 +305,7 @@ namespace IngenieriaSoftware.UI
 
                 if (PermisoChecker.TienePermiso(permisos, "PERM_COCINA"))
                 {
+                    permisosPermitidos.Add("PERM_COCINA");
                     permisosPermitidos.Add("PERM_GEST_COMANDAS");
                     comandasToolStripMenuItem.Visible = true;
                 }
@@ -278,6 +321,7 @@ namespace IngenieriaSoftware.UI
                 //Usuario no tiene permisos
             }
 
+            PermisosData.Permisos = permisosPermitidos;
             mostrarPermisosDelUsuario(permisosPermitidos);
         }
 
@@ -411,9 +455,13 @@ namespace IngenieriaSoftware.UI
 
         private void CerrarFormulariosHijos()
         {
-            foreach (Form childForm in this.MdiChildren)
+            if (this.HasChildren)
             {
-                childForm.Close();
+                foreach (Form childForm in this.MdiChildren)
+                {
+                    childForm.Close();
+                }
+
             }
         }
 
@@ -542,6 +590,19 @@ namespace IngenieriaSoftware.UI
         {
             FormComandasAEntregar formComandasAEntregar = new FormComandasAEntregar();
             AbrirFormHijo(formComandasAEntregar);
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+               PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
     }
 }

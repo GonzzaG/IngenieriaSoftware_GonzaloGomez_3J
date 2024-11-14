@@ -1,5 +1,7 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,15 +20,18 @@ namespace IngenieriaSoftware.UI
     public partial class FormABMMesas : Form, IActualizable
     {
         private readonly MesaBLL _mesaBLL = new MesaBLL();
+
+
         public FormABMMesas()
         {
             InitializeComponent();
             Actualizar();
+
         }
 
         private void FormABMMesas_Load(object sender, EventArgs e)
         {
-
+            VerificarNotificaciones();
         }
 
         private void btnGuardarMesa_Click(object sender, EventArgs e)
@@ -113,5 +118,22 @@ namespace IngenieriaSoftware.UI
             }
        
         }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
+                PermisosData.Permisos.Contains("PERM_MESERO"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
+        }
+        public NotificacionService _notificacionService => new NotificacionService();
+
+
+
     }
 }
