@@ -58,6 +58,9 @@
     <Compile Include="PermisoChecker.cs" />
     <Compile Include="DTOs\PermisoDTO.cs" />
     <Compile Include="PermisosData.cs" />
+    <Compile Include="Permisos\ComponentePermiso.cs" />
+    <Compile Include="Permisos\CompositePermiso.cs" />
+    <Compile Include="Permisos\HojaPermiso.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DTOs\UsuarioDTO.cs" />

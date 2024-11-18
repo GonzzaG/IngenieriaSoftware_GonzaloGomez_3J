@@ -63,10 +63,8 @@ namespace IngenieriaSoftware.UI
                 {
                     InicioSesionExitoso?.Invoke();
 
-                    //obtenemos el usuario que inicio sesion
                     var usuario = SessionManager.GetInstance.Usuario;
 
-                    //cambiamos el idioma el cual tiene el usuario
                     _idiomaObserver.CambiarEstado(usuario.Id);
                     throw new CredencialesCorrectasException();
                 }

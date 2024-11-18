@@ -33,7 +33,9 @@ namespace IngenieriaSoftware.UI
         public void VerificarNotificaciones()
         {
             if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-               PermisosData.Permisos.Contains("PERM_MESERO"))
+             PermisosData.Permisos.Contains("PERM_MESERO") ||
+             PermisosData.Permisos.Contains("PERM_GEST_MESAS") ||
+             PermisosData.Permisos.Contains("PERM_COM_ENTREGAR"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -58,7 +60,7 @@ namespace IngenieriaSoftware.UI
         private void FormComandasAEntregar_Load(object sender, EventArgs e)
         {
             Actualizar();
-            VerificarNotificaciones();
+            //VerificarNotificaciones();
         }
     }
 }

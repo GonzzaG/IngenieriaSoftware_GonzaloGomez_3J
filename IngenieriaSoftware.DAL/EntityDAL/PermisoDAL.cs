@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.Permisos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,78 +11,32 @@ namespace IngenieriaSoftware.DAL
     public class PermisoDAL
     {
         private readonly DAO _dao = new DAO();
-        internal List<PermisoDTO> _permisosTree;
+        internal PermisoMapper _permisoMapper;
         internal List<PermisoDTO> _permisosGlobales;
 
         public PermisoDAL()
         {
-            _permisosGlobales = new List<PermisoDTO>();
-            _permisosTree = new List<PermisoDTO>();
+            _permisoMapper = new PermisoMapper();
         }
-
-        public List<PermisoDTO> PermisosTree()
-        {
-            return _permisosTree;
-        }
-
         public List<PermisoDTO> PermisosGlobales()
         {
             return _permisosGlobales;
         }
 
-        public void AsignarPermisosHijos(DataSet pDs)
+        public List<PermisoDTO> CargarPermisosTreeView2()
         {
-            var permisosConHijos = new List<PermisoDTO>();
-            var permisosPorId = _permisosTree.ToDictionary(p => p.Id);
-
-            foreach (var permiso in _permisosTree)
+            try
             {
-                permiso.permisosHijos.Clear();
-            }
+                var permisosDataSet = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosPermisos", null);
+                _permisosGlobales = new PermisoMapper().MapearPermisosDesdeDataSet(permisosDataSet);
+                new PermisoMapper().ConstruirJerarquiaDePermisos(_permisosGlobales);
 
-            foreach (DataRow row in pDs.Tables[3].Rows)
+                return _permisosGlobales;
+            }
+            catch (Exception ex)
             {
-                int idPermisoPadre = (int)row["id_permiso_padre"];
-                int idPermisoHijo = (int)row["id_permiso_hijo"];
-
-                if (permisosPorId.TryGetValue(idPermisoPadre, out PermisoDTO permisoPadre) &&
-                    permisosPorId.TryGetValue(idPermisoHijo, out PermisoDTO permisoHijo))
-                {
-                    if (!permisoPadre.permisosHijos.Contains(permisoHijo))
-                    {
-                        permisoPadre.permisosHijos.Add(permisoHijo);
-                    }
-                }
+                throw new Exception("Error al cargar los permisos para el TreeView: " + ex.Message, ex);
             }
-
-            foreach (var permiso in _permisosTree)
-            {
-                if (!permiso.PermisoPadreId.HasValue)
-                {
-                    permisosConHijos.Add(permiso);
-                }
-            }
-
-            _permisosTree = permisosConHijos;
-        }
-
-        public PermisoDTO ObtenerPermisoPorId(int idPermiso)
-        {
-            var permiso = _permisosTree.FirstOrDefault(p => p.Id == idPermiso);
-
-            if (permiso == null)
-            {
-                foreach (var p in _permisosTree)
-                {
-                    permiso = BuscarPermisoEnHijos(p, idPermiso);
-                    if (permiso != null)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            return permiso;
         }
 
         public List<PermisoDTO> ObtenerPermisosDelUsuarioPorUsername(string pUsuarioNombre)
@@ -94,7 +49,12 @@ namespace IngenieriaSoftware.DAL
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosUsuarioPorUsername", parametros);
-                return new PermisoMapper().MapearPermisosDesdeDataSet(mDs);
+                var permisosUsuario = _permisoMapper.MapearPermisosDesdeDataSet(mDs);
+                _permisoMapper.AsignarPermisosHijos(permisosUsuario);
+                
+                
+                return permisosUsuario;
+                 
             }
             catch (Exception ex)
             {
@@ -124,15 +84,30 @@ namespace IngenieriaSoftware.DAL
             return null;
         }
 
-        public List<PermisoDTO> MapearPermisos(DataSet pDS)
+        public PermisoDTO BuscarPermisoPorId(List<PermisoDTO> permisos, int permisoBuscadoId)
         {
-            _permisosGlobales = new PermisoMapper().MapearPermisosDesdeDataSet(pDS);
-            _permisosTree = _permisosGlobales;
+            foreach (var permiso in permisos)
+            {
+                if (permiso.Id == permisoBuscadoId)
+                {
+                    return permiso;
+                }
 
-            return _permisosTree;
+                var hijos = permiso.permisosHijos;
+                if (hijos != null)
+                {
+                    var permisoEncontrado = BuscarPermisoPorId(hijos, permisoBuscadoId);
+                    if (permisoEncontrado != null)
+                    {
+                        return permisoEncontrado;
+                    }
+                }
+            }
+            return null;
         }
 
-        public DataSet AsignarPermiso(int usuarioId, int permisoId)
+
+        public void AsignarPermiso(int usuarioId, int permisoId)
         {
             try
             {
@@ -144,9 +119,7 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@permiso_id", permisoId)
                 };
 
-                var permisosUsuarioDataSet = _dao.ExecuteStoredProcedure(nombreStoredProcedure, parametros);
-
-                return permisosUsuarioDataSet ?? null;
+               _dao.ExecuteNonQuery(nombreStoredProcedure, parametros);
             }
             catch (Exception ex)
             {
@@ -167,6 +140,26 @@ namespace IngenieriaSoftware.DAL
                 };
 
                 _dao.ExecuteStoredProcedure(nombreStoredProcedure, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DesasignarPermiso(int usuarioId, int permisoId)
+        {
+            try
+            {
+                string nombreStoredProcedure = "sp_DesasignarPermiso";
+
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@usuario_id", usuarioId),
+                    new SqlParameter("@permiso_id", permisoId)
+                };
+
+                _dao.ExecuteNonQuery(nombreStoredProcedure, parametros);
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@ namespace IngenieriaSoftware.UI
     {
         private readonly AuthService _authService = new AuthService();
         private readonly UsuarioBLL _usuarioBLL;
+        private readonly PermisoBLL _permisoBLL;
 
         public NotificacionService _notificacionService => new NotificacionService();
 
@@ -16,6 +17,7 @@ namespace IngenieriaSoftware.UI
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
+            _permisoBLL = new PermisoBLL();
         }
 
         #region Metodos de Interfaz
@@ -61,19 +63,19 @@ namespace IngenieriaSoftware.UI
                     switch (comboBoxCategorias.Text)
                     {
                         case "Administrador":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_ADMIN");
+                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_ADMIN");
                             break;
 
                         case "Mesero":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_MESERO");
+                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_MESERO");
                             break;
 
                         case "Caja":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_CAJA");
+                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_CAJA");
                             break;
 
                         case "Cocina":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_COCINA");
+                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_COCINA");
                             break;
                     }
 

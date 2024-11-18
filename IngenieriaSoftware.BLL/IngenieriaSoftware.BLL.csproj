@@ -50,6 +50,9 @@
     <Compile Include="MedioDePagoBLL.cs" />
     <Compile Include="Mesas\MesaBLL.cs" />
     <Compile Include="NotificacionService.cs" />
+    <Compile Include="Permisos\ComponentePermiso.cs" />
+    <Compile Include="Permisos\CompositePermiso.cs" />
+    <Compile Include="Permisos\HojaPermiso.cs" />
     <Compile Include="Permiso\PermisoBLL.cs" />
     <Compile Include="Permiso\PermisoManager.cs" />
     <Compile Include="ProductoBLL.cs" />
@@ -75,5 +78,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

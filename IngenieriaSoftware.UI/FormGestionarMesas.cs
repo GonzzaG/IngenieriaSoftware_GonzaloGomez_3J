@@ -68,7 +68,7 @@ namespace IngenieriaSoftware.UI
 
         private void FormGestionarMesas_Load(object sender, EventArgs e)
         {
-            VerificarNotificaciones();
+            //VerificarNotificaciones();
         }
 
         private void btnAsignarMesa_Click(object sender, EventArgs e)
@@ -138,7 +138,9 @@ namespace IngenieriaSoftware.UI
         public void VerificarNotificaciones()
         {
             if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-               PermisosData.Permisos.Contains("PERM_MESERO"))
+            PermisosData.Permisos.Contains("PERM_MESERO") ||
+            PermisosData.Permisos.Contains("PERM_GEST_MESAS") ||
+            PermisosData.Permisos.Contains("PERM_COM_ENTREGAR"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -156,8 +158,7 @@ namespace IngenieriaSoftware.UI
                 {
                     // Cerraremos la mesa, vamos a empezar a crear la factura.
                     // abriremos un formulario donde pondremos un resumen de los gastos hasta el momento.
-                    // con botones de cerrar la mesa.
-
+                    // con botones de cerrar la mesa.                
                     DialogResult result = MessageBox.Show("Esta seguro que desea cerrar la mesa?", "Cerrar mesa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if(result  == DialogResult.Yes)
                     {
@@ -176,8 +177,7 @@ namespace IngenieriaSoftware.UI
                     }
                     else
                     {
-
-                        return;
+                        MessageBox.Show("La factura todavia no fue abonada, no se puede entregar.");
                     }
 
                     return;

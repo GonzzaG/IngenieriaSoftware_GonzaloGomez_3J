@@ -96,7 +96,7 @@ namespace IngenieriaSoftware.UI
 
         private void MDI_Load(object sender, EventArgs e)
         {
-            VerificarNotificaciones();
+            //VerificarNotificaciones();
         }
 
         public List<IdiomaDTO> CargarIdiomas()
@@ -124,10 +124,9 @@ namespace IngenieriaSoftware.UI
 
            // PermisosData.Permisos = AuthService.PermisosUsuario;
             var permisosUsuario = AuthService.PermisosUsuario;
+            InicializarPermisosMenu();
             VerificarPermisosRoles(permisosUsuario);
-            VerificarPermisosIndividuales(permisosUsuario);
-
-           
+            VerificarNotificaciones();
 
         }
 
@@ -143,8 +142,6 @@ namespace IngenieriaSoftware.UI
 
         private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormGestionarPermisos formGestionPermisos = new FormGestionarPermisos();
-            AbrirFormHijo(formGestionPermisos);
         }
 
         private void gestionIdiomasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,7 +200,7 @@ namespace IngenieriaSoftware.UI
         {
             //SuscribirControles(formHijo);
             _controlesHelper.SuscribirControles(formHijo);
-
+            VerificarNotificaciones();
             CerrarFormulariosHijos();
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
@@ -236,252 +233,170 @@ namespace IngenieriaSoftware.UI
                 
             }
         }
+        private Dictionary<string, ToolStripMenuItem[]> permisosRol;
+        private Dictionary<string, ToolStripMenuItem> permisosIndividuales;
+        public void InicializarPermisosMenu()
+        {
+            permisosRol = new Dictionary<string, ToolStripMenuItem[]>
+            {
+                { "PERM_ADMIN", new [] { gestionUsuariosToolStripMenuItem, gestionIdiomasToolStripMenuItem, cobrosToolStripMenuItem, gestionarMesasToolStripMenuItem, fToolStripMenuItem,
+                    aBMMesasToolStripMenuItem , mesasToolStripMenuItem, comandasToolStripMenuItem, comandasAEntregarToolStripMenuItem, comandasCocinaToolStripMenuItem, registrarUsuarioToolStripMenuItem,
+                    asignarPermisosToolStripMenuItem, eliminarUsuarioToolStripMenuItem, agregarTraduccionToolStripMenuItem, actualizarEtiquetasToolStripMenuItem, gestionarPermisosToolStripMenuItem} },
+                { "PERM_CAJA", new [] { cobrosToolStripMenuItem, fToolStripMenuItem } },
+                { "PERM_MESERO", new [] { mesasToolStripMenuItem, gestionarMesasToolStripMenuItem,  comandasToolStripMenuItem, comandasAEntregarToolStripMenuItem } },
+                { "PERM_COCINA", new [] { comandasToolStripMenuItem, comandasCocinaToolStripMenuItem } }
+            };
 
-        private void VerificarPermisosRoles(List<PermisoDTO> permisos)
+            permisosIndividuales = new Dictionary<string, ToolStripMenuItem>
+            {
+                { "PERM_GEST_MESAS", gestionarMesasToolStripMenuItem },
+                { "PERM_ABM_MESAS", aBMMesasToolStripMenuItem },
+                { "PERM_VER_FACTURAS", fToolStripMenuItem },
+                { "PERM_COM_COCINA", comandasCocinaToolStripMenuItem },
+                { "PERM_COM_ENTREGAR", comandasAEntregarToolStripMenuItem },
+                { "PERM_REGIST_USUARIO", registrarUsuarioToolStripMenuItem },
+                { "PERM_ELIM_USUARIO", eliminarUsuarioToolStripMenuItem },
+                { "PERM_ACT_ETIQUETAS", actualizarEtiquetasToolStripMenuItem },
+                { "PERM_AGR_TRADUCCION", agregarTraduccionToolStripMenuItem },
+                { "PERM_GEST_PERMISOS", gestionarPermisosToolStripMenuItem },
+                { "PERM_ASIGN_PERMISOS", asignarPermisosToolStripMenuItem }
+                //{ "PERM_GEST_USUARIO", gestionUsuariosToolStripMenuItem },
+            };
+        }
+
+        public void VerificarPermisosRoles(List<PermisoDTO> permisos)
         {
             List<string> permisosPermitidos = new List<string>();
-            
+
             if (PermisoChecker.TienePermiso(permisos, "PERM_ADMIN"))
             {
-                //permisosPermitidos.Add( "PERM_ADMIN");
-                permisosPermitidos.Add("PERM_ADMIN");
-                permisosPermitidos.Add("PERM_CAJA");
-                permisosPermitidos.Add("PERM_MESERO");
-                permisosPermitidos.Add("PERM_COCINA");
-                permisosPermitidos.Add("PERM_GEST_USUARIO");
-                permisosPermitidos.Add("PERM_GEST_PERMISOS");
-                permisosPermitidos.Add("PERM_GEST_PERMISOS");
-                //permisosPermitidos.Add( "PERM_MESERO");
-                permisosPermitidos.Add("PERM_GEST_CAJA");
-                permisosPermitidos.Add("PERM_GEST_MESAS");
-                permisosPermitidos.Add("PERM_GEST_COBROS");
-                permisosPermitidos.Add("PERM_ABM_MESAS");
-                permisosPermitidos.Add("PERM_VER_FACTURAS");
-                permisosPermitidos.Add("PERM_COM_COCINA");
-                permisosPermitidos.Add("PERM_COM_ENTREGAR");
+                for (int i = menuStripMDI.Items.Count - 1; i >= 0; i--)
+                {
+                    var item = menuStripMDI.Items[i];
+                    if (item is ToolStripMenuItem menuItem)
+                    {
+                        menuItem.Visible = false;
+                        OcultarSubItems(menuItem);
+                    }
+                    else
+                    {
+                        item.Visible = false;
+                    }
+                }
 
-                gestionUsuariosToolStripMenuItem.Visible = true;
-                gestionIdiomasToolStripMenuItem.Visible = true;
+                foreach (var rol in permisosRol)
+                {
+                    foreach (var menuItem in rol.Value)
+                    {
+                        menuItem.Visible = true;
+                    }
+                }
             }
-            else //no es admin
+            else 
             {
-                gestionUsuariosToolStripMenuItem.Visible = false;
-                gestionIdiomasToolStripMenuItem.Visible = false;
 
-                if (PermisoChecker.TienePermiso(permisos, "PERM_CAJA"))
+                for (int i = menuStripMDI.Items.Count - 1; i >= 0; i--)
                 {
-                    permisosPermitidos.Add("PERM_CAJA");
-                    permisosPermitidos.Add("PERM_GEST_COBROS");
-                    permisosPermitidos.Add("PERM_VER_FACTURAS");
-
-                    cobrosToolStripMenuItem.Visible = true;
+                    var item = menuStripMDI.Items[i];
+                    if (item is ToolStripMenuItem menuItem)
+                    {
+                        menuItem.Visible = false;
+                        OcultarSubItems(menuItem);
+                    }
+                    else
+                    {
+                        item.Visible = false;
+                    }
                 }
-                else
+                foreach (var rol in permisosRol)
                 {
-                    //no tiene permiso de gestionar Caja
-                    cobrosToolStripMenuItem.Visible = false;
-                }
-
-                if (PermisoChecker.TienePermiso(permisos, "PERM_MESERO"))
-                {
-                    //aca se va a suscribir al evento que lo notifique 
-                    permisosPermitidos.Add("PERM_MESERO");
-                    permisosPermitidos.Add("PERM_GEST_MESAS");
-                    permisosPermitidos.Add("PERM_COM_ENTREGAR");
-
-                    mesasToolStripMenuItem.Visible = true;
-                    comandasToolStripMenuItem.Visible = true;
-                }
-                else
-                {
-                    //no tiene permiso de gestionar Mesas
-                    mesasToolStripMenuItem.Visible = false;
-                    comandasToolStripMenuItem.Visible = false;
+                    if (PermisoChecker.TienePermiso(permisos, rol.Key))
+                    {
+                        foreach (var menuItem in rol.Value)
+                        {
+                            menuItem.Visible = true;
+                        }
+                    }
                 }
 
-                if (PermisoChecker.TienePermiso(permisos, "PERM_COCINA"))
+            } 
+                foreach (var permiso in permisosIndividuales)
                 {
-                    permisosPermitidos.Add("PERM_COCINA");
-                    permisosPermitidos.Add("PERM_GEST_COMANDAS");
-                    permisosPermitidos.Add("PERM_COM_COCINA");
+                    if (PermisoChecker.TienePermiso(permisos, permiso.Key))
+                    {
 
-                    comandasToolStripMenuItem.Visible = true;
+                        //si tiene padre habilitarlo
+                        var parentItem = ObtenerPadre(permiso.Value);
+
+                        // Si el permiso tiene un padre y no está habilitado, habilitarlo
+                        if (parentItem != null && !parentItem.Visible)
+                        {
+                            parentItem.Visible = true;
+                        }
+                        permiso.Value.Visible = true;
+                    }
+                    else
+                    {
+                        permiso.Value.Visible = false;
+                    }
                 }
-                else
-                {
-                    //no tiene permiso de gestionar Mesas
-                    comandasToolStripMenuItem.Visible = false;
-                }
-
-            }
-
-            if (permisos.Count == 0)
-            {
-                //Usuario no tiene permisos
-            }
-
-            PermisosData.Permisos = permisosPermitidos;
-            mostrarPermisosDelUsuario(permisosPermitidos);
+              
+                //mostrarPermisosDelUsuario();
+                LogOutgestionUsuariosToolStripMenuItem.Visible = true;
         }
 
-        private void VerificarPermisosIndividuales(List<PermisoDTO> permisos)
+        private void OcultarSubItems(ToolStripMenuItem menuItem)
         {
-            List<string> permisosPermitidos = new List<string>();
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_USUARIO"))
+            foreach (ToolStripItem subItem in menuItem.DropDownItems)
             {
-                permisosPermitidos.Add("PERM_GEST_USUARIO");
-
-                gestionUsuariosToolStripMenuItem.Visible = true;
+                subItem.Visible = false;
+                if (subItem is ToolStripMenuItem subMenuItem)
+                {
+                    OcultarSubItems(subMenuItem);
+                }
             }
-            else
-            {
-                gestionUsuariosToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_PERMISOS"))
-            {
-                permisosPermitidos.Add("PERM_GEST_PERMISOS");
-                gestionUsuariosToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar permisos
-                cobrosToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_MESAS"))
-            {
-                permisosPermitidos.Add("PERM_GEST_MESAS");
-                mesasToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar Mesas
-                mesasToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_COBROS"))
-            {
-                permisosPermitidos.Add("PERM_GEST_COBROS");
-                cobrosToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar Mesas
-                cobrosToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_COMANDAS"))
-            {
-                permisosPermitidos.Add("PERM_GEST_COMANDAS");
-
-                comandasToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar Mesas
-                comandasToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_REGIST_USUARIO"))
-            {
-                permisosPermitidos.Add("PERM_REGIST_USUARIO");
-                //como puede registrar usuarios, se puede ver Gestionar Usuarios
-                gestionUsuariosToolStripMenuItem.Visible = true;
-
-                registrarUsuarioToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar Mesas
-                registrarUsuarioToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_ELIM_USUARIO"))
-            {
-                permisosPermitidos.Add("PERM_REGIST_USUARIO");
-                //como puede registrar usuarios, se puede ver Gestionar Usuarios
-                gestionUsuariosToolStripMenuItem.Visible = true;
-
-                eliminarUsuarioToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar Mesas
-                eliminarUsuarioToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_ASIGN_PERMISOS"))
-            {
-                permisosPermitidos.Add("PERM_ASIGN_PERMISOS");
-                //como puede registrar usuarios, se puede ver Gestionar Usuarios
-                gestionUsuariosToolStripMenuItem.Visible = true;
-
-                asignarPermisosToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar Mesas
-                asignarPermisosToolStripMenuItem.Visible = false;
-            }
-            if (PermisoChecker.TienePermiso(permisos, "PERM_GEST_IDIOMAS"))
-            {
-                permisosPermitidos.Add("PERM_GEST_IDIOMAS");
-                gestionIdiomasToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de gestionar Mesas
-                gestionIdiomasToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_ABM_MESAS"))
-            {
-                permisosPermitidos.Add("PERM_ABM_MESAS");
-                aBMMesasToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de ABM MESASs
-                aBMMesasToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_VER_FACTURAS"))
-            {
-                permisosPermitidos.Add("PERM_VER_FACTURAS");
-                fToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de ver facturas
-                fToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_COM_COCINA"))
-            {
-                permisosPermitidos.Add("PERM_COM_COCINA");
-                comandasCocinaToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de ver comandas de la cocina
-                comandasCocinaToolStripMenuItem.Visible = false;
-            }
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_COM_ENTREGAR"))
-            {
-                permisosPermitidos.Add("PERM_COM_ENTREGAR");
-                comandasToolStripMenuItem.Visible = true;
-                comandasAEntregarToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //no tiene permiso de ver comandas a entregar
-                comandasAEntregarToolStripMenuItem.Visible = false;
-            }
-            mostrarPermisosDelUsuario(permisosPermitidos);
         }
+
+        private ToolStripMenuItem ObtenerPadre(ToolStripMenuItem item)
+        {
+            foreach (var control in this.Controls)
+            {
+                if (control is MenuStrip menuStrip)
+                {
+                    foreach (ToolStripMenuItem parentItem in menuStrip.Items)
+                    {
+                        if (parentItem.DropDownItems.Contains(item))
+                        {
+                            return parentItem;
+                        }
+                        foreach (ToolStripMenuItem childItem in parentItem.DropDownItems)
+                        {
+                            if (childItem.DropDownItems.Contains(item))
+                            {
+                                return parentItem;
+                            }
+                        }
+                    }
+                }
+                else if (control is ToolStripMenuItem parentItem)
+                {
+                    if (parentItem.DropDownItems.Contains(item))
+                    {
+                        return parentItem;
+                    }
+                    foreach (ToolStripMenuItem childItem in parentItem.DropDownItems)
+                    {
+                        if (childItem.DropDownItems.Contains(item))
+                        {
+                            return parentItem;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
 
         private void mostrarPermisosDelUsuario(List<string> permisos)
         {
@@ -637,7 +552,9 @@ namespace IngenieriaSoftware.UI
         public void VerificarNotificaciones()
         {
             if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-               PermisosData.Permisos.Contains("PERM_MESERO"))
+               PermisosData.Permisos.Contains("PERM_MESERO") || 
+               PermisosData.Permisos.Contains("PERM_GEST_MESAS") || 
+               PermisosData.Permisos.Contains("PERM_COM_ENTREGAR") )
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -656,6 +573,12 @@ namespace IngenieriaSoftware.UI
         {
             FormGestionarFacturas formGestionarFacturas = new FormGestionarFacturas();
             AbrirFormHijo(formGestionarFacturas);
+        }
+
+        private void asignarPermisosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormGestionarPermisos formGestionPermisos = new FormGestionarPermisos();
+            AbrirFormHijo(formGestionPermisos);
         }
     }
 }
