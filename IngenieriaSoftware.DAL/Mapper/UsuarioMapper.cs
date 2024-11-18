@@ -55,5 +55,6 @@ namespace IngenieriaSoftware.DAL
             if (usuario.Id == 0) { return null; }
             return usuario;
         }
+
     }
 }

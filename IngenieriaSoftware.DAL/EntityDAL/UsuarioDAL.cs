@@ -10,11 +10,7 @@ namespace IngenieriaSoftware.DAL
     public class UsuarioDAL
     {
         private readonly DAO _dao = new DAO();
-        private List<UsuarioDTO> _usuarioGlobales = new List<UsuarioDTO>(); // Almacena todos los usuarios.
-        private readonly PermisoDAL _permisoDAL = new PermisoDAL();
-
-        // DataSet donde se almacenan usuarios, permisos, y relaciones entre ellos.
-        internal static DataSet UsuariosPermisosDataSet { get; set; } = new DataSet();
+        private List<UsuarioDTO> _usuariosGlobales = new List<UsuarioDTO>();
 
         private static int mId;
 
@@ -33,7 +29,7 @@ namespace IngenieriaSoftware.DAL
 
         public List<UsuarioDTO> ObtenerUsuariosGlobales()
         {
-            return _usuarioGlobales;
+            return _usuariosGlobales;
         }
 
         public void EliminarUsuario(int usuarioId)
@@ -59,7 +55,9 @@ namespace IngenieriaSoftware.DAL
             try
             {
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosUsuarios", null);
-                return new UsuarioMapper().MapearUsuariosDesdeDataSet(mDs);
+                _usuariosGlobales = new UsuarioMapper().MapearUsuariosDesdeDataSet(mDs);
+
+                return _usuariosGlobales;
             }
             catch (Exception ex)
             {
@@ -101,174 +99,6 @@ namespace IngenieriaSoftware.DAL
             return _dao.ExecuteNonQuery("sp_GuardarUsuario", parametros);
         }
 
-        #endregion Métodos para manejar usuarios
-
-        #region Métodos para manejar permisos
-
-        public List<PermisoDTO> PermisosTree()
-        {
-            return _permisoDAL.PermisosTree();
-        }
-
-        public List<PermisoDTO> PermisosGlobales()
-        {
-            return _permisoDAL.PermisosGlobales();
-        }
-
-        public List<PermisoDTO> ObtenerPermisosDelUsuarioEnMemoria(string pUsername)
-        {
-            UsuarioDTO usuario = _usuarioGlobales.Find(u => u.Username == pUsername);
-            return usuario.Permisos;
-        }
-
-        public void AsignarPermisoPorCod(string username, string permisoCod)
-        {
-            try
-            {
-                _permisoDAL.AsignarPermisoPorCod(username, permisoCod);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public void AsignarPermiso(int usuarioId, int permisoId)
-        {
-            try
-            {
-                _permisoDAL.AsignarPermiso(usuarioId, permisoId);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al asignar permiso: " + ex.Message, ex);
-            }
-        }
-
-        public void DesasignarPermiso(string username, int permisoId)
-        {
-            try
-            {
-                UsuarioDTO usuario = _usuarioGlobales.Find(u => u.Username == username);
-                if (usuario == null) return;
-
-                // Definir los parámetros para el procedimiento almacenado.
-                SqlParameter[] parametros = new SqlParameter[]
-                {
-                    new SqlParameter("@usuario_id", usuario.Id),
-                    new SqlParameter("@permiso_id", permisoId)
-                };
-
-                // Ejecutar el procedimiento almacenado.
-                _dao.ExecuteStoredProcedure("sp_DesasignarPermiso", parametros);
-
-                // Eliminar el permiso de la lista del usuario.
-                PermisoDTO permisoAEliminar = usuario.Permisos.FirstOrDefault(p => p.Id == permisoId);
-                if (permisoAEliminar != null)
-                {
-                    usuario.Permisos.Remove(permisoAEliminar);
-                    Console.WriteLine("Permiso desasignado correctamente.");
-                }
-                else
-                {
-                    Console.WriteLine("El permiso no está asignado a este usuario.");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al desasignar permiso: " + ex.Message, ex);
-            }
-        }
-
-        #endregion Métodos para manejar permisos
-
-        #region Métodos para cargar usuarios y permisos
-
-        public List<UsuarioDTO> CargarUsuariosPermisos()
-        {
-            try
-            {
-                // Obtener todos los usuarios, permisos y relaciones entre ellos.
-                UsuariosPermisosDataSet = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosTreeView", null);
-                _usuarioGlobales = new UsuarioMapper().MapearUsuariosDesdeDataSet(UsuariosPermisosDataSet);
-                var permisosMapeados = _permisoDAL.MapearPermisos(UsuariosPermisosDataSet);
-                _permisoDAL.AsignarPermisosHijos(UsuariosPermisosDataSet);
-
-                // Establecer la relación usuarios_permisos.
-                RelacionarUsuariosPermisos(UsuariosPermisosDataSet);
-
-                return _usuarioGlobales;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al cargar usuarios y permisos: " + ex.Message, ex);
-            }
-        }
-
-        private void RelacionarUsuariosPermisos(DataSet pDs)
-        {
-            foreach (DataRow row in pDs.Tables[2].Rows)
-            {
-                int idUsuario = (int)row["id_usuario"];
-                int idPermiso = (int)row["id_permiso"];
-
-                UsuarioDTO usuario = _usuarioGlobales.FirstOrDefault(u => u.Id == idUsuario);
-                PermisoDTO permiso = _permisoDAL.ObtenerPermisoPorId(idPermiso);
-
-                if (usuario != null && permiso != null)
-                {
-                    // Verificar si el permiso ya está asignado al usuario.
-                    if (!TienePermiso(usuario, permiso))
-                    {
-                        // Agregar el permiso al usuario.
-                        usuario.Permisos.Add(permiso);
-                        permiso.Usuarios.Add(usuario);
-                    }
-                }
-            }
-        }
-
-        public bool TienePermiso(UsuarioDTO usuario, PermisoDTO permiso)
-        {
-            // Verificar si el permiso está directamente en la lista de permisos del usuario.
-            if (usuario.Permisos.Contains(permiso))
-            {
-                return true;
-            }
-
-            // Buscar recursivamente en los permisos hijos de cada permiso del usuario.
-            foreach (var permisoAsignado in usuario.Permisos)
-            {
-                if (VerificarPermisoRecursivo(permisoAsignado, permiso))
-                {
-                    return true;
-                }
-            }
-
-            return false; // Si no se encontró el permiso en la lista del usuario ni en sus hijos.
-        }
-
-        // Método auxiliar recursivo para verificar permisos.
-        private bool VerificarPermisoRecursivo(PermisoDTO permisoActual, PermisoDTO permisoBuscado)
-        {
-            // Verificar si el permiso actual es el que estamos buscando.
-            if (permisoActual == permisoBuscado)
-            {
-                return true;
-            }
-
-            // Buscar en los permisos hijos del permiso actual.
-            foreach (PermisoDTO hijo in permisoActual.permisosHijos)
-            {
-                if (VerificarPermisoRecursivo(hijo, permisoBuscado))
-                {
-                    return true;
-                }
-            }
-
-            return false; // Si no se encontró el permiso buscado en el permiso actual ni en sus hijos.
-        }
-
-        #endregion Métodos para cargar usuarios y permisos
+        #endregion Métodos para manejar usuarios     
     }
 }

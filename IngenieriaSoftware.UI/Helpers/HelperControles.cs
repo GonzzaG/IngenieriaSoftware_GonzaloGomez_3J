@@ -15,6 +15,8 @@ namespace IngenieriaSoftware.UI
 
         private readonly IIdiomaSujeto _idiomaSujeto;
 
+       
+
         public ControlesHelper(IIdiomaSujeto idiomaSujeto)
         {
             _idiomaSujeto = idiomaSujeto;
