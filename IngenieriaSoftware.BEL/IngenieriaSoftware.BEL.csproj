@@ -47,6 +47,7 @@
     <Compile Include="Constantes\TipoProducto.cs" />
     <Compile Include="Empleados\Administrador.cs" />
     <Compile Include="Constantes\EstadoMesa.cs" />
+    <Compile Include="Empleados\Mesero.cs" />
     <Compile Include="Factura.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />

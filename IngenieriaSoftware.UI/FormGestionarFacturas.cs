@@ -17,6 +17,7 @@ namespace IngenieriaSoftware.UI
     public partial class FormGestionarFacturas : Form, IActualizable
     {
         private readonly FacturaBLL _facturaBLL = new FacturaBLL();
+        private readonly ComandaBLL _comandaBLL = new ComandaBLL(); 
         public FormGestionarFacturas()
         {
             InitializeComponent();
@@ -159,6 +160,29 @@ namespace IngenieriaSoftware.UI
 
             string estado = (comboBoxFiltroEstado.SelectedItem.ToString());
             ListarFacturas(estado);
+        }
+
+        private void btnEntregarFactura_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int mesaId = (int)dataGridViewFacturas.SelectedRows[0].Cells[3].Value;
+                var facturas = (List<Factura>)dataGridViewFacturas.DataSource;
+                Factura Factura = facturas
+                    .Where(m => m.MesaId == mesaId)
+                    .First(m => m.EstadoPago == EstadoFactura.Estado.Pagada);
+
+                if (Factura == null) { return; }
+                //veo si puedo imprimir la factura y tabmien marcarla como entregada
+                var padre = this.MdiParent as FormMDI;
+                FormFacturaAEntregar formGestionarFacturas = new FormFacturaAEntregar(Factura);
+
+                padre.AbrirFormHijo(formGestionarFacturas);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("La factura tiene que estar ppagada para entregarla");
+            }
         }
     }
 }

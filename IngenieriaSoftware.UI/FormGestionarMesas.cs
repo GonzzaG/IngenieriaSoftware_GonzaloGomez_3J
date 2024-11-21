@@ -37,7 +37,7 @@ namespace IngenieriaSoftware.UI
         {
             dataGridViewMesas.DataSource = null;
             dataGridViewMesas.DataSource = _mesasBLL.ObtenerMesasDisponibles();
-
+            if (dataGridViewMesas.Rows.Count == 0) { return; }
             dataGridViewMesas.Columns[0].HeaderText = "Numero de mesa";
             dataGridViewMesas.Columns[1].HeaderText = "Capacidad maxima";
             dataGridViewMesas.Columns[2].HeaderText = "Estado de la mesa";
@@ -109,8 +109,12 @@ namespace IngenieriaSoftware.UI
                     var mesa = _mesasBLL.Mesas().Find(m => m.MesaId == mesaId);
                     var padre = this.MdiParent as FormMDI;
 
+                    var comandaId = _comandaBLL.VerificarComandaOcupada(mesaId);
+                    if (comandaId == 0)
+                    {
+                         comandaId = _comandaBLL.InsertarComanda(mesaId);
+                    }
                     //voy a crear la comanda de la mesa, me retorna el id de la comanda
-                    int comandaId = _comandaBLL.InsertarComanda(mesaId);
 
                     FormRealizarComanda formRealizarComanda = new FormRealizarComanda(mesa, comandaId);
                     padre.AbrirFormHijo(formRealizarComanda);
@@ -170,9 +174,18 @@ namespace IngenieriaSoftware.UI
                         }
 
                         int mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
-                        var padre = this.MdiParent as FormMDI;
-                        FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
-                        padre.AbrirFormHijo(formSeleccionMedioDePago);
+                        if (!_comandaBLL.ComandasProductosEntregados(mesaId))
+                        {
+                            MessageBox.Show("La mesa tiene productos en la comanda que no fueron entregadas aun");
+                            return;
+                        }
+
+
+                        //voy a cerrar la mesa,  y luego desde otro formulario el cual un cajero pueda ver las mesas cerradas para poder seleccionar medios de pago                      
+                        var comanda = _comandaBLL.ObtenerComandaPorMesaId(mesaId);
+                        _mesasBLL.CambiarEstadoMesaCerrada(mesaId);
+                        _comandaBLL.CambiarEstadoComandaCerrada(mesaId);    
+                        Actualizar();
 
                     }
                     else

@@ -66,6 +66,12 @@
     <Compile Include="FormFacturaAEntregar.Designer.cs">
       <DependentUpon>FormFacturaAEntregar.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGenerarFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGenerarFacturas.Designer.cs">
+      <DependentUpon>FormGenerarFacturas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGestionarComandas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFacturaAEntregar.resx">
       <DependentUpon>FormFacturaAEntregar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGenerarFacturas.resx">
+      <DependentUpon>FormGenerarFacturas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarComandas.resx">
       <DependentUpon>FormGestionarComandas.cs</DependentUpon>

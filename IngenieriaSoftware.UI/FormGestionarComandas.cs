@@ -32,15 +32,18 @@ namespace IngenieriaSoftware.UI
                 var comanda = _comadaBLL.ObtenerComandasPendientes();
                 dataGridViewComandasPendientes.DataSource = null;
                 dataGridViewComandasPendientes.DataSource = comanda;
+                int comandaId;
+                int mesaId;
+                List<ComandaProducto> productosComanda;
 
-                if(dataGridViewComandasPendientes.RowCount > 0)
-                {
-                    int comandaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[0].Value;
-                    int mesaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[1].Value;
-                    var productosComanda = _comadaBLL.ObtenerComandaProductosPendientes(mesaId, comandaId);
+                if(dataGridViewComandasPendientes.RowCount > 0 )
+                {       
+                    comandaId = (int)dataGridViewComandasPendientes.Rows[0].Cells[0].Value;
+                    mesaId = (int)dataGridViewComandasPendientes.Rows[0].Cells[1].Value;
+                    productosComanda = _comadaBLL.ObtenerComandaProductosPendientes(mesaId, comandaId);
 
                     dataGridViewComandaProductos.DataSource = null;
-                    dataGridViewComandaProductos.DataSource = productosComanda;
+                    dataGridViewComandaProductos.DataSource = productosComanda;           
                 }
                 else
                 {

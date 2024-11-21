@@ -11,7 +11,11 @@ no haya nada, ira a buscarla. Cuando tenga cosas, solo la retornara, el IdiomaSu
 notificar(). Asi, tengo que ver que cuando una excepcion se ejecute, dentro de la excepcion busque el mensaje dentro de la lista
 de etiquetasTraducciones segun el tag de la excepcion // LISTO
 - Ver como se podria implementar las traducciones en messagesbox y ecepciones (excepciones utiliza message property) // LISTO
-
+- Cuando cierro sesion, las traducciones se ponen en espaniol pero el combobox se queda en el idioma que estaba.
+- Actualizar las mesas cuando se agregue, elimine o modifique una mesa, tanto en formabm o formGestionarMesas
+- En el formulario de nueva mesa, puedo poner 2 labels, uno de 'Nueva Mesa' otro de 'Modificar Mesa' Depende el estado que le pase
+como parametron al constructor, pongo como visible uno u otro, asi me despreocupo por varias traducciones en un label, puedo
+hacer lo mismo con el boton. 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - Hacer que cuando esta haciendo la comparación entre las etiquetas en base de datos y las de memoria, si hay etiquetas en bd
@@ -22,13 +26,7 @@ que no hay en memoria, las borramos. comparándolas por tag
 
 
 - Aregar idioma Ucraniano
-- Cuando cierro sesion, las traducciones se ponen en espaniol pero el combobox se queda en el idioma que estaba.
-lo que pasa es que cuando cierro sesion, se muestra el form inicio de sesion en español y despues de aceptar se vuelve a cambiar
 - Hacer que cuando se elimine, agregue o modifique una mesa, aparezcan excepciones de si fue correcto o incorrecto la operacion
-- Actualizar las mesas cuando se agregue, elimine o modifique una mesa, tanto en formabm o formGestionarMesas
-- En el formulario de nueva mesa, puedo poner 2 labels, uno de 'Nueva Mesa' otro de 'Modificar Mesa' Depende el estado que le pase
-como parametron al constructor, pongo como visible uno u otro, asi me despreocupo por varias traducciones en un label, puedo
-hacer lo mismo con el boton. 
 - Tengo que rellenar Tambien los campos que esten completos en el formulario de modificarMesa
 - OPCIONAL--- colocar la cantidad de comensales con un numeric en FormGestionarMesas, que se asignen a la mesa correspondiente
 - una mesa va a tener una unica comanda la cual se pueden ir agregando cosas a ella a medida que se va solicitando y luego lo que debo hacer es ir obteniendo siempre esa tabla para obtener los productos que posee la comanda de dicha mesa. y si quiero agregar productosComanda. habran algunos que ya fueron entregados, por ende esos no iran a cocina, pero iran como una lista  normal, no les pasare tooda la comanda.
@@ -39,6 +37,7 @@ para su preparacion.
 -Implementar que se pueda ver un resumen de lo que se lleva consumido hasta el momento (comandaproductos relacionadas a la mesa y comanda id correspondientes)
 -- IMPORTANTE-----antes de cerrar la cuenta, todos los comandaProductos de esa comanda tienen ue estar ene stado ENTREGADO
 
+--IMPORTANTE------ deberia utilizar el encripionmanager al menos para los datos de la tarjeta
 
 
 
@@ -48,6 +47,12 @@ cuando seleccione uno, presiono para pagar y esta factura debe marcarse como (Es
 
 
 
+--tengo que mostrar ien los productos en Ver comanda. mostrando el nombre de los productos y descripcion
+--cambiar estado de comandas en l codigo y en stored procedures
+--comandas a entregar mostrar message
+
+
+https://chatgpt.com/share/6736959d-00d0-800a-a183-72eab84962fa
 
 ULTIMO TAG 90
 

@@ -19,6 +19,7 @@ namespace IngenieriaSoftware.UI
         private readonly FacturaBLL _facturaBLL = new FacturaBLL();
         private readonly MesaBLL _mesaBLL = new MesaBLL();
        
+        private Factura Factura;
         private int MesaId;
         private int ComandaId;
         public FormFacturaAEntregar(int mesaId, int comandaId)
@@ -29,22 +30,29 @@ namespace IngenieriaSoftware.UI
             ComandaId = comandaId;
         }
 
+        public FormFacturaAEntregar(Factura factura)
+        {
+            InitializeComponent();
+            VerificarNotificaciones();
+            Factura = factura;
+        }
+
         public NotificacionService _notificacionService => new NotificacionService();
 
         public void Actualizar()
         {
-            var factura = _facturaBLL.ObtenerFacturaPorMesaYComanda(MesaId, ComandaId);
-            if(factura == null)
+            
+            if(Factura == null)
             {
                 MessageBox.Show("No tiene facturas en estado 'Pagadas' de esta mesa para entregar");
                 return;
             }
             
 
-            var detalleFactura = _facturaBLL.ObtenerProductosPorFacturaId(factura.FacturaId);
+            var detalleFactura = _facturaBLL.ObtenerProductosPorFacturaId(Factura.FacturaId);
             if(detalleFactura == null) { return; }
 
-            List<Factura> facturaList = new List<Factura>() { factura};
+            List<Factura> facturaList = new List<Factura>() { Factura };
 
             dataGridViewDetalleFactura.DataSource = null;
             dataGridViewDetalleFactura.DataSource = detalleFactura;
@@ -52,10 +60,7 @@ namespace IngenieriaSoftware.UI
             dataGridViewFacturaMesa.DataSource = null;
             dataGridViewFacturaMesa.DataSource = facturaList;
 
-    
-
-
-            lblNumeroFactura.Text = factura.NumeroFactura;
+            lblNumeroFactura.Text = Factura.NumeroFactura;
         }
 
         public void VerificarNotificaciones()
@@ -80,8 +85,9 @@ namespace IngenieriaSoftware.UI
         {
             
             var facturaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[0].Value;
+            var mesaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[3].Value;
             _facturaBLL.CambiarEstadoFacturaEntregada(facturaId);
-            _mesaBLL.CambiarEstadoMesaDesocupada(MesaId);
+            _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
 
             MessageBox.Show("Factura Entregada con exito. Mesa desocupada");
             this.Close();

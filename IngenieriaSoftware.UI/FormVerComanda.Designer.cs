@@ -40,7 +40,7 @@
             // 
             // btnConfirmarComanda
             // 
-            this.btnConfirmarComanda.Location = new System.Drawing.Point(504, 83);
+            this.btnConfirmarComanda.Location = new System.Drawing.Point(64, 517);
             this.btnConfirmarComanda.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmarComanda.Name = "btnConfirmarComanda";
             this.btnConfirmarComanda.Size = new System.Drawing.Size(162, 45);
@@ -52,7 +52,7 @@
             // 
             // btnEliminarProducto
             // 
-            this.btnEliminarProducto.Location = new System.Drawing.Point(504, 220);
+            this.btnEliminarProducto.Location = new System.Drawing.Point(271, 517);
             this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminarProducto.Name = "btnEliminarProducto";
             this.btnEliminarProducto.Size = new System.Drawing.Size(162, 45);
@@ -78,14 +78,14 @@
             // 
             this.dataGridViewComandaGeneral.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewComandaGeneral.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewComandaGeneral.Location = new System.Drawing.Point(34, 69);
+            this.dataGridViewComandaGeneral.Location = new System.Drawing.Point(34, 52);
             this.dataGridViewComandaGeneral.MultiSelect = false;
             this.dataGridViewComandaGeneral.Name = "dataGridViewComandaGeneral";
             this.dataGridViewComandaGeneral.RowHeadersVisible = false;
             this.dataGridViewComandaGeneral.RowHeadersWidth = 51;
             this.dataGridViewComandaGeneral.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewComandaGeneral.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewComandaGeneral.Size = new System.Drawing.Size(391, 401);
+            this.dataGridViewComandaGeneral.Size = new System.Drawing.Size(949, 191);
             this.dataGridViewComandaGeneral.TabIndex = 22;
             this.dataGridViewComandaGeneral.Tag = "101";
             // 
@@ -93,7 +93,7 @@
             // 
             this.lblComandaActual.AutoSize = true;
             this.lblComandaActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComandaActual.Location = new System.Drawing.Point(748, 23);
+            this.lblComandaActual.Location = new System.Drawing.Point(41, 263);
             this.lblComandaActual.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblComandaActual.Name = "lblComandaActual";
             this.lblComandaActual.Size = new System.Drawing.Size(185, 26);
@@ -105,14 +105,14 @@
             // 
             this.dataGridViewComandaActual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewComandaActual.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewComandaActual.Location = new System.Drawing.Point(743, 69);
+            this.dataGridViewComandaActual.Location = new System.Drawing.Point(34, 304);
             this.dataGridViewComandaActual.MultiSelect = false;
             this.dataGridViewComandaActual.Name = "dataGridViewComandaActual";
             this.dataGridViewComandaActual.RowHeadersVisible = false;
             this.dataGridViewComandaActual.RowHeadersWidth = 51;
             this.dataGridViewComandaActual.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewComandaActual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewComandaActual.Size = new System.Drawing.Size(391, 401);
+            this.dataGridViewComandaActual.Size = new System.Drawing.Size(949, 184);
             this.dataGridViewComandaActual.TabIndex = 26;
             this.dataGridViewComandaActual.Tag = "104";
             // 
@@ -120,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1168, 518);
+            this.ClientSize = new System.Drawing.Size(1046, 608);
             this.Controls.Add(this.lblComandaActual);
             this.Controls.Add(this.dataGridViewComandaActual);
             this.Controls.Add(this.btnConfirmarComanda);

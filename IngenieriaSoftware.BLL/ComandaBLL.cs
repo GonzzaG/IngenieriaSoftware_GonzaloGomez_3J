@@ -22,6 +22,10 @@ namespace IngenieriaSoftware.BLL
             return _comandaDAL.ObtenerComandasPendientes();
         }
 
+        public void EliminarComandaProducto(ComandaProducto p)
+        {
+            _comandaProductos.Remove(p);
+        }
         public void MarcarProductosEnPreparacion(List<ComandaProducto> productos)
         {
             var productosAux = productos;
@@ -73,7 +77,10 @@ namespace IngenieriaSoftware.BLL
             //con la comandaId 
             _comandaDAL.MarcarComandaProductosComoEntregados(notificacionId);
         }
-
+        public void CambiarEstadoComandaCerrada(int comandaId)
+        {
+            _comandaDAL.CambiarEstadoComandaCerrada(comandaId);  
+        }
         public void NotificarComandaLista(Comanda comanda)
         {
             //Voy a insertar una nueva notificacion con los datos de la comanda
@@ -87,7 +94,11 @@ namespace IngenieriaSoftware.BLL
                 Producto = producto,
                 Cantidad = cantidad,
                 EstadoProducto = BEL.Constantes.EstadoComandaProductos.Estado.Propuesta,
-                PrecioUnitario = producto.Precio
+                PrecioUnitario = producto.Precio,
+                Nombre = producto.Nombre,
+                Descripcion = producto.Descripcion,
+                EsPostre = producto.EsPostre
+                
             };
             
             //verificamos si el producto ya existe en la lista de comandaProducto, para reordenarlo si es asi 
@@ -102,7 +113,10 @@ namespace IngenieriaSoftware.BLL
             }
 
         }
-
+        public bool ComandasProductosEntregados(int mesaId)
+        {
+            return _comandaDAL.VerificarEstadoComandaProductosPorMesaId(mesaId);
+        }
         public void InsertarComandaProductos(List<ComandaProducto> comandaProductos)
         {
             _comandaDAL.InsertarComandaProductos(comandaProductos);    
@@ -111,6 +125,10 @@ namespace IngenieriaSoftware.BLL
         public int InsertarComanda(int mesaId)
         {
             return _comandaDAL.InsertarComanda(mesaId);
+        }
+        public int VerificarComandaOcupada(int mesaId)
+        {
+            return _comandaDAL.VerificarComandaOcupada(mesaId);
         }
 
         public Comanda ObtenerComandaPorMesaId(int mesaId)

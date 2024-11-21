@@ -23,6 +23,7 @@ namespace IngenieriaSoftware.UI
         private readonly ComandaBLL _comandaBLL = new ComandaBLL();
         private Mesa _mesa;
         private int _comandaId;
+        private Comanda _comanda;
 
         public NotificacionService _notificacionService => new NotificacionService();
 
@@ -31,7 +32,6 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
             _mesa = mesa;
             _comandaId = comandaId;
-
             Inicializar();
             
         }
@@ -68,7 +68,7 @@ namespace IngenieriaSoftware.UI
             //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
             int indice = dataGridViewProductos.SelectedRows[0].Index;
             Producto producto = ((List<Producto>)dataGridViewProductos.DataSource)[indice];
-
+   
             _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
         }
 
@@ -85,7 +85,7 @@ namespace IngenieriaSoftware.UI
             
             var padre = this.MdiParent as FormMDI;
 
-            FormVerComanda formVerComanda = new FormVerComanda(_mesa, _comandaBLL);
+            FormVerComanda formVerComanda = new FormVerComanda(_comandaBLL, _comandaId);
             formVerComanda.StartPosition = FormStartPosition.CenterScreen;
             formVerComanda.ShowDialog();
           // padre.AbrirFormHijo(formVerComanda);

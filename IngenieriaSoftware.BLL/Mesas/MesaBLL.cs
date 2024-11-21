@@ -61,12 +61,10 @@ namespace IngenieriaSoftware.BLL.Mesas
             }
         }
 
-
         public void CerrarMesa(int mesaId, decimal propina, decimal descuento, int medioDePagoId, int clienteId)
         {
             using (var transaction = new TransactionScope())
             {
-
                 var comanda = _comandaBLL.ObtenerComandaPorMesaId(mesaId);
 
                 _mesaDAL.CambiarEstadoMesaCerrada(mesaId);
@@ -111,6 +109,12 @@ namespace IngenieriaSoftware.BLL.Mesas
         public List<Mesa> ObtenerMesasDisponibles()
         {
             _mesas = _mesaDAL.ObtenerMesasDisponibles((int)EstadoMesa.Estado.FueraDeServicio);
+            return _mesas;
+        }
+
+        public List<Mesa> ObtenerMesasCerradas()
+        {
+            _mesas = _mesaDAL.ObtenerMesasPorEstado((int)EstadoMesa.Estado.Cerrada);
             return _mesas;
         }
 

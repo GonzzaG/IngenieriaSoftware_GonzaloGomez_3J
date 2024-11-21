@@ -66,6 +66,24 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public List<Mesa> ObtenerMesasPorEstado(int estado)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@estadoMesa", estado)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerMesasPorEstado", parametros);
+                return _mesaMapper.MapearMesasDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Mesa ObtenerMesaDisponiblePorId(int mesaId,int estadoFueraDeServicio)
         {
             try

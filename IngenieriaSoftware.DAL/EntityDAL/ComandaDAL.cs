@@ -37,6 +37,24 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
+
+        public int VerificarComandaOcupada(int mesaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@mesa_id", mesaId)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_VerificarComandaOcupada", parametros);
+                return Convert.ToInt32(mDs.Tables[0].Rows[0]["comanda_id"]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void InsertarComandaProductos(List<ComandaProducto> comandaProductos)
         {
             try
@@ -103,6 +121,24 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        public bool VerificarEstadoComandaProductosPorMesaId(int mesaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@mesa_id", mesaId),
+                };
+
+                var resultado = _dao.ExecuteStoredProcedure("sp_VerificarEstadoComandaProductosPorMesaId", parametros);
+                DataRow verificado = resultado.Tables[0].Rows[0];
+                return Convert.ToBoolean(verificado["resultado"]);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al verificar el estado de los productos de la comanda.", ex);
             }
         }
 
@@ -234,7 +270,22 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             return table;
         }
 
+        public void CambiarEstadoComandaCerrada(int comandaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@comanda_id", comandaId),
+                };
 
+                _dao.ExecuteNonQuery("sp_CambiarEstadoComandaCerrada", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

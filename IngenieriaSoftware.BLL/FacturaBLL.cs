@@ -74,7 +74,7 @@ namespace IngenieriaSoftware.BLL
                 TotalFinal = totalFinal,
                 MetodoPagoId = medioDePago.MedioDePagoId,
                 MetodoPago = medioDePago,
-                EstadoPago = EstadoFactura.Estado.Solicitada,
+                EstadoPago = EstadoFactura.Estado.PendienteDePago,
                 MontoPagado = 0,
                 Cambio = 0,
                 Notas = "Generada automáticamente",
