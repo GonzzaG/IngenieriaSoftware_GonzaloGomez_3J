@@ -259,7 +259,8 @@ namespace IngenieriaSoftware.UI
                 { "PERM_ACT_ETIQUETAS", actualizarEtiquetasToolStripMenuItem },
                 { "PERM_AGR_TRADUCCION", agregarTraduccionToolStripMenuItem },
                 { "PERM_GEST_PERMISOS", gestionarPermisosToolStripMenuItem },
-                { "PERM_ASIGN_PERMISOS", asignarPermisosToolStripMenuItem }
+                { "PERM_ASIGN_PERMISOS", asignarPermisosToolStripMenuItem },
+                { "PERM_GEN_FACTURAS", generarFacturarToolStripMenuItem }
                 //{ "PERM_GEST_USUARIO", gestionUsuariosToolStripMenuItem },
             };
         }
@@ -579,6 +580,12 @@ namespace IngenieriaSoftware.UI
         {
             FormGestionarPermisos formGestionPermisos = new FormGestionarPermisos();
             AbrirFormHijo(formGestionPermisos);
+        }
+
+        private void generarFacturarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGenerarFacturas formGenerarFacturas = new FormGenerarFacturas();
+            AbrirFormHijo(formGenerarFacturas);
         }
     }
 }

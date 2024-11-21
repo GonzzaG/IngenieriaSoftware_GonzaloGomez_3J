@@ -147,15 +147,11 @@ namespace IngenieriaSoftware.UI
 
                 if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.GetInstance.Usuario.Username)
                 {
-                    this.Close();
-                }
-                if (comboBoxUsuario.Text == SessionManager.GetInstance.Usuario.Username)
-                {
                     var padre = this.MdiParent as FormMDI;
                     padre.VerificarPermisosRoles(permisosUsuario);
                     this.Close();
-
                 }
+
                     ActualizarFormulario();
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
             }

@@ -34,6 +34,7 @@
             this.lblFiltrar = new System.Windows.Forms.Label();
             this.btnMarcarComoPagado = new System.Windows.Forms.Button();
             this.btnPendienteDePago = new System.Windows.Forms.Button();
+            this.btnEntregarFactura = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFacturas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,11 +111,24 @@
             this.btnPendienteDePago.UseVisualStyleBackColor = true;
             this.btnPendienteDePago.Click += new System.EventHandler(this.btnPendienteDePago_Click_1);
             // 
+            // btnEntregarFactura
+            // 
+            this.btnEntregarFactura.Location = new System.Drawing.Point(704, 437);
+            this.btnEntregarFactura.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEntregarFactura.Name = "btnEntregarFactura";
+            this.btnEntregarFactura.Size = new System.Drawing.Size(162, 45);
+            this.btnEntregarFactura.TabIndex = 33;
+            this.btnEntregarFactura.Tag = "171";
+            this.btnEntregarFactura.Text = "Entregar Factura";
+            this.btnEntregarFactura.UseVisualStyleBackColor = true;
+            this.btnEntregarFactura.Click += new System.EventHandler(this.btnEntregarFactura_Click);
+            // 
             // FormGestionarFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 567);
+            this.Controls.Add(this.btnEntregarFactura);
             this.Controls.Add(this.btnPendienteDePago);
             this.Controls.Add(this.btnMarcarComoPagado);
             this.Controls.Add(this.lblFiltrar);
@@ -138,5 +152,6 @@
         private System.Windows.Forms.Label lblFiltrar;
         private System.Windows.Forms.Button btnMarcarComoPagado;
         private System.Windows.Forms.Button btnPendienteDePago;
+        private System.Windows.Forms.Button btnEntregarFactura;
     }
 }

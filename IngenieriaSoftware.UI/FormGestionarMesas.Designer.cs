@@ -32,8 +32,7 @@
             this.lblMesas = new System.Windows.Forms.Label();
             this.btnAsignarMesa = new System.Windows.Forms.Button();
             this.btnRealizarComanda = new System.Windows.Forms.Button();
-            this.btnSolicitarCuenta = new System.Windows.Forms.Button();
-            this.btnEntregarFactura = new System.Windows.Forms.Button();
+            this.btnCerrarMesa = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMesas)).BeginInit();
             this.SuspendLayout();
@@ -89,37 +88,24 @@
             this.btnRealizarComanda.UseVisualStyleBackColor = true;
             this.btnRealizarComanda.Click += new System.EventHandler(this.btnRealizarComanda_Click);
             // 
-            // btnSolicitarCuenta
+            // btnCerrarMesa
             // 
-            this.btnSolicitarCuenta.Location = new System.Drawing.Point(489, 366);
-            this.btnSolicitarCuenta.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSolicitarCuenta.Name = "btnSolicitarCuenta";
-            this.btnSolicitarCuenta.Size = new System.Drawing.Size(162, 45);
-            this.btnSolicitarCuenta.TabIndex = 16;
-            this.btnSolicitarCuenta.Tag = "170";
-            this.btnSolicitarCuenta.Text = "Solicitar Cuenta";
-            this.btnSolicitarCuenta.UseVisualStyleBackColor = true;
-            this.btnSolicitarCuenta.Click += new System.EventHandler(this.btnSolicitarCuenta_Click);
-            // 
-            // btnEntregarFactura
-            // 
-            this.btnEntregarFactura.Location = new System.Drawing.Point(489, 424);
-            this.btnEntregarFactura.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEntregarFactura.Name = "btnEntregarFactura";
-            this.btnEntregarFactura.Size = new System.Drawing.Size(162, 45);
-            this.btnEntregarFactura.TabIndex = 17;
-            this.btnEntregarFactura.Tag = "171";
-            this.btnEntregarFactura.Text = "Entregar Factura";
-            this.btnEntregarFactura.UseVisualStyleBackColor = true;
-            this.btnEntregarFactura.Click += new System.EventHandler(this.btnCobrar_Click);
+            this.btnCerrarMesa.Location = new System.Drawing.Point(489, 414);
+            this.btnCerrarMesa.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCerrarMesa.Name = "btnCerrarMesa";
+            this.btnCerrarMesa.Size = new System.Drawing.Size(162, 45);
+            this.btnCerrarMesa.TabIndex = 16;
+            this.btnCerrarMesa.Tag = "170";
+            this.btnCerrarMesa.Text = "Cerrar mesa";
+            this.btnCerrarMesa.UseVisualStyleBackColor = true;
+            this.btnCerrarMesa.Click += new System.EventHandler(this.btnSolicitarCuenta_Click);
             // 
             // FormGestionarMesas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 524);
-            this.Controls.Add(this.btnEntregarFactura);
-            this.Controls.Add(this.btnSolicitarCuenta);
+            this.Controls.Add(this.btnCerrarMesa);
             this.Controls.Add(this.btnRealizarComanda);
             this.Controls.Add(this.btnAsignarMesa);
             this.Controls.Add(this.lblMesas);
@@ -141,8 +127,7 @@
         private System.Windows.Forms.Label lblMesas;
         private System.Windows.Forms.Button btnAsignarMesa;
         private System.Windows.Forms.Button btnRealizarComanda;
-        private System.Windows.Forms.Button btnSolicitarCuenta;
-        private System.Windows.Forms.Button btnEntregarFactura;
+        private System.Windows.Forms.Button btnCerrarMesa;
         private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
