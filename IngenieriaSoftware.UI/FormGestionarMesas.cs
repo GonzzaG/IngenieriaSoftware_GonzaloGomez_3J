@@ -37,7 +37,7 @@ namespace IngenieriaSoftware.UI
         {
             dataGridViewMesas.DataSource = null;
             dataGridViewMesas.DataSource = _mesasBLL.ObtenerMesasDisponibles();
-
+            if (dataGridViewMesas.Rows.Count == 0) { return; }
             dataGridViewMesas.Columns[0].HeaderText = "Numero de mesa";
             dataGridViewMesas.Columns[1].HeaderText = "Capacidad maxima";
             dataGridViewMesas.Columns[2].HeaderText = "Estado de la mesa";

@@ -38,10 +38,11 @@
             // 
             // btnEliminarMesa
             // 
-            this.btnEliminarMesa.Location = new System.Drawing.Point(715, 211);
-            this.btnEliminarMesa.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEliminarMesa.Enabled = false;
+            this.btnEliminarMesa.Location = new System.Drawing.Point(953, 260);
+            this.btnEliminarMesa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminarMesa.Name = "btnEliminarMesa";
-            this.btnEliminarMesa.Size = new System.Drawing.Size(162, 45);
+            this.btnEliminarMesa.Size = new System.Drawing.Size(216, 55);
             this.btnEliminarMesa.TabIndex = 19;
             this.btnEliminarMesa.Tag = "301";
             this.btnEliminarMesa.Text = "Eliminar Mesa";
@@ -50,10 +51,10 @@
             // 
             // btnNuevaMesa
             // 
-            this.btnNuevaMesa.Location = new System.Drawing.Point(715, 135);
-            this.btnNuevaMesa.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNuevaMesa.Location = new System.Drawing.Point(953, 166);
+            this.btnNuevaMesa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNuevaMesa.Name = "btnNuevaMesa";
-            this.btnNuevaMesa.Size = new System.Drawing.Size(162, 45);
+            this.btnNuevaMesa.Size = new System.Drawing.Size(216, 55);
             this.btnNuevaMesa.TabIndex = 18;
             this.btnNuevaMesa.Tag = "300";
             this.btnNuevaMesa.Text = "Nueva Mesa";
@@ -64,10 +65,9 @@
             // 
             this.lblMesas.AutoSize = true;
             this.lblMesas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMesas.Location = new System.Drawing.Point(58, 26);
-            this.lblMesas.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMesas.Location = new System.Drawing.Point(77, 32);
             this.lblMesas.Name = "lblMesas";
-            this.lblMesas.Size = new System.Drawing.Size(81, 26);
+            this.lblMesas.Size = new System.Drawing.Size(102, 32);
             this.lblMesas.TabIndex = 17;
             this.lblMesas.Tag = "198";
             this.lblMesas.Text = "Mesas";
@@ -76,23 +76,24 @@
             // 
             this.dataGridViewMesas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMesas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewMesas.Location = new System.Drawing.Point(23, 71);
+            this.dataGridViewMesas.Location = new System.Drawing.Point(31, 87);
+            this.dataGridViewMesas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridViewMesas.MultiSelect = false;
             this.dataGridViewMesas.Name = "dataGridViewMesas";
             this.dataGridViewMesas.RowHeadersVisible = false;
             this.dataGridViewMesas.RowHeadersWidth = 51;
             this.dataGridViewMesas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewMesas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewMesas.Size = new System.Drawing.Size(602, 328);
+            this.dataGridViewMesas.Size = new System.Drawing.Size(803, 404);
             this.dataGridViewMesas.TabIndex = 16;
             this.dataGridViewMesas.Tag = "199";
             // 
             // btnModificarMesa
             // 
-            this.btnModificarMesa.Location = new System.Drawing.Point(715, 286);
-            this.btnModificarMesa.Margin = new System.Windows.Forms.Padding(2);
+            this.btnModificarMesa.Location = new System.Drawing.Point(953, 352);
+            this.btnModificarMesa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModificarMesa.Name = "btnModificarMesa";
-            this.btnModificarMesa.Size = new System.Drawing.Size(162, 45);
+            this.btnModificarMesa.Size = new System.Drawing.Size(216, 55);
             this.btnModificarMesa.TabIndex = 20;
             this.btnModificarMesa.Tag = "302";
             this.btnModificarMesa.Text = "Modificar Mesa";
@@ -101,15 +102,15 @@
             // 
             // FormABMMesas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(926, 507);
+            this.ClientSize = new System.Drawing.Size(1235, 624);
             this.Controls.Add(this.btnModificarMesa);
             this.Controls.Add(this.btnEliminarMesa);
             this.Controls.Add(this.btnNuevaMesa);
             this.Controls.Add(this.lblMesas);
             this.Controls.Add(this.dataGridViewMesas);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormABMMesas";
             this.Tag = "303";
             this.Text = "ABM Mesas";
