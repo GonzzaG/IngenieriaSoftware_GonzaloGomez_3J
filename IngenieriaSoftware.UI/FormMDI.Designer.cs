@@ -52,6 +52,7 @@
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.toolTipNotificacion = new System.Windows.Forms.ToolTip(this.components);
+            this.crearRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,7 +116,7 @@
             // generarFacturarToolStripMenuItem
             // 
             this.generarFacturarToolStripMenuItem.Name = "generarFacturarToolStripMenuItem";
-            this.generarFacturarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.generarFacturarToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.generarFacturarToolStripMenuItem.Tag = "380";
             this.generarFacturarToolStripMenuItem.Text = "Generar Facturas";
             this.generarFacturarToolStripMenuItem.Click += new System.EventHandler(this.generarFacturarToolStripMenuItem_Click);
@@ -123,7 +124,7 @@
             // fToolStripMenuItem
             // 
             this.fToolStripMenuItem.Name = "fToolStripMenuItem";
-            this.fToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.fToolStripMenuItem.Tag = "163";
             this.fToolStripMenuItem.Text = "Ver Facturas";
             this.fToolStripMenuItem.Click += new System.EventHandler(this.fToolStripMenuItem_Click);
@@ -158,7 +159,8 @@
             // gestionarPermisosToolStripMenuItem
             // 
             this.gestionarPermisosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asignarPermisosToolStripMenuItem});
+            this.asignarPermisosToolStripMenuItem,
+            this.crearRolesToolStripMenuItem});
             this.gestionarPermisosToolStripMenuItem.Name = "gestionarPermisosToolStripMenuItem";
             this.gestionarPermisosToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.gestionarPermisosToolStripMenuItem.Text = "Gestionar Permisos";
@@ -166,7 +168,7 @@
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.asignarPermisosToolStripMenuItem.Tag = "385";
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem1_Click);
@@ -185,7 +187,7 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
@@ -193,7 +195,7 @@
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
@@ -213,7 +215,7 @@
             // 
             this.actualizarEtiquetasToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
-            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.actualizarEtiquetasToolStripMenuItem.Tag = "11";
             this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
             this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
@@ -221,7 +223,7 @@
             // agregarTraduccionToolStripMenuItem
             // 
             this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
-            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.agregarTraduccionToolStripMenuItem.Tag = "12";
             this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
             this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
@@ -262,6 +264,14 @@
             this.lblIdiomaActual.TabIndex = 9;
             this.lblIdiomaActual.Tag = "69";
             this.lblIdiomaActual.Text = "Idioma Actual";
+            // 
+            // crearRolesToolStripMenuItem
+            // 
+            this.crearRolesToolStripMenuItem.Name = "crearRolesToolStripMenuItem";
+            this.crearRolesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.crearRolesToolStripMenuItem.Tag = "665";
+            this.crearRolesToolStripMenuItem.Text = "Crear Roles";
+            this.crearRolesToolStripMenuItem.Click += new System.EventHandler(this.crearRolesToolStripMenuItem_Click);
             // 
             // FormMDI
             // 
@@ -310,5 +320,6 @@
         private System.Windows.Forms.ToolStripMenuItem gestionarPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarFacturarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem crearRolesToolStripMenuItem;
     }
 }

@@ -587,5 +587,10 @@ namespace IngenieriaSoftware.UI
             FormGenerarFacturas formGenerarFacturas = new FormGenerarFacturas();
             AbrirFormHijo(formGenerarFacturas);
         }
+
+        private void crearRolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
