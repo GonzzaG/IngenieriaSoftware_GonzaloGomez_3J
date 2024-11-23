@@ -60,6 +60,12 @@
     <Compile Include="FormComandasAEntregar.Designer.cs">
       <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCrearPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCrearPermisos.Designer.cs">
+      <DependentUpon>FormCrearPermisos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormFacturaAEntregar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormComandasAEntregar.resx">
       <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCrearPermisos.resx">
+      <DependentUpon>FormCrearPermisos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFacturaAEntregar.resx">
       <DependentUpon>FormFacturaAEntregar.cs</DependentUpon>

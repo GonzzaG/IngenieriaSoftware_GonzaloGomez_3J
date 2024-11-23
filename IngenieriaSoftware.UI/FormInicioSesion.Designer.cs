@@ -39,19 +39,19 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(276, 103);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(2);
+            this.txtUsuario.Location = new System.Drawing.Point(503, 213);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(159, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(211, 22);
             this.txtUsuario.TabIndex = 0;
             this.txtUsuario.Tag = "17";
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(276, 288);
-            this.btnIngresar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnIngresar.Location = new System.Drawing.Point(503, 440);
+            this.btnIngresar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(151, 70);
+            this.btnIngresar.Size = new System.Drawing.Size(201, 86);
             this.btnIngresar.TabIndex = 2;
             this.btnIngresar.Tag = "20";
             this.btnIngresar.Text = "Ingresar";
@@ -61,10 +61,9 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(274, 88);
-            this.lblUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblUsuario.Location = new System.Drawing.Point(500, 194);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(46, 13);
+            this.lblUsuario.Size = new System.Drawing.Size(57, 16);
             this.lblUsuario.TabIndex = 3;
             this.lblUsuario.Tag = "16";
             this.lblUsuario.Text = "Usuario:";
@@ -72,20 +71,20 @@
             // lblContrasena
             // 
             this.lblContrasena.AutoSize = true;
-            this.lblContrasena.Location = new System.Drawing.Point(274, 150);
-            this.lblContrasena.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblContrasena.Location = new System.Drawing.Point(500, 271);
             this.lblContrasena.Name = "lblContrasena";
-            this.lblContrasena.Size = new System.Drawing.Size(64, 13);
+            this.lblContrasena.Size = new System.Drawing.Size(79, 16);
             this.lblContrasena.TabIndex = 4;
             this.lblContrasena.Tag = "18";
             this.lblContrasena.Text = "Contrasena:";
             // 
             // txtContrasena
             // 
-            this.txtContrasena.Location = new System.Drawing.Point(276, 178);
-            this.txtContrasena.Margin = new System.Windows.Forms.Padding(2);
+            this.txtContrasena.Location = new System.Drawing.Point(503, 305);
+            this.txtContrasena.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtContrasena.Name = "txtContrasena";
-            this.txtContrasena.Size = new System.Drawing.Size(159, 20);
+            this.txtContrasena.PasswordChar = '*';
+            this.txtContrasena.Size = new System.Drawing.Size(211, 22);
             this.txtContrasena.TabIndex = 5;
             this.txtContrasena.Tag = "19";
             // 
@@ -96,16 +95,16 @@
             // 
             // FormInicioSesion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(851, 505);
+            this.ClientSize = new System.Drawing.Size(1135, 622);
             this.Controls.Add(this.txtContrasena);
             this.Controls.Add(this.lblContrasena);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.txtUsuario);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormInicioSesion";
             this.Tag = "15";
             this.Text = "Inicio";
