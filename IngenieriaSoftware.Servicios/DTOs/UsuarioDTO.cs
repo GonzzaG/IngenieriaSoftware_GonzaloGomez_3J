@@ -12,5 +12,6 @@ namespace IngenieriaSoftware.Servicios
         public DateTime FechaCreacion { get; set; }
         public List<PermisoDTO> Permisos { get; set; } = new List<PermisoDTO>();
         public int IdiomaId { get; set; }
+        public int id_rol { get; set; }
     }
 }

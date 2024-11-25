@@ -239,7 +239,7 @@ namespace IngenieriaSoftware.UI
         {
             permisosRol = new Dictionary<string, ToolStripMenuItem[]>
             {
-                { "PERM_ADMIN", new [] { gestionUsuariosToolStripMenuItem, gestionIdiomasToolStripMenuItem, cobrosToolStripMenuItem, gestionarMesasToolStripMenuItem, fToolStripMenuItem,
+                { "PERM_ADMIN", new [] { gestionUsuariosToolStripMenuItem, asignarRolToolStripMenuItem,gestionPermisosToolStripMenuItem, gestionIdiomasToolStripMenuItem, cobrosToolStripMenuItem, gestionarMesasToolStripMenuItem, fToolStripMenuItem,
                     aBMMesasToolStripMenuItem , mesasToolStripMenuItem, comandasToolStripMenuItem, comandasAEntregarToolStripMenuItem, comandasCocinaToolStripMenuItem, registrarUsuarioToolStripMenuItem,
                     asignarPermisosToolStripMenuItem, eliminarUsuarioToolStripMenuItem, agregarTraduccionToolStripMenuItem, actualizarEtiquetasToolStripMenuItem, gestionarPermisosToolStripMenuItem} },
                 { "PERM_CAJA", new [] { cobrosToolStripMenuItem, fToolStripMenuItem } },
@@ -586,6 +586,18 @@ namespace IngenieriaSoftware.UI
         {
             FormGenerarFacturas formGenerarFacturas = new FormGenerarFacturas();
             AbrirFormHijo(formGenerarFacturas);
+        }
+
+        private void gestionPermisosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestionRoles formGestionRoles = new FormGestionRoles();
+            AbrirFormHijo(formGestionRoles);
+        }
+
+        private void asignarRolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAsignarRolAUsuario formAsignarRolAUsuario = new FormAsignarRolAUsuario();
+            AbrirFormHijo(formAsignarRolAUsuario);
         }
     }
 }

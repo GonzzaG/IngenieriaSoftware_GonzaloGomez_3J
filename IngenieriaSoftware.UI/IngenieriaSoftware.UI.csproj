@@ -54,6 +54,12 @@
     <Compile Include="FormABMMesas.Designer.cs">
       <DependentUpon>FormABMMesas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAsignarRolAUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAsignarRolAUsuario.Designer.cs">
+      <DependentUpon>FormAsignarRolAUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormComandasAEntregar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,12 @@
     </Compile>
     <Compile Include="FormGestionarMesas.Designer.cs">
       <DependentUpon>FormGestionarMesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionRoles.Designer.cs">
+      <DependentUpon>FormGestionRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="FormNuevaMesa.cs">
       <SubType>Form</SubType>
@@ -175,6 +187,9 @@
     <EmbeddedResource Include="FormABMMesas.resx">
       <DependentUpon>FormABMMesas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAsignarRolAUsuario.resx">
+      <DependentUpon>FormAsignarRolAUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormComandasAEntregar.resx">
       <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarPermisos.resx">
       <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionRoles.resx">
+      <DependentUpon>FormGestionRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormNuevaMesa.resx">
       <DependentUpon>FormNuevaMesa.cs</DependentUpon>

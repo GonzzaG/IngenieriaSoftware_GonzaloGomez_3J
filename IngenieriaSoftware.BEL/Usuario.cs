@@ -12,6 +12,7 @@ namespace IngenieriaSoftware.BEL
         public DateTime FechaCreacion { get; set; }
         public List<Permiso> Permisos { get; set; } = new List<Permiso>();
         public int IdiomaId { get; set; }
+        public int id_rol { get; set; }
 
         public void Actualizar(Idioma i)
         {

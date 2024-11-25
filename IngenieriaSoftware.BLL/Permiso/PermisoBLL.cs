@@ -14,10 +14,52 @@ namespace IngenieriaSoftware.BLL
         {
             _permisoDAL = new PermisoDAL();
         }
+
+        public List<PermisoDTO> ObtenerTodosLosRoles()
+        {
+            return _permisoDAL.ObtenerTodosLosRoles();
+        }
+        public List<PermisoDTO> ObtenerTodosLosPermisos()
+        {
+            return _permisoDAL.ObtenerTodosLosPermisos();
+        }
+
+        public void CrearRol(string nombreRol)
+        {
+            _permisoDAL.CrearRol(nombreRol);
+        }
+        public string EliminarRol(int rolId)
+        {
+            return _permisoDAL.EliminarRol(rolId);  
+        }
+        public void AsignarRolARol(int rolPadreId, int rolHijoId)
+        {
+            _permisoDAL.AsignarRolARol(rolPadreId, rolHijoId);      
+        }
+        public void AsignarPermisoARol(int rolId, int permisoId)
+        {
+            _permisoDAL.AsignarPermisoARol(rolId, permisoId);   
+        }
+        public string DesasignarRolARol(int rolPadreId, int rolHijoId)
+        {
+            return _permisoDAL.DesasignarRolARol(rolPadreId, rolHijoId);
+        }
+        public string AsignarRolAUsuario(int usuarioId, int rolId)
+        {
+            return _permisoDAL.AsignarRolAUsuario(usuarioId, rolId);
+        }
         public List<PermisoDTO> ObtenerPermisosDelUsuario(string pUserName) 
         {
             List<PermisoDTO> permisosUsuario = _permisoDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
             return permisosUsuario;
+        }
+        public List<PermisoDTO> ObtenerPermisosDelRol(string nombreRol)
+        {
+            return _permisoDAL.ObtenerPermisosDelRol(nombreRol);
+        }
+        public List<PermisoDTO> ObtenerPermisosDelRolPorId(int rolId)
+        {
+            return _permisoDAL.ObtenerPermisosDelRolPorId(rolId);
         }
 
         public List<PermisoDTO> CargarPermisos()

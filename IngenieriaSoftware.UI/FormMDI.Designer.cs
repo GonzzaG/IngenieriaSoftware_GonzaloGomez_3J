@@ -41,6 +41,7 @@
             this.comandasAEntregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +53,7 @@
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.toolTipNotificacion = new System.Windows.Forms.ToolTip(this.components);
+            this.asignarRolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,7 +117,7 @@
             // generarFacturarToolStripMenuItem
             // 
             this.generarFacturarToolStripMenuItem.Name = "generarFacturarToolStripMenuItem";
-            this.generarFacturarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.generarFacturarToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.generarFacturarToolStripMenuItem.Tag = "380";
             this.generarFacturarToolStripMenuItem.Text = "Generar Facturas";
             this.generarFacturarToolStripMenuItem.Click += new System.EventHandler(this.generarFacturarToolStripMenuItem_Click);
@@ -123,7 +125,7 @@
             // fToolStripMenuItem
             // 
             this.fToolStripMenuItem.Name = "fToolStripMenuItem";
-            this.fToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.fToolStripMenuItem.Tag = "163";
             this.fToolStripMenuItem.Text = "Ver Facturas";
             this.fToolStripMenuItem.Click += new System.EventHandler(this.fToolStripMenuItem_Click);
@@ -158,7 +160,9 @@
             // gestionarPermisosToolStripMenuItem
             // 
             this.gestionarPermisosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asignarPermisosToolStripMenuItem});
+            this.asignarPermisosToolStripMenuItem,
+            this.gestionPermisosToolStripMenuItem,
+            this.asignarRolToolStripMenuItem});
             this.gestionarPermisosToolStripMenuItem.Name = "gestionarPermisosToolStripMenuItem";
             this.gestionarPermisosToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.gestionarPermisosToolStripMenuItem.Text = "Gestionar Permisos";
@@ -166,10 +170,17 @@
             // asignarPermisosToolStripMenuItem
             // 
             this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.asignarPermisosToolStripMenuItem.Tag = "385";
             this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
             this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem1_Click);
+            // 
+            // gestionPermisosToolStripMenuItem
+            // 
+            this.gestionPermisosToolStripMenuItem.Name = "gestionPermisosToolStripMenuItem";
+            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gestionPermisosToolStripMenuItem.Text = "Gestion Roles";
+            this.gestionPermisosToolStripMenuItem.Click += new System.EventHandler(this.gestionPermisosToolStripMenuItem_Click);
             // 
             // gestionUsuariosToolStripMenuItem
             // 
@@ -185,7 +196,7 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
@@ -193,7 +204,7 @@
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
@@ -263,6 +274,13 @@
             this.lblIdiomaActual.Tag = "69";
             this.lblIdiomaActual.Text = "Idioma Actual";
             // 
+            // asignarRolToolStripMenuItem
+            // 
+            this.asignarRolToolStripMenuItem.Name = "asignarRolToolStripMenuItem";
+            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.asignarRolToolStripMenuItem.Text = "Asignar Rol";
+            this.asignarRolToolStripMenuItem.Click += new System.EventHandler(this.asignarRolToolStripMenuItem_Click);
+            // 
             // FormMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -310,5 +328,7 @@
         private System.Windows.Forms.ToolStripMenuItem gestionarPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarFacturarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionPermisosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asignarRolToolStripMenuItem;
     }
 }
