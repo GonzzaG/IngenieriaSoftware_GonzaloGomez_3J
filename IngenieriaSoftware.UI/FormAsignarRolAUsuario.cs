@@ -148,23 +148,26 @@ namespace IngenieriaSoftware.UI
 
         private void btnVerPermisos_Click(object sender, EventArgs e)
         {
-            if(btnVerPermisos.Text == "Ver Permisos")
+            if(btnVerPermisos.Text == "Ver PermisosString")
             {
                 if (dataGridViewUsuarios.SelectedRows.Count > 0 &&
                     dataGridViewUsuarios.SelectedRows[0] != null)
                 {
+                    btnDesasignarRol.Visible = true;
+
                     var usuario = (UsuarioDTO)dataGridViewUsuarios.SelectedRows[0].DataBoundItem;
-                    if (usuario.id_rol == 0) { return; }
+                    if (usuario.id_rol > 0)
+                    {
+                        int rolId = usuario.id_rol;
+                        var permisosUsuario = _permisoBLL.ObtenerPermisosDelRolPorId(rolId);
 
-                    int rolId = usuario.id_rol;
-                    var permisosUsuario = _permisoBLL.ObtenerPermisosDelRolPorId(rolId);
-
-                    FillTreeView(permisosUsuario, treeViewPermisoRol);
+                        FillTreeView(permisosUsuario, treeViewPermisoRol);
+                    }
                 }
                 _verPermisos = true;
                 foreach(Control c in this.Controls)
                 {
-                    if(c.Name != dataGridViewUsuarios.Name && c.Name != treeViewPermisoRol.Name && c.Name != btnVerPermisos.Name)
+                    if(c.Name != dataGridViewUsuarios.Name && c.Name != treeViewPermisoRol.Name && c.Name != btnVerPermisos.Name && c.Name != btnDesasignarRol.Name)
                         c.Enabled = false;
                     this.BackColor = SystemColors.ControlDark;
 
@@ -174,6 +177,7 @@ namespace IngenieriaSoftware.UI
             }
             else
             {
+                btnDesasignarRol.Visible = false;
                 _verPermisos = false;
                 foreach (Control c in this.Controls)
                 {
@@ -183,7 +187,7 @@ namespace IngenieriaSoftware.UI
 
                 }
 
-                btnVerPermisos.Text = "Ver Permisos";
+                btnVerPermisos.Text = "Ver PermisosString";
                 treeViewPermisoRol.Nodes.Clear();
             }
         }
@@ -232,6 +236,28 @@ namespace IngenieriaSoftware.UI
             var permisosUsuario = _permisoBLL.ObtenerPermisosDelRolPorId(rolId);
 
             FillTreeView(permisosUsuario, treeViewPermisoRol);
+        }
+
+        private void btnDesasignarRol_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewUsuarios.SelectedRows[0] == null ||
+                treeViewPermisoRol.Nodes.Count == 0 ||
+                !_verPermisos) { return; }
+            try
+            {
+                int usuarioId = (int)dataGridViewUsuarios.SelectedRows[0].Cells[0].Value;
+                int rolId = (int)dataGridViewRoles.SelectedRows[0].Cells[0].Value;
+                //asignamos el rol al usuario
+                MessageBox.Show(_permisoBLL.DesasignarRolAUsuario(usuarioId));
+
+                treeViewPermisoRol.Nodes.Clear();  
+                //Actualizar();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

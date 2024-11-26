@@ -10,25 +10,30 @@ namespace IngenieriaSoftware.DAL
         public Dictionary<string, string> MapearTraduccionesPorIdiomaDesdeDataSet(DataSet dataSet)
         {
             var traducciones = new Dictionary<string, string>();
-
-            // Suponiendo que los datos vienen en la primera tabla del DataSet
             if (dataSet.Tables.Count > 0)
             {
                 DataTable tabla = dataSet.Tables[0];
 
                 foreach (DataRow fila in tabla.Rows)
                 {
-                    // Suponiendo que la tabla tiene columnas "EtiquetaId" y "Name"
                     int etiquetaId = Convert.ToInt32(fila["etiqueta_id"]);
                     string texto = Convert.ToString(fila["traduccion"]);
+                    string clave = etiquetaId.ToString();
 
-                    // Agregar al diccionario
-                    traducciones.Add(etiquetaId.ToString(), texto);
+                    if (traducciones.ContainsKey(clave))
+                    {
+                        traducciones[clave] = texto;
+                    }
+                    else
+                    {
+                        traducciones.Add(clave, texto);
+                    }
                 }
             }
 
             return traducciones;
         }
+
 
         public List<TraduccionDTO> MapearTraduccionesDesdeDataSet(DataSet dataSet)
         {

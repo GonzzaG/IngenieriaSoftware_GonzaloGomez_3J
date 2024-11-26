@@ -47,6 +47,7 @@
     <Compile Include="DAO.cs" />
     <Compile Include="EntityDAL\ClienteDAL.cs" />
     <Compile Include="EntityDAL\ComandaDAL.cs" />
+    <Compile Include="EntityDAL\EtiquetaDAL.cs" />
     <Compile Include="EntityDAL\FacturaDAL.cs" />
     <Compile Include="EntityDAL\IdiomaDAL.cs" />
     <Compile Include="EntityDAL\MedioDePagoDAL.cs" />

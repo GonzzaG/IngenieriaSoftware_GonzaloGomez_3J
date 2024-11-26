@@ -24,6 +24,8 @@ namespace IngenieriaSoftware.UI
         private Mesa _mesa;
         private int _comandaId;
         private Comanda _comanda;
+        private TraduccionBLL _traduccionBLL = new TraduccionBLL();      
+        private EtiquetaBLL _etiquetaBLL = new EtiquetaBLL();      
 
         public NotificacionService _notificacionService => new NotificacionService();
 
@@ -110,8 +112,8 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-                PermisosData.Permisos.Contains("PERM_MESERO"))
+            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
+                PermisosData.PermisosString.Contains("PERM_MESERO"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -120,5 +122,29 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
+
+        public void CargarProductosConTraduccion(DataGridView dgv, string idioma)
+        {
+            var productos = _productoBLL.ObtenerTodosLosProductos();
+            var etiquetas = _etiquetaBLL.ObtenerTodasLasEtiquetas();
+
+            foreach (var producto in productos)
+            {
+                // Suponiendo que las etiquetas se corresponden con el nombre del producto
+                var etiqueta = etiquetas.FirstOrDefault(e => e.Name == "datagridviewrow" + producto.Nombre);
+                var traduccion = string.Empty;
+
+                if (etiqueta != null)
+                {
+                    // Obtener traducción
+                    traduccion = ObtenerTraduccion(etiqueta.EtiquetaId, idioma);
+                }
+
+                // Agregar la fila con la traducción al DataGridView
+                dgv.Rows.Add(traduccion, producto.Precio);
+            }
+        }
+
+
     }
 }

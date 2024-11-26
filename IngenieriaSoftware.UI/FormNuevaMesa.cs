@@ -101,8 +101,8 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-                 PermisosData.Permisos.Contains("PERM_MESERO"))
+            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
+                 PermisosData.PermisosString.Contains("PERM_MESERO"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)

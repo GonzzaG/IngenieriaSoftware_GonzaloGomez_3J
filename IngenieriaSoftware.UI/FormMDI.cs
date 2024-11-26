@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IngenieriaSoftware.UI
 {
@@ -122,10 +124,16 @@ namespace IngenieriaSoftware.UI
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
-           // PermisosData.Permisos = AuthService.PermisosUsuario;
+           // PermisosData.PermisosString = AuthService.PermisosUsuario;
             var permisosUsuario = AuthService.PermisosUsuario;
-            InicializarPermisosMenu();
-            VerificarPermisosRoles(permisosUsuario);
+
+
+            //InicializarPermisosMenu();
+            //VerificarPermisosRoles(permisosUsuario);
+
+            ActualizarVisibilidadBotones();
+
+
             VerificarNotificaciones();
 
         }
@@ -187,6 +195,7 @@ namespace IngenieriaSoftware.UI
 
             // Notificamos a los suscriptores del cambio de idioma
             //_idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
+
 
             formInicio.MdiParent = this;
             formInicio.WindowState = FormWindowState.Maximized;
@@ -408,7 +417,7 @@ namespace IngenieriaSoftware.UI
             }
 
             string mensajeFinal = string.Join("\n", permisos);
-            MessageBox.Show(mensajeFinal, "Lista de Permisos");
+            MessageBox.Show(mensajeFinal, "Lista de PermisosString");
         }
 
         private void CerrarFormulariosHijos()
@@ -424,6 +433,37 @@ namespace IngenieriaSoftware.UI
         }
 
         #endregion Metodos privados
+
+        private void ActualizarVisibilidadBotones()
+        {
+            // Obtener la lista de permisos del usuario actual
+            PermisosData.Permisos = permisoBLL.ObtenerPermisosUsuario(SessionManager.GetInstance.Usuario.Id);
+            PermisosData.PermisosString = PermisosData.Permisos.Select(p => p.Nombre).ToList();
+            List<int> permisosId = PermisosData.Permisos.Select(x => x.Id).ToList();
+
+            var items = menuStripMDI.Items.Cast<ToolStripItem>().ToList();
+
+            foreach (ToolStripMenuItem item in items)
+            {
+                if (item.Tag != null && int.TryParse(item.Tag.ToString(), out int etiquetaId))
+                {
+                    if (permisosId.Contains(etiquetaId))
+                    {
+                        item.Visible = true;
+                    }
+                    else
+                    {
+                        item.Visible = false;
+                    }
+                }
+                else
+                {
+                 
+                    item.Visible = false;
+                }
+            }
+        }
+
 
         private void actualizarEtiquetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -552,10 +592,10 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-               PermisosData.Permisos.Contains("PERM_MESERO") || 
-               PermisosData.Permisos.Contains("PERM_GEST_MESAS") || 
-               PermisosData.Permisos.Contains("PERM_COM_ENTREGAR") )
+            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
+               PermisosData.PermisosString.Contains("PERM_MESERO") || 
+               PermisosData.PermisosString.Contains("PERM_GEST_MESAS") || 
+               PermisosData.PermisosString.Contains("PERM_COM_ENTREGAR") )
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)

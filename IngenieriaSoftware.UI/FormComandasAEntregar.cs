@@ -32,10 +32,10 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-             PermisosData.Permisos.Contains("PERM_MESERO") ||
-             PermisosData.Permisos.Contains("PERM_GEST_MESAS") ||
-             PermisosData.Permisos.Contains("PERM_COM_ENTREGAR"))
+            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
+             PermisosData.PermisosString.Contains("PERM_MESERO") ||
+             PermisosData.PermisosString.Contains("PERM_GEST_MESAS") ||
+             PermisosData.PermisosString.Contains("PERM_COM_ENTREGAR"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)

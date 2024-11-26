@@ -104,7 +104,7 @@
             this.lblPermisosUsuario.Location = new System.Drawing.Point(324, 55);
             this.lblPermisosUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPermisosUsuario.Name = "lblPermisosUsuario";
-            this.lblPermisosUsuario.Size = new System.Drawing.Size(103, 13);
+            this.lblPermisosUsuario.Size = new System.Drawing.Size(82, 10);
             this.lblPermisosUsuario.TabIndex = 19;
             this.lblPermisosUsuario.Tag = "34";
             this.lblPermisosUsuario.Text = "Permisos del usuario";

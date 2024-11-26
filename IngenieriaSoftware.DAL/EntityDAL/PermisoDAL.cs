@@ -62,6 +62,30 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+        public List<PermisoDTO> ObtenerPermisosUsuario(int usuarioId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@id_usuario", usuarioId)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosUsuario", parametros);
+                var permisosUsuario = _permisoMapper.MapearPermisosUsuarioDesdeDataSet(mDs);
+                //_permisoMapper.AsignarPermisosHijos(permisosUsuario);
+
+
+                return permisosUsuario;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener permisos del usuario: " + ex.Message, ex);
+            }
+        }
+
+
         public List<PermisoDTO> ObtenerPermisosDelRol(string nombreRol)
         {
             try
@@ -184,7 +208,7 @@ namespace IngenieriaSoftware.DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al asignar el permiso: " + ex.Message, ex);
+                throw new Exception("Error: " + ex.Message, ex);
             }
         }
 
@@ -238,40 +262,6 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public string DesasignarRolARol(int rolPadreId, int rolHijoId)
-        {
-            try
-            {
-                SqlParameter[] parametros = new SqlParameter[]
-                {
-                    new SqlParameter("@idRolPadre", rolPadreId),
-                    new SqlParameter("@idRolHijo ", rolHijoId)
-                };
-                DataSet ds = _dao.ExecuteStoredProcedure("sp_DesasignarRolARol", parametros);
-
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    DataTable resultado = ds.Tables[0];
-                    string mensaje = resultado.Rows[0]["Mensaje"].ToString();
-                    int codigoResultado = Convert.ToInt32(resultado.Rows[0]["Resultado"]);
-                    if (codigoResultado == 0)
-                    {
-                        throw new Exception(mensaje);
-                    }
-
-                    return mensaje;
-                }
-                else
-                {
-                    throw new Exception("No se pudo obtener el resultado de la operación.");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al asignar el permiso: " + ex.Message, ex);
-            }
-        }   
-
         public string AsignarRolAUsuario(int usuarioId, int rolId)
         {
             try
@@ -307,6 +297,109 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+        public string DesasignarRolAUsuario(int usuarioId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@usuario_id", usuarioId)
+                };
+
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_DesasignarRolAUsuario", parametros);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    DataTable resultado = ds.Tables[0];
+                    string mensaje = resultado.Rows[0]["Mensaje"].ToString();
+                    int codigoResultado = Convert.ToInt32(resultado.Rows[0]["Resultado"]);
+                    if (codigoResultado == 0)
+                    {
+                        throw new Exception(mensaje);
+                    }
+
+                    return mensaje;
+                }
+                else
+                {
+                    throw new Exception("No se pudo obtener el resultado de la operación.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al asignar el permiso: " + ex.Message, ex);
+            }
+        }
+
+
+        public string DesasignarRolARol(int rolPadreId, int rolHijoId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@idRolPadre", rolPadreId),
+                    new SqlParameter("@idRolHijo ", rolHijoId)
+                };
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_DesasignarRolARol", parametros);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    DataTable resultado = ds.Tables[0];
+                    string mensaje = resultado.Rows[0]["Mensaje"].ToString();
+                    int codigoResultado = Convert.ToInt32(resultado.Rows[0]["Resultado"]);
+                    if (codigoResultado == 0)
+                    {
+                        throw new Exception(mensaje);
+                    }
+
+                    return mensaje;
+                }
+                else
+                {
+                    throw new Exception("No se pudo obtener el resultado de la operación.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al asignar el permiso: " + ex.Message, ex);
+            }
+        }
+
+        public string DesasignarPermisoDeRol(int rolPadreId, int rolHijoId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@idRol", rolPadreId),
+                    new SqlParameter("@idPermiso", rolHijoId)
+                };
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_DesasignarPermisoDeRol", parametros);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    DataTable resultado = ds.Tables[0];
+                    string mensaje = resultado.Rows[0]["Mensaje"].ToString();
+                    int codigoResultado = Convert.ToInt32(resultado.Rows[0]["Resultado"]);
+                    if (codigoResultado == 0)
+                    {
+                        throw new Exception(mensaje);
+                    }
+
+                    return mensaje;
+                }
+                else
+                {
+                    throw new Exception("No se pudo obtener el resultado de la operación.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al asignar el permiso: " + ex.Message, ex);
+            }
+        }
+       
 
         private PermisoDTO BuscarPermisoEnHijos(PermisoDTO permiso, int idPermiso)
         {

@@ -30,7 +30,24 @@ namespace IngenieriaSoftware.DAL
                     permiso.PermisoPadreId = row["id_permiso_padre"] != DBNull.Value ? (int?)row["id_permiso_padre"] : null;
                 permisos.Add(permiso);
 
-                PermisosData.Permisos.Add(row["permiso"].ToString());
+               // PermisosData.PermisosString.Add(row["permiso"].ToString());
+            }
+
+            return permisos;
+        }
+
+        public List<PermisoDTO> MapearPermisosUsuarioDesdeDataSet(DataSet pDS)
+        {
+            var permisos = new List<PermisoDTO>();
+
+            foreach (DataRow row in pDS.Tables[0].Rows)
+            {
+                var permiso = new PermisoDTO();
+
+                permiso.Id = (int)row["id_permiso"];
+                permiso.Nombre = row["nombre_permiso"].ToString();
+                
+                permisos.Add(permiso);
             }
 
             return permisos;

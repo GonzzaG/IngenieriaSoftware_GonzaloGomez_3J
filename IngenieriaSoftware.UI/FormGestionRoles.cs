@@ -146,7 +146,7 @@ namespace IngenieriaSoftware.UI
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -289,10 +289,12 @@ namespace IngenieriaSoftware.UI
 
         private void btnDesasignar_Click(object sender, EventArgs e)
         {
-            if(comboBoxRoles.SelectedItem == null||
-               comboBoxRoles.Text == string.Empty||
-               treeViewPermisoRol.SelectedNode == null) 
+            if(comboBoxRoles.Text == string.Empty||
+               treeViewPermisoRol.SelectedNode == null)
+            {
+                MessageBox.Show("Seleccione un rol o permiso de la jerarquia para desasignarlo.");
                 return;
+            }
             try
             {
                 string nombrePermisoPadre = comboBoxRoles.Text;
@@ -304,10 +306,27 @@ namespace IngenieriaSoftware.UI
                 {
                     string mensaje = _permisoBLL.DesasignarRolARol(permisoPadre.Id, permisoHijo.Id);
                     Actualizar();
+
+
+                    if (comboBoxRoles.Items.Count == 0) { return; }
+                    if (comboBoxRoles.Text == string.Empty) { return; }
+                    string nombreRol = comboBoxRoles.Text.ToString();
+                    var permisosRol = _permisoBLL.ObtenerPermisosDelRol(nombreRol);
+
+                    FillTreeView(permisosRol, treeViewPermisoRol);
                 }
                 else
                 {
 
+                    _permisoBLL.DesasignarPermisoDeRol(permisoPadre.Id, permisoHijo.Id);
+                    Actualizar();
+
+                    if (comboBoxRoles.Items.Count == 0) { return; }
+                    if (comboBoxRoles.Text == string.Empty) { return; }
+                    string nombreRol = comboBoxRoles.Text.ToString();
+                    var permisosRol = _permisoBLL.ObtenerPermisosDelRol(nombreRol);
+
+                    FillTreeView(permisosRol, treeViewPermisoRol);
                 }
             }
             catch (Exception ex)

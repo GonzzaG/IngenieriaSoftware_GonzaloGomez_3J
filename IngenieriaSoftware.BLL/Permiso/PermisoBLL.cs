@@ -40,9 +40,17 @@ namespace IngenieriaSoftware.BLL
         {
             _permisoDAL.AsignarPermisoARol(rolId, permisoId);   
         }
+        public string DesasignarRolAUsuario(int usuarioId)
+        {
+            return _permisoDAL.DesasignarRolAUsuario(usuarioId); 
+        }
         public string DesasignarRolARol(int rolPadreId, int rolHijoId)
         {
             return _permisoDAL.DesasignarRolARol(rolPadreId, rolHijoId);
+        }
+        public string DesasignarPermisoDeRol(int rolPadreId, int rolHijoId)
+        {
+            return _permisoDAL.DesasignarPermisoDeRol(rolPadreId, rolHijoId);
         }
         public string AsignarRolAUsuario(int usuarioId, int rolId)
         {
@@ -53,6 +61,11 @@ namespace IngenieriaSoftware.BLL
             List<PermisoDTO> permisosUsuario = _permisoDAL.ObtenerPermisosDelUsuarioPorUsername(pUserName);
             return permisosUsuario;
         }
+        public List<PermisoDTO> ObtenerPermisosUsuario(int usuarioId) 
+        {
+            return _permisoDAL.ObtenerPermisosUsuario(usuarioId);          
+        }
+
         public List<PermisoDTO> ObtenerPermisosDelRol(string nombreRol)
         {
             return _permisoDAL.ObtenerPermisosDelRol(nombreRol);

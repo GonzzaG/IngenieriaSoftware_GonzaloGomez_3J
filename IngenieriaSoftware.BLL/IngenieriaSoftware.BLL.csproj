@@ -45,6 +45,7 @@
     <Compile Include="AuthService.cs" />
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="ComandaBLL.cs" />
+    <Compile Include="EtiquetaBLL.cs" />
     <Compile Include="FacturaBLL.cs" />
     <Compile Include="IdiomaBLL.cs" />
     <Compile Include="MedioDePagoBLL.cs" />
