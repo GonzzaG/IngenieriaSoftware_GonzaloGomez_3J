@@ -50,6 +50,7 @@ namespace IngenieriaSoftware.UI
 
         private void Inicio_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             txtUsuario.Text = "gonza2";
             txtContrasena.Text = "gonza";
         }

@@ -141,7 +141,7 @@ namespace IngenieriaSoftware.UI
         {
             this.menuStripMDI.Visible = true;
             comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
-
+            this.WindowState = FormWindowState.Maximized;
             //_controlesHelper.SuscribirControles(this);
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
@@ -212,15 +212,15 @@ namespace IngenieriaSoftware.UI
         private void AbrirIniciarSesion()
         {
             this.menuStripMDI.Visible = false;
-
+            this.WindowState = FormWindowState.Normal;
             FormInicioSesion formInicio = new FormInicioSesion(_idiomaObserver);
 
             _controlesHelper.SuscribirControles(formInicio);
 
-            formInicio.MdiParent = this;
             formInicio.WindowState = FormWindowState.Maximized;
-            formInicio.MaximizeBox = false;
-            formInicio.Size = this.Size;
+            formInicio.MdiParent = this;
+           // formInicio.MaximizeBox = false;
+            //formInicio.Size = this.Size;
             formInicio.InicioSesionExitoso += AbrirFormMenu;
             formInicio.Show();
         }
@@ -479,6 +479,13 @@ namespace IngenieriaSoftware.UI
             FormGestionarIdioma formGestionarIdioma = new FormGestionarIdioma();
             AbrirFormHijo(formGestionarIdioma); 
         }
-       
+
+        private void FormMDI_Resize(object sender, EventArgs e)
+        {
+            //foreach (Form child in this.MdiChildren)
+            //{
+            //    child.WindowState = FormWindowState.Maximized;
+            //}
+        }
     }
 }
