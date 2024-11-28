@@ -24,6 +24,10 @@ namespace IngenieriaSoftware.BLL
             return _etiquetaDAL.ObtenerTodasLasEtiquetas();
         }
 
+        public List<EtiquetaDTO> ObtenerEtiquetasPorPalabra(string palabra)
+        {
+            return _etiquetaDAL.ObtenerEtiquetasPorPalabra(palabra);
+        }
 
     }
 }

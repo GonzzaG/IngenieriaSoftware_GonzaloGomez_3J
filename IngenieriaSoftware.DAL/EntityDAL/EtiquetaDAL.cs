@@ -35,7 +35,24 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public List<EtiquetaDTO> ObtenerEtiquetasPorPalabra(string palabra)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Palabra", palabra)
+                };
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerEtiquetasPorPalabra", parametros);
+                _etiqutas = EtiquetaMapper.MapearEtiquetasDesdeDataSet(mDs);
 
+                return _etiqutas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener traducciones por idioma.", ex);
+            }
+        }
 
     }
 }

@@ -38,30 +38,45 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        #endregion Idioma
-
-        #region Etiqueta
-
-        public void GuardarEtiquetas(Dictionary<string, string> etiquetas)     //(List<EtiquetaDTO> etiquetas)
+        public void InsertarIdioma (string idiomaNombre)
         {
             try
             {
-                foreach (var etiqueta in etiquetas)
+                SqlParameter[] parametros = new SqlParameter[]
                 {
-                    SqlParameter[] parametros = new SqlParameter[]
-                    {
-                        new SqlParameter("@etiquetaId", int.Parse(etiqueta.Key)),
-                        new SqlParameter("@nombre", etiqueta.Value)
-                    };
-
-                    DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarEtiqueta", parametros);
-                }
+                    new SqlParameter("@Nombre", idiomaNombre)
+                };
+                
+                _dao.ExecuteNonQuery("sp_InsertarIdioma", parametros);            
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        public void EliminarIdioma(int idiomaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@IdiomaId", idiomaId)
+                };
+
+                _dao.ExecuteNonQuery("sp_EliminarIdioma", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion Idioma
+
+        #region Etiqueta
+
+
 
         public int AgregarEtiqueta(Dictionary<string, IIdiomaObservador> etiquetasEnMemoria)
         {

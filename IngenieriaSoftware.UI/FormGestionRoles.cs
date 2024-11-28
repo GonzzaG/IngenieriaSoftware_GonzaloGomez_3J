@@ -89,7 +89,6 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            throw new NotImplementedException();
         }
 
         private void btnCrearRol_Click(object sender, EventArgs e)

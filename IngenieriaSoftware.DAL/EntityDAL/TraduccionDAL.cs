@@ -10,6 +10,8 @@ namespace IngenieriaSoftware.DAL
     public class TraduccionDAL
     {
         private readonly DAO _dao;
+        TraduccionMapper _traduccionMapper = new TraduccionMapper();
+        EtiquetaMapper _etiquetaMapper = new EtiquetaMapper();
         public Dictionary<string, string> _traducciones;
 
         public TraduccionDAL()
@@ -19,6 +21,30 @@ namespace IngenieriaSoftware.DAL
         }
 
         #region Traduccion
+
+        public List<TraduccionDTO> ObtenerTraduccionesPorEtiquetas(List<int> listaEtiquetas, int idiomaId)
+        {
+            try
+            {            
+                DataTable dtEtiquetas = _traduccionMapper.ConvertirListaEtiquetasATabla(listaEtiquetas);
+
+                var parameters = new SqlParameter[]
+                {
+                    new SqlParameter("@ListaEtiquetas", SqlDbType.Structured) { Value = dtEtiquetas },
+                    new SqlParameter("@IdiomaId", SqlDbType.Int) { Value = idiomaId } 
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTraduccionesPorEtiquetas", parameters);
+                List<TraduccionDTO> traducciones = _traduccionMapper.MapearTraduccionesDesdeDataSet(mDs);
+
+                return traducciones;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener traducciones por idioma.", ex);
+            }
+        }
+
 
         public Dictionary<string, string> ObtenerTraduccionesPorIdioma(int idiomaId)
         {

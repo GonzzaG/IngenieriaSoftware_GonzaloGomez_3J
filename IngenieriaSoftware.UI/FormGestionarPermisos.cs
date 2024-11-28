@@ -148,7 +148,7 @@ namespace IngenieriaSoftware.UI
                 if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.GetInstance.Usuario.Username)
                 {
                     var padre = this.MdiParent as FormMDI;
-                   padre.VerificarPermisosRoles(permisosUsuario);
+                  
                     this.Close();
                 }
 
@@ -169,7 +169,7 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.PermisosString.Contains("PERM_MESERO"))
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)

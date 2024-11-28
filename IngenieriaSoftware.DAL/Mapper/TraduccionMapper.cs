@@ -7,6 +7,19 @@ namespace IngenieriaSoftware.DAL
 {
     public class TraduccionMapper
     {
+        public DataTable ConvertirListaEtiquetasATabla(List<int> listaEtiquetasId)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Value", typeof(int));
+
+            foreach (var etiqueta in listaEtiquetasId)
+            {
+                dt.Rows.Add(etiqueta);
+            }
+
+            return dt;
+        }
+
         public Dictionary<string, string> MapearTraduccionesPorIdiomaDesdeDataSet(DataSet dataSet)
         {
             var traducciones = new Dictionary<string, string>();

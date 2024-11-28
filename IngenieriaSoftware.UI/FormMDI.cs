@@ -115,6 +115,28 @@ namespace IngenieriaSoftware.UI
             }
         }
 
+        public void ActualizarIdiomasCombo()
+        {
+            try
+            {
+                comboBoxIdiomas.Items.Clear();
+            
+                var idiomas = idiomaBLL.ObtenerIdiomas();
+
+                if(idiomas != null)
+                {
+                    foreach( var idioma in idiomas)
+                    {
+                        comboBoxIdiomas.Items.Add(idioma.Nombre);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("No se pudieron cargar los idiomas: " + ex.Message);
+            }
+        }
+
         internal void AbrirFormMenu()
         {
             this.menuStripMDI.Visible = true;
@@ -158,7 +180,6 @@ namespace IngenieriaSoftware.UI
 
         private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CerrarFormulariosHijos();
 
             FormEliminarUsuario formEliminarUsuario = new FormEliminarUsuario();
             AbrirFormHijo(formEliminarUsuario);
@@ -167,14 +188,17 @@ namespace IngenieriaSoftware.UI
         private void LogOutgestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
-            {
-                CerrarFormulariosHijos();
-                
+            {                 
                // Actualizar();
 
                 _authService.LogOut();
+                foreach(var hijo in this.MdiChildren)
+                {
+                    hijo.Close();
+                }
 
                 AbrirIniciarSesion();
+
                 
             }
             catch (Exception ex)
@@ -193,10 +217,6 @@ namespace IngenieriaSoftware.UI
 
             _controlesHelper.SuscribirControles(formInicio);
 
-            // Notificamos a los suscriptores del cambio de idioma
-            //_idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
-
-
             formInicio.MdiParent = this;
             formInicio.WindowState = FormWindowState.Maximized;
             formInicio.MaximizeBox = false;
@@ -207,14 +227,10 @@ namespace IngenieriaSoftware.UI
 
         internal void AbrirFormHijo(Form formHijo)
         {
-            //SuscribirControles(formHijo);
             _controlesHelper.SuscribirControles(formHijo);
             VerificarNotificaciones();
-            CerrarFormulariosHijos();
-            // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
-            // Lo suscribo al evento para que el formHijo se actualice si cambia el idioma
             if(formHijo is IActualizable formActualizable)
             {
                 this.ActualizarFormsHijos += formActualizable.Actualizar;
@@ -227,242 +243,63 @@ namespace IngenieriaSoftware.UI
             formHijo.Size = this.Size;
             formHijo.Show();
         }
-        private void MostrarNotificacion(string mensaje)
-        {
-            DialogResult result= MessageBox.Show(mensaje + " Quiere ir a la pantalla de comandas listas?", "Notificación", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-
-            if (result == DialogResult.Yes)
-            {
-                FormComandasAEntregar formComandasAEntregar = new FormComandasAEntregar();
-                formComandasAEntregar.ShowDialog();
-            }
-            else
-            {
-                
-            }
-        }
-        private Dictionary<string, ToolStripMenuItem[]> permisosRol;
-        private Dictionary<string, ToolStripMenuItem> permisosIndividuales;
-        public void InicializarPermisosMenu()
-        {
-            permisosRol = new Dictionary<string, ToolStripMenuItem[]>
-            {
-                { "PERM_ADMIN", new [] { gestionUsuariosToolStripMenuItem, asignarRolToolStripMenuItem,gestionPermisosToolStripMenuItem, gestionIdiomasToolStripMenuItem, cobrosToolStripMenuItem, gestionarMesasToolStripMenuItem, fToolStripMenuItem,
-                    aBMMesasToolStripMenuItem , mesasToolStripMenuItem, comandasToolStripMenuItem, comandasAEntregarToolStripMenuItem, comandasCocinaToolStripMenuItem, registrarUsuarioToolStripMenuItem,
-                    asignarPermisosToolStripMenuItem, eliminarUsuarioToolStripMenuItem, agregarTraduccionToolStripMenuItem, actualizarEtiquetasToolStripMenuItem, gestionarPermisosToolStripMenuItem} },
-                { "PERM_CAJA", new [] { cobrosToolStripMenuItem, fToolStripMenuItem } },
-                { "PERM_MESERO", new [] { mesasToolStripMenuItem, gestionarMesasToolStripMenuItem,  comandasToolStripMenuItem, comandasAEntregarToolStripMenuItem } },
-                { "PERM_COCINA", new [] { comandasToolStripMenuItem, comandasCocinaToolStripMenuItem } }
-            };
-
-            permisosIndividuales = new Dictionary<string, ToolStripMenuItem>
-            {
-                { "PERM_GEST_MESAS", gestionarMesasToolStripMenuItem },
-                { "PERM_ABM_MESAS", aBMMesasToolStripMenuItem },
-                { "PERM_VER_FACTURAS", fToolStripMenuItem },
-                { "PERM_COM_COCINA", comandasCocinaToolStripMenuItem },
-                { "PERM_COM_ENTREGAR", comandasAEntregarToolStripMenuItem },
-                { "PERM_REGIST_USUARIO", registrarUsuarioToolStripMenuItem },
-                { "PERM_ELIM_USUARIO", eliminarUsuarioToolStripMenuItem },
-                { "PERM_ACT_ETIQUETAS", actualizarEtiquetasToolStripMenuItem },
-                { "PERM_AGR_TRADUCCION", agregarTraduccionToolStripMenuItem },
-                { "PERM_GEST_PERMISOS", gestionarPermisosToolStripMenuItem },
-                { "PERM_ASIGN_PERMISOS", asignarPermisosToolStripMenuItem },
-                { "PERM_GEN_FACTURAS", generarFacturarToolStripMenuItem }
-                //{ "PERM_GEST_USUARIO", gestionUsuariosToolStripMenuItem },
-            };
-        }
-
-        public void VerificarPermisosRoles(List<PermisoDTO> permisos)
-        {
-            List<string> permisosPermitidos = new List<string>();
-
-            if (PermisoChecker.TienePermiso(permisos, "PERM_ADMIN"))
-            {
-                for (int i = menuStripMDI.Items.Count - 1; i >= 0; i--)
-                {
-                    var item = menuStripMDI.Items[i];
-                    if (item is ToolStripMenuItem menuItem)
-                    {
-                        menuItem.Visible = false;
-                        OcultarSubItems(menuItem);
-                    }
-                    else
-                    {
-                        item.Visible = false;
-                    }
-                }
-
-                foreach (var rol in permisosRol)
-                {
-                    foreach (var menuItem in rol.Value)
-                    {
-                        menuItem.Visible = true;
-                    }
-                }
-            }
-            else 
-            {
-
-                for (int i = menuStripMDI.Items.Count - 1; i >= 0; i--)
-                {
-                    var item = menuStripMDI.Items[i];
-                    if (item is ToolStripMenuItem menuItem)
-                    {
-                        menuItem.Visible = false;
-                        OcultarSubItems(menuItem);
-                    }
-                    else
-                    {
-                        item.Visible = false;
-                    }
-                }
-                foreach (var rol in permisosRol)
-                {
-                    if (PermisoChecker.TienePermiso(permisos, rol.Key))
-                    {
-                        foreach (var menuItem in rol.Value)
-                        {
-                            menuItem.Visible = true;
-                        }
-                    }
-                }
-
-            } 
-                foreach (var permiso in permisosIndividuales)
-                {
-                    if (PermisoChecker.TienePermiso(permisos, permiso.Key))
-                    {
-
-                        //si tiene padre habilitarlo
-                        var parentItem = ObtenerPadre(permiso.Value);
-
-                        // Si el permiso tiene un padre y no está habilitado, habilitarlo
-                        if (parentItem != null && !parentItem.Visible)
-                        {
-                            parentItem.Visible = true;
-                        }
-                        permiso.Value.Visible = true;
-                    }
-                    else
-                    {
-                        permiso.Value.Visible = false;
-                    }
-                }
-              
-                //mostrarPermisosDelUsuario();
-                LogOutgestionUsuariosToolStripMenuItem.Visible = true;
-        }
-
-        private void OcultarSubItems(ToolStripMenuItem menuItem)
-        {
-            foreach (ToolStripItem subItem in menuItem.DropDownItems)
-            {
-                subItem.Visible = false;
-                if (subItem is ToolStripMenuItem subMenuItem)
-                {
-                    OcultarSubItems(subMenuItem);
-                }
-            }
-        }
-
-        private ToolStripMenuItem ObtenerPadre(ToolStripMenuItem item)
-        {
-            foreach (var control in this.Controls)
-            {
-                if (control is MenuStrip menuStrip)
-                {
-                    foreach (ToolStripMenuItem parentItem in menuStrip.Items)
-                    {
-                        if (parentItem.DropDownItems.Contains(item))
-                        {
-                            return parentItem;
-                        }
-                        foreach (ToolStripMenuItem childItem in parentItem.DropDownItems)
-                        {
-                            if (childItem.DropDownItems.Contains(item))
-                            {
-                                return parentItem;
-                            }
-                        }
-                    }
-                }
-                else if (control is ToolStripMenuItem parentItem)
-                {
-                    if (parentItem.DropDownItems.Contains(item))
-                    {
-                        return parentItem;
-                    }
-                    foreach (ToolStripMenuItem childItem in parentItem.DropDownItems)
-                    {
-                        if (childItem.DropDownItems.Contains(item))
-                        {
-                            return parentItem;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
-
-        private void mostrarPermisosDelUsuario(List<string> permisos)
-        {
-            if (permisos.Count == 0)
-            {
-                MessageBox.Show("Usuario no tiene permisos");
-                return;
-            }
-
-            string mensajeFinal = string.Join("\n", permisos);
-            MessageBox.Show(mensajeFinal, "Lista de PermisosString");
-        }
-
-        private void CerrarFormulariosHijos()
-        {
-            if (this.HasChildren)
-            {
-                foreach (Form childForm in this.MdiChildren)
-                {
-                    childForm.Close();
-                }
-
-            }
-        }
 
         #endregion Metodos privados
 
-        private void ActualizarVisibilidadBotones()
+        private void ActualizarVisibilidadBotones()   
         {
-            // Obtener la lista de permisos del usuario actual
+            
             PermisosData.Permisos = permisoBLL.ObtenerPermisosUsuario(SessionManager.GetInstance.Usuario.Id);
             PermisosData.PermisosString = PermisosData.Permisos.Select(p => p.Nombre).ToList();
             List<int> permisosId = PermisosData.Permisos.Select(x => x.Id).ToList();
 
-            var items = menuStripMDI.Items.Cast<ToolStripItem>().ToList();
+            var items = menuStripMDI.Items.Cast<ToolStripItem>().OfType<ToolStripMenuItem>().ToList();
 
             foreach (ToolStripMenuItem item in items)
             {
-                if (item.Tag != null && int.TryParse(item.Tag.ToString(), out int etiquetaId))
-                {
-                    if (permisosId.Contains(etiquetaId))
-                    {
-                        item.Visible = true;
-                    }
-                    else
-                    {
-                        item.Visible = false;
-                    }
-                }
-                else
-                {
-                 
-                    item.Visible = false;
-                }
+                EstablecerInvisibilidadRecursiva(item);
+            }
+
+            foreach (ToolStripMenuItem item in items)
+            {
+                ActualizarVisibilidadItem(item, permisosId);
             }
         }
+
+        private void EstablecerInvisibilidadRecursiva(ToolStripMenuItem item)
+        {
+            item.Visible = false;
+
+            var subItems = item.DropDownItems.OfType<ToolStripMenuItem>().ToList();
+            foreach (ToolStripMenuItem subItem in subItems)
+            {
+                EstablecerInvisibilidadRecursiva(subItem);
+            }
+        }
+
+        private void ActualizarVisibilidadItem(ToolStripMenuItem item, List<int> permisosId)
+        {
+            bool esVisible = false;
+
+            if (item.Tag != null && int.TryParse(item.Tag.ToString(), out int etiquetaId))
+            {
+                esVisible = permisosId.Contains(etiquetaId);
+            }
+
+            var subItems = item.DropDownItems.OfType<ToolStripMenuItem>().ToList();
+            foreach (ToolStripMenuItem subItem in subItems)
+            {
+                ActualizarVisibilidadItem(subItem, permisosId);
+                if (subItem.Visible)
+                {
+                    esVisible = true;
+                }
+            }
+
+            item.Visible = esVisible;
+        }
+
 
 
         private void actualizarEtiquetasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -592,10 +429,7 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
-               PermisosData.PermisosString.Contains("PERM_MESERO") || 
-               PermisosData.PermisosString.Contains("PERM_GEST_MESAS") || 
-               PermisosData.PermisosString.Contains("PERM_COM_ENTREGAR") )
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -639,5 +473,12 @@ namespace IngenieriaSoftware.UI
             FormAsignarRolAUsuario formAsignarRolAUsuario = new FormAsignarRolAUsuario();
             AbrirFormHijo(formAsignarRolAUsuario);
         }
+
+        private void agregarIdiomasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestionarIdioma formGestionarIdioma = new FormGestionarIdioma();
+            AbrirFormHijo(formGestionarIdioma); 
+        }
+       
     }
 }

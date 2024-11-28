@@ -68,7 +68,7 @@ namespace IngenieriaSoftware.UI
 
         private void FormGestionarMesas_Load(object sender, EventArgs e)
         {
-            //VerificarNotificaciones();
+            VerificarNotificaciones();
         }
 
         private void btnAsignarMesa_Click(object sender, EventArgs e)
@@ -141,10 +141,7 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
-            PermisosData.PermisosString.Contains("PERM_MESERO") ||
-            PermisosData.PermisosString.Contains("PERM_GEST_MESAS") ||
-            PermisosData.PermisosString.Contains("PERM_COM_ENTREGAR"))
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)

@@ -57,28 +57,28 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if (txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0 || comboBoxCategorias.SelectedItem == null) { return; }
+                if (txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0) { return; }
                 if (_authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text))
                 {
-                    switch (comboBoxCategorias.Text)
-                    {
-                        case "Administrador":
-                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_ADMIN");
-                            break;
+                    //switch (comboBoxCategorias.Text)
+                    //{
+                    //    case "Administrador":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_ADMIN");
+                    //        break;
 
-                        case "Mesero":
-                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_MESERO");
-                            break;
+                    //    case "Mesero":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_MESERO");
+                    //        break;
 
-                        case "Caja":
-                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_CAJA");
-                            break;
+                    //    case "Caja":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_CAJA");
+                    //        break;
 
-                        case "Cocina":
-                            _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_COCINA");
-                            break;
-                    }
-
+                    //    case "Cocina":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_COCINA");
+                    //        break;
+                    //}
+                    MessageBox.Show($"El usuario {txtUsername.Text} fue registrado con exito");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -95,8 +95,7 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
-                PermisosData.PermisosString.Contains("PERM_MESERO"))
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)

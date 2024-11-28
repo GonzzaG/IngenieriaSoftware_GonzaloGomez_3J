@@ -65,7 +65,7 @@ namespace IngenieriaSoftware.UI
 
                     var usuario = SessionManager.GetInstance.Usuario;
 
-                    _idiomaObserver.CambiarEstado(usuario.Id);
+                    //_idiomaObserver.CambiarEstado(usuario.Id);
                     throw new CredencialesCorrectasException();
                 }
             }
@@ -85,8 +85,7 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.PermisosString.Contains("PERM_ADMIN") ||
-                PermisosData.PermisosString.Contains("PERM_MESERO"))
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)

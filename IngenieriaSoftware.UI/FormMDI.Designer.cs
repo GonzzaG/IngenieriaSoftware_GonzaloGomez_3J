@@ -40,7 +40,6 @@
             this.comandasCocinaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comandasAEntregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarRolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +48,7 @@
             this.gestionIdiomasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarEtiquetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarTraduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarIdiomasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
@@ -160,21 +160,12 @@
             // gestionarPermisosToolStripMenuItem
             // 
             this.gestionarPermisosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asignarPermisosToolStripMenuItem,
             this.gestionPermisosToolStripMenuItem,
             this.asignarRolToolStripMenuItem});
             this.gestionarPermisosToolStripMenuItem.Name = "gestionarPermisosToolStripMenuItem";
             this.gestionarPermisosToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
             this.gestionarPermisosToolStripMenuItem.Tag = "569";
             this.gestionarPermisosToolStripMenuItem.Text = "Gestionar Permisos";
-            // 
-            // asignarPermisosToolStripMenuItem
-            // 
-            this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
-            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.asignarPermisosToolStripMenuItem.Tag = "385";
-            this.asignarPermisosToolStripMenuItem.Text = "Asignar Permisos";
-            this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem1_Click);
             // 
             // gestionPermisosToolStripMenuItem
             // 
@@ -206,7 +197,7 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
@@ -214,7 +205,7 @@
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
@@ -223,7 +214,8 @@
             // 
             this.gestionIdiomasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actualizarEtiquetasToolStripMenuItem,
-            this.agregarTraduccionToolStripMenuItem});
+            this.agregarTraduccionToolStripMenuItem,
+            this.agregarIdiomasToolStripMenuItem});
             this.gestionIdiomasToolStripMenuItem.Name = "gestionIdiomasToolStripMenuItem";
             this.gestionIdiomasToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
             this.gestionIdiomasToolStripMenuItem.Tag = "10";
@@ -234,7 +226,7 @@
             // 
             this.actualizarEtiquetasToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.actualizarEtiquetasToolStripMenuItem.Name = "actualizarEtiquetasToolStripMenuItem";
-            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.actualizarEtiquetasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.actualizarEtiquetasToolStripMenuItem.Tag = "11";
             this.actualizarEtiquetasToolStripMenuItem.Text = "Actualizar Etiquetas";
             this.actualizarEtiquetasToolStripMenuItem.Click += new System.EventHandler(this.actualizarEtiquetasToolStripMenuItem_Click);
@@ -242,10 +234,18 @@
             // agregarTraduccionToolStripMenuItem
             // 
             this.agregarTraduccionToolStripMenuItem.Name = "agregarTraduccionToolStripMenuItem";
-            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.agregarTraduccionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarTraduccionToolStripMenuItem.Tag = "12";
             this.agregarTraduccionToolStripMenuItem.Text = "Agregar Traduccion";
             this.agregarTraduccionToolStripMenuItem.Click += new System.EventHandler(this.agregarTraduccionToolStripMenuItem_Click);
+            // 
+            // agregarIdiomasToolStripMenuItem
+            // 
+            this.agregarIdiomasToolStripMenuItem.Name = "agregarIdiomasToolStripMenuItem";
+            this.agregarIdiomasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarIdiomasToolStripMenuItem.Tag = "777";
+            this.agregarIdiomasToolStripMenuItem.Text = "Agregar Idiomas";
+            this.agregarIdiomasToolStripMenuItem.Click += new System.EventHandler(this.agregarIdiomasToolStripMenuItem_Click);
             // 
             // estadisticasToolStripMenuItem
             // 
@@ -266,7 +266,7 @@
             // 
             this.comboBoxIdiomas.FormattingEnabled = true;
             this.comboBoxIdiomas.Location = new System.Drawing.Point(951, 3);
-            this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
             this.comboBoxIdiomas.Size = new System.Drawing.Size(157, 21);
             this.comboBoxIdiomas.TabIndex = 7;
@@ -327,9 +327,9 @@
         private System.Windows.Forms.ToolTip toolTipNotificacion;
         private System.Windows.Forms.ToolStripMenuItem fToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestionarPermisosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem asignarPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarFacturarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestionPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarRolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agregarIdiomasToolStripMenuItem;
     }
 }

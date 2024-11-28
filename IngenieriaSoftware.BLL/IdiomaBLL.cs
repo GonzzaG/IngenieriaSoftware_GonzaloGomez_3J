@@ -16,6 +16,14 @@ namespace IngenieriaSoftware.BLL
             _idiomaDAL = new IdiomaDAL();
         }
 
+        public void InsertarIdioma(string idiomaNombre)
+        {
+            _idiomaDAL.InsertarIdioma(idiomaNombre);
+        }
+        public void EliminarIdioma(int idiomaId)
+        {
+            _idiomaDAL.EliminarIdioma(idiomaId);
+        }
         public Dictionary<EtiquetaDTO, TraduccionDTO> ObtenerEtiquetasConTraduccion(int idioma_id)
         {
             try
