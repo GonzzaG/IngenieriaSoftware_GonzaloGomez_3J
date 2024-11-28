@@ -5,15 +5,19 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormRegistrarUsuario : Form
+    public partial class FormRegistrarUsuario : Form, IActualizable
     {
         private readonly AuthService _authService = new AuthService();
         private readonly UsuarioBLL _usuarioBLL;
+        private readonly PermisoBLL _permisoBLL;
+
+        public NotificacionService _notificacionService => new NotificacionService();
 
         public FormRegistrarUsuario()
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
+            _permisoBLL = new PermisoBLL();
         }
 
         #region Metodos de Interfaz
@@ -38,6 +42,7 @@ namespace IngenieriaSoftware.UI
 
         private void GestionUsuarios_Load(object sender, EventArgs e)
         {
+            VerificarNotificaciones();
             comboBoxCategorias.Items.Add("Administrador");
             comboBoxCategorias.Items.Add("Mesero");
             comboBoxCategorias.Items.Add("Caja");
@@ -52,28 +57,28 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if (txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0 || comboBoxCategorias.SelectedItem == null) { return; }
+                if (txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0) { return; }
                 if (_authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text))
                 {
-                    switch (comboBoxCategorias.Text)
-                    {
-                        case "Administrador":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_ADMIN");
-                            break;
+                    //switch (comboBoxCategorias.Text)
+                    //{
+                    //    case "Administrador":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_ADMIN");
+                    //        break;
 
-                        case "Mesero":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_MESERO");
-                            break;
+                    //    case "Mesero":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_MESERO");
+                    //        break;
 
-                        case "Caja":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_CAJA");
-                            break;
+                    //    case "Caja":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_CAJA");
+                    //        break;
 
-                        case "Cocina":
-                            _usuarioBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_COCINA");
-                            break;
-                    }
-
+                    //    case "Cocina":
+                    //        _permisoBLL.AsignarPermisoPorCod(txtUsername.Text, "PERM_COCINA");
+                    //        break;
+                    //}
+                    MessageBox.Show($"El usuario {txtUsername.Text} fue registrado con exito");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -86,6 +91,18 @@ namespace IngenieriaSoftware.UI
 
         private void label1_Click_1(object sender, EventArgs e)
         {
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.PermisosString.Contains("Mesero"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
     }
 }

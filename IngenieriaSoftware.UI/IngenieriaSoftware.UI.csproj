@@ -47,7 +47,93 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
+    <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
+    <Compile Include="FormABMMesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormABMMesas.Designer.cs">
+      <DependentUpon>FormABMMesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAsignarRolAUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAsignarRolAUsuario.Designer.cs">
+      <DependentUpon>FormAsignarRolAUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormComandasAEntregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormComandasAEntregar.Designer.cs">
+      <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFacturaAEntregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFacturaAEntregar.Designer.cs">
+      <DependentUpon>FormFacturaAEntregar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGenerarFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGenerarFacturas.Designer.cs">
+      <DependentUpon>FormGenerarFacturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionarComandas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarComandas.Designer.cs">
+      <DependentUpon>FormGestionarComandas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionarFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarFacturas.Designer.cs">
+      <DependentUpon>FormGestionarFacturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionarMesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarMesas.Designer.cs">
+      <DependentUpon>FormGestionarMesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionRoles.Designer.cs">
+      <DependentUpon>FormGestionRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNuevaMesa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNuevaMesa.Designer.cs">
+      <DependentUpon>FormNuevaMesa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRealizarComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRealizarComanda.Designer.cs">
+      <DependentUpon>FormRealizarComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRellenarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRellenarCliente.Designer.cs">
+      <DependentUpon>FormRellenarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSeleccionMedioDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSeleccionMedioDePago.Designer.cs">
+      <DependentUpon>FormSeleccionMedioDePago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormVerComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVerComanda.Designer.cs">
+      <DependentUpon>FormVerComanda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\HelperControles.cs" />
+    <Compile Include="Helpers\HelperExcepciones.cs" />
     <Compile Include="Helpers\HelperForms.cs" />
     <Compile Include="FormGestionarTraducciones.cs">
       <SubType>Form</SubType>
@@ -98,6 +184,30 @@
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormABMMesas.resx">
+      <DependentUpon>FormABMMesas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAsignarRolAUsuario.resx">
+      <DependentUpon>FormAsignarRolAUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormComandasAEntregar.resx">
+      <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFacturaAEntregar.resx">
+      <DependentUpon>FormFacturaAEntregar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGenerarFacturas.resx">
+      <DependentUpon>FormGenerarFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionarComandas.resx">
+      <DependentUpon>FormGestionarComandas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionarFacturas.resx">
+      <DependentUpon>FormGestionarFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionarMesas.resx">
+      <DependentUpon>FormGestionarMesas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarTraducciones.resx">
       <DependentUpon>FormGestionarTraducciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +220,15 @@
     <EmbeddedResource Include="FormGestionarPermisos.resx">
       <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionRoles.resx">
+      <DependentUpon>FormGestionRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNuevaMesa.resx">
+      <DependentUpon>FormNuevaMesa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRealizarComanda.resx">
+      <DependentUpon>FormRealizarComanda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormRegistrarUsuario.resx">
       <DependentUpon>FormRegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +237,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMDI.resx">
       <DependentUpon>FormMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRellenarCliente.resx">
+      <DependentUpon>FormRellenarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSeleccionMedioDePago.resx">
+      <DependentUpon>FormSeleccionMedioDePago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVerComanda.resx">
+      <DependentUpon>FormVerComanda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

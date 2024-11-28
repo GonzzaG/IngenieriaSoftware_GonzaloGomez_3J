@@ -1,0 +1,70 @@
+- Cada vez que ingrese a un form, tiene que listarse los controles de este form, y traducirlos //LISTO
+- ver como poder obtener el tag de los menuStripItems //LISTO
+- cuando inicio esion y voy a agregar traducciones,no mantiene el idiomas //LISTO
+- Hacer una ABM de traducciones, obteniendo las etiquetas que ya existen, y cuando lo seleccione, ver la traduccion actual
+  el idioma actual seleccionado es donde se guardara la traduccion (se podria usar un dictionary<nombre, traduccion> o la 
+  lista del tipo IdiomaSuscriptorDTO //LISTO
+- Tengo que obtener el idioma cunado se va a mostrar un formulario, y traducirlo con el idioma antes de entrar // LISTO
+- cabiar el suscribir controles para que suscriba los controles correspondientes // LISTO
+- puedo usar la propiedad de idiomaData. etiquetatraducciones para traer las traducciones de la base de datos, entonces cuando
+no haya nada, ira a buscarla. Cuando tenga cosas, solo la retornara, el IdiomaSujeto cambiara el estado de las traducciones cuando realice
+notificar(). Asi, tengo que ver que cuando una excepcion se ejecute, dentro de la excepcion busque el mensaje dentro de la lista
+de etiquetasTraducciones segun el tag de la excepcion // LISTO
+- Ver como se podria implementar las traducciones en messagesbox y ecepciones (excepciones utiliza message property) // LISTO
+- Cuando cierro sesion, las traducciones se ponen en espaniol pero el combobox se queda en el idioma que estaba.
+- Actualizar las mesas cuando se agregue, elimine o modifique una mesa, tanto en formabm o formGestionarMesas
+- En el formulario de nueva mesa, puedo poner 2 labels, uno de 'Nueva Mesa' otro de 'Modificar Mesa' Depende el estado que le pase
+como parametron al constructor, pongo como visible uno u otro, asi me despreocupo por varias traducciones en un label, puedo
+hacer lo mismo con el boton. 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- Hacer que cuando esta haciendo la comparación entre las etiquetas en base de datos y las de memoria, si hay etiquetas en bd
+que no hay en memoria, las borramos. comparándolas por tag
+	. Para hacerlo, se deberia hacer antes de la primera comparacion,ya que la primera elimina etiquetas de la lista de etiquetas
+	  en memoria, lo que haria que detecte aun mas etiquetas que en realidad si estan, por eso se debe hacer antes, eliminando
+	  cada una de las etiquetas que estaban en bd y que ya no estan en memoria.
+
+
+- Aregar idioma Ucraniano
+- Hacer que cuando se elimine, agregue o modifique una mesa, aparezcan excepciones de si fue correcto o incorrecto la operacion
+- Tengo que rellenar Tambien los campos que esten completos en el formulario de modificarMesa
+- OPCIONAL--- colocar la cantidad de comensales con un numeric en FormGestionarMesas, que se asignen a la mesa correspondiente
+- una mesa va a tener una unica comanda la cual se pueden ir agregando cosas a ella a medida que se va solicitando y luego lo que debo hacer es ir obteniendo siempre esa tabla para obtener los productos que posee la comanda de dicha mesa. y si quiero agregar productosComanda. habran algunos que ya fueron entregados, por ende esos no iran a cocina, pero iran como una lista  normal, no les pasare tooda la comanda.
+-RECORDATORIO... en el formulario de verComanda, al apretar aceptar la comanda, voy a tener que guardar todos los comandaproductos
+de la grid derecha en la base de datos, una vez aceptada, cerrare este formulario y la lista de comandaProductos en memoria se 
+limpiara. Ademas de aceptar la comanda, se le senviara al sector de cocina donde podra ver las comandas las cuales estan en espera
+para su preparacion.
+-Implementar que se pueda ver un resumen de lo que se lleva consumido hasta el momento (comandaproductos relacionadas a la mesa y comanda id correspondientes)
+-- IMPORTANTE-----antes de cerrar la cuenta, todos los comandaProductos de esa comanda tienen ue estar ene stado ENTREGADO
+
+--IMPORTANTE------ deberia utilizar el encripionmanager al menos para los datos de la tarjeta
+
+
+
+--un formulario de cobros que me va a mostrar todas las facturas que no hayan sido abonadas (EstadoPago = 0)
+cuando seleccione uno, presiono para pagar y esta factura debe marcarse como (EstadoPago = 1)
+
+
+
+
+--tengo que mostrar ien los productos en Ver comanda. mostrando el nombre de los productos y descripcion
+--cambiar estado de comandas en l codigo y en stored procedures
+--comandas a entregar mostrar message
+
+
+https://chatgpt.com/share/6736959d-00d0-800a-a183-72eab84962fa
+
+
+
+Implementacion de roles ------------------------------------
+
+Tengo que hacer un abm donde puedo crear roles asignandole tanto permisos como roles.
+- Los roles no dan permisos, solo lo dan los permisos(patentes) 
+- La mejor forma de relacionar el permiso con el boton es mediante un tag o id
+
+
+
+tengo que hacer que se pueda desasignar un permiso a un rol y desasignar un rol a un rol
+arreglar la relacion de mesero como hijo de cajero cocina, el cual no existe, pero deberia haberse desasignado
+
+

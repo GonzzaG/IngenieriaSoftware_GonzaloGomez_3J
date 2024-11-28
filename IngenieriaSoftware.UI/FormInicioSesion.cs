@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
+using IngenieriaSoftware.UI.Adaptadores;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,13 +16,14 @@ namespace IngenieriaSoftware.UI
 
         private readonly IdiomaSujeto _idiomaObserver;
 
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public FormInicioSesion() { InitializeComponent(); }
         public FormInicioSesion(IdiomaSujeto idiomaObserver)
         {
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.DialogResult = DialogResult.No;
 
             _idiomaObserver = idiomaObserver;
 
@@ -48,6 +50,7 @@ namespace IngenieriaSoftware.UI
 
         private void Inicio_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             txtUsuario.Text = "gonza2";
             txtContrasena.Text = "gonza";
         }
@@ -61,17 +64,35 @@ namespace IngenieriaSoftware.UI
                 {
                     InicioSesionExitoso?.Invoke();
 
-                    //obtenemos el usuario que inicio sesion
                     var usuario = SessionManager.GetInstance.Usuario;
 
-                    //cambiamos el idioma el cual tiene el usuario
-                    _idiomaObserver.CambiarEstado(usuario.Id);
-                    this.Close();
+                    //_idiomaObserver.CambiarEstado(usuario.Id);
+                    throw new CredencialesCorrectasException();
                 }
             }
-            catch (Exception ex)
+            catch (FalloCredencialesException ex)
             {
-                MessageBox.Show(ex.Message);
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+            }
+            catch (CredencialesCorrectasException ex)
+            {
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+                this.Close();
+            }
+
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.PermisosString.Contains("Mesero"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
             }
         }
         #endregion
