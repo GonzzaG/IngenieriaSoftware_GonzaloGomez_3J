@@ -58,7 +58,48 @@ namespace IngenieriaSoftware.UI
         }
 
         #region LogIn LogOut
-        private void LogIn(object sender, EventArgs e)
+        //private void LogIn(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (_authService.LogIn(txtUsuario.Text, txtContrasena.Text))
+        //        {
+        //            InicioSesionExitoso?.Invoke();
+
+        //            var usuario = SessionManager.GetInstance.Usuario;
+
+        //            //_idiomaObserver.CambiarEstado(usuario.Id);
+        //            throw new CredencialesCorrectasException();
+        //        }
+        //    }
+        //    catch (FalloCredencialesException ex)
+        //    {
+        //        var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+        //        MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+        //    }
+        //    catch (CredencialesCorrectasException ex)
+        //    {
+        //        var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+        //        MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+        //        this.Close();
+        //    }
+
+        //}
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.PermisosString.Contains("Mesero"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
+        }
+        #endregion
+
+        private void btnIngresar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -83,20 +124,9 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
                 this.Close();
             }
-
         }
 
-        public void VerificarNotificaciones()
-        {
-            if (PermisosData.PermisosString.Contains("Mesero"))
-            {
-                var notificaciones = _notificacionService.ObtenerNotificaciones();
-                if (notificaciones.Count > 0)
-                {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
-                }
-            }
-        }
-        #endregion
+     
+
     }
 }
