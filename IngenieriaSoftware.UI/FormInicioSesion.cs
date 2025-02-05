@@ -23,9 +23,11 @@ namespace IngenieriaSoftware.UI
         {
             InitializeComponent();
 
-            this.StartPosition = FormStartPosition.CenterScreen;
+           // this.StartPosition = FormStartPosition.CenterScreen;
 
             _idiomaObserver = idiomaObserver;
+            this.WindowState = FormWindowState.Maximized;
+          
 
           
 

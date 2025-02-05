@@ -96,11 +96,6 @@ namespace IngenieriaSoftware.UI
             base.OnFormClosed(e);
         }
 
-        private void MDI_Load(object sender, EventArgs e)
-        {
-            //VerificarNotificaciones();
-        }
-
         public List<IdiomaDTO> CargarIdiomas()
         {
             return new IdiomaBLL().ObtenerIdiomas();
@@ -198,7 +193,7 @@ namespace IngenieriaSoftware.UI
                 }
 
                 AbrirIniciarSesion();
-
+                //this.WindowState = FormWindowState.Maximized;
                 
             }
             catch (Exception ex)
@@ -211,16 +206,18 @@ namespace IngenieriaSoftware.UI
 
         private void AbrirIniciarSesion()
         {
-            this.menuStripMDI.Visible = false;
             this.WindowState = FormWindowState.Normal;
             FormInicioSesion formInicio = new FormInicioSesion(_idiomaObserver);
+            formInicio.MdiParent = this;
+            this.menuStripMDI.Visible = false;
 
             _controlesHelper.SuscribirControles(formInicio);
 
             formInicio.WindowState = FormWindowState.Maximized;
-            formInicio.MdiParent = this;
-           // formInicio.MaximizeBox = false;
-            //formInicio.Size = this.Size;
+            formInicio.Dock = DockStyle.Fill;
+            formInicio.FormBorderStyle = FormBorderStyle.None;
+            formInicio.MaximizeBox = true;
+            formInicio.Size = this.Size;
             formInicio.InicioSesionExitoso += AbrirFormMenu;
             formInicio.Show();
         }
@@ -486,6 +483,11 @@ namespace IngenieriaSoftware.UI
             //{
             //    child.WindowState = FormWindowState.Maximized;
             //}
+        }
+
+        private void MDI_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
