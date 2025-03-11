@@ -74,8 +74,8 @@ namespace IngenieriaSoftware.UI
             lblModificarMesa.Visible = false; 
             lblNuevaMesa.Visible = true;
             lblNuevaMesa.Visible = true;
-            numericUpDownNumMesa.Visible = true;
-            numericUpDownNumMesa.Enabled = true;
+            //numericUpDownNumMesa.Visible = true;
+            //numericUpDownNumMesa.Enabled = true;
         }
 
         //Inicializar Para modificacion
@@ -84,10 +84,11 @@ namespace IngenieriaSoftware.UI
             numericUpDownCapacidadMaxima.Value = mesa.CapacidadMaxima;
             numericUpDownNumMesa.Value = mesa.MesaId;
             lblModificarMesa.Visible = true;
+            lblModificarMesa.Location = new Point(47, 22);
             lblNuevaMesa.Visible = false;
             lblNuevaMesa.Visible = false;
-            numericUpDownNumMesa.Visible = true;
-            numericUpDownNumMesa.Enabled = false;
+            //numericUpDownNumMesa.Visible = true;
+            //numericUpDownNumMesa.Enabled = false;
         }
         public void Actualizar()
         {

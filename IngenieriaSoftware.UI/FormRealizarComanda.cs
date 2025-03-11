@@ -41,8 +41,6 @@ namespace IngenieriaSoftware.UI
             
         }
 
-
-
         private void Inicializar()
         {
             try
@@ -53,7 +51,8 @@ namespace IngenieriaSoftware.UI
                 {
                     dataGridViewProductos.DataSource = null;
                     dataGridViewProductos.DataSource = _productos;
-                    
+
+                    OcultarColumnas();
                     #region Traduccion implementacion
                     //List<EtiquetaDTO> etiquetas = _etiquetaBLL.ObtenerEtiquetasPorPalabra("DataGridViewRow");
 
@@ -121,12 +120,6 @@ namespace IngenieriaSoftware.UI
             _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
         }
 
-        private void NuevoProducto()
-        {
-           
-
-          
-        }
 
         private void btnVerComanda_Click(object sender, EventArgs e)
         {
@@ -194,6 +187,7 @@ namespace IngenieriaSoftware.UI
                 }
 
                 lblNumeroMesa.Text = _mesa.MesaId.ToString();
+                //OcultarColumnas();
             }
             catch (Exception ex)
             {
@@ -233,6 +227,11 @@ namespace IngenieriaSoftware.UI
             }
         }
 
+        public void OcultarColumnas()
+        {
+            dataGridViewProductos.Columns["ProductoId"].Visible = false;
+            dataGridViewProductos.Columns["Diponible"].Visible = false;
 
+        }
     }
 }

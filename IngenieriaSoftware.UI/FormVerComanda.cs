@@ -56,6 +56,7 @@ namespace IngenieriaSoftware.UI
         }
         private void OcultarColumnasComandaGeneral()
         {
+            dataGridViewComandaGeneral.Columns["ComandaId"].Visible = false;
             dataGridViewComandaGeneral.Columns["ProductoId"].Visible = false;
             dataGridViewComandaGeneral.Columns["Producto"].Visible = false;
             dataGridViewComandaGeneral.Columns["Diponible"].Visible = false;
@@ -64,6 +65,7 @@ namespace IngenieriaSoftware.UI
         }
         private void OcultarColumnasComandaActual()
         {
+            dataGridViewComandaActual.Columns["ComandaId"].Visible = false;
             dataGridViewComandaActual.Columns["ProductoId"].Visible = false;
             dataGridViewComandaActual.Columns["Producto"].Visible = false;
             dataGridViewComandaActual.Columns["Diponible"].Visible = false;

@@ -148,7 +148,7 @@ namespace IngenieriaSoftware.UI
 
         private void btnVerPermisos_Click(object sender, EventArgs e)
         {
-            if(btnVerPermisos.Text == "Ver PermisosString")
+            if(btnVerPermisos.Text == "Ver Permisos")
             {
                 if (dataGridViewUsuarios.SelectedRows.Count > 0 &&
                     dataGridViewUsuarios.SelectedRows[0] != null)
@@ -169,10 +169,10 @@ namespace IngenieriaSoftware.UI
                 {
                     if(c.Name != dataGridViewUsuarios.Name && c.Name != treeViewPermisoRol.Name && c.Name != btnVerPermisos.Name && c.Name != btnDesasignarRol.Name)
                         c.Enabled = false;
-                    this.BackColor = SystemColors.ControlDark;
-
+                    this.BackColor = SystemColors.GrayText;
                 }
 
+                dataGridViewUsuarios.Enabled = false;
                 btnVerPermisos.Text = "Dejar de Ver";
             }
             else
@@ -183,11 +183,11 @@ namespace IngenieriaSoftware.UI
                 {
                     if (c.Name != dataGridViewUsuarios.Name)
                         c.Enabled = true;
-                    this.BackColor = SystemColors.Control;
-
+                    this.BackColor = Color.DarkSlateGray;
                 }
 
-                btnVerPermisos.Text = "Ver PermisosString";
+                dataGridViewUsuarios.Enabled = true;
+                btnVerPermisos.Text = "Ver Permisos";
                 treeViewPermisoRol.Nodes.Clear();
             }
         }

@@ -206,6 +206,10 @@ namespace IngenieriaSoftware.UI
 
         private void AbrirIniciarSesion()
         {
+            foreach (Form hijo in this.MdiChildren)
+            {
+                hijo.Close();
+            }
             this.WindowState = FormWindowState.Normal;
             FormInicioSesion formInicio = new FormInicioSesion(_idiomaObserver);
             formInicio.MdiParent = this;
@@ -219,11 +223,16 @@ namespace IngenieriaSoftware.UI
             formInicio.MaximizeBox = true;
             formInicio.Size = this.Size;
             formInicio.InicioSesionExitoso += AbrirFormMenu;
+            panel1.Visible = false;
             formInicio.Show();
         }
 
         internal void AbrirFormHijo(Form formHijo)
         {
+            foreach(Form hijo in this.MdiChildren)
+            {
+                hijo.Close();
+            }
             _controlesHelper.SuscribirControles(formHijo);
             VerificarNotificaciones();
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
@@ -234,11 +243,15 @@ namespace IngenieriaSoftware.UI
             }
             
             formHijo.MdiParent = this;
+
             formHijo.WindowState = FormWindowState.Maximized;
             formHijo.MaximizeBox = false;
             formHijo.StartPosition = FormStartPosition.CenterScreen;
             formHijo.Size = this.Size;
+            formHijo.ControlBox = false;
             formHijo.Show();
+
+            panel1.Visible = false;
         }
 
 
@@ -487,7 +500,33 @@ namespace IngenieriaSoftware.UI
 
         private void MDI_Load(object sender, EventArgs e)
         {
+            
+        }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void FormMDI_Activated(object sender, EventArgs e)
+        {
+            if (this.MdiChildren.Length > 0)
+            {
+                HidePanel(); // Si hay formularios hijos, ocultar el panel
+            }
+            else
+            {
+                ShowPanel(); // Si no hay formularios hijos, mostrar el panel
+            }
+        }
+
+        public void ShowPanel()
+        {
+            panel1.Visible = true; 
+        }
+        public void HidePanel()
+        {
+            panel1.Visible = false; 
         }
     }
 }

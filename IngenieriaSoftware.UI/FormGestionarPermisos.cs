@@ -113,14 +113,14 @@ namespace IngenieriaSoftware.UI
 
         private void btnAsignarPermiso_Click(object sender, EventArgs e)
         {
-            if (treeViewPermisos.SelectedNode == null) return;
+            if (treeViewPermisoUsuario.SelectedNode == null) return;
             if (comboBoxUsuario.Text.Length == 0) return;
             try
             {
                 string usuarioNombre = comboBoxUsuario.Text.ToString();
                 var usuario = _usuarioBLL.ObtenerUsuarioPorNombre(usuarioNombre);
                 usuario.Permisos = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);
-                List<PermisoDTO> permisosUsuario = _permisoBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, usuario);
+                List<PermisoDTO> permisosUsuario = _permisoBLL.AsignarPermisoUsuario((int)treeViewPermisoUsuario.SelectedNode.Tag, usuario);
 
                 ActualizarFormulario();
                 permisosUsuario = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);

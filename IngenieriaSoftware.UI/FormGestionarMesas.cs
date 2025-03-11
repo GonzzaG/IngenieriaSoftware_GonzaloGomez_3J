@@ -41,6 +41,14 @@ namespace IngenieriaSoftware.UI
             dataGridViewMesas.Columns[0].HeaderText = "Numero de mesa";
             dataGridViewMesas.Columns[1].HeaderText = "Capacidad maxima";
             dataGridViewMesas.Columns[2].HeaderText = "Estado de la mesa";
+            HeadersConfig();
+        }
+
+        private void HeadersConfig()
+        {
+            dataGridViewMesas.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+
         }
 
         private async void ActualizarAsync()
