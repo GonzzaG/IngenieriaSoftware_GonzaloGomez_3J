@@ -115,9 +115,12 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if (btnAsignarPermiso.Text == "Asignar")
-                    MessageBox.Show("Por favor, seleccione un permiso o rol para asignar");
-                if (comboBoxRoles.Text == string.Empty)
+                if (dataGridViewRoles.SelectedRows.Count != 1)
+                {
+                    //MessageBox.Show("Por favor, seleccione un permiso o rol para asignar");
+                    //return;
+                }
+                if (dataGridViewPermisos.SelectedRows.Count != 1)
                     MessageBox.Show("Debe seleccionar al menos un rol para asignarle un rol o permiso");
                 else
                 {
@@ -146,37 +149,6 @@ namespace IngenieriaSoftware.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void dataGridViewRoles_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewRoles.SelectedRows.Count > 0)
-            {
-                string nombre = dataGridViewRoles.SelectedRows[0].Cells["Nombre"].Value.ToString();
-                _permisoSeleccionado = _permisos.First(rol => rol.Nombre == nombre);
-                txtPermisoSeleccionado.Text = nombre;
-                btnAsignarPermiso.Text = "Asignar Rol";
-                foreach (DataGridViewRow row in dataGridViewPermisos.Rows)
-                {
-                    row.Selected = false;
-                }
-            }
-        }
-
-        private void dataGridViewPermisos_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewPermisos.SelectedRows.Count > 0)
-            {
-                string nombre = dataGridViewPermisos.SelectedRows[0].Cells["Nombre"].Value.ToString();
-                _permisoSeleccionado = _permisos.First(rol => rol.Nombre == nombre);
-                txtPermisoSeleccionado.Text = nombre;
-                btnAsignarPermiso.Text = "Asignar Permiso";
-                foreach (DataGridViewRow row in dataGridViewRoles.Rows)
-                {
-                    row.Selected = false;
-                }
-
             }
         }
 
@@ -331,6 +303,38 @@ namespace IngenieriaSoftware.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dataGridViewRoles_RowEnter_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewRoles.SelectedRows.Count > 0)
+            {
+                string nombre = dataGridViewRoles.SelectedRows[0].Cells["Nombre"].Value.ToString();
+                _permisoSeleccionado = _permisos.First(rol => rol.Nombre == nombre);
+                txtPermisoSeleccionado.Text = nombre;
+                btnAsignarPermiso.Text = "Asignar Rol";
+                foreach (DataGridViewRow row in dataGridViewPermisos.Rows)
+                {
+                    row.Selected = false;
+                }
+            }
+
+        }
+
+        private void dataGridViewPermisos_RowEnter_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewPermisos.SelectedRows.Count > 0)
+            {
+                string nombre = dataGridViewPermisos.SelectedRows[0].Cells["Nombre"].Value.ToString();
+                _permisoSeleccionado = _permisos.First(rol => rol.Nombre == nombre);
+                txtPermisoSeleccionado.Text = nombre;
+                btnAsignarPermiso.Text = "Asignar Permiso";
+                foreach (DataGridViewRow row in dataGridViewRoles.Rows)
+                {
+                    row.Selected = false;
+                }
+
             }
         }
     }

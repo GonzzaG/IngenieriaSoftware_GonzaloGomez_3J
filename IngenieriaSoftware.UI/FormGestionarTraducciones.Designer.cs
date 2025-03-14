@@ -136,7 +136,7 @@
             this.lblEtiquetasSinTraduccion.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblEtiquetasSinTraduccion.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEtiquetasSinTraduccion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblEtiquetasSinTraduccion.Location = new System.Drawing.Point(769, 69);
+            this.lblEtiquetasSinTraduccion.Location = new System.Drawing.Point(941, 69);
             this.lblEtiquetasSinTraduccion.Name = "lblEtiquetasSinTraduccion";
             this.lblEtiquetasSinTraduccion.Size = new System.Drawing.Size(219, 28);
             this.lblEtiquetasSinTraduccion.TabIndex = 14;
@@ -216,9 +216,10 @@
             this.dataGridViewEtiquetasConTraduccion.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewEtiquetasConTraduccion.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewEtiquetasConTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEtiquetasConTraduccion.Size = new System.Drawing.Size(353, 282);
+            this.dataGridViewEtiquetasConTraduccion.Size = new System.Drawing.Size(438, 282);
             this.dataGridViewEtiquetasConTraduccion.TabIndex = 51;
             this.dataGridViewEtiquetasConTraduccion.Tag = "166";
+            this.dataGridViewEtiquetasConTraduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEtiquetasConTraduccion_RowEnter_1);
             // 
             // dataGridViewEtiquetasSinTraduccion
             // 
@@ -253,7 +254,7 @@
             this.dataGridViewEtiquetasSinTraduccion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewEtiquetasSinTraduccion.EnableHeadersVisualStyles = false;
             this.dataGridViewEtiquetasSinTraduccion.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewEtiquetasSinTraduccion.Location = new System.Drawing.Point(774, 119);
+            this.dataGridViewEtiquetasSinTraduccion.Location = new System.Drawing.Point(937, 119);
             this.dataGridViewEtiquetasSinTraduccion.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEtiquetasSinTraduccion.MultiSelect = false;
             this.dataGridViewEtiquetasSinTraduccion.Name = "dataGridViewEtiquetasSinTraduccion";
@@ -281,16 +282,17 @@
             this.dataGridViewEtiquetasSinTraduccion.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewEtiquetasSinTraduccion.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewEtiquetasSinTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEtiquetasSinTraduccion.Size = new System.Drawing.Size(353, 282);
+            this.dataGridViewEtiquetasSinTraduccion.Size = new System.Drawing.Size(438, 282);
             this.dataGridViewEtiquetasSinTraduccion.TabIndex = 52;
             this.dataGridViewEtiquetasSinTraduccion.Tag = "166";
+            this.dataGridViewEtiquetasSinTraduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEtiquetasSinTraduccion_RowEnter_1);
             // 
             // AgregarIdioma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(1183, 577);
+            this.ClientSize = new System.Drawing.Size(1426, 577);
             this.Controls.Add(this.dataGridViewEtiquetasSinTraduccion);
             this.Controls.Add(this.dataGridViewEtiquetasConTraduccion);
             this.Controls.Add(this.txtEtiqueta);

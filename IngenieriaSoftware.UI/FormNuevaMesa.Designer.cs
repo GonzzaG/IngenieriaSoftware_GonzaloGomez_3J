@@ -51,7 +51,6 @@
             this.lblNumMesa.TabIndex = 1;
             this.lblNumMesa.Tag = "155";
             this.lblNumMesa.Text = "Numero de mesa";
-            this.lblNumMesa.Visible = false;
             // 
             // lblCapacidadMaxima
             // 
@@ -150,7 +149,6 @@
             0,
             0,
             0});
-            this.numericUpDownNumMesa.Visible = false;
             // 
             // FormNuevaMesa
             // 

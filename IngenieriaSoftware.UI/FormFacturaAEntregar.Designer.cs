@@ -53,7 +53,7 @@
             this.btnFacturaEntregada.BackColor = System.Drawing.Color.Teal;
             this.btnFacturaEntregada.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFacturaEntregada.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnFacturaEntregada.Location = new System.Drawing.Point(79, 601);
+            this.btnFacturaEntregada.Location = new System.Drawing.Point(79, 679);
             this.btnFacturaEntregada.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFacturaEntregada.Name = "btnFacturaEntregada";
             this.btnFacturaEntregada.Size = new System.Drawing.Size(244, 73);
@@ -69,7 +69,7 @@
             this.lblDetalleFactura.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblDetalleFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetalleFactura.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDetalleFactura.Location = new System.Drawing.Point(78, 203);
+            this.lblDetalleFactura.Location = new System.Drawing.Point(78, 281);
             this.lblDetalleFactura.Name = "lblDetalleFactura";
             this.lblDetalleFactura.Size = new System.Drawing.Size(217, 38);
             this.lblDetalleFactura.TabIndex = 34;
@@ -110,7 +110,7 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Orange;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewFacturaMesa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewFacturaMesa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewFacturaMesa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridViewFacturaMesa.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridViewFacturaMesa.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridViewFacturaMesa.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -163,7 +163,7 @@
             this.dataGridViewFacturaMesa.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewFacturaMesa.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewFacturaMesa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFacturaMesa.Size = new System.Drawing.Size(671, 100);
+            this.dataGridViewFacturaMesa.Size = new System.Drawing.Size(1025, 146);
             this.dataGridViewFacturaMesa.TabIndex = 50;
             this.dataGridViewFacturaMesa.Tag = "166";
             // 
@@ -200,7 +200,7 @@
             this.dataGridViewDetalleFactura.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewDetalleFactura.EnableHeadersVisualStyles = false;
             this.dataGridViewDetalleFactura.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewDetalleFactura.Location = new System.Drawing.Point(79, 245);
+            this.dataGridViewDetalleFactura.Location = new System.Drawing.Point(79, 323);
             this.dataGridViewDetalleFactura.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDetalleFactura.MultiSelect = false;
             this.dataGridViewDetalleFactura.Name = "dataGridViewDetalleFactura";
@@ -237,14 +237,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(1289, 699);
+            this.ClientSize = new System.Drawing.Size(1289, 776);
             this.Controls.Add(this.dataGridViewDetalleFactura);
             this.Controls.Add(this.dataGridViewFacturaMesa);
             this.Controls.Add(this.lblFacturas);
             this.Controls.Add(this.lblNumeroFactura);
             this.Controls.Add(this.btnFacturaEntregada);
             this.Controls.Add(this.lblDetalleFactura);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormFacturaAEntregar";
             this.Tag = "193";
             this.Text = "FormFacturaAEntregar";

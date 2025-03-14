@@ -63,7 +63,7 @@
             this.comboBoxFiltroEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.comboBoxFiltroEstado.FormattingEnabled = true;
             this.comboBoxFiltroEstado.Location = new System.Drawing.Point(879, 56);
-            this.comboBoxFiltroEstado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxFiltroEstado.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxFiltroEstado.Name = "comboBoxFiltroEstado";
             this.comboBoxFiltroEstado.Size = new System.Drawing.Size(275, 36);
             this.comboBoxFiltroEstado.TabIndex = 28;
@@ -136,7 +136,7 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Orange;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewFacturas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewFacturas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewFacturas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridViewFacturas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridViewFacturas.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridViewFacturas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -189,7 +189,7 @@
             this.dataGridViewFacturas.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewFacturas.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFacturas.Size = new System.Drawing.Size(1095, 386);
+            this.dataGridViewFacturas.Size = new System.Drawing.Size(1283, 386);
             this.dataGridViewFacturas.TabIndex = 51;
             this.dataGridViewFacturas.Tag = "166";
             // 
@@ -206,7 +206,7 @@
             this.Controls.Add(this.lblFiltrar);
             this.Controls.Add(this.comboBoxFiltroEstado);
             this.Controls.Add(this.lblFacturas);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormGestionarFacturas";
             this.Tag = "179";
             this.Text = "FormGestionarFacturas";

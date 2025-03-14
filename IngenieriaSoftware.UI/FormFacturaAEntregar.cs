@@ -86,7 +86,7 @@ namespace IngenieriaSoftware.UI
             var facturaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[0].Value;
             var mesaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[3].Value;
             _facturaBLL.CambiarEstadoFacturaEntregada(facturaId);
-            _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
+            //_mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
 
             MessageBox.Show("Factura Entregada con exito. Mesa desocupada");
             this.Close();

@@ -82,12 +82,13 @@
             this.lblTodosLosRoles.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblTodosLosRoles.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTodosLosRoles.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTodosLosRoles.Location = new System.Drawing.Point(855, 129);
+            this.lblTodosLosRoles.Location = new System.Drawing.Point(75, 396);
             this.lblTodosLosRoles.Name = "lblTodosLosRoles";
             this.lblTodosLosRoles.Size = new System.Drawing.Size(143, 28);
             this.lblTodosLosRoles.TabIndex = 27;
             this.lblTodosLosRoles.Tag = "821";
             this.lblTodosLosRoles.Text = "Todos los roles";
+            this.lblTodosLosRoles.Visible = false;
             // 
             // btnCrearRol
             // 
@@ -123,7 +124,7 @@
             this.lblTodosLosPermisos.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblTodosLosPermisos.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTodosLosPermisos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTodosLosPermisos.Location = new System.Drawing.Point(1188, 128);
+            this.lblTodosLosPermisos.Location = new System.Drawing.Point(959, 140);
             this.lblTodosLosPermisos.Name = "lblTodosLosPermisos";
             this.lblTodosLosPermisos.Size = new System.Drawing.Size(180, 28);
             this.lblTodosLosPermisos.TabIndex = 23;
@@ -147,7 +148,7 @@
             this.comboBoxRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxRoles.FormattingEnabled = true;
             this.comboBoxRoles.Location = new System.Drawing.Point(461, 140);
-            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxRoles.Name = "comboBoxRoles";
             this.comboBoxRoles.Size = new System.Drawing.Size(296, 33);
             this.comboBoxRoles.TabIndex = 34;
@@ -262,7 +263,7 @@
             this.dataGridViewRoles.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridViewRoles.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridViewRoles.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dataGridViewRoles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewRoles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSeaGreen;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -283,9 +284,8 @@
             this.dataGridViewRoles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewRoles.EnableHeadersVisualStyles = false;
             this.dataGridViewRoles.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewRoles.Location = new System.Drawing.Point(858, 186);
+            this.dataGridViewRoles.Location = new System.Drawing.Point(78, 453);
             this.dataGridViewRoles.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewRoles.MultiSelect = false;
             this.dataGridViewRoles.Name = "dataGridViewRoles";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightSeaGreen;
@@ -311,9 +311,11 @@
             this.dataGridViewRoles.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewRoles.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRoles.Size = new System.Drawing.Size(178, 339);
+            this.dataGridViewRoles.Size = new System.Drawing.Size(300, 339);
             this.dataGridViewRoles.TabIndex = 50;
             this.dataGridViewRoles.Tag = "166";
+            this.dataGridViewRoles.Visible = false;
+            this.dataGridViewRoles.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoles_RowEnter_1);
             // 
             // dataGridViewPermisos
             // 
@@ -326,8 +328,9 @@
             this.dataGridViewPermisos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewPermisos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridViewPermisos.BackgroundColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridViewPermisos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dataGridViewPermisos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewPermisos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewPermisos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewPermisos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightSeaGreen;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -348,9 +351,8 @@
             this.dataGridViewPermisos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewPermisos.EnableHeadersVisualStyles = false;
             this.dataGridViewPermisos.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewPermisos.Location = new System.Drawing.Point(1191, 186);
+            this.dataGridViewPermisos.Location = new System.Drawing.Point(971, 198);
             this.dataGridViewPermisos.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewPermisos.MultiSelect = false;
             this.dataGridViewPermisos.Name = "dataGridViewPermisos";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightSeaGreen;
@@ -376,9 +378,10 @@
             this.dataGridViewPermisos.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewPermisos.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewPermisos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewPermisos.Size = new System.Drawing.Size(178, 339);
+            this.dataGridViewPermisos.Size = new System.Drawing.Size(296, 339);
             this.dataGridViewPermisos.TabIndex = 51;
             this.dataGridViewPermisos.Tag = "166";
+            this.dataGridViewPermisos.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPermisos_RowEnter_1);
             // 
             // FormGestionRoles
             // 

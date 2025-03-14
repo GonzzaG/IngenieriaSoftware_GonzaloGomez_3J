@@ -53,7 +53,7 @@
             this.btnConfirmarComanda.BackColor = System.Drawing.Color.Teal;
             this.btnConfirmarComanda.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarComanda.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnConfirmarComanda.Location = new System.Drawing.Point(60, 895);
+            this.btnConfirmarComanda.Location = new System.Drawing.Point(65, 832);
             this.btnConfirmarComanda.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConfirmarComanda.Name = "btnConfirmarComanda";
             this.btnConfirmarComanda.Size = new System.Drawing.Size(225, 69);
@@ -68,7 +68,7 @@
             this.btnEliminarProducto.BackColor = System.Drawing.Color.Teal;
             this.btnEliminarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEliminarProducto.Location = new System.Drawing.Point(336, 895);
+            this.btnEliminarProducto.Location = new System.Drawing.Point(341, 832);
             this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminarProducto.Name = "btnEliminarProducto";
             this.btnEliminarProducto.Size = new System.Drawing.Size(225, 69);
@@ -95,7 +95,7 @@
             this.lblComandaActual.AutoSize = true;
             this.lblComandaActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblComandaActual.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblComandaActual.Location = new System.Drawing.Point(54, 443);
+            this.lblComandaActual.Location = new System.Drawing.Point(54, 416);
             this.lblComandaActual.Name = "lblComandaActual";
             this.lblComandaActual.Size = new System.Drawing.Size(235, 32);
             this.lblComandaActual.TabIndex = 27;
@@ -202,7 +202,7 @@
             this.dataGridViewComandaActual.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewComandaActual.EnableHeadersVisualStyles = false;
             this.dataGridViewComandaActual.GridColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridViewComandaActual.Location = new System.Drawing.Point(45, 505);
+            this.dataGridViewComandaActual.Location = new System.Drawing.Point(45, 475);
             this.dataGridViewComandaActual.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewComandaActual.MultiSelect = false;
             this.dataGridViewComandaActual.Name = "dataGridViewComandaActual";
@@ -250,6 +250,7 @@
             this.Name = "FormVerComanda";
             this.Tag = "106";
             this.Text = "FormVerComanda";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormVerComanda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandaGeneral)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComandaActual)).EndInit();

@@ -223,7 +223,7 @@ namespace IngenieriaSoftware.UI
             formInicio.MaximizeBox = true;
             formInicio.Size = this.Size;
             formInicio.InicioSesionExitoso += AbrirFormMenu;
-            panel1.Visible = false;
+            //panel1.Visible = false;
             formInicio.Show();
         }
 
@@ -251,7 +251,7 @@ namespace IngenieriaSoftware.UI
             formHijo.ControlBox = false;
             formHijo.Show();
 
-            panel1.Visible = false;
+            //panel1.Visible = false;
         }
 
 
@@ -512,21 +512,21 @@ namespace IngenieriaSoftware.UI
         {
             if (this.MdiChildren.Length > 0)
             {
-                HidePanel(); // Si hay formularios hijos, ocultar el panel
+               // HidePanel(); // Si hay formularios hijos, ocultar el panel
             }
             else
             {
-                ShowPanel(); // Si no hay formularios hijos, mostrar el panel
+                //ShowPanel(); // Si no hay formularios hijos, mostrar el panel
             }
         }
 
-        public void ShowPanel()
-        {
-            panel1.Visible = true; 
-        }
-        public void HidePanel()
-        {
-            panel1.Visible = false; 
-        }
+        //public void ShowPanel()
+        //{
+        //    panel1.Visible = true; 
+        //}
+        //public void HidePanel()
+        //{
+        //    panel1.Visible = false; 
+        //}
     }
 }

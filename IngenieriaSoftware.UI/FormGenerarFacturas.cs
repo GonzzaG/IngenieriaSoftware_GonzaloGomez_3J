@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -59,8 +61,24 @@ namespace IngenieriaSoftware.UI
             int mesaId = (int)dataGridViewMesasCerradas.SelectedRows[0].Cells[0].Value;
 
             var padre = this.MdiParent as FormMDI;
-            FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
-            padre.AbrirFormHijo(formSeleccionMedioDePago);
+
+            using (var transaction = new TransactionScope())
+            {
+               
+                FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
+               
+                formSeleccionMedioDePago.FormClosed += (s, ev) =>
+                {
+                    _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
+                    MessageBox.Show("La mesa ha sido desocupada");
+                };
+
+                padre.AbrirFormHijo(formSeleccionMedioDePago);
+
+                transaction.Complete();
+                
+            }   
+           
 
         }
     }

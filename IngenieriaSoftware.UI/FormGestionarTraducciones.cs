@@ -142,5 +142,35 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
+
+        private void dataGridViewEtiquetasSinTraduccion_RowEnter_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewEtiquetasSinTraduccion.SelectedRows.Count > 0)
+            {
+                int etiquetaId = (int)dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells[0].Value;
+                var etiquetaNombre = dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells[1].Value.ToString();
+                txtEtiqueta.Text = etiquetaNombre;
+                etiquetaSeleccionada = etiquetasSinTraduccion.Find(et => et.Tag == etiquetaId);
+
+                // Vaciamos el txtTraduccion ya que no tiene traduccion
+                txtTraduccion.Text = "";
+            }
+        }
+
+        private void dataGridViewEtiquetasConTraduccion_RowEnter_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewEtiquetasConTraduccion.SelectedRows.Count > 0)
+            {
+                int etiquetaId = (int)dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells[0].Value;
+                string etiquetaNombre = dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells[1].Value.ToString();
+
+                etiquetaSeleccionada = etiquetasConTraduccion.Keys.FirstOrDefault(et => et.Tag == etiquetaId);
+                // Buscamos en el diccionario, la etiqueta que fue seleciconada segun el nombre en la gridView
+                TraduccionDTO traduccion = etiquetasConTraduccion.FirstOrDefault(t => t.Value.EtiquetaId == etiquetaId).Value;
+
+                txtEtiqueta.Text = etiquetaNombre;
+                txtTraduccion.Text = traduccion.Texto;
+            }
+        }
     }
 }

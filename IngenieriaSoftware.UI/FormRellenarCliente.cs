@@ -25,9 +25,9 @@ namespace IngenieriaSoftware.UI
 
             txtNombre.Text = "gonza";
             txtApellido.Text = "gomez";
-            txtEmail.Text = "gonza@gonza.com";
-            txtTelefono.Text = "123131231";
-            txtDireccion.Text = "Pasteur 3232";
+            txtEmail.Text = "gonzalogomezhf@gmail.com";
+            txtTelefono.Text = "1234567890";
+            txtDireccion.Text = "Av. Siempre viva 742";
             EsBancario = esBancario;
             DatosBancarios(esBancario);
         }

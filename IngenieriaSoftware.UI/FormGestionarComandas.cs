@@ -67,30 +67,8 @@ namespace IngenieriaSoftware.UI
             //dataGridViewComandasPendientes.DataSource = comandaProductos;
         }
 
-        private void dataGridViewComandasPendientes_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if(dataGridViewComandasPendientes.SelectedRows.Count == 0) 
-                {             
-                    dataGridViewComandaProductos.ClearSelection();
-                 
-                    return; 
-                }
-                //mostramos los productos que no esten listos ni entregados mediante la mesa_id y comanda_id de la comanda seleccionada
-                int comandaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[0].Value;
-                int mesaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[1].Value;
-                var productosComanda = _comadaBLL.ObtenerComandaProductosPendientes(mesaId, comandaId);
-
-                dataGridViewComandaProductos.DataSource = null;
-                dataGridViewComandaProductos.DataSource = productosComanda;
-
-            }
-            catch(Exception ex)
-            {
-
-            }
-        }
+      
+        
 
         private void btnComandaEnPreparacion_Click(object sender, EventArgs e)
         {
@@ -141,6 +119,31 @@ namespace IngenieriaSoftware.UI
         private void FormGestionarComandas_Load(object sender, EventArgs e)
         {
             VerificarNotificaciones();
+        }
+
+        private void dataGridViewComandasPendientes_RowEnter_1(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dataGridViewComandasPendientes.SelectedRows.Count == 0)
+                {
+                    dataGridViewComandaProductos.ClearSelection();
+
+                    return;
+                }
+                //mostramos los productos que no esten listos ni entregados mediante la mesa_id y comanda_id de la comanda seleccionada
+                int comandaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[0].Value;
+                int mesaId = (int)dataGridViewComandasPendientes.SelectedRows[0].Cells[1].Value;
+                var productosComanda = _comadaBLL.ObtenerComandaProductosPendientes(mesaId, comandaId);
+
+                dataGridViewComandaProductos.DataSource = null;
+                dataGridViewComandaProductos.DataSource = productosComanda;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

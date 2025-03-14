@@ -23,7 +23,6 @@ namespace IngenieriaSoftware.UI
         {
             InitializeComponent();
 
-           // this.StartPosition = FormStartPosition.CenterScreen;
 
             _idiomaObserver = idiomaObserver;
             this.WindowState = FormWindowState.Maximized;
@@ -53,8 +52,8 @@ namespace IngenieriaSoftware.UI
         private void Inicio_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            txtUsuario.Text = "gonza2";
-            txtContrasena.Text = "gonza";
+            //txtUsuario.Text = "gonza2";
+            //txtContrasena.Text = "gonza";
         }
 
         #region LogIn LogOut

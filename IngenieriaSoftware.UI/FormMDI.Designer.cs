@@ -54,7 +54,6 @@
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.toolTipNotificacion = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,7 +136,7 @@
             // 
             this.fToolStripMenuItem.Name = "fToolStripMenuItem";
             this.fToolStripMenuItem.Size = new System.Drawing.Size(244, 32);
-            this.fToolStripMenuItem.Tag = "163";
+            this.fToolStripMenuItem.Tag = "433";
             this.fToolStripMenuItem.Text = "Ver Facturas";
             this.fToolStripMenuItem.Click += new System.EventHandler(this.fToolStripMenuItem_Click);
             // 
@@ -187,7 +186,7 @@
             // gestionPermisosToolStripMenuItem
             // 
             this.gestionPermisosToolStripMenuItem.Name = "gestionPermisosToolStripMenuItem";
-            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(217, 32);
+            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.gestionPermisosToolStripMenuItem.Tag = "570";
             this.gestionPermisosToolStripMenuItem.Text = "Gestion Roles";
             this.gestionPermisosToolStripMenuItem.Click += new System.EventHandler(this.gestionPermisosToolStripMenuItem_Click);
@@ -195,7 +194,7 @@
             // asignarRolToolStripMenuItem
             // 
             this.asignarRolToolStripMenuItem.Name = "asignarRolToolStripMenuItem";
-            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(217, 32);
+            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.asignarRolToolStripMenuItem.Tag = "571";
             this.asignarRolToolStripMenuItem.Text = "Asignar Rol";
             this.asignarRolToolStripMenuItem.Click += new System.EventHandler(this.asignarRolToolStripMenuItem_Click);
@@ -314,16 +313,6 @@
             this.lblIdiomaActual.Tag = "69";
             this.lblIdiomaActual.Text = "Idioma Actual";
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.DarkCyan;
-            this.panel1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Location = new System.Drawing.Point(0, 65);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1738, 723);
-            this.panel1.TabIndex = 11;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
             // FormMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -333,9 +322,7 @@
             this.Controls.Add(this.lblIdiomaActual);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.menuStripMDI);
-            this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripMDI;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -380,6 +367,5 @@
         private System.Windows.Forms.ToolStripMenuItem gestionPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarRolToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarIdiomasToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
     }
 }
