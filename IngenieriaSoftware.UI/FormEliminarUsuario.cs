@@ -61,16 +61,28 @@ namespace IngenieriaSoftware.UI
 
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
-            if (comboBoxUsuarios.SelectedItem == null) { return; }
-            DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar?", "Alerta de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (respuesta == DialogResult.No) return;
-            else if (respuesta == DialogResult.Yes)
+            try
             {
-                usuarios = usuarioBLL.EliminarUsuario(usuarios, comboBoxUsuarios.SelectedItem.ToString());
-                listarUsuarios(usuarios);
+                if (comboBoxUsuarios.SelectedItem == null) { return; }
+                DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar?", "Alerta de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (respuesta == DialogResult.No) return;
+                else if (respuesta == DialogResult.Yes)
+                {
+                    usuarios = usuarioBLL.EliminarUsuario(usuarios, comboBoxUsuarios.SelectedItem.ToString());
+                    listarUsuarios(usuarios);
+                }
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Eliminar Usuario", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+
+            }
+            catch (Exception ex)
+            {
+                BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios",SessionManager.GetInstance.Usuario.Username);
+                MessageBox.Show(ex.Message);
             }
         }
+            
 
         private void comboBoxUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {

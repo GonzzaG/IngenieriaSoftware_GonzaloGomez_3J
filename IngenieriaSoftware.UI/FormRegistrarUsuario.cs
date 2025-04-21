@@ -81,11 +81,15 @@ namespace IngenieriaSoftware.UI
                     MessageBox.Show($"El usuario {txtUsername.Text} fue registrado con exito");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
+
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Registro de Usuario", DateTime.Now, $"Usuario {txtUsername.Text} registrado", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios" ,SessionManager.GetInstance.Usuario.Username); 
             }
         }
 

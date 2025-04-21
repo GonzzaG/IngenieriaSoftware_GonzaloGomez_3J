@@ -79,10 +79,13 @@ namespace IngenieriaSoftware.UI
                 _comadaBLL.MarcarProductosEnPreparacion(comandaProductos);
 
                 Actualizar();
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Marcar productos en preparacion", DateTime.Now, "Se han marcado los productos en preparacion", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Cocina");
             }
             catch(Exception ex)
             {
                 MessageBox.Show("La comanda tiene que estar en estado 'pendiente' para marcarlo como listos");
+                BitacoraHelper.RegistrarError(this.Name, ex, "Cocina", null);    
             }
         }
 

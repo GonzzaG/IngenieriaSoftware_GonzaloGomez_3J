@@ -53,32 +53,43 @@ namespace IngenieriaSoftware.UI
 
         private void btnGenerarFactura_Click(object sender, EventArgs e)
         {
-            if(dataGridViewMesasCerradas.SelectedRows.Count == 0)
+            try
             {
-                MessageBox.Show("Seleccione una mesa para poder generar la factura");
+                if(dataGridViewMesasCerradas.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Seleccione una mesa para poder generar la factura");
+                }
+
+                int mesaId = (int)dataGridViewMesasCerradas.SelectedRows[0].Cells[0].Value;
+
+                var padre = this.MdiParent as FormMDI;
+
+                using (var transaction = new TransactionScope())
+                {
+               
+                    FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
+               
+                    formSeleccionMedioDePago.FormClosed += (s, ev) =>
+                    {
+                        _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
+                        MessageBox.Show("La mesa ha sido desocupada");
+                    };
+
+                    padre.AbrirFormHijo(formSeleccionMedioDePago);
+
+                    transaction.Complete();
+                
+                }   
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Generar Factura", DateTime.Now, "MesaId: " + mesaId, this.Name, AppDomain.CurrentDomain.BaseDirectory, "Caja");
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al generar la factura: " + ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", SessionManager.GetInstance.Usuario.Username);
             }
 
-            int mesaId = (int)dataGridViewMesasCerradas.SelectedRows[0].Cells[0].Value;
-
-            var padre = this.MdiParent as FormMDI;
-
-            using (var transaction = new TransactionScope())
-            {
-               
-                FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
-               
-                formSeleccionMedioDePago.FormClosed += (s, ev) =>
-                {
-                    _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
-                    MessageBox.Show("La mesa ha sido desocupada");
-                };
-
-                padre.AbrirFormHijo(formSeleccionMedioDePago);
-
-                transaction.Complete();
-                
-            }   
-           
 
         }
     }

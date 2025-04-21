@@ -47,7 +47,7 @@
             this.comboBoxCategorias.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.comboBoxCategorias.FormattingEnabled = true;
             this.comboBoxCategorias.Location = new System.Drawing.Point(185, 295);
-            this.comboBoxCategorias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxCategorias.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxCategorias.Name = "comboBoxCategorias";
             this.comboBoxCategorias.Size = new System.Drawing.Size(251, 36);
             this.comboBoxCategorias.TabIndex = 0;
@@ -86,10 +86,10 @@
             this.lblUsername.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblUsername.Location = new System.Drawing.Point(180, 102);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(160, 28);
+            this.lblUsername.Size = new System.Drawing.Size(181, 28);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Tag = "134";
-            this.lblUsername.Text = "Name de usuario";
+            this.lblUsername.Text = "Nombre de usuario";
             this.lblUsername.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblPassword
@@ -130,7 +130,7 @@
             this.btnRegistrar.Size = new System.Drawing.Size(201, 86);
             this.btnRegistrar.TabIndex = 7;
             this.btnRegistrar.Tag = "140";
-            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.Text = "Registrar Usuario";
             this.btnRegistrar.UseVisualStyleBackColor = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
@@ -151,7 +151,7 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.comboBoxCategorias);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormRegistrarUsuario";
             this.Tag = "141";
             this.Text = "GestionUsuarios";

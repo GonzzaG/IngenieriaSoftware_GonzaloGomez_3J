@@ -50,6 +50,8 @@
             this.agregarTraduccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarIdiomasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BitacoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BackUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogOutgestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.lblIdiomaActual = new System.Windows.Forms.Label();
@@ -70,13 +72,15 @@
             this.gestionUsuariosToolStripMenuItem,
             this.gestionIdiomasToolStripMenuItem,
             this.estadisticasToolStripMenuItem,
+            this.BitacoraToolStripMenuItem,
+            this.BackUpToolStripMenuItem,
             this.LogOutgestionUsuariosToolStripMenuItem});
             this.menuStripMDI.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStripMDI.Location = new System.Drawing.Point(0, 0);
             this.menuStripMDI.Name = "menuStripMDI";
             this.menuStripMDI.Padding = new System.Windows.Forms.Padding(10);
             this.menuStripMDI.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStripMDI.Size = new System.Drawing.Size(1738, 62);
+            this.menuStripMDI.Size = new System.Drawing.Size(1920, 62);
             this.menuStripMDI.TabIndex = 1;
             this.menuStripMDI.Tag = "14";
             this.menuStripMDI.Text = "menuStrip1";
@@ -186,7 +190,7 @@
             // gestionPermisosToolStripMenuItem
             // 
             this.gestionPermisosToolStripMenuItem.Name = "gestionPermisosToolStripMenuItem";
-            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
+            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(217, 32);
             this.gestionPermisosToolStripMenuItem.Tag = "570";
             this.gestionPermisosToolStripMenuItem.Text = "Gestion Roles";
             this.gestionPermisosToolStripMenuItem.Click += new System.EventHandler(this.gestionPermisosToolStripMenuItem_Click);
@@ -194,7 +198,7 @@
             // asignarRolToolStripMenuItem
             // 
             this.asignarRolToolStripMenuItem.Name = "asignarRolToolStripMenuItem";
-            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
+            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(217, 32);
             this.asignarRolToolStripMenuItem.Tag = "571";
             this.asignarRolToolStripMenuItem.Text = "Asignar Rol";
             this.asignarRolToolStripMenuItem.Click += new System.EventHandler(this.asignarRolToolStripMenuItem_Click);
@@ -216,15 +220,15 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(248, 32);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(331, 32);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
-            this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
+            this.registrarUsuarioToolStripMenuItem.Text = "RegistrarActividad Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
             // 
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(248, 32);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(331, 32);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
             this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
@@ -279,6 +283,28 @@
             this.estadisticasToolStripMenuItem.Tag = "13";
             this.estadisticasToolStripMenuItem.Text = "Estadisticas";
             // 
+            // BitacoraToolStripMenuItem
+            // 
+            this.BitacoraToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.BitacoraToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BitacoraToolStripMenuItem.Name = "BitacoraToolStripMenuItem";
+            this.BitacoraToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5, 10, 5, 0);
+            this.BitacoraToolStripMenuItem.Size = new System.Drawing.Size(97, 42);
+            this.BitacoraToolStripMenuItem.Tag = "1208";
+            this.BitacoraToolStripMenuItem.Text = "Bitacora";
+            this.BitacoraToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // BackUpToolStripMenuItem
+            // 
+            this.BackUpToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.BackUpToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BackUpToolStripMenuItem.Name = "BackUpToolStripMenuItem";
+            this.BackUpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5, 10, 5, 0);
+            this.BackUpToolStripMenuItem.Size = new System.Drawing.Size(97, 42);
+            this.BackUpToolStripMenuItem.Tag = "1222";
+            this.BackUpToolStripMenuItem.Text = "Back Up";
+            this.BackUpToolStripMenuItem.Click += new System.EventHandler(this.BackUpToolStripMenuItem_Click);
+            // 
             // LogOutgestionUsuariosToolStripMenuItem
             // 
             this.LogOutgestionUsuariosToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -288,12 +314,12 @@
             this.LogOutgestionUsuariosToolStripMenuItem.Size = new System.Drawing.Size(141, 42);
             this.LogOutgestionUsuariosToolStripMenuItem.Tag = "14";
             this.LogOutgestionUsuariosToolStripMenuItem.Text = "Cerrar Sesion";
-            this.LogOutgestionUsuariosToolStripMenuItem.Click += new System.EventHandler(this.LogOutgestionUsuariosToolStripMenuItem_Click);
+            this.LogOutgestionUsuariosToolStripMenuItem.Click += new System.EventHandler(this.LogOutgestionUsuariosToolStripMenuItem_Click_1);
             // 
             // comboBoxIdiomas
             // 
             this.comboBoxIdiomas.FormattingEnabled = true;
-            this.comboBoxIdiomas.Location = new System.Drawing.Point(1518, 24);
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(1700, 20);
             this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
             this.comboBoxIdiomas.Size = new System.Drawing.Size(208, 24);
@@ -305,7 +331,7 @@
             // 
             this.lblIdiomaActual.AutoSize = true;
             this.lblIdiomaActual.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdiomaActual.Location = new System.Drawing.Point(1322, 21);
+            this.lblIdiomaActual.Location = new System.Drawing.Point(1549, 16);
             this.lblIdiomaActual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIdiomaActual.Name = "lblIdiomaActual";
             this.lblIdiomaActual.Size = new System.Drawing.Size(133, 28);
@@ -318,7 +344,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(1738, 785);
+            this.ClientSize = new System.Drawing.Size(1920, 785);
             this.Controls.Add(this.lblIdiomaActual);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.menuStripMDI);
@@ -349,7 +375,7 @@
         private System.Windows.Forms.ToolStripMenuItem registrarUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comandasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem LogOutgestionUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BackUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actualizarEtiquetasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarTraduccionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mesasToolStripMenuItem;
@@ -367,5 +393,7 @@
         private System.Windows.Forms.ToolStripMenuItem gestionPermisosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarRolToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarIdiomasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BitacoraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LogOutgestionUsuariosToolStripMenuItem;
     }
 }

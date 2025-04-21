@@ -126,10 +126,13 @@ namespace IngenieriaSoftware.UI
                 permisosUsuario = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);
 
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Asignar Permiso", DateTime.Now, $"Se asigno el permiso {treeViewPermisoUsuario.SelectedNode.Text} al usuario {usuarioNombre}", this.Name, AppDomain.CurrentDomain.BaseDirectory,"Permisos"); 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos" ,SessionManager.GetInstance.Usuario.Username); 
+
             }
         }
 
@@ -154,10 +157,14 @@ namespace IngenieriaSoftware.UI
 
                     ActualizarFormulario();
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Desasignar Permiso", DateTime.Now, $"Se desasigno el permiso {treeViewPermisoUsuario.SelectedNode.Text} al usuario {usuarioNombre}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");   
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
+
             }
         }
 

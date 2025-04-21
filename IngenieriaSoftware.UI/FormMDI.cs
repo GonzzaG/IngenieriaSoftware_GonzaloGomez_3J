@@ -11,6 +11,8 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using System.Transactions;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -182,24 +184,7 @@ namespace IngenieriaSoftware.UI
 
         private void LogOutgestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {                 
-               // Actualizar();
 
-                _authService.LogOut();
-                foreach(var hijo in this.MdiChildren)
-                {
-                    hijo.Close();
-                }
-
-                AbrirIniciarSesion();
-                //this.WindowState = FormWindowState.Maximized;
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         #region Metodos privados
@@ -258,6 +243,7 @@ namespace IngenieriaSoftware.UI
         #endregion Metodos privados
 
         private void ActualizarVisibilidadBotones()   
+        
         {
             
             PermisosData.Permisos = permisoBLL.ObtenerPermisosUsuario(SessionManager.GetInstance.Usuario.Id);
@@ -500,7 +486,7 @@ namespace IngenieriaSoftware.UI
 
         private void MDI_Load(object sender, EventArgs e)
         {
-            
+            BitacoraToolStripMenuItem.Visible = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -517,6 +503,60 @@ namespace IngenieriaSoftware.UI
             else
             {
                 //ShowPanel(); // Si no hay formularios hijos, mostrar el panel
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormBitacoraBusqueda form = new FormBitacoraBusqueda();
+            this.AbrirFormHijo(form);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BitacoraToolStripMenuItem.Visible = true;
+        }
+
+        private void BackUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionarBackup formGestionarBackup = new FormGestionarBackup();
+                AbrirFormHijo(formGestionarBackup);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Bitacora", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void LogOutgestionUsuariosToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Actualizar();
+                using (TransactionScope transac = new TransactionScope())
+                {
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Cerrar Sesion", DateTime.Now, "Cierre de sesion exitoso", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Sesion");
+                    _authService.LogOut();
+                    foreach (var hijo in this.MdiChildren)
+                    {
+                        hijo.Close();
+                    }
+
+                    AbrirIniciarSesion();
+                    //this.WindowState = FormWindowState.Maximized;
+
+                    transac.Complete();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Sesion", SessionManager.GetInstance.Usuario.Username);
+
             }
         }
 

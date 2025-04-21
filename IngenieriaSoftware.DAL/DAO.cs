@@ -2,12 +2,15 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace IngenieriaSoftware.DAL
 {
     public class DAO
     {
         private SqlConnection mCon;
+        public string NombreBD { get; } = "ISProyecto";
+        public string rutaBD = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\BD"));
 
         public void Conectar()
         {

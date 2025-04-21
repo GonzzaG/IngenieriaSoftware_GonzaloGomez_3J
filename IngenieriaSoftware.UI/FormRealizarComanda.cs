@@ -111,28 +111,44 @@ namespace IngenieriaSoftware.UI
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            //en este boton se agregara el producto seleccionado a la comanda de la mesa actual seleccionada
-            //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
-            int indice = dataGridViewProductos.SelectedRows[0].Index;
-            int productoId = (int)dataGridViewProductos.SelectedRows[0].Cells[0].Value;
-            Producto producto = _productos.Find(p => p.ProductoId == productoId);
+            try
+            {
+                //en este boton se agregara el producto seleccionado a la comanda de la mesa actual seleccionada
+                //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
+                int indice = dataGridViewProductos.SelectedRows[0].Index;
+                int productoId = (int)dataGridViewProductos.SelectedRows[0].Cells[0].Value;
+                Producto producto = _productos.Find(p => p.ProductoId == productoId);
    
-            _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
+                _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Agregar Producto", DateTime.Now, "Producto agregado a la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
+            }
+            catch (Exception ex)
+            {
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);   
+            }
         }
 
 
         private void btnVerComanda_Click(object sender, EventArgs e)
         {
-            // Mostramos el formulario ver comanda con la mesa actual como parametro
-            
-            var padre = this.MdiParent as FormMDI;
+            try
+            {
+                // Mostramos el formulario ver comanda con la mesa actual como parametro
 
-            FormVerComanda formVerComanda = new FormVerComanda(_comandaBLL, _comandaId);
-            formVerComanda.StartPosition = FormStartPosition.CenterScreen;
-            formVerComanda.ShowDialog();
-          // padre.AbrirFormHijo(formVerComanda);
+                var padre = this.MdiParent as FormMDI;
 
-            Actualizar();
+                FormVerComanda formVerComanda = new FormVerComanda(_comandaBLL, _comandaId);
+                formVerComanda.StartPosition = FormStartPosition.CenterScreen;
+                formVerComanda.ShowDialog();
+                // padre.AbrirFormHijo(formVerComanda);
+
+                Actualizar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al abrir el formulario de ver comanda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         public void Actualizar()

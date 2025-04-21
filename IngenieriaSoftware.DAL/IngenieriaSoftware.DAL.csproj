@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackupRepository.cs" />
+    <Compile Include="BitacoraDAL.cs" />
     <Compile Include="DAO.cs" />
     <Compile Include="EntityDAL\ClienteDAL.cs" />
     <Compile Include="EntityDAL\ComandaDAL.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="EntityDAL\MesaDAL.cs" />
     <Compile Include="EntityDAL\NotificacionDAL.cs" />
     <Compile Include="EntityDAL\ProductoDAL.cs" />
+    <Compile Include="Mapper\BitacoraMapper.cs" />
     <Compile Include="Mapper\ComandaMapper.cs" />
     <Compile Include="Mapper\ComandaProductoMapper.cs" />
     <Compile Include="Mapper\EtiquetaMapper.cs" />

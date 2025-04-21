@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IngenieriaSoftware.BLL;
+using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI

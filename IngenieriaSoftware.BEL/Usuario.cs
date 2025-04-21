@@ -18,5 +18,9 @@ namespace IngenieriaSoftware.BEL
         {
             throw new NotImplementedException();
         }
+        public override string ToString()
+        {
+            return Username;
+        }
     }
 }

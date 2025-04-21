@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackupService.cs" />
     <Compile Include="DTOs\EtiquetaDTO.cs" />
     <Compile Include="DTOs\IdiomaDTO.cs" />
     <Compile Include="DTOs\TraduccionDTO.cs" />

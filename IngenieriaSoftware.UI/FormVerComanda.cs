@@ -3,6 +3,7 @@ using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,20 +81,30 @@ namespace IngenieriaSoftware.UI
 
         private void btnConfirmarComanda_Click(object sender, EventArgs e)
         {
-            //vamos a enviar la comanda actual a cocina
-            //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
-            //se actualizara la gridview de la izquierda
-            if(_comandaBLL._comandaProductos == null) { MessageBox.Show("No tiene productos que enviar a cocina"); }
-            if(_comandaBLL._comandaProductos.Count > 0)
+            try
             {
-             //   _comandaBLL.InsertarComandaProductos(_comandaProductos);
-                _comandaBLL.InsertarComandaProductos(_comandaBLL._comandaProductos);
-                _comandaBLL._comandaProductos = null;
-                MessageBox.Show("La comanda fue enviada a la cocina con exito.");
+                //vamos a enviar la comanda actual a cocina
+                //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
+                //se actualizara la gridview de la izquierda
+                if(_comandaBLL._comandaProductos == null) { MessageBox.Show("No tiene productos que enviar a cocina"); }
+                if(_comandaBLL._comandaProductos.Count > 0)
+                {
+                 //   _comandaBLL.InsertarComandaProductos(_comandaProductos);
+                    _comandaBLL.InsertarComandaProductos(_comandaBLL._comandaProductos);
+                    _comandaBLL._comandaProductos = null;
+                    MessageBox.Show("La comanda fue enviada a la cocina con exito.");
+
+                }
+           
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Enviar Comanda a Cocina", DateTime.Now, "Se envio la comanda a cocina", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
+                this.Close();
 
             }
-           
-                this.Close();
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al enviar la comanda a cocina");
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
+            }   
 
         }
 
@@ -118,10 +129,14 @@ namespace IngenieriaSoftware.UI
                 {
                     OcultarColumnasComandaActual();
                 }
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Eliminar Comanda Producto", DateTime.Now, "Se elimino un producto de la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Seleccione un producto de la comanda actual para eliminarlo");
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
             }
         }
     }

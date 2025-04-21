@@ -82,14 +82,23 @@ namespace IngenieriaSoftware.UI
 
         private void btnFacturaEntregada_Click(object sender, EventArgs e)
         {
-            
-            var facturaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[0].Value;
-            var mesaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[3].Value;
-            _facturaBLL.CambiarEstadoFacturaEntregada(facturaId);
-            //_mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
+            try
+            {
+                var facturaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[0].Value;
+                var mesaId = (int)dataGridViewFacturaMesa.SelectedRows[0].Cells[3].Value;
+                _facturaBLL.CambiarEstadoFacturaEntregada(facturaId);
+                //_mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
 
-            MessageBox.Show("Factura Entregada con exito. Mesa desocupada");
-            this.Close();
+                BitacoraHelper.RegistrarActividad(ToString(), "Factura Entregada", DateTime.Now, $"Factura entregada: {facturaId}", this.Name, AppDomain.CurrentDomain.BaseDirectory,"Caja");
+                MessageBox.Show("Factura Entregada con exito. Mesa desocupada");
+                this.Close();
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", ToString());   
+            }
         }
     }
 }

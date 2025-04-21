@@ -108,6 +108,7 @@ namespace IngenieriaSoftware.UI
 
                     var usuario = SessionManager.GetInstance.Usuario;
 
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Inicio de Sesion", DateTime.Now, "Inicio de sesion exitoso", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Sesion");
                     //_idiomaObserver.CambiarEstado(usuario.Id);
                     throw new CredencialesCorrectasException();
                 }
@@ -116,12 +117,18 @@ namespace IngenieriaSoftware.UI
             {
                 var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Sesion",SessionManager.GetInstance.Usuario.Username);
             }
             catch (CredencialesCorrectasException ex)
             {
                 var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
                 this.Close();
+            }
+            finally
+            {
+                
             }
         }
 

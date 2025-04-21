@@ -174,6 +174,8 @@ namespace IngenieriaSoftware.UI
 
                 dataGridViewUsuarios.Enabled = false;
                 btnVerPermisos.Text = "Dejar de Ver";
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Ver Permisos", DateTime.Now, "Ver permisos de usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             else
             {
@@ -208,10 +210,13 @@ namespace IngenieriaSoftware.UI
                 //FillTreeView(permisosUsuario, treeViewPermisoRol);
                 Actualizar();
 
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Asignar Rol", DateTime.Now, "Asignar rol a usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
+
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name,ex,"Permisos",SessionManager.GetInstance.Usuario.ToString());
             }
 
         }
@@ -251,12 +256,14 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(_permisoBLL.DesasignarRolAUsuario(usuarioId));
 
                 treeViewPermisoRol.Nodes.Clear();  
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Desasignar Rol", DateTime.Now, "Desasignar rol a usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
                 //Actualizar();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.ToString());
             }
         }
     }

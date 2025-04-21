@@ -2,6 +2,7 @@
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,37 +62,46 @@ namespace IngenieriaSoftware.UI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            Cliente cliente;
-            if (EsBancario)
+            try
             {
-               cliente = new Cliente
-               {
-                    Nombre = txtNombre.Text,
-                    Apellido = txtApellido.Text,
-                    Email = txtEmail.Text,
-                    Telefono = txtTelefono.Text,
-                    Direccion = txtDireccion.Text,
-                    numeroTarjetaUltimos4 = txtNumeroTarjeta.Text,
-                    TipoTarjeta = txtTipoTarjeta.Text,
-                    BancoEmisor = txtBancoEmisor.Text
-               };
-            }
-            else
-            {
-                cliente = new Cliente
+                Cliente cliente;
+                if (EsBancario)
                 {
-                    Nombre = txtNombre.Text,
-                    Apellido = txtApellido.Text,
-                    Email = txtEmail.Text,
-                    Telefono = txtTelefono.Text,
-                    Direccion = txtDireccion.Text
-                };
+                   cliente = new Cliente
+                   {
+                        Nombre = txtNombre.Text,
+                        Apellido = txtApellido.Text,
+                        Email = txtEmail.Text,
+                        Telefono = txtTelefono.Text,
+                        Direccion = txtDireccion.Text,
+                        numeroTarjetaUltimos4 = txtNumeroTarjeta.Text,
+                        TipoTarjeta = txtTipoTarjeta.Text,
+                        BancoEmisor = txtBancoEmisor.Text
+                   };
+                }
+                else
+                {
+                    cliente = new Cliente
+                    {
+                        Nombre = txtNombre.Text,
+                        Apellido = txtApellido.Text,
+                        Email = txtEmail.Text,
+                        Telefono = txtTelefono.Text,
+                        Direccion = txtDireccion.Text
+                    };
+                }
+
+                ClienteId = _clienteBLL.InsertarCliente(cliente);
+
+
+                this.Close();   
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", SessionManager.GetInstance.Usuario.Username);
+            }   
 
-            ClienteId = _clienteBLL.InsertarCliente(cliente);
-
-
-            this.Close();   
         }
     }
 }

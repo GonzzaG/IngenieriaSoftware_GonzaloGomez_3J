@@ -64,36 +64,46 @@ namespace IngenieriaSoftware.UI
 
         private void btnSeleccionarMedioDePago_Click(object sender, EventArgs e)
         {
-            // aca seleccionamos y obtenemos el metodo de pago
-            // podemos hacer un switch dependiendo el metodo de pago
-            var descuento = numericUpDownDescuento.Value;
-            var propina = numericUpDownPropina.Value;
-            var medioDePagoId = (int)dataGridViewMediosDePago.SelectedRows[0].Cells[0].Value;
-
-            //si no selecciona efectivo, vamos a mostrar el formulario de rellenar cliente
-            //if (medioDePagoId != 1)
-            //{
-            bool esBancario;
-            if (medioDePagoId == 1)
-                esBancario = false;
-            else
-                esBancario = true;
-
-                FormRellenarCliente formRellenarCliente = new FormRellenarCliente(esBancario);
-                formRellenarCliente.StartPosition = FormStartPosition.CenterScreen;
-                formRellenarCliente.ShowDialog();
-
-                var clienteId = formRellenarCliente.ClienteId;
-            //}
-
-
-            //tegno que crear un cliente y mostrar un formulario de datos si elije otra opcion que no sea
-            //efectivo
-            if(clienteId > 0)
+            try
             {
-                _mesaBLL.CerrarMesa(_mesaId, propina, descuento, medioDePagoId, clienteId);
-                MessageBox.Show("La mesa fue cerrada y se guardo el cliente");
-                this.Close();
+                // aca seleccionamos y obtenemos el metodo de pago
+                // podemos hacer un switch dependiendo el metodo de pago
+                var descuento = numericUpDownDescuento.Value;
+                var propina = numericUpDownPropina.Value;
+                var medioDePagoId = (int)dataGridViewMediosDePago.SelectedRows[0].Cells[0].Value;
+
+                //si no selecciona efectivo, vamos a mostrar el formulario de rellenar cliente
+                //if (medioDePagoId != 1)
+                //{
+                bool esBancario;
+                if (medioDePagoId == 1)
+                    esBancario = false;
+                else
+                    esBancario = true;
+
+                    FormRellenarCliente formRellenarCliente = new FormRellenarCliente(esBancario);
+                    formRellenarCliente.StartPosition = FormStartPosition.CenterScreen;
+                    formRellenarCliente.ShowDialog();
+
+                    var clienteId = formRellenarCliente.ClienteId;
+                //}
+
+
+                //tegno que crear un cliente y mostrar un formulario de datos si elije otra opcion que no sea
+                //efectivo
+                if(clienteId > 0)
+                {
+                    _mesaBLL.CerrarMesa(_mesaId, propina, descuento, medioDePagoId, clienteId);
+                    MessageBox.Show("La mesa fue cerrada y se guardo el cliente");
+                    this.Close();
+                }
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Cerrar Mesa", DateTime.Now, "Mesa cerrada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");  
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cerrar la mesa: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BitacoraHelper.RegistrarError(this.Name, ex,"Mesas", SessionManager.GetInstance.Usuario.Username);
             }
 
 

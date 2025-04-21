@@ -98,29 +98,40 @@ namespace IngenieriaSoftware.UI
 
         private void btnAgregarTraduccion_Click(object sender, EventArgs e)
         {
-            // Vamos a agregar una nueva traduccion, indicando idioma_id, etiqueta_id, texto(nuevatraduccion)
-            // Tambien verificar si ya existia una traduccion, para saber si hacer un UPDATE o un INSERT
-            //validacion para saber que se completaron los campos necesarios
-            if ((dataGridViewEtiquetasConTraduccion.SelectedRows == null && dataGridViewEtiquetasSinTraduccion.SelectedRows == null) 
-                || txtTraduccion.Text.Length == 0) 
+            try
             {
-                MessageBox.Show("Por favor, complete todos los campos");
-                return;      
-            }
-            else
-            {
-                var traduccion = new TraduccionDTO
+                // Vamos a agregar una nueva traduccion, indicando idioma_id, etiqueta_id, texto(nuevatraduccion)
+                // Tambien verificar si ya existia una traduccion, para saber si hacer un UPDATE o un INSERT
+                //validacion para saber que se completaron los campos necesarios
+                if ((dataGridViewEtiquetasConTraduccion.SelectedRows == null && dataGridViewEtiquetasSinTraduccion.SelectedRows == null)
+                    || txtTraduccion.Text.Length == 0)
                 {
-                    EtiquetaId = etiquetaSeleccionada.Tag,
-                    IdiomaId = IdiomaData.IdiomaActual.Id,
-                    Texto = txtTraduccion.Text
-                };
-                // Implementacion para guardar la traduccion
-                _traduccionBLL.InsertarTraduccion(traduccion);
+                    MessageBox.Show("Por favor, complete todos los campos");
+                    return;
+                }
+                else
+                {
+                    var traduccion = new TraduccionDTO
+                    {
+                        EtiquetaId = etiquetaSeleccionada.Tag,
+                        IdiomaId = IdiomaData.IdiomaActual.Id,
+                        Texto = txtTraduccion.Text
+                    };
+                    // Implementacion para guardar la traduccion
+                    _traduccionBLL.InsertarTraduccion(traduccion);
 
-                Actualizar();
-                LimpiarCampos();
+                    Actualizar();
+                    LimpiarCampos();
+                }
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Agregar Traducción", DateTime.Now, $"Se agregó la traducción: {txtTraduccion.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Traducciones");    
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error al agregar la traducción: {ex.Message}");
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Traducciones", SessionManager.GetInstance.Usuario.Username);    
+            }   
 
 
         }

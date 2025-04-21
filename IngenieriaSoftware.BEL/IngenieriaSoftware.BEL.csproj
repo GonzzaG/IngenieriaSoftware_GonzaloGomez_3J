@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bitacora.cs" />
+    <Compile Include="BackupRegistro.cs" />
     <Compile Include="Constantes\EstadoComanda.cs" />
     <Compile Include="Constantes\EstadoComandaProductos.cs" />
     <Compile Include="Constantes\EstadoFactura.cs" />

@@ -216,7 +216,7 @@
             this.dataGridViewEtiquetasConTraduccion.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewEtiquetasConTraduccion.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewEtiquetasConTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEtiquetasConTraduccion.Size = new System.Drawing.Size(438, 282);
+            this.dataGridViewEtiquetasConTraduccion.Size = new System.Drawing.Size(524, 535);
             this.dataGridViewEtiquetasConTraduccion.TabIndex = 51;
             this.dataGridViewEtiquetasConTraduccion.Tag = "166";
             this.dataGridViewEtiquetasConTraduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEtiquetasConTraduccion_RowEnter_1);
@@ -282,7 +282,7 @@
             this.dataGridViewEtiquetasSinTraduccion.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewEtiquetasSinTraduccion.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewEtiquetasSinTraduccion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEtiquetasSinTraduccion.Size = new System.Drawing.Size(438, 282);
+            this.dataGridViewEtiquetasSinTraduccion.Size = new System.Drawing.Size(512, 535);
             this.dataGridViewEtiquetasSinTraduccion.TabIndex = 52;
             this.dataGridViewEtiquetasSinTraduccion.Tag = "166";
             this.dataGridViewEtiquetasSinTraduccion.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEtiquetasSinTraduccion_RowEnter_1);
@@ -292,7 +292,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(1426, 577);
+            this.ClientSize = new System.Drawing.Size(1514, 729);
             this.Controls.Add(this.dataGridViewEtiquetasSinTraduccion);
             this.Controls.Add(this.dataGridViewEtiquetasConTraduccion);
             this.Controls.Add(this.txtEtiqueta);

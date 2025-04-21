@@ -46,16 +46,25 @@ namespace IngenieriaSoftware.UI
 
         private void btnComandaEntregada_Click(object sender, EventArgs e)
         {
-            //vamos a marcar los productos como entregados
-            //vamos a marcar la notificacion como vista
-            int notificacionId = (int)dataGridViewComandasAEntregar.SelectedRows[0].Cells[0].Value;
-            _comandaBLL.MarcarProductosEntregados(notificacionId);
+            try
+            {
+                //vamos a marcar los productos como entregados
+                //vamos a marcar la notificacion como vista
+                int notificacionId = (int)dataGridViewComandasAEntregar.SelectedRows[0].Cells[0].Value;
+                _comandaBLL.MarcarProductosEntregados(notificacionId);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Entregada", DateTime.Now, "Comanda entregada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Cocina");
 
-            Actualizar();
+                Actualizar();
+            }
+            catch (Exception ex)
+            {
+                BitacoraHelper.RegistrarError(this.Name,ex,"Cocina", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         private void FormComandasAEntregar_Load(object sender, EventArgs e)
         {
+            
             Actualizar();
             //VerificarNotificaciones();
         }

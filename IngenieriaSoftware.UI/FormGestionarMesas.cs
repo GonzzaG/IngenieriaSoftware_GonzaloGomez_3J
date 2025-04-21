@@ -89,13 +89,16 @@ namespace IngenieriaSoftware.UI
                 var mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
                 _mesasBLL.AsignarMesa(mesaId);
 
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Asignar mesa", DateTime.Now, "Mesa asignada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
 
-               Actualizar(); //sacar cuando implemente 
+
+                Actualizar(); //sacar cuando implemente 
             }
             catch (MesaNoDisponibleException ex)
             {
                 var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
                 Actualizar();
 
             }
@@ -190,6 +193,8 @@ namespace IngenieriaSoftware.UI
                         var comanda = _comandaBLL.ObtenerComandaPorMesaId(mesaId);
                         _mesasBLL.CambiarEstadoMesaCerrada(mesaId);
                         _comandaBLL.CambiarEstadoComandaCerrada(mesaId);    
+
+                        BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Cerrar mesa", DateTime.Now, "Mesa cerrada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
                         Actualizar();
 
                     }
@@ -204,7 +209,8 @@ namespace IngenieriaSoftware.UI
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
             }
 
 

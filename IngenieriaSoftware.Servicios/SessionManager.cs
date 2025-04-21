@@ -17,7 +17,8 @@ namespace IngenieriaSoftware.Servicios
         {
             get
             {
-                if (_Session == null) throw new Exception("Sesión no iniciada.");
+                if (_Session == null) 
+                    throw new Exception("Sesión no iniciada.");
                 return _Session;
             }
         }

@@ -103,11 +103,12 @@ namespace IngenieriaSoftware.UI
                     Actualizar();
                 }
 
-
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Crear Rol", DateTime.Now, $"Rol creado: {txtNombreRol.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);    
             }
         }
 
@@ -145,10 +146,14 @@ namespace IngenieriaSoftware.UI
                 var permisosRol = _permisoBLL.ObtenerPermisosDelRol(nombreRol);
 
                 FillTreeView(permisosRol, treeViewPermisoRol);
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Crear Rol", DateTime.Now, $"Rol creado: {txtNombreRol.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }
 
@@ -245,10 +250,14 @@ namespace IngenieriaSoftware.UI
                 _permisoBLL.EliminarRol(rolId);
                 Actualizar();
                 MessageBox.Show("Rol eliminado correctamente.");
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Crear Rol", DateTime.Now, $"Rol creado: {txtNombreRol.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
             finally
             {
@@ -299,10 +308,12 @@ namespace IngenieriaSoftware.UI
 
                     FillTreeView(permisosRol, treeViewPermisoRol);
                 }
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Crear Rol", DateTime.Now, $"Rol creado: {txtNombreRol.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }
 

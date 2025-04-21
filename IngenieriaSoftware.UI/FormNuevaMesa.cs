@@ -50,13 +50,14 @@ namespace IngenieriaSoftware.UI
                     //Cuando la mesa se desocupe, se tendra que sacar el estado de la mesa
                 };
                 _mesaBLL.GuardarMesa(mesa);
-               
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Mesa", DateTime.Now, "Mesa creada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");   
+
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("La mesa se creo con exito");
-           
+                MessageBox.Show("Error al crear la mesa");
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
                 //Excepcion 1
                 //excepcion personalizada por si no se completaron los campos correctamente
                 //Excepcion 2
