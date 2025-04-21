@@ -118,7 +118,7 @@ namespace IngenieriaSoftware.UI
                 var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
 
-                BitacoraHelper.RegistrarError(this.Name, ex, "Sesion",SessionManager.GetInstance.Usuario.Username);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Sesion",null);
             }
             catch (CredencialesCorrectasException ex)
             {
@@ -126,9 +126,9 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
                 this.Close();
             }
-            finally
+            catch(Exception ex)
             {
-                
+                MessageBox.Show("Se produjo un error al iniciar sesion: ", ex.Message);
             }
         }
 

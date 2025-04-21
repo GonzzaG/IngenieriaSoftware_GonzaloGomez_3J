@@ -1,6 +1,8 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.Servicios;
 using System;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 
@@ -55,17 +57,27 @@ namespace IngenieriaSoftware.DAL
             }   
         }
 
-        public bool RestaurarBackup(string nombreArchivo, string rutaBackup)
+        public bool RestaurarBackup(string rutaBackup)
         {
             try
             {
-                SqlParameter[] parametros = new SqlParameter[]
+                string cadenaConexion = ConfigurationManager.AppSettings["ConnectionString"];
+
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(cadenaConexion);
+                builder.InitialCatalog = "master";
+                string cadenaMaster = builder.ConnectionString;
+
+                using (SqlConnection conexion = new SqlConnection(cadenaMaster))
                 {
-                    new SqlParameter("@BackupFilePath", Path.Combine(rutaBackup, nombreArchivo)),
-                    new SqlParameter("@DataDirectory", _dao.rutaBD),
-                    new SqlParameter("@DatabaseName", _dao.NombreBD)
-                };
-                _dao.ExecuteNonQuery("sp_RestoreISProyecto", parametros);
+                    conexion.Open();
+
+                    SqlCommand comando = new SqlCommand("sp_RestoreISProyecto", conexion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    comando.Parameters.AddWithValue("@BackupFilePath", rutaBackup);
+                    comando.Parameters.AddWithValue("@DataDirectory", _dao.rutaBD);
+                    comando.Parameters.AddWithValue("@DatabaseName", _dao.NombreBD);
+                    comando.ExecuteNonQuery();
+                }
 
                 return true;
             }

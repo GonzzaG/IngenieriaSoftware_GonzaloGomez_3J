@@ -23,7 +23,10 @@ namespace IngenieriaSoftware.DAL.Mapper
                         Usuario = row["Usuario"].ToString(),
                         Actividad = row["Actividad"].ToString(),
                         InfoAdicional = row["InfoAdicional"].ToString(),
-                        Controller = row.IsNull("Controller") ? null : row["Controller"].ToString()
+                        Controller = row.IsNull("Controller") ? null : row["Controller"].ToString(),
+                        Url = row.IsNull("URL") ? null : row["URL"].ToString(),
+                        Area = row.IsNull("Area") ? null : row["Area"].ToString()
+
                     };
                     lista.Add(bitacora);
                 }

@@ -74,7 +74,7 @@ namespace IngenieriaSoftware.BLL
             try
             {
                 var rutaBackup = Path.Combine(BackupDirectory, nombreArchivo);
-                if (_backupRepository.RestaurarBackup(nombreArchivo, rutaBackup))
+                if (_backupRepository.RestaurarBackup(rutaBackup))
                 {
                     File.Delete(rutaBackup);
                     return true;

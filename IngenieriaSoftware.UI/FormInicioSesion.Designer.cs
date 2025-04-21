@@ -88,7 +88,7 @@
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.PasswordChar = '*';
             this.txtContrasena.Size = new System.Drawing.Size(271, 34);
-            this.txtContrasena.TabIndex = 5;
+            this.txtContrasena.TabIndex = 1;
             this.txtContrasena.Tag = "19";
             // 
             // btnIngresar

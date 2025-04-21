@@ -22,42 +22,12 @@ namespace IngenieriaSoftware.UI
         public FormBitacoraBusqueda()
         {
             InitializeComponent();
+            InicializarFechas();
         }
 
         private void btnBuscarRegistros_Click(object sender, EventArgs e)
         {
-            //txtRegistros.Text = ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text).ToString();
-
             dataGridViewBitacora.DataSource = BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text);
-
-
-        }
-
-        public StringBuilder ConsultarBitacora(DateTime desde, DateTime hasta, string modulo = null)
-        {
-            try
-            {
-                var registros = BitacoraHelper.ConsultarBitacora(desde,hasta, modulo);
-
-                StringBuilder cadena = new StringBuilder();
-                foreach (Bitacora registro in registros)
-                {
-                    cadena.AppendLine($"-- {registro.Actividad} | {registro.InfoAdicional} | {registro.FechaHora} | {registro.Usuario}");
-
-                }
-                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Consulta de bitácora", DateTime.Now, $"Desde: {desde}, Hasta: {hasta}, Controller: {modulo}", this.Name,AppDomain.CurrentDomain.BaseDirectory, "Bitacora");    
-
-                return cadena;
-
-            }
-            catch (Exception ex)
-            {
-                BitacoraHelper.RegistrarError(this.Name, ex, "Bitacora",SessionManager.GetInstance.Usuario.ToString());
-                StringBuilder cadena = new StringBuilder();
-                cadena.Append($"Error al consultar la bitácora: {ex.Message}");
-                return cadena;
-            }
-
         }
 
         private void checkBoxBuscarPorModulo_CheckedChanged(object sender, EventArgs e)
@@ -89,6 +59,37 @@ namespace IngenieriaSoftware.UI
                 {
                     HelperForms.MostrarNotificacion(notificaciones, this);
                 }
+            }
+        }
+
+        private void InicializarFechas()
+        {
+            try
+            {
+                desdeDateTimePicker.Value = DateTime.Now.AddDays(-7);
+                hastaDateTimePicker.Value = DateTime.Now;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al inicializar fechas: " + ex.Message);
+            }
+        }
+
+        private void desdeDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (desdeDateTimePicker.Value > hastaDateTimePicker.Value)
+            {
+                MessageBox.Show("La fecha de inicio no puede ser mayor que la fecha de fin.");
+                desdeDateTimePicker.Value = hastaDateTimePicker.Value;
+            }
+        }
+
+        private void hastaDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (hastaDateTimePicker.Value < desdeDateTimePicker.Value)
+            {
+                MessageBox.Show("La fecha de fin no puede ser menor que la fecha de inicio.");
+                hastaDateTimePicker.Value = desdeDateTimePicker.Value;
             }
         }
     }
