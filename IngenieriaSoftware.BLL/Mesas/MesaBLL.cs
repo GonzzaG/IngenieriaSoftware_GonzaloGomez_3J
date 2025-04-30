@@ -97,6 +97,7 @@ namespace IngenieriaSoftware.BLL.Mesas
         public List<Mesa> GuardarMesa(Mesa mesa)
         {
             _mesas = _mesaDAL.GuardarMesa(mesa);
+            new BackupManager().RealizarBackup();
             return _mesas;
         }
          
@@ -126,6 +127,7 @@ namespace IngenieriaSoftware.BLL.Mesas
         public void EliminarMesa(int mesaId)
         {
             _mesaDAL.EliminarMesa(mesaId);
+            new BackupManager().RealizarBackup();
         }
     }
 }

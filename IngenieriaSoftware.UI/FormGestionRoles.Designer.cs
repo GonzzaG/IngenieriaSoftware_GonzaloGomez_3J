@@ -82,13 +82,12 @@
             this.lblTodosLosRoles.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblTodosLosRoles.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTodosLosRoles.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTodosLosRoles.Location = new System.Drawing.Point(75, 396);
+            this.lblTodosLosRoles.Location = new System.Drawing.Point(1366, 138);
             this.lblTodosLosRoles.Name = "lblTodosLosRoles";
             this.lblTodosLosRoles.Size = new System.Drawing.Size(143, 28);
             this.lblTodosLosRoles.TabIndex = 27;
             this.lblTodosLosRoles.Tag = "821";
             this.lblTodosLosRoles.Text = "Todos los roles";
-            this.lblTodosLosRoles.Visible = false;
             // 
             // btnCrearRol
             // 
@@ -284,7 +283,7 @@
             this.dataGridViewRoles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewRoles.EnableHeadersVisualStyles = false;
             this.dataGridViewRoles.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewRoles.Location = new System.Drawing.Point(78, 453);
+            this.dataGridViewRoles.Location = new System.Drawing.Point(1371, 198);
             this.dataGridViewRoles.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewRoles.Name = "dataGridViewRoles";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -314,7 +313,6 @@
             this.dataGridViewRoles.Size = new System.Drawing.Size(300, 339);
             this.dataGridViewRoles.TabIndex = 50;
             this.dataGridViewRoles.Tag = "166";
-            this.dataGridViewRoles.Visible = false;
             this.dataGridViewRoles.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoles_RowEnter_1);
             // 
             // dataGridViewPermisos

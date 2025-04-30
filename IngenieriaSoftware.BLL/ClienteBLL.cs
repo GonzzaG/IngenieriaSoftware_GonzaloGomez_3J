@@ -18,20 +18,25 @@ namespace IngenieriaSoftware.BLL
         {
             using(var transaccion = new TransactionScope())
             {
-                if(cliente.numeroTarjetaUltimos4 != string.Empty)
+                int clienteId;
+                if (cliente.numeroTarjetaUltimos4 != string.Empty)
                 {
-                    int clienteId = _clienteDAL.InsertarClienteConDatosBancarios(cliente);
+                   clienteId = _clienteDAL.InsertarClienteConDatosBancarios(cliente);
 
-                    transaccion.Complete();
-                    return clienteId;
+                    
                 }
                 else
                 {
-                    int clienteId = _clienteDAL.InsertarCliente(cliente);
-                    transaccion.Complete();
-                    return clienteId;
+                    clienteId = _clienteDAL.InsertarCliente(cliente);
+                    
 
                 }
+                // Realizamos backup para guardar los cambios
+                new BackupManager().RealizarBackup();
+
+                transaccion.Complete();
+
+                return clienteId;
             }
         }
 

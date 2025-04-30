@@ -116,26 +116,23 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if (dataGridViewRoles.SelectedRows.Count != 1)
+                int permisoPadreId = _permisos.Find(p => p.Nombre == comboBoxRoles.Text).Id;
+                if(btnAsignarPermiso.Text == "Asignar Rol")
                 {
-                    //MessageBox.Show("Por favor, seleccione un permiso o rol para asignar");
-                    //return;
-                }
-                if (dataGridViewPermisos.SelectedRows.Count != 1)
-                    MessageBox.Show("Debe seleccionar al menos un rol para asignarle un rol o permiso");
-                else
-                {
-                    int permisoPadreId = _permisos.Find(p => p.Nombre == comboBoxRoles.Text).Id;
-                    if(btnAsignarPermiso.Text == "Asignar Rol")
+                    int rolHijo = _permisos.Find(r => r.Id == (int)dataGridViewRoles.SelectedRows[0].Cells[0].Value).Id;
+                    if (rolHijo > 0)
                     {
-                        int rolHijo = _permisos.Find(r => r.Id == (int)dataGridViewRoles.SelectedRows[0].Cells[0].Value).Id;
                         _permisoBLL.AsignarRolARol(permisoPadreId, rolHijo);
                     }
-                    else
+                }
+                else
+                {
+                    int permisoHijoId = _permisos.Find(p => p.Id == (int)dataGridViewPermisos.SelectedRows[0].Cells[0].Value).Id;
+                    if(permisoHijoId > 0)
                     {
-                        int permisoHijoId = _permisos.Find(p => p.Id == (int)dataGridViewPermisos.SelectedRows[0].Cells[0].Value).Id;
                         _permisoBLL.AsignarPermisoARol(permisoPadreId, permisoHijoId);
                     }
+
                 }
 
                 Actualizar();
@@ -152,7 +149,6 @@ namespace IngenieriaSoftware.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
                 BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IngenieriaSoftware.DAL.Mapper;
 using System.Windows.Forms;
+using IngenieriaSoftware.Servicios;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {

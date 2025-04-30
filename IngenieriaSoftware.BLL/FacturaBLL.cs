@@ -93,6 +93,9 @@ namespace IngenieriaSoftware.BLL
                     int facturaId = _facturaDAL.GuardarFactura(factura);
 
                     _facturaDAL.GuardarProductosFactura(facturaId, productosFactura);
+
+                    new BackupManager().RealizarBackup();
+
                     transaction.Complete();
                 }
                 catch (Exception ex)

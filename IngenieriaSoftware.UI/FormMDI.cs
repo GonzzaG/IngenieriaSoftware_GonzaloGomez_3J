@@ -234,6 +234,7 @@ namespace IngenieriaSoftware.UI
             formHijo.StartPosition = FormStartPosition.CenterScreen;
             formHijo.Size = this.Size;
             formHijo.ControlBox = false;
+            formHijo.AutoScroll = true;
             formHijo.Show();
 
             //panel1.Visible = false;
@@ -242,8 +243,7 @@ namespace IngenieriaSoftware.UI
 
         #endregion Metodos privados
 
-        private void ActualizarVisibilidadBotones()   
-        
+        private void ActualizarVisibilidadBotones()          
         {
             
             PermisosData.Permisos = permisoBLL.ObtenerPermisosUsuario(SessionManager.GetInstance.Usuario.Id);
@@ -519,16 +519,7 @@ namespace IngenieriaSoftware.UI
 
         private void BackUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormGestionarBackup formGestionarBackup = new FormGestionarBackup();
-                AbrirFormHijo(formGestionarBackup);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                BitacoraHelper.RegistrarError(this.Name, ex, "Bitacora", SessionManager.GetInstance.Usuario.Username);
-            }
+
         }
 
         private void LogOutgestionUsuariosToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -557,6 +548,63 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
                 BitacoraHelper.RegistrarError(this.Name, ex, "Sesion", SessionManager.GetInstance.Usuario.Username);
 
+            }
+        }
+
+
+        private void BitacoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormBitacoraBusqueda formBitacoraBusqueda = new FormBitacoraBusqueda();
+                AbrirFormHijo(formBitacoraBusqueda);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Bitacora", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void BackUpToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionarBackup formGestionarBackup = new FormGestionarBackup();
+                AbrirFormHijo(formGestionarBackup);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void proponerCambioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormAuditoria formAuditoria = new FormAuditoria();
+                AbrirFormHijo(formAuditoria);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Auditoria", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void gestionarCambiosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionarCambiosAuditoria formGestionarCambiosAuditoria = new FormGestionarCambiosAuditoria();
+                AbrirFormHijo(formGestionarCambiosAuditoria);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Auditoria", SessionManager.GetInstance.Usuario.Username);
             }
         }
 

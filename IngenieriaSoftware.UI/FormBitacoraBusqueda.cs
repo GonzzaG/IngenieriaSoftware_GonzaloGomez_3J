@@ -22,12 +22,19 @@ namespace IngenieriaSoftware.UI
         public FormBitacoraBusqueda()
         {
             InitializeComponent();
-            InicializarFechas();
         }
 
         private void btnBuscarRegistros_Click(object sender, EventArgs e)
         {
-            dataGridViewBitacora.DataSource = BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text);
+            try
+            {
+                dataGridViewBitacora.DataSource = BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text);
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al obtener registros de bitacora: " + ex.Message);
+            }
         }
 
         private void checkBoxBuscarPorModulo_CheckedChanged(object sender, EventArgs e)
@@ -91,6 +98,11 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show("La fecha de fin no puede ser menor que la fecha de inicio.");
                 hastaDateTimePicker.Value = desdeDateTimePicker.Value;
             }
+        }
+
+        private void FormBitacoraBusqueda_Load(object sender, EventArgs e)
+        {
+            InicializarFechas();
         }
     }
 }

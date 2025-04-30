@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngenieriaSoftware.BEL
+﻿namespace IngenieriaSoftware.BEL
 {
     public class Mesa
     {
@@ -17,7 +11,7 @@ namespace IngenieriaSoftware.BEL
         }
 
         public int MesaId { get; set; }
-        public int CapacidadMaxima {  get; set; } 
+        public int CapacidadMaxima { get; set; }
         public EstadoMesa.Estado EstadoMesa { get; set; } = BEL.EstadoMesa.Estado.Desocupada;
 
 

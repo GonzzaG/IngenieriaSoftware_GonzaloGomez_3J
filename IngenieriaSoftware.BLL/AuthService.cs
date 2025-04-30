@@ -45,7 +45,7 @@ namespace IngenieriaSoftware.BLL
             }
             catch(Exception e)
             {
-                throw e;
+                throw new Exception(e.Message);
             }
         }
 

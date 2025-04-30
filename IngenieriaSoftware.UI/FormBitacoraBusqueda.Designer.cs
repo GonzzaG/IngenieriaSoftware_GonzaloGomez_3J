@@ -229,6 +229,7 @@
             this.Name = "FormBitacoraBusqueda";
             this.Tag = "1215";
             this.Text = "FormBitacoraBusqueda";
+            this.Load += new System.EventHandler(this.FormBitacoraBusqueda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBitacora)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

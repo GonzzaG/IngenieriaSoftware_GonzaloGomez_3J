@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditoriaDetalle.cs" />
+    <Compile Include="AuditoriaRegistro.cs" />
     <Compile Include="Bitacora.cs" />
     <Compile Include="BackupRegistro.cs" />
     <Compile Include="Constantes\EstadoComanda.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Negocio\Notificacion.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Negocio\Producto.cs" />
+    <Compile Include="PeticionRestauracion.cs" />
     <Compile Include="ProductoFactura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario.cs" />
