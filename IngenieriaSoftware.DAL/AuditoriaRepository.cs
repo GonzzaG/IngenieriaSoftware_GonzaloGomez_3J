@@ -51,6 +51,10 @@ namespace IngenieriaSoftware.DAL
 
                 return new AuditoriaMapper().MapearDesdeDataSet(dt);
             }
+            catch(InvalidCastException ex)
+            {
+                throw new Exception("La tabla no tiene cambios que mostrar");
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

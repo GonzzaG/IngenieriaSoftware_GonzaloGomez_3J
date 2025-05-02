@@ -16,10 +16,14 @@ namespace IngenieriaSoftware.UI
 {
     public partial class FormAuditoria: Form, IActualizable
     {
-        private readonly AuditoriaManager _auditoriaManager = new AuditoriaManager();
-        public FormAuditoria()
+        private readonly AuditoriaManager _auditoriaManager;
+        private List<AuditoriaRegistro> _registros;
+        private bool registrosCargados = false;
+        public FormAuditoria(AuditoriaManager audit, List<AuditoriaRegistro> registros)
         {
             InitializeComponent();
+            _registros = registros;  
+            _auditoriaManager = audit;
             Actualizar();
         }
 
@@ -27,7 +31,10 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar()
         {
-            ListarTablasAuditadas();
+            //ListarTablasAuditadas();
+            dataGridViewRegistrosModificados.DataSource = null;
+            dataGridViewRegistrosModificados.DataSource = _registros;
+
         }
         public void ListarTablasAuditadas()
         {
@@ -84,7 +91,7 @@ namespace IngenieriaSoftware.UI
             {
                 dataGridViewHistorialCambios.DataSource = null;
 
-                Guid idCambio = (Guid)dataGridViewRegistrosModificados.SelectedRows[0].Cells[0].Value;
+                Guid idCambio = (Guid)dataGridViewRegistrosModificados.SelectedRows[0].Cells[nameof(AuditoriaRegistro.IdCambio)].Value;
                 var detalles = ListarDetallesRegistro(idCambio);
 
                 dataGridViewHistorialCambios.DataSource = detalles;
@@ -149,6 +156,19 @@ namespace IngenieriaSoftware.UI
             catch(Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        private void FormAuditoria_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxRegistros_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (comboBoxRegistros.SelectedIndex >= 0 && comboBoxRegistros.SelectedText != string.Empty && registrosCargados)
+            {
+
             }
         }
     }

@@ -150,6 +150,7 @@ namespace IngenieriaSoftware.UI
                 }
                 int idPeticion = int.Parse(dataGridViewPeticionesPendientes.SelectedRows[0].Cells[nameof(PeticionRestauracion.IdPeticion)].Value.ToString());
                 string usuarioAutorizador = SessionManager.GetInstance.Usuario.Username;
+
                 if(_auditoriaManager.AceptarPeticionDeRestauracion(idPeticion, usuarioAutorizador))
                 {
                     MessageBox.Show("Se han realizado los cambios correctamente");

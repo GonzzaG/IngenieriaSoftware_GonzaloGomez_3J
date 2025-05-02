@@ -189,7 +189,7 @@ namespace IngenieriaSoftware.UI
 
         #region Metodos privados
 
-        private void AbrirIniciarSesion()
+        internal void AbrirIniciarSesion()
         {
             foreach (Form hijo in this.MdiChildren)
             {
@@ -584,7 +584,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                FormAuditoria formAuditoria = new FormAuditoria();
+                FormBusquedaAuditoria formAuditoria = new FormBusquedaAuditoria();
                 AbrirFormHijo(formAuditoria);
             }
             catch (Exception ex)
@@ -606,6 +606,11 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
                 BitacoraHelper.RegistrarError(this.Name, ex, "Auditoria", SessionManager.GetInstance.Usuario.Username);
             }
+        }
+
+        private void AuditoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         //public void ShowPanel()

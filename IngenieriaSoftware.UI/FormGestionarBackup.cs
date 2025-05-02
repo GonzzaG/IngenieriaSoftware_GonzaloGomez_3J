@@ -17,10 +17,12 @@ namespace IngenieriaSoftware.UI
         public BackupManager BackupManager = new BackupManager();
 
         public NotificacionService _notificacionService => new NotificacionService();
+        private UsuarioBLL _usuarioBLL;
 
         public FormGestionarBackup()
         {
             InitializeComponent();
+            _usuarioBLL =  new UsuarioBLL();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -43,6 +45,10 @@ namespace IngenieriaSoftware.UI
                 Actualizar();
 
                 MessageBox.Show("Restauracion de la base de datos realizada con exito", "Restauracion", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
+
+                VerificarUsuario();
+
+
             }
             catch (Exception ex)
             {
@@ -51,6 +57,24 @@ namespace IngenieriaSoftware.UI
             }
         }
 
+        private bool VerificarUsuario()
+        {
+            try
+            {
+                if (_usuarioBLL.ObtenerUsuarioPorId(SessionManager.GetInstance.Usuario.Id) != null)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al verificar el usuario" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _usuarioBLL.LogOut();
+                FormMDI _menu = (FormMDI)this.MdiParent;
+                _menu.AbrirIniciarSesion(); 
+                return false;
+            }
+        }
         private void btnCopiaDeSeguridad_Click(object sender, EventArgs e)
         {
             try

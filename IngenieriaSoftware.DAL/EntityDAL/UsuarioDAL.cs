@@ -83,6 +83,24 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+        public UsuarioDTO ObtenerUsuarioPorId(int id)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Id", id)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerUsuarioPorId", parametros);
+                return new UsuarioMapper().MapearUsuarioDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el usuario por nombre: " + ex.Message, ex);
+            }
+        }
+
         public int GuardarUsuario(UsuarioDTO pUsuario, DateTime fechaInicio)
         {
             pUsuario.Id = ProximoId();

@@ -52,6 +52,22 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
+        public UsuarioDTO ObtenerUsuarioPorId(int id)
+        {
+            try
+            {
+                var usuario = _usuarioDAL.ObtenerUsuarioPorId(id);
+                if(usuario == null)
+                {
+                    throw new Exception("No se encontró el usuario");
+                }
+                else return usuario;    
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         #region Login LogOut
 
         public bool RegistrarUsuario(UsuarioDTO pUsuario, DateTime FechaInicio)

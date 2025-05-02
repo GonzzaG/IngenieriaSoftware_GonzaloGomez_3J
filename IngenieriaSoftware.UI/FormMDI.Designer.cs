@@ -321,6 +321,7 @@
             this.AuditoriaToolStripMenuItem.Size = new System.Drawing.Size(108, 42);
             this.AuditoriaToolStripMenuItem.Tag = "1241";
             this.AuditoriaToolStripMenuItem.Text = "Auditoria";
+            this.AuditoriaToolStripMenuItem.Click += new System.EventHandler(this.AuditoriaToolStripMenuItem_Click);
             // 
             // proponerCambioToolStripMenuItem
             // 

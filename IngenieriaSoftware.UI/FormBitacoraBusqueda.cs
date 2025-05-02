@@ -18,7 +18,7 @@ namespace IngenieriaSoftware.UI
        
 
         public NotificacionService _notificacionService => new NotificacionService();
-
+        private bool formCargado = false;
         public FormBitacoraBusqueda()
         {
             InitializeComponent();
@@ -84,7 +84,7 @@ namespace IngenieriaSoftware.UI
 
         private void desdeDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (desdeDateTimePicker.Value > hastaDateTimePicker.Value)
+            if (desdeDateTimePicker.Value > hastaDateTimePicker.Value && formCargado)
             {
                 MessageBox.Show("La fecha de inicio no puede ser mayor que la fecha de fin.");
                 desdeDateTimePicker.Value = hastaDateTimePicker.Value;
@@ -93,7 +93,7 @@ namespace IngenieriaSoftware.UI
 
         private void hastaDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (hastaDateTimePicker.Value < desdeDateTimePicker.Value)
+            if (hastaDateTimePicker.Value < desdeDateTimePicker.Value && formCargado)
             {
                 MessageBox.Show("La fecha de fin no puede ser menor que la fecha de inicio.");
                 hastaDateTimePicker.Value = desdeDateTimePicker.Value;
@@ -103,6 +103,7 @@ namespace IngenieriaSoftware.UI
         private void FormBitacoraBusqueda_Load(object sender, EventArgs e)
         {
             InicializarFechas();
+            formCargado = true;
         }
     }
 }

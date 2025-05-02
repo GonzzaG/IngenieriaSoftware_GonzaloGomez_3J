@@ -104,6 +104,12 @@
     <Compile Include="FormBitacoraBusqueda.Designer.cs">
       <DependentUpon>FormBitacoraBusqueda.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormBusquedaAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBusquedaAuditoria.Designer.cs">
+      <DependentUpon>FormBusquedaAuditoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormComandasAEntregar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBitacoraBusqueda.resx">
       <DependentUpon>FormBitacoraBusqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBusquedaAuditoria.resx">
+      <DependentUpon>FormBusquedaAuditoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormComandasAEntregar.resx">
       <DependentUpon>FormComandasAEntregar.cs</DependentUpon>

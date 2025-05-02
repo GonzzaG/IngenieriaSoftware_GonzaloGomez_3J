@@ -8,6 +8,7 @@ namespace IngenieriaSoftware.BEL
 {
     public class AuditoriaRegistro
     {
+        public int Registro { get; set; }
         public Guid IdCambio { get; set; }
         public DateTime Fecha { get; set; }
         public string Usuario { get; set; }

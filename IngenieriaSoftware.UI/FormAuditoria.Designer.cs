@@ -28,23 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewRegistrosModificados = new System.Windows.Forms.DataGridView();
             this.lblDetallesDelCambio = new System.Windows.Forms.Label();
-            this.comboBoxTablasAuditadas = new System.Windows.Forms.ComboBox();
             this.lblHistorialCambiosTabla = new System.Windows.Forms.Label();
             this.dataGridViewHistorialCambios = new System.Windows.Forms.DataGridView();
-            this.lblSeleccioneTablas = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.btnDetallesRegistro = new System.Windows.Forms.Button();
             this.btnPeticionRestauracion = new System.Windows.Forms.Button();
             this.txtComentario = new System.Windows.Forms.TextBox();
@@ -55,58 +52,58 @@
             // 
             // dataGridViewRegistrosModificados
             // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewRegistrosModificados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridViewRegistrosModificados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewRegistrosModificados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridViewRegistrosModificados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridViewRegistrosModificados.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridViewRegistrosModificados.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dataGridViewRegistrosModificados.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRegistrosModificados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRegistrosModificados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewRegistrosModificados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewRegistrosModificados.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewRegistrosModificados.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewRegistrosModificados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewRegistrosModificados.EnableHeadersVisualStyles = false;
             this.dataGridViewRegistrosModificados.GridColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridViewRegistrosModificados.Location = new System.Drawing.Point(140, 126);
+            this.dataGridViewRegistrosModificados.Location = new System.Drawing.Point(108, 108);
             this.dataGridViewRegistrosModificados.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewRegistrosModificados.MultiSelect = false;
             this.dataGridViewRegistrosModificados.Name = "dataGridViewRegistrosModificados";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRegistrosModificados.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRegistrosModificados.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewRegistrosModificados.RowHeadersVisible = false;
             this.dataGridViewRegistrosModificados.RowHeadersWidth = 51;
             this.dataGridViewRegistrosModificados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewRegistrosModificados.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridViewRegistrosModificados.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewRegistrosModificados.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.LightSeaGreen;
             this.dataGridViewRegistrosModificados.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewRegistrosModificados.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -114,7 +111,7 @@
             this.dataGridViewRegistrosModificados.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewRegistrosModificados.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewRegistrosModificados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRegistrosModificados.Size = new System.Drawing.Size(1344, 395);
+            this.dataGridViewRegistrosModificados.Size = new System.Drawing.Size(1344, 364);
             this.dataGridViewRegistrosModificados.TabIndex = 32;
             this.dataGridViewRegistrosModificados.Tag = "1237";
             // 
@@ -124,22 +121,12 @@
             this.lblDetallesDelCambio.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblDetallesDelCambio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetallesDelCambio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDetallesDelCambio.Location = new System.Drawing.Point(135, 545);
+            this.lblDetallesDelCambio.Location = new System.Drawing.Point(103, 509);
             this.lblDetallesDelCambio.Name = "lblDetallesDelCambio";
             this.lblDetallesDelCambio.Size = new System.Drawing.Size(202, 28);
             this.lblDetallesDelCambio.TabIndex = 33;
             this.lblDetallesDelCambio.Tag = "1236";
             this.lblDetallesDelCambio.Text = "Detalles del cambio";
-            // 
-            // comboBoxTablasAuditadas
-            // 
-            this.comboBoxTablasAuditadas.FormattingEnabled = true;
-            this.comboBoxTablasAuditadas.Location = new System.Drawing.Point(969, 34);
-            this.comboBoxTablasAuditadas.Name = "comboBoxTablasAuditadas";
-            this.comboBoxTablasAuditadas.Size = new System.Drawing.Size(219, 24);
-            this.comboBoxTablasAuditadas.TabIndex = 34;
-            this.comboBoxTablasAuditadas.Tag = "1234";
-            this.comboBoxTablasAuditadas.Text = "Seleccione...";
             // 
             // lblHistorialCambiosTabla
             // 
@@ -147,7 +134,7 @@
             this.lblHistorialCambiosTabla.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblHistorialCambiosTabla.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHistorialCambiosTabla.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblHistorialCambiosTabla.Location = new System.Drawing.Point(135, 84);
+            this.lblHistorialCambiosTabla.Location = new System.Drawing.Point(126, 63);
             this.lblHistorialCambiosTabla.Name = "lblHistorialCambiosTabla";
             this.lblHistorialCambiosTabla.Size = new System.Drawing.Size(318, 28);
             this.lblHistorialCambiosTabla.TabIndex = 35;
@@ -156,58 +143,58 @@
             // 
             // dataGridViewHistorialCambios
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewHistorialCambios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridViewHistorialCambios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewHistorialCambios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridViewHistorialCambios.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridViewHistorialCambios.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridViewHistorialCambios.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dataGridViewHistorialCambios.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewHistorialCambios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewHistorialCambios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewHistorialCambios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewHistorialCambios.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewHistorialCambios.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewHistorialCambios.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewHistorialCambios.EnableHeadersVisualStyles = false;
             this.dataGridViewHistorialCambios.GridColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridViewHistorialCambios.Location = new System.Drawing.Point(140, 583);
+            this.dataGridViewHistorialCambios.Location = new System.Drawing.Point(108, 578);
             this.dataGridViewHistorialCambios.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewHistorialCambios.MultiSelect = false;
             this.dataGridViewHistorialCambios.Name = "dataGridViewHistorialCambios";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewHistorialCambios.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewHistorialCambios.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewHistorialCambios.RowHeadersVisible = false;
             this.dataGridViewHistorialCambios.RowHeadersWidth = 51;
             this.dataGridViewHistorialCambios.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.LightSeaGreen;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridViewHistorialCambios.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.LightSeaGreen;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridViewHistorialCambios.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewHistorialCambios.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.LightSeaGreen;
             this.dataGridViewHistorialCambios.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI Symbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewHistorialCambios.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -215,41 +202,15 @@
             this.dataGridViewHistorialCambios.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridViewHistorialCambios.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewHistorialCambios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewHistorialCambios.Size = new System.Drawing.Size(1344, 459);
+            this.dataGridViewHistorialCambios.Size = new System.Drawing.Size(1344, 285);
             this.dataGridViewHistorialCambios.TabIndex = 36;
             this.dataGridViewHistorialCambios.Tag = "1239";
-            // 
-            // lblSeleccioneTablas
-            // 
-            this.lblSeleccioneTablas.AutoSize = true;
-            this.lblSeleccioneTablas.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.lblSeleccioneTablas.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSeleccioneTablas.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblSeleccioneTablas.Location = new System.Drawing.Point(731, 34);
-            this.lblSeleccioneTablas.Name = "lblSeleccioneTablas";
-            this.lblSeleccioneTablas.Size = new System.Drawing.Size(215, 28);
-            this.lblSeleccioneTablas.TabIndex = 37;
-            this.lblSeleccioneTablas.Tag = "1235";
-            this.lblSeleccioneTablas.Text = "Seleccione una tabla:";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.BackColor = System.Drawing.Color.Teal;
-            this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(1099, 64);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(89, 39);
-            this.btnBuscar.TabIndex = 38;
-            this.btnBuscar.Tag = "1232";
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnDetallesRegistro
             // 
             this.btnDetallesRegistro.BackColor = System.Drawing.Color.Teal;
             this.btnDetallesRegistro.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDetallesRegistro.Location = new System.Drawing.Point(1272, 531);
+            this.btnDetallesRegistro.Location = new System.Drawing.Point(1240, 492);
             this.btnDetallesRegistro.Name = "btnDetallesRegistro";
             this.btnDetallesRegistro.Size = new System.Drawing.Size(212, 45);
             this.btnDetallesRegistro.TabIndex = 39;
@@ -262,7 +223,7 @@
             // 
             this.btnPeticionRestauracion.BackColor = System.Drawing.Color.Crimson;
             this.btnPeticionRestauracion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPeticionRestauracion.Location = new System.Drawing.Point(1517, 400);
+            this.btnPeticionRestauracion.Location = new System.Drawing.Point(1504, 351);
             this.btnPeticionRestauracion.Name = "btnPeticionRestauracion";
             this.btnPeticionRestauracion.Size = new System.Drawing.Size(236, 121);
             this.btnPeticionRestauracion.TabIndex = 40;
@@ -273,10 +234,10 @@
             // 
             // txtComentario
             // 
-            this.txtComentario.Location = new System.Drawing.Point(1517, 126);
+            this.txtComentario.Location = new System.Drawing.Point(1504, 117);
             this.txtComentario.Multiline = true;
             this.txtComentario.Name = "txtComentario";
-            this.txtComentario.Size = new System.Drawing.Size(236, 88);
+            this.txtComentario.Size = new System.Drawing.Size(236, 111);
             this.txtComentario.TabIndex = 41;
             // 
             // lblComentario
@@ -285,7 +246,7 @@
             this.lblComentario.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblComentario.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblComentario.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblComentario.Location = new System.Drawing.Point(1512, 84);
+            this.lblComentario.Location = new System.Drawing.Point(1499, 75);
             this.lblComentario.Name = "lblComentario";
             this.lblComentario.Size = new System.Drawing.Size(125, 28);
             this.lblComentario.TabIndex = 42;
@@ -302,16 +263,14 @@
             this.Controls.Add(this.txtComentario);
             this.Controls.Add(this.btnPeticionRestauracion);
             this.Controls.Add(this.btnDetallesRegistro);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.lblSeleccioneTablas);
             this.Controls.Add(this.dataGridViewHistorialCambios);
             this.Controls.Add(this.lblHistorialCambiosTabla);
-            this.Controls.Add(this.comboBoxTablasAuditadas);
             this.Controls.Add(this.lblDetallesDelCambio);
             this.Controls.Add(this.dataGridViewRegistrosModificados);
             this.Name = "FormAuditoria";
             this.Tag = "1240";
             this.Text = "FormAuditoria";
+            this.Load += new System.EventHandler(this.FormAuditoria_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRegistrosModificados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistorialCambios)).EndInit();
             this.ResumeLayout(false);
@@ -323,11 +282,8 @@
 
         private System.Windows.Forms.DataGridView dataGridViewRegistrosModificados;
         private System.Windows.Forms.Label lblDetallesDelCambio;
-        private System.Windows.Forms.ComboBox comboBoxTablasAuditadas;
         private System.Windows.Forms.Label lblHistorialCambiosTabla;
         private System.Windows.Forms.DataGridView dataGridViewHistorialCambios;
-        private System.Windows.Forms.Label lblSeleccioneTablas;
-        private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnDetallesRegistro;
         private System.Windows.Forms.Button btnPeticionRestauracion;
         private System.Windows.Forms.TextBox txtComentario;
