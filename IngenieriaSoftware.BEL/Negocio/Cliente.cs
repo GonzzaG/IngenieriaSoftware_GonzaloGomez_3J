@@ -12,10 +12,8 @@
         public string TipoTarjeta { get; set; }
         public string BancoEmisor { get; set; }
 
-
         public Cliente()
         {
         }
     }
-
 }

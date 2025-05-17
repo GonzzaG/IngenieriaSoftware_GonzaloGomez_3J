@@ -1,17 +1,12 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.Negocio;
-using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.DAL.EntityDAL;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
-using IngenieriaSoftware.BLL.Mesas;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -20,16 +15,14 @@ namespace IngenieriaSoftware.BLL
         private readonly FacturaDAL _facturaDAL = new FacturaDAL();
         private readonly ComandaBLL _comandaBLL = new ComandaBLL();
         private readonly MedioDePagoBLL _medioDePagoBLL = new MedioDePagoBLL();
-       
 
         private Factura Factura;
+
         public FacturaBLL()
         {
             Factura = new Factura();
-            
         }
 
-       
         public Factura GenerarFactura(int comandaId, int mesaId, decimal propina, decimal descuento, int metodoPagoId, int clienteId)
         {
             List<ComandaProducto> productosComanda = _comandaBLL.ObtenerComandaProductoProductoPorComandaId(comandaId);
@@ -86,9 +79,8 @@ namespace IngenieriaSoftware.BLL
                 try
                 {
                     //si es 0, es porque fue en efectivo, no vamos a guardar clienteIdFactura
-                    if(factura.ClienteId == 0)
+                    if (factura.ClienteId == 0)
                     {
-
                     }
                     int facturaId = _facturaDAL.GuardarFactura(factura);
 
@@ -104,20 +96,19 @@ namespace IngenieriaSoftware.BLL
                 }
             }
 
-
             return factura;
         }
+
         private string GenerarNumeroFactura()
         {
             return $"FAC-{DateTime.Now:yyyyMMddHHmmss}";
         }
 
-
-
         #region Facturas por estado
+
         public List<Factura> ObtenerFacturasSolicitadas()
         {
-            using(var transaction = new TransactionScope())
+            using (var transaction = new TransactionScope())
             {
                 var facturas = _facturaDAL.ObtenerFacturasPorEstado((int)EstadoFactura.Estado.Solicitada);
                 transaction.Complete();
@@ -154,7 +145,8 @@ namespace IngenieriaSoftware.BLL
                 return facturas;
             }
         }
-        #endregion
+
+        #endregion Facturas por estado
 
         public List<string> ObtenerEstadosFactura()
         {
@@ -168,17 +160,15 @@ namespace IngenieriaSoftware.BLL
             return estados;
         }
 
-
         public bool FacturaPendienteDePago(int facturaId)
         {
-            using(var transaction = new TransactionScope())
+            using (var transaction = new TransactionScope())
             {
                 var factura = _facturaDAL.ObtenerFacturaPorFacturaId(facturaId);
 
-                if(factura != null && 
+                if (factura != null &&
                    factura.EstadoPago is EstadoFactura.Estado.PendienteDePago)
                 {
-                   
                     transaction.Complete();
                     return true;
                 }
@@ -189,6 +179,7 @@ namespace IngenieriaSoftware.BLL
                 }
             }
         }
+
         public bool FacturaSolicitada(int facturaId)
         {
             using (var transaction = new TransactionScope())
@@ -198,7 +189,6 @@ namespace IngenieriaSoftware.BLL
                 if (factura != null &&
                    factura.EstadoPago is EstadoFactura.Estado.Solicitada)
                 {
-
                     transaction.Complete();
                     return true;
                 }
@@ -209,15 +199,17 @@ namespace IngenieriaSoftware.BLL
                 }
             }
         }
+
         public void CambiarEstadoFacturaPagada(int facturaId)
         {
-            using(var transaction = new TransactionScope())
+            using (var transaction = new TransactionScope())
             {
                 _facturaDAL.CambiarEstadoFactura(facturaId, (int)EstadoFactura.Estado.Pagada);
 
                 transaction.Complete();
             }
         }
+
         public void CambiarEstadoFacturaPendienteDePago(int facturaId)
         {
             using (var transaction = new TransactionScope())
@@ -233,11 +225,10 @@ namespace IngenieriaSoftware.BLL
             using (var transaction = new TransactionScope())
             {
                 _facturaDAL.CambiarEstadoFactura(facturaId, (int)EstadoFactura.Estado.Entregada);
-               
+
                 transaction.Complete();
             }
         }
-
 
         public List<ProductoFactura> ObtenerProductosPorFacturaId(int facturaId)
         {
@@ -254,7 +245,7 @@ namespace IngenieriaSoftware.BLL
             using (var transaction = new TransactionScope())
             {
                 var factura = _facturaDAL.ObtenerFacturaPorMesaYComanda(mesaId, comandaId);
-                if(factura.EstadoPago != EstadoFactura.Estado.Pagada)
+                if (factura.EstadoPago != EstadoFactura.Estado.Pagada)
                 {
                     factura = null;
                 }
@@ -262,7 +253,5 @@ namespace IngenieriaSoftware.BLL
                 return factura;
             }
         }
-
-   
     }
 }

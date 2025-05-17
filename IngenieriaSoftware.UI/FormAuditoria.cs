@@ -3,26 +3,20 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormAuditoria: Form, IActualizable
+    public partial class FormAuditoria : Form, IActualizable
     {
         private readonly AuditoriaManager _auditoriaManager;
         private List<AuditoriaRegistro> _registros;
         private bool registrosCargados = false;
+
         public FormAuditoria(AuditoriaManager audit, List<AuditoriaRegistro> registros)
         {
             InitializeComponent();
-            _registros = registros;  
+            _registros = registros;
             _auditoriaManager = audit;
             Actualizar();
         }
@@ -34,43 +28,11 @@ namespace IngenieriaSoftware.UI
             //ListarTablasAuditadas();
             dataGridViewRegistrosModificados.DataSource = null;
             dataGridViewRegistrosModificados.DataSource = _registros;
-
-        }
-        public void ListarTablasAuditadas()
-        {
-            try
-            {
-                List<string> tablas = _auditoriaManager.ObtenerTablasAuditadas();
-                
-                foreach(string tabla in tablas)
-                {
-                    comboBoxTablasAuditadas.Items.Add(tabla);
-                }
-
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error al obtener las tablas: " + ex.Message);
-            }
         }
 
         public void VerificarNotificaciones()
         {
             throw new NotImplementedException();
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                dataGridViewRegistrosModificados.DataSource = null;
-                var registros = ListarRegistrosTabla(comboBoxTablasAuditadas.Text);
-                dataGridViewRegistrosModificados.DataSource = registros;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error al obtener los registros: " + ex.Message);   
-            }
         }
 
         private List<AuditoriaRegistro> ListarRegistrosTabla(string nombre)
@@ -79,7 +41,7 @@ namespace IngenieriaSoftware.UI
             {
                 return _auditoriaManager.ObtenerRegistroDeTabla(nombre);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -95,9 +57,8 @@ namespace IngenieriaSoftware.UI
                 var detalles = ListarDetallesRegistro(idCambio);
 
                 dataGridViewHistorialCambios.DataSource = detalles;
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al obtener lso detalles del registro seleccionado: " + ex.Message);
             }
@@ -119,7 +80,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if(dataGridViewHistorialCambios.SelectedRows.Count == 0)
+                if (dataGridViewHistorialCambios.SelectedRows.Count == 0)
                 {
                     throw new Exception("Debe seleccionar una fila del historial de cambios");
                 }
@@ -130,7 +91,7 @@ namespace IngenieriaSoftware.UI
 
                 MessageBox.Show("Peticion realizada con exito.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al obtener los detalles del registro seleccionado: " + ex.Message);
             }
@@ -153,7 +114,7 @@ namespace IngenieriaSoftware.UI
                     IdCambioOrigen = row.Cells["IdCambio"].Value != DBNull.Value ? Guid.Parse(row.Cells["IdCambio"].Value.ToString()) : throw new Exception("Error al realizar la peticion"),
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -161,15 +122,6 @@ namespace IngenieriaSoftware.UI
 
         private void FormAuditoria_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void comboBoxRegistros_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (comboBoxRegistros.SelectedIndex >= 0 && comboBoxRegistros.SelectedText != string.Empty && registrosCargados)
-            {
-
-            }
         }
     }
 }

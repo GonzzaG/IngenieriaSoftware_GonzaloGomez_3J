@@ -1,13 +1,9 @@
 ﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -30,16 +26,15 @@ namespace IngenieriaSoftware.BLL
 
                 var mUsuario = SessionManager.GetInstance.Usuario?.Username ?? "Sistema";
                 _instance.RegistrarActividad(mUsuario, actividad, DateTime.Now, infoAdicional, clase, ubicacion, area);
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Puedes registrar en un archivo de log como fallback
                 File.AppendAllText("log_fallos.txt", $"Error al guardar bitácora: {ex.Message}\n");
-            }   
+            }
         }
 
-        public static void RegistrarError(string controller, Exception ex, string area, string usuario )
+        public static void RegistrarError(string controller, Exception ex, string area, string usuario)
         {
             var stackTrace = new StackTrace();
             var frame = stackTrace.GetFrame(1); // 1 para obtener el método que llamó a este

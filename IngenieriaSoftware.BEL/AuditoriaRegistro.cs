@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
@@ -13,6 +9,5 @@ namespace IngenieriaSoftware.BEL
         public DateTime Fecha { get; set; }
         public string Usuario { get; set; }
         public string Tipo { get; set; } // Insert (I), Update (U), Delete (D), Restore (R)
-
     }
 }

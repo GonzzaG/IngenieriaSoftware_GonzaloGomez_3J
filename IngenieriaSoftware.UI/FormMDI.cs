@@ -1,6 +1,4 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Negocio;
-using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
@@ -9,12 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Transactions;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IngenieriaSoftware.UI
 {
@@ -33,17 +27,18 @@ namespace IngenieriaSoftware.UI
         private readonly ControlesHelper _controlesHelper;
         private readonly HelperExcepciones _helperExcepciones;
         private IdiomaSujeto _idiomaObserver;
+        private readonly DigitoVerificadorManager _digitoVerificadorManager;
 
         public NotificacionService _notificacionService => new NotificacionService();
 
         public event Action ActualizarFormsHijos;
-
 
         public FormMDI()
         {
             InitializeComponent();
             this.IsMdiContainer = true;
             this.StartPosition = FormStartPosition.CenterScreen;
+            _digitoVerificadorManager = new DigitoVerificadorManager();
             usuarioBLL = new UsuarioBLL();
             permisoBLL = new PermisoBLL();
             idiomaBLL = new IdiomaBLL();
@@ -56,6 +51,27 @@ namespace IngenieriaSoftware.UI
             _helperExcepciones = new HelperExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
+            VerificarIntegridad();
+        }
+
+        /// <summary>
+        /// Realizar la verificacion de digitos verificadores horizontales y verticales
+        /// </summary>
+        private void VerificarIntegridad()
+        {
+            try
+            {
+                //int result = new DigitoVerificadorManager().ActualizarVerificadorVertical(nombreTabla);
+               // bool resultad = new DigitoVerificadorManager().ActualizarVerificadores("usuarios");
+
+                bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Integridad", SessionManager.GetInstance.Usuario.Username);
+                this.Close();
+            }
         }
 
         private void Inicializar()
@@ -87,7 +103,8 @@ namespace IngenieriaSoftware.UI
 
             //comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
         }
-        #endregion
+
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -117,18 +134,18 @@ namespace IngenieriaSoftware.UI
             try
             {
                 comboBoxIdiomas.Items.Clear();
-            
+
                 var idiomas = idiomaBLL.ObtenerIdiomas();
 
-                if(idiomas != null)
+                if (idiomas != null)
                 {
-                    foreach( var idioma in idiomas)
+                    foreach (var idioma in idiomas)
                     {
                         comboBoxIdiomas.Items.Add(idioma.Nombre);
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("No se pudieron cargar los idiomas: " + ex.Message);
             }
@@ -143,18 +160,15 @@ namespace IngenieriaSoftware.UI
             // Notificamos a los suscriptores del cambio de idioma
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
-           // PermisosData.PermisosString = AuthService.PermisosUsuario;
+            // PermisosData.PermisosString = AuthService.PermisosUsuario;
             var permisosUsuario = AuthService.PermisosUsuario;
-
 
             //InicializarPermisosMenu();
             //VerificarPermisosRoles(permisosUsuario);
 
             ActualizarVisibilidadBotones();
 
-
             VerificarNotificaciones();
-
         }
 
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -163,7 +177,7 @@ namespace IngenieriaSoftware.UI
 
         private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormRegistrarUsuario formRegistrarUsuario = new FormRegistrarUsuario();
+            FormRegistrarUsuario formRegistrarUsuario = new FormRegistrarUsuario(_digitoVerificadorManager);
             AbrirFormHijo(formRegistrarUsuario);
         }
 
@@ -177,14 +191,12 @@ namespace IngenieriaSoftware.UI
 
         private void eliminarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             FormEliminarUsuario formEliminarUsuario = new FormEliminarUsuario();
             AbrirFormHijo(formEliminarUsuario);
         }
 
         private void LogOutgestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         #region Metodos privados
@@ -214,7 +226,7 @@ namespace IngenieriaSoftware.UI
 
         internal void AbrirFormHijo(Form formHijo)
         {
-            foreach(Form hijo in this.MdiChildren)
+            foreach (Form hijo in this.MdiChildren)
             {
                 hijo.Close();
             }
@@ -222,11 +234,11 @@ namespace IngenieriaSoftware.UI
             VerificarNotificaciones();
             _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
-            if(formHijo is IActualizable formActualizable)
+            if (formHijo is IActualizable formActualizable)
             {
                 this.ActualizarFormsHijos += formActualizable.Actualizar;
             }
-            
+
             formHijo.MdiParent = this;
 
             formHijo.WindowState = FormWindowState.Maximized;
@@ -240,12 +252,10 @@ namespace IngenieriaSoftware.UI
             //panel1.Visible = false;
         }
 
-
         #endregion Metodos privados
 
-        private void ActualizarVisibilidadBotones()          
+        private void ActualizarVisibilidadBotones()
         {
-            
             PermisosData.Permisos = permisoBLL.ObtenerPermisosUsuario(SessionManager.GetInstance.Usuario.Id);
             PermisosData.PermisosString = PermisosData.Permisos.Select(p => p.Nombre).ToList();
             List<int> permisosId = PermisosData.Permisos.Select(x => x.Id).ToList();
@@ -296,8 +306,6 @@ namespace IngenieriaSoftware.UI
             item.Visible = esVisible;
         }
 
-
-
         private void actualizarEtiquetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult respuesta = MessageBox.Show("Está seguro que desea agregar todos los controles a la base de datos?", "Alerta de Agregacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -320,16 +328,15 @@ namespace IngenieriaSoftware.UI
         public void ActualizarEtiquetas()
         {
             var formularios = HelperForms.InstanciarTodosLosFormularios(this);
-            formularios.Add(this); 
+            formularios.Add(this);
             Dictionary<string, IIdiomaObservador> etiquetasEnMemoria = ControlesHelper.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaObservador)p.Value);
 
             var etiquetasExcepciones = HelperExcepciones.ListarExcepciones();
-            foreach(var etiquetaExcepcion in etiquetasExcepciones)
+            foreach (var etiquetaExcepcion in etiquetasExcepciones)
             {
                 etiquetasEnMemoria[etiquetaExcepcion.Key] = etiquetaExcepcion.Value;
             }
-            idiomaBLL.AgregarEtiqueta(etiquetasEnMemoria); 
-            
+            idiomaBLL.AgregarEtiqueta(etiquetasEnMemoria);
         }
 
         private void RegistrarEtiquetasDeControles(Control control, List<EtiquetaDTO> etiquetasEnBD, List<EtiquetaDTO> etiquetasNuevas)
@@ -380,7 +387,6 @@ namespace IngenieriaSoftware.UI
 
         private void comandasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
         }
 
         private void mesasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -392,9 +398,9 @@ namespace IngenieriaSoftware.UI
             if (comboBoxIdiomas.SelectedItem == null) return;
             //Obtengo el idiomaId de la lista de idiomas, comparando el nombre del idioma con el del combo box, item seleccionado, y retorno el id
             var idiomaId = (IdiomaData.Idiomas.Find(I => I.Nombre == comboBoxIdiomas.SelectedItem.ToString())).Id;
-           
+
             _idiomaObserver.CambiarEstado(idiomaId);
-            ActualizarFormsHijos?.Invoke();         
+            ActualizarFormsHijos?.Invoke();
         }
 
         private void gestionarMesasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -437,7 +443,6 @@ namespace IngenieriaSoftware.UI
 
         private void verFacturasPendientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void fToolStripMenuItem_Click(object sender, EventArgs e)
@@ -473,7 +478,7 @@ namespace IngenieriaSoftware.UI
         private void agregarIdiomasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormGestionarIdioma formGestionarIdioma = new FormGestionarIdioma();
-            AbrirFormHijo(formGestionarIdioma); 
+            AbrirFormHijo(formGestionarIdioma);
         }
 
         private void FormMDI_Resize(object sender, EventArgs e)
@@ -491,14 +496,13 @@ namespace IngenieriaSoftware.UI
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void FormMDI_Activated(object sender, EventArgs e)
         {
             if (this.MdiChildren.Length > 0)
             {
-               // HidePanel(); // Si hay formularios hijos, ocultar el panel
+                // HidePanel(); // Si hay formularios hijos, ocultar el panel
             }
             else
             {
@@ -519,7 +523,6 @@ namespace IngenieriaSoftware.UI
 
         private void BackUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void LogOutgestionUsuariosToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -541,16 +544,13 @@ namespace IngenieriaSoftware.UI
 
                     transac.Complete();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 BitacoraHelper.RegistrarError(this.Name, ex, "Sesion", SessionManager.GetInstance.Usuario.Username);
-
             }
         }
-
 
         private void BitacoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -610,16 +610,15 @@ namespace IngenieriaSoftware.UI
 
         private void AuditoriaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         //public void ShowPanel()
         //{
-        //    panel1.Visible = true; 
+        //    panel1.Visible = true;
         //}
         //public void HidePanel()
         //{
-        //    panel1.Visible = false; 
+        //    panel1.Visible = false;
         //}
     }
 }

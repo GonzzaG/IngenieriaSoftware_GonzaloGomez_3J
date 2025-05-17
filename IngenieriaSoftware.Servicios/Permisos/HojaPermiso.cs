@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IngenieriaSoftware.Servicios.Permisos
 {
     public class HojaPermiso : ComponentePermiso
     {
-        int _tamaño;
+        private int _tamaño;
+
         public HojaPermiso(string nombre, int tamaño) : base(nombre)
         {
             _tamaño = tamaño;
         }
-        public int Tamaño { get { return _tamaño; } }
+
+        public int Tamaño
+        { get { return _tamaño; } }
 
         public override IList<ComponentePermiso> ObtenerHijos()
         {
@@ -22,7 +21,6 @@ namespace IngenieriaSoftware.Servicios.Permisos
 
         public override void AgregarHijo(ComponentePermiso c)
         {
-        
         }
 
         public override int ObtenerTamaño
@@ -32,6 +30,5 @@ namespace IngenieriaSoftware.Servicios.Permisos
                 return _tamaño;
             }
         }
-
     }
 }

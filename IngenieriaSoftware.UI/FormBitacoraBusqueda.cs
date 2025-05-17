@@ -1,24 +1,16 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
     public partial class FormBitacoraBusqueda : Form, IActualizable
     {
-       
-
         public NotificacionService _notificacionService => new NotificacionService();
         private bool formCargado = false;
+
         public FormBitacoraBusqueda()
         {
             InitializeComponent();
@@ -29,9 +21,8 @@ namespace IngenieriaSoftware.UI
             try
             {
                 dataGridViewBitacora.DataSource = BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text);
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al obtener registros de bitacora: " + ex.Message);
             }
@@ -39,7 +30,7 @@ namespace IngenieriaSoftware.UI
 
         private void checkBoxBuscarPorModulo_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBoxBuscarPorArea.Checked)
+            if (checkBoxBuscarPorArea.Checked)
             {
                 txtModulo.Enabled = true;
                 txtModulo.BackColor = Color.White;

@@ -2,22 +2,19 @@
 using IngenieriaSoftware.BLL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormBusquedaAuditoria: Form, IActualizable
+    public partial class FormBusquedaAuditoria : Form, IActualizable
     {
         private AuditoriaManager _auditoriaManager = new AuditoriaManager();
         private List<AuditoriaRegistro> _registros;
         private bool formCargado = false;
         private bool tablasCargadas = false;
+
         public FormBusquedaAuditoria()
         {
             InitializeComponent();
@@ -32,16 +29,14 @@ namespace IngenieriaSoftware.UI
             {
                 ListarTablasAuditadas();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al actualizar: " + ex.Message);
             }
-            
         }
 
         public void VerificarNotificaciones()
         {
-            
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -49,7 +44,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 int registroSeleccionado;
-                if(comboBoxRegistros.SelectedIndex < 0)
+                if (comboBoxRegistros.SelectedIndex < 0)
                 {
                     MessageBox.Show("Seleccione un numero de registro");
                     return;
@@ -64,9 +59,9 @@ namespace IngenieriaSoftware.UI
                     return;
                 }
                 FormMDI formMDI = (FormMDI)this.MdiParent;
-                formMDI.AbrirFormHijo(new FormAuditoria(_auditoriaManager, _registros.FindAll(r => r.Registro == registroSeleccionado).ToList())); 
+                formMDI.AbrirFormHijo(new FormAuditoria(_auditoriaManager, _registros.FindAll(r => r.Registro == registroSeleccionado).ToList()));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al buscar auditoria: " + ex.Message);
             }
@@ -82,7 +77,6 @@ namespace IngenieriaSoftware.UI
                 {
                     comboBoxTablasAuditadas.Items.Add(tabla);
                 }
-
             }
             catch (Exception ex)
             {
@@ -123,7 +117,6 @@ namespace IngenieriaSoftware.UI
             {
                 MessageBox.Show("Error al seleccionar tabla: " + ex.Message);
             }
-
         }
 
         private void FormBusquedaAuditoria_Load(object sender, EventArgs e)

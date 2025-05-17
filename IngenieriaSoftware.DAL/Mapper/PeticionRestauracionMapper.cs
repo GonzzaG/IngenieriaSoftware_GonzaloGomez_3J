@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Mapper
 {
@@ -14,7 +11,7 @@ namespace IngenieriaSoftware.DAL.Mapper
         {
             List<PeticionRestauracion> peticiones = new List<PeticionRestauracion>();
 
-            foreach (DataRow row in ds.Tables[0].Rows) 
+            foreach (DataRow row in ds.Tables[0].Rows)
             {
                 peticiones.Add(new PeticionRestauracion
                 {
@@ -26,10 +23,9 @@ namespace IngenieriaSoftware.DAL.Mapper
                     Registro = int.Parse(row["Registro"].ToString()),
                     Comentario = row["Comentario"].ToString(),
                     Estado = row["Estado"].ToString(),
-
                 });
             }
-           
+
             return peticiones;
         }
     }

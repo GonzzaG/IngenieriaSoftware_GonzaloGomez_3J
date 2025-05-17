@@ -1,32 +1,21 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
     //Primero traigo todas las mesas de la bd
-    
 
     public partial class FormABMMesas : Form, IActualizable
     {
         private readonly MesaBLL _mesaBLL = new MesaBLL();
 
-
         public FormABMMesas()
         {
             InitializeComponent();
             Actualizar();
-
         }
 
         private void FormABMMesas_Load(object sender, EventArgs e)
@@ -44,22 +33,19 @@ namespace IngenieriaSoftware.UI
 
                 Actualizar();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //aca muestro mensaje box de que se asigno correctamente
                 //actualizo las mesas
 
-
                 // muestro mensaje box que no se asigno
                 // actualizo mesas por las dudas
             }
-
-
         }
 
         public void Actualizar()
         {
-            var estadoFueraDeServicio = 
+            var estadoFueraDeServicio =
             dataGridViewMesas.DataSource = null;
             dataGridViewMesas.DataSource = _mesaBLL.ObtenerMesasDisponibles();
         }
@@ -75,14 +61,11 @@ namespace IngenieriaSoftware.UI
                 }
                 int mesaId = (int)dataGridViewMesas.SelectedRows[0].Cells[0].Value;
                 _mesaBLL.EliminarMesa(mesaId);
-              
-
             }
             catch (Exception ex)
             {
                 //aca muestro mensaje box de que se asigno correctamente
                 //actualizo las mesas
-
 
                 // muestro mensaje box que no se asigno
                 // actualizo mesas por las dudas
@@ -112,11 +95,9 @@ namespace IngenieriaSoftware.UI
                 //aca muestro mensaje box de que se asigno correctamente
                 //actualizo las mesas
 
-
                 // muestro mensaje box que no se asigno
                 // actualizo mesas por las dudas
             }
-       
         }
 
         public void VerificarNotificaciones()
@@ -130,9 +111,7 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
+
         public NotificacionService _notificacionService => new NotificacionService();
-
-
-
     }
 }

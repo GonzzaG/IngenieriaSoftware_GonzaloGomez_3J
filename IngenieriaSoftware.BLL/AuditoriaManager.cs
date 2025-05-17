@@ -2,15 +2,12 @@
 using IngenieriaSoftware.DAL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL
 {
     public class AuditoriaManager
     {
-        AuditoriaRepository _auditoriaRepository = new AuditoriaRepository();
+        private AuditoriaRepository _auditoriaRepository = new AuditoriaRepository();
 
         public List<string> ObtenerTablasAuditadas()
         {
@@ -42,7 +39,7 @@ namespace IngenieriaSoftware.BLL
             {
                 return _auditoriaRepository.ObtenerDetalleCambio(idCambio);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -64,7 +61,7 @@ namespace IngenieriaSoftware.BLL
         {
             try
             {
-                return _auditoriaRepository.SolicitarRestauracion(peticion);    
+                return _auditoriaRepository.SolicitarRestauracion(peticion);
             }
             catch (Exception ex)
             {
@@ -95,6 +92,7 @@ namespace IngenieriaSoftware.BLL
                 throw new Exception(ex.Message);
             }
         }
+
         public List<PeticionRestauracion> ObtenerPeticionesPendientes()
         {
             try

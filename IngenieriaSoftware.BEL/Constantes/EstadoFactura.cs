@@ -9,6 +9,5 @@
             Pagada = 2,
             Entregada = 3
         };
-
     }
 }

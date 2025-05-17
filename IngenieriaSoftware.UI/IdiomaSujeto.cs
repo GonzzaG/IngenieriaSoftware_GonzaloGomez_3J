@@ -2,10 +2,6 @@
 using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
@@ -15,13 +11,11 @@ namespace IngenieriaSoftware.UI
 
         private readonly ITraduccionServicio _traduccionServicio;
 
-   
         public IdiomaSujeto(ITraduccionServicio traduccionServicio)//(int idiomaInicialId, ITraduccionServicio traduccionServicio)
         {
             //idiomaId = idiomaInicialId;
 
             _traduccionServicio = traduccionServicio;
-
         }
 
         public void CambiarEstado(int nuevoIdiomaId)
@@ -32,7 +26,7 @@ namespace IngenieriaSoftware.UI
 
         protected void Notificar()
         {
-             IdiomaData.TagTraducciones = _traduccionServicio.ObtenerTraduccionesPorIdioma(IdiomaData.IdiomaActual.Id) ?? new Dictionary<string, string>();
+            IdiomaData.TagTraducciones = _traduccionServicio.ObtenerTraduccionesPorIdioma(IdiomaData.IdiomaActual.Id) ?? new Dictionary<string, string>();
 
             if (IdiomaData.TagTraducciones == null || IdiomaData.TagTraducciones.Count == 0)
             {
@@ -55,13 +49,14 @@ namespace IngenieriaSoftware.UI
         }
 
         #region Suscribir y Desuscribir
+
         public void Desuscribir(IIdiomaObservador suscriptor)
         {
             if (Suscriptores.Contains(suscriptor))
             {
                 Suscriptores.Remove(suscriptor);
             }
-        } 
+        }
 
         public void Suscribir(IIdiomaObservador suscriptor)
         {
@@ -70,6 +65,7 @@ namespace IngenieriaSoftware.UI
                 Suscriptores.Add(suscriptor);
             }
         }
-        #endregion
+
+        #endregion Suscribir y Desuscribir
     }
 }

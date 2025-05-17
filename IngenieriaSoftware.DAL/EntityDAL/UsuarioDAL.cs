@@ -1,9 +1,9 @@
-﻿using IngenieriaSoftware.Servicios;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -65,6 +65,21 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+        public List<Usuario> GetAllUsuarios()
+        {
+            try
+            {
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosUsuarios", null);
+                List<Usuario> usuarios = new UsuarioMapper().MapearUsuariosDesdeDataSetExtension(mDs);
+
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener todos los usuarios: " + ex.Message, ex);
+            }
+        }
+
         public UsuarioDTO ObtenerUsuarioPorNombre(string pUsuarioNombre)
         {
             try
@@ -117,6 +132,62 @@ namespace IngenieriaSoftware.DAL
             return _dao.ExecuteNonQuery("sp_GuardarUsuario", parametros);
         }
 
-        #endregion Métodos para manejar usuarios     
+        public int ModificarUsuario(UsuarioDVHDTO pUsuario)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+           {
+                new SqlParameter("@id", pUsuario.Id),
+                new SqlParameter("@dvh", pUsuario.DVH),
+           };
+                return _dao.ExecuteNonQuery("sp_ModificarDVHDelUsuario", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al modificar el usuario: " + ex.Message, ex);
+            }
+        }
+
+        public UsuarioDVHDTO ObtenerDVHDelUsuarioPorId(int id)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@id", id)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerDVHDelUsuarioPorId", parametros);
+
+                return new UsuarioDVHDTO { DVH = mDs.Tables[0].Columns["DVH"].DefaultValue.ToString() };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el usuario por nombre: " + ex.Message, ex);
+            }
+        }
+
+        public bool AgregarVerificadorVertical(DigitoVerificadorVertical dvv)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@nombreTabla", dvv.NombreTabla),
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_AgregarVerificadorVertical", parametros);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al agregar el verificador vertical: " + ex.Message, ex);
+            }
+        }
+
+        #endregion Métodos para manejar usuarios
+
     }
 }

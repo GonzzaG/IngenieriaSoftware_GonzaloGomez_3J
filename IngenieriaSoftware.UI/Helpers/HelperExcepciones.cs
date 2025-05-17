@@ -3,10 +3,6 @@ using IngenieriaSoftware.Servicios.Interfaces;
 using IngenieriaSoftware.UI.Adaptadores;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.UI.Helpers
 {
@@ -65,6 +61,5 @@ namespace IngenieriaSoftware.UI.Helpers
                 _idiomaSujeto.Suscribir(e);
             }
         }
-
     }
 }

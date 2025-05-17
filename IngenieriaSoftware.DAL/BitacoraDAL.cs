@@ -4,15 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {
     public class BitacoraDAL
     {
-        DAO _dao = new DAO();
+        private DAO _dao = new DAO();
+
         public bool RegistrarActividad(Bitacora bitacora)
         {
             try
@@ -32,11 +30,10 @@ namespace IngenieriaSoftware.DAL
                 return true;
             }
             catch
-            {     
+            {
                 return false;
             }
         }
-
 
         public List<Bitacora> ObtenerRegistros(DateTime desde, DateTime hasta, string area = null)
         {
@@ -45,13 +42,13 @@ namespace IngenieriaSoftware.DAL
                 DataSet ds;
                 //if(area != null)
                 //{
-                    SqlParameter[] parametros = new SqlParameter[]
-                    {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
                         new SqlParameter("@Desde", desde),
                         new SqlParameter("@Hasta", hasta),
                         new SqlParameter("@Area", area)
-                    };
-                    ds = _dao.ExecuteStoredProcedure("sp_ConsultarBitacoraPorModulo", parametros);
+                };
+                ds = _dao.ExecuteStoredProcedure("sp_ConsultarBitacoraPorModulo", parametros);
 
                 //}
                 //else

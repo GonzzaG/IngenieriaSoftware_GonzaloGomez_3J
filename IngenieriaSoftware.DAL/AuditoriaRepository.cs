@@ -4,16 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace IngenieriaSoftware.DAL
 {
     public class AuditoriaRepository
     {
-        DAO _dao = new DAO();
+        private DAO _dao = new DAO();
+
         public List<string> ObtenerTablasAuditadas()
         {
             try
@@ -47,11 +44,10 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter ("@NombreTabla", nombreTabla)
                 };
                 DataSet dt = _dao.ExecuteStoredProcedure("sp_ObtenerCambiosPorTabla", parametros);
-                  
 
                 return new AuditoriaMapper().MapearDesdeDataSet(dt);
             }
-            catch(InvalidCastException ex)
+            catch (InvalidCastException ex)
             {
                 throw new Exception("La tabla no tiene cambios que mostrar");
             }
@@ -109,6 +105,7 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception(ex.Message);
             }
         }
+
         public bool SolicitarRestauracion(PeticionRestauracion peticion)
         {
             try
@@ -176,7 +173,7 @@ namespace IngenieriaSoftware.DAL
             try
             {
                 DataSet ds = _dao.ExecuteStoredProcedure("sp_ObtenerPeticionesPendientes", null);
-                
+
                 if (ds == null || ds.Tables.Count == 0)
                 {
                     return new List<PeticionRestauracion>();
@@ -188,6 +185,5 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception(ex.Message);
             }
         }
-
     }
 }

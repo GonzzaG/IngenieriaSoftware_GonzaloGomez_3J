@@ -1,9 +1,7 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.UI.Adaptadores;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -18,27 +16,24 @@ namespace IngenieriaSoftware.UI
 
         public NotificacionService _notificacionService => new NotificacionService();
 
-        public FormInicioSesion() { InitializeComponent(); }
+        public FormInicioSesion()
+        { InitializeComponent(); }
+
         public FormInicioSesion(IdiomaSujeto idiomaObserver)
         {
             InitializeComponent();
 
-
             _idiomaObserver = idiomaObserver;
             this.WindowState = FormWindowState.Maximized;
-          
-
-          
-
         }
 
         #region Metodos de Interfaz
 
         public void Actualizar()
         {
-            
         }
-        #endregion
+
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -57,6 +52,7 @@ namespace IngenieriaSoftware.UI
         }
 
         #region LogIn LogOut
+
         //private void LogIn(object sender, EventArgs e)
         //{
         //    try
@@ -96,7 +92,8 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
-        #endregion
+
+        #endregion LogIn LogOut
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
@@ -118,7 +115,7 @@ namespace IngenieriaSoftware.UI
                 var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
 
-                BitacoraHelper.RegistrarError(this.Name, ex, "Sesion",null);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Sesion", null);
             }
             catch (CredencialesCorrectasException ex)
             {
@@ -126,13 +123,10 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(adaptador.ObtenerMensajeTraducido());
                 this.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error al iniciar sesion: ", ex.Message);
             }
         }
-
-     
-
     }
 }

@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Mapper
 {
@@ -26,7 +23,6 @@ namespace IngenieriaSoftware.DAL.Mapper
                         Controller = row.IsNull("Controller") ? null : row["Controller"].ToString(),
                         Url = row.IsNull("URL") ? null : row["URL"].ToString(),
                         Area = row.IsNull("Area") ? null : row["Area"].ToString()
-
                     };
                     lista.Add(bitacora);
                 }

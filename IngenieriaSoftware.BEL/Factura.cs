@@ -6,7 +6,6 @@ namespace IngenieriaSoftware.BEL
 {
     public class Factura
     {
-
         public int FacturaId { get; set; }
         public string NumeroFactura { get; set; }
         public DateTime FechaEmision { get; set; }
@@ -21,13 +20,11 @@ namespace IngenieriaSoftware.BEL
         public decimal Propina { get; set; }
         public decimal TotalFinal { get; set; }
 
-
         public int MetodoPagoId { get; set; }
         public MedioDePago MetodoPago { get; set; }
         public EstadoFactura.Estado EstadoPago { get; set; }
         public decimal MontoPagado { get; set; }
         public decimal Cambio { get; set; }
-
 
         public string Notas { get; set; }
         public DateTime FechaCierre { get; set; }
@@ -39,5 +36,4 @@ namespace IngenieriaSoftware.BEL
             EstadoPago = EstadoFactura.Estado.Solicitada;
         }
     }
-
 }

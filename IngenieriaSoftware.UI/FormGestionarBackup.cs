@@ -2,17 +2,11 @@
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarBackup: Form, IActualizable
+    public partial class FormGestionarBackup : Form, IActualizable
     {
         public BackupManager BackupManager = new BackupManager();
 
@@ -22,20 +16,18 @@ namespace IngenieriaSoftware.UI
         public FormGestionarBackup()
         {
             InitializeComponent();
-            _usuarioBLL =  new UsuarioBLL();
+            _usuarioBLL = new UsuarioBLL();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
         }
 
         private void btnReestablecerBackUp_Click(object sender, EventArgs e)
         {
             try
             {
-
-                if(comboBoxBackUps.SelectedItem == null)
+                if (comboBoxBackUps.SelectedItem == null)
                 {
                     MessageBox.Show("Seleccione una copia de seguridad para restaurar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -44,11 +36,9 @@ namespace IngenieriaSoftware.UI
                 BitacoraHelper.RegistrarActividad(ToString(), "Restauración de base de datos", DateTime.Now, $"Nombre de la copia de seguridad: {comboBoxBackUps.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "BackUp");
                 Actualizar();
 
-                MessageBox.Show("Restauracion de la base de datos realizada con exito", "Restauracion", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
+                MessageBox.Show("Restauracion de la base de datos realizada con exito", "Restauracion", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 VerificarUsuario();
-
-
             }
             catch (Exception ex)
             {
@@ -71,20 +61,21 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show("Error al verificar el usuario" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _usuarioBLL.LogOut();
                 FormMDI _menu = (FormMDI)this.MdiParent;
-                _menu.AbrirIniciarSesion(); 
+                _menu.AbrirIniciarSesion();
                 return false;
             }
         }
+
         private void btnCopiaDeSeguridad_Click(object sender, EventArgs e)
         {
             try
             {
-                DialogResult result = MessageBox.Show("¿Está seguro de que desea realizar una copia de seguridad?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);  
-                if(result == DialogResult.Yes)
+                DialogResult result = MessageBox.Show("¿Está seguro de que desea realizar una copia de seguridad?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
                     BackupManager.RealizarBackup();
                     MessageBox.Show("Copia de seguridad realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Copia de seguridad realizada con éxito.",DateTime.Now, $"Nombre de la copia de seguridad: {comboBoxBackUps.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "BackUp");   
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Copia de seguridad realizada con éxito.", DateTime.Now, $"Nombre de la copia de seguridad: {comboBoxBackUps.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "BackUp");
                 }
 
                 Actualizar();
@@ -108,7 +99,7 @@ namespace IngenieriaSoftware.UI
                 comboBoxBackUps.Items.Clear();
 
                 List<string> backups = BackupManager.ObtenerBackUps();
-                foreach(var copia in backups)
+                foreach (var copia in backups)
                 {
                     comboBoxBackUps.Items.Add(copia);
                 }
@@ -124,7 +115,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar la copia de seguridad seleccionada?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(result == DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     new BackupService().DeleteBackup(comboBoxBackUps.SelectedItem.ToString());
                     BitacoraHelper.RegistrarActividad(ToString(), "Eliminación de copia de seguridad", DateTime.Now, $"Nombre de la copia de seguridad: {comboBoxBackUps.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "BackUp");
@@ -133,9 +124,9 @@ namespace IngenieriaSoftware.UI
 
                 Actualizar();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                BitacoraHelper.RegistrarError(this.Name, ex, "BackUp", SessionManager.GetInstance.Usuario.Username);    
+                BitacoraHelper.RegistrarError(this.Name, ex, "BackUp", SessionManager.GetInstance.Usuario.Username);
                 MessageBox.Show("Error al eliminar la copia de seguridad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

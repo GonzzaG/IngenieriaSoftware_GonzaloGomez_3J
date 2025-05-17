@@ -5,8 +5,6 @@ using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace IngenieriaSoftware.BLL.Mesas
@@ -24,9 +22,10 @@ namespace IngenieriaSoftware.BLL.Mesas
             _comandaBLL = new ComandaBLL();
             _facturaBLL = new FacturaBLL();
         }
+
         public List<Mesa> Mesas()
         {
-            if(_mesas == null)
+            if (_mesas == null)
             {
                 _mesas = new List<Mesa>();
             }
@@ -41,7 +40,6 @@ namespace IngenieriaSoftware.BLL.Mesas
                 return true;
             else
                 return false;
-
         }
 
         public void AsignarMesa(int mesaId)
@@ -76,7 +74,7 @@ namespace IngenieriaSoftware.BLL.Mesas
                 }
 
                 Factura factura = _facturaBLL.GenerarFactura(comanda.ComandaId, mesaId, propina, descuento, medioDePagoId, clienteId);
-                
+
                 transaction.Complete();
             }
         }
@@ -85,28 +83,30 @@ namespace IngenieriaSoftware.BLL.Mesas
         {
             _mesaDAL.CambiarEstadoMesaCerrada(mesaId);
         }
+
         public void CambiarEstadoMesaDesocupada(int mesaId)
         {
-            using(var transaction = new TransactionScope())
+            using (var transaction = new TransactionScope())
             {
                 _mesaDAL.CambiarEstadoMesa(mesaId, (int)EstadoMesa.Estado.Desocupada);
 
                 transaction.Complete();
             }
         }
+
         public List<Mesa> GuardarMesa(Mesa mesa)
         {
             _mesas = _mesaDAL.GuardarMesa(mesa);
             new BackupManager().RealizarBackup();
             return _mesas;
         }
-         
+
         public List<Mesa> ObtenerTodasLasMesas()
         {
             _mesas = _mesaDAL.ObtenerTodasLasMesas();
             return _mesas;
         }
-        
+
         public List<Mesa> ObtenerMesasDisponibles()
         {
             _mesas = _mesaDAL.ObtenerMesasDisponibles((int)EstadoMesa.Estado.FueraDeServicio);

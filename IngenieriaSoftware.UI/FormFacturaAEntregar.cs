@@ -4,12 +4,6 @@ using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -18,10 +12,11 @@ namespace IngenieriaSoftware.UI
     {
         private readonly FacturaBLL _facturaBLL = new FacturaBLL();
         private readonly MesaBLL _mesaBLL = new MesaBLL();
-       
+
         private Factura Factura;
         private int MesaId;
         private int ComandaId;
+
         public FormFacturaAEntregar(int mesaId, int comandaId)
         {
             InitializeComponent();
@@ -41,16 +36,14 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar()
         {
-            
-            if(Factura == null)
+            if (Factura == null)
             {
                 MessageBox.Show("No tiene facturas en estado 'Pagadas' de esta mesa para entregar");
                 return;
             }
-            
 
             var detalleFactura = _facturaBLL.ObtenerProductosPorFacturaId(Factura.FacturaId);
-            if(detalleFactura == null) { return; }
+            if (detalleFactura == null) { return; }
 
             List<Factura> facturaList = new List<Factura>() { Factura };
 
@@ -89,15 +82,14 @@ namespace IngenieriaSoftware.UI
                 _facturaBLL.CambiarEstadoFacturaEntregada(facturaId);
                 //_mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
 
-                BitacoraHelper.RegistrarActividad(ToString(), "Factura Entregada", DateTime.Now, $"Factura entregada: {facturaId}", this.Name, AppDomain.CurrentDomain.BaseDirectory,"Caja");
+                BitacoraHelper.RegistrarActividad(ToString(), "Factura Entregada", DateTime.Now, $"Factura entregada: {facturaId}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Caja");
                 MessageBox.Show("Factura Entregada con exito. Mesa desocupada");
                 this.Close();
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", ToString());   
+                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", ToString());
             }
         }
     }

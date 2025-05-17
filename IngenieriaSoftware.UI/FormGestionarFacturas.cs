@@ -4,12 +4,8 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -17,21 +13,21 @@ namespace IngenieriaSoftware.UI
     public partial class FormGestionarFacturas : Form, IActualizable
     {
         private readonly FacturaBLL _facturaBLL = new FacturaBLL();
-        private readonly ComandaBLL _comandaBLL = new ComandaBLL(); 
+        private readonly ComandaBLL _comandaBLL = new ComandaBLL();
+
         public FormGestionarFacturas()
         {
             InitializeComponent();
-
         }
-    
-        public NotificacionService _notificacionService =>  new NotificacionService();
+
+        public NotificacionService _notificacionService => new NotificacionService();
 
         public void Actualizar()
         {
             comboBoxFiltroEstado.Items.Clear();
 
             var estados = _facturaBLL.ObtenerEstadosFactura();
-            foreach(string e in estados)
+            foreach (string e in estados)
             {
                 comboBoxFiltroEstado.Items.Add(e);
             }
@@ -53,16 +49,16 @@ namespace IngenieriaSoftware.UI
 
         private void FormGestionarFacturas_Load(object sender, EventArgs e)
         {
-            Actualizar();   
+            Actualizar();
         }
 
         private void comboBoxFiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxFiltroEstado.SelectedItem == null || comboBoxFiltroEstado.Text == string.Empty) { return; }
+            if (comboBoxFiltroEstado.SelectedItem == null || comboBoxFiltroEstado.Text == string.Empty) { return; }
 
             var estadoNombre = comboBoxFiltroEstado.SelectedItem.ToString();
 
-          //  dataGridViewFacturas.DataSource = null;
+            //  dataGridViewFacturas.DataSource = null;
 
             ListarFacturas(estadoNombre);
         }
@@ -120,7 +116,7 @@ namespace IngenieriaSoftware.UI
             catch (Exception ex)
             {
                 MessageBox.Show("La factura tiene que estar en estado 'Pendiente de Pago' para marcarla como pagada");
-                BitacoraHelper.RegistrarError(this.Name, ex,"Caja", SessionManager.GetInstance.ToString());
+                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", SessionManager.GetInstance.ToString());
             }
         }
 
@@ -162,7 +158,6 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-
                 if (dataGridViewFacturas.SelectedRows.Count == 0) { return; }
 
                 var facturaId = (int)dataGridViewFacturas.SelectedRows[0].Cells[0].Value;
@@ -173,7 +168,7 @@ namespace IngenieriaSoftware.UI
                 ListarFacturas(estado);
                 BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Factura Pendiente de Pago", DateTime.Now, $"Factura pendiente de pago: {facturaId}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Caja");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("La factura tiene que estar en estado 'Solicitada' para marcarla como pendiente de pago");
                 BitacoraHelper.RegistrarError(this.Name, ex, "Caja", SessionManager.GetInstance.Usuario.ToString());

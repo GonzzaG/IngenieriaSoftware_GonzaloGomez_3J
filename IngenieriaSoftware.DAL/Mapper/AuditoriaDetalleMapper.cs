@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Mapper
 {
@@ -45,7 +42,6 @@ namespace IngenieriaSoftware.DAL.Mapper
             {
                 throw new Exception(ex.Message);
             }
-          
         }
 
         public List<AuditoriaDetalle> MapearDetallesActualesDesdeDataSet(DataSet ds)
@@ -78,7 +74,6 @@ namespace IngenieriaSoftware.DAL.Mapper
             {
                 throw new Exception(ex.Message);
             }
-            
         }
     }
 }

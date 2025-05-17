@@ -1,24 +1,22 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.DAL;
-using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL
 {
-    public class BitacoraBLL 
+    public class BitacoraBLL
     {
-        BitacoraDAL _bitacoraDAL = new BitacoraDAL();
-        string _rutaArchivoLog;    
+        private BitacoraDAL _bitacoraDAL = new BitacoraDAL();
+        private string _rutaArchivoLog;
+
         public BitacoraBLL()
         {
             var rutaFallback = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs", "bitacora_fallback.log");
-            _rutaArchivoLog = rutaFallback;   
+            _rutaArchivoLog = rutaFallback;
         }
+
         public void RegistrarActividad(string usuario, string actividad, DateTime fecha, string infoAdicional, string controller, string url, string area)
         {
             var registro = new Bitacora
@@ -30,7 +28,6 @@ namespace IngenieriaSoftware.BLL
                 Controller = controller,
                 Url = url,
                 Area = area
-
             };
 
             try
@@ -41,7 +38,6 @@ namespace IngenieriaSoftware.BLL
                 }
                 else
                 {
-                    
                 }
             }
             catch (Exception ex)
@@ -50,7 +46,6 @@ namespace IngenieriaSoftware.BLL
                 File.AppendAllText("log_fallos.txt", $"Error al guardar bitácora: {ex.Message}\n");
                 GuardarEnArchivo(registro);
             }
-
         }
 
         public void RegistrarError(string controller, Exception ex, string usuario, string area)

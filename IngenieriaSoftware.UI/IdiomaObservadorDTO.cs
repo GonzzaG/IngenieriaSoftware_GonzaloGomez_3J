@@ -1,6 +1,4 @@
-﻿using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.Interfaces;
-using System;
+﻿using IngenieriaSoftware.Servicios.Interfaces;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -15,7 +13,6 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar(string nuevoTexto)
         {
-         
             if (Control != null)
             {
                 if (Regex.IsMatch(Control.Name, @"(txt|comboBox)", RegexOptions.IgnoreCase))
@@ -41,6 +38,5 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
-
     }
 }

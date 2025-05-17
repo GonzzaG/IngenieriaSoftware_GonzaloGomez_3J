@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.DAL;
+﻿using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
@@ -57,17 +56,18 @@ namespace IngenieriaSoftware.BLL
             try
             {
                 var usuario = _usuarioDAL.ObtenerUsuarioPorId(id);
-                if(usuario == null)
+                if (usuario == null)
                 {
                     throw new Exception("No se encontró el usuario");
                 }
-                else return usuario;    
+                else return usuario;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
         #region Login LogOut
 
         public bool RegistrarUsuario(UsuarioDTO pUsuario, DateTime FechaInicio)
@@ -95,16 +95,17 @@ namespace IngenieriaSoftware.BLL
 
                 if (HashingManager.VerificarHash(password, storedHash))
                 {
-                    UsuarioDTO usuario = new UsuarioDTO 
-                    { 
-                        Id = mUsuario.Id, Username = mUsuario.Username,
+                    UsuarioDTO usuario = new UsuarioDTO
+                    {
+                        Id = mUsuario.Id,
+                        Username = mUsuario.Username,
                         FechaCreacion = mUsuario.FechaCreacion,
                         IdiomaId = mUsuario.IdiomaId,
-                        Permisos = mUsuario.Permisos,   
+                        Permisos = mUsuario.Permisos,
                         _passwordHash = mUsuario._passwordHash
                     };
                     SessionManager.LogIn(usuario);
-                    return true; 
+                    return true;
                 }
             }
 

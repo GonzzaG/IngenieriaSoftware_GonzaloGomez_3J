@@ -28,22 +28,21 @@ namespace IngenieriaSoftware.BLL
             {
                 return _traduccionDAL.ObtenerTraduccionesPorIdioma(idiomaId);
             }
-            catch( Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
-        public void InsertarTraduccion (TraduccionDTO traduccion)
+        public void InsertarTraduccion(TraduccionDTO traduccion)
         {
             try
             {
-               _traduccionDAL.InsertarTraduccion(traduccion);
+                _traduccionDAL.InsertarTraduccion(traduccion);
             }
             catch (Exception ex)
             {
-                throw ex;   
+                throw ex;
             }
         }
     }

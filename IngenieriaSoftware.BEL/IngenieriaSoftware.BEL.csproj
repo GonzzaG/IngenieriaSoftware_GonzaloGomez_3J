@@ -49,9 +49,11 @@
     <Compile Include="Constantes\EstadoComandaProductos.cs" />
     <Compile Include="Constantes\EstadoFactura.cs" />
     <Compile Include="Constantes\TipoProducto.cs" />
+    <Compile Include="DigitoVerificadorVertical.cs" />
     <Compile Include="Empleados\Administrador.cs" />
     <Compile Include="Constantes\EstadoMesa.cs" />
     <Compile Include="Empleados\Mesero.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Factura.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />

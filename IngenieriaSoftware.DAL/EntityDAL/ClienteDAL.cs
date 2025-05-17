@@ -1,11 +1,7 @@
 ﻿using IngenieriaSoftware.BEL.Negocio;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
@@ -17,7 +13,6 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         {
             try
             {
-              
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@Nombre", cliente.Nombre),
@@ -43,7 +38,6 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         {
             try
             {
-
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@Nombre", cliente.Nombre),
@@ -54,7 +48,6 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                     new SqlParameter("@NumeroTarjetaUltimos4", cliente.numeroTarjetaUltimos4),
                     new SqlParameter("@BancoEmisor", cliente.BancoEmisor),
                     new SqlParameter("@TipoTarjeta", cliente.TipoTarjeta),
-
                 };
 
                 DataSet ds = _dao.ExecuteStoredProcedure("sp_InsertarClienteConDatosBancarios", parametros);
@@ -68,8 +61,5 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
-
-
-
     }
 }

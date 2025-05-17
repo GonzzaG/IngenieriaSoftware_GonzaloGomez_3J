@@ -1,10 +1,8 @@
 ﻿using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.Permisos;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -18,6 +16,7 @@ namespace IngenieriaSoftware.DAL
         {
             _permisoMapper = new PermisoMapper();
         }
+
         public List<PermisoDTO> PermisosGlobales()
         {
             return _permisosGlobales;
@@ -51,10 +50,8 @@ namespace IngenieriaSoftware.DAL
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosUsuarioPorUsername", parametros);
                 var permisosUsuario = _permisoMapper.MapearPermisosDesdeDataSet2(mDs);
                 //_permisoMapper.AsignarPermisosHijos(permisosUsuario);
-                
-                
+
                 return permisosUsuario;
-                 
             }
             catch (Exception ex)
             {
@@ -75,16 +72,13 @@ namespace IngenieriaSoftware.DAL
                 var permisosUsuario = _permisoMapper.MapearPermisosUsuarioDesdeDataSet(mDs);
                 //_permisoMapper.AsignarPermisosHijos(permisosUsuario);
 
-
                 return permisosUsuario;
-
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al obtener permisos del usuario: " + ex.Message, ex);
             }
         }
-
 
         public List<PermisoDTO> ObtenerPermisosDelRol(string nombreRol)
         {
@@ -97,10 +91,8 @@ namespace IngenieriaSoftware.DAL
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosDelRol", parametros);
                 var permisosUsuario = _permisoMapper.MapearPermisosDesdeDataSet2(mDs);
-         
 
                 return permisosUsuario;
-
             }
             catch (Exception ex)
             {
@@ -120,9 +112,7 @@ namespace IngenieriaSoftware.DAL
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerPermisosDelRolPorId", parametros);
                 var permisosUsuario = _permisoMapper.MapearPermisosDesdeDataSet2(mDs);
 
-
                 return permisosUsuario;
-
             }
             catch (Exception ex)
             {
@@ -161,6 +151,7 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception("Error al obtener permisos del usuario: " + ex.Message, ex);
             }
         }
+
         public void CrearRol(string nombreRol)
         {
             try
@@ -183,7 +174,7 @@ namespace IngenieriaSoftware.DAL
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@IdRol ", rolId)            
+                    new SqlParameter("@IdRol ", rolId)
                 };
 
                 DataSet ds = _dao.ExecuteStoredProcedure("sp_EliminarRol", parametros);
@@ -192,7 +183,7 @@ namespace IngenieriaSoftware.DAL
                 {
                     DataTable resultado = ds.Tables[0];
                     string mensaje = resultado.Rows[0]["Mensaje"].ToString();
-                   
+
                     int codigoResultado = Convert.ToInt32(resultado.Rows[0]["Resultado"]);
                     if (codigoResultado == 0)
                     {
@@ -228,6 +219,7 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception("Error al asignar el rol: " + ex.Message, ex);
             }
         }
+
         public string AsignarPermisoARol(int rolId, int permisoId)
         {
             try
@@ -331,7 +323,6 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-
         public string DesasignarRolARol(int rolPadreId, int rolHijoId)
         {
             try
@@ -399,7 +390,6 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception("Error al asignar el permiso: " + ex.Message, ex);
             }
         }
-       
 
         private PermisoDTO BuscarPermisoEnHijos(PermisoDTO permiso, int idPermiso)
         {
@@ -445,7 +435,6 @@ namespace IngenieriaSoftware.DAL
             return null;
         }
 
-
         public void AsignarPermiso(int usuarioId, int permisoId)
         {
             try
@@ -458,7 +447,7 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@permiso_id", permisoId)
                 };
 
-               _dao.ExecuteNonQuery(nombreStoredProcedure, parametros);
+                _dao.ExecuteNonQuery(nombreStoredProcedure, parametros);
             }
             catch (Exception ex)
             {

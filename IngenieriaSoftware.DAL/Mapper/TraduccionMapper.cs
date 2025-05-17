@@ -47,7 +47,6 @@ namespace IngenieriaSoftware.DAL
             return traducciones;
         }
 
-
         public List<TraduccionDTO> MapearTraduccionesDesdeDataSet(DataSet dataSet)
         {
             var traducciones = new List<TraduccionDTO>();

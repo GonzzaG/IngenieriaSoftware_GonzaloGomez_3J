@@ -4,14 +4,13 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace IngenieriaSoftware.DAL
 {
     public class BackupRepository
     {
-        DAO _dao = new DAO();
-        BackupService _fileBackupService = new BackupService();
+        private DAO _dao = new DAO();
+        private BackupService _fileBackupService = new BackupService();
 
         public bool GuardarRegistro(BackupRegistro backup)
         {
@@ -23,7 +22,6 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@Ruta", backup.Ruta),
                     new SqlParameter("@Fecha", backup.Fecha),
                     new SqlParameter("@Usuario", backup.Usuario),
-                    
                 };
                 _dao.ExecuteNonQuery("sp_InsertarBackupCatalogo", parametros);
 
@@ -39,7 +37,6 @@ namespace IngenieriaSoftware.DAL
         {
             try
             {
-
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@NombreBD", _dao.NombreBD),
@@ -51,10 +48,10 @@ namespace IngenieriaSoftware.DAL
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error al realizar el backup: " + ex.Message);
-            }   
+            }
         }
 
         public bool RestaurarBackup(string rutaBackup)
@@ -86,9 +83,5 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception(ex.Message);
             }
         }
-
-       
-
-        
     }
 }

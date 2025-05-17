@@ -3,24 +3,20 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarCambiosAuditoria: Form, IActualizable
+    public partial class FormGestionarCambiosAuditoria : Form, IActualizable
     {
         private readonly AuditoriaManager _auditoriaManager = new AuditoriaManager();
         public NotificacionService _notificacionService => new NotificacionService();
+
         public FormGestionarCambiosAuditoria()
         {
             InitializeComponent();
         }
+
         private void FormGestionarCambiosAuditoria_Load(object sender, EventArgs e)
         {
             Actualizar();
@@ -38,14 +34,14 @@ namespace IngenieriaSoftware.UI
                 dataGridViewPeticionesPendientes.DataSource = null;
                 var peticiones = _auditoriaManager.ObtenerPeticionesPendientes();
 
-                if(peticiones.Count > 0)
+                if (peticiones.Count > 0)
                 {
                     dataGridViewPeticionesPendientes.DataSource = peticiones;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al listar las peticiones pendientes: " + ex.Message); 
+                MessageBox.Show("Error al listar las peticiones pendientes: " + ex.Message);
             }
         }
 
@@ -90,7 +86,7 @@ namespace IngenieriaSoftware.UI
                 dataGridViewDetallesNuevos.DataSource = null;
                 dataGridViewDetallesAntes.DataSource = null;
                 dataGridViewDetallesAntes.DataSource = detallesActuales;
-                dataGridViewDetallesNuevos.DataSource = cambiosPropuestos;  
+                dataGridViewDetallesNuevos.DataSource = cambiosPropuestos;
 
                 OcultarColumnasDetalles();
             }
@@ -123,7 +119,7 @@ namespace IngenieriaSoftware.UI
                 throw new Exception(ex.Message);
             }
         }
-         
+
         private void OcultarColumnasDetalles()
         {
             dataGridViewDetallesAntes.Columns[nameof(AuditoriaDetalle.IdAuditoria)].Visible = false;
@@ -143,7 +139,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if(dataGridViewPeticionesPendientes.SelectedRows.Count == 0)
+                if (dataGridViewPeticionesPendientes.SelectedRows.Count == 0)
                 {
                     MessageBox.Show("Seleccione una fila para aceptar la petición.");
                     return;
@@ -151,14 +147,14 @@ namespace IngenieriaSoftware.UI
                 int idPeticion = int.Parse(dataGridViewPeticionesPendientes.SelectedRows[0].Cells[nameof(PeticionRestauracion.IdPeticion)].Value.ToString());
                 string usuarioAutorizador = SessionManager.GetInstance.Usuario.Username;
 
-                if(_auditoriaManager.AceptarPeticionDeRestauracion(idPeticion, usuarioAutorizador))
+                if (_auditoriaManager.AceptarPeticionDeRestauracion(idPeticion, usuarioAutorizador))
                 {
                     MessageBox.Show("Se han realizado los cambios correctamente");
                 }
 
                 Actualizar();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("No se pudo aceptar los cambios: " + ex.Message);
             }
@@ -176,10 +172,10 @@ namespace IngenieriaSoftware.UI
                 }
                 else
                     MessageBox.Show("No se pudo rechazar la petición.");
-             
-                    Actualizar();
+
+                Actualizar();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("No se pudo rechazar los cambios: " + ex.Message);
             }

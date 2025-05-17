@@ -2,14 +2,6 @@
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -17,7 +9,8 @@ namespace IngenieriaSoftware.UI
 {
     public partial class FormGenerarFacturas : Form, IActualizable
     {
-        MesaBLL _mesaBLL = new MesaBLL();
+        private MesaBLL _mesaBLL = new MesaBLL();
+
         public FormGenerarFacturas()
         {
             InitializeComponent();
@@ -55,7 +48,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if(dataGridViewMesasCerradas.SelectedRows.Count == 0)
+                if (dataGridViewMesasCerradas.SelectedRows.Count == 0)
                 {
                     MessageBox.Show("Seleccione una mesa para poder generar la factura");
                 }
@@ -66,9 +59,8 @@ namespace IngenieriaSoftware.UI
 
                 using (var transaction = new TransactionScope())
                 {
-               
                     FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
-               
+
                     formSeleccionMedioDePago.FormClosed += (s, ev) =>
                     {
                         _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
@@ -78,19 +70,15 @@ namespace IngenieriaSoftware.UI
                     padre.AbrirFormHijo(formSeleccionMedioDePago);
 
                     transaction.Complete();
-                
-                }   
+                }
 
                 BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Generar Factura", DateTime.Now, "MesaId: " + mesaId, this.Name, AppDomain.CurrentDomain.BaseDirectory, "Caja");
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al generar la factura: " + ex.Message);
                 BitacoraHelper.RegistrarError(this.Name, ex, "Caja", SessionManager.GetInstance.Usuario.Username);
             }
-
-
         }
     }
 }

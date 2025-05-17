@@ -1,13 +1,6 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -15,6 +8,7 @@ namespace IngenieriaSoftware.UI
     public partial class FormComandasAEntregar : Form, IActualizable
     {
         private readonly ComandaBLL _comandaBLL = new ComandaBLL();
+
         public FormComandasAEntregar()
         {
             InitializeComponent();
@@ -42,8 +36,6 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-
-
         private void btnComandaEntregada_Click(object sender, EventArgs e)
         {
             try
@@ -58,13 +50,12 @@ namespace IngenieriaSoftware.UI
             }
             catch (Exception ex)
             {
-                BitacoraHelper.RegistrarError(this.Name,ex,"Cocina", SessionManager.GetInstance.Usuario.Username);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Cocina", SessionManager.GetInstance.Usuario.Username);
             }
         }
 
         private void FormComandasAEntregar_Load(object sender, EventArgs e)
         {
-            
             Actualizar();
             //VerificarNotificaciones();
         }

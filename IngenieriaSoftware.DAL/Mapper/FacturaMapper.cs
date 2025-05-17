@@ -3,15 +3,11 @@ using IngenieriaSoftware.BEL.Constantes;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Mapper
 {
     public class FacturaMapper
     {
-
         public List<Factura> MapearFacturasDesdeDataSet(DataSet ds)
         {
             List<Factura> facturas = new List<Factura>();

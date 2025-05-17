@@ -11,8 +11,9 @@ namespace IngenieriaSoftware.UI
     public partial class AgregarIdioma : Form, IActualizable
     {
         //private readonly IdiomaSujeto _idiomaObserver;
-        Dictionary<EtiquetaDTO, TraduccionDTO> etiquetasConTraduccion = new Dictionary<EtiquetaDTO, TraduccionDTO>();
-        List<EtiquetaDTO> etiquetasSinTraduccion = new List<EtiquetaDTO>();
+        private Dictionary<EtiquetaDTO, TraduccionDTO> etiquetasConTraduccion = new Dictionary<EtiquetaDTO, TraduccionDTO>();
+
+        private List<EtiquetaDTO> etiquetasSinTraduccion = new List<EtiquetaDTO>();
         private readonly TraduccionBLL _traduccionBLL;
         private EtiquetaDTO etiquetaSeleccionada = new EtiquetaDTO();
 
@@ -25,15 +26,14 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
 
             _traduccionBLL = new TraduccionBLL();
-            
         }
+
         private void AgregarIdioma_Load(object sender, EventArgs e)
         {
             formPadre = this.MdiParent as FormMDI;
             Actualizar();
             VerificarNotificaciones();
         }
-
 
         #region Metodos de Interfaz
 
@@ -54,8 +54,7 @@ namespace IngenieriaSoftware.UI
             dataGridViewEtiquetasSinTraduccion.DataSource = etiquetasSinTraduccion.OrderBy(e => e.Tag).ToList();
         }
 
-
-        #endregion
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -73,7 +72,7 @@ namespace IngenieriaSoftware.UI
                 int etiquetaId = (int)dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells[0].Value;
                 string etiquetaNombre = dataGridViewEtiquetasConTraduccion.SelectedRows[0].Cells[1].Value.ToString();
 
-                etiquetaSeleccionada = etiquetasConTraduccion.Keys.FirstOrDefault(et => et.Tag == etiquetaId);                                                                                             
+                etiquetaSeleccionada = etiquetasConTraduccion.Keys.FirstOrDefault(et => et.Tag == etiquetaId);
                 // Buscamos en el diccionario, la etiqueta que fue seleciconada segun el nombre en la gridView
                 TraduccionDTO traduccion = etiquetasConTraduccion.FirstOrDefault(t => t.Value.EtiquetaId == etiquetaId).Value;
 
@@ -85,7 +84,7 @@ namespace IngenieriaSoftware.UI
         private void dataGridViewEtiquetasSinTraduccion_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridViewEtiquetasSinTraduccion.SelectedRows.Count > 0)
-            {           
+            {
                 int etiquetaId = (int)dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells[0].Value;
                 var etiquetaNombre = dataGridViewEtiquetasSinTraduccion.SelectedRows[0].Cells[1].Value.ToString();
                 txtEtiqueta.Text = etiquetaNombre;
@@ -124,16 +123,14 @@ namespace IngenieriaSoftware.UI
                     LimpiarCampos();
                 }
 
-                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Agregar Traducción", DateTime.Now, $"Se agregó la traducción: {txtTraduccion.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Traducciones");    
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Agregar Traducción", DateTime.Now, $"Se agregó la traducción: {txtTraduccion.Text}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Traducciones");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error al agregar la traducción: {ex.Message}");
 
-                BitacoraHelper.RegistrarError(this.Name, ex, "Traducciones", SessionManager.GetInstance.Usuario.Username);    
-            }   
-
-
+                BitacoraHelper.RegistrarError(this.Name, ex, "Traducciones", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         public void LimpiarCampos()

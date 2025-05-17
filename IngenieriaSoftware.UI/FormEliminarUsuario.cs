@@ -24,9 +24,9 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar()
         {
-
         }
-        #endregion
+
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -36,6 +36,7 @@ namespace IngenieriaSoftware.UI
             }
             base.OnFormClosed(e);
         }
+
         private void EliminarUsuario_Load(object sender, EventArgs e)
         {
             try
@@ -74,15 +75,13 @@ namespace IngenieriaSoftware.UI
                 }
 
                 BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Eliminar Usuario", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
-
             }
             catch (Exception ex)
             {
-                BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios",SessionManager.GetInstance.Usuario.Username);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios", SessionManager.GetInstance.Usuario.Username);
                 MessageBox.Show(ex.Message);
             }
         }
-            
 
         private void comboBoxUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {

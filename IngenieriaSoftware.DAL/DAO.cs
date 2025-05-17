@@ -26,16 +26,14 @@ namespace IngenieriaSoftware.DAL
             mCon = new SqlConnection(connectionString);
         }
 
-        public int ExecuteNonQuery(string pNombreStoredProcedure, SqlParameter[] pParametros)
+        public int ExecuteNonQuery(string pCommandText, SqlParameter[] pParametros)
         {
             try
             {
                 Conectar();
 
-                SqlCommand mComm = new SqlCommand(pNombreStoredProcedure, mCon)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
+                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
+                mComm.CommandType = CommandType.StoredProcedure;
 
                 if (pParametros != null)
                 {

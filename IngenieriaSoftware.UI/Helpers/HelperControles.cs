@@ -1,21 +1,15 @@
-﻿using IngenieriaSoftware.Servicios.DTOs;
-using IngenieriaSoftware.Servicios.Interfaces;
-using System;
+﻿using IngenieriaSoftware.Servicios.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
     public class ControlesHelper
     {
-
         private static int TagContador = 500;
 
         private readonly IIdiomaSujeto _idiomaSujeto;
-
-       
 
         public ControlesHelper(IIdiomaSujeto idiomaSujeto)
         {
@@ -23,11 +17,11 @@ namespace IngenieriaSoftware.UI
         }
 
         #region Suscribir Controles
+
         public void SuscribirControles(Form formulario)
         {
             foreach (Control control in formulario.Controls)
             {
-             
                 if (control.Tag != null && int.TryParse(control.Tag.ToString(), out int _))
                 {
                     var controlAdaptador = new ControlIdiomaAdaptador(control);
@@ -42,7 +36,6 @@ namespace IngenieriaSoftware.UI
                     }
                 }
 
-   
                 SuscribirControlesRecursivos(control);
             }
         }
@@ -76,11 +69,11 @@ namespace IngenieriaSoftware.UI
                 SuscribirControlesRecursivos(control);
             }
         }
-        #endregion
 
-
+        #endregion Suscribir Controles
 
         #region Obtener Controles Del Formulario
+
         public static Dictionary<string, IdiomaObservadorDTO> ListarControles(Control formulario)
         {
             Dictionary<string, IdiomaObservadorDTO> controles = new Dictionary<string, IdiomaObservadorDTO>();
@@ -95,7 +88,7 @@ namespace IngenieriaSoftware.UI
         private static void RecorrerControles(Control control, Dictionary<string, IdiomaObservadorDTO> controles)
         {
             // Si el control tiene un Tag, lo usamos, si no, asignamos uno nuevo usando el TagContador
-            if(control.Tag == null) { control.Tag = 0; }
+            if (control.Tag == null) { control.Tag = 0; }
             if (int.Parse(control.Tag.ToString()) is int tagValue)
             {
                 controles[tagValue.ToString()] = new IdiomaObservadorDTO
@@ -109,7 +102,7 @@ namespace IngenieriaSoftware.UI
             {
                 // Asignar un nuevo Tag si el control no tiene uno
                 int nuevoTag = controles.Count() + TagContador++;
-                control.Tag = nuevoTag;  
+                control.Tag = nuevoTag;
                 controles[nuevoTag.ToString()] = new IdiomaObservadorDTO
                 {
                     Tag = nuevoTag,
@@ -134,7 +127,6 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-   
         private static void RecorrerMenuItems(ToolStripMenuItem item, Dictionary<string, IdiomaObservadorDTO> controles)
         {
             // Verificamos si el Tag es nulo o vacío, o si el valor es 0
@@ -158,7 +150,7 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
-        #endregion
 
+        #endregion Obtener Controles Del Formulario
     }
 }

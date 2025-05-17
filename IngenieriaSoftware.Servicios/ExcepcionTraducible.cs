@@ -1,9 +1,5 @@
 ﻿using IngenieriaSoftware.Servicios.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios
 {
@@ -12,7 +8,7 @@ namespace IngenieriaSoftware.Servicios
         public int Tag { get; set; }
         public string Name { get; set; } //no es necesario
 
-        protected ExcepcionTraducible(int tag, string name) 
+        protected ExcepcionTraducible(int tag, string name)
         {
             Tag = tag;
             Name = name;
@@ -25,6 +21,5 @@ namespace IngenieriaSoftware.Servicios
         }
 
         public override string Message => HelpLink ?? base.Message;
-
     }
 }

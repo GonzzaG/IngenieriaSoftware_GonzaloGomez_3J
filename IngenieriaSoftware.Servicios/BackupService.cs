@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios
 {
@@ -17,15 +13,14 @@ namespace IngenieriaSoftware.Servicios
             {
                 if (!Directory.Exists(BackupDirectory))
                     Directory.CreateDirectory(BackupDirectory);
-            
+
                 string backupPath = Path.Combine(BackupDirectory, $"{tableName}_{DateTime.Now:yyyyMMdd}.bak");
 
-                File.Copy(sourcePath, backupPath, true );
+                File.Copy(sourcePath, backupPath, true);
 
                 return backupPath;
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error al crear el backup.", ex);
             }
@@ -44,13 +39,12 @@ namespace IngenieriaSoftware.Servicios
                 {
                     throw new FileNotFoundException("El archivo no existe.", filePath);
                 }
-
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al obtener el tamaño del archivo.", ex);
             }
-        }   
+        }
 
         public void RestoreBackup(string backupPath, string destinationPath)
         {
@@ -92,11 +86,10 @@ namespace IngenieriaSoftware.Servicios
                     throw new FileNotFoundException("El archivo de backup no existe.");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Ocurrio un error eliminando el backup: ", ex);
             }
         }
-
     }
 }

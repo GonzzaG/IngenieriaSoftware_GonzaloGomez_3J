@@ -3,14 +3,7 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -26,6 +19,7 @@ namespace IngenieriaSoftware.UI
             InitializeComponent();
             Inicializar();
         }
+
         public FormNuevaMesa(Mesa mesa)
         {
             InitializeComponent();
@@ -36,7 +30,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if(numericUpDownNumMesa.Value == 0)
+                if (numericUpDownNumMesa.Value == 0)
                 {
                     //aca lanzo la excepcionpersonalizada
                     return;
@@ -50,7 +44,7 @@ namespace IngenieriaSoftware.UI
                     //Cuando la mesa se desocupe, se tendra que sacar el estado de la mesa
                 };
                 _mesaBLL.GuardarMesa(mesa);
-                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Mesa", DateTime.Now, "Mesa creada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");   
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Mesa", DateTime.Now, "Mesa creada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
 
                 this.Close();
             }
@@ -65,14 +59,12 @@ namespace IngenieriaSoftware.UI
                 //Excepcion 3
                 //excepcion personalizada por si no se pudo guardar la mesa
             }
-
         }
-
 
         //Inicializar para Alta
         private void Inicializar()
         {
-            lblModificarMesa.Visible = false; 
+            lblModificarMesa.Visible = false;
             lblNuevaMesa.Visible = true;
             lblNuevaMesa.Visible = true;
             //numericUpDownNumMesa.Visible = true;
@@ -91,9 +83,9 @@ namespace IngenieriaSoftware.UI
             //numericUpDownNumMesa.Visible = true;
             //numericUpDownNumMesa.Enabled = false;
         }
+
         public void Actualizar()
         {
-            
         }
 
         private void FormNuevaMesa_Load(object sender, EventArgs e)

@@ -7,7 +7,8 @@ namespace IngenieriaSoftware.UI
 {
     public partial class FormGestionarIdioma : Form, IActualizable
     {
-        IdiomaBLL _idiomaBLL = new IdiomaBLL();
+        private IdiomaBLL _idiomaBLL = new IdiomaBLL();
+
         public FormGestionarIdioma()
         {
             InitializeComponent();
@@ -16,6 +17,7 @@ namespace IngenieriaSoftware.UI
         public NotificacionService _notificacionService => new NotificacionService();
 
         #region Metodos de Interfaz
+
         public void Actualizar()
         {
             try
@@ -29,10 +31,9 @@ namespace IngenieriaSoftware.UI
                     OcultarCampos();
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("No se pudo obtener los idiomas: " + ex.Message);
-               
             }
         }
 
@@ -43,6 +44,7 @@ namespace IngenieriaSoftware.UI
             dataGridViewIdiomas.Columns[3].Visible = false;
             dataGridViewIdiomas.Columns[4].Visible = false;
         }
+
         public void VerificarNotificaciones()
         {
             if (PermisosData.PermisosString.Contains("Mesero"))
@@ -54,7 +56,8 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
-        #endregion
+
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -64,6 +67,7 @@ namespace IngenieriaSoftware.UI
             }
             base.OnFormClosed(e);
         }
+
         private void FormGestionarIdioma_Load(object sender, System.EventArgs e)
         {
             VerificarNotificaciones();
@@ -74,7 +78,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if(txtIdioma.Text != null)
+                if (txtIdioma.Text != null)
                 {
                     var texto = txtIdioma.Text;
                     _idiomaBLL.InsertarIdioma(texto);
@@ -87,7 +91,6 @@ namespace IngenieriaSoftware.UI
 
                     BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Idioma agregado", DateTime.Now, txtIdioma.Text, this.Name, AppDomain.CurrentDomain.BaseDirectory, "Idiomas");
                 }
-
             }
             catch (Exception ex)
             {
@@ -106,7 +109,6 @@ namespace IngenieriaSoftware.UI
                     _idiomaBLL.EliminarIdioma(idiomaId);
                     string idiomaNombre = (string)dataGridViewIdiomas.Rows[0].Cells[1].Value;
                     MessageBox.Show("Idioma eliminado con exito.");
-
 
                     //deberia actualizar el combobox del form padre
                     FormMDI formMDI = this.MdiParent as FormMDI;
