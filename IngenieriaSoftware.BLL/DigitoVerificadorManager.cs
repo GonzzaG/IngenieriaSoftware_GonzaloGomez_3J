@@ -11,6 +11,7 @@ namespace IngenieriaSoftware.BLL
     {
         private readonly DigitoVerificadorVerticalDAL _dvVerticalDAL = new DigitoVerificadorVerticalDAL();
         private readonly DigitoVerificadorHorizontalDAL _dvHorizontalDAL = new DigitoVerificadorHorizontalDAL();
+        private readonly ObjetoDAL _objetoDAL = new ObjetoDAL();
 
         public bool VerificarDigitoVerticalYHorizontal()
         {
@@ -105,7 +106,7 @@ namespace IngenieriaSoftware.BLL
                 string campoId = TablasDVCamposId.ObtenerCampoId(nombreTabla);
 
                 // Obtener el DataRow del registro
-                DataRow registro = ObjetoDAL.ObtenerRegistroDeTabla(nombreTabla, campoId, valorId);
+                DataRow registro = _objetoDAL.ObtenerRegistroDeTabla(nombreTabla, campoId, valorId);
 
                 if (registro == null)
                     throw new Exception("No se encontró el registro especificado para la tabla " + nombreTabla);

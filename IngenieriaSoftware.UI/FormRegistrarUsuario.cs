@@ -86,6 +86,7 @@ namespace IngenieriaSoftware.UI
 
         /// <summary>
         /// Metodo que calcula el digito verificador de un registro, dado el nombre de la tabla y el id del registro.
+        /// Luego, verifica la integridad de los registros de la tabla, comparando el DVH almacenado con el DVH generado.
         /// </summary>
         /// <param name="entidadVerificable"></param>
         /// <exception cref="Exception"></exception>
@@ -95,9 +96,12 @@ namespace IngenieriaSoftware.UI
             {
                 string nombreTabla = entidadVerificable.getNombreTabla();
                 if (_digitoVerificadorManager.ActualizarDVHorizontalDeRegistro(nombreTabla, entidadVerificable.Id))
-                    return true;
-                else
-                    throw new Exception(nombreTabla + " no se actualizo correctamente el DVH");
+                {
+                    if (_digitoVerificadorManager.VerificarDigitoVerticalYHorizontal())
+                        return true;
+                }
+
+                throw new Exception(nombreTabla + " no se actualizo correctamente el DVH");
             }
             catch (Exception ex)
             {

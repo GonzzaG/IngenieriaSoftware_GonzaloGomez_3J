@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace IngenieriaSoftware.BEL
 {
     [Verificable("user")]
-    public class Usuario : Entity, IUsuario, IObserver, IVerificable, IDigitoVerificable
+    public class Usuario : Entity, IUsuario, IObserver, IVerificable
     {
         //public int Id { get; set; }
         public string Username { get; set; }

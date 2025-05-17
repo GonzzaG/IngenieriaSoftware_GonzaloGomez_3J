@@ -62,7 +62,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 //int result = new DigitoVerificadorManager().ActualizarVerificadorVertical(nombreTabla);
-               // bool resultad = new DigitoVerificadorManager().ActualizarVerificadores("usuarios");
+               bool resultad = new DigitoVerificadorManager().ActualizarVerificadores("usuarios");
 
                 bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
             }

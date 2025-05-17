@@ -45,7 +45,7 @@ namespace IngenieriaSoftware.DAL
         /// <param name="valorId"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static DataRow ObtenerRegistroDeTabla(string nombreTabla, string campoId, object valorId)
+        public DataRow ObtenerRegistroDeTabla(string nombreTabla, string campoId, object valorId)
         {
             try
             {
