@@ -139,7 +139,7 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@UsuarioAutorizador", usuarioAutorizador)
                 };
 
-                _dao.ExecuteNonQuery("sp_AceptarPeticionRestauracion", parametros);
+                _dao.ExecuteNonQuery("sp_AceptarPeticionRestauracionExtension", parametros);
 
                 return true;
             }

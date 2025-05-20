@@ -31,10 +31,12 @@ namespace IngenieriaSoftware.BLL
                         Usuario = SessionManager.GetInstance.Usuario.Username
                     };
                     _backupRepository.GuardarRegistro(backup);
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Backup realizado", DateTime.Now, string.Empty, "BackupManager", "RealizarBackup");
                 }
             }
             catch (Exception ex)
             {
+                BitacoraHelper.RegistrarError(SessionManager.GetInstance.Usuario.ToString(), ex, "BackupManager", "RealizarBackup");
                 throw new Exception("Error al realizar el backup: " + ex.Message);
             }
         }
@@ -53,6 +55,7 @@ namespace IngenieriaSoftware.BLL
                         backups.Add(Path.GetFileName(archivo));
                     }
 
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Obteniendo backups", DateTime.Now, string.Empty, "BackupManager", "ObtenerBackUps");
                     return backups;
                 }
                 else
@@ -62,6 +65,7 @@ namespace IngenieriaSoftware.BLL
             }
             catch (Exception ex)
             {
+                BitacoraHelper.RegistrarError(SessionManager.GetInstance.Usuario.ToString(), ex, "BackupManager", "ObtenerBackUps");
                 throw new Exception("Error al obtener los backups: " + ex.Message);
             }
         }
@@ -74,6 +78,7 @@ namespace IngenieriaSoftware.BLL
                 if (_backupRepository.RestaurarBackup(rutaBackup))
                 {
                     File.Delete(rutaBackup);
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Restaurando backup", DateTime.Now, string.Empty, "BackupManager", "RestaurarBackup");
                     return true;
                 }
                 else
@@ -83,6 +88,7 @@ namespace IngenieriaSoftware.BLL
             }
             catch (Exception ex)
             {
+                BitacoraHelper.RegistrarError(SessionManager.GetInstance.Usuario.ToString(), ex, "BackupManager", "RestaurarBackup");
                 throw new Exception("Error al restaurar el backup: " + ex.Message);
             }
         }

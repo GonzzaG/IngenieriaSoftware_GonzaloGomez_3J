@@ -26,6 +26,8 @@ namespace IngenieriaSoftware.UI
         public void Actualizar()
         {
             //ListarTablasAuditadas();
+            txtComentario.Clear();
+            dataGridViewHistorialCambios.DataSource = null;
             dataGridViewRegistrosModificados.DataSource = null;
             dataGridViewRegistrosModificados.DataSource = _registros;
         }
@@ -85,7 +87,14 @@ namespace IngenieriaSoftware.UI
                     throw new Exception("Debe seleccionar una fila del historial de cambios");
                 }
                 PeticionRestauracion petRest = new PeticionRestauracion();
+                string fullName = dataGridViewHistorialCambios.SelectedRows[0].Cells[nameof(AuditoriaDetalle.Tabla)].Value.ToString();
+                string[] partes = fullName.Replace("[", "").Replace("]", "").Split('.');
+                string nombreTabla = partes.Length > 1 ? partes[1] : partes[0];
 
+                if (TablasDVCamposId.ImplementaIDVHCalculo(nombreTabla))
+                {
+                    throw new Exception("No se puede aceptar la petición porque la tabla implementa IDVH y no se puede calcular el DVH (AUN).");
+                }
                 petRest = MapearDesdeDataGridViewRow(dataGridViewHistorialCambios.SelectedRows[0]);
                 _auditoriaManager.SolicitarRestauracion(petRest);
 
@@ -94,6 +103,10 @@ namespace IngenieriaSoftware.UI
             catch (Exception ex)
             {
                 MessageBox.Show("Error al obtener los detalles del registro seleccionado: " + ex.Message);
+            }
+            finally
+            {
+                Actualizar();
             }
         }
 

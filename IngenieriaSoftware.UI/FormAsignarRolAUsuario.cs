@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace IngenieriaSoftware.UI
         private List<PermisoDTO> _roles = new List<PermisoDTO>();
         private List<UsuarioDTO> _usuarios = new List<UsuarioDTO>();
 
+        private DigitoVerificadorManager _digitoVerificadorManager = new DigitoVerificadorManager();
         private bool _verPermisos = false;
         public NotificacionService _notificacionService => new NotificacionService();
 
@@ -180,7 +182,25 @@ namespace IngenieriaSoftware.UI
                 treeViewPermisoRol.Nodes.Clear();
             }
         }
+       
+        private bool CalcularDigitoVerificador(Entity entidadVerificable)
+        {
+            try
+            {
+                string nombreTabla = entidadVerificable.getNombreTabla();
+                if (_digitoVerificadorManager.ActualizarDVH_Y_DVV_DeRegistro(nombreTabla, entidadVerificable.Id))
+                {
+                    if (_digitoVerificadorManager.VerificarDigitoVerticalYHorizontal())
+                        return true;
+                }
 
+                throw new Exception(nombreTabla + " no se actualizo correctamente el DVH");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         private void btnAsignarRol_Click(object sender, EventArgs e)
         {
             if (dataGridViewRoles.SelectedRows[0] == null ||
@@ -197,6 +217,16 @@ namespace IngenieriaSoftware.UI
                 //FillTreeView(permisosUsuario, treeViewPermisoRol);
                 Actualizar();
 
+                Entity usuarioVerificable = new Usuario
+                {
+                    Id = usuarioId,
+                };
+
+                if (CalcularDigitoVerificador(usuarioVerificable))
+                {
+                    MessageBox.Show($"El digito verificador del usuario fue calculado con exito");
+                }
+
                 BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Asignar Rol", DateTime.Now, "Asignar rol a usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
@@ -204,6 +234,7 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
                 BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.ToString());
             }
+            
         }
 
         private void dataGridViewUsuarios_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -243,6 +274,15 @@ namespace IngenieriaSoftware.UI
                 treeViewPermisoRol.Nodes.Clear();
                 BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Desasignar Rol", DateTime.Now, "Desasignar rol a usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
                 //Actualizar();
+                Entity usuarioVerificable = new Usuario
+                {
+                    Id = usuarioId,
+                };
+
+                if (CalcularDigitoVerificador(usuarioVerificable))
+                {
+                    MessageBox.Show($"El digito verificador del usuario fue calculado con exito");
+                }
             }
             catch (Exception ex)
             {

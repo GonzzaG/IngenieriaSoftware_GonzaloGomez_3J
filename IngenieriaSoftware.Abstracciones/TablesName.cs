@@ -1,4 +1,7 @@
-﻿namespace IngenieriaSoftware.Abstracciones
+﻿using System.Collections.Generic;
+using System;
+
+namespace IngenieriaSoftware.Abstracciones
 {
     public static class TablesName
     {

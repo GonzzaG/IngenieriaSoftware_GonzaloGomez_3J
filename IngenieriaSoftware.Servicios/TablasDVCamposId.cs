@@ -33,5 +33,13 @@ namespace IngenieriaSoftware.Servicios
         /// Verifica si la tabla tiene un campo ID registrado para DVH.
         /// </summary>
         public static bool TieneCampoId(string nombreTabla) => ClavesPrimarias.ContainsKey(nombreTabla);
+        public static bool ImplementaIDVHCalculo(string nombreTabla)
+        {
+            Type tipo;
+            if (!TablesMap.TryGetType(nombreTabla, out tipo))
+                return false;
+
+            return typeof(IVerificable).IsAssignableFrom(tipo);
+        }
     }
 }
