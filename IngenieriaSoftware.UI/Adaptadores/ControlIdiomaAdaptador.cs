@@ -1,11 +1,6 @@
 ﻿using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -27,7 +22,6 @@ namespace IngenieriaSoftware.UI
         {
             if (Regex.IsMatch(_control.Name, @"(comboBox|txt)", RegexOptions.IgnoreCase))
             {
-                     
                 if (Regex.IsMatch(_control.Name, @"(Idioma)", RegexOptions.IgnoreCase))
                 {
                     _control.Text = IdiomaData.IdiomaActual.Nombre;

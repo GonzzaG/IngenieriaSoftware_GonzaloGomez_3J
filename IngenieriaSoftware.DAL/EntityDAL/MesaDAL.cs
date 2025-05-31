@@ -1,14 +1,10 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.DAL.Mapper;
-using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
@@ -48,13 +44,14 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
+
         public List<Mesa> ObtenerMesasDisponibles(int estadoFueraDeServicio)
         {
             try
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@estadoMesa", estadoFueraDeServicio)  
+                    new SqlParameter("@estadoMesa", estadoFueraDeServicio)
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerMesasDisponibles", parametros);
@@ -84,7 +81,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-        public Mesa ObtenerMesaDisponiblePorId(int mesaId,int estadoFueraDeServicio)
+        public Mesa ObtenerMesaDisponiblePorId(int mesaId, int estadoFueraDeServicio)
         {
             try
             {
@@ -176,6 +173,5 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
-
     }
 }

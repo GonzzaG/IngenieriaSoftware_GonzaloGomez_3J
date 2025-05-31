@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Mapper
 {
@@ -24,7 +21,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                         NombreProducto = row["NombreProducto"].ToString(),
                         Cantidad = Convert.ToInt32(row["Cantidad"]),
                         PrecioUnitario = Convert.ToDecimal(row["PrecioUnitario"]),
-                        
+
                         //implementar descuento
                         //Descuento = row["Descuento"] != DBNull.Value ? Convert.ToDecimal(row["Descuento"]) : 0
                     };
@@ -35,6 +32,5 @@ namespace IngenieriaSoftware.DAL.Mapper
 
             return productosFactura;
         }
-
     }
 }

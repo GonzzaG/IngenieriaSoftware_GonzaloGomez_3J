@@ -2,7 +2,6 @@
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -26,9 +25,9 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar()
         {
-
         }
-        #endregion
+
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -47,10 +46,10 @@ namespace IngenieriaSoftware.UI
 
         private void CargarUsuarios()
         {
-           // List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuarios();     
-           List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuarios();
+            // List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuarios();
+            List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuarios();
 
-           listarUsuarios(usuarios);
+            listarUsuarios(usuarios);
         }
 
         public void listarUsuarios(List<UsuarioDTO> pUsuarios)
@@ -89,7 +88,7 @@ namespace IngenieriaSoftware.UI
         {
             TreeNode nodo = new TreeNode(permiso.CodPermiso)
             {
-                Tag = permiso.Id 
+                Tag = permiso.Id
             };
             foreach (PermisoDTO hijo in permiso.permisosHijos)
             {
@@ -104,32 +103,33 @@ namespace IngenieriaSoftware.UI
         {
             if (comboBoxUsuario.SelectedItem == null) return;
             string nombreUsuario = comboBoxUsuario.SelectedItem.ToString();
-           // var permisosDelUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
+            // var permisosDelUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
             var permisosUsuario = _permisoBLL.ObtenerPermisosDelUsuario(nombreUsuario);
-           
-       
+
             FillTreeView(permisosUsuario, treeViewPermisoUsuario);
         }
 
         private void btnAsignarPermiso_Click(object sender, EventArgs e)
         {
-            if (treeViewPermisos.SelectedNode == null) return;
+            if (treeViewPermisoUsuario.SelectedNode == null) return;
             if (comboBoxUsuario.Text.Length == 0) return;
             try
             {
                 string usuarioNombre = comboBoxUsuario.Text.ToString();
                 var usuario = _usuarioBLL.ObtenerUsuarioPorNombre(usuarioNombre);
                 usuario.Permisos = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);
-                List<PermisoDTO> permisosUsuario = _permisoBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, usuario);
+                List<PermisoDTO> permisosUsuario = _permisoBLL.AsignarPermisoUsuario((int)treeViewPermisoUsuario.SelectedNode.Tag, usuario);
 
                 ActualizarFormulario();
                 permisosUsuario = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);
 
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Asignar Permiso", DateTime.Now, $"Se asigno el permiso {treeViewPermisoUsuario.SelectedNode.Text} al usuario {usuarioNombre}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }
 
@@ -148,16 +148,19 @@ namespace IngenieriaSoftware.UI
                 if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.GetInstance.Usuario.Username)
                 {
                     var padre = this.MdiParent as FormMDI;
-                  
+
                     this.Close();
                 }
 
-                    ActualizarFormulario();
+                ActualizarFormulario();
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Desasignar Permiso", DateTime.Now, $"Se desasigno el permiso {treeViewPermisoUsuario.SelectedNode.Text} al usuario {usuarioNombre}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }
 

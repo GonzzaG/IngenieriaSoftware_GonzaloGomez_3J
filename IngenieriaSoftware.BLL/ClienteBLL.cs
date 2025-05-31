@@ -1,11 +1,5 @@
 ﻿using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.EntityDAL;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace IngenieriaSoftware.BLL
@@ -16,25 +10,24 @@ namespace IngenieriaSoftware.BLL
 
         public int InsertarCliente(Cliente cliente)
         {
-            using(var transaccion = new TransactionScope())
+            using (var transaccion = new TransactionScope())
             {
-                if(cliente.numeroTarjetaUltimos4 != string.Empty)
+                int clienteId;
+                if (cliente.numeroTarjetaUltimos4 != string.Empty)
                 {
-                    int clienteId = _clienteDAL.InsertarClienteConDatosBancarios(cliente);
-
-                    transaccion.Complete();
-                    return clienteId;
+                    clienteId = _clienteDAL.InsertarClienteConDatosBancarios(cliente);
                 }
                 else
                 {
-                    int clienteId = _clienteDAL.InsertarCliente(cliente);
-                    transaccion.Complete();
-                    return clienteId;
-
+                    clienteId = _clienteDAL.InsertarCliente(cliente);
                 }
+                // Realizamos backup para guardar los cambios
+                new BackupManager().RealizarBackup();
+
+                transaccion.Complete();
+
+                return clienteId;
             }
         }
-
-
     }
 }

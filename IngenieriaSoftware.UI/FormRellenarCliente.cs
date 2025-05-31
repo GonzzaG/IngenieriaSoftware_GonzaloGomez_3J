@@ -1,15 +1,7 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Negocio;
+﻿using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
-using IngenieriaSoftware.BLL.Mesas;
+using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -19,15 +11,16 @@ namespace IngenieriaSoftware.UI
         private readonly ClienteBLL _clienteBLL = new ClienteBLL();
         private bool EsBancario;
         internal int ClienteId { get; private set; }
+
         public FormRellenarCliente(bool esBancario)
         {
             InitializeComponent();
 
             txtNombre.Text = "gonza";
             txtApellido.Text = "gomez";
-            txtEmail.Text = "gonza@gonza.com";
-            txtTelefono.Text = "123131231";
-            txtDireccion.Text = "Pasteur 3232";
+            txtEmail.Text = "gonzalogomezhf@gmail.com";
+            txtTelefono.Text = "1234567890";
+            txtDireccion.Text = "Av. Siempre viva 742";
             EsBancario = esBancario;
             DatosBancarios(esBancario);
         }
@@ -42,7 +35,6 @@ namespace IngenieriaSoftware.UI
                 txtNumeroTarjeta.Visible = true;
                 lblBancoEmisor.Visible = true;
                 txtBancoEmisor.Visible = true;
-                
 
                 txtTipoTarjeta.Text = "asdf";
                 txtNumeroTarjeta.Text = "1231312123";
@@ -61,37 +53,44 @@ namespace IngenieriaSoftware.UI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            Cliente cliente;
-            if (EsBancario)
+            try
             {
-               cliente = new Cliente
-               {
-                    Nombre = txtNombre.Text,
-                    Apellido = txtApellido.Text,
-                    Email = txtEmail.Text,
-                    Telefono = txtTelefono.Text,
-                    Direccion = txtDireccion.Text,
-                    numeroTarjetaUltimos4 = txtNumeroTarjeta.Text,
-                    TipoTarjeta = txtTipoTarjeta.Text,
-                    BancoEmisor = txtBancoEmisor.Text
-               };
-            }
-            else
-            {
-                cliente = new Cliente
+                Cliente cliente;
+                if (EsBancario)
                 {
-                    Nombre = txtNombre.Text,
-                    Apellido = txtApellido.Text,
-                    Email = txtEmail.Text,
-                    Telefono = txtTelefono.Text,
-                    Direccion = txtDireccion.Text
-                };
+                    cliente = new Cliente
+                    {
+                        Nombre = txtNombre.Text,
+                        Apellido = txtApellido.Text,
+                        Email = txtEmail.Text,
+                        Telefono = txtTelefono.Text,
+                        Direccion = txtDireccion.Text,
+                        numeroTarjetaUltimos4 = txtNumeroTarjeta.Text,
+                        TipoTarjeta = txtTipoTarjeta.Text,
+                        BancoEmisor = txtBancoEmisor.Text
+                    };
+                }
+                else
+                {
+                    cliente = new Cliente
+                    {
+                        Nombre = txtNombre.Text,
+                        Apellido = txtApellido.Text,
+                        Email = txtEmail.Text,
+                        Telefono = txtTelefono.Text,
+                        Direccion = txtDireccion.Text
+                    };
+                }
+
+                ClienteId = _clienteBLL.InsertarCliente(cliente);
+
+                this.Close();
             }
-
-            ClienteId = _clienteBLL.InsertarCliente(cliente);
-
-
-            this.Close();   
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", SessionManager.GetInstance.Usuario.Username);
+            }
         }
     }
 }

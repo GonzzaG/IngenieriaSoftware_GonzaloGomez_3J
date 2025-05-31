@@ -1,16 +1,12 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.DAL.EntityDAL;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL
 {
     public class MedioDePagoBLL
     {
-        private readonly MedioDePagoDAL _medioDePagoDAL = new MedioDePagoDAL(); 
+        private readonly MedioDePagoDAL _medioDePagoDAL = new MedioDePagoDAL();
 
         public MedioDePago ObtenerMedioDePagoPorId(int medioDePagoId)
         {

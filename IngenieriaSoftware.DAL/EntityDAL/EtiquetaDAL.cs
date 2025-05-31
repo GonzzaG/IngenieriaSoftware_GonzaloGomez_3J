@@ -1,11 +1,8 @@
 ﻿using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
@@ -14,18 +11,18 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         private readonly DAO _dao;
         public List<EtiquetaDTO> _etiqutas;
         private EtiquetaMapper EtiquetaMapper = new EtiquetaMapper();
+
         public EtiquetaDAL()
         {
             _dao = new DAO();
-           
         }
 
         public List<EtiquetaDTO> ObtenerTodasLasEtiquetas()
         {
             try
-            {            
+            {
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodasLasEtiquetas", null);
-                _etiqutas = EtiquetaMapper.MapearEtiquetasDesdeDataSet(mDs);    
+                _etiqutas = EtiquetaMapper.MapearEtiquetasDesdeDataSet(mDs);
 
                 return _etiqutas;
             }
@@ -53,6 +50,5 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw new Exception("Error al obtener traducciones por idioma.", ex);
             }
         }
-
     }
 }

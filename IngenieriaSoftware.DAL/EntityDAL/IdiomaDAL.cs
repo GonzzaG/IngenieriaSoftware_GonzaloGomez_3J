@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.DTOs;
+﻿using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,6 +14,7 @@ namespace IngenieriaSoftware.DAL
         public List<EtiquetaDTO> etiquetas;
         private EtiquetaMapper _etiquetaMapper;
         private TraduccionMapper _traduccionMapper;
+
         public IdiomaDAL()
         {
             _dao = new DAO();
@@ -38,7 +38,7 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public void InsertarIdioma (string idiomaNombre)
+        public void InsertarIdioma(string idiomaNombre)
         {
             try
             {
@@ -46,8 +46,8 @@ namespace IngenieriaSoftware.DAL
                 {
                     new SqlParameter("@Nombre", idiomaNombre)
                 };
-                
-                _dao.ExecuteNonQuery("sp_InsertarIdioma", parametros);            
+
+                _dao.ExecuteNonQuery("sp_InsertarIdioma", parametros);
             }
             catch (Exception ex)
             {
@@ -75,8 +75,6 @@ namespace IngenieriaSoftware.DAL
         #endregion Idioma
 
         #region Etiqueta
-
-
 
         public int AgregarEtiqueta(Dictionary<string, IIdiomaObservador> etiquetasEnMemoria)
         {
@@ -112,7 +110,7 @@ namespace IngenieriaSoftware.DAL
             // Obtener una lista de los nombres de las etiquetas en la base de datos
             var nombresEtiquetasBD = etiquetasBD.Select(e => e.Tag).ToList();
 
-            for(int i = etiquetasMemoria.Count - 1; i>=0; i--)
+            for (int i = etiquetasMemoria.Count - 1; i >= 0; i--)
             {
                 if (nombresEtiquetasBD.Contains(etiquetasMemoria[i].Tag))
                 {
@@ -157,7 +155,6 @@ namespace IngenieriaSoftware.DAL
         {
             try
             {
-                
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@idioma_id", idioma_id)
@@ -170,11 +167,11 @@ namespace IngenieriaSoftware.DAL
 
                 Dictionary<EtiquetaDTO, TraduccionDTO> etiquetasTraduccion = new Dictionary<EtiquetaDTO, TraduccionDTO>();
 
-                foreach(var etiqueta in etiquetas)
+                foreach (var etiqueta in etiquetas)
                 {
                     var traduccion = traducciones.FirstOrDefault(t => t.EtiquetaId == etiqueta.Tag);
 
-                    if(traduccion != null)
+                    if (traduccion != null)
                     {
                         etiquetasTraduccion[etiqueta] = traduccion;
                     }

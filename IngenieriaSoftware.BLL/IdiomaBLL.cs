@@ -1,5 +1,4 @@
 ﻿using IngenieriaSoftware.DAL;
-using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
 using System;
@@ -20,10 +19,12 @@ namespace IngenieriaSoftware.BLL
         {
             _idiomaDAL.InsertarIdioma(idiomaNombre);
         }
+
         public void EliminarIdioma(int idiomaId)
         {
             _idiomaDAL.EliminarIdioma(idiomaId);
         }
+
         public Dictionary<EtiquetaDTO, TraduccionDTO> ObtenerEtiquetasConTraduccion(int idioma_id)
         {
             try
@@ -35,6 +36,7 @@ namespace IngenieriaSoftware.BLL
                 throw ex;
             }
         }
+
         public List<EtiquetaDTO> ObtenerEtiquetasSinTraduccion(int idioma_id)
         {
             try

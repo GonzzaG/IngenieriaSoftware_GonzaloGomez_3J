@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
@@ -14,7 +11,10 @@ namespace IngenieriaSoftware.DAL.EntityDAL
     {
         private readonly DAO _dao = new DAO();
         private readonly NotificacionMapper _notificacionMapper = new NotificacionMapper();
-        public NotificacionDAL() { }
+
+        public NotificacionDAL()
+        { }
+
         public void InsertarNotificacion(int mesaId, int comandaId)
         {
             try
@@ -36,16 +36,14 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         public List<Notificacion> ObtenerNotificacionesNoVistas()
         {
             try
-            {                  
+            {
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerNotificacionesNoVistas", null);
                 return _notificacionMapper.MapearComandasDesdeDataSet(mDs);
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
     }
 }

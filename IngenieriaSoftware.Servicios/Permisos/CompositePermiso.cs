@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IngenieriaSoftware.Servicios.Permisos
 {
     public class CompositePermiso : ComponentePermiso
     {
         private List<ComponentePermiso> _hijos;
+
         public CompositePermiso(string nombre) : base(nombre)
         {
             _hijos = new List<ComponentePermiso>();
@@ -37,9 +34,6 @@ namespace IngenieriaSoftware.Servicios.Permisos
 
                 return t;
             }
-
         }
-
-
     }
 }

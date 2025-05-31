@@ -1,13 +1,9 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Negocio;
+﻿using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
@@ -17,7 +13,9 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         private readonly ComandaProductoMapper _comandaProductoMapper = new ComandaProductoMapper();
         private readonly ComandaMapper _comandaMapper = new ComandaMapper();
         private readonly ProductoMapper _productoMapper = new ProductoMapper();
-        public ComandaDAL() { }
+
+        public ComandaDAL()
+        { }
 
         public int InsertarComanda(int mesaId)
         {
@@ -26,7 +24,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@mesa_id", mesaId),
-                    new SqlParameter("@fecha_hora_creacion", DateTime.Now),                
+                    new SqlParameter("@fecha_hora_creacion", DateTime.Now),
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarComanda", parametros);
@@ -55,6 +53,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
+
         public void InsertarComandaProductos(List<ComandaProducto> comandaProductos)
         {
             try
@@ -123,6 +122,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
+
         public bool VerificarEstadoComandaProductosPorMesaId(int mesaId)
         {
             try
@@ -181,14 +181,15 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
-        public List<ComandaProducto> ObtenerComandaProductosPendientes (int mesaId, int comandaId)
+
+        public List<ComandaProducto> ObtenerComandaProductosPendientes(int mesaId, int comandaId)
         {
             try
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@mesa_id", mesaId),
-                    new SqlParameter("@comanda_id", comandaId) 
+                    new SqlParameter("@comanda_id", comandaId)
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerComandaProductosPendientes", parametros);
@@ -227,9 +228,9 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 {
                     new SqlParameter("@ComandaProductos", SqlDbType.Structured)
                     {
-                        TypeName = "dbo.ComandaProductoType", 
+                        TypeName = "dbo.ComandaProductoType",
                         Value = table
-                    },  
+                    },
                     new SqlParameter("@NuevoEstado", nuevoEstado)
                 };
 
@@ -241,10 +242,9 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
-
         private DataTable CrearComandaProductoDataTable(List<ComandaProducto> comandaProductos)
         {
-            if(comandaProductos == null) {return null;}
+            if (comandaProductos == null) { return null; }
             DataTable table = new DataTable();
             table.Columns.Add("comanda_id", typeof(int));
             table.Columns.Add("producto_id", typeof(int));
@@ -252,10 +252,9 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             table.Columns.Add("cantidad", typeof(int));
             table.Columns.Add("precio_unitario", typeof(decimal));
 
-      
             foreach (var comandaProducto in comandaProductos)
             {
-                if(comandaProducto.Producto == null)
+                if (comandaProducto.Producto == null)
                 {
                     table.Rows.Add(comandaProducto.ComandaId, comandaProducto.ProductoId, (int)comandaProducto.EstadoProducto,
                                comandaProducto.Cantidad, comandaProducto.PrecioUnitario);
@@ -286,6 +285,5 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
-
     }
 }

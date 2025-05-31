@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngenieriaSoftware.BEL
+﻿namespace IngenieriaSoftware.BEL
 {
     public class ProductoFactura
     {
@@ -13,6 +7,7 @@ namespace IngenieriaSoftware.BEL
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
         public decimal Descuento { get; set; }
+
         public decimal Subtotal
         {
             get { return (PrecioUnitario * Cantidad) - Descuento; }

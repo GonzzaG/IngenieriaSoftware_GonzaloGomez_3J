@@ -12,12 +12,12 @@ namespace IngenieriaSoftware.Servicios
 
         public DateTime FechaInicio { get; private set; }
 
-
         public static SessionManager GetInstance
         {
             get
             {
-                if (_Session == null) throw new Exception("Sesión no iniciada.");
+                if (_Session == null)
+                    throw new Exception("Sesión no iniciada.");
                 return _Session;
             }
         }

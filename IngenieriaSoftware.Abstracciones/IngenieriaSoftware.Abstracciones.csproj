@@ -41,12 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEntity.cs" />
+    <Compile Include="IBitacora.cs" />
     <Compile Include="IEtiqueta.cs" />
     <Compile Include="IIdioma.cs" />
     <Compile Include="IIdiomaSuscriptor.cs" />
     <Compile Include="IPermiso.cs" />
     <Compile Include="IUsuario.cs" />
+    <Compile Include="IVerificable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TablesName.cs" />
+    <Compile Include="VerificableAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

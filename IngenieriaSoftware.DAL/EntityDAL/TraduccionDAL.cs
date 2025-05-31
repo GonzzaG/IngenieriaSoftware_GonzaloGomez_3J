@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios.DTOs;
+﻿using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,8 +9,8 @@ namespace IngenieriaSoftware.DAL
     public class TraduccionDAL
     {
         private readonly DAO _dao;
-        TraduccionMapper _traduccionMapper = new TraduccionMapper();
-        EtiquetaMapper _etiquetaMapper = new EtiquetaMapper();
+        private TraduccionMapper _traduccionMapper = new TraduccionMapper();
+        private EtiquetaMapper _etiquetaMapper = new EtiquetaMapper();
         public Dictionary<string, string> _traducciones;
 
         public TraduccionDAL()
@@ -25,13 +24,13 @@ namespace IngenieriaSoftware.DAL
         public List<TraduccionDTO> ObtenerTraduccionesPorEtiquetas(List<int> listaEtiquetas, int idiomaId)
         {
             try
-            {            
+            {
                 DataTable dtEtiquetas = _traduccionMapper.ConvertirListaEtiquetasATabla(listaEtiquetas);
 
                 var parameters = new SqlParameter[]
                 {
                     new SqlParameter("@ListaEtiquetas", SqlDbType.Structured) { Value = dtEtiquetas },
-                    new SqlParameter("@IdiomaId", SqlDbType.Int) { Value = idiomaId } 
+                    new SqlParameter("@IdiomaId", SqlDbType.Int) { Value = idiomaId }
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTraduccionesPorEtiquetas", parameters);
@@ -44,7 +43,6 @@ namespace IngenieriaSoftware.DAL
                 throw new Exception("Error al obtener traducciones por idioma.", ex);
             }
         }
-
 
         public Dictionary<string, string> ObtenerTraduccionesPorIdioma(int idiomaId)
         {
@@ -75,11 +73,9 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@idiomaId", traduccion.IdiomaId),
                     new SqlParameter("@etiqueta_id", traduccion.EtiquetaId),
                     new SqlParameter("@texto", traduccion.Texto)
-
                 };
 
                 _dao.ExecuteNonQuery("sp_AsignarTraduccion", parametros);
-
             }
             catch (Exception ex)
             {

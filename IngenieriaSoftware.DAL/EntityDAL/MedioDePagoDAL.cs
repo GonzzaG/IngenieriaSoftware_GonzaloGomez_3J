@@ -1,20 +1,16 @@
 ﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
     public class MedioDePagoDAL
     {
         private readonly DAO _dao = new DAO();
-        private readonly MedioDePagoMapper _medioDePagoMapper = new MedioDePagoMapper();        
+        private readonly MedioDePagoMapper _medioDePagoMapper = new MedioDePagoMapper();
 
         public MedioDePago ObtenerMedioDePagoPorId(int medioDePagoId)
         {

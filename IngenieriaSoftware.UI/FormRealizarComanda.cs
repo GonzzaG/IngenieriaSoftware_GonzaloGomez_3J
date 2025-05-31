@@ -1,20 +1,13 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
-using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IngenieriaSoftware.UI
 {
@@ -25,7 +18,7 @@ namespace IngenieriaSoftware.UI
         private Mesa _mesa;
         private int _comandaId;
         private Comanda _comanda;
-        private TraduccionBLL _traduccionBLL = new TraduccionBLL();      
+        private TraduccionBLL _traduccionBLL = new TraduccionBLL();
         private EtiquetaBLL _etiquetaBLL = new EtiquetaBLL();
 
         private List<Producto> _productos = new List<Producto>();
@@ -38,10 +31,7 @@ namespace IngenieriaSoftware.UI
             _mesa = mesa;
             _comandaId = comandaId;
             Inicializar();
-            
         }
-
-
 
         private void Inicializar()
         {
@@ -53,8 +43,11 @@ namespace IngenieriaSoftware.UI
                 {
                     dataGridViewProductos.DataSource = null;
                     dataGridViewProductos.DataSource = _productos;
-                    
+
+                    OcultarColumnas();
+
                     #region Traduccion implementacion
+
                     //List<EtiquetaDTO> etiquetas = _etiquetaBLL.ObtenerEtiquetasPorPalabra("DataGridViewRow");
 
                     //var etiquetasRelacionadasId = etiquetas
@@ -94,7 +87,8 @@ namespace IngenieriaSoftware.UI
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Tiempo Preparacion", HeaderText = "Tiempo Preparacion", DataPropertyName = "TiempoPreparacion" });
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "EsPostre", HeaderText = "EsPostre", DataPropertyName = "EsPostre" });
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Categoria", HeaderText = "Categoría", DataPropertyName = "Categoria" });
-                    #endregion
+
+                    #endregion Traduccion implementacion
                 }
 
                 lblNumeroMesa.Text = _mesa.MesaId.ToString();
@@ -112,34 +106,43 @@ namespace IngenieriaSoftware.UI
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            //en este boton se agregara el producto seleccionado a la comanda de la mesa actual seleccionada
-            //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
-            int indice = dataGridViewProductos.SelectedRows[0].Index;
-            int productoId = (int)dataGridViewProductos.SelectedRows[0].Cells[0].Value;
-            Producto producto = _productos.Find(p => p.ProductoId == productoId);
-   
-            _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
-        }
+            try
+            {
+                //en este boton se agregara el producto seleccionado a la comanda de la mesa actual seleccionada
+                //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
+                int indice = dataGridViewProductos.SelectedRows[0].Index;
+                int productoId = (int)dataGridViewProductos.SelectedRows[0].Cells[0].Value;
+                Producto producto = _productos.Find(p => p.ProductoId == productoId);
 
-        private void NuevoProducto()
-        {
-           
-
-          
+                _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Agregar Producto", DateTime.Now, "Producto agregado a la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
+            }
+            catch (Exception ex)
+            {
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         private void btnVerComanda_Click(object sender, EventArgs e)
         {
-            // Mostramos el formulario ver comanda con la mesa actual como parametro
-            
-            var padre = this.MdiParent as FormMDI;
+            try
+            {
+                // Mostramos el formulario ver comanda con la mesa actual como parametro
 
-            FormVerComanda formVerComanda = new FormVerComanda(_comandaBLL, _comandaId);
-            formVerComanda.StartPosition = FormStartPosition.CenterScreen;
-            formVerComanda.ShowDialog();
-          // padre.AbrirFormHijo(formVerComanda);
+                var padre = this.MdiParent as FormMDI;
 
-            Actualizar();
+                FormVerComanda formVerComanda = new FormVerComanda(_comandaBLL, _comandaId);
+                formVerComanda.StartPosition = FormStartPosition.CenterScreen;
+                formVerComanda.ShowDialog();
+                // padre.AbrirFormHijo(formVerComanda);
+
+                Actualizar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir el formulario de ver comanda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         public void Actualizar()
@@ -194,6 +197,7 @@ namespace IngenieriaSoftware.UI
                 }
 
                 lblNumeroMesa.Text = _mesa.MesaId.ToString();
+                //OcultarColumnas();
             }
             catch (Exception ex)
             {
@@ -212,11 +216,12 @@ namespace IngenieriaSoftware.UI
                 }
             }
         }
+
         public void CargarProductosConTraduccion(DataGridView dgv, string idioma)
         {
             var productos = _productoBLL.ObtenerTodosLosProductos();
             List<EtiquetaDTO> etiquetas = _etiquetaBLL.ObtenerEtiquetasPorPalabra("DataGridViewRow");
-            
+
             var etiquetasRelacionadasId = etiquetas
             .Where(etiqueta => productos
             .Any(producto => etiqueta.Name.Contains(producto.Nombre)))
@@ -225,14 +230,16 @@ namespace IngenieriaSoftware.UI
 
             var traducciones = _traduccionBLL.ObtenerTraduccionesPorEtiquetas(etiquetasRelacionadasId, IdiomaData.IdiomaActual.Id);
 
-
             foreach (var traduccion in traducciones)
             {
-   
                 dgv.Rows.Add(traduccion.Texto);
             }
         }
 
-
+        public void OcultarColumnas()
+        {
+            dataGridViewProductos.Columns["ProductoId"].Visible = false;
+            dataGridViewProductos.Columns["Diponible"].Visible = false;
+        }
     }
 }

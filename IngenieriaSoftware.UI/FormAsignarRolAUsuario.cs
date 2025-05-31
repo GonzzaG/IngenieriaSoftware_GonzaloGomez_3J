@@ -3,25 +3,21 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
     public partial class FormAsignarRolAUsuario : Form, IActualizable
     {
-        PermisoBLL _permisoBLL = new PermisoBLL();
-        UsuarioBLL _usuarioBLL = new UsuarioBLL();
-        List<PermisoDTO> _roles = new List<PermisoDTO>();
-        List<UsuarioDTO> _usuarios = new List<UsuarioDTO>();
+        private PermisoBLL _permisoBLL = new PermisoBLL();
+        private UsuarioBLL _usuarioBLL = new UsuarioBLL();
+        private List<PermisoDTO> _roles = new List<PermisoDTO>();
+        private List<UsuarioDTO> _usuarios = new List<UsuarioDTO>();
 
-        bool _verPermisos = false;
+        private DigitoVerificadorManager _digitoVerificadorManager = new DigitoVerificadorManager();
+        private bool _verPermisos = false;
         public NotificacionService _notificacionService => new NotificacionService();
 
         public FormAsignarRolAUsuario()
@@ -38,7 +34,7 @@ namespace IngenieriaSoftware.UI
                 var roles = _permisoBLL.ObtenerTodosLosRoles();
 
                 _roles = roles.ToList();
-                _usuarios = usuarios.ToList();  
+                _usuarios = usuarios.ToList();
                 if (usuarios != null)
                 {
                     dataGridViewUsuarios.DataSource = null;
@@ -52,9 +48,7 @@ namespace IngenieriaSoftware.UI
                     dataGridViewRoles.DataSource = null;
                     dataGridViewRoles.DataSource = roles;
 
-
                     OcultarColumnasDataGrid(dataGridViewRoles);
-
                 }
 
                 foreach (DataGridViewRow row in dataGridViewUsuarios.Rows)
@@ -66,14 +60,13 @@ namespace IngenieriaSoftware.UI
                 {
                     row.Selected = false;
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("s" + ex.Message);
             }
-
         }
+
         private void OcultarColumnasDataGrid(DataGridView dgv)
         {
             foreach (DataGridViewColumn dc in dgv.Columns)
@@ -87,17 +80,14 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-           
         }
 
         private void FormAsignarRolAUsuario_Load(object sender, EventArgs e)
-        {  
-          
+        {
         }
 
         private void dataGridViewUsuarios_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-           
         }
 
         private void FillTreeView(List<PermisoDTO> permisosJerarquizados, TreeView treeViewPermisos)
@@ -143,12 +133,11 @@ namespace IngenieriaSoftware.UI
 
         private void dataGridViewUsuarios_DataSourceChanged(object sender, EventArgs e)
         {
-            
         }
 
         private void btnVerPermisos_Click(object sender, EventArgs e)
         {
-            if(btnVerPermisos.Text == "Ver PermisosString")
+            if (btnVerPermisos.Text == "Ver Permisos")
             {
                 if (dataGridViewUsuarios.SelectedRows.Count > 0 &&
                     dataGridViewUsuarios.SelectedRows[0] != null)
@@ -165,15 +154,17 @@ namespace IngenieriaSoftware.UI
                     }
                 }
                 _verPermisos = true;
-                foreach(Control c in this.Controls)
+                foreach (Control c in this.Controls)
                 {
-                    if(c.Name != dataGridViewUsuarios.Name && c.Name != treeViewPermisoRol.Name && c.Name != btnVerPermisos.Name && c.Name != btnDesasignarRol.Name)
+                    if (c.Name != dataGridViewUsuarios.Name && c.Name != treeViewPermisoRol.Name && c.Name != btnVerPermisos.Name && c.Name != btnDesasignarRol.Name)
                         c.Enabled = false;
-                    this.BackColor = SystemColors.ControlDark;
-
+                    this.BackColor = SystemColors.GrayText;
                 }
 
+                dataGridViewUsuarios.Enabled = false;
                 btnVerPermisos.Text = "Dejar de Ver";
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Ver Permisos", DateTime.Now, "Ver permisos de usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             else
             {
@@ -183,15 +174,33 @@ namespace IngenieriaSoftware.UI
                 {
                     if (c.Name != dataGridViewUsuarios.Name)
                         c.Enabled = true;
-                    this.BackColor = SystemColors.Control;
-
+                    this.BackColor = Color.DarkSlateGray;
                 }
 
-                btnVerPermisos.Text = "Ver PermisosString";
+                dataGridViewUsuarios.Enabled = true;
+                btnVerPermisos.Text = "Ver Permisos";
                 treeViewPermisoRol.Nodes.Clear();
             }
         }
+       
+        private bool CalcularDigitoVerificador(Entity entidadVerificable)
+        {
+            try
+            {
+                string nombreTabla = entidadVerificable.getNombreTabla();
+                if (_digitoVerificadorManager.ActualizarDVH_Y_DVV_DeRegistro(nombreTabla, entidadVerificable.Id))
+                {
+                    if (_digitoVerificadorManager.VerificarDigitoVerticalYHorizontal())
+                        return true;
+                }
 
+                throw new Exception(nombreTabla + " no se actualizo correctamente el DVH");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         private void btnAsignarRol_Click(object sender, EventArgs e)
         {
             if (dataGridViewRoles.SelectedRows[0] == null ||
@@ -208,12 +217,24 @@ namespace IngenieriaSoftware.UI
                 //FillTreeView(permisosUsuario, treeViewPermisoRol);
                 Actualizar();
 
+                Entity usuarioVerificable = new Usuario
+                {
+                    Id = usuarioId,
+                };
+
+                if (CalcularDigitoVerificador(usuarioVerificable))
+                {
+                    MessageBox.Show($"El digito verificador del usuario fue calculado con exito");
+                }
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Asignar Rol", DateTime.Now, "Asignar rol a usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.ToString());
             }
-
+            
         }
 
         private void dataGridViewUsuarios_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -250,13 +271,23 @@ namespace IngenieriaSoftware.UI
                 //asignamos el rol al usuario
                 MessageBox.Show(_permisoBLL.DesasignarRolAUsuario(usuarioId));
 
-                treeViewPermisoRol.Nodes.Clear();  
+                treeViewPermisoRol.Nodes.Clear();
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Desasignar Rol", DateTime.Now, "Desasignar rol a usuario", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
                 //Actualizar();
+                Entity usuarioVerificable = new Usuario
+                {
+                    Id = usuarioId,
+                };
 
+                if (CalcularDigitoVerificador(usuarioVerificable))
+                {
+                    MessageBox.Show($"El digito verificador del usuario fue calculado con exito");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.ToString());
             }
         }
     }

@@ -1,18 +1,16 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios;
+﻿using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.Permisos;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace IngenieriaSoftware.DAL
 {
     public class PermisoMapper
     {
         public ComponentePermiso componentePermiso;
+
         public List<PermisoDTO> MapearPermisosDesdeDataSet(DataSet pDS)
         {
             var permisos = new List<PermisoDTO>();
@@ -30,7 +28,7 @@ namespace IngenieriaSoftware.DAL
                     permiso.PermisoPadreId = row["id_permiso_padre"] != DBNull.Value ? (int?)row["id_permiso_padre"] : null;
                 permisos.Add(permiso);
 
-               // PermisosData.PermisosString.Add(row["permiso"].ToString());
+                // PermisosData.PermisosString.Add(row["permiso"].ToString());
             }
 
             return permisos;
@@ -46,7 +44,7 @@ namespace IngenieriaSoftware.DAL
 
                 permiso.Id = (int)row["id_permiso"];
                 permiso.Nombre = row["nombre_permiso"].ToString();
-                
+
                 permisos.Add(permiso);
             }
 
@@ -138,14 +136,9 @@ namespace IngenieriaSoftware.DAL
         {
             foreach (var hijo in permisoRaiz.permisosHijos)
             {
-                permisos.Remove(hijo); 
+                permisos.Remove(hijo);
                 EliminarHijosDePermisoRaiz(permisos, hijo);
             }
         }
-
-
-
-
-
     }
 }
