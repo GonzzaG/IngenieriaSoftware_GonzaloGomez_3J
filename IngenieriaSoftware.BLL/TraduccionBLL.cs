@@ -17,28 +17,32 @@ namespace IngenieriaSoftware.BLL
             //  _traduccionServicio = traduccionServicio;
         }
 
+        public List<TraduccionDTO> ObtenerTraduccionesPorEtiquetas(List<int> listaEtiquetas, int idiomaId)
+        {
+            return _traduccionDAL.ObtenerTraduccionesPorEtiquetas(listaEtiquetas, idiomaId);
+        }
+
         public Dictionary<string, string> ObtenerTraduccionesPorIdioma(int idiomaId)
         {
             try
             {
                 return _traduccionDAL.ObtenerTraduccionesPorIdioma(idiomaId);
             }
-            catch( Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
-        public void InsertarTraduccion (TraduccionDTO traduccion)
+        public void InsertarTraduccion(TraduccionDTO traduccion)
         {
             try
             {
-               _traduccionDAL.InsertarTraduccion(traduccion);
+                _traduccionDAL.InsertarTraduccion(traduccion);
             }
             catch (Exception ex)
             {
-                throw ex;   
+                throw ex;
             }
         }
     }

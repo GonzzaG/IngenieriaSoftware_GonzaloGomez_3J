@@ -1,10 +1,5 @@
-﻿using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.Interfaces;
+﻿using IngenieriaSoftware.Servicios.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.UI
 {

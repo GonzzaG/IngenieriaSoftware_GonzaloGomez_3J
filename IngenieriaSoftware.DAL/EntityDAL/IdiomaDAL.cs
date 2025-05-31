@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.DTOs;
+﻿using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,10 +10,11 @@ namespace IngenieriaSoftware.DAL
 {
     public class IdiomaDAL
     {
-        private DAO _dao;
+        private readonly DAO _dao;
         public List<EtiquetaDTO> etiquetas;
         private EtiquetaMapper _etiquetaMapper;
         private TraduccionMapper _traduccionMapper;
+
         public IdiomaDAL()
         {
             _dao = new DAO();
@@ -38,30 +38,43 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        #endregion Idioma
-
-        #region Etiqueta
-
-        public void GuardarEtiquetas(Dictionary<string, string> etiquetas)     //(List<EtiquetaDTO> etiquetas)
+        public void InsertarIdioma(string idiomaNombre)
         {
             try
             {
-                foreach (var etiqueta in etiquetas)
+                SqlParameter[] parametros = new SqlParameter[]
                 {
-                    SqlParameter[] parametros = new SqlParameter[]
-                    {
-                        new SqlParameter("@etiquetaId", int.Parse(etiqueta.Key)),
-                        new SqlParameter("@nombre", etiqueta.Value)
-                    };
+                    new SqlParameter("@Nombre", idiomaNombre)
+                };
 
-                    DataSet mDs = _dao.ExecuteStoredProcedure("sp_InsertarEtiqueta", parametros);
-                }
+                _dao.ExecuteNonQuery("sp_InsertarIdioma", parametros);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        public void EliminarIdioma(int idiomaId)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@IdiomaId", idiomaId)
+                };
+
+                _dao.ExecuteNonQuery("sp_EliminarIdioma", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion Idioma
+
+        #region Etiqueta
 
         public int AgregarEtiqueta(Dictionary<string, IIdiomaObservador> etiquetasEnMemoria)
         {
@@ -97,7 +110,7 @@ namespace IngenieriaSoftware.DAL
             // Obtener una lista de los nombres de las etiquetas en la base de datos
             var nombresEtiquetasBD = etiquetasBD.Select(e => e.Tag).ToList();
 
-            for(int i = etiquetasMemoria.Count - 1; i>=0; i--)
+            for (int i = etiquetasMemoria.Count - 1; i >= 0; i--)
             {
                 if (nombresEtiquetasBD.Contains(etiquetasMemoria[i].Tag))
                 {
@@ -142,7 +155,6 @@ namespace IngenieriaSoftware.DAL
         {
             try
             {
-                
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@idioma_id", idioma_id)
@@ -155,11 +167,11 @@ namespace IngenieriaSoftware.DAL
 
                 Dictionary<EtiquetaDTO, TraduccionDTO> etiquetasTraduccion = new Dictionary<EtiquetaDTO, TraduccionDTO>();
 
-                foreach(var etiqueta in etiquetas)
+                foreach (var etiqueta in etiquetas)
                 {
                     var traduccion = traducciones.FirstOrDefault(t => t.EtiquetaId == etiqueta.Tag);
 
-                    if(traduccion != null)
+                    if (traduccion != null)
                     {
                         etiquetasTraduccion[etiqueta] = traduccion;
                     }

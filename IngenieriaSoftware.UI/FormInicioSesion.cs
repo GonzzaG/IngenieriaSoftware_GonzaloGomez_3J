@@ -1,8 +1,7 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.DTOs;
+using IngenieriaSoftware.UI.Adaptadores;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -15,27 +14,26 @@ namespace IngenieriaSoftware.UI
 
         private readonly IdiomaSujeto _idiomaObserver;
 
-        public FormInicioSesion() { InitializeComponent(); }
+        public NotificacionService _notificacionService => new NotificacionService();
+
+        public FormInicioSesion()
+        { InitializeComponent(); }
+
         public FormInicioSesion(IdiomaSujeto idiomaObserver)
         {
             InitializeComponent();
 
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.DialogResult = DialogResult.No;
-
             _idiomaObserver = idiomaObserver;
-
-          
-
+            this.WindowState = FormWindowState.Maximized;
         }
 
         #region Metodos de Interfaz
 
         public void Actualizar()
         {
-            
         }
-        #endregion
+
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -48,12 +46,56 @@ namespace IngenieriaSoftware.UI
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            txtUsuario.Text = "gonza2";
-            txtContrasena.Text = "gonza";
+            this.WindowState = FormWindowState.Maximized;
+            //txtUsuario.Text = "gonza2";
+            //txtContrasena.Text = "gonza";
         }
 
         #region LogIn LogOut
-        private void LogIn(object sender, EventArgs e)
+
+        //private void LogIn(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (_authService.LogIn(txtUsuario.Text, txtContrasena.Text))
+        //        {
+        //            InicioSesionExitoso?.Invoke();
+
+        //            var usuario = SessionManager.GetInstance.Usuario;
+
+        //            //_idiomaObserver.CambiarEstado(usuario.Id);
+        //            throw new CredencialesCorrectasException();
+        //        }
+        //    }
+        //    catch (FalloCredencialesException ex)
+        //    {
+        //        var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+        //        MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+        //    }
+        //    catch (CredencialesCorrectasException ex)
+        //    {
+        //        var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+        //        MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+        //        this.Close();
+        //    }
+
+        //}
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.PermisosString.Contains("Mesero"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
+        }
+
+        #endregion LogIn LogOut
+
+        private void btnIngresar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -61,19 +103,30 @@ namespace IngenieriaSoftware.UI
                 {
                     InicioSesionExitoso?.Invoke();
 
-                    //obtenemos el usuario que inicio sesion
                     var usuario = SessionManager.GetInstance.Usuario;
 
-                    //cambiamos el idioma el cual tiene el usuario
-                    _idiomaObserver.CambiarEstado(usuario.Id);
-                    this.Close();
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Inicio de Sesion", DateTime.Now, "Inicio de sesion exitoso", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Sesion");
+                    //_idiomaObserver.CambiarEstado(usuario.Id);
+                    throw new CredencialesCorrectasException();
                 }
+            }
+            catch (FalloCredencialesException ex)
+            {
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Sesion", null);
+            }
+            catch (CredencialesCorrectasException ex)
+            {
+                var adaptador = new ExcepcionesIdiomaAdaptador(ex.Tag, ex.Name);
+                MessageBox.Show(adaptador.ObtenerMensajeTraducido());
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Se produjo un error al iniciar sesion: ", ex.Message);
             }
         }
-        #endregion
     }
 }

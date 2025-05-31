@@ -29,90 +29,79 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.comboBoxCategorias = new System.Windows.Forms.ComboBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
-            this.lblCategoria = new System.Windows.Forms.Label();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.usuarioBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.usuarioBLLBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBoxCategorias
-            // 
-            this.comboBoxCategorias.FormattingEnabled = true;
-            this.comboBoxCategorias.Location = new System.Drawing.Point(139, 240);
-            this.comboBoxCategorias.Name = "comboBoxCategorias";
-            this.comboBoxCategorias.Size = new System.Drawing.Size(189, 21);
-            this.comboBoxCategorias.TabIndex = 0;
-            this.comboBoxCategorias.Tag = "27";
-            this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(139, 171);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPassword.BackColor = System.Drawing.Color.Teal;
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPassword.Location = new System.Drawing.Point(185, 238);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(189, 20);
+            this.txtPassword.Size = new System.Drawing.Size(251, 34);
             this.txtPassword.TabIndex = 1;
-            this.txtPassword.Tag = "25";
+            this.txtPassword.Tag = "137";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(139, 115);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
+            this.txtUsername.BackColor = System.Drawing.Color.Teal;
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtUsername.Location = new System.Drawing.Point(185, 142);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(189, 20);
+            this.txtUsername.Size = new System.Drawing.Size(251, 34);
             this.txtUsername.TabIndex = 2;
-            this.txtUsername.Tag = "23";
+            this.txtUsername.Tag = "135";
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(146, 101);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblUsername.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUsername.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblUsername.Location = new System.Drawing.Point(180, 102);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(96, 13);
+            this.lblUsername.Size = new System.Drawing.Size(181, 28);
             this.lblUsername.TabIndex = 3;
-            this.lblUsername.Tag = "22";
-            this.lblUsername.Text = "Name de usuario";
+            this.lblUsername.Tag = "134";
+            this.lblUsername.Text = "Nombre de usuario";
             this.lblUsername.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(146, 155);
-            this.lblPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPassword.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.lblPassword.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblPassword.Location = new System.Drawing.Point(182, 206);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(61, 13);
+            this.lblPassword.Size = new System.Drawing.Size(110, 28);
             this.lblPassword.TabIndex = 4;
-            this.lblPassword.Tag = "24";
+            this.lblPassword.Tag = "136";
             this.lblPassword.Text = "Contraseña";
-            // 
-            // lblCategoria
-            // 
-            this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new System.Drawing.Point(146, 224);
-            this.lblCategoria.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new System.Drawing.Size(52, 13);
-            this.lblCategoria.TabIndex = 5;
-            this.lblCategoria.Tag = "26";
-            this.lblCategoria.Text = "Categoria";
-            this.lblCategoria.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(158, 307);
-            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRegistrar.BackColor = System.Drawing.Color.Teal;
+            this.btnRegistrar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnRegistrar.Location = new System.Drawing.Point(212, 366);
+            this.btnRegistrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(151, 70);
+            this.btnRegistrar.Size = new System.Drawing.Size(201, 86);
             this.btnRegistrar.TabIndex = 7;
-            this.btnRegistrar.Tag = "28";
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Tag = "140";
+            this.btnRegistrar.Text = "Registrar Usuario";
+            this.btnRegistrar.UseVisualStyleBackColor = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // usuarioBLLBindingSource
@@ -121,18 +110,18 @@
             // 
             // FormRegistrarUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 477);
+            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ClientSize = new System.Drawing.Size(663, 587);
             this.Controls.Add(this.btnRegistrar);
-            this.Controls.Add(this.lblCategoria);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.comboBoxCategorias);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormRegistrarUsuario";
-            this.Tag = "21";
+            this.Tag = "141";
             this.Text = "GestionUsuarios";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GestionUsuarios_Load);
@@ -143,14 +132,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboBoxCategorias;
         private System.Windows.Forms.BindingSource usuarioBLLBindingSource;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.Label lblCategoria;
         private System.Windows.Forms.Button btnRegistrar;
     }
 }

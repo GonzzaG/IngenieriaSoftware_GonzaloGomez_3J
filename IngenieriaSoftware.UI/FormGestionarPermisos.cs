@@ -2,7 +2,6 @@
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -10,20 +9,25 @@ namespace IngenieriaSoftware.UI
     public partial class FormGestionarPermisos : Form, IActualizable
     {
         private readonly UsuarioBLL _usuarioBLL;
+        private readonly PermisoBLL _permisoBLL;
         private readonly IdiomaSujeto _idiomaObserver;
+
+        public NotificacionService _notificacionService => new NotificacionService();
+
         public FormGestionarPermisos()
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
+            _permisoBLL = new PermisoBLL();
         }
 
         #region Metodos de Interfaz
 
         public void Actualizar()
         {
-
         }
-        #endregion
+
+        #endregion Metodos de Interfaz
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -37,11 +41,14 @@ namespace IngenieriaSoftware.UI
         private void GestionarPermisos_Load(object sender, EventArgs e)
         {
             ActualizarFormulario();
+            VerificarNotificaciones();
         }
 
-        private void CargarUsuariosPermisos()
+        private void CargarUsuarios()
         {
-            List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuariosPermisos();
+            // List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuarios();
+            List<UsuarioDTO> usuarios = _usuarioBLL.CargarUsuarios();
+
             listarUsuarios(usuarios);
         }
 
@@ -56,43 +63,33 @@ namespace IngenieriaSoftware.UI
 
         public void ActualizarFormulario()
         {
-            CargarUsuariosPermisos();
-            ListarTreeView();
+            CargarUsuarios();
+            CargarPermisos();
         }
 
-        private void ListarTreeView()
+        private void CargarPermisos()
         {
-            var permisos = _usuarioBLL.ObtenerPermisosGlobales();
+            List<PermisoDTO> permisos = _permisoBLL.CargarPermisos();
             FillTreeView(permisos, treeViewPermisos);
         }
 
         private void FillTreeView(List<PermisoDTO> permisosJerarquizados, TreeView treeViewPermisos)
         {
-            // Limpiar el TreeView antes de llenarlo
             treeViewPermisos.Nodes.Clear();
-
-            // Agregar cada permiso raíz y construir sus hijos recursivamente
             foreach (PermisoDTO permiso in permisosJerarquizados)
             {
-                // Crear y añadir el nodo raíz
                 TreeNode nodoRaiz = CrearNodoRecursivo(permiso);
                 treeViewPermisos.Nodes.Add(nodoRaiz);
             }
-
-            // Expandir todos los nodos para visualizarlos
             treeViewPermisos.ExpandAll();
         }
 
-        // Método recursivo para construir nodos del TreeView con sus hijos
         private TreeNode CrearNodoRecursivo(PermisoDTO permiso)
         {
-            // Crear un nodo para el permiso actual
             TreeNode nodo = new TreeNode(permiso.CodPermiso)
             {
-                Tag = permiso.Id // Asignar el ID del permiso al Tag del nodo
+                Tag = permiso.Id
             };
-
-            // Recorrer los permisos hijos del permiso actual y añadirlos como nodos hijos
             foreach (PermisoDTO hijo in permiso.permisosHijos)
             {
                 TreeNode nodoHijo = CrearNodoRecursivo(hijo);
@@ -106,28 +103,33 @@ namespace IngenieriaSoftware.UI
         {
             if (comboBoxUsuario.SelectedItem == null) return;
             string nombreUsuario = comboBoxUsuario.SelectedItem.ToString();
-            var permisosDelUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
+            // var permisosDelUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
+            var permisosUsuario = _permisoBLL.ObtenerPermisosDelUsuario(nombreUsuario);
 
-            FillTreeView(permisosDelUsuario, treeViewPermisoUsuario);
+            FillTreeView(permisosUsuario, treeViewPermisoUsuario);
         }
 
         private void btnAsignarPermiso_Click(object sender, EventArgs e)
         {
-            if (treeViewPermisos.SelectedNode == null) return;
+            if (treeViewPermisoUsuario.SelectedNode == null) return;
             if (comboBoxUsuario.Text.Length == 0) return;
             try
             {
-                string nombreUsuario = comboBoxUsuario.Text.ToString();
-                List<PermisoDTO> permisosUsuario = _usuarioBLL.AsignarPermisoUsuario((int)treeViewPermisos.SelectedNode.Tag, nombreUsuario);
+                string usuarioNombre = comboBoxUsuario.Text.ToString();
+                var usuario = _usuarioBLL.ObtenerUsuarioPorNombre(usuarioNombre);
+                usuario.Permisos = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);
+                List<PermisoDTO> permisosUsuario = _permisoBLL.AsignarPermisoUsuario((int)treeViewPermisoUsuario.SelectedNode.Tag, usuario);
 
                 ActualizarFormulario();
-                permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
+                permisosUsuario = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);
 
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Asignar Permiso", DateTime.Now, $"Se asigno el permiso {treeViewPermisoUsuario.SelectedNode.Text} al usuario {usuarioNombre}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }
 
@@ -137,21 +139,28 @@ namespace IngenieriaSoftware.UI
             if (comboBoxUsuario.Text.Length == 0) return;
             try
             {
-                string nombreUsuario = comboBoxUsuario.Text.ToString();
-                _usuarioBLL.DesasignarPermisoUsuario(nombreUsuario, (int)treeViewPermisoUsuario.SelectedNode.Tag);
+                string usuarioNombre = comboBoxUsuario.Text.ToString();
+                var usuario = _usuarioBLL.ObtenerUsuarioPorNombre(usuarioNombre);
+                _permisoBLL.DesasignarPermisoUsuario(usuario.Id, (int)treeViewPermisoUsuario.SelectedNode.Tag);
 
-                ActualizarFormulario();
-                var permisosUsuario = _usuarioBLL.ObtenerPermisosDelUsuarioEnMemoria(nombreUsuario);
+                var permisosUsuario = _permisoBLL.ObtenerPermisosDelUsuario(usuario.Username);
 
-                if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.UsuarioActual.Username)
+                if (treeViewPermisoUsuario.SelectedNode.Text.ToLower() == "asignar permisos" && comboBoxUsuario.Text == SessionManager.GetInstance.Usuario.Username)
                 {
+                    var padre = this.MdiParent as FormMDI;
+
                     this.Close();
                 }
+
+                ActualizarFormulario();
                 FillTreeView(permisosUsuario, treeViewPermisoUsuario);
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Desasignar Permiso", DateTime.Now, $"Se desasigno el permiso {treeViewPermisoUsuario.SelectedNode.Text} al usuario {usuarioNombre}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Permisos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }
 
@@ -159,6 +168,18 @@ namespace IngenieriaSoftware.UI
         {
             var formPadre = this.MdiParent as FormMDI;
             formPadre.AbrirFormMenu();
+        }
+
+        public void VerificarNotificaciones()
+        {
+            if (PermisosData.PermisosString.Contains("Mesero"))
+            {
+                var notificaciones = _notificacionService.ObtenerNotificaciones();
+                if (notificaciones.Count > 0)
+                {
+                    HelperForms.MostrarNotificacion(notificaciones, this);
+                }
+            }
         }
     }
 }

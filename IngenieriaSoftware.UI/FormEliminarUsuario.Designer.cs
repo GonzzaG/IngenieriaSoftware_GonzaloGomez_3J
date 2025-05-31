@@ -35,46 +35,54 @@
             // 
             // btnEliminarUsuario
             // 
-            this.btnEliminarUsuario.Location = new System.Drawing.Point(127, 129);
-            this.btnEliminarUsuario.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEliminarUsuario.BackColor = System.Drawing.Color.Teal;
+            this.btnEliminarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminarUsuario.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnEliminarUsuario.Location = new System.Drawing.Point(169, 159);
+            this.btnEliminarUsuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminarUsuario.Name = "btnEliminarUsuario";
-            this.btnEliminarUsuario.Size = new System.Drawing.Size(120, 32);
+            this.btnEliminarUsuario.Size = new System.Drawing.Size(179, 48);
             this.btnEliminarUsuario.TabIndex = 11;
             this.btnEliminarUsuario.Tag = "40";
             this.btnEliminarUsuario.Text = "Eliminar usuario";
-            this.btnEliminarUsuario.UseVisualStyleBackColor = true;
+            this.btnEliminarUsuario.UseVisualStyleBackColor = false;
             this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
             // 
             // lblUsuarios
             // 
             this.lblUsuarios.AutoSize = true;
-            this.lblUsuarios.Location = new System.Drawing.Point(110, 39);
-            this.lblUsuarios.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuarios.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblUsuarios.Location = new System.Drawing.Point(134, 58);
             this.lblUsuarios.Name = "lblUsuarios";
-            this.lblUsuarios.Size = new System.Drawing.Size(48, 13);
+            this.lblUsuarios.Size = new System.Drawing.Size(89, 25);
             this.lblUsuarios.TabIndex = 10;
             this.lblUsuarios.Tag = "38";
             this.lblUsuarios.Text = "Usuarios";
             // 
             // comboBoxUsuarios
             // 
+            this.comboBoxUsuarios.BackColor = System.Drawing.Color.Teal;
+            this.comboBoxUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxUsuarios.FormattingEnabled = true;
-            this.comboBoxUsuarios.Location = new System.Drawing.Point(102, 54);
+            this.comboBoxUsuarios.Location = new System.Drawing.Point(139, 87);
+            this.comboBoxUsuarios.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBoxUsuarios.Name = "comboBoxUsuarios";
-            this.comboBoxUsuarios.Size = new System.Drawing.Size(189, 21);
+            this.comboBoxUsuarios.Size = new System.Drawing.Size(251, 33);
             this.comboBoxUsuarios.TabIndex = 9;
             this.comboBoxUsuarios.Tag = "37";
             this.comboBoxUsuarios.SelectedIndexChanged += new System.EventHandler(this.comboBoxUsuarios_SelectedIndexChanged);
             // 
             // FormEliminarUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 241);
+            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ClientSize = new System.Drawing.Size(544, 297);
             this.Controls.Add(this.btnEliminarUsuario);
             this.Controls.Add(this.lblUsuarios);
             this.Controls.Add(this.comboBoxUsuarios);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormEliminarUsuario";
             this.Tag = "39";
             this.Text = "EliminarUsuario";
