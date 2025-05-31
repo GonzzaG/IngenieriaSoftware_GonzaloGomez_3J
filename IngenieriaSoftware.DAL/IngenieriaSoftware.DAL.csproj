@@ -56,7 +56,7 @@
     <Compile Include="DAO.cs" />
     <Compile Include="DigitoVerificadorHorizontalDAL.cs" />
     <Compile Include="DigitoVerificadorVerticalDAL.cs" />
-    <Compile Include="IAuditoryRepository.cs" />
+    <Compile Include="Auditoria\IAuditoryRepository.cs" />
     <Compile Include="ObjetoDAL.cs" />
     <Compile Include="EntityDAL\ClienteDAL.cs" />
     <Compile Include="EntityDAL\ComandaDAL.cs" />
