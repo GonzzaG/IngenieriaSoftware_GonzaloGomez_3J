@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL.Permisos
 {
@@ -34,7 +31,5 @@ namespace IngenieriaSoftware.BLL.Permisos
                 return _hijos.Sum(h => h.ObtenerTamaño);
             }
         }
-
-
     }
 }

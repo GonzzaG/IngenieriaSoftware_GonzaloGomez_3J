@@ -1,6 +1,4 @@
-﻿using IngenieriaSoftware.DAL;
-using IngenieriaSoftware.Servicios;
-using IngenieriaSoftware.Servicios.Interfaces;
+﻿using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +10,9 @@ namespace IngenieriaSoftware.BLL
 
         private readonly UsuarioBLL _usuarioBLL;
         private static List<PermisoDTO> _permisos { get; set; }
-        public static List<PermisoDTO> PermisosUsuario {  get { return _permisos; } set { _permisos = value; } }
+        public static List<PermisoDTO> PermisosUsuario
+        { get { return _permisos; } set { _permisos = value; } }
+
         public AuthService()
         {
             _usuarioBLL = new UsuarioBLL();
@@ -34,7 +34,6 @@ namespace IngenieriaSoftware.BLL
                 {
                     // SessionManager.LogIn(_Usuario);
                     _permisos = _permisoBLL.ObtenerPermisosDelUsuario(_Usuario.Username);
-                
 
                     return true;
                 }
@@ -43,9 +42,9 @@ namespace IngenieriaSoftware.BLL
                     throw new FalloCredencialesException();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                throw e;
+                throw new Exception(e.Message);
             }
         }
 
@@ -61,7 +60,7 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public bool RegistrarUsuario(string pNombreUsuario, string pContrasena) //string categoria)
+        public int RegistrarUsuario(string pNombreUsuario, string pContrasena) //string categoria)
         {
             try
             {
@@ -76,14 +75,14 @@ namespace IngenieriaSoftware.BLL
                 {
                     //SessionManager.LogIn(_Usuario);
 
-                    return true;
+                    return _Usuario.Id;
                 }
                 else
                 {
                     throw new Exception("Fallo en las credenciales.");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

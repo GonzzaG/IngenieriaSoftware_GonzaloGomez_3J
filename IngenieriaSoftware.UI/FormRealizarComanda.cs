@@ -1,19 +1,13 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
-using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.DTOs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IngenieriaSoftware.UI
 {
@@ -24,6 +18,10 @@ namespace IngenieriaSoftware.UI
         private Mesa _mesa;
         private int _comandaId;
         private Comanda _comanda;
+        private TraduccionBLL _traduccionBLL = new TraduccionBLL();
+        private EtiquetaBLL _etiquetaBLL = new EtiquetaBLL();
+
+        private List<Producto> _productos = new List<Producto>();
 
         public NotificacionService _notificacionService => new NotificacionService();
 
@@ -33,30 +31,74 @@ namespace IngenieriaSoftware.UI
             _mesa = mesa;
             _comandaId = comandaId;
             Inicializar();
-            
         }
-
-
 
         private void Inicializar()
         {
             try
             {
-                //obtenemos todos los productos
-                var productos = _productoBLL.ObtenerTodosLosProductos();
-                if (productos != null)
+                _productos = _productoBLL.ObtenerTodosLosProductos();
+
+                if (_productos != null)
                 {
                     dataGridViewProductos.DataSource = null;
-                    dataGridViewProductos.DataSource = productos;
+                    dataGridViewProductos.DataSource = _productos;
+
+                    OcultarColumnas();
+
+                    #region Traduccion implementacion
+
+                    //List<EtiquetaDTO> etiquetas = _etiquetaBLL.ObtenerEtiquetasPorPalabra("DataGridViewRow");
+
+                    //var etiquetasRelacionadasId = etiquetas
+                    //    .Where(etiqueta => _productos
+                    //    .Any(producto => etiqueta.Name.Contains(producto.Nombre)))
+                    //    .Select(e => e.Tag)
+                    //    .ToList();
+
+                    //var traducciones = _traduccionBLL.ObtenerTraduccionesPorEtiquetas(
+                    //    etiquetasRelacionadasId, IdiomaData.IdiomaActual.Id);
+
+                    //var productosConTraduccion = _productos.Select(producto =>
+                    //{
+                    //    var traduccion = traducciones
+                    //        .FirstOrDefault(t => etiquetas.Any(e => e.Tag == t.EtiquetaId && e.Name.Contains(producto.Nombre)));
+
+                    //    return new
+                    //    {
+                    //        producto.ProductoId,
+                    //        Nombre = traduccion?.Texto ?? producto.Nombre,
+                    //        producto.Precio,
+                    //        producto.TiempoPreparacion,
+                    //        producto.EsPostre,
+                    //        producto.Categoria
+                    //    };
+                    //}).ToList();
+
+                    //dataGridViewProductos.DataSource = null;
+                    //dataGridViewProductos.DataSource = productosConTraduccion;
+
+                    //dataGridViewProductos.AutoGenerateColumns = false;
+                    //dataGridViewProductos.Columns.Clear();
+
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "ProductoId", HeaderText = "ID", DataPropertyName = "ProductoId" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Nombre", HeaderText = "Nombre", DataPropertyName = "Nombre" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Precio", HeaderText = "Precio", DataPropertyName = "Precio" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Tiempo Preparacion", HeaderText = "Tiempo Preparacion", DataPropertyName = "TiempoPreparacion" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "EsPostre", HeaderText = "EsPostre", DataPropertyName = "EsPostre" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Categoria", HeaderText = "Categoría", DataPropertyName = "Categoria" });
+
+                    #endregion Traduccion implementacion
                 }
 
                 lblNumeroMesa.Text = _mesa.MesaId.ToString();
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show("Error al inicializar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void FormRealizarComanda_Load(object sender, EventArgs e)
         {
             VerificarNotificaciones();
@@ -64,54 +106,108 @@ namespace IngenieriaSoftware.UI
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            //en este boton se agregara el producto seleccionado a la comanda de la mesa actual seleccionada
-            //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
-            int indice = dataGridViewProductos.SelectedRows[0].Index;
-            Producto producto = ((List<Producto>)dataGridViewProductos.DataSource)[indice];
-   
-            _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
-        }
+            try
+            {
+                //en este boton se agregara el producto seleccionado a la comanda de la mesa actual seleccionada
+                //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
+                int indice = dataGridViewProductos.SelectedRows[0].Index;
+                int productoId = (int)dataGridViewProductos.SelectedRows[0].Cells[0].Value;
+                Producto producto = _productos.Find(p => p.ProductoId == productoId);
 
-        private void NuevoProducto()
-        {
-           
-
-          
+                _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Agregar Producto", DateTime.Now, "Producto agregado a la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
+            }
+            catch (Exception ex)
+            {
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         private void btnVerComanda_Click(object sender, EventArgs e)
         {
-            // Mostramos el formulario ver comanda con la mesa actual como parametro
-            
-            var padre = this.MdiParent as FormMDI;
+            try
+            {
+                // Mostramos el formulario ver comanda con la mesa actual como parametro
 
-            FormVerComanda formVerComanda = new FormVerComanda(_comandaBLL, _comandaId);
-            formVerComanda.StartPosition = FormStartPosition.CenterScreen;
-            formVerComanda.ShowDialog();
-          // padre.AbrirFormHijo(formVerComanda);
+                var padre = this.MdiParent as FormMDI;
 
-            Actualizar();
+                FormVerComanda formVerComanda = new FormVerComanda(_comandaBLL, _comandaId);
+                formVerComanda.StartPosition = FormStartPosition.CenterScreen;
+                formVerComanda.ShowDialog();
+                // padre.AbrirFormHijo(formVerComanda);
+
+                Actualizar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir el formulario de ver comanda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         public void Actualizar()
         {
-            // aca voy a mostrar todos los productos que tiene la mesa en su comanda hasta el momento (general)
-            // tambien voy a mostrar la lista de productos seleccionados en la pantalla anterior (derecha)
-            //esta pantalla de la derecha es la que luego se enviara a cocina
-            var productos = _productoBLL.ObtenerTodosLosProductos();
-            if (productos != null)
+            try
             {
-                dataGridViewProductos.DataSource = null;
-                dataGridViewProductos.DataSource = productos;
-            }
+                _productos = _productoBLL.ObtenerTodosLosProductos();
 
-            lblNumeroMesa.Text = _mesa.MesaId.ToString();
+                if (_productos != null)
+                {
+                    dataGridViewProductos.DataSource = null;
+                    dataGridViewProductos.DataSource = _productos;
+
+                    //List<EtiquetaDTO> etiquetas = _etiquetaBLL.ObtenerEtiquetasPorPalabra("DataGridViewRow");
+
+                    //var etiquetasRelacionadasId = etiquetas
+                    //    .Where(etiqueta => _productos
+                    //        .Any(producto => etiqueta.Name.Contains(producto.Nombre)))
+                    //    .Select(e => e.Tag)
+                    //    .ToList();
+                    //var traducciones = _traduccionBLL.ObtenerTraduccionesPorEtiquetas(
+                    //    etiquetasRelacionadasId, IdiomaData.IdiomaActual.Id);
+
+                    //var productosConTraduccion = _productos.Select(producto =>
+                    //{
+                    //    var traduccion = traducciones
+                    //        .FirstOrDefault(t => etiquetas.Any(e => e.Tag == t.EtiquetaId && e.Name.Contains(producto.Nombre)));
+
+                    //    return new
+                    //    {
+                    //        producto.ProductoId,
+                    //        Nombre = traduccion?.Texto ?? producto.Nombre,
+                    //        producto.Precio,
+                    //        producto.TiempoPreparacion,
+                    //        producto.EsPostre,
+                    //        producto.Categoria
+                    //    };
+                    //}).ToList();
+
+                    //dataGridViewProductos.DataSource = null;
+                    //dataGridViewProductos.DataSource = productosConTraduccion;
+
+                    //dataGridViewProductos.AutoGenerateColumns = false;
+                    //dataGridViewProductos.Columns.Clear();
+
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "ProductoId", HeaderText = "ID", DataPropertyName = "ProductoId" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Nombre", HeaderText = "Nombre", DataPropertyName = "Nombre" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Precio", HeaderText = "Precio", DataPropertyName = "Precio" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Tiempo Preparacion", HeaderText = "Tiempo Preparacion", DataPropertyName = "TiempoPreparacion" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "EsPostre", HeaderText = "EsPostre", DataPropertyName = "EsPostre" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Categoria", HeaderText = "Categoría", DataPropertyName = "Categoria" });
+                }
+
+                lblNumeroMesa.Text = _mesa.MesaId.ToString();
+                //OcultarColumnas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-                PermisosData.Permisos.Contains("PERM_MESERO"))
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -119,6 +215,31 @@ namespace IngenieriaSoftware.UI
                     HelperForms.MostrarNotificacion(notificaciones, this);
                 }
             }
+        }
+
+        public void CargarProductosConTraduccion(DataGridView dgv, string idioma)
+        {
+            var productos = _productoBLL.ObtenerTodosLosProductos();
+            List<EtiquetaDTO> etiquetas = _etiquetaBLL.ObtenerEtiquetasPorPalabra("DataGridViewRow");
+
+            var etiquetasRelacionadasId = etiquetas
+            .Where(etiqueta => productos
+            .Any(producto => etiqueta.Name.Contains(producto.Nombre)))
+            .Select(e => e.Tag)
+            .ToList();
+
+            var traducciones = _traduccionBLL.ObtenerTraduccionesPorEtiquetas(etiquetasRelacionadasId, IdiomaData.IdiomaActual.Id);
+
+            foreach (var traduccion in traducciones)
+            {
+                dgv.Rows.Add(traduccion.Texto);
+            }
+        }
+
+        public void OcultarColumnas()
+        {
+            dataGridViewProductos.Columns["ProductoId"].Visible = false;
+            dataGridViewProductos.Columns["Diponible"].Visible = false;
         }
     }
 }

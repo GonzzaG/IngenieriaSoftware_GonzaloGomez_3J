@@ -4,10 +4,6 @@ using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.EntityDAL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -26,6 +22,7 @@ namespace IngenieriaSoftware.BLL
         {
             _comandaProductos.Remove(p);
         }
+
         public void MarcarProductosEnPreparacion(List<ComandaProducto> productos)
         {
             var productosAux = productos;
@@ -47,7 +44,6 @@ namespace IngenieriaSoftware.BLL
             {
                 throw new Exception();
             }
-            
         }
 
         public void MarcarProductoslistos(List<ComandaProducto> productos)
@@ -71,21 +67,25 @@ namespace IngenieriaSoftware.BLL
                 throw new Exception();
             }
         }
+
         public void MarcarProductosEntregados(int notificacionId)
         {
             //tenemos que obtener todos los comandaProducto que se encuentren en estado 'listo' de la bd y que esten
-            //con la comandaId 
+            //con la comandaId
             _comandaDAL.MarcarComandaProductosComoEntregados(notificacionId);
         }
+
         public void CambiarEstadoComandaCerrada(int comandaId)
         {
-            _comandaDAL.CambiarEstadoComandaCerrada(comandaId);  
+            _comandaDAL.CambiarEstadoComandaCerrada(comandaId);
         }
+
         public void NotificarComandaLista(Comanda comanda)
         {
             //Voy a insertar una nueva notificacion con los datos de la comanda
             _notificacionDAL.InsertarNotificacion(comanda.MesaId, comanda.ComandaId);
         }
+
         public void NuevoComandaProducto(Producto producto, int comandaId, int cantidad)
         {
             var comandaProducto = new ComandaProducto
@@ -98,12 +98,11 @@ namespace IngenieriaSoftware.BLL
                 Nombre = producto.Nombre,
                 Descripcion = producto.Descripcion,
                 EsPostre = producto.EsPostre
-                
             };
-            
-            //verificamos si el producto ya existe en la lista de comandaProducto, para reordenarlo si es asi 
+
+            //verificamos si el producto ya existe en la lista de comandaProducto, para reordenarlo si es asi
             var productoComanda = _comandaProductos.Find(cp => cp.Producto == comandaProducto.Producto);
-            if(productoComanda != null)
+            if (productoComanda != null)
             {
                 productoComanda.Cantidad += cantidad;
             }
@@ -111,21 +110,23 @@ namespace IngenieriaSoftware.BLL
             {
                 _comandaProductos.Add(comandaProducto);
             }
-
         }
+
         public bool ComandasProductosEntregados(int mesaId)
         {
             return _comandaDAL.VerificarEstadoComandaProductosPorMesaId(mesaId);
         }
+
         public void InsertarComandaProductos(List<ComandaProducto> comandaProductos)
         {
-            _comandaDAL.InsertarComandaProductos(comandaProductos);    
+            _comandaDAL.InsertarComandaProductos(comandaProductos);
         }
 
         public int InsertarComanda(int mesaId)
         {
             return _comandaDAL.InsertarComanda(mesaId);
         }
+
         public int VerificarComandaOcupada(int mesaId)
         {
             return _comandaDAL.VerificarComandaOcupada(mesaId);
@@ -133,13 +134,12 @@ namespace IngenieriaSoftware.BLL
 
         public Comanda ObtenerComandaPorMesaId(int mesaId)
         {
-            return _comandaDAL.ObtenerComandaPorMesaId(mesaId);  
+            return _comandaDAL.ObtenerComandaPorMesaId(mesaId);
         }
 
         public List<ComandaProducto> ObtenerComandaProducto(int mesaId)
         {
             return ObtenerComandaProductoPorMesaId(mesaId);
-            
         }
 
         private List<ComandaProducto> ObtenerComandaProductoPorMesaId(int mesaId)
@@ -150,8 +150,8 @@ namespace IngenieriaSoftware.BLL
         public List<ComandaProducto> ObtenerComandaProductoPorComandaId(int mesaId)
         {
             return _comandaDAL.ObtenerComandaProductoPorComandaId(mesaId);
-        } 
-        
+        }
+
         public List<ComandaProducto> ObtenerComandaProductoProductoPorComandaId(int mesaId)
         {
             return _comandaDAL.ObtenerComandaProductoProductoPorComandaId(mesaId);
@@ -164,7 +164,7 @@ namespace IngenieriaSoftware.BLL
 
         public List<Notificacion> ObtenerNotificacionesNoVistas()
         {
-           return _notificacionDAL.ObtenerNotificacionesNoVistas();
+            return _notificacionDAL.ObtenerNotificacionesNoVistas();
         }
     }
 }

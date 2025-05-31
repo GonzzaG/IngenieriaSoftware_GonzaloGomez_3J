@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngenieriaSoftware.BEL.Constantes
+﻿namespace IngenieriaSoftware.BEL.Constantes
 {
     public class EstadoFactura
     {
@@ -15,6 +9,5 @@ namespace IngenieriaSoftware.BEL.Constantes
             Pagada = 2,
             Entregada = 3
         };
-
     }
 }

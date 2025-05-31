@@ -1,17 +1,11 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Constantes;
+﻿using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
-using IngenieriaSoftware.BLL.Mesas;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -20,12 +14,12 @@ namespace IngenieriaSoftware.UI
     {
         private readonly ComandaBLL _comandaBLL;
         private readonly int _comandaId;
-       // private List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
+        // private List<ComandaProducto> _comandaProductos = new List<ComandaProducto>();
 
         public FormVerComanda(ComandaBLL comandaBLL, int comandaId)
         {
             InitializeComponent();
-           // _comandaProductos = productos;
+            // _comandaProductos = productos;
             _comandaBLL = comandaBLL;
             _comandaId = comandaId;
             Inicializar();
@@ -33,8 +27,8 @@ namespace IngenieriaSoftware.UI
 
         private void Inicializar()
         {
-            // En este boton debemos mostrar la lista de comandaProductos de la mesa actual. 
-            var comandaGeneral= _comandaBLL.ObtenerComandaProductoPorComandaId(_comandaId);
+            // En este boton debemos mostrar la lista de comandaProductos de la mesa actual.
+            var comandaGeneral = _comandaBLL.ObtenerComandaProductoPorComandaId(_comandaId);
 
             dataGridViewComandaGeneral.DataSource = null;
             dataGridViewComandaGeneral.DataSource = comandaGeneral;
@@ -43,7 +37,7 @@ namespace IngenieriaSoftware.UI
             dataGridViewComandaActual.DataSource = null;
             dataGridViewComandaActual.DataSource = _comandaBLL._comandaProductos;
 
-            if(comandaGeneral != null)
+            if (comandaGeneral != null)
             {
                 OcultarColumnasComandaGeneral();
             }
@@ -52,18 +46,21 @@ namespace IngenieriaSoftware.UI
             {
                 OcultarColumnasComandaActual();
             }
-
         }
+
         private void OcultarColumnasComandaGeneral()
         {
+            dataGridViewComandaGeneral.Columns["ComandaId"].Visible = false;
             dataGridViewComandaGeneral.Columns["ProductoId"].Visible = false;
             dataGridViewComandaGeneral.Columns["Producto"].Visible = false;
             dataGridViewComandaGeneral.Columns["Diponible"].Visible = false;
             dataGridViewComandaGeneral.Columns["TiempoPreparacion"].Visible = false;
             dataGridViewComandaGeneral.Columns["Precio"].Visible = false;
         }
+
         private void OcultarColumnasComandaActual()
         {
+            dataGridViewComandaActual.Columns["ComandaId"].Visible = false;
             dataGridViewComandaActual.Columns["ProductoId"].Visible = false;
             dataGridViewComandaActual.Columns["Producto"].Visible = false;
             dataGridViewComandaActual.Columns["Diponible"].Visible = false;
@@ -73,26 +70,32 @@ namespace IngenieriaSoftware.UI
 
         private void FormVerComanda_Load(object sender, EventArgs e)
         {
-
         }
 
         private void btnConfirmarComanda_Click(object sender, EventArgs e)
         {
-            //vamos a enviar la comanda actual a cocina
-            //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
-            //se actualizara la gridview de la izquierda
-            if(_comandaBLL._comandaProductos == null) { MessageBox.Show("No tiene productos que enviar a cocina"); }
-            if(_comandaBLL._comandaProductos.Count > 0)
+            try
             {
-             //   _comandaBLL.InsertarComandaProductos(_comandaProductos);
-                _comandaBLL.InsertarComandaProductos(_comandaBLL._comandaProductos);
-                _comandaBLL._comandaProductos = null;
-                MessageBox.Show("La comanda fue enviada a la cocina con exito.");
+                //vamos a enviar la comanda actual a cocina
+                //vamos a insertar los productos de la comanda actual en la de comandageneral (comandaProducto)
+                //se actualizara la gridview de la izquierda
+                if (_comandaBLL._comandaProductos == null) { MessageBox.Show("No tiene productos que enviar a cocina"); }
+                if (_comandaBLL._comandaProductos.Count > 0)
+                {
+                    //   _comandaBLL.InsertarComandaProductos(_comandaProductos);
+                    _comandaBLL.InsertarComandaProductos(_comandaBLL._comandaProductos);
+                    _comandaBLL._comandaProductos = null;
+                    MessageBox.Show("La comanda fue enviada a la cocina con exito.");
+                }
 
-            }
-           
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Enviar Comanda a Cocina", DateTime.Now, "Se envio la comanda a cocina", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
                 this.Close();
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al enviar la comanda a cocina");
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         private void btnEliminarProducto_Click(object sender, EventArgs e)
@@ -107,19 +110,23 @@ namespace IngenieriaSoftware.UI
                     .First(m => m.EstadoProducto != EstadoComandaProductos.Estado.En_Preparacion);
 
                 if (ComandaProducto == null) { return; }
-                
-                _comandaBLL.EliminarComandaProducto(ComandaProducto);   
-                
+
+                _comandaBLL.EliminarComandaProducto(ComandaProducto);
+
                 dataGridViewComandaActual.DataSource = null;
                 dataGridViewComandaActual.DataSource = _comandaBLL._comandaProductos;
                 if (_comandaBLL._comandaProductos != null)
                 {
                     OcultarColumnasComandaActual();
                 }
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Eliminar Comanda Producto", DateTime.Now, "Se elimino un producto de la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Seleccione un producto de la comanda actual para eliminarlo");
+
+                BitacoraHelper.RegistrarError(this.Name, ex, "Mesas", SessionManager.GetInstance.Usuario.Username);
             }
         }
     }

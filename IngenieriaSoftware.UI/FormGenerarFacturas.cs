@@ -2,20 +2,15 @@
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
     public partial class FormGenerarFacturas : Form, IActualizable
     {
-        MesaBLL _mesaBLL = new MesaBLL();
+        private MesaBLL _mesaBLL = new MesaBLL();
+
         public FormGenerarFacturas()
         {
             InitializeComponent();
@@ -34,10 +29,7 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-             PermisosData.Permisos.Contains("PERM_MESERO") ||
-             PermisosData.Permisos.Contains("PERM_GEST_MESAS") ||
-             PermisosData.Permisos.Contains("PERM_COM_ENTREGAR"))
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -54,17 +46,39 @@ namespace IngenieriaSoftware.UI
 
         private void btnGenerarFactura_Click(object sender, EventArgs e)
         {
-            if(dataGridViewMesasCerradas.SelectedRows.Count == 0)
+            try
             {
-                MessageBox.Show("Seleccione una mesa para poder generar la factura");
+                if (dataGridViewMesasCerradas.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Seleccione una mesa para poder generar la factura");
+                }
+
+                int mesaId = (int)dataGridViewMesasCerradas.SelectedRows[0].Cells[0].Value;
+
+                var padre = this.MdiParent as FormMDI;
+
+                using (var transaction = new TransactionScope())
+                {
+                    FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
+
+                    formSeleccionMedioDePago.FormClosed += (s, ev) =>
+                    {
+                        _mesaBLL.CambiarEstadoMesaDesocupada(mesaId);
+                        MessageBox.Show("La mesa ha sido desocupada");
+                    };
+
+                    padre.AbrirFormHijo(formSeleccionMedioDePago);
+
+                    transaction.Complete();
+                }
+
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Generar Factura", DateTime.Now, "MesaId: " + mesaId, this.Name, AppDomain.CurrentDomain.BaseDirectory, "Caja");
             }
-
-            int mesaId = (int)dataGridViewMesasCerradas.SelectedRows[0].Cells[0].Value;
-
-            var padre = this.MdiParent as FormMDI;
-            FormSeleccionMedioDePago formSeleccionMedioDePago = new FormSeleccionMedioDePago(mesaId);
-            padre.AbrirFormHijo(formSeleccionMedioDePago);
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar la factura: " + ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Caja", SessionManager.GetInstance.Usuario.Username);
+            }
         }
     }
 }

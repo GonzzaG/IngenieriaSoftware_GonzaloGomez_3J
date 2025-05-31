@@ -33,8 +33,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.4\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=9.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.9.0.4\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=9.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.9.0.4\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.9.0.4\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.4\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.9.0.4\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +85,30 @@
     </Compile>
     <Compile Include="FormABMMesas.Designer.cs">
       <DependentUpon>FormABMMesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAsignarRolAUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAsignarRolAUsuario.Designer.cs">
+      <DependentUpon>FormAsignarRolAUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAuditoria.Designer.cs">
+      <DependentUpon>FormAuditoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBitacoraBusqueda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBitacoraBusqueda.Designer.cs">
+      <DependentUpon>FormBitacoraBusqueda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBusquedaAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBusquedaAuditoria.Designer.cs">
+      <DependentUpon>FormBusquedaAuditoria.cs</DependentUpon>
     </Compile>
     <Compile Include="FormComandasAEntregar.cs">
       <SubType>Form</SubType>
@@ -78,6 +134,18 @@
     <Compile Include="FormGenerarFacturas.Designer.cs">
       <DependentUpon>FormGenerarFacturas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGestionarBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarBackup.Designer.cs">
+      <DependentUpon>FormGestionarBackup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionarCambiosAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionarCambiosAuditoria.Designer.cs">
+      <DependentUpon>FormGestionarCambiosAuditoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGestionarComandas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +163,12 @@
     </Compile>
     <Compile Include="FormGestionarMesas.Designer.cs">
       <DependentUpon>FormGestionarMesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionRoles.Designer.cs">
+      <DependentUpon>FormGestionRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="FormNuevaMesa.cs">
       <SubType>Form</SubType>
@@ -181,6 +255,18 @@
     <EmbeddedResource Include="FormABMMesas.resx">
       <DependentUpon>FormABMMesas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAsignarRolAUsuario.resx">
+      <DependentUpon>FormAsignarRolAUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAuditoria.resx">
+      <DependentUpon>FormAuditoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBitacoraBusqueda.resx">
+      <DependentUpon>FormBitacoraBusqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBusquedaAuditoria.resx">
+      <DependentUpon>FormBusquedaAuditoria.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormComandasAEntregar.resx">
       <DependentUpon>FormComandasAEntregar.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,6 +278,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGenerarFacturas.resx">
       <DependentUpon>FormGenerarFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionarBackup.resx">
+      <DependentUpon>FormGestionarBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionarCambiosAuditoria.resx">
+      <DependentUpon>FormGestionarCambiosAuditoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarComandas.resx">
       <DependentUpon>FormGestionarComandas.cs</DependentUpon>
@@ -213,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestionarPermisos.resx">
       <DependentUpon>FormGestionarPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionRoles.resx">
+      <DependentUpon>FormGestionRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormNuevaMesa.resx">
       <DependentUpon>FormNuevaMesa.cs</DependentUpon>
@@ -247,6 +342,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\IngenieriaSoftware.BLL.AuthService.datasource" />
     <None Include="Properties\DataSources\IngenieriaSoftware.BLL.UsuarioBLL.datasource" />
     <None Include="Properties\Settings.settings">

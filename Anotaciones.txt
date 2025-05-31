@@ -54,6 +54,17 @@ cuando seleccione uno, presiono para pagar y esta factura debe marcarse como (Es
 
 https://chatgpt.com/share/6736959d-00d0-800a-a183-72eab84962fa
 
-ULTIMO TAG 90
+
+
+Implementacion de roles ------------------------------------
+
+Tengo que hacer un abm donde puedo crear roles asignandole tanto permisos como roles.
+- Los roles no dan permisos, solo lo dan los permisos(patentes) 
+- La mejor forma de relacionar el permiso con el boton es mediante un tag o id
+
+
+
+tengo que hacer que se pueda desasignar un permiso a un rol y desasignar un rol a un rol
+arreglar la relacion de mesero como hijo de cajero cocina, el cual no existe, pero deberia haberse desasignado
 
 

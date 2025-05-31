@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IngenieriaSoftware.BLL.Permisos
 {
@@ -18,11 +14,9 @@ namespace IngenieriaSoftware.BLL.Permisos
         }
 
         public abstract void AgregarHijo(ComponentePermiso c);
+
         public abstract IList<ComponentePermiso> ObtenerHijos();
+
         public abstract int ObtenerTamaño { get; }
-
-
-
-
     }
 }

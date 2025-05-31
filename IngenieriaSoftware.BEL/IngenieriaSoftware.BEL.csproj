@@ -41,13 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditoriaDetalle.cs" />
+    <Compile Include="AuditoriaRegistro.cs" />
+    <Compile Include="Bitacora.cs" />
+    <Compile Include="BackupRegistro.cs" />
     <Compile Include="Constantes\EstadoComanda.cs" />
     <Compile Include="Constantes\EstadoComandaProductos.cs" />
     <Compile Include="Constantes\EstadoFactura.cs" />
     <Compile Include="Constantes\TipoProducto.cs" />
+    <Compile Include="DigitoVerificadorVertical.cs" />
     <Compile Include="Empleados\Administrador.cs" />
     <Compile Include="Constantes\EstadoMesa.cs" />
     <Compile Include="Empleados\Mesero.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Factura.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />
@@ -62,6 +68,7 @@
     <Compile Include="Negocio\Notificacion.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Negocio\Producto.cs" />
+    <Compile Include="PeticionRestauracion.cs" />
     <Compile Include="ProductoFactura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario.cs" />

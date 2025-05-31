@@ -1,10 +1,5 @@
 ﻿using IngenieriaSoftware.Servicios.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -24,7 +19,6 @@ namespace IngenieriaSoftware.UI
 
         public void Actualizar(string nuevoTexto)
         {
-
             if (Regex.IsMatch(_menuItem.Name, @"(txt)", RegexOptions.IgnoreCase))
             {
                 //si es un textBox o un ComboBox, no lo modificamos

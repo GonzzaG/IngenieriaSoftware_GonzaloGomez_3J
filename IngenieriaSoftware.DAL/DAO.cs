@@ -2,12 +2,15 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace IngenieriaSoftware.DAL
 {
     public class DAO
     {
         private SqlConnection mCon;
+        public string NombreBD { get; } = "ISProyecto";
+        public string rutaBD = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\BD"));
 
         public void Conectar()
         {
@@ -23,16 +26,14 @@ namespace IngenieriaSoftware.DAL
             mCon = new SqlConnection(connectionString);
         }
 
-        public int ExecuteNonQuery(string pNombreStoredProcedure, SqlParameter[] pParametros)
+        public int ExecuteNonQuery(string pCommandText, SqlParameter[] pParametros)
         {
             try
             {
                 Conectar();
 
-                SqlCommand mComm = new SqlCommand(pNombreStoredProcedure, mCon)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
+                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
+                mComm.CommandType = CommandType.StoredProcedure;
 
                 if (pParametros != null)
                 {
@@ -44,7 +45,7 @@ namespace IngenieriaSoftware.DAL
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
             finally
             {

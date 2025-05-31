@@ -1,13 +1,6 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -15,6 +8,7 @@ namespace IngenieriaSoftware.UI
     public partial class FormComandasAEntregar : Form, IActualizable
     {
         private readonly ComandaBLL _comandaBLL = new ComandaBLL();
+
         public FormComandasAEntregar()
         {
             InitializeComponent();
@@ -32,10 +26,7 @@ namespace IngenieriaSoftware.UI
 
         public void VerificarNotificaciones()
         {
-            if (PermisosData.Permisos.Contains("PERM_ADMIN") ||
-             PermisosData.Permisos.Contains("PERM_MESERO") ||
-             PermisosData.Permisos.Contains("PERM_GEST_MESAS") ||
-             PermisosData.Permisos.Contains("PERM_COM_ENTREGAR"))
+            if (PermisosData.PermisosString.Contains("Mesero"))
             {
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
@@ -45,16 +36,22 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-
-
         private void btnComandaEntregada_Click(object sender, EventArgs e)
         {
-            //vamos a marcar los productos como entregados
-            //vamos a marcar la notificacion como vista
-            int notificacionId = (int)dataGridViewComandasAEntregar.SelectedRows[0].Cells[0].Value;
-            _comandaBLL.MarcarProductosEntregados(notificacionId);
+            try
+            {
+                //vamos a marcar los productos como entregados
+                //vamos a marcar la notificacion como vista
+                int notificacionId = (int)dataGridViewComandasAEntregar.SelectedRows[0].Cells[0].Value;
+                _comandaBLL.MarcarProductosEntregados(notificacionId);
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Entregada", DateTime.Now, "Comanda entregada", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Cocina");
 
-            Actualizar();
+                Actualizar();
+            }
+            catch (Exception ex)
+            {
+                BitacoraHelper.RegistrarError(this.Name, ex, "Cocina", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         private void FormComandasAEntregar_Load(object sender, EventArgs e)
