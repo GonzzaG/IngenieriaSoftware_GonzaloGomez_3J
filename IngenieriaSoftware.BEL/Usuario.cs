@@ -1,19 +1,41 @@
-﻿using System;
+﻿using IngenieriaSoftware.Abstracciones;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL
 {
-    public class Usuario
+    [Verificable("user")]
+    public class Usuario : Entity, IUsuario, IObserver, IVerificable
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Username { get; set; }
+
         public string _passwordHash;
+        public DateTime FechaCreacion { get; set; }
+        public List<Permiso> Permisos { get; set; } = new List<Permiso>();
+        public int IdiomaId { get; set; }
+        public int id_rol { get; set; }
+        public string DVH { get; set; }
+        public string Email { get; set; }
 
-        public Constantes.Categoria Categoria { get; set; } = Constantes.Categoria.Ninguna;
+        public void Actualizar(Idioma i)
+        {
+            throw new NotImplementedException();
+        }
 
-        public List<Permiso> Permisos { get; set; }
+        public override string ToString()
+        {
+            return Username;
+        }
+
+        public bool VerificarIntegridad(string dvhBD)
+        {
+            return DVH == dvhBD;
+        }
+
+        public override string getNombreTabla()
+        {
+            return TablesName.Usuario;
+        }
     }
 }

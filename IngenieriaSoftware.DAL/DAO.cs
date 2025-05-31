@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlTypes;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace IngenieriaSoftware.DAL
 {
     public class DAO
     {
         private SqlConnection mCon;
+        public string NombreBD { get; } = "ISProyecto";
+        public string rutaBD = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\BD"));
 
         public void Conectar()
         {
-          
             string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
             // Validar si la variable está definida
@@ -29,60 +26,14 @@ namespace IngenieriaSoftware.DAL
             mCon = new SqlConnection(connectionString);
         }
 
-        //este metodo sera elimnado por la misma razon que executenonquery
-        public DataSet ExecuteDataSet(string pCommandText)
-        {
-            try
-            {
-                SqlDataAdapter mDa = new SqlDataAdapter(pCommandText, mCon);
-
-                DataSet mDs = new DataSet();
-                mDa.Fill(mDs);
-
-                return mDs;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (mCon.State != ConnectionState.Closed)
-                    mCon.Close();
-            }
-        }
-
-        //este se va a tener que eliminar ya que no ejecuta storeprocedure
-        public int ExecuteNonQuery(string pCommandText)
-        {
-            try
-            {
-                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
-
-                mCon.Open();
-
-                return mComm.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (mCon.State != ConnectionState.Closed)
-                    mCon.Close();
-            }
-        }
-        public int ExecuteNonQuery(string pNombreStoredProcedure, SqlParameter[] pParametros)
+        public int ExecuteNonQuery(string pCommandText, SqlParameter[] pParametros)
         {
             try
             {
                 Conectar();
 
-                SqlCommand mComm = new SqlCommand(pNombreStoredProcedure, mCon)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
+                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
+                mComm.CommandType = CommandType.StoredProcedure;
 
                 if (pParametros != null)
                 {
@@ -94,7 +45,7 @@ namespace IngenieriaSoftware.DAL
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -102,7 +53,6 @@ namespace IngenieriaSoftware.DAL
                     mCon.Close();
             }
         }
-
 
         public DataSet ExecuteStoredProcedure(string pNombreStoreProcedure, SqlParameter[] pParametros)
         {
@@ -115,7 +65,7 @@ namespace IngenieriaSoftware.DAL
                     CommandType = CommandType.StoredProcedure
                 };
 
-                if(pParametros != null)
+                if (pParametros != null)
                 {
                     mComm.Parameters.AddRange(pParametros);
                 }
@@ -126,22 +76,22 @@ namespace IngenieriaSoftware.DAL
 
                 return mDs;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             finally
             {
-                if(mCon.State != ConnectionState.Closed)
+                if (mCon.State != ConnectionState.Closed)
                     mCon.Close();
             }
         }
-
 
         public int ObtenerUltimoId(string pTabla, string pColumnaId)
         {
             try
             {
+                Conectar();
                 SqlCommand mComm = new SqlCommand("SELECT ISNULL(MAX(" + pColumnaId + "),0) FROM " + pTabla, mCon);
 
                 mCon.Open();
