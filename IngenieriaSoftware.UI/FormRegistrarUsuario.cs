@@ -1,5 +1,7 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Data;
@@ -15,12 +17,15 @@ namespace IngenieriaSoftware.UI
         private readonly DigitoVerificadorManager _digitoVerificadorManager = new DigitoVerificadorManager();
         public NotificacionService _notificacionService => new NotificacionService();
 
+        private readonly UsuarioAuditoriaService _usuarioAuditoriaService;
+
         public FormRegistrarUsuario(DigitoVerificadorManager digitoVerificador)
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
             _permisoBLL = new PermisoBLL();
-            _digitoVerificadorManager = digitoVerificador;  
+            _digitoVerificadorManager = digitoVerificador;
+            _usuarioAuditoriaService = new UsuarioAuditoriaService();
         }
 
         #region Metodos de Interfaz
@@ -66,14 +71,21 @@ namespace IngenieriaSoftware.UI
                         Id = usuarioId,
                     };
 
-                    if (CalcularDigitoVerificador(usuarioVerificable))
-                    {
-                        MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
-                    }
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
+                    //if (CalcularDigitoVerificador(usuarioVerificable))
+                    //{
+                    //    MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
+                    //}
 
-                        BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Registro de Usuario", DateTime.Now, $"Usuario {txtUsername.Text} registrado", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+                    var usuario = _usuarioBLL.ObtenerUsuarioPorId(usuarioId);
+
+                    AuditarUsuarioInsert(usuario);
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Registro de Usuario", DateTime.Now, $"Usuario {txtUsername.Text} registrado", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+
+                    //MessageBox.Show("Usuario registrado con exito");
                 }
             }
             catch (Exception ex)
@@ -81,6 +93,18 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
 
                 BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void AuditarUsuarioInsert(Usuario usuario)
+        {
+            if (usuario != null)
+            {
+                var cambiadoPor = SessionManager.GetInstance.Usuario.Username;
+
+                var usuarioAuditado = UsuarioAuditoriaFactory.CrearParaInsert(usuario, cambiadoPor);
+
+                _usuarioAuditoriaService.RegistrarCambio(usuarioAuditado);
             }
         }
 

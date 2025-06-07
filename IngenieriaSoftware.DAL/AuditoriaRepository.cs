@@ -1,4 +1,6 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
+using IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios;
 using IngenieriaSoftware.DAL.Mapper;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace IngenieriaSoftware.DAL
                 {
                     foreach (DataRow row in dt.Tables[0].Rows)
                     {
-                        tablas.Add(row["Tabla"].ToString());
+                        tablas.Add(row["NombreTabla"].ToString());
                     }
                 }
 
@@ -33,19 +35,28 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public List<AuditoriaRegistro> ObtenerRegistroDeTabla(string nombreTabla)
+        public List<UsuarioAuditoriaModel> ObtenerRegistroDeTabla(string nombreTabla)
         {
             try
             {
-                List<AuditoriaRegistro> tablas = new List<AuditoriaRegistro>();
+                List<UsuarioAuditoriaModel> registros = new List<UsuarioAuditoriaModel>();
 
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter ("@NombreTabla", nombreTabla)
                 };
+
                 DataSet dt = _dao.ExecuteStoredProcedure("sp_ObtenerCambiosPorTabla", parametros);
 
-                return new AuditoriaMapper().MapearDesdeDataSet(dt);
+                foreach (DataRow row in dt.Tables[0].Rows)
+                {
+                    var registro = UsuarioAuditoriaMapper.ConvertirDesdeRow(row);
+
+                    if (registro == null) continue;
+
+                    registros.Add(registro);
+                }
+                return registros;
             }
             catch (InvalidCastException ex)
             {

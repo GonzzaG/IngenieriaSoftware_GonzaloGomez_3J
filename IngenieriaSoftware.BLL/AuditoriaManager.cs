@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using System;
@@ -24,7 +25,7 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public List<AuditoriaRegistro> ObtenerRegistroDeTabla(string nombreTabla)
+        public List<UsuarioAuditoriaModel> ObtenerRegistroDeTabla(string nombreTabla)
         {
             try
             {

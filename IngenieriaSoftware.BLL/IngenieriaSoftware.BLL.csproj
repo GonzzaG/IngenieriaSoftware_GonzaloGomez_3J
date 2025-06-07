@@ -93,6 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditoriaManager.cs" />
+    <Compile Include="Auditoria\Services\AuditoriaService.cs" />
+    <Compile Include="Auditoria\Services\IAuditoriaService.cs" />
+    <Compile Include="Auditoria\Factories\UsuarioAuditoriaFactory.cs" />
+    <Compile Include="Auditoria\Services\UsuariosAuditoriaService.cs" />
     <Compile Include="AuthService.cs" />
     <Compile Include="BackupManager.cs" />
     <Compile Include="BitacoraBLL.cs" />
@@ -144,5 +148,6 @@
     <Analyzer Include="..\packages\MSTest.Analyzers.3.8.3\analyzers\dotnet\cs\MSTest.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\MSTest.Analyzers.3.8.3\analyzers\dotnet\cs\MSTest.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

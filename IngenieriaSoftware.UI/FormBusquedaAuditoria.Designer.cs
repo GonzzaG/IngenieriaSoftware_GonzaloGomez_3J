@@ -43,10 +43,10 @@
             this.lblRegistros.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblRegistros.Location = new System.Drawing.Point(290, 205);
             this.lblRegistros.Name = "lblRegistros";
-            this.lblRegistros.Size = new System.Drawing.Size(215, 28);
+            this.lblRegistros.Size = new System.Drawing.Size(242, 28);
             this.lblRegistros.TabIndex = 51;
             this.lblRegistros.Tag = "";
-            this.lblRegistros.Text = "Seleccione una tabla:";
+            this.lblRegistros.Text = "Seleccione una registro:";
             // 
             // comboBoxRegistros
             // 

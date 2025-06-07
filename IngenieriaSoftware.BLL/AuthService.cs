@@ -33,7 +33,7 @@ namespace IngenieriaSoftware.BLL
                 if (new UsuarioBLL().LogIn(_Usuario.Username, _Usuario._passwordHash))
                 {
                     // SessionManager.LogIn(_Usuario);
-                    _permisos = _permisoBLL.ObtenerPermisosDelUsuario(_Usuario.Username);
+                    //_permisos = _permisoBLL.ObtenerPermisosDelUsuario(_Usuario.Username);
 
                     return true;
                 }

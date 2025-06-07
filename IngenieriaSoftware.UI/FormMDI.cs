@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
@@ -51,8 +52,9 @@ namespace IngenieriaSoftware.UI
             _helperExcepciones = new HelperExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
-            VerificarIntegridad();
+            //VerificarIntegridad();
         }
+
 
         /// <summary>
         /// Realizar la verificacion de digitos verificadores horizontales y verticales

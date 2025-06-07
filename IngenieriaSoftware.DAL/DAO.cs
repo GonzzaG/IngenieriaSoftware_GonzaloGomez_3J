@@ -87,6 +87,8 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+
+        // Inhabilitado para permitir el identity increment en la base de datos
         public int ObtenerUltimoId(string pTabla, string pColumnaId)
         {
             try

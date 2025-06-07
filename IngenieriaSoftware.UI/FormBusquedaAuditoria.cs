@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace IngenieriaSoftware.UI
     public partial class FormBusquedaAuditoria : Form, IActualizable
     {
         private AuditoriaManager _auditoriaManager = new AuditoriaManager();
-        private List<AuditoriaRegistro> _registros;
+        private List<IAuditableModel> _registros;
         private bool formCargado = false;
         private bool tablasCargadas = false;
 
@@ -59,7 +60,7 @@ namespace IngenieriaSoftware.UI
                     return;
                 }
                 FormMDI formMDI = (FormMDI)this.MdiParent;
-                formMDI.AbrirFormHijo(new FormAuditoria(_auditoriaManager, _registros.FindAll(r => r.Registro == registroSeleccionado).ToList()));
+                formMDI.AbrirFormHijo(new FormAuditoria(_auditoriaManager, _registros.FindAll(r => r.Entidad.Id == registroSeleccionado).ToList()));
             }
             catch (Exception ex)
             {
@@ -95,19 +96,21 @@ namespace IngenieriaSoftware.UI
                         comboBoxRegistros.Items.Clear();
                     }
 
-                    _registros = _auditoriaManager.ObtenerRegistroDeTabla(comboBoxTablasAuditadas.Text);
+                    // Fix: Use LINQ to cast each item in the list to IAuditableModel
+                    var registrosUsuario = _auditoriaManager.ObtenerRegistroDeTabla(comboBoxTablasAuditadas.Text);
+                    _registros = registrosUsuario.Cast<IAuditableModel>().ToList();
 
                     comboBoxRegistros.Items.Clear();
 
                     _registros = _registros
-                        .OrderByDescending(x => x.Registro)
+                        .OrderByDescending(x => x.Entidad.Id)
                         .ToList();
 
                     if (_registros.Count > 0)
                     {
                         comboBoxRegistros.Items
                             .AddRange(_registros
-                            .Select(x => x.Registro.ToString())
+                            .Select(x => x.Entidad.Id.ToString())
                             .Distinct()
                             .ToArray());
                     }

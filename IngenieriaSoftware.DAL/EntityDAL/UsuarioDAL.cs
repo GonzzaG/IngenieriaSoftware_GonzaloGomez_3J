@@ -90,7 +90,7 @@ namespace IngenieriaSoftware.DAL
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerUsuarioPorNombre", parametros);
-                return new UsuarioMapper().MapearUsuarioDesdeDataSet(mDs);
+                return new UsuarioMapper().MapearUsuarioDTODesdeDataSet(mDs);
             }
             catch (Exception ex)
             {
@@ -98,7 +98,25 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public UsuarioDTO ObtenerUsuarioPorId(int id)
+        public UsuarioDTO ObtenerUsuarioDTOPorId(int id)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Id", id)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerUsuarioPorId", parametros);
+                return new UsuarioMapper().MapearUsuarioDTODesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el usuario por nombre: " + ex.Message, ex);
+            }
+        }
+
+        public Usuario ObtenerUsuarioPorId(int id)
         {
             try
             {
@@ -118,18 +136,26 @@ namespace IngenieriaSoftware.DAL
 
         public int GuardarUsuario(UsuarioDTO pUsuario, DateTime fechaInicio)
         {
-            pUsuario.Id = ProximoId();
+            //pUsuario.Id = ProximoId();
+
+            var parametroSalida = new SqlParameter("@nuevoUsuario_id", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Output
+            };
 
             SqlParameter[] parametros = new SqlParameter[]
             {
-                new SqlParameter("@IdUsuario", pUsuario.Id),
+               // new SqlParameter("@IdUsuario", pUsuario.Id),
                 new SqlParameter("@Username", pUsuario.Username),
                 new SqlParameter("@PasswordHash", pUsuario._passwordHash),
                 new SqlParameter("@FechaCreacion", fechaInicio),
-                new SqlParameter("@idioma_id", pUsuario.IdiomaId)
+                new SqlParameter("@idioma_id", pUsuario.IdiomaId),
+                parametroSalida,
             };
 
-            return _dao.ExecuteNonQuery("sp_GuardarUsuario", parametros);
+            _dao.ExecuteNonQuery("sp_GuardarUsuario", parametros);
+
+            return parametroSalida.Value != DBNull.Value ? Convert.ToInt32(parametroSalida.Value) : throw new Exception("No se puedo retornar el id del nuevo usuario");
         }
 
         public int ModificarUsuario(UsuarioDVHDTO pUsuario)

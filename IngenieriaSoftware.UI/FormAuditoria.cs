@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using System;
@@ -11,12 +12,21 @@ namespace IngenieriaSoftware.UI
     {
         private readonly AuditoriaManager _auditoriaManager;
         private List<AuditoriaRegistro> _registros;
+        private List<IAuditableModel> _registrosAuditable;
         private bool registrosCargados = false;
 
         public FormAuditoria(AuditoriaManager audit, List<AuditoriaRegistro> registros)
         {
             InitializeComponent();
             _registros = registros;
+            _auditoriaManager = audit;
+            Actualizar();
+        }
+
+        public FormAuditoria(AuditoriaManager audit, List<IAuditableModel> registros)
+        {
+            InitializeComponent();
+            _registrosAuditable = registros;
             _auditoriaManager = audit;
             Actualizar();
         }
@@ -29,24 +39,12 @@ namespace IngenieriaSoftware.UI
             txtComentario.Clear();
             dataGridViewHistorialCambios.DataSource = null;
             dataGridViewRegistrosModificados.DataSource = null;
-            dataGridViewRegistrosModificados.DataSource = _registros;
+            dataGridViewRegistrosModificados.DataSource = _registrosAuditable;
         }
 
         public void VerificarNotificaciones()
         {
             throw new NotImplementedException();
-        }
-
-        private List<AuditoriaRegistro> ListarRegistrosTabla(string nombre)
-        {
-            try
-            {
-                return _auditoriaManager.ObtenerRegistroDeTabla(nombre);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
 
         private void btnDetallesRegistro_Click(object sender, EventArgs e)
