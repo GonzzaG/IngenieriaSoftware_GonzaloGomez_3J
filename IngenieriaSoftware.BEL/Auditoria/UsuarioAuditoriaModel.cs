@@ -18,6 +18,6 @@ namespace IngenieriaSoftware.BEL.Auditoria
         public DateTime FechaCambio { get; set; }
         public bool EsUltimaVersion { get; set; }
         public Usuario Usuario { get; set; }
-        object IAuditableModel.Entidad => Usuario;
+        IEntity IAuditableModel.Entidad => Usuario;
     }
 }
