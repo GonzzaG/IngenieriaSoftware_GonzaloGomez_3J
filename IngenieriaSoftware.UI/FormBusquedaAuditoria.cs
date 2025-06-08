@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +13,7 @@ namespace IngenieriaSoftware.UI
     public partial class FormBusquedaAuditoria : Form, IActualizable
     {
         private AuditoriaManager _auditoriaManager = new AuditoriaManager();
+
         private List<IAuditableModel> _registros;
         private bool formCargado = false;
         private bool tablasCargadas = false;
@@ -60,7 +62,7 @@ namespace IngenieriaSoftware.UI
                     return;
                 }
                 FormMDI formMDI = (FormMDI)this.MdiParent;
-                formMDI.AbrirFormHijo(new FormAuditoria(_auditoriaManager, _registros.FindAll(r => r.Entidad.Id == registroSeleccionado).ToList()));
+                formMDI.AbrirFormHijo(new FormAuditoria(_auditoria, _registros.FindAll(r => r.Entidad.Id == registroSeleccionado).ToList()));
             }
             catch (Exception ex)
             {
@@ -96,9 +98,8 @@ namespace IngenieriaSoftware.UI
                         comboBoxRegistros.Items.Clear();
                     }
 
-                    // Fix: Use LINQ to cast each item in the list to IAuditableModel
-                    var registrosUsuario = _auditoriaManager.ObtenerRegistroDeTabla(comboBoxTablasAuditadas.Text);
-                    _registros = registrosUsuario.Cast<IAuditableModel>().ToList();
+                    var registrosEntidadAuditable = _auditoriaManager.ObtenerRegistroDeTabla(comboBoxTablasAuditadas.Text);
+                    _registros = registrosEntidadAuditable.Cast<IAuditableModel>().ToList();
 
                     comboBoxRegistros.Items.Clear();
 

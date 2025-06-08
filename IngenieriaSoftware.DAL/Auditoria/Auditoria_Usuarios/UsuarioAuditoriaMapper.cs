@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios
 {
-    public static class UsuarioAuditoriaMapper
+    public class UsuarioAuditoriaMapper: IAuditoriaMapper
     {
-        public static UsuarioAuditoriaModel ConvertirDesdeRow(DataRow row)
+        public IAuditableModel ConvertirDesdeRow(DataRow row)
         {
             if (row == null) return null;
 

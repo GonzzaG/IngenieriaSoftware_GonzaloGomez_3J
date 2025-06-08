@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,10 @@ namespace IngenieriaSoftware.UI
     {
         private readonly AuditoriaManager _auditoriaManager;
         private List<AuditoriaRegistro> _registros;
+
+
         private List<IAuditableModel> _registrosAuditable;
+
         private bool registrosCargados = false;
 
         public FormAuditoria(AuditoriaManager audit, List<AuditoriaRegistro> registros)
@@ -23,11 +27,10 @@ namespace IngenieriaSoftware.UI
             Actualizar();
         }
 
-        public FormAuditoria(AuditoriaManager audit, List<IAuditableModel> registros)
+        public FormAuditoria(List<IAuditableModel> registros)
         {
             InitializeComponent();
             _registrosAuditable = registros;
-            _auditoriaManager = audit;
             Actualizar();
         }
 

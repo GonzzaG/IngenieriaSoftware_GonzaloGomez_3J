@@ -80,15 +80,16 @@ namespace IngenieriaSoftware.DAL.Auditoria
         {
             try
             {
-                var dt = _dao.ExecuteStoredProcedure("audit.sp_ObtenerAuditoriaUsuarios", null);
-                var lista = new List<UsuarioAuditoriaModel>();
+                throw new NotImplementedException("Este método no está implementado en la versión actual.");
+                //var dt = _dao.ExecuteStoredProcedure("audit.sp_ObtenerAuditoriaUsuarios", null);
+                //var lista = new List<UsuarioAuditoriaModel>();
 
-                foreach (DataRow row in dt.Tables[0].Rows)
-                {
-                    lista.Add(UsuarioAuditoriaMapper.ConvertirDesdeRow(row));
-                }
+                //foreach (DataRow row in dt.Tables[0].Rows)
+                //{
+                //    lista.Add(new UsuarioAuditoriaMapper().ConvertirDesdeRow(row));
+                //}
 
-                return lista;
+                //return lista;
             }
             catch
             {

@@ -51,9 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditoriaRepository.cs" />
+    <Compile Include="Auditoria\AuditoriaMapperRegistry.cs" />
     <Compile Include="Auditoria\Auditoria_Usuarios\UsuarioAuditoriaMapper.cs" />
     <Compile Include="Auditoria\Auditoria_Usuarios\UsuarioAuditoriaRepository.cs" />
     <Compile Include="Auditoria\IAuditoriaRepository.cs" />
+    <Compile Include="Auditoria\IAuditoriaMapper.cs" />
     <Compile Include="BackupRepository.cs" />
     <Compile Include="BitacoraDAL.cs" />
     <Compile Include="DAO.cs" />
@@ -93,6 +95,10 @@
     <Compile Include="Mapper\UsuarioMapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">
+      <Project>{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}</Project>
+      <Name>IngenieriaSoftware.Abstracciones</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">
       <Project>{5da171d4-ef5b-4e09-8687-305243dfb51e}</Project>
       <Name>IngenieriaSoftware.BEL</Name>

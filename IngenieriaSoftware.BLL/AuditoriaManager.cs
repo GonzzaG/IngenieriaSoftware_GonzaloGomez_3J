@@ -4,6 +4,7 @@ using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IngenieriaSoftware.BLL
 {
@@ -25,12 +26,12 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public List<UsuarioAuditoriaModel> ObtenerRegistroDeTabla(string nombreTabla)
+        public List<IAuditableModel> ObtenerRegistroDeTabla(string nombreTabla)
         {
             try
             {
                 BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Obteniendo registro de tabla", DateTime.Now, string.Empty, "AuditoriaManager", "ObtenerRegistroDeTabla");
-                return _auditoriaRepository.ObtenerRegistroDeTabla(nombreTabla);
+                return _auditoriaRepository.ObtenerRegistroDeTabla(nombreTabla).Cast<IAuditableModel>().ToList();
             }
             catch (Exception ex)
             {

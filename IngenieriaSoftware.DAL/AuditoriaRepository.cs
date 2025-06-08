@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Auditoria;
+using IngenieriaSoftware.DAL.Auditoria;
 using IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios;
 using IngenieriaSoftware.DAL.Mapper;
 using System;
@@ -35,27 +36,29 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public List<UsuarioAuditoriaModel> ObtenerRegistroDeTabla(string nombreTabla)
+        public List<IAuditableModel> ObtenerRegistroDeTabla(string nombreTabla)
         {
             try
             {
-                List<UsuarioAuditoriaModel> registros = new List<UsuarioAuditoriaModel>();
+                List<IAuditableModel> registros = new List<IAuditableModel>();
 
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter ("@NombreTabla", nombreTabla)
                 };
 
-                DataSet dt = _dao.ExecuteStoredProcedure("sp_ObtenerCambiosPorTabla", parametros);
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_ObtenerCambiosPorTabla", parametros);
 
-                foreach (DataRow row in dt.Tables[0].Rows)
+                if (!AuditoriaMapperRegistry.TryGetMapper(nombreTabla, out var mapper))
+                    throw new Exception($"No se encontró un mapper para la tabla '{nombreTabla}'.");
+
+                foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    var registro = UsuarioAuditoriaMapper.ConvertirDesdeRow(row);
-
-                    if (registro == null) continue;
-
-                    registros.Add(registro);
+                    var registro = mapper.ConvertirDesdeRow(row);
+                    if (registro != null)
+                        registros.Add(registro);
                 }
+
                 return registros;
             }
             catch (InvalidCastException ex)
