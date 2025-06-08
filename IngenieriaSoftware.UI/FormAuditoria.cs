@@ -5,6 +5,7 @@ using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -41,9 +42,81 @@ namespace IngenieriaSoftware.UI
             //ListarTablasAuditadas();
             txtComentario.Clear();
             dataGridViewHistorialCambios.DataSource = null;
-            dataGridViewRegistrosModificados.DataSource = null;
-            dataGridViewRegistrosModificados.DataSource = _registrosAuditable;
+            //dataGridViewRegistrosModificados.DataSource = null;
+            //dataGridViewRegistrosModificados.DataSource = _registrosAuditable;
+
+            if (!registrosCargados)
+            {
+                LlenarDataGridView();
+                registrosCargados = true;
+            }
         }
+        private void LlenarDataGridView()
+        {
+            dataGridViewHistorialCambios.Columns.Clear();
+            dataGridViewHistorialCambios.Rows.Clear();
+
+            if (_registrosAuditable == null || !_registrosAuditable.Any())
+                return;
+
+            // Obtener las propiedades simples de la entidad (no colecciones, excepto string)
+            var primeraEntidad = _registrosAuditable[0].Entidad;
+            var propiedades = primeraEntidad.GetType()
+                .GetProperties()
+                .Where(p =>
+                    !typeof(System.Collections.IEnumerable).IsAssignableFrom(p.PropertyType) ||
+                    p.PropertyType == typeof(string))
+                .ToList();
+
+            // Crear columnas por cada propiedad válida
+            foreach (var prop in propiedades)
+            {
+                dataGridViewHistorialCambios.Columns.Add(prop.Name, prop.Name);
+            }
+
+            // Agregar columnas del modelo auditable
+            dataGridViewHistorialCambios.Columns.Add("Version", "Version");
+            dataGridViewHistorialCambios.Columns.Add("Accion", "Acción");
+            dataGridViewHistorialCambios.Columns.Add("CambiadoPor", "Cambiado Por");
+            dataGridViewHistorialCambios.Columns.Add("FechaCambio", "Fecha de Cambio");
+            dataGridViewHistorialCambios.Columns.Add("EsUltimaVersion", "Última Versión");
+
+            // Agregar filas
+            foreach (var registro in _registrosAuditable)
+            {
+                var entidad = registro.Entidad;
+                var valores = new List<object>();
+
+                foreach (var prop in propiedades)
+                {
+                    object valor = prop.GetValue(entidad);
+                    valores.Add(FormatearValor(valor));
+                }
+
+                valores.Add(registro.Version);
+                valores.Add(registro.Accion);
+                valores.Add(registro.CambiadoPor);
+                valores.Add(registro.FechaCambio.ToString("yyyy-MM-dd HH:mm:ss"));
+                valores.Add(registro.EsUltimaVersion ? "Sí" : "No");
+
+                dataGridViewHistorialCambios.Rows.Add(valores.ToArray());
+            }
+        }
+
+        private object FormatearValor(object valor)
+        {
+            if (valor == null)
+                return "[Nulo]";
+
+            if (valor is DateTime fecha)
+                return fecha.ToString("yyyy-MM-dd");
+
+            if (valor.GetType().IsEnum)
+                return valor.ToString();
+
+            return valor;
+        }
+
 
         public void VerificarNotificaciones()
         {

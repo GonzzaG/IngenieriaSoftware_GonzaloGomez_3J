@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Auditoria;
+using IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

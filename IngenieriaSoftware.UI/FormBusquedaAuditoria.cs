@@ -62,7 +62,7 @@ namespace IngenieriaSoftware.UI
                     return;
                 }
                 FormMDI formMDI = (FormMDI)this.MdiParent;
-                formMDI.AbrirFormHijo(new FormAuditoria(_auditoria, _registros.FindAll(r => r.Entidad.Id == registroSeleccionado).ToList()));
+                formMDI.AbrirFormHijo(new FormAuditoria(_registros.FindAll(r => r.Entidad.Id == registroSeleccionado).ToList()));
             }
             catch (Exception ex)
             {

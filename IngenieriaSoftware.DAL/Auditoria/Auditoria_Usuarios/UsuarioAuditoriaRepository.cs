@@ -111,7 +111,7 @@ namespace IngenieriaSoftware.DAL.Auditoria
                 if (dt.Tables[0].Rows.Count == 0)
                     return null;
 
-                return UsuarioAuditoriaMapper.ConvertirDesdeRow(dt.Tables[0].Rows[0]);
+                return (UsuarioAuditoriaModel)new UsuarioAuditoriaMapper().ConvertirDesdeRow(dt.Tables[0].Rows[0]);
             }
             catch
             {
@@ -136,6 +136,5 @@ namespace IngenieriaSoftware.DAL.Auditoria
                 throw new Exception("Error al restaurar el estado de la entidad desde auditoría", ex);
             }
         }
-
     }
 }

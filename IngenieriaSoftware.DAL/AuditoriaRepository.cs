@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms.VisualStyles;
 
 namespace IngenieriaSoftware.DAL
 {
@@ -49,7 +50,16 @@ namespace IngenieriaSoftware.DAL
 
                 DataSet ds = _dao.ExecuteStoredProcedure("sp_ObtenerCambiosPorTabla", parametros);
 
-                if (!AuditoriaMapperRegistry.TryGetMapper(nombreTabla, out var mapper))
+                string[] nombreTablaSplit = nombreTabla.Split('.');
+                string nombreTablaSinEsquema = "";
+
+                if (nombreTablaSplit.Length > 1)
+                    nombreTablaSinEsquema = nombreTablaSplit[nombreTablaSplit.Length - 1];
+
+                if(nombreTablaSinEsquema.Length == 0)
+                    throw new Exception("El nombre de la tabla no es válido.");
+
+                if ( !AuditoriaMapperRegistry.TryGetMapper(nombreTablaSinEsquema, out var mapper))
                     throw new Exception($"No se encontró un mapper para la tabla '{nombreTabla}'.");
 
                 foreach (DataRow row in ds.Tables[0].Rows)
