@@ -69,8 +69,7 @@ namespace IngenieriaSoftware.DAL
                 usuario.Username = row["Username"].ToString();
                 usuario._passwordHash = row["PasswordHash"].ToString();
                 usuario.FechaCreacion = (DateTime)row["FechaCreacion"];
-                if (pDS.Tables.Contains("id_rol"))
-                    usuario.id_rol = (int)row["id_rol"];
+                usuario.id_rol = (int)row["id_rol"];
                 usuario.IdiomaId = (int)row["idioma_id"];
             }
             if (usuario.Id == 0) { return null; }

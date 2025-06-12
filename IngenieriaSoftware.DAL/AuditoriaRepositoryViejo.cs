@@ -11,7 +11,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace IngenieriaSoftware.DAL
 {
-    public class AuditoriaRepository
+    public class AuditoriaRepositoryViejo
     {
         private DAO _dao = new DAO();
 
@@ -192,17 +192,19 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public List<PeticionRestauracion> ObtenerPeticionesPendientes()
+        public List<PeticionRestauracionModel> ObtenerPeticionesPendientes()
         {
             try
             {
-                DataSet ds = _dao.ExecuteStoredProcedure("sp_ObtenerPeticionesPendientes", null);
+                DataSet ds = _dao.ExecuteStoredProcedure("audit.sp_ObtenerPeticionesDeRestauracionPendientes", null);
 
                 if (ds == null || ds.Tables.Count == 0)
                 {
-                    return new List<PeticionRestauracion>();
+                    return new List<PeticionRestauracionModel>();
                 }
-                return PeticionRestauracionMapper.MapearDesdeDataRow(ds);
+
+
+                return Auditoria.PeticionRestauracionMapper.MappearDesdeDataSet(ds);
             }
             catch (Exception ex)
             {

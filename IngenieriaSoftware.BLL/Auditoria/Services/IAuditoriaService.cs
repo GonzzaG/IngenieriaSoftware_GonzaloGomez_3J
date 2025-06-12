@@ -1,18 +1,13 @@
 ﻿using IngenieriaSoftware.BEL.Auditoria;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL.Auditoria
 {
-    public interface IAuditoriaService<T> where T : IAuditableModel
+    public interface IAuditoriaService
     {
-
-        void RegistrarCambio(T entidad);
-        IEnumerable<T> GetAll();
-        T GetById(int id);
+        void RealizarPeticionRestauracion(string tabla, int idEntidad, int version, int idUsuarioActual, string comentario);
+        object GetPorIdYVersion(int id, int version);
+        IAuditableModel ObtenerUltimaVersionDeEntidadAuditable(string nombreTabla, int idEntidad);
+        void AceptarPeticionDeRestauracion(int idEntidad, int version, int idPeticion, int IdEntidad);
+        void RechazarPeticionDeRestauracion(int idPeticion, int IdEntidad);
     }
-
 }

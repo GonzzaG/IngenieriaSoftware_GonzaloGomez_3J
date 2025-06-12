@@ -93,8 +93,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditoriaManager.cs" />
-    <Compile Include="Auditoria\Services\AuditoriaService.cs" />
+    <Compile Include="Auditoria\AuditoriaPeticionesPendientesService.cs" />
+    <Compile Include="Auditoria\Services\AuditoriaRepositoryFactory.cs" />
     <Compile Include="Auditoria\Services\IAuditoriaService.cs" />
+    <Compile Include="Auditoria\Services\AuditoriaService.cs" />
+    <Compile Include="Auditoria\Services\IAuditoriaEntidadService.cs" />
     <Compile Include="Auditoria\Factories\UsuarioAuditoriaFactory.cs" />
     <Compile Include="Auditoria\Services\UsuariosAuditoriaService.cs" />
     <Compile Include="AuthService.cs" />

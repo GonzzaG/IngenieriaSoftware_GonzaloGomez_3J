@@ -18,7 +18,7 @@ namespace IngenieriaSoftware.DAL
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@FechaHora", bitacora.FechaHora),
-                    new SqlParameter("@Usuario", bitacora.Usuario),
+                    new SqlParameter("@Entidad", bitacora.Usuario),
                     new SqlParameter("@Actividad", bitacora.Actividad),
                     new SqlParameter("@InfoAdicional", bitacora.InfoAdicional),
                     new SqlParameter("@Controller", bitacora.Controller),

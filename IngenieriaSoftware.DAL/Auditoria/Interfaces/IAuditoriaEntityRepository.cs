@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {
-    public interface IAuditoriaRepository<T> where T : IAuditableModel
+    public interface IAuditoriaEntityRepository<T> where T : IAuditableModel
     {
         /// <summary>
         /// Registra un cambio en la auditoría.
@@ -31,10 +31,10 @@ namespace IngenieriaSoftware.DAL
         /// </summary>
         /// <param name="id">El id del registro de auditoría.</param>
         /// <returns>Registro auditado o null si no se encontró.</returns>
-        T GetById(int id);
+        T GetPorIdYVersion(int id, int version);
 
         void RestaurarEstadoEntidad(int idEntidad, int version);
 
-
+        void RealizarPeticion(string tabla, int idEntidad, int version, int idUsuarioActual, string comentario = null);
     }
 }

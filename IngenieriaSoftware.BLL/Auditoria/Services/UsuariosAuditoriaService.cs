@@ -12,9 +12,9 @@ using System.Transactions;
 
 namespace IngenieriaSoftware.BLL.Auditoria
 {
-    public class UsuarioAuditoriaService : IAuditoriaService<UsuarioAuditoriaModel>
+    public class UsuarioAuditoriaService : IAuditoriaEntidadService<UsuarioAuditoriaModel>
     {
-        private readonly IAuditoriaRepository<UsuarioAuditoriaModel> _repo;
+        private readonly IAuditoriaEntityRepository<UsuarioAuditoriaModel> _repo;
 
         public UsuarioAuditoriaService()
         {
@@ -55,6 +55,5 @@ namespace IngenieriaSoftware.BLL.Auditoria
         }
 
         public IEnumerable<UsuarioAuditoriaModel> GetAll() => _repo.GetAll();
-        public UsuarioAuditoriaModel GetById(int id) => _repo.GetById(id);
     }
 }

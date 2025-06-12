@@ -226,7 +226,7 @@
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
             this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(331, 32);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
-            this.registrarUsuarioToolStripMenuItem.Text = "RegistrarActividad Usuario";
+            this.registrarUsuarioToolStripMenuItem.Text = "RegistrarActividad Entidad";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
             // 
             // eliminarUsuarioToolStripMenuItem
@@ -234,7 +234,7 @@
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
             this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(331, 32);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
-            this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
+            this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Entidad";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
             // 
             // gestionIdiomasToolStripMenuItem

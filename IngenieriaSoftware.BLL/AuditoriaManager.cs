@@ -10,7 +10,7 @@ namespace IngenieriaSoftware.BLL
 {
     public class AuditoriaManager
     {
-        private AuditoriaRepository _auditoriaRepository = new AuditoriaRepository();
+        private AuditoriaRepositoryViejo _auditoriaRepository = new AuditoriaRepositoryViejo();
 
         public List<string> ObtenerTablasAuditadas()
         {
@@ -112,7 +112,7 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public List<PeticionRestauracion> ObtenerPeticionesPendientes()
+        public List<PeticionRestauracionModel> ObtenerPeticionesPendientes()
         {
             try
             {

@@ -17,21 +17,25 @@ namespace IngenieriaSoftware.UI
 
 
         private List<IAuditableModel> _registrosAuditable;
+        private IAuditoriaService _auditoriaService;
+        private string NombreTabla;
 
         private bool registrosCargados = false;
 
-        public FormAuditoria(AuditoriaManager audit, List<AuditoriaRegistro> registros)
+        public FormAuditoria(List<IAuditableModel> registros, string nombreTabla)
         {
             InitializeComponent();
-            _registros = registros;
-            _auditoriaManager = audit;
-            Actualizar();
-        }
 
-        public FormAuditoria(List<IAuditableModel> registros)
-        {
-            InitializeComponent();
+            var tipoModelo = AuditoriaModelTyperRegistry.GetModelTypeOrThrow(nombreTabla);
+
+            var tipoServicio = typeof(AuditoriaService<>).MakeGenericType(tipoModelo);
+
+            _auditoriaService = (IAuditoriaService)Activator.CreateInstance(tipoServicio);
+
             _registrosAuditable = registros;
+
+            NombreTabla = nombreTabla;
+
             Actualizar();
         }
 
@@ -99,7 +103,9 @@ namespace IngenieriaSoftware.UI
                 valores.Add(registro.FechaCambio.ToString("yyyy-MM-dd HH:mm:ss"));
                 valores.Add(registro.EsUltimaVersion ? "Sí" : "No");
 
-                dataGridViewHistorialCambios.Rows.Add(valores.ToArray());
+                int rowIndex = dataGridViewHistorialCambios.Rows.Add(valores.ToArray());
+
+                dataGridViewHistorialCambios.Rows[rowIndex].Tag = registro; // Guardar el registro completo en la fila para referencia futura
             }
         }
 
@@ -125,19 +131,19 @@ namespace IngenieriaSoftware.UI
 
         private void btnDetallesRegistro_Click(object sender, EventArgs e)
         {
-            try
-            {
-                dataGridViewHistorialCambios.DataSource = null;
+            //try
+            //{
+            //    dataGridViewHistorialCambios.DataSource = null;
 
-                Guid idCambio = (Guid)dataGridViewRegistrosModificados.SelectedRows[0].Cells[nameof(AuditoriaRegistro.IdCambio)].Value;
-                var detalles = ListarDetallesRegistro(idCambio);
+            //    Guid idCambio = (Guid)dataGridViewRegistrosModificados.SelectedRows[0].Cells[nameof(AuditoriaRegistro.IdCambio)].Value;
+            //    var detalles = ListarDetallesRegistro(idCambio);
 
-                dataGridViewHistorialCambios.DataSource = detalles;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al obtener lso detalles del registro seleccionado: " + ex.Message);
-            }
+            //    dataGridViewHistorialCambios.DataSource = detalles;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error al obtener lso detalles del registro seleccionado: " + ex.Message);
+            //}
         }
 
         private List<AuditoriaDetalle> ListarDetallesRegistro(Guid idCambio)
@@ -160,17 +166,48 @@ namespace IngenieriaSoftware.UI
                 {
                     throw new Exception("Debe seleccionar una fila del historial de cambios");
                 }
-                PeticionRestauracion petRest = new PeticionRestauracion();
-                string fullName = dataGridViewHistorialCambios.SelectedRows[0].Cells[nameof(AuditoriaDetalle.Tabla)].Value.ToString();
-                string[] partes = fullName.Replace("[", "").Replace("]", "").Split('.');
-                string nombreTabla = partes.Length > 1 ? partes[1] : partes[0];
+                var registroSeleccionado = dataGridViewHistorialCambios.SelectedRows[0].Tag as IAuditableModel;
 
-                if (TablasDVCamposId.ImplementaIDVHCalculo(nombreTabla))
+                if (registroSeleccionado == null)
                 {
-                    throw new Exception("No se puede aceptar la petición porque la tabla implementa IDVH y no se puede calcular el DVH (AUN).");
+                    throw new Exception("No se pudo obtener el registro seleccionado.");
                 }
-                petRest = MapearDesdeDataGridViewRow(dataGridViewHistorialCambios.SelectedRows[0]);
-                _auditoriaManager.SolicitarRestauracion(petRest);
+
+                bool esUltimaVersion = registroSeleccionado.EsUltimaVersion;
+
+                if (esUltimaVersion)
+                {
+                    throw new Exception("No se puede realizar una petición de restauración sobre la última versión del registro.");
+                }
+
+                #region Implementacion vieja de auditoria
+                //PeticionRestauracion petRest = new PeticionRestauracion();
+                //string fullName = dataGridViewHistorialCambios.SelectedRows[0].Cells[nameof(AuditoriaDetalle.Tabla)].Value.ToString();
+                //string[] partes = fullName.Replace("[", "").Replace("]", "").Split('.');
+                //string nombreTabla = partes.Length > 1 ? partes[1] : partes[0];
+
+                //if (TablasDVCamposId.ImplementaIDVHCalculo(nombreTabla))
+                //{
+                //    throw new Exception("No se puede aceptar la petición porque la tabla implementa IDVH y no se puede calcular el DVH (AUN).");
+                //}
+                //petRest = MapearDesdeDataGridViewRow(dataGridViewHistorialCambios.SelectedRows[0]);
+                //_auditoriaManager.SolicitarRestauracion(petRest);
+                #endregion
+
+                if (NombreTabla.Length <= 0)
+                {
+                    throw new Exception("Debe seleccionar una tabla para realizar la petición de restauración.");
+                }
+
+                int idEntidad = registroSeleccionado.Entidad.Id;
+
+                int version = registroSeleccionado.Version;
+
+                int idUsuarioActual = SessionManager.GetInstance.Usuario.Id;
+
+                string comentario = txtComentario.Text.Trim();
+
+                _auditoriaService.RealizarPeticionRestauracion(NombreTabla, idEntidad, version, idUsuarioActual, comentario);
 
                 MessageBox.Show("Peticion realizada con exito.");
             }
@@ -183,6 +220,24 @@ namespace IngenieriaSoftware.UI
                 Actualizar();
             }
         }
+
+
+
+        //private bool RealizarPeticionRestauracion()
+        //{
+        //    try
+        //    {
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error al obtener los detalles del registro seleccionado: " + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        Actualizar();
+        //    }
+        //}
 
         public PeticionRestauracion MapearDesdeDataGridViewRow(DataGridViewRow row)
         {

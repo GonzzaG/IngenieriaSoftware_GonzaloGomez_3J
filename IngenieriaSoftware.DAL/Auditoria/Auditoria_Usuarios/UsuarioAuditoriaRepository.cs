@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Auditoria
 {
-    public class UsuarioAuditoriaRepository : IAuditoriaRepository<UsuarioAuditoriaModel>
+    public class UsuarioAuditoriaRepository : IAuditoriaEntityRepository<UsuarioAuditoriaModel>
     {
         private readonly DAO _dao;
-            
+
         public UsuarioAuditoriaRepository()
-        {   
+        {
             _dao = new DAO();
         }
 
@@ -27,7 +27,7 @@ namespace IngenieriaSoftware.DAL.Auditoria
             try
             {
                 int version = 1;
-                int idUsuario = entidad.Usuario.Id;
+                int idUsuario = entidad.Entidad.Id;
 
                 var parametrosVersion = new SqlParameter[]
                 {
@@ -36,37 +36,52 @@ namespace IngenieriaSoftware.DAL.Auditoria
 
                 var dt = _dao.ExecuteStoredProcedure("audit.sp_ObtenerUltimaVersionUsuario", parametrosVersion);
 
+                // si el count es = 0, significa que no hay versiones previas, por lo tanto es la primera versión.
                 if (dt.Tables[0].Rows.Count > 0)
-                {
                     version = Convert.ToInt32(dt.Tables[0].Rows[0]["Version"]) + 1;
 
-                    // Invalidar última versión anterior (¡nuevos parámetros!)
-                    var parametrosInvalidar = new SqlParameter[]
-                    {
-                        new SqlParameter("@Id_Usuario", idUsuario)
-                    };
+                else
+                    version = 1;
 
-                    _dao.ExecuteStoredProcedure("audit.sp_InvalidarUltimaVersionUsuario", parametrosInvalidar);
-                }
 
-                var usuario = entidad.Usuario as Usuario;
+                var parametrosInvalidar = new SqlParameter[]
+                {
+                    new SqlParameter("@Id_Usuario", idUsuario)
+                };
+
+                _dao.ExecuteStoredProcedure("audit.sp_InvalidarUltimaVersionUsuario", parametrosInvalidar);
+
+
+                var usuario = entidad.Entidad as Usuario;
 
                 var parametrosInsert = new SqlParameter[]
                 {
                     new SqlParameter("@Id_Usuario", usuario.Id),
-                    new SqlParameter("@Username", usuario.Username),
-                    new SqlParameter("@PasswordHash", usuario._passwordHash),
                     new SqlParameter("@FechaCreacion", usuario.FechaCreacion),
-                    new SqlParameter("@idioma_id", usuario.IdiomaId),
-                    new SqlParameter("@id_rol", usuario.id_rol),
-                    new SqlParameter("@DVH", usuario.DVH),
-                    new SqlParameter("@Email", usuario.Email),
                     new SqlParameter("@Version", version),
                     new SqlParameter("@Accion", entidad.Accion),
                     new SqlParameter("@CambiadoPor", entidad.CambiadoPor),
                     new SqlParameter("@FechaCambio", DateTime.Now),
                     new SqlParameter("@EsUltimaVersion", true)
                 };
+
+                //si es INSERT, agregar los parámetros específicos de la clase, si no, sera nulo.
+                if (entidad.Accion == "INSERT")
+                {
+
+                    var parametrosUsuario = new SqlParameter[]
+                    {
+                        new SqlParameter("@Username", usuario.Username),
+                        new SqlParameter("@PasswordHash", usuario._passwordHash),
+                        new SqlParameter("@idioma_id", usuario.IdiomaId),
+                        new SqlParameter("@id_rol", usuario.id_rol),
+                        new SqlParameter("@DVH", usuario.DVH),
+                        new SqlParameter("@Email", usuario.Email),
+                    };
+
+                    parametrosInsert = parametrosInsert.Concat(parametrosUsuario).ToArray();
+                }
+
 
                 _dao.ExecuteStoredProcedure("audit.sp_InsertarAuditoriaUsuario", parametrosInsert);
             }
@@ -97,16 +112,18 @@ namespace IngenieriaSoftware.DAL.Auditoria
             }
         }
 
-        public UsuarioAuditoriaModel GetById(int id)
+        public UsuarioAuditoriaModel GetPorIdYVersion(int id, int version)
         {
             try
             {
                 var parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@Id", id)
+                    new SqlParameter("@Id", id),
+                    new SqlParameter("@Version", version),
+
                 };
 
-                var dt = _dao.ExecuteStoredProcedure("audit.sp_ObtenerAuditoriaUsuarioPorId", parametros);
+                var dt = _dao.ExecuteStoredProcedure("audit.sp_ObtenerAuditoriaUsuarioPorIdYVersion", parametros);
 
                 if (dt.Tables[0].Rows.Count == 0)
                     return null;
@@ -134,6 +151,19 @@ namespace IngenieriaSoftware.DAL.Auditoria
             catch (Exception ex)
             {
                 throw new Exception("Error al restaurar el estado de la entidad desde auditoría", ex);
+            }
+        }
+
+        public void RealizarPeticion(string tabla, int idEntidad, int version, int idUsuarioActual, string comentario = null)
+        {
+            try
+            {
+                new AuditoriaRepository().RealizarPeticion(tabla, idEntidad, version, idUsuarioActual, comentario);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al realizar la petición de restauración", ex);
             }
         }
     }

@@ -5,6 +5,7 @@ using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Data;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -61,38 +62,46 @@ namespace IngenieriaSoftware.UI
             {
                 if (txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0) { return; }
 
-                int usuarioId = _authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text);
-                if (usuarioId > 0)
+                using(var transaccion = new TransactionScope())
                 {
-                    MessageBox.Show($"El usuario {txtUsername.Text} fue registrado con exito");
-
-                    Entity usuarioVerificable = new Usuario
+                    int usuarioId = _authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text);
+                    if (usuarioId > 0)
                     {
-                        Id = usuarioId,
-                    };
+                        MessageBox.Show($"El usuario {txtUsername.Text} fue registrado con exito");
 
-                    //if (CalcularDigitoVerificador(usuarioVerificable))
-                    //{
-                    //    MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
-                    //}
+                        Entity usuarioVerificable = new Usuario
+                        {
+                            Id = usuarioId,
+                        };
 
-                    var usuario = _usuarioBLL.ObtenerUsuarioPorId(usuarioId);
+                        //if (CalcularDigitoVerificador(usuarioVerificable))
+                        //{
+                        //    MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
+                        //}
 
-                    AuditarUsuarioInsert(usuario);
+                        var usuario = _usuarioBLL.ObtenerUsuarioPorId(usuarioId);
 
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                        AuditarUsuarioInsert(usuario);
 
-                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Registro de Usuario", DateTime.Now, $"Usuario {txtUsername.Text} registrado", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+                        this.DialogResult = DialogResult.OK;
 
-                    //MessageBox.Show("Usuario registrado con exito");
+                        MessageBox.Show("Entidad registrado con exito");
+
+                    }
+                        transaccion.Complete();
                 }
+              
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
 
                 BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios", SessionManager.GetInstance.Usuario.Username);
+            }
+            finally
+            {
+                this.Close();
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Registro de Entidad", DateTime.Now, $"Entidad {txtUsername.Text} registrado", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
             }
         }
 

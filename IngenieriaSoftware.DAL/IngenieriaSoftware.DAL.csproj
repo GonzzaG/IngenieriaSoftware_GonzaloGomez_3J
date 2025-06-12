@@ -50,12 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuditoriaRepository.cs" />
+    <Compile Include="AuditoriaRepositoryViejo.cs" />
     <Compile Include="Auditoria\AuditoriaMapperRegistry.cs" />
+    <Compile Include="Auditoria\AuditoriaRepository.cs" />
     <Compile Include="Auditoria\Auditoria_Usuarios\UsuarioAuditoriaMapper.cs" />
     <Compile Include="Auditoria\Auditoria_Usuarios\UsuarioAuditoriaRepository.cs" />
-    <Compile Include="Auditoria\IAuditoriaRepository.cs" />
-    <Compile Include="Auditoria\IAuditoriaMapper.cs" />
+    <Compile Include="Auditoria\Interfaces\IAuditoriaEntityRepository.cs" />
+    <Compile Include="Auditoria\Interfaces\IAuditoriaMapper.cs" />
+    <Compile Include="Auditoria\Interfaces\IAuditoriaRepository.cs" />
+    <Compile Include="Auditoria\PeticionesRestauracionRepository.cs" />
+    <Compile Include="Auditoria\Mapper\PeticionRestauracionMapper.cs" />
     <Compile Include="BackupRepository.cs" />
     <Compile Include="BitacoraDAL.cs" />
     <Compile Include="DAO.cs" />

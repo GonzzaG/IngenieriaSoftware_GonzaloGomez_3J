@@ -14,7 +14,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
         {
             return new UsuarioAuditoriaModel
             {
-                Usuario = usuario,
+                Entidad = usuario,
                 Accion = "INSERT",
                 CambiadoPor = cambiadoPor,
                 FechaCambio = DateTime.Now,
@@ -26,7 +26,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
         {
             return new UsuarioAuditoriaModel
             {
-                Usuario = usuario,
+                Entidad = usuario,
                 Accion = "DELETE",
                 CambiadoPor = cambiadoPor,
                 FechaCambio = DateTime.Now,
@@ -38,7 +38,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
         {
             return new UsuarioAuditoriaModel
             {
-                Usuario = usuario,
+                Entidad = usuario,
                 Accion = "RESTORE",
                 CambiadoPor = cambiadoPor,
                 FechaCambio = DateTime.Now,

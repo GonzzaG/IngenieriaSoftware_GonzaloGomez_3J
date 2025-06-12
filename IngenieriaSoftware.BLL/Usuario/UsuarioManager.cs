@@ -87,7 +87,7 @@ namespace IngenieriaSoftware.BLL
         /// <summary>
         /// metodo para crear un digito verificador horizontal
         /// </summary>
-        /// <param name="usuario">Usuario para calcular su DVH</param>
+        /// <param name="usuario">Entidad para calcular su DVH</param>
         /// <returns>El DVH del usuario</returns>
         // Debo agregarlo al metood que guarda el usuario********
         public string GenerarDVHUsuario(Usuario usuario)

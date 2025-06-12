@@ -61,8 +61,11 @@ namespace IngenieriaSoftware.UI
                     MessageBox.Show("Seleccione un registro válido.");
                     return;
                 }
+
+                string nombreTabla = comboBoxTablasAuditadas.Text;
+
                 FormMDI formMDI = (FormMDI)this.MdiParent;
-                formMDI.AbrirFormHijo(new FormAuditoria(_registros.FindAll(r => r.Entidad.Id == registroSeleccionado).ToList()));
+                formMDI.AbrirFormHijo(new FormAuditoria(_registros.FindAll(r =>  r.Entidad.Id == registroSeleccionado).ToList(), nombreTabla));
             }
             catch (Exception ex)
             {

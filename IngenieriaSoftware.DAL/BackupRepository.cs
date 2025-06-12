@@ -21,7 +21,7 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@NombreArchivo", backup.NombreArchivo),
                     new SqlParameter("@Ruta", backup.Ruta),
                     new SqlParameter("@Fecha", backup.Fecha),
-                    new SqlParameter("@Usuario", backup.Usuario),
+                    new SqlParameter("@Entidad", backup.Usuario),
                 };
                 _dao.ExecuteNonQuery("sp_InsertarBackupCatalogo", parametros);
 
