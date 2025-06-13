@@ -50,13 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuditoriaRepository.cs" />
+    <Compile Include="AuditoriaRepositoryViejo.cs" />
+    <Compile Include="Auditoria\AuditoriaMapperRegistry.cs" />
+    <Compile Include="Auditoria\AuditoriaRepository.cs" />
+    <Compile Include="Auditoria\Auditoria_Usuarios\UsuarioAuditoriaMapper.cs" />
+    <Compile Include="Auditoria\Auditoria_Usuarios\UsuarioAuditoriaRepository.cs" />
+    <Compile Include="Auditoria\Interfaces\IAuditoriaEntityRepository.cs" />
+    <Compile Include="Auditoria\Interfaces\IAuditoriaMapper.cs" />
+    <Compile Include="Auditoria\Interfaces\IAuditoriaRepository.cs" />
+    <Compile Include="Auditoria\PeticionesRestauracionRepository.cs" />
+    <Compile Include="Auditoria\Mapper\PeticionRestauracionMapper.cs" />
     <Compile Include="BackupRepository.cs" />
     <Compile Include="BitacoraDAL.cs" />
     <Compile Include="DAO.cs" />
     <Compile Include="DigitoVerificadorHorizontalDAL.cs" />
     <Compile Include="DigitoVerificadorVerticalDAL.cs" />
-    <Compile Include="Auditoria\IAuditoryRepository.cs" />
     <Compile Include="ObjetoDAL.cs" />
     <Compile Include="EntityDAL\ClienteDAL.cs" />
     <Compile Include="EntityDAL\ComandaDAL.cs" />
@@ -91,6 +99,10 @@
     <Compile Include="Mapper\UsuarioMapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">
+      <Project>{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}</Project>
+      <Name>IngenieriaSoftware.Abstracciones</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">
       <Project>{5da171d4-ef5b-4e09-8687-305243dfb51e}</Project>
       <Name>IngenieriaSoftware.BEL</Name>
@@ -107,5 +119,6 @@
     <Analyzer Include="..\packages\MSTest.Analyzers.3.8.3\analyzers\dotnet\cs\MSTest.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\MSTest.Analyzers.3.8.3\analyzers\dotnet\cs\MSTest.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

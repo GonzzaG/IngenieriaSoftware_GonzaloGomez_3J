@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditoriaDetalle.cs" />
+    <Compile Include="Auditoria\AuditoriaModelTyperRegistry.cs" />
     <Compile Include="AuditoriaRegistro.cs" />
+    <Compile Include="Auditoria\IAuditableModel.cs" />
+    <Compile Include="Auditoria\PeticionRestauracionModel.cs" />
+    <Compile Include="Auditoria\UsuarioAuditoriaModel.cs" />
     <Compile Include="Bitacora.cs" />
     <Compile Include="BackupRegistro.cs" />
     <Compile Include="Constantes\EstadoComanda.cs" />

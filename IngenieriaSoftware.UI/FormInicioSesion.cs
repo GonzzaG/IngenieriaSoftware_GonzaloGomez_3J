@@ -25,6 +25,9 @@ namespace IngenieriaSoftware.UI
 
             _idiomaObserver = idiomaObserver;
             this.WindowState = FormWindowState.Maximized;
+
+            txtContrasena.Text = "pruebanueva";
+            txtUsuario.Text = "Gonza2"; 
         }
 
         #region Metodos de Interfaz
@@ -61,7 +64,7 @@ namespace IngenieriaSoftware.UI
         //        {
         //            InicioSesionExitoso?.Invoke();
 
-        //            var usuario = SessionManager.GetInstance.Usuario;
+        //            var usuario = SessionManager.GetInstance.Entidad;
 
         //            //_idiomaObserver.CambiarEstado(usuario.Id);
         //            throw new CredencialesCorrectasException();

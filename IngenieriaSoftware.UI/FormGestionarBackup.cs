@@ -51,7 +51,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                if (_usuarioBLL.ObtenerUsuarioPorId(SessionManager.GetInstance.Usuario.Id) != null)
+                if (_usuarioBLL.ObtenerUsuarioDTOPorId(SessionManager.GetInstance.Usuario.Id) != null)
                     return true;
                 else
                     return false;

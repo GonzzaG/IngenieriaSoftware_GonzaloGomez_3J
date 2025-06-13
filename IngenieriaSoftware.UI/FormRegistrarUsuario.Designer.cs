@@ -100,7 +100,7 @@
             this.btnRegistrar.Size = new System.Drawing.Size(201, 86);
             this.btnRegistrar.TabIndex = 7;
             this.btnRegistrar.Tag = "140";
-            this.btnRegistrar.Text = "Registrar Usuario";
+            this.btnRegistrar.Text = "Registrar Entidad";
             this.btnRegistrar.UseVisualStyleBackColor = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 

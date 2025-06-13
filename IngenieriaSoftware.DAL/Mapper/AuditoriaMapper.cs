@@ -18,7 +18,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                     Registro = Convert.ToInt32(row["Registro"]),
                     IdCambio = Guid.Parse(row["id_cambio"].ToString()),
                     Fecha = Convert.ToDateTime(row["Fecha"]),
-                    Usuario = row["Usuario"].ToString(),
+                    Usuario = row["Entidad"].ToString(),
                     Tipo = row["Tipo"].ToString()
                 });
             }

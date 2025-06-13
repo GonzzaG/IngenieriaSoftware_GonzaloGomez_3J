@@ -28,7 +28,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                         ValorAntes = row["ValorAntes"] != DBNull.Value ? row["ValorAntes"].ToString() : null,
                         ValorDespues = row["ValorDespues"] != DBNull.Value ? row["ValorDespues"].ToString() : null,
                         Fecha = row["Fecha"] != DBNull.Value ? Convert.ToDateTime(row["Fecha"]) : DateTime.MinValue,
-                        Usuario = row["Usuario"] != DBNull.Value ? row["Usuario"].ToString() : null,
+                        Usuario = row["Entidad"] != DBNull.Value ? row["Entidad"].ToString() : null,
                         PC = row["PC"] != DBNull.Value ? row["PC"].ToString() : null,
                         IdCambio = row["id_cambio"] != DBNull.Value ? (Guid)row["id_cambio"] : Guid.Empty
                     };
@@ -61,7 +61,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                         Campo = row["Campo"] != DBNull.Value ? row["Campo"].ToString() : throw new Exception(),
                         ValorDespues = row["ValorActual"] != DBNull.Value ? row["ValorActual"].ToString() : null,
                         Fecha = row["Fecha"] != DBNull.Value ? Convert.ToDateTime(row["Fecha"]) : DateTime.MinValue,
-                        Usuario = row["Usuario"] != DBNull.Value ? row["Usuario"].ToString() : null,
+                        Usuario = row["Entidad"] != DBNull.Value ? row["Entidad"].ToString() : null,
                         PC = row["PC"] != DBNull.Value ? row["PC"].ToString() : null,
                     };
 

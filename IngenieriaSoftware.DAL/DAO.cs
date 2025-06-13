@@ -14,16 +14,23 @@ namespace IngenieriaSoftware.DAL
 
         public void Conectar()
         {
-            string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+            //string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+            string connectionStringBD = ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString;
+         
+            //if (string.IsNullOrEmpty(connectionString))
+            //{
+            //    throw new Exception("La cadena de conexion no está definida.");
+            //}
 
-            // Validar si la variable está definida
-            if (string.IsNullOrEmpty(connectionString))
+            //mCon = new SqlConnection(connectionString);
+
+            if (string.IsNullOrEmpty(connectionStringBD))
             {
                 throw new Exception("La cadena de conexion no está definida.");
             }
 
             // Crear la conexión
-            mCon = new SqlConnection(connectionString);
+            mCon = new SqlConnection(connectionStringBD);
         }
 
         public int ExecuteNonQuery(string pCommandText, SqlParameter[] pParametros)
@@ -87,6 +94,8 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
+
+        // Inhabilitado para permitir el identity increment en la base de datos
         public int ObtenerUltimoId(string pTabla, string pColumnaId)
         {
             try

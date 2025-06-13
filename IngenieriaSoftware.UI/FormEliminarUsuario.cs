@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,14 @@ namespace IngenieriaSoftware.UI
         private readonly DigitoVerificadorManager _digitoVerificadorManager = new DigitoVerificadorManager();
 
         public NotificacionService _notificacionService => new NotificacionService();
-
+        
+        private UsuarioAuditoriaService _usuarioAuditoriaService;
         public FormEliminarUsuario()
         {
             InitializeComponent();
             usuarioBLL = new UsuarioBLL();
             usuarios = new List<UsuarioDTO>();
+            _usuarioAuditoriaService = new UsuarioAuditoriaService();
         }
 
         #region Metodos de Interfaz
@@ -75,20 +78,26 @@ namespace IngenieriaSoftware.UI
                 if (respuesta == DialogResult.No) return;
                 else if (respuesta == DialogResult.Yes)
                 {
+                    var usuario = usuarioBLL.ObtenerUsuarioPorId(usuarioId);
+
+                    AuditarUsuarioDelete(usuario);
+
                     Entity usuarioVerificable = new Usuario
                     {
                         Id = usuarioId,
                     };
                     usuarios = usuarioBLL.EliminarUsuario(usuarios, comboBoxUsuarios.SelectedItem.ToString());
 
-                    if (CalcularDigitoVerificador(usuarioVerificable))
-                    {
-                        MessageBox.Show($"El digito verificador del usuario {comboBoxUsuarios.SelectedItem} fue calculado con exito");
-                    }
+                    //if (CalcularDigitoVerificador(usuarioVerificable))
+                    //{
+                    //    MessageBox.Show($"El digito verificador del usuario {comboBoxUsuarios.SelectedItem} fue calculado con exito");
+                    //}
 
-                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Eliminar Usuario", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Eliminar Entidad", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
 
+                    MessageBox.Show($"El usuario {comboBoxUsuarios.SelectedItem.ToString()} fue eliminado con exito");  
                     listarUsuarios(usuarios);
+
                 }
 
 
@@ -97,6 +106,18 @@ namespace IngenieriaSoftware.UI
             {
                 BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios", SessionManager.GetInstance.Usuario.Username);
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AuditarUsuarioDelete(Usuario usuario)
+        {
+            if (usuario != null)
+            {
+                var cambiadoPor = SessionManager.GetInstance.Usuario.Username;
+
+                var usuarioAuditado = UsuarioAuditoriaFactory.CrearParaDelete(usuario, cambiadoPor);
+
+                _usuarioAuditoriaService.RegistrarCambio(usuarioAuditado);
             }
         }
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.DAL;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,24 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
-        public UsuarioDTO ObtenerUsuarioPorId(int id)
+        public UsuarioDTO ObtenerUsuarioDTOPorId(int id)
+        {
+            try
+            {
+                var usuario = _usuarioDAL.ObtenerUsuarioDTOPorId(id);
+                if (usuario == null)
+                {
+                    throw new Exception("No se encontró el usuario");
+                }
+                else return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Usuario ObtenerUsuarioPorId(int id)
         {
             try
             {
@@ -77,6 +95,11 @@ namespace IngenieriaSoftware.BLL
             if (mUsuario == null)
             {
                 int resultado = _usuarioDAL.GuardarUsuario(pUsuario, FechaInicio);
+
+                if (resultado == 0) throw new Exception("Error al guardar el usuario en la base de datos");
+                
+                pUsuario.Id = resultado; 
+
                 return resultado > 0;
             }
             else

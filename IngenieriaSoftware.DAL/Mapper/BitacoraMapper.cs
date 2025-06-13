@@ -17,7 +17,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                     Bitacora bitacora = new Bitacora
                     {
                         FechaHora = Convert.ToDateTime(row["FechaHora"]),
-                        Usuario = row["Usuario"].ToString(),
+                        Usuario = row["Entidad"].ToString(),
                         Actividad = row["Actividad"].ToString(),
                         InfoAdicional = row["InfoAdicional"].ToString(),
                         Controller = row.IsNull("Controller") ? null : row["Controller"].ToString(),
