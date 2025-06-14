@@ -332,17 +332,18 @@ namespace IngenieriaSoftware.UI
                 }
 
                 var registroPropuesto = dataGridViewPeticionesPendientes.SelectedRows[0].Tag as PeticionRestauracionModel;
-
                 var idEntidad = registroPropuesto.IdEntidad;
                 var version = registroPropuesto.Version;
                 var idPeticion = registroPropuesto.Id;
                 var procesadoPor = SessionManager.GetInstance.Usuario.Id;
+
                 _auditoriaService.AceptarPeticionDeRestauracion(idEntidad, version, idPeticion, procesadoPor);
 
                 //if (TablasDVCamposId.ImplementaIDVHCalculo(nombreTabla))
                 //{
                 //    throw new Exception("No se puede aceptar la petición porque la tabla implementa IDVH y no se puede calcular el DVH (AUN).");
                 //}
+
                  MessageBox.Show("Se han realizado los cambios correctamente");
             }
             catch (Exception ex)

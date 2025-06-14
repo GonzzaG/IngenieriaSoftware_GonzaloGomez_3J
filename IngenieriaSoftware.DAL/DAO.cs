@@ -10,29 +10,44 @@ namespace IngenieriaSoftware.DAL
     {
         private SqlConnection mCon;
         public string NombreBD { get; } = "ISProyecto";
+
         public string rutaBD = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\BD"));
 
         public void Conectar()
         {
             //string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
             string connectionStringBD = ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString;
-         
-            //if (string.IsNullOrEmpty(connectionString))
-            //{
-            //    throw new Exception("La cadena de conexion no está definida.");
-            //}
-
-            //mCon = new SqlConnection(connectionString);
 
             if (string.IsNullOrEmpty(connectionStringBD))
             {
                 throw new Exception("La cadena de conexion no está definida.");
             }
 
-            // Crear la conexión
             mCon = new SqlConnection(connectionStringBD);
         }
 
+        public int Execute(string pCommandText)
+        {
+            try
+            {
+                Conectar();
+
+                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
+
+                mCon.Open();
+
+                return mComm.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (mCon.State != ConnectionState.Closed)
+                    mCon.Close();
+            }
+        }
         public int ExecuteNonQuery(string pCommandText, SqlParameter[] pParametros)
         {
             try

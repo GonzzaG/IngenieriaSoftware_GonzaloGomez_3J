@@ -27,20 +27,20 @@ namespace IngenieriaSoftware.BLL
         public void CrearRol(string nombreRol)
         {
             _permisoDAL.CrearRol(nombreRol);
-            new BackupManager().RealizarBackup();
+            new BackupManager().Backup();
         }
 
         public string EliminarRol(int rolId)
         {
             string mensaje = _permisoDAL.EliminarRol(rolId);
-            new BackupManager().RealizarBackup();
+            new BackupManager().Backup();
             return mensaje;
         }
 
         public void AsignarRolARol(int rolPadreId, int rolHijoId)
         {
             _permisoDAL.AsignarRolARol(rolPadreId, rolHijoId);
-            new BackupManager().RealizarBackup();
+            new BackupManager().Backup();
         }
 
         public void AsignarPermisoARol(int rolId, int permisoId)
@@ -66,7 +66,7 @@ namespace IngenieriaSoftware.BLL
         public string AsignarRolAUsuario(int usuarioId, int rolId)
         {
             string mensaje = _permisoDAL.AsignarRolAUsuario(usuarioId, rolId);
-            new BackupManager().RealizarBackup();
+            new BackupManager().Backup();
             return mensaje;
         }
 

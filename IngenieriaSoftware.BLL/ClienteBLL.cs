@@ -10,9 +10,10 @@ namespace IngenieriaSoftware.BLL
 
         public int InsertarCliente(Cliente cliente)
         {
+            int clienteId;
+
             using (var transaccion = new TransactionScope())
             {
-                int clienteId;
                 if (cliente.numeroTarjetaUltimos4 != string.Empty)
                 {
                     clienteId = _clienteDAL.InsertarClienteConDatosBancarios(cliente);
@@ -20,14 +21,14 @@ namespace IngenieriaSoftware.BLL
                 else
                 {
                     clienteId = _clienteDAL.InsertarCliente(cliente);
-                }
-                // Realizamos backup para guardar los cambios
-                new BackupManager().RealizarBackup();
+                } 
 
                 transaccion.Complete();
 
-                return clienteId;
             }
+                new BackupManager().Backup();
+
+                return clienteId;
         }
     }
 }

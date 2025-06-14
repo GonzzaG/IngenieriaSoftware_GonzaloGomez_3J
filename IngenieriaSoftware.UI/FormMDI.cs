@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.Abstracciones;
+using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
@@ -52,7 +53,7 @@ namespace IngenieriaSoftware.UI
             _helperExcepciones = new HelperExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
-            //VerificarIntegridad();
+            VerificarIntegridad();
         }
 
 
@@ -65,7 +66,8 @@ namespace IngenieriaSoftware.UI
             {
                 //int result = new DigitoVerificadorManager().ActualizarVerificadorVertical(nombreTabla);
                //bool resultad = new DigitoVerificadorManager().ActualizarVerificadores("usuarios");
-                bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
+               bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
+               //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
             }
             catch (Exception ex)
             {

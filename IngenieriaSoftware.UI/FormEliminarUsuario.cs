@@ -88,10 +88,10 @@ namespace IngenieriaSoftware.UI
                     };
                     usuarios = usuarioBLL.EliminarUsuario(usuarios, comboBoxUsuarios.SelectedItem.ToString());
 
-                    //if (CalcularDigitoVerificador(usuarioVerificable))
-                    //{
-                    //    MessageBox.Show($"El digito verificador del usuario {comboBoxUsuarios.SelectedItem} fue calculado con exito");
-                    //}
+                    if (CalcularDigitoVerificador(usuarioVerificable))
+                    {
+                        MessageBox.Show($"El digito verificador del usuario {comboBoxUsuarios.SelectedItem} fue calculado con exito");
+                    }
 
                     BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Eliminar Entidad", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
 

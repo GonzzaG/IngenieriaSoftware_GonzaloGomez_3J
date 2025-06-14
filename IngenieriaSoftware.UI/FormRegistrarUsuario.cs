@@ -74,10 +74,10 @@ namespace IngenieriaSoftware.UI
                             Id = usuarioId,
                         };
 
-                        //if (CalcularDigitoVerificador(usuarioVerificable))
-                        //{
-                        //    MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
-                        //}
+                        if (CalcularDigitoVerificador(usuarioVerificable))
+                        {
+                            MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
+                        }
 
                         var usuario = _usuarioBLL.ObtenerUsuarioPorId(usuarioId);
 
@@ -128,6 +128,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 string nombreTabla = entidadVerificable.getNombreTabla();
+
                 if (_digitoVerificadorManager.ActualizarDVH_Y_DVV_DeRegistro(nombreTabla, entidadVerificable.Id))
                 {
                     if (_digitoVerificadorManager.VerificarDigitoVerticalYHorizontal())

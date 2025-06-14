@@ -21,7 +21,6 @@ namespace IngenieriaSoftware.DAL.Auditoria
             _dao = new DAO();
         }
 
-
         public void RegistrarCambio(UsuarioAuditoriaModel entidad)
         {
             try

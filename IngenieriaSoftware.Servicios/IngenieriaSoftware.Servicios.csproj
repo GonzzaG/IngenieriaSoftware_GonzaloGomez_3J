@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditoriaServicio.cs" />
-    <Compile Include="BackupService.cs" />
     <Compile Include="DTOs\EtiquetaDTO.cs" />
     <Compile Include="DTOs\IdiomaDTO.cs" />
     <Compile Include="DTOs\TraduccionDTO.cs" />

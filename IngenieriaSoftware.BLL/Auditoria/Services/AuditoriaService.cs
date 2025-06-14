@@ -52,7 +52,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
             if (entidad != null)
             {
                 entidad.FechaCambio = DateTime.Now;
-                entidad.CambiadoPor = SessionManager.GetInstance.Usuario.Username; // O el usuario que corresponda
+                entidad.CambiadoPor = SessionManager.GetInstance.Usuario.Username;
                 _auditoriaRepository.RegistrarCambio(entidad);
             }
             else
