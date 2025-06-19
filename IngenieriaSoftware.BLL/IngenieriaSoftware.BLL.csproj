@@ -107,6 +107,7 @@
     <Compile Include="BitacoraHelper.cs" />
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="ComandaBLL.cs" />
+    <Compile Include="DatabaseService.cs" />
     <Compile Include="DigitoVerificadorManager.cs" />
     <Compile Include="EtiquetaBLL.cs" />
     <Compile Include="Excepciones\VerificarIntegridadException.cs" />

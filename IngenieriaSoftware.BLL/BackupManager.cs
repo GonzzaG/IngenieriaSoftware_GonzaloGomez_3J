@@ -49,22 +49,35 @@ namespace IngenieriaSoftware.BLL
             _backupRepository.actionBD(copiaDeSeguridad);
 
         }
-        public void Restore(String nombreBackup)
+        public void Restore(string nombreBackup)
         {
             string backupFilePath = Path.Combine(BackupsDirectory, nombreBackup);
 
-            if (string.IsNullOrEmpty(backupFilePath))
-                throw new ArgumentException("El path del backup no puede ser nulo o vacío.");
+            if (string.IsNullOrEmpty(backupFilePath) ||
+                !File.Exists(backupFilePath))
+            {
+                throw new FileNotFoundException("El backup especificado no existe.", backupFilePath);
+            }
+
+            string dataFile = Path.Combine(BackupsDirectory, "ISProyecto.mdf");
+
+            string logFile = Path.Combine(BackupsDirectory, "ISProyecto_log.ldf");
 
             var cmd = new StringBuilder();
 
             cmd.AppendLine("USE MASTER;");
             cmd.AppendLine("ALTER DATABASE ISProyecto SET SINGLE_USER WITH ROLLBACK IMMEDIATE;");
-            cmd.AppendLine("RESTORE DATABASE ISProyecto FROM DISK = N'" + backupFilePath + "' WITH REPLACE;");
-            cmd.AppendLine("ALTER DATABASE ISProyecto SET MULTI_USER;" );
+            cmd.AppendLine($"RESTORE DATABASE ISProyecto FROM DISK = N'{backupFilePath}' WITH REPLACE,");
 
-            _backupRepository.actionBD(cmd.ToString()); // aquí mandamos directamente el script armado
+            cmd.AppendLine($"MOVE 'ISProyecto' TO N'{dataFile}',");
+
+            cmd.AppendLine($"MOVE 'ISProyecto_log' TO N'{logFile}';");
+
+            cmd.AppendLine("ALTER DATABASE ISProyecto SET MULTI_USER;");
+
+            _backupRepository.actionBD(cmd.ToString()); 
         }
+
 
         public List<string> GetBackUps()
         {

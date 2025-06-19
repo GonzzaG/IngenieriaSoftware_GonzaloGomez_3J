@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using IngenieriaSoftware.BLL;
 
 namespace IngenieriaSoftware.UI
 {
@@ -11,6 +12,7 @@ namespace IngenieriaSoftware.UI
         [STAThread]
         private static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMDI());

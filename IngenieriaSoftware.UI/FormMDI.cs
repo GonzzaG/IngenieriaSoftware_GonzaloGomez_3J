@@ -53,7 +53,7 @@ namespace IngenieriaSoftware.UI
             _helperExcepciones = new HelperExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
-            VerificarIntegridad();
+            //VerificarIntegridad();
         }
 
 
@@ -64,10 +64,8 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                //int result = new DigitoVerificadorManager().ActualizarVerificadorVertical(nombreTabla);
-               //bool resultad = new DigitoVerificadorManager().ActualizarVerificadores("usuarios");
-               bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
                //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
+                bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
             }
             catch (Exception ex)
             {
@@ -79,17 +77,25 @@ namespace IngenieriaSoftware.UI
 
         private void Inicializar()
         {
-            _controlesHelper.SuscribirControles(this);
-            _helperExcepciones.SuscribirExcepciones();
-            //aca voy a tener que pasar como parametro el idimoaId
-            IdiomaData.Idiomas = CargarIdiomas();
-            ListarIdiomas(IdiomaData.Idiomas);
+            try
+            {
+                _controlesHelper.SuscribirControles(this);
+                _helperExcepciones.SuscribirExcepciones();
+                //aca voy a tener que pasar como parametro el idimoaId
+                IdiomaData.Idiomas = CargarIdiomas();
+                ListarIdiomas(IdiomaData.Idiomas);
 
-            // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
-            var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
-            IdiomaData.CambiarIdioma(idiomaActual);
+                // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
+                var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
+                IdiomaData.CambiarIdioma(idiomaActual);
 
-            comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
+                comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #region Metodos de Interfaz

@@ -228,7 +228,7 @@ namespace IngenieriaSoftware.BLL
         /// <param name="nombreTabla"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        private bool ActualizarVerificadorVertical(string nombreTabla)
+        public bool ActualizarVerificadorVertical(string nombreTabla)
         {
             try
             {

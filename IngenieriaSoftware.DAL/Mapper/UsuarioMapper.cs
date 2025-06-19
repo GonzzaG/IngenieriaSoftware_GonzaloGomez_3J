@@ -71,6 +71,9 @@ namespace IngenieriaSoftware.DAL
                 usuario.FechaCreacion = (DateTime)row["FechaCreacion"];
                 usuario.id_rol = (int)row["id_rol"];
                 usuario.IdiomaId = (int)row["idioma_id"];
+                usuario.DVH = row["DVH"] == DBNull.Value ? null : row["DVH"].ToString();
+                usuario.Email = row["Email"] == DBNull.Value ? null : row["Email"].ToString();
+
             }
             if (usuario.Id == 0) { return null; }
             return usuario;

@@ -142,7 +142,6 @@ namespace IngenieriaSoftware.UI
                 throw new Exception(ex.Message);
             }
         }
-        
 
         public void VerificarNotificaciones()
         {

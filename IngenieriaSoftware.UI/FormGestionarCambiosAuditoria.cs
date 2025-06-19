@@ -339,12 +339,18 @@ namespace IngenieriaSoftware.UI
 
                 _auditoriaService.AceptarPeticionDeRestauracion(idEntidad, version, idPeticion, procesadoPor);
 
-                //if (TablasDVCamposId.ImplementaIDVHCalculo(nombreTabla))
-                //{
-                //    throw new Exception("No se puede aceptar la petición porque la tabla implementa IDVH y no se puede calcular el DVH (AUN).");
-                //}
+                // Implementar mas adelante una forma de obtener el type mediante una clase, para luego poder verificar otros tipos de entidades.
+                Entity entidad = new Usuario
+                {
+                    Id = idEntidad,
+                };
 
-                 MessageBox.Show("Se han realizado los cambios correctamente");
+                if (_digitoVerificadorManager.ActualizarVerificadorVertical(entidad.getNombreTabla()))
+                {
+                    MessageBox.Show("SE actualizo correctamente el verificador Vertical");
+                }
+
+                MessageBox.Show("Se han realizado los cambios correctamente");
             }
             catch (Exception ex)
             {

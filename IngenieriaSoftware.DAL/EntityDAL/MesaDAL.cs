@@ -23,7 +23,9 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                     new SqlParameter("@capacidadMaxima", mesa.CapacidadMaxima),
                     new SqlParameter("@estado_mesa", (int)mesa.EstadoMesa)
                 };
+
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_GuardarMesa", parametros);
+
                 return _mesaMapper.MapearMesasDesdeDataSet(mDs);
             }
             catch (Exception ex)
