@@ -8,11 +8,12 @@ namespace IngenieriaSoftware.BLL
 {
     public class BitacoraBLL
     {
-        private BitacoraDAL _bitacoraDAL = new BitacoraDAL();
+        private BitacoraDAL _bitacoraDAL;
         private string _rutaArchivoLog;
 
         public BitacoraBLL()
         {
+            _bitacoraDAL = new BitacoraDAL();
             var rutaFallback = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs", "bitacora_fallback.log");
             _rutaArchivoLog = rutaFallback;
         }

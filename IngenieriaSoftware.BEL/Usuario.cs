@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.Abstracciones;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IngenieriaSoftware.BEL
 {
@@ -8,6 +9,8 @@ namespace IngenieriaSoftware.BEL
     public class Usuario : Entity, IUsuario, IObserver, IVerificable
     {
         //public int Id { get; set; }
+
+ 
         public string Username { get; set; }
 
         public string _passwordHash;

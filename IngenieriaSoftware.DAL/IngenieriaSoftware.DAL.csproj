@@ -97,6 +97,8 @@
     <Compile Include="Mapper\TraduccionMapper.cs" />
     <Compile Include="EntityDAL\UsuarioDAL.cs" />
     <Compile Include="Mapper\UsuarioMapper.cs" />
+    <Compile Include="Proveedores\ProveedorMapper.cs" />
+    <Compile Include="Proveedores\ProveedorRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">

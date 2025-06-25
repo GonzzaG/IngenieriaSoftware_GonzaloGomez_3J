@@ -4,6 +4,7 @@ using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
+using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
 using IngenieriaSoftware.UI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace IngenieriaSoftware.UI
             _helperExcepciones = new HelperExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
-            //VerificarIntegridad();
+            VerificarIntegridad();
         }
 
 
@@ -619,6 +620,25 @@ namespace IngenieriaSoftware.UI
 
         private void AuditoriaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        }
+
+        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItemGestionarProveedor_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionProveedores formGestionProveedores = new FormGestionProveedores();
+                AbrirFormHijo(formGestionProveedores);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Gestionar Proveedores", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         //public void ShowPanel()
