@@ -11,7 +11,7 @@ namespace IngenieriaSoftware.BEL
         public int TiempoPreparacion { get; set; }
         public bool Diponible { get; set; }
         public bool EsPostre { get; set; }
-        public Constantes.TipoProducto.Tipo Categoria { get; set; } = Constantes.TipoProducto.Tipo.SinAsignar;
+        public Constantes.TipoProducto.Tipo IdCategoria { get; set; } = Constantes.TipoProducto.Tipo.SinAsignar;
         public Categoria oCategoria { get; set; }
     }
 }

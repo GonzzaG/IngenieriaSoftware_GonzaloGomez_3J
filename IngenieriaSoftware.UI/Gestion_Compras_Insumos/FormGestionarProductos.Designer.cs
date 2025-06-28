@@ -144,7 +144,7 @@
             this.lblEstado.Size = new System.Drawing.Size(97, 28);
             this.lblEstado.TabIndex = 27;
             this.lblEstado.Tag = "52";
-            this.lblEstado.Text = "Categoria";
+            this.lblEstado.Text = "IdCategoria";
             // 
             // lblTelefono
             // 

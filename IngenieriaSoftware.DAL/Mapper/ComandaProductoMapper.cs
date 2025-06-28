@@ -22,7 +22,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                 comandaProducto.PrecioUnitario = (decimal)row["precio_unitario"];
                 comandaProducto.Nombre = row["nombre"].ToString();
                 comandaProducto.Descripcion = row["descripcion"].ToString();
-                comandaProducto.Categoria = (TipoProducto.Tipo)(int)row["categoria"];
+                comandaProducto.IdCategoria = (TipoProducto.Tipo)(int)row["categoria"];
 
                 if (row.Table.Columns.Contains("nombre_producto") && row["nombre_producto"] != DBNull.Value)
                 {

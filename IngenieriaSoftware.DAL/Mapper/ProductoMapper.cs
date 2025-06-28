@@ -22,7 +22,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                 producto.Diponible = (bool)row["disponible"];
                 producto.EsPostre = (bool)row["es_postre"];
                 int categoria = (int)row["categoria"];
-                producto.Categoria = (TipoProducto.Tipo)categoria;
+                producto.IdCategoria = (TipoProducto.Tipo)categoria;
 
                 productos.Add(producto);
             }
