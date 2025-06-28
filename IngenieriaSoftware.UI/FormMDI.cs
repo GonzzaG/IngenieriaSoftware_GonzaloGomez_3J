@@ -54,7 +54,8 @@ namespace IngenieriaSoftware.UI
             _helperExcepciones = new HelperExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
-            VerificarIntegridad();
+            //Auditoria en mantenimiento
+            //VerificarIntegridad();
         }
 
 
@@ -65,7 +66,8 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-               //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
+                //int result = new DigitoVerificadorManager().ActualizarVerificadorVertical(nombreTabla);
+                bool resultad = new DigitoVerificadorManager().ActualizarVerificadores("usuarios");
                 bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
             }
             catch (Exception ex)
