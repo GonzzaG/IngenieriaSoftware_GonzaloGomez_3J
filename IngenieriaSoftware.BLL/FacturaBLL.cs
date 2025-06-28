@@ -86,7 +86,7 @@ namespace IngenieriaSoftware.BLL
 
                     _facturaDAL.GuardarProductosFactura(facturaId, productosFactura);
 
-                    new BackupManager().RealizarBackup();
+                    new BackupManager().Backup();
 
                     transaction.Complete();
                 }

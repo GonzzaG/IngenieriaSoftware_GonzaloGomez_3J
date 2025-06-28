@@ -1,5 +1,7 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +13,8 @@ namespace IngenieriaSoftware.UI
     public partial class FormBusquedaAuditoria : Form, IActualizable
     {
         private AuditoriaManager _auditoriaManager = new AuditoriaManager();
-        private List<AuditoriaRegistro> _registros;
+
+        private List<IAuditableModel> _registros;
         private bool formCargado = false;
         private bool tablasCargadas = false;
 
@@ -58,8 +61,11 @@ namespace IngenieriaSoftware.UI
                     MessageBox.Show("Seleccione un registro válido.");
                     return;
                 }
+
+                string nombreTabla = comboBoxTablasAuditadas.Text;
+
                 FormMDI formMDI = (FormMDI)this.MdiParent;
-                formMDI.AbrirFormHijo(new FormAuditoria(_auditoriaManager, _registros.FindAll(r => r.Registro == registroSeleccionado).ToList()));
+                formMDI.AbrirFormHijo(new FormAuditoria(_registros.FindAll(r =>  r.Entidad.Id == registroSeleccionado).ToList(), nombreTabla));
             }
             catch (Exception ex)
             {
@@ -95,19 +101,20 @@ namespace IngenieriaSoftware.UI
                         comboBoxRegistros.Items.Clear();
                     }
 
-                    _registros = _auditoriaManager.ObtenerRegistroDeTabla(comboBoxTablasAuditadas.Text);
+                    var registrosEntidadAuditable = _auditoriaManager.ObtenerRegistroDeTabla(comboBoxTablasAuditadas.Text);
+                    _registros = registrosEntidadAuditable.Cast<IAuditableModel>().ToList();
 
                     comboBoxRegistros.Items.Clear();
 
                     _registros = _registros
-                        .OrderByDescending(x => x.Registro)
+                        .OrderByDescending(x => x.Entidad.Id)
                         .ToList();
 
                     if (_registros.Count > 0)
                     {
                         comboBoxRegistros.Items
                             .AddRange(_registros
-                            .Select(x => x.Registro.ToString())
+                            .Select(x => x.Entidad.Id.ToString())
                             .Distinct()
                             .ToArray());
                     }

@@ -1,7 +1,10 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.Abstracciones;
+using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
+using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
 using IngenieriaSoftware.UI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -55,6 +58,7 @@ namespace IngenieriaSoftware.UI
             //VerificarIntegridad();
         }
 
+
         /// <summary>
         /// Realizar la verificacion de digitos verificadores horizontales y verticales
         /// </summary>
@@ -76,17 +80,25 @@ namespace IngenieriaSoftware.UI
 
         private void Inicializar()
         {
-            _controlesHelper.SuscribirControles(this);
-            _helperExcepciones.SuscribirExcepciones();
-            //aca voy a tener que pasar como parametro el idimoaId
-            IdiomaData.Idiomas = CargarIdiomas();
-            ListarIdiomas(IdiomaData.Idiomas);
+            try
+            {
+                _controlesHelper.SuscribirControles(this);
+                _helperExcepciones.SuscribirExcepciones();
+                //aca voy a tener que pasar como parametro el idimoaId
+                IdiomaData.Idiomas = CargarIdiomas();
+                ListarIdiomas(IdiomaData.Idiomas);
 
-            // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
-            var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
-            IdiomaData.CambiarIdioma(idiomaActual);
+                // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
+                var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
+                IdiomaData.CambiarIdioma(idiomaActual);
 
-            comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
+                comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #region Metodos de Interfaz
@@ -610,6 +622,25 @@ namespace IngenieriaSoftware.UI
 
         private void AuditoriaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        }
+
+        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItemGestionarProveedor_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionProveedores formGestionProveedores = new FormGestionProveedores();
+                AbrirFormHijo(formGestionProveedores);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Gestionar Proveedores", SessionManager.GetInstance.Usuario.Username);
+            }
         }
 
         //public void ShowPanel()

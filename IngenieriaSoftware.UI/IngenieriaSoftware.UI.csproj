@@ -12,6 +12,22 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\PuercoArana\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +47,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Puerco-arana-icono.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>CD0C3F08FC4FC29456DA4A7705878E23A6E005B4</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>IngenieriaSoftware.UI_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -55,6 +86,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
@@ -80,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
+    <Compile Include="ConexionDinamica.cs" />
     <Compile Include="FormABMMesas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +232,18 @@
     </Compile>
     <Compile Include="FormVerComanda.Designer.cs">
       <DependentUpon>FormVerComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\FormGestionarProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\FormGestionarProductos.Designer.cs">
+      <DependentUpon>FormGestionarProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\FormGestionProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\FormGestionProveedores.Designer.cs">
+      <DependentUpon>FormGestionProveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperControles.cs" />
     <Compile Include="Helpers\HelperExcepciones.cs" />
@@ -333,6 +378,12 @@
     <EmbeddedResource Include="FormVerComanda.resx">
       <DependentUpon>FormVerComanda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionarProductos.resx">
+      <DependentUpon>FormGestionarProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionProveedores.resx">
+      <DependentUpon>FormGestionProveedores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -342,6 +393,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="IngenieriaSoftware.UI_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\IngenieriaSoftware.BLL.AuthService.datasource" />
     <None Include="Properties\DataSources\IngenieriaSoftware.BLL.UsuarioBLL.datasource" />
@@ -359,6 +411,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">
+      <Project>{524E8D24-0D9C-46AD-9A55-4E42DCE5FA5F}</Project>
+      <Name>IngenieriaSoftware.Abstracciones</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">
       <Project>{5da171d4-ef5b-4e09-8687-305243dfb51e}</Project>
       <Name>IngenieriaSoftware.BEL</Name>
@@ -371,6 +427,22 @@
       <Project>{88779aa0-50fe-4fae-af75-2374a220469d}</Project>
       <Name>IngenieriaSoftware.Servicios</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dd779451f90bfcf15d997368ffece841.ico" />
+    <Content Include="Puerco-arana-icono.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

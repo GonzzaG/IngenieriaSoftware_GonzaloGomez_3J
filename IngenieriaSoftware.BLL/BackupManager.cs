@@ -3,94 +3,130 @@ using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace IngenieriaSoftware.BLL
 {
     public class BackupManager
     {
         private BackupRepository _backupRepository = new BackupRepository();
-        public string BackupDirectory { get; set; } = AppDomain.CurrentDomain.BaseDirectory + @"\BackUps";
 
-        public void RealizarBackup()
+        public string BackupsDirectory { get; set; } = Path.Combine(ConfigurationManager.AppSettings["Directorio"]); 
+
+        public void Backup()
+        {
+            String copiaDeSeguridad = null;
+            var directorio = ConfigurationManager.AppSettings["Directorio"];
+            var archivo = ConfigurationManager.AppSettings["NombreArchivo"];
+
+
+            if (!Directory.Exists(directorio))
+            {
+                Directory.CreateDirectory(directorio);
+                Console.WriteLine("El directorio fue creado.");
+            }
+            else
+            {
+                Console.WriteLine("El directorio ya existe.");
+            }
+
+            // Obtener la fecha y hora actuales
+            DateTime ahora = DateTime.Now;
+
+            // Formatear la fecha y la hora
+            string fechaFormateada = ahora.ToString("ddMMyyyy");
+            string horaFormateada = ahora.ToString("HHmmss"); // Formato de 24 horas
+
+            // Concatenar la fecha y la hora con un guion bajo
+            string fechaHoraFormateada = $"{fechaFormateada}_{horaFormateada}";
+
+            // Crear la línea de comando
+            copiaDeSeguridad = $"USE MASTER BACKUP DATABASE ISProyecto TO DISK = '{directorio}\\{archivo}_{fechaHoraFormateada}.bak'";
+
+            _backupRepository.actionBD(copiaDeSeguridad);
+
+        }
+        public void Restore(string nombreBackup)
+        {
+            string backupFilePath = Path.Combine(BackupsDirectory, nombreBackup);
+
+            if (string.IsNullOrEmpty(backupFilePath) ||
+                !File.Exists(backupFilePath))
+            {
+                throw new FileNotFoundException("El backup especificado no existe.", backupFilePath);
+            }
+
+            string dataFile = Path.Combine(BackupsDirectory, "ISProyecto.mdf");
+
+            string logFile = Path.Combine(BackupsDirectory, "ISProyecto_log.ldf");
+
+            var cmd = new StringBuilder();
+
+            cmd.AppendLine("USE MASTER;");
+            cmd.AppendLine("ALTER DATABASE ISProyecto SET SINGLE_USER WITH ROLLBACK IMMEDIATE;");
+            cmd.AppendLine($"RESTORE DATABASE ISProyecto FROM DISK = N'{backupFilePath}' WITH REPLACE,");
+
+            cmd.AppendLine($"MOVE 'ISProyecto' TO N'{dataFile}',");
+
+            cmd.AppendLine($"MOVE 'ISProyecto_log' TO N'{logFile}';");
+
+            cmd.AppendLine("ALTER DATABASE ISProyecto SET MULTI_USER;");
+
+            _backupRepository.actionBD(cmd.ToString()); 
+        }
+
+
+        public List<string> GetBackUps()
         {
             try
             {
-                if (!Directory.Exists(BackupDirectory))
-                    Directory.CreateDirectory(BackupDirectory);
+                if (!Directory.Exists(BackupsDirectory))
+                    Directory.CreateDirectory(BackupsDirectory);
 
-                var nombreBackup = $"{new DAO().NombreBD}_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
-                var rutaCompleta = Path.Combine(BackupDirectory, nombreBackup);
-                if (_backupRepository.RealizarBackUpBD(nombreBackup, rutaCompleta))
-                {
-                    BackupRegistro backup = new BackupRegistro
-                    {
-                        NombreArchivo = nombreBackup,
-                        Ruta = rutaCompleta,
-                        Fecha = DateTime.Now,
-                        Usuario = SessionManager.GetInstance.Usuario.Username
-                    };
-                    _backupRepository.GuardarRegistro(backup);
-                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Backup realizado", DateTime.Now, string.Empty, "BackupManager", "RealizarBackup");
-                }
+                var usuario = SessionManager.GetInstance?.Usuario;
+                if (usuario == null) throw new Exception("Usuario no definido");
+
+                var backups = Directory.GetFiles(BackupsDirectory, "*.bak")
+                                       .Select(Path.GetFileName)
+                                       .ToList();
+
+                BitacoraHelper.RegistrarActividad(usuario.ToString(), "Obteniendo backups", DateTime.Now, string.Empty, nameof(BackupManager), nameof(GetBackUps));
+
+                return backups;
             }
             catch (Exception ex)
             {
-                BitacoraHelper.RegistrarError(SessionManager.GetInstance.Usuario.ToString(), ex, "BackupManager", "RealizarBackup");
-                throw new Exception("Error al realizar el backup: " + ex.Message);
+                var usuario = SessionManager.GetInstance?.Usuario?.ToString() ?? "Usuario desconocido";
+                BitacoraHelper.RegistrarError(usuario, ex, nameof(BackupManager), nameof(GetBackUps));
+
+                throw new Exception("Error al obtener los backups", ex);
             }
         }
 
-        public List<string> ObtenerBackUps()
+        public void DeleteBackup(string backupNombre)
         {
             try
             {
-                List<string> backups = new List<string>();
+                string backupPath = Path.Combine(BackupsDirectory, backupNombre);
 
-                if (Directory.Exists(BackupDirectory))
+                if (File.Exists(backupPath))
                 {
-                    var archivos = Directory.GetFiles(BackupDirectory, "*.bak");
-                    foreach (var archivo in archivos)
-                    {
-                        backups.Add(Path.GetFileName(archivo));
-                    }
-
-                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Obteniendo backups", DateTime.Now, string.Empty, "BackupManager", "ObtenerBackUps");
-                    return backups;
+                    File.Delete(backupPath);
                 }
                 else
                 {
-                    throw new DirectoryNotFoundException("El directorio de backups no existe.");
+                    throw new FileNotFoundException("El archivo de backup no existe.");
                 }
             }
             catch (Exception ex)
             {
-                BitacoraHelper.RegistrarError(SessionManager.GetInstance.Usuario.ToString(), ex, "BackupManager", "ObtenerBackUps");
-                throw new Exception("Error al obtener los backups: " + ex.Message);
+                throw new Exception("Ocurrio un error eliminando el backup: ", ex);
             }
         }
 
-        public bool RestaurarBackup(string nombreArchivo)
-        {
-            try
-            {
-                var rutaBackup = Path.Combine(BackupDirectory, nombreArchivo);
-                if (_backupRepository.RestaurarBackup(rutaBackup))
-                {
-                    File.Delete(rutaBackup);
-                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Restaurando backup", DateTime.Now, string.Empty, "BackupManager", "RestaurarBackup");
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("No se pudo realizar la restauracion.");
-                }
-            }
-            catch (Exception ex)
-            {
-                BitacoraHelper.RegistrarError(SessionManager.GetInstance.Usuario.ToString(), ex, "BackupManager", "RestaurarBackup");
-                throw new Exception("Error al restaurar el backup: " + ex.Message);
-            }
-        }
+
     }
 }

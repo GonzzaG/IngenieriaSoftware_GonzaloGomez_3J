@@ -1,8 +1,11 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Data;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -15,12 +18,15 @@ namespace IngenieriaSoftware.UI
         private readonly DigitoVerificadorManager _digitoVerificadorManager = new DigitoVerificadorManager();
         public NotificacionService _notificacionService => new NotificacionService();
 
+        private readonly UsuarioAuditoriaService _usuarioAuditoriaService;
+
         public FormRegistrarUsuario(DigitoVerificadorManager digitoVerificador)
         {
             InitializeComponent();
             _usuarioBLL = new UsuarioBLL();
             _permisoBLL = new PermisoBLL();
-            _digitoVerificadorManager = digitoVerificador;  
+            _digitoVerificadorManager = digitoVerificador;
+            _usuarioAuditoriaService = new UsuarioAuditoriaService();
         }
 
         #region Metodos de Interfaz
@@ -56,31 +62,58 @@ namespace IngenieriaSoftware.UI
             {
                 if (txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0) { return; }
 
-                int usuarioId = _authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text);
-                if (usuarioId > 0)
+                using(var transaccion = new TransactionScope())
                 {
-                    MessageBox.Show($"El usuario {txtUsername.Text} fue registrado con exito");
-
-                    Entity usuarioVerificable = new Usuario
+                    int usuarioId = _authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text);
+                    if (usuarioId > 0)
                     {
-                        Id = usuarioId,
-                    };
+                        MessageBox.Show($"El usuario {txtUsername.Text} fue registrado con exito");
 
-                    if (CalcularDigitoVerificador(usuarioVerificable))
-                    {
-                        MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
-                    }
+                        Entity usuarioVerificable = new Usuario
+                        {
+                            Id = usuarioId,
+                        };
+
+                        if (CalcularDigitoVerificador(usuarioVerificable))
+                        {
+                            MessageBox.Show($"El digito verificador del usuario {txtUsername.Text} fue calculado con exito");
+                        }
+
+                        var usuario = _usuarioBLL.ObtenerUsuarioPorId(usuarioId);
+
+                        AuditarUsuarioInsert(usuario);
+
                         this.DialogResult = DialogResult.OK;
-                        this.Close();
 
-                        BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Registro de Usuario", DateTime.Now, $"Usuario {txtUsername.Text} registrado", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+                        MessageBox.Show("Entidad registrado con exito");
+
+                    }
+                        transaccion.Complete();
                 }
+              
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
 
                 BitacoraHelper.RegistrarError(this.Name, ex, "Usuarios", SessionManager.GetInstance.Usuario.Username);
+            }
+            finally
+            {
+                this.Close();
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Registro de Entidad", DateTime.Now, $"Entidad {txtUsername.Text} registrado", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+            }
+        }
+
+        private void AuditarUsuarioInsert(Usuario usuario)
+        {
+            if (usuario != null)
+            {
+                var cambiadoPor = SessionManager.GetInstance.Usuario.Username;
+
+                var usuarioAuditado = UsuarioAuditoriaFactory.CrearParaInsert(usuario, cambiadoPor);
+
+                _usuarioAuditoriaService.RegistrarCambio(usuarioAuditado);
             }
         }
 
@@ -95,6 +128,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 string nombreTabla = entidadVerificable.getNombreTabla();
+
                 if (_digitoVerificadorManager.ActualizarDVH_Y_DVV_DeRegistro(nombreTabla, entidadVerificable.Id))
                 {
                     if (_digitoVerificadorManager.VerificarDigitoVerticalYHorizontal())
@@ -108,7 +142,6 @@ namespace IngenieriaSoftware.UI
                 throw new Exception(ex.Message);
             }
         }
-        
 
         public void VerificarNotificaciones()
         {

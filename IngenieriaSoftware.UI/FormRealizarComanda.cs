@@ -71,7 +71,7 @@ namespace IngenieriaSoftware.UI
                     //        producto.Precio,
                     //        producto.TiempoPreparacion,
                     //        producto.EsPostre,
-                    //        producto.Categoria
+                    //        producto.IdCategoria
                     //    };
                     //}).ToList();
 
@@ -86,7 +86,7 @@ namespace IngenieriaSoftware.UI
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Precio", HeaderText = "Precio", DataPropertyName = "Precio" });
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Tiempo Preparacion", HeaderText = "Tiempo Preparacion", DataPropertyName = "TiempoPreparacion" });
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "EsPostre", HeaderText = "EsPostre", DataPropertyName = "EsPostre" });
-                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Categoria", HeaderText = "Categoría", DataPropertyName = "Categoria" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "IdCategoria", HeaderText = "Categoría", DataPropertyName = "IdCategoria" });
 
                     #endregion Traduccion implementacion
                 }
@@ -178,7 +178,7 @@ namespace IngenieriaSoftware.UI
                     //        producto.Precio,
                     //        producto.TiempoPreparacion,
                     //        producto.EsPostre,
-                    //        producto.Categoria
+                    //        producto.IdCategoria
                     //    };
                     //}).ToList();
 
@@ -193,7 +193,7 @@ namespace IngenieriaSoftware.UI
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Precio", HeaderText = "Precio", DataPropertyName = "Precio" });
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Tiempo Preparacion", HeaderText = "Tiempo Preparacion", DataPropertyName = "TiempoPreparacion" });
                     //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "EsPostre", HeaderText = "EsPostre", DataPropertyName = "EsPostre" });
-                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "Categoria", HeaderText = "Categoría", DataPropertyName = "Categoria" });
+                    //dataGridViewProductos.Columns.Add(new DataGridViewTextBoxColumn { Name = "IdCategoria", HeaderText = "Categoría", DataPropertyName = "IdCategoria" });
                 }
 
                 lblNumeroMesa.Text = _mesa.MesaId.ToString();

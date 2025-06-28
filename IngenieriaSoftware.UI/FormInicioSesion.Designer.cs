@@ -54,7 +54,7 @@
             this.lblUsuario.Size = new System.Drawing.Size(97, 31);
             this.lblUsuario.TabIndex = 3;
             this.lblUsuario.Tag = "16";
-            this.lblUsuario.Text = "Usuario:";
+            this.lblUsuario.Text = "Entidad:";
             // 
             // txtUsuario
             // 

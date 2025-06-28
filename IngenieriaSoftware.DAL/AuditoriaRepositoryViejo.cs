@@ -1,13 +1,17 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Auditoria;
+using IngenieriaSoftware.DAL.Auditoria;
+using IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios;
 using IngenieriaSoftware.DAL.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms.VisualStyles;
 
 namespace IngenieriaSoftware.DAL
 {
-    public class AuditoriaRepository
+    public class AuditoriaRepositoryViejo
     {
         private DAO _dao = new DAO();
 
@@ -21,7 +25,7 @@ namespace IngenieriaSoftware.DAL
                 {
                     foreach (DataRow row in dt.Tables[0].Rows)
                     {
-                        tablas.Add(row["Tabla"].ToString());
+                        tablas.Add(row["NombreTabla"].ToString());
                     }
                 }
 
@@ -33,19 +37,39 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public List<AuditoriaRegistro> ObtenerRegistroDeTabla(string nombreTabla)
+        public List<IAuditableModel> ObtenerRegistroDeTabla(string nombreTabla)
         {
             try
             {
-                List<AuditoriaRegistro> tablas = new List<AuditoriaRegistro>();
+                List<IAuditableModel> registros = new List<IAuditableModel>();
 
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter ("@NombreTabla", nombreTabla)
                 };
-                DataSet dt = _dao.ExecuteStoredProcedure("sp_ObtenerCambiosPorTabla", parametros);
 
-                return new AuditoriaMapper().MapearDesdeDataSet(dt);
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_ObtenerCambiosPorTabla", parametros);
+
+                string[] nombreTablaSplit = nombreTabla.Split('.');
+                string nombreTablaSinEsquema = "";
+
+                if (nombreTablaSplit.Length > 1)
+                    nombreTablaSinEsquema = nombreTablaSplit[nombreTablaSplit.Length - 1];
+
+                if(nombreTablaSinEsquema.Length == 0)
+                    throw new Exception("El nombre de la tabla no es válido.");
+
+                if ( !AuditoriaMapperRegistry.TryGetMapper(nombreTablaSinEsquema, out var mapper))
+                    throw new Exception($"No se encontró un mapper para la tabla '{nombreTabla}'.");
+
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    var registro = mapper.ConvertirDesdeRow(row);
+                    if (registro != null)
+                        registros.Add(registro);
+                }
+
+                return registros;
             }
             catch (InvalidCastException ex)
             {
@@ -168,17 +192,19 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-        public List<PeticionRestauracion> ObtenerPeticionesPendientes()
+        public List<PeticionRestauracionModel> ObtenerPeticionesPendientes()
         {
             try
             {
-                DataSet ds = _dao.ExecuteStoredProcedure("sp_ObtenerPeticionesPendientes", null);
+                DataSet ds = _dao.ExecuteStoredProcedure("audit.sp_ObtenerPeticionesDeRestauracionPendientes", null);
 
                 if (ds == null || ds.Tables.Count == 0)
                 {
-                    return new List<PeticionRestauracion>();
+                    return new List<PeticionRestauracionModel>();
                 }
-                return PeticionRestauracionMapper.MapearDesdeDataRow(ds);
+
+
+                return Auditoria.PeticionRestauracionMapper.MappearDesdeDataSet(ds);
             }
             catch (Exception ex)
             {

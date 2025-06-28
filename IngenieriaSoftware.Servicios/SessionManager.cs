@@ -12,6 +12,11 @@ namespace IngenieriaSoftware.Servicios
 
         public DateTime FechaInicio { get; private set; }
 
+        public override string ToString()
+        {
+            return Usuario.Username;
+        }
+
         public static SessionManager GetInstance
         {
             get

@@ -8,11 +8,12 @@ namespace IngenieriaSoftware.BLL
 {
     public class BitacoraBLL
     {
-        private BitacoraDAL _bitacoraDAL = new BitacoraDAL();
+        private BitacoraDAL _bitacoraDAL;
         private string _rutaArchivoLog;
 
         public BitacoraBLL()
         {
+            _bitacoraDAL = new BitacoraDAL();
             var rutaFallback = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs", "bitacora_fallback.log");
             _rutaArchivoLog = rutaFallback;
         }
@@ -34,16 +35,25 @@ namespace IngenieriaSoftware.BLL
             {
                 if (!_bitacoraDAL.RegistrarActividad(registro))
                 {
-                    throw new Exception("Fallo al guardar en la base de datos");
-                }
-                else
-                {
+                    throw new Exception("Fallo al guardar en la base de datos.");
                 }
             }
             catch (Exception ex)
             {
-                // Puedes registrar en un archivo de log como fallback
-                File.AppendAllText("log_fallos.txt", $"Error al guardar bitácora: {ex.Message}\n");
+                // Ruta fallback en AppData
+                var fallbackDir = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "IS Proyecto");
+
+                if (!Directory.Exists(fallbackDir))
+                {
+                    Directory.CreateDirectory(fallbackDir);
+                }
+
+                var fallbackPath = Path.Combine(fallbackDir, "log_fallos.txt");
+
+                File.AppendAllText(fallbackPath, $"Error al guardar bitácora: {ex.Message}\n");
+
                 GuardarEnArchivo(registro);
             }
         }
