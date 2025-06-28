@@ -112,6 +112,7 @@
     <Compile Include="EtiquetaBLL.cs" />
     <Compile Include="Excepciones\VerificarIntegridadException.cs" />
     <Compile Include="FacturaBLL.cs" />
+    <Compile Include="Gestion_Compras_Insumos\CategoriaBussines.cs" />
     <Compile Include="IdiomaBLL.cs" />
     <Compile Include="MedioDePagoBLL.cs" />
     <Compile Include="Mesas\MesaBLL.cs" />

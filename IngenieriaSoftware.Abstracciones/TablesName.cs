@@ -10,5 +10,6 @@ namespace IngenieriaSoftware.Abstracciones
         public const string Permiso = "permiso";
         public const string DigitoVerificadorVertical = "VerificadorVertical";
         public const string Bitacora = "Bitacora";
+        public const string Categoria = "Categoria";
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="Auditoria\Interfaces\IAuditoriaEntityRepository.cs" />
     <Compile Include="Auditoria\Interfaces\IAuditoriaMapper.cs" />
     <Compile Include="Auditoria\Interfaces\IAuditoriaRepository.cs" />
+    <Compile Include="Auditoria\Interfaces\IMapper.cs" />
     <Compile Include="Auditoria\PeticionesRestauracionRepository.cs" />
     <Compile Include="Auditoria\Mapper\PeticionRestauracionMapper.cs" />
     <Compile Include="BackupRepository.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="DAO.cs" />
     <Compile Include="DigitoVerificadorHorizontalDAL.cs" />
     <Compile Include="DigitoVerificadorVerticalDAL.cs" />
+    <Compile Include="Gestion_Compras_Insumos\CategoriaDataAccess.cs" />
+    <Compile Include="Interfaces\IDataAccessEntity.cs" />
+    <Compile Include="Mapper\CategoriaMapper.cs" />
     <Compile Include="ObjetoDAL.cs" />
     <Compile Include="EntityDAL\ClienteDAL.cs" />
     <Compile Include="EntityDAL\ComandaDAL.cs" />

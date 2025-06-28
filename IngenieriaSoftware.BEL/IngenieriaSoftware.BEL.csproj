@@ -60,6 +60,7 @@
     <Compile Include="Empleados\Mesero.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Factura.cs" />
+    <Compile Include="Gestion_Compras_Insumos\Categoria.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />
     <Compile Include="Idiomas\Traduccion.cs" />

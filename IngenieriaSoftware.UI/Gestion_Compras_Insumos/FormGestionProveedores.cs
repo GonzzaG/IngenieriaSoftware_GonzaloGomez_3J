@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.BEL.Proveedor;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Proveedores;
+using IngenieriaSoftware.Servicios.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -74,56 +75,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 MessageBox.Show(ex.Message);
             }
         }
-        private void PersonalizarEstiloDataGridView()
-        {
-            // Paleta de colores que combinan con DarkSlateGray
-            Color colorBase = Color.FromArgb(0, 64, 64);        // fondo principal
-            Color colorAlterno = Color.FromArgb(0, 80, 80);     // fila alterna
-            Color colorEncabezado = Color.FromArgb(0, 90, 90);  // encabezado
-            Color colorTexto = Color.WhiteSmoke;
-
-            // General
-            dgvProveedores.BackgroundColor = colorBase;
-            dgvProveedores.BorderStyle = BorderStyle.None;
-            dgvProveedores.EnableHeadersVisualStyles = false;
-            dgvProveedores.GridColor = Color.FromArgb(20, 100, 100); // líneas suaves
-            dgvProveedores.MultiSelect = false;
-            dgvProveedores.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            // Encabezado de columnas
-            dgvProveedores.ColumnHeadersDefaultCellStyle.BackColor = colorEncabezado;
-            dgvProveedores.ColumnHeadersDefaultCellStyle.ForeColor = colorTexto;
-            dgvProveedores.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dgvProveedores.ColumnHeadersHeight = 50;
-
-            // Celdas normales
-            dgvProveedores.DefaultCellStyle.BackColor = colorBase;
-            dgvProveedores.DefaultCellStyle.ForeColor = colorTexto;
-            dgvProveedores.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 120, 120);
-            dgvProveedores.DefaultCellStyle.SelectionForeColor = Color.White;
-            dgvProveedores.DefaultCellStyle.Font = new Font("Segoe UI", 11F);
-
-            // Celdas alternas
-            dgvProveedores.AlternatingRowsDefaultCellStyle.BackColor = colorAlterno;
-            dgvProveedores.AlternatingRowsDefaultCellStyle.ForeColor = colorTexto;
-            dgvProveedores.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 120, 120);
-            dgvProveedores.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.White;
-            dgvProveedores.AlternatingRowsDefaultCellStyle.Font = new Font("Segoe UI", 11F);
-
-            // Quitar encabezado de filas
-            dgvProveedores.RowHeadersVisible = false;
-
-            // AutoSize
-            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvProveedores.RowTemplate.Height = 45; // Ajusta altura para que no se corte el texto
-            dgvProveedores.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dgvProveedores.Width += 5;
-
-        }
-
-
-
         private void AgregarNuevoProveedor(Proveedor proveedor)
         {
 
@@ -143,7 +94,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private void FormGestionProveedores_Load(object sender, EventArgs e)
         {
             _formCargado = true;
-            PersonalizarEstiloDataGridView();
+            dgvProveedores.PersonalizarEstiloPredeterminado();
 
         }
 

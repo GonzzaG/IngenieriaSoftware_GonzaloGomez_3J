@@ -227,6 +227,12 @@
     <Compile Include="FormVerComanda.Designer.cs">
       <DependentUpon>FormVerComanda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gestion_Compras_Insumos\FormGestionarProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\FormGestionarProductos.Designer.cs">
+      <DependentUpon>FormGestionarProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gestion_Compras_Insumos\FormGestionProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormVerComanda.resx">
       <DependentUpon>FormVerComanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionarProductos.resx">
+      <DependentUpon>FormGestionarProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionProveedores.resx">
       <DependentUpon>FormGestionProveedores.cs</DependentUpon>
