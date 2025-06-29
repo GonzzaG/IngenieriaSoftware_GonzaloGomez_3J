@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.DAL.Interfaces;
 using IngenieriaSoftware.DAL.Mapper;
@@ -16,7 +17,12 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
     {
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@Id", id)
+            };
+
+            DataSet ds = new DAO().ExecuteStoredProcedure("sp_Categoria_Delete", parametros);
         }
 
         public IEnumerable<Categoria> GetAll()
@@ -41,19 +47,72 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
 
         public Categoria GetById(int id)
         {
-            throw new NotImplementedException();
-        }
+            
 
-        public void Save(Categoria entity)
-        {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Id", id)
+                };
 
+                DataSet ds = new DAO().ExecuteStoredProcedure("sp_Categoria_GetById", parametros);
+
+                return new CategoriaMapper().ConvertirDesdeRow(ds.Tables[0].Rows[0]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void Update(Categoria entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Nombre", entity.Nombre),
+                    new SqlParameter("@NewId ", SqlDbType.Int) { Direction = ParameterDirection.Output }
+                };
+
+                DataSet ds = new DAO().ExecuteStoredProcedure("sp_Categoria_Update", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-      
+        public int Save(Categoria entity)
+        {
+            try
+            {
+                DataSet ds = new DAO().ExecuteStoredProcedure("sp_Categoria_Insert", null);
+
+                return int.Parse(ds.Tables[0].Rows[0].ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Categoria GetCategoriaByNombre(string nombreCategoria)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Nombre", nombreCategoria),
+                };
+                DataSet ds = new DAO().ExecuteStoredProcedure("sp_ObtenerCategoriaPorNombre", parametros);
+
+                return new CategoriaMapper().ConvertirDesdeRow(ds.Tables[0].Rows[0]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

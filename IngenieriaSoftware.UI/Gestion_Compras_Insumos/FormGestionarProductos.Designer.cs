@@ -32,27 +32,27 @@
             this.btnEliminarProducto = new System.Windows.Forms.Button();
             this.lblListaProveedores = new System.Windows.Forms.Label();
             this.groupBoxProducto = new System.Windows.Forms.GroupBox();
+            this.lblMinutos = new System.Windows.Forms.Label();
+            this.nudPrecio = new System.Windows.Forms.NumericUpDown();
+            this.nudTiempoPreparacion = new System.Windows.Forms.NumericUpDown();
+            this.cbEsPostre = new System.Windows.Forms.CheckBox();
+            this.cbCategoria = new System.Windows.Forms.ComboBox();
             this.cbDisponible = new System.Windows.Forms.CheckBox();
             this.lblEstado = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
+            this.lblCorreo = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblRazonSocial = new System.Windows.Forms.Label();
-            this.lblCorreo = new System.Windows.Forms.Label();
             this.lblDetalleProveedor = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblDocumento = new System.Windows.Forms.Label();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
-            this.cbCategoria = new System.Windows.Forms.ComboBox();
-            this.cbEsPostre = new System.Windows.Forms.CheckBox();
-            this.nudTiempoPreparacion = new System.Windows.Forms.NumericUpDown();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
-            this.nudPrecio = new System.Windows.Forms.NumericUpDown();
-            this.lblMinutos = new System.Windows.Forms.Label();
             this.groupBoxProducto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudTiempoPreparacion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTiempoPreparacion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnModificar
@@ -60,7 +60,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.Orange;
             this.btnModificar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnModificar.Location = new System.Drawing.Point(1223, 616);
+            this.btnModificar.Location = new System.Drawing.Point(1376, 616);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(183, 70);
@@ -75,7 +75,7 @@
             this.btnEliminarProducto.BackColor = System.Drawing.Color.Maroon;
             this.btnEliminarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEliminarProducto.Location = new System.Drawing.Point(890, 616);
+            this.btnEliminarProducto.Location = new System.Drawing.Point(1011, 616);
             this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminarProducto.Name = "btnEliminarProducto";
             this.btnEliminarProducto.Size = new System.Drawing.Size(183, 70);
@@ -121,6 +121,72 @@
             this.groupBoxProducto.TabStop = false;
             this.groupBoxProducto.Text = "gbDetalleProveedor";
             // 
+            // lblMinutos
+            // 
+            this.lblMinutos.AutoSize = true;
+            this.lblMinutos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblMinutos.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinutos.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblMinutos.Location = new System.Drawing.Point(147, 391);
+            this.lblMinutos.Name = "lblMinutos";
+            this.lblMinutos.Size = new System.Drawing.Size(84, 28);
+            this.lblMinutos.TabIndex = 40;
+            this.lblMinutos.Tag = "52";
+            this.lblMinutos.Text = "Minutos";
+            // 
+            // nudPrecio
+            // 
+            this.nudPrecio.BackColor = System.Drawing.Color.Teal;
+            this.nudPrecio.DecimalPlaces = 2;
+            this.nudPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.nudPrecio.Location = new System.Drawing.Point(32, 456);
+            this.nudPrecio.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudPrecio.Name = "nudPrecio";
+            this.nudPrecio.Size = new System.Drawing.Size(109, 30);
+            this.nudPrecio.TabIndex = 39;
+            // 
+            // nudTiempoPreparacion
+            // 
+            this.nudTiempoPreparacion.BackColor = System.Drawing.Color.Teal;
+            this.nudTiempoPreparacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudTiempoPreparacion.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.nudTiempoPreparacion.Location = new System.Drawing.Point(32, 392);
+            this.nudTiempoPreparacion.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudTiempoPreparacion.Name = "nudTiempoPreparacion";
+            this.nudTiempoPreparacion.Size = new System.Drawing.Size(109, 30);
+            this.nudTiempoPreparacion.TabIndex = 38;
+            // 
+            // cbEsPostre
+            // 
+            this.cbEsPostre.AutoSize = true;
+            this.cbEsPostre.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEsPostre.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.cbEsPostre.Location = new System.Drawing.Point(32, 545);
+            this.cbEsPostre.Name = "cbEsPostre";
+            this.cbEsPostre.Size = new System.Drawing.Size(149, 33);
+            this.cbEsPostre.TabIndex = 30;
+            this.cbEsPostre.Text = "Es postre?";
+            this.cbEsPostre.UseVisualStyleBackColor = true;
+            // 
+            // cbCategoria
+            // 
+            this.cbCategoria.BackColor = System.Drawing.Color.Teal;
+            this.cbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCategoria.FormattingEnabled = true;
+            this.cbCategoria.Location = new System.Drawing.Point(32, 312);
+            this.cbCategoria.Name = "cbCategoria";
+            this.cbCategoria.Size = new System.Drawing.Size(266, 37);
+            this.cbCategoria.TabIndex = 29;
+            // 
             // cbDisponible
             // 
             this.cbDisponible.AutoSize = true;
@@ -141,7 +207,7 @@
             this.lblEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblEstado.Location = new System.Drawing.Point(27, 281);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(97, 28);
+            this.lblEstado.Size = new System.Drawing.Size(114, 28);
             this.lblEstado.TabIndex = 27;
             this.lblEstado.Tag = "52";
             this.lblEstado.Text = "IdCategoria";
@@ -158,6 +224,19 @@
             this.lblTelefono.TabIndex = 25;
             this.lblTelefono.Tag = "52";
             this.lblTelefono.Text = "Tiempo de preparacion";
+            // 
+            // lblCorreo
+            // 
+            this.lblCorreo.AutoSize = true;
+            this.lblCorreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblCorreo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCorreo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblCorreo.Location = new System.Drawing.Point(27, 425);
+            this.lblCorreo.Name = "lblCorreo";
+            this.lblCorreo.Size = new System.Drawing.Size(66, 28);
+            this.lblCorreo.TabIndex = 19;
+            this.lblCorreo.Tag = "52";
+            this.lblCorreo.Text = "Precio";
             // 
             // txtDescripcion
             // 
@@ -183,26 +262,13 @@
             this.lblRazonSocial.Tag = "52";
             this.lblRazonSocial.Text = "Descripcion";
             // 
-            // lblCorreo
-            // 
-            this.lblCorreo.AutoSize = true;
-            this.lblCorreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCorreo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorreo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblCorreo.Location = new System.Drawing.Point(27, 425);
-            this.lblCorreo.Name = "lblCorreo";
-            this.lblCorreo.Size = new System.Drawing.Size(66, 28);
-            this.lblCorreo.TabIndex = 19;
-            this.lblCorreo.Tag = "52";
-            this.lblCorreo.Text = "Precio";
-            // 
             // lblDetalleProveedor
             // 
             this.lblDetalleProveedor.AutoSize = true;
             this.lblDetalleProveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblDetalleProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetalleProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDetalleProveedor.Location = new System.Drawing.Point(25, 50);
+            this.lblDetalleProveedor.Location = new System.Drawing.Point(25, 35);
             this.lblDetalleProveedor.Name = "lblDetalleProveedor";
             this.lblDetalleProveedor.Size = new System.Drawing.Size(224, 38);
             this.lblDetalleProveedor.TabIndex = 18;
@@ -248,7 +314,7 @@
             this.btnAgregarProducto.BackColor = System.Drawing.Color.Teal;
             this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(569, 616);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(613, 616);
             this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(183, 70);
@@ -257,43 +323,6 @@
             this.btnAgregarProducto.Text = "Guardar";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
             this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
-            // 
-            // cbCategoria
-            // 
-            this.cbCategoria.BackColor = System.Drawing.Color.Teal;
-            this.cbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(32, 312);
-            this.cbCategoria.Name = "cbCategoria";
-            this.cbCategoria.Size = new System.Drawing.Size(266, 37);
-            this.cbCategoria.TabIndex = 29;
-            // 
-            // cbEsPostre
-            // 
-            this.cbEsPostre.AutoSize = true;
-            this.cbEsPostre.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbEsPostre.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.cbEsPostre.Location = new System.Drawing.Point(32, 545);
-            this.cbEsPostre.Name = "cbEsPostre";
-            this.cbEsPostre.Size = new System.Drawing.Size(149, 33);
-            this.cbEsPostre.TabIndex = 30;
-            this.cbEsPostre.Text = "Es postre?";
-            this.cbEsPostre.UseVisualStyleBackColor = true;
-            // 
-            // nudTiempoPreparacion
-            // 
-            this.nudTiempoPreparacion.BackColor = System.Drawing.Color.Teal;
-            this.nudTiempoPreparacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudTiempoPreparacion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.nudTiempoPreparacion.Location = new System.Drawing.Point(32, 392);
-            this.nudTiempoPreparacion.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudTiempoPreparacion.Name = "nudTiempoPreparacion";
-            this.nudTiempoPreparacion.Size = new System.Drawing.Size(109, 30);
-            this.nudTiempoPreparacion.TabIndex = 38;
             // 
             // btnAgregarCategoria
             // 
@@ -309,35 +338,6 @@
             this.btnAgregarCategoria.Text = "Agregar";
             this.btnAgregarCategoria.UseVisualStyleBackColor = false;
             this.btnAgregarCategoria.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
-            // 
-            // nudPrecio
-            // 
-            this.nudPrecio.BackColor = System.Drawing.Color.Teal;
-            this.nudPrecio.DecimalPlaces = 2;
-            this.nudPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.nudPrecio.Location = new System.Drawing.Point(32, 456);
-            this.nudPrecio.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.nudPrecio.Name = "nudPrecio";
-            this.nudPrecio.Size = new System.Drawing.Size(109, 30);
-            this.nudPrecio.TabIndex = 39;
-            // 
-            // lblMinutos
-            // 
-            this.lblMinutos.AutoSize = true;
-            this.lblMinutos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblMinutos.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMinutos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblMinutos.Location = new System.Drawing.Point(147, 391);
-            this.lblMinutos.Name = "lblMinutos";
-            this.lblMinutos.Size = new System.Drawing.Size(84, 28);
-            this.lblMinutos.TabIndex = 40;
-            this.lblMinutos.Tag = "52";
-            this.lblMinutos.Text = "Minutos";
             // 
             // FormGestionarProductos
             // 
@@ -356,9 +356,9 @@
             this.Text = "FormGestionarProductos";
             this.groupBoxProducto.ResumeLayout(false);
             this.groupBoxProducto.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudTiempoPreparacion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTiempoPreparacion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

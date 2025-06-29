@@ -178,7 +178,7 @@ namespace IngenieriaSoftware.UI
             //InicializarPermisosMenu();
             //VerificarPermisosRoles(permisosUsuario);
 
-            ActualizarVisibilidadBotones();
+            //ActualizarVisibilidadBotones();
 
             VerificarNotificaciones();
         }
@@ -242,9 +242,9 @@ namespace IngenieriaSoftware.UI
             {
                 hijo.Close();
             }
-            _controlesHelper.SuscribirControles(formHijo);
+            //_controlesHelper.SuscribirControles(formHijo);
             VerificarNotificaciones();
-            _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
+            //_idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
             if (formHijo is IActualizable formActualizable)
             {
@@ -503,7 +503,7 @@ namespace IngenieriaSoftware.UI
 
         private void MDI_Load(object sender, EventArgs e)
         {
-            BitacoraToolStripMenuItem.Visible = true;
+            bitacoraToolStripMenuItem.Visible = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -530,7 +530,7 @@ namespace IngenieriaSoftware.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BitacoraToolStripMenuItem.Visible = true;
+            bitacoraToolStripMenuItem.Visible = true;
         }
 
         private void BackUpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -566,30 +566,12 @@ namespace IngenieriaSoftware.UI
 
         private void BitacoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormBitacoraBusqueda formBitacoraBusqueda = new FormBitacoraBusqueda();
-                AbrirFormHijo(formBitacoraBusqueda);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                BitacoraHelper.RegistrarError(this.Name, ex, "Bitacora", SessionManager.GetInstance.Usuario.Username);
-            }
+            
         }
 
         private void BackUpToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            try
-            {
-                FormGestionarBackup formGestionarBackup = new FormGestionarBackup();
-                AbrirFormHijo(formGestionarBackup);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
-            }
+           
         }
 
         private void proponerCambioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -643,13 +625,70 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        //public void ShowPanel()
-        //{
-        //    panel1.Visible = true;
-        //}
-        //public void HidePanel()
-        //{
-        //    panel1.Visible = false;
-        //}
+        private void bitacoraToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormBitacoraBusqueda formBitacoraBusqueda = new FormBitacoraBusqueda();
+                AbrirFormHijo(formBitacoraBusqueda);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Bitacora", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void backUpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionarBackup formGestionarBackup = new FormGestionarBackup();
+                AbrirFormHijo(formGestionarBackup);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void estadisticasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionarProductos formGestionarProductos = new FormGestionarProductos();
+                AbrirFormHijo(formGestionarProductos);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void toolStrip_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormGestionProveedores formGestionProveedores = new FormGestionProveedores();
+                AbrirFormHijo(formGestionProveedores);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
     }
 }
