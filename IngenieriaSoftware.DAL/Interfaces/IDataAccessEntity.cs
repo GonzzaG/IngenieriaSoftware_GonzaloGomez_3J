@@ -12,7 +12,7 @@ namespace IngenieriaSoftware.DAL.Interfaces
         IEnumerable<T> GetAll();    
         T GetById(int id);
         void DeleteById(int id);
-        void Save(T entity);
+        int Save(T entity);
         void Update(T entity);
 
     }

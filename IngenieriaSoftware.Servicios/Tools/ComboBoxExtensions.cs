@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IngenieriaSoftware.BEL;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,13 +17,10 @@ namespace IngenieriaSoftware.Servicios.Tools
 
             if (data is null) return;
 
-            for(int i=0; i > data.Count(); i++)
+            foreach(T item in data)
             {
-                combo.Items.Add(data);
+                combo.Items.Add(item.ToString());
             }
         }
-
-
-        
     }
 }

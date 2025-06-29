@@ -53,7 +53,7 @@ namespace IngenieriaSoftware.UI
             dataGridViewComandaGeneral.Columns["ComandaId"].Visible = false;
             dataGridViewComandaGeneral.Columns["ProductoId"].Visible = false;
             dataGridViewComandaGeneral.Columns["Producto"].Visible = false;
-            dataGridViewComandaGeneral.Columns["Diponible"].Visible = false;
+            dataGridViewComandaGeneral.Columns["Disponible"].Visible = false;
             dataGridViewComandaGeneral.Columns["TiempoPreparacion"].Visible = false;
             dataGridViewComandaGeneral.Columns["Precio"].Visible = false;
         }
@@ -63,7 +63,7 @@ namespace IngenieriaSoftware.UI
             dataGridViewComandaActual.Columns["ComandaId"].Visible = false;
             dataGridViewComandaActual.Columns["ProductoId"].Visible = false;
             dataGridViewComandaActual.Columns["Producto"].Visible = false;
-            dataGridViewComandaActual.Columns["Diponible"].Visible = false;
+            dataGridViewComandaActual.Columns["Disponible"].Visible = false;
             dataGridViewComandaActual.Columns["TiempoPreparacion"].Visible = false;
             dataGridViewComandaActual.Columns["Precio"].Visible = false;
         }

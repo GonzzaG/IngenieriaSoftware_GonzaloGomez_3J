@@ -17,5 +17,10 @@ namespace IngenieriaSoftware.BEL.Gestion_Compras_Insumos
         {
             return TablesName.Categoria;
         }
+
+        public override string ToString()
+        {
+            return this.Nombre;
+        }
     }
 }

@@ -42,13 +42,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         }
         private void ListarProductos()
         {
-            dgvProductos.ActualizarDataSource(new ProductoBLL().ObtenerTodosLosProductos());
+            dgvProductos.ActualizarDataSource(new ProductoBLL().GetAll());
             dgvProductos.PersonalizarEstiloPredeterminado();
         }
 
         private void ListarCategorias()
         {
-            cbCategoria.ActualizarComboBox(new CategoriaBussines().GetAll());
+            var categorias = new CategoriaBussines().GetAll();
+            int[] catVector = new int[categorias.Count()];
+
+            cbCategoria.ActualizarComboBox<Categoria>(new CategoriaBussines().GetAll());
         }
 
         void IActualizable.Actualizar()
@@ -60,22 +63,25 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
+                VerificarCamposGuardar();
+                var categoria =  cbCategoria.Text;
                 var producto = new Producto
                 {
                     Nombre = txtNombre.Text,
                     Descripcion = txtDescripcion.Text,
-                    oCategoria = cbCategoria.SelectedItem is null ? 
-                                cbCategoria.SelectedItem as Categoria : 
-                                throw new Exception("Debe seleccionar una categoria"),
+                    oCategoria = cbCategoria.Text == string.Empty ?
+                                   throw new Exception("Debe seleccionar una categoria") :
+                                   new CategoriaBussines().GetCategoriaByNombre(cbCategoria.Text),
                     Precio = (decimal)nudPrecio.Value,
                     TiempoPreparacion = (int)nudTiempoPreparacion.Value,
-                    Diponible = cbDisponible.Checked,
+                    Disponible = cbDisponible.Checked,
                     EsPostre = cbEsPostre.Checked,
-
+                    
                 };
 
-                
-                new ProductoBLL()
+                new ProductoBLL().Save(producto);
+
+                Actualizar();
 
             }
             catch (Exception ex)
@@ -84,11 +90,25 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             }
         }
 
+        private void VerificarCamposGuardar()
+        {
+            if (txtNombre.Text == string.Empty
+               || txtDescripcion.Text == string.Empty
+               || cbCategoria.SelectedItem is null
+               || nudTiempoPreparacion.Value < 1
+               || nudPrecio.Value < 1)
+
+                throw new Exception("Verificar los datos ingresados");
+        }
+
         private void btnEliminarProducto_Click(object sender, EventArgs e)
         {
             try
             {
+                int id = dgvProductos.SelectedRows.Count > 0 ? (int)dgvProductos.SelectedRows[0].Cells[nameof(Producto.ProductoId)].Value :
+                    throw new Exception("Debe seleccionar un producto");
 
+                new ProductoBLL().DeleteById(id);
             }
             catch (Exception ex)
             {
@@ -100,7 +120,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-
+                
             }   
             catch (Exception ex)
             {
@@ -112,7 +132,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-                
+               
 
 
 

@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.DAL.Gestion_Compras_Insumos;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,13 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
             if (entity is null) throw new Exception("Error al actualizar la categoria");
 
             new CategoriaDataAccess().Update(entity);
+        }
+
+        public Categoria GetCategoriaByNombre(string nombreCategoria)
+        {
+            if (nombreCategoria == string.Empty) throw new Exception("No se pudo obtener la categoria");
+
+            return new CategoriaDataAccess().GetCategoriaByNombre(nombreCategoria);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                _productos = _productoBLL.ObtenerTodosLosProductos();
+                _productos = _productoBLL.GetAll();
 
                 if (_productos != null)
                 {
@@ -149,7 +149,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                _productos = _productoBLL.ObtenerTodosLosProductos();
+                _productos = _productoBLL.GetAll();
 
                 if (_productos != null)
                 {
@@ -219,7 +219,7 @@ namespace IngenieriaSoftware.UI
 
         public void CargarProductosConTraduccion(DataGridView dgv, string idioma)
         {
-            var productos = _productoBLL.ObtenerTodosLosProductos();
+            var productos = _productoBLL.GetAll();
             List<EtiquetaDTO> etiquetas = _etiquetaBLL.ObtenerEtiquetasPorPalabra("DataGridViewRow");
 
             var etiquetasRelacionadasId = etiquetas
@@ -239,7 +239,7 @@ namespace IngenieriaSoftware.UI
         public void OcultarColumnas()
         {
             dataGridViewProductos.Columns["ProductoId"].Visible = false;
-            dataGridViewProductos.Columns["Diponible"].Visible = false;
+            dataGridViewProductos.Columns["Disponible"].Visible = false;
         }
     }
 }
