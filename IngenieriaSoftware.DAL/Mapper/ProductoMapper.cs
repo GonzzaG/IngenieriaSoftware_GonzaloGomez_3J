@@ -24,6 +24,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                 producto.EsPostre = (bool)row["es_postre"];
                 int categoria = (int)row["categoria"];
                 producto.IdCategoria = (TipoProducto.Tipo)categoria;
+                producto.Tipo = row["Tipo"].ToString();
 
                 productos.Add(producto);
             }
@@ -42,6 +43,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                 TiempoPreparacion = (int)row["tiempo_preparacion"],
                 Disponible = (bool)row["disponible"],
                 EsPostre = (bool)row["es_postre"],
+                Tipo = row["Tipo"].ToString(),
                 IdCategoria = row["categoria"] is DBNull ? 0 : (TipoProducto.Tipo)(int.Parse(row["categoria"].ToString())),
             };
 

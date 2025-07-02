@@ -38,7 +38,6 @@
             this.lblRazonSocial = new System.Windows.Forms.Label();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.lblCorreo = new System.Windows.Forms.Label();
-            this.lblDetalleProveedor = new System.Windows.Forms.Label();
             this.txtDocumento = new System.Windows.Forms.TextBox();
             this.lblDocumento = new System.Windows.Forms.Label();
             this.lblListaProveedores = new System.Windows.Forms.Label();
@@ -70,15 +69,16 @@
             this.groupBoxProveedor.Controls.Add(this.lblRazonSocial);
             this.groupBoxProveedor.Controls.Add(this.txtCorreo);
             this.groupBoxProveedor.Controls.Add(this.lblCorreo);
-            this.groupBoxProveedor.Controls.Add(this.lblDetalleProveedor);
             this.groupBoxProveedor.Controls.Add(this.txtDocumento);
             this.groupBoxProveedor.Controls.Add(this.lblDocumento);
+            this.groupBoxProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBoxProveedor.Location = new System.Drawing.Point(42, 115);
             this.groupBoxProveedor.Name = "groupBoxProveedor";
             this.groupBoxProveedor.Size = new System.Drawing.Size(327, 522);
             this.groupBoxProveedor.TabIndex = 4;
             this.groupBoxProveedor.TabStop = false;
-            this.groupBoxProveedor.Text = "gbDetalleProveedor";
+            this.groupBoxProveedor.Text = "Detalle Proveedor";
             // 
             // checkBoxEsActivo
             // 
@@ -178,19 +178,6 @@
             this.lblCorreo.TabIndex = 19;
             this.lblCorreo.Tag = "52";
             this.lblCorreo.Text = "Correo";
-            // 
-            // lblDetalleProveedor
-            // 
-            this.lblDetalleProveedor.AutoSize = true;
-            this.lblDetalleProveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblDetalleProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetalleProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDetalleProveedor.Location = new System.Drawing.Point(47, 46);
-            this.lblDetalleProveedor.Name = "lblDetalleProveedor";
-            this.lblDetalleProveedor.Size = new System.Drawing.Size(239, 38);
-            this.lblDetalleProveedor.TabIndex = 18;
-            this.lblDetalleProveedor.Tag = "52";
-            this.lblDetalleProveedor.Text = "Detalle Proveedor";
             // 
             // txtDocumento
             // 
@@ -305,7 +292,6 @@
         private System.Windows.Forms.Label lblRazonSocial;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Label lblCorreo;
-        private System.Windows.Forms.Label lblDetalleProveedor;
         private System.Windows.Forms.TextBox txtDocumento;
         private System.Windows.Forms.Label lblDocumento;
         private System.Windows.Forms.Label lblEstado;

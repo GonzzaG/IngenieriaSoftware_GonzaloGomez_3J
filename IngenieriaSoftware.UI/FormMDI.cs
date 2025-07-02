@@ -88,7 +88,7 @@ namespace IngenieriaSoftware.UI
 
                 // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
                 var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
-                IdiomaData.CambiarIdioma(idiomaActual);
+                //IdiomaData.CambiarIdioma(idiomaActual);
 
                 comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
 
@@ -168,7 +168,7 @@ namespace IngenieriaSoftware.UI
             this.WindowState = FormWindowState.Maximized;
             //_controlesHelper.SuscribirControles(this);
             // Notificamos a los suscriptores del cambio de idioma
-            _idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
+            //_idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
             // PermisosData.PermisosString = AuthService.PermisosUsuario;
             var permisosUsuario = AuthService.PermisosUsuario;
