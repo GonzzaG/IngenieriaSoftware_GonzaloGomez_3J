@@ -13,7 +13,7 @@ namespace IngenieriaSoftware.BEL
         public bool Disponible { get; set; }
         public bool EsPostre { get; set; }
 
-        public string Tipo { get; set; } = "Restaurante";
+        public string Tipo { get; set; } = "RESTAURANTE";
         public Constantes.TipoProducto.Tipo IdCategoria { get; set; } = Constantes.TipoProducto.Tipo.SinAsignar;
         public Categoria oCategoria { get; set; }
         public int Id { get; set; }

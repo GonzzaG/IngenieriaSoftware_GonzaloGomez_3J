@@ -7,10 +7,10 @@ namespace IngenieriaSoftware.BLL.Proveedores
 {
     public class ProveedorBussiness
     {
-        ProveedorRepository _proveedorRepository;
+        ProveedorDataAccess _proveedorRepository;
         public ProveedorBussiness()
         {
-            _proveedorRepository = new ProveedorRepository();
+            _proveedorRepository = new ProveedorDataAccess();
         }
         public List<Proveedor> GetAll()
         {

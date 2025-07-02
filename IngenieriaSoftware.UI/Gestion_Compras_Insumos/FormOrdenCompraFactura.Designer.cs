@@ -66,6 +66,7 @@
             this.iBBuscarProveedores.Size = new System.Drawing.Size(62, 54);
             this.iBBuscarProveedores.TabIndex = 33;
             this.iBBuscarProveedores.UseVisualStyleBackColor = false;
+            this.iBBuscarProveedores.Click += new System.EventHandler(this.iBBuscarProveedores_Click);
             // 
             // txtDocumento
             // 
@@ -98,7 +99,7 @@
             this.checkBoxEsActivo.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEsActivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxEsActivo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkBoxEsActivo.Location = new System.Drawing.Point(1018, 273);
+            this.checkBoxEsActivo.Location = new System.Drawing.Point(1130, 350);
             this.checkBoxEsActivo.Name = "checkBoxEsActivo";
             this.checkBoxEsActivo.Size = new System.Drawing.Size(99, 33);
             this.checkBoxEsActivo.TabIndex = 28;
@@ -109,7 +110,7 @@
             // 
             this.txtTelefono.BackColor = System.Drawing.Color.Teal;
             this.txtTelefono.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(839, 332);
+            this.txtTelefono.Location = new System.Drawing.Point(951, 409);
             this.txtTelefono.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(266, 34);
@@ -122,7 +123,7 @@
             this.lblRazonSocial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblRazonSocial.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRazonSocial.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblRazonSocial.Location = new System.Drawing.Point(1013, 242);
+            this.lblRazonSocial.Location = new System.Drawing.Point(1125, 319);
             this.lblRazonSocial.Name = "lblRazonSocial";
             this.lblRazonSocial.Size = new System.Drawing.Size(123, 28);
             this.lblRazonSocial.TabIndex = 23;
@@ -134,7 +135,7 @@
             this.cbCategoria.BackColor = System.Drawing.Color.Teal;
             this.cbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(839, 396);
+            this.cbCategoria.Location = new System.Drawing.Point(951, 473);
             this.cbCategoria.Name = "cbCategoria";
             this.cbCategoria.Size = new System.Drawing.Size(266, 37);
             this.cbCategoria.TabIndex = 30;

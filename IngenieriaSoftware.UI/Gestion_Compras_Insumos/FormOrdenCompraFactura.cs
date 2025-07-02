@@ -1,13 +1,32 @@
-﻿using System.Windows.Forms;
+﻿using IngenieriaSoftware.BEL.Proveedor;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+using System;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
     public partial class FormOrdenCompraFactura : Form
     {
+        internal Proveedor Proveedor { get; set; }
+        
         public FormOrdenCompraFactura()
         {
             InitializeComponent();
         }
+
+        private void iBBuscarProveedores_Click(object sender, System.EventArgs e)
+        {
+            var _formBusquedaProveedores = new FormBusquedaProveedores();
+            _formBusquedaProveedores.esProveedorSeleccionado += ProveedorSeleccionadoHandler;
+            _formBusquedaProveedores.ShowDialog(this);
+        }
+
+        private void ProveedorSeleccionadoHandler(Proveedor proveedor)
+        {
+            //debo buscar los productos asociados al id del proveedor
+            var productos = new ProductoProveedorBussiness().GetById(proveedor.IdProveedor);    
+        }   
 
         //TODO: Agregar un campo Tipo varchar, que por defecto sea 'Restaurante', para diferenciar productos del negocio con productos
         //como packaging, limpieza, etc.

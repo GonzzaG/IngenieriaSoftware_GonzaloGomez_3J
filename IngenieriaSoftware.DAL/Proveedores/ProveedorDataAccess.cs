@@ -1,15 +1,16 @@
 ﻿using IngenieriaSoftware.BEL.Proveedor;
+using IngenieriaSoftware.DAL.Tools;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace IngenieriaSoftware.DAL.Proveedores
 {
-    public class ProveedorRepository
+    public class ProveedorDataAccess
     {
         private DAO _dao;
 
-        public ProveedorRepository()
+        public ProveedorDataAccess()
         {
             _dao = new DAO();
         }
@@ -43,7 +44,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
 
             var dt = _dao.ExecuteStoredProcedure("Proveedor.sp_Proveedor_ObtenerPorId", parametros);
 
-            if (dt.Tables[0].Rows.Count == 0)
+            if (!dt.esValido())
                 return new Proveedor();
 
             var proveedor = ProveedorMapper.MappearDesdeDatarow(dt.Tables[0].Rows[0]);

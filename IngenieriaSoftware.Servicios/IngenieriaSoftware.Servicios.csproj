@@ -72,6 +72,7 @@
     <Compile Include="TablesMap.cs" />
     <Compile Include="TagAtributo.cs" />
     <Compile Include="Tools\ComboBoxExtensions.cs" />
+    <Compile Include="Tools\CommonExtensions.cs" />
     <Compile Include="Tools\ControlesExtensions.cs" />
     <Compile Include="Tools\DataGridViewExtensions.cs" />
     <Compile Include="TraduccionServicio.cs" />
