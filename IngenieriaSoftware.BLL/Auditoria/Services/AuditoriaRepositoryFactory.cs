@@ -1,14 +1,6 @@
-﻿using IngenieriaSoftware.Abstracciones;
-using IngenieriaSoftware.BEL.Auditoria;
-using IngenieriaSoftware.DAL;
+﻿using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.DAL.Auditoria;
-using IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios;
-using IngenieriaSoftware.DAL.Mapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL.Auditoria.Services
 {

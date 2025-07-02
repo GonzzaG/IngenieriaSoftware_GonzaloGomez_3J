@@ -4,12 +4,7 @@ using IngenieriaSoftware.BLL.Proveedores;
 using IngenieriaSoftware.Servicios.Tools;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
@@ -35,7 +30,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             LimpiarCampos();
             _Proveedores = _proveedorBussiness.GetAll();
-            MostrarProveedoresEnDataGrid();   
+            MostrarProveedoresEnDataGrid();
         }
 
 
@@ -48,7 +43,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private void LimpiarCampos()
         {
 
-            foreach(TextBox tb in this.Controls.OfType<TextBox>())
+            foreach (TextBox tb in this.Controls.OfType<TextBox>())
             {
                 tb.Text = string.Empty;
             }
@@ -70,7 +65,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
                 Actualizar();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -110,7 +105,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
                 MessageBox.Show("Proveedor eliminado con exito");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -134,7 +129,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             {
                 MessageBox.Show(ex.Message);
             }
-           
+
         }
 
         private void CargarProveedorEnTextos(Proveedor proveedor)

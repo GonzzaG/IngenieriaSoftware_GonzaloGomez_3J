@@ -15,7 +15,7 @@ namespace IngenieriaSoftware.UI
         private readonly DigitoVerificadorManager _digitoVerificadorManager = new DigitoVerificadorManager();
 
         public NotificacionService _notificacionService => new NotificacionService();
-        
+
         private UsuarioAuditoriaService _usuarioAuditoriaService;
         public FormEliminarUsuario()
         {
@@ -73,7 +73,7 @@ namespace IngenieriaSoftware.UI
                 if (comboBoxUsuarios.SelectedItem == null) { return; }
                 DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar?", "Alerta de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                int usuarioId = usuarios[usuarios.FindIndex(u => u.Username == comboBoxUsuarios.SelectedItem.ToString())].Id;   
+                int usuarioId = usuarios[usuarios.FindIndex(u => u.Username == comboBoxUsuarios.SelectedItem.ToString())].Id;
 
                 if (respuesta == DialogResult.No) return;
                 else if (respuesta == DialogResult.Yes)
@@ -95,7 +95,7 @@ namespace IngenieriaSoftware.UI
 
                     BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Eliminar Entidad", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
 
-                    MessageBox.Show($"El usuario {comboBoxUsuarios.SelectedItem.ToString()} fue eliminado con exito");  
+                    MessageBox.Show($"El usuario {comboBoxUsuarios.SelectedItem.ToString()} fue eliminado con exito");
                     listarUsuarios(usuarios);
 
                 }

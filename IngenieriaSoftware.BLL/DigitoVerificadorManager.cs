@@ -28,12 +28,12 @@ namespace IngenieriaSoftware.BLL
                     VerificarDVVDeTabla(tabla, dvHorizontales);
                 }
 
-                BitacoraHelper.RegistrarActividad("Sistema", "Verificación de integridad de registros", DateTime.Now, "Verificación de DVH y DVV", "VerificarDigitoVerticalYHorizontal", "VerificarIntegridadDeRegistrosDeTabla");  
+                BitacoraHelper.RegistrarActividad("Sistema", "Verificación de integridad de registros", DateTime.Now, "Verificación de DVH y DVV", "VerificarDigitoVerticalYHorizontal", "VerificarIntegridadDeRegistrosDeTabla");
                 return true;
             }
             catch (Exception ex)
             {
-                BitacoraHelper.RegistrarError("VerificarDigitoVerticalYHorizontal", ex, "Verificación de DVH y DVV", "Sistema");    
+                BitacoraHelper.RegistrarError("VerificarDigitoVerticalYHorizontal", ex, "Verificación de DVH y DVV", "Sistema");
                 throw new Exception("Error al verificar integridad: " + ex.Message, ex);
             }
         }
@@ -205,7 +205,7 @@ namespace IngenieriaSoftware.BLL
             {
                 if (ActualizarVerificadorHorizontal(nombreTabla))
                 {
-                    if(ActualizarVerificadorVertical(nombreTabla))
+                    if (ActualizarVerificadorVertical(nombreTabla))
                     {
                         BitacoraHelper.RegistrarActividad("Sistema", "Actualización de DVH y DVV", DateTime.Now, "Actualización de DVH y DVV", "ActualizarVerificadores", "ActualizarVerificadores");
                         return true;

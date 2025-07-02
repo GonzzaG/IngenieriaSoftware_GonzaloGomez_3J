@@ -1,13 +1,7 @@
-﻿using IngenieriaSoftware.BEL.Auditoria;
-using IngenieriaSoftware.BEL.Proveedor;
-using IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios;
-using System;
+﻿using IngenieriaSoftware.BEL.Proveedor;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Proveedores
 {
@@ -17,7 +11,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
 
         public ProveedorRepository()
         {
-            _dao = new DAO();   
+            _dao = new DAO();
         }
 
         public List<Proveedor> GetAll()
@@ -54,21 +48,21 @@ namespace IngenieriaSoftware.DAL.Proveedores
 
             var proveedor = ProveedorMapper.MappearDesdeDatarow(dt.Tables[0].Rows[0]);
 
-            return proveedor;          
+            return proveedor;
         }
 
         public void DeleteById(int Id)
         {
-           var parametros = new SqlParameter[]
-           {
+            var parametros = new SqlParameter[]
+            {
                 new SqlParameter("@Id", Id)
 
-           };
+            };
 
             var dt = _dao.ExecuteStoredProcedure("Proveedor.sp_Proveedor_Eliminar", parametros);
         }
 
-        public int Save (Proveedor proveedor)
+        public int Save(Proveedor proveedor)
         {
 
             bool esInsert = proveedor.IdProveedor == 0 ? true : false;
@@ -107,7 +101,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
             return (int)output.Value;
         }
 
-        
+
 
     }
 }

@@ -1,6 +1,4 @@
-﻿using IngenieriaSoftware.Abstracciones;
-using IngenieriaSoftware.BLL;
-using IngenieriaSoftware.BLL.Auditoria;
+﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
@@ -65,7 +63,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-               //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
+                //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
                 bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
             }
             catch (Exception ex)
@@ -564,12 +562,12 @@ namespace IngenieriaSoftware.UI
 
         private void BitacoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void BackUpToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-           
+
         }
 
         private void proponerCambioToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,7 +1,6 @@
 ﻿using IngenieriaSoftware.Abstracciones;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IngenieriaSoftware.BEL
 {
@@ -10,7 +9,7 @@ namespace IngenieriaSoftware.BEL
     {
         //public int Id { get; set; }
 
- 
+
         public string Username { get; set; }
 
         public string _passwordHash;

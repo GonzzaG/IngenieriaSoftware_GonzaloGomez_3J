@@ -21,14 +21,14 @@ namespace IngenieriaSoftware.BLL
                 else
                 {
                     clienteId = _clienteDAL.InsertarCliente(cliente);
-                } 
+                }
 
                 transaccion.Complete();
 
             }
-                new BackupManager().Backup();
+            new BackupManager().Backup();
 
-                return clienteId;
+            return clienteId;
         }
     }
 }

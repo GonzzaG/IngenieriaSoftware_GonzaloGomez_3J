@@ -2,9 +2,6 @@
 using IngenieriaSoftware.DAL.Proveedores;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL.Proveedores
 {
@@ -46,7 +43,7 @@ namespace IngenieriaSoftware.BLL.Proveedores
         public void DeleteById(int Id)
         {
             if (Id == 0) throw new Exception("El proveedor no es valido");
-                _proveedorRepository.DeleteById(Id);
+            _proveedorRepository.DeleteById(Id);
         }
     }
 }

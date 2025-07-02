@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
@@ -32,5 +24,5 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         //        Se realiza según los términos acordados (por ejemplo, a 30 días de la fecha de factura o de recepción).
 
 
-        }
+    }
 }

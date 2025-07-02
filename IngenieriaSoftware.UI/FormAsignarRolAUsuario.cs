@@ -182,7 +182,7 @@ namespace IngenieriaSoftware.UI
                 treeViewPermisoRol.Nodes.Clear();
             }
         }
-       
+
         private bool CalcularDigitoVerificador(Entity entidadVerificable)
         {
             try
@@ -234,7 +234,7 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
                 BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.ToString());
             }
-            
+
         }
 
         private void dataGridViewUsuarios_CellEnter(object sender, DataGridViewCellEventArgs e)

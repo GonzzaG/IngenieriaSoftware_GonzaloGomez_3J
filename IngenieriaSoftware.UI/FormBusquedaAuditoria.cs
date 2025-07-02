@@ -1,7 +1,5 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Auditoria;
+﻿using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
-using IngenieriaSoftware.BLL.Auditoria;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -65,7 +63,7 @@ namespace IngenieriaSoftware.UI
                 string nombreTabla = comboBoxTablasAuditadas.Text;
 
                 FormMDI formMDI = (FormMDI)this.MdiParent;
-                formMDI.AbrirFormHijo(new FormAuditoria(_registros.FindAll(r =>  r.Entidad.Id == registroSeleccionado).ToList(), nombreTabla));
+                formMDI.AbrirFormHijo(new FormAuditoria(_registros.FindAll(r => r.Entidad.Id == registroSeleccionado).ToList(), nombreTabla));
             }
             catch (Exception ex)
             {

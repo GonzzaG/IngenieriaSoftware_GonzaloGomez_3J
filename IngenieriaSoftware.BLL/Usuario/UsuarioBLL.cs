@@ -97,8 +97,8 @@ namespace IngenieriaSoftware.BLL
                 int resultado = _usuarioDAL.GuardarUsuario(pUsuario, FechaInicio);
 
                 if (resultado == 0) throw new Exception("Error al guardar el usuario en la base de datos");
-                
-                pUsuario.Id = resultado; 
+
+                pUsuario.Id = resultado;
 
                 return resultado > 0;
             }

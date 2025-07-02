@@ -1,12 +1,5 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Auditoria;
-using IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios;
-using System;
+﻿using IngenieriaSoftware.BEL.Auditoria;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL
 {

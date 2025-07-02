@@ -1,18 +1,11 @@
-﻿using IngenieriaSoftware.BLL;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using IngenieriaSoftware.Servicios.Tools;
-using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
-using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.Servicios.Tools;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
     public partial class FormGestionarProductos : Form, IActualizable
@@ -35,7 +28,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             LimpiarFormulario();
             ListarCategorias();
         }
-        
+
         void LimpiarFormulario()
         {
             groupBoxProducto.LimpiarControles(typeof(Button), typeof(Label));
@@ -64,7 +57,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             try
             {
                 VerificarCamposGuardar();
-                var categoria =  cbCategoria.Text;
+                var categoria = cbCategoria.Text;
                 var producto = new Producto
                 {
                     Nombre = txtNombre.Text,
@@ -76,7 +69,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                     TiempoPreparacion = (int)nudTiempoPreparacion.Value,
                     Disponible = cbDisponible.Checked,
                     EsPostre = cbEsPostre.Checked,
-                    
+
                 };
 
                 new ProductoBLL().Save(producto);
@@ -120,8 +113,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-                
-            }   
+
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -132,7 +125,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-               
+
 
 
 

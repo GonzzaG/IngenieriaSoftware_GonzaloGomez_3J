@@ -5,7 +5,6 @@ using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -22,7 +21,7 @@ namespace IngenieriaSoftware.UI
         {
             InitializeComponent();
             _auditoriaPeticionesPendientesService = new AuditoriaPeticionesPendientesService();
-//            _auditoriaService = new AuditoriaService();
+            //            _auditoriaService = new AuditoriaService();
 
         }
 
@@ -44,7 +43,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 dataGridViewDetallesAntes.DataSource = null;
-                dataGridViewDetallesNuevos.DataSource = null;   
+                dataGridViewDetallesNuevos.DataSource = null;
                 dataGridViewPeticionesPendientes.DataSource = null;
 
                 // Obtenemos las peticiones pendientes de restauración
@@ -68,7 +67,7 @@ namespace IngenieriaSoftware.UI
                 dataGridViewDetallesAntes.DataSource = null;
                 dataGridViewDetallesAntes.Columns.Clear();
                 dataGridViewDetallesAntes.Rows.Clear();
-               
+
 
                 dataGridViewDetallesNuevos.DataSource = null;
                 dataGridViewDetallesNuevos.Columns.Clear();
@@ -144,8 +143,8 @@ namespace IngenieriaSoftware.UI
                 _auditoriaService = (IAuditoriaService)Activator.CreateInstance(tipoServicio);
 
                 var peticionRestauracion = dataGridViewPeticionesPendientes.SelectedRows[0].Tag as PeticionRestauracionModel;
-                
-             
+
+
 
                 if (peticionRestauracion == null)
                 {
@@ -165,7 +164,7 @@ namespace IngenieriaSoftware.UI
 
                 var registroActual = ObtenerRegistroAuditableActualPorTabla(peticionRestauracion.Tabla, peticionRestauracion.IdEntidad);
 
-                ListarRegistroActual(registroActual);   
+                ListarRegistroActual(registroActual);
             }
             catch (Exception ex)
             {
@@ -174,7 +173,7 @@ namespace IngenieriaSoftware.UI
         }
 
         // Metodo para obtener un registro modificable
-        private IAuditableModel ObtenerRegistroDesdePeticionRestauracion (int idEntidad, int version, string nombreTabla)
+        private IAuditableModel ObtenerRegistroDesdePeticionRestauracion(int idEntidad, int version, string nombreTabla)
         {
             try
             {
@@ -186,7 +185,7 @@ namespace IngenieriaSoftware.UI
 
                 var registroAuditoria = _auditoriaService.GetPorIdYVersion(idEntidad, version);
 
-                 if(registroAuditoria == null)
+                if (registroAuditoria == null)
                 {
                     throw new Exception("No se encontró el registro con el id y versión especificados.");
                 }
@@ -234,7 +233,7 @@ namespace IngenieriaSoftware.UI
 
         }
 
-        private IAuditableModel ObtenerRegistroAuditableActualPorTabla (string nombreTabla, int idEntidad)
+        private IAuditableModel ObtenerRegistroAuditableActualPorTabla(string nombreTabla, int idEntidad)
         {
             return _auditoriaService.ObtenerUltimaVersionDeEntidadAuditable(nombreTabla, idEntidad);
         }
@@ -269,7 +268,7 @@ namespace IngenieriaSoftware.UI
 
             dataGridViewDetallesAntes.Rows[rowIndex].Tag = registro; // Guardamos el registro completo en la fila para referencia futura
 
-            ListarEntidadEnGrid(registro.Entidad, dataGridViewDetallesAntes);    
+            ListarEntidadEnGrid(registro.Entidad, dataGridViewDetallesAntes);
 
         }
 
@@ -369,7 +368,7 @@ namespace IngenieriaSoftware.UI
         /// </summary>
         /// <param name="entidadVerificable"></param>
         /// <exception cref="Exception"></exception>
-    
+
         private bool CalcularDigitoVerificador(Entity entidadVerificable)
         {
             try
@@ -393,7 +392,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                var peticion = dataGridViewPeticionesPendientes.SelectedRows[0].Tag as PeticionRestauracionModel;   
+                var peticion = dataGridViewPeticionesPendientes.SelectedRows[0].Tag as PeticionRestauracionModel;
 
                 if (peticion == null)
                 {
@@ -402,7 +401,7 @@ namespace IngenieriaSoftware.UI
                 }
 
                 var idPeticion = peticion.Id;
-                var procesadoPor = SessionManager.GetInstance.Usuario.Id; 
+                var procesadoPor = SessionManager.GetInstance.Usuario.Id;
 
                 _auditoriaService.RechazarPeticionDeRestauracion(idPeticion, procesadoPor);
 

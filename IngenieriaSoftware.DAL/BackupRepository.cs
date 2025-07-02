@@ -1,10 +1,4 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.Servicios;
-using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
+﻿using System;
 
 namespace IngenieriaSoftware.DAL
 {

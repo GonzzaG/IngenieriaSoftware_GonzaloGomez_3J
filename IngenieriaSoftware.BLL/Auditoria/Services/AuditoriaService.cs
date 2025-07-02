@@ -1,18 +1,13 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Auditoria;
+﻿using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL.Auditoria.Services;
 using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.DAL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL.Auditoria
 {
-    public class AuditoriaService<T>: IAuditoriaService where T : IAuditableModel, new()
+    public class AuditoriaService<T> : IAuditoriaService where T : IAuditableModel, new()
     {
         readonly IAuditoriaEntityRepository<T> _auditoriaRepository;
         readonly PeticionesRestauracionRepository _peticionesRestauracionRepository;
@@ -26,7 +21,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
 
         public void RealizarPeticionRestauracion(string tabla, int idEntidad, int version, int idUsuarioActual, string comentario = null)
         {
-            _auditoriaRepository.RealizarPeticion(tabla, idEntidad, version, idUsuarioActual, comentario);  
+            _auditoriaRepository.RealizarPeticion(tabla, idEntidad, version, idUsuarioActual, comentario);
         }
 
         public object GetPorIdYVersion(int id, int version)
@@ -41,8 +36,8 @@ namespace IngenieriaSoftware.BLL.Auditoria
 
         public void AceptarPeticionDeRestauracion(int idEntidad, int version, int idPeticion, int IdEntidad)
         {
-            
-           _auditoriaRepository.RestaurarEstadoEntidad(idEntidad, version);
+
+            _auditoriaRepository.RestaurarEstadoEntidad(idEntidad, version);
 
             _peticionesRestauracionRepository.CambiarEstadoPeticion(idPeticion, "Aprobada", IdEntidad);
 
@@ -63,7 +58,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
 
         public void RechazarPeticionDeRestauracion(int idPeticion, int IdEntidad)
         {
-            _peticionesRestauracionRepository.CambiarEstadoPeticion(idPeticion, "Rechazada",IdEntidad);
+            _peticionesRestauracionRepository.CambiarEstadoPeticion(idPeticion, "Rechazada", IdEntidad);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace IngenieriaSoftware.UI
             this.WindowState = FormWindowState.Maximized;
 
             txtContrasena.Text = "pruebanueva";
-            txtUsuario.Text = "Gonza2"; 
+            txtUsuario.Text = "Gonza2";
         }
 
         #region Metodos de Interfaz

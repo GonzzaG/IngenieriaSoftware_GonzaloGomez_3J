@@ -2,7 +2,6 @@
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
@@ -122,7 +121,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 DialogResult result = MessageBox.Show("¿Está seguro de que desea eliminar la copia de seguridad seleccionada?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-              
+
                 if (result == DialogResult.Yes)
                 {
                     var nombreBackup = comboBoxBackUps.SelectedItem.ToString();

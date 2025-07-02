@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Abstracciones
 {
@@ -18,7 +15,7 @@ namespace IngenieriaSoftware.Abstracciones
         {
             string[] nombreTabla = tableName.Split('.');
 
-            if(nombreTabla.Length > 1)
+            if (nombreTabla.Length > 1)
                 tableName = nombreTabla[nombreTabla.Length - 1]; // Obtener solo el nombre de la tabla sin esquema
 
             if (!_entitiesAuditoria.TryGetValue(tableName, out var entityAuditoria))

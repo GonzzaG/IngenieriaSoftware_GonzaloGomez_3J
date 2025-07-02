@@ -1,11 +1,8 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
+﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.DAL.Gestion_Compras_Insumos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
 {
@@ -27,7 +24,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
 
         public Categoria GetById(int id)
         {
-            if(id > 0) return new CategoriaDataAccess().GetById(id);
+            if (id > 0) return new CategoriaDataAccess().GetById(id);
 
             throw new Exception("No se pudo obtener la categoria");
         }

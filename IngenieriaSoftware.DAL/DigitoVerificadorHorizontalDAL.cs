@@ -47,7 +47,7 @@ namespace IngenieriaSoftware.DAL
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

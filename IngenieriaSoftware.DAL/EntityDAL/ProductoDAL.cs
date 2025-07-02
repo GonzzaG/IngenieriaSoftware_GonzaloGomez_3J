@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
-    public class ProductoDAL: IDataAccessEntity<Producto>
+    public class ProductoDAL : IDataAccessEntity<Producto>
     {
         private readonly DAO _dao = new DAO();
 
@@ -46,7 +46,8 @@ namespace IngenieriaSoftware.DAL.EntityDAL
 
                 DataRow row = ds.Tables[0].Rows[0];
 
-                return new ProductoMapper().ConvertirDesdeRow(row);
+                return new ProductoMapper().ConvertirDesdeRow
+                    (row);
             }
             catch (Exception ex)
             {

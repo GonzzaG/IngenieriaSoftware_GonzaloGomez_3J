@@ -1,6 +1,5 @@
 ﻿using IngenieriaSoftware.Abstracciones;
 using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
-using System.Net.Http.Headers;
 
 namespace IngenieriaSoftware.BEL
 {
@@ -17,7 +16,7 @@ namespace IngenieriaSoftware.BEL
         public string Tipo { get; set; } = "Restaurante";
         public Constantes.TipoProducto.Tipo IdCategoria { get; set; } = Constantes.TipoProducto.Tipo.SinAsignar;
         public Categoria oCategoria { get; set; }
-        public int Id {  get; set; }
+        public int Id { get; set; }
 
         public string getNombreTabla()
         {

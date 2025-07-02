@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.DAL;
+﻿using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace IngenieriaSoftware.BLL
     {
         private BackupRepository _backupRepository = new BackupRepository();
 
-        public string BackupsDirectory { get; set; } = Path.Combine(ConfigurationManager.AppSettings["Directorio"]); 
+        public string BackupsDirectory { get; set; } = Path.Combine(ConfigurationManager.AppSettings["Directorio"]);
 
         public void Backup()
         {
@@ -75,7 +74,7 @@ namespace IngenieriaSoftware.BLL
 
             cmd.AppendLine("ALTER DATABASE ISProyecto SET MULTI_USER;");
 
-            _backupRepository.actionBD(cmd.ToString()); 
+            _backupRepository.actionBD(cmd.ToString());
         }
 
 

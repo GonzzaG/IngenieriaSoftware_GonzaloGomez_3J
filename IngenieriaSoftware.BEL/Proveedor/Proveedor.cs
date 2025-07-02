@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL.Proveedor
 {
@@ -25,18 +20,18 @@ namespace IngenieriaSoftware.BEL.Proveedor
             Documento = documento;
             RazonSocial = razonSocial;
             Correo = correo;
-            Telefono = telefono;    
+            Telefono = telefono;
             Estado = estado;
         }
 
         public static Proveedor CrearNuevoProveedor(string documento, string razonSocial, string correo, string telefono, bool estado)
         {
-            return new Proveedor(documento, razonSocial, correo, telefono, estado); 
+            return new Proveedor(documento, razonSocial, correo, telefono, estado);
         }
 
         public static Proveedor ActualizarProveedor(int proveedorId, string documento, string razonSocial, string correo, string telefono, bool estado)
         {
-            return new Proveedor(proveedorId,documento, razonSocial, correo, telefono, estado);
+            return new Proveedor(proveedorId, documento, razonSocial, correo, telefono, estado);
         }
 
         public int IdProveedor { get; set; }

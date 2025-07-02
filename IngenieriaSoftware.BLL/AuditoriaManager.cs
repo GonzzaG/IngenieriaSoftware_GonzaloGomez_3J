@@ -16,7 +16,7 @@ namespace IngenieriaSoftware.BLL
         {
             try
             {
-                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Obteniendo tablas auditadas", DateTime.Now, string.Empty, "AuditoriaManager", "ObtenerTablasAuditadas");   
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Obteniendo tablas auditadas", DateTime.Now, string.Empty, "AuditoriaManager", "ObtenerTablasAuditadas");
                 return _auditoriaRepository.ObtenerTablasAuditadas();
             }
             catch (Exception ex)

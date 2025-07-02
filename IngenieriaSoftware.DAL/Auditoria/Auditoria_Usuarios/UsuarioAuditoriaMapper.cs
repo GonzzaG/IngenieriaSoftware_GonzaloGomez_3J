@@ -1,15 +1,11 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Auditoria;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios
 {
-    public class UsuarioAuditoriaMapper: IAuditoriaMapper
+    public class UsuarioAuditoriaMapper : IAuditoriaMapper
     {
         public IAuditableModel ConvertirDesdeRow(DataRow row)
         {

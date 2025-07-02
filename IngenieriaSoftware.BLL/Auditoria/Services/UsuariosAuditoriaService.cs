@@ -1,13 +1,9 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Auditoria;
+﻿using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.DAL;
 using IngenieriaSoftware.DAL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace IngenieriaSoftware.BLL.Auditoria
@@ -31,7 +27,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
 
         public void RestaurarEstadoEntidad(int idEntidad, int version)
         {
-            using(var transaction = new TransactionScope())
+            using (var transaction = new TransactionScope())
             {
                 try
                 {
@@ -50,7 +46,7 @@ namespace IngenieriaSoftware.BLL.Auditoria
                     throw new Exception("Error al restaurar el estado del usuario", ex);
                 }
             }
-           
+
 
         }
 

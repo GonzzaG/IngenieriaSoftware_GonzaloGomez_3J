@@ -1,16 +1,11 @@
 ﻿using IngenieriaSoftware.BEL.Proveedor;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Proveedores
 {
-    public static class ProveedorMapper 
+    public static class ProveedorMapper
     {
-        public static Proveedor MappearDesdeDatarow (DataRow dr)
+        public static Proveedor MappearDesdeDatarow(DataRow dr)
         {
             var proveedor = new Proveedor()
             {

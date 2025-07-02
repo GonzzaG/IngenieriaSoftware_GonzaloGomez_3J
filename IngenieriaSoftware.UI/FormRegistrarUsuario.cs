@@ -1,10 +1,8 @@
 ﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Auditoria;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
 using System;
-using System.Data;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -49,7 +47,7 @@ namespace IngenieriaSoftware.UI
         private void GestionUsuarios_Load(object sender, EventArgs e)
         {
             VerificarNotificaciones();
-           
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -62,7 +60,7 @@ namespace IngenieriaSoftware.UI
             {
                 if (txtUsername.Text.Length == 0 || txtPassword.Text.Length == 0) { return; }
 
-                using(var transaccion = new TransactionScope())
+                using (var transaccion = new TransactionScope())
                 {
                     int usuarioId = _authService.RegistrarUsuario(txtUsername.Text, txtPassword.Text);
                     if (usuarioId > 0)
@@ -88,9 +86,9 @@ namespace IngenieriaSoftware.UI
                         MessageBox.Show("Entidad registrado con exito");
 
                     }
-                        transaccion.Complete();
+                    transaccion.Complete();
                 }
-              
+
             }
             catch (Exception ex)
             {
