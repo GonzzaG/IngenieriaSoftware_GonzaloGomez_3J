@@ -1,13 +1,14 @@
 ﻿using IngenieriaSoftware.BEL.Negocio;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarComandas : Form, IActualizable
+    public partial class FormGestionarComandas : Form, IVerificoNotificaciones
     {
         private readonly ComandaBLL _comadaBLL = new ComandaBLL();
 
@@ -102,7 +103,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

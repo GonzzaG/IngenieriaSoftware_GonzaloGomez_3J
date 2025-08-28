@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace IngenieriaSoftware.UI
+namespace IngenieriaSoftware.UI.Common
 {
-    public class ControlesHelper
+    public class CommonControles
     {
         private static int TagContador = 500;
 
         private readonly IIdiomaSujeto _idiomaSujeto;
 
-        public ControlesHelper(IIdiomaSujeto idiomaSujeto)
+        public CommonControles(IIdiomaSujeto idiomaSujeto)
         {
             _idiomaSujeto = idiomaSujeto;
         }

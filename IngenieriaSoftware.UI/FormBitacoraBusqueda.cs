@@ -1,12 +1,13 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormBitacoraBusqueda : Form, IActualizable
+    public partial class FormBitacoraBusqueda : Form, IVerificoNotificaciones
     {
         public NotificacionService _notificacionService => new NotificacionService();
         private bool formCargado = false;
@@ -55,7 +56,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

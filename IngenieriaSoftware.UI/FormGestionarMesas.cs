@@ -3,6 +3,7 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.UI.Adaptadores;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarMesas : Form, IActualizable
+    public partial class FormGestionarMesas : Form, IVerificoNotificaciones
     {
         private readonly MesaBLL _mesasBLL;
         private readonly ComandaBLL _comandaBLL;
@@ -143,7 +144,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

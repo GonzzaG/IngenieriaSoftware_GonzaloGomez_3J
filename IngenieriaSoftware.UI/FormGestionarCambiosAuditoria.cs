@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarCambiosAuditoria : Form, IActualizable
+    public partial class FormGestionarCambiosAuditoria : Form, IVerificoNotificaciones
     {
         //private readonly AuditoriaManager _auditoriaManager = new AuditoriaManager();
         public NotificacionService _notificacionService => new NotificacionService();

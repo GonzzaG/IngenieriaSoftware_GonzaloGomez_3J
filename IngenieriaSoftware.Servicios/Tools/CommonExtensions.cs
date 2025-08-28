@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.Servicios.Tools
 {
@@ -12,10 +10,26 @@ namespace IngenieriaSoftware.Servicios.Tools
         {
             if (objeto is null)
                 throw new ArgumentNullException($"{nameof(objeto)}, no validado correctamente");
-            
         }
 
+        public static bool HasValue(this string value)
+        {
+            return !string.IsNullOrWhiteSpace(value);
+        }
 
+        public static bool HasPositiveValue(this decimal value)
+        {
+            return value > 0;
+        }
+        public static bool HasPositiveValue(this int value)
+        {
+            return value > 0;
+        }
 
+        public static bool isEmpty(this IEnumerable<object> lista)
+        {
+            return lista == null || !lista.Any();
+               
+        }   
     }
 }

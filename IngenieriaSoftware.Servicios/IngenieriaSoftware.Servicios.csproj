@@ -75,6 +75,7 @@
     <Compile Include="Tools\CommonExtensions.cs" />
     <Compile Include="Tools\ControlesExtensions.cs" />
     <Compile Include="Tools\DataGridViewExtensions.cs" />
+    <Compile Include="Tools\GroupBoxExtensions.cs" />
     <Compile Include="TraduccionServicio.cs" />
     <Compile Include="UsuarioDVHDTO.cs" />
   </ItemGroup>

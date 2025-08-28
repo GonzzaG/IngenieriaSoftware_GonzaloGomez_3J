@@ -2,13 +2,14 @@
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Auditoria;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormEliminarUsuario : Form, IActualizable
+    public partial class FormEliminarUsuario : Form, IVerificoNotificaciones
     {
         private UsuarioBLL usuarioBLL;
         private List<UsuarioDTO> usuarios;
@@ -35,7 +36,7 @@ namespace IngenieriaSoftware.UI
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            if (this.MdiParent is FormMDI formPrincipal && this is IActualizable actualizableForm)
+            if (this.MdiParent is FormMDI formPrincipal && this is IVerificoNotificaciones actualizableForm)
             {
                 formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
             }
@@ -156,7 +157,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

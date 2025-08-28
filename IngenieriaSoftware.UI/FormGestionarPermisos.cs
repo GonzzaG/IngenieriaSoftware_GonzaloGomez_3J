@@ -1,12 +1,13 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarPermisos : Form, IActualizable
+    public partial class FormGestionarPermisos : Form, IVerificoNotificaciones
     {
         private readonly UsuarioBLL _usuarioBLL;
         private readonly PermisoBLL _permisoBLL;
@@ -31,7 +32,7 @@ namespace IngenieriaSoftware.UI
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            if (this.MdiParent is FormMDI formPrincipal && this is IActualizable actualizableForm)
+            if (this.MdiParent is FormMDI formPrincipal && this is IVerificoNotificaciones actualizableForm)
             {
                 formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
             }
@@ -177,7 +178,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

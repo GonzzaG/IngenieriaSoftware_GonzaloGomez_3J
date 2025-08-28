@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormBusquedaAuditoria : Form, IActualizable
+    public partial class FormBusquedaAuditoria : Form, IVerificoNotificaciones
     {
         private AuditoriaManager _auditoriaManager = new AuditoriaManager();
 

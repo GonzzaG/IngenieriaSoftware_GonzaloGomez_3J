@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormAsignarRolAUsuario : Form, IActualizable
+    public partial class FormAsignarRolAUsuario : Form, IVerificoNotificaciones
     {
         private PermisoBLL _permisoBLL = new PermisoBLL();
         private UsuarioBLL _usuarioBLL = new UsuarioBLL();

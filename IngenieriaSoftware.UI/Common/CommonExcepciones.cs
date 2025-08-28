@@ -3,14 +3,17 @@ using IngenieriaSoftware.Servicios.Interfaces;
 using IngenieriaSoftware.UI.Adaptadores;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace IngenieriaSoftware.UI.Helpers
+namespace IngenieriaSoftware.UI.Common
 {
-    public class HelperExcepciones
+    public class CommonExcepciones
     {
         private readonly IIdiomaSujeto _idiomaSujeto;
 
-        public HelperExcepciones(IIdiomaSujeto idiomaSujeto)
+        public CommonExcepciones(IIdiomaSujeto idiomaSujeto)
         {
             _idiomaSujeto = idiomaSujeto;
         }

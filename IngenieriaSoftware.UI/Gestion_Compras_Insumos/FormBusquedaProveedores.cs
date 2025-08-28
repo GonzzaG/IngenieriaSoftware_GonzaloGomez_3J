@@ -14,22 +14,28 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
-    public partial class FormBusquedaProveedores : Form, IActualizable
+    public partial class FormBusquedaProveedores : Form, IVerificoNotificaciones
     {
         internal event Action<Proveedor> esProveedorSeleccionado;
         public FormBusquedaProveedores()
         {
             InitializeComponent();
-            Actualizar();
+            Inicializar();
+
         }
 
         public NotificacionService _notificacionService => new NotificacionService();
 
+        private void Inicializar()
+        {
+            Actualizar();   
+            dgvProveedores.PersonalizarEstiloPredeterminado();
+        }
         public void Actualizar()
         {
             ObtenerProveedores();  
         }
-
+        
         private void ObtenerProveedores()
         {
             ListarProveedores(new ProveedorBussiness().GetAll());
@@ -57,29 +63,12 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                     
                 esProveedorSeleccionado.Invoke(proveedorSeleccionado);
 
+                this.Close();   
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);   
-            }
-        }
-
-        //vamos a llevar el proveedor seleccionado al formulario que lo llama
-        private void SeleccionarProveedor(Proveedor proveedor)
-        {
-            try
-            {
-                ((FormOrdenCompraFactura)this.Parent).Proveedor = proveedor;
-
-                
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                this.Close();
             }
         }
 

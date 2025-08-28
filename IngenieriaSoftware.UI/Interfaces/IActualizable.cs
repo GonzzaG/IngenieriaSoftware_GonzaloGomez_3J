@@ -1,13 +1,14 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace IngenieriaSoftware.UI
+namespace IngenieriaSoftware.UI.Interfaces
 {
     internal interface IActualizable
     {
-        NotificacionService _notificacionService { get; }
-
         void Actualizar();
-
-        void VerificarNotificaciones();
     }
 }

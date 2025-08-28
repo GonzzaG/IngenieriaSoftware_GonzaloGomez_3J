@@ -58,6 +58,37 @@ namespace IngenieriaSoftware.BLL
             }
         }
 
+
+        public void RegistrarActividad(Bitacora bitacora)
+        {
+
+            try
+            {
+                if (!_bitacoraDAL.RegistrarActividad(bitacora))
+                {
+                    throw new Exception("Fallo al guardar en la base de datos.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Ruta fallback en AppData
+                var fallbackDir = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "IS Proyecto");
+
+                if (!Directory.Exists(fallbackDir))
+                {
+                    Directory.CreateDirectory(fallbackDir);
+                }
+
+                var fallbackPath = Path.Combine(fallbackDir, "log_fallos.txt");
+
+                File.AppendAllText(fallbackPath, $"Error al guardar bitácora: {ex.Message}\n");
+
+                GuardarEnArchivo(bitacora);
+            }
+        }
+
         public void RegistrarError(string controller, Exception ex, string usuario, string area)
         {
             RegistrarActividad(usuario, ex.Message, DateTime.Now, $"ERROR: {ex.GetType().Name}", controller, ex.Source, "Mesas");

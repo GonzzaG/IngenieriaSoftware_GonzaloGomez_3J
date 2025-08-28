@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.QueryModels;
 using IngenieriaSoftware.DAL.Interfaces;
 using IngenieriaSoftware.DAL.Mapper;
 using System;
@@ -6,12 +7,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.EntityDAL
 {
-    public class ProductoInsumosDAL : IDataAccessEntity<Producto>
+    public class ProductoRestauranteDataAccess : IDataAccessEntity<Producto>
     {
         private readonly DAO _dao = new DAO();
 
@@ -21,7 +20,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@Id", id)
+                new SqlParameter("@Id", id)
                 };
 
                 _dao.ExecuteStoredProcedure("sp_Producto_Eliminar", parametros);
@@ -38,10 +37,10 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@Id", id)
+                new SqlParameter("@Id", id)
                 };
 
-                DataSet ds = _dao.ExecuteStoredProcedure("sp_ProductoInsumo_ObtenerPorId", parametros);
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_ProductoRestaurante_ObtenerPorId", parametros);
 
                 if (ds.Tables[0].Rows.Count == 0)
                     return null;
@@ -57,21 +56,83 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             }
         }
 
+        public List<Producto> GetWithFiltros (FiltroQueryModel filtro)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@FiltrosBusquedaQuery", filtro)
+                };
+
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_ProductoRestaurante_ObtenerFiltrado", parametros);
+
+                if (ds.Tables[0].Rows.Count == 0)
+                    return null;
+
+                DataRow row = ds.Tables[0].Rows[0];
+
+                var result = new List<Producto>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    result.Add(new ProductoMapper().ConvertirDesdeRow(ds.Tables[0].Rows[i]));
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Producto> GetByNombre(string nombre)
+        {
+            try
+            {
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                new SqlParameter("@Nombre", nombre)
+                };
+
+                DataSet ds = _dao.ExecuteStoredProcedure("sp_ProductoRestaurante_ObtenerPorNombre", parametros);
+
+                if (ds.Tables[0].Rows.Count == 0)
+                    return null;
+
+                DataRow row = ds.Tables[0].Rows[0];
+
+                var result = new List<Producto>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    result.Add(new ProductoMapper().ConvertirDesdeRow(ds.Tables[0].Rows[i]));
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public int Save(Producto entity)
         {
             try
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                new SqlParameter("@Nombre", entity.Nombre),
-                new SqlParameter("@Descripcion", entity.Descripcion ?? (object)DBNull.Value),
-                new SqlParameter("@Precio", entity.Precio),
-                new SqlParameter("@TiempoPreparacion", entity.TiempoPreparacion),
-                new SqlParameter("@Disponible", entity.Disponible),
-                new SqlParameter("@EsPostre", entity.EsPostre),
-                new SqlParameter("@Categoria", entity.oCategoria.Id),
-                new SqlParameter("@Tipo", entity.Tipo),
-                new SqlParameter("@NuevoId", SqlDbType.Int) { Direction = ParameterDirection.Output }
+                    new SqlParameter("@Nombre", entity.Nombre),
+                    new SqlParameter("@Descripcion", entity.Descripcion ?? (object)DBNull.Value),
+                    new SqlParameter("@Precio", entity.Precio),
+                    new SqlParameter("@TiempoPreparacion", entity.TiempoPreparacion),
+                    new SqlParameter("@Disponible", entity.Disponible),
+                    new SqlParameter("@EsPostre", entity.EsPostre),
+                    new SqlParameter("@Categoria", entity.oCategoria.Id),
+                    new SqlParameter("@Tipo", "RESTAURANTE"),
+                    new SqlParameter("@NuevoId", SqlDbType.Int) { Direction = ParameterDirection.Output }
                 };
 
                 _dao.ExecuteStoredProcedure("sp_Producto_Guardar", parametros);
@@ -112,7 +173,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         {
             try
             {
-                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosInsumos", null);
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosRestaurante", null);
                 return new ProductoMapper().MapearProductosDesdeDataSet(mDs);
             }
             catch (Exception ex)
@@ -120,6 +181,5 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
-        
     }
 }

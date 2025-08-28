@@ -3,25 +3,38 @@ using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.Servicios.Tools;
+using IngenieriaSoftware.UI.Interfaces;
 using System;
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using IngenieriaSoftware.BEL.QueryModels;
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
-    public partial class FormGestionarProductos : Form, IActualizable
+    public partial class FormGestionarProductos : Form, IVerificoNotificaciones
     {
         public FormGestionarProductos()
         {
             InitializeComponent();
-            Actualizar();
+            Inicializar();
+            
         }
 
         public NotificacionService _notificacionService => new NotificacionService();
-
         public void VerificarNotificaciones()
         {
         }
 
+        private void Inicializar()
+        {
+            #region Filtros
+            filtroNombreProducto.InicializarFiltro(ListarProductos);
+            filtroCodigoProducto.InicializarFiltro(ListarProductos);
+
+            #endregion
+            Actualizar();
+        }
         private void Actualizar()
         {
             ListarProductos();
@@ -33,11 +46,27 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             groupBoxProducto.LimpiarControles(typeof(Button), typeof(Label));
         }
+
         private void ListarProductos()
         {
-            dgvProductos.ActualizarDataSource(new ProductoBLL().GetAll());
-            dgvProductos.PersonalizarEstiloPredeterminado();
+            var filtro = MappearFiltros();
+
+            
+            gcfProductos.CargarDatos(new ProductoBLL().GetWithFiltro(filtro));
+            //else
+            //    gcfProductos.CargarDatos(new ProductoBLL().GetAll());
         }
+
+        private FiltroQueryModel MappearFiltros()
+        {
+            return new FiltroQueryModel
+            {
+                Nombre = filtroNombreProducto.Text ,
+                Id = int.Parse(filtroCodigoProducto.Text),
+            };
+        }
+
+
 
         private void ListarCategorias()
         {
@@ -98,7 +127,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-                int id = dgvProductos.SelectedRows.Count > 0 ? (int)dgvProductos.SelectedRows[0].Cells[nameof(Producto.ProductoId)].Value :
+                
+                int id = gcfProductos.CantidadElementos;
+                if(id.Equals(0))
                     throw new Exception("Debe seleccionar un producto");
 
                 new ProductoBLL().DeleteById(id);
@@ -135,5 +166,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 MessageBox.Show(ex.Message);
             }
         }
+
+        
     }
 }

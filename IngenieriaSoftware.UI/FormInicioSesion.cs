@@ -1,12 +1,13 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.UI.Adaptadores;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormInicioSesion : Form, IActualizable
+    public partial class FormInicioSesion : Form, IVerificoNotificaciones
     {
         private readonly AuthService _authService = new AuthService();
 
@@ -40,7 +41,7 @@ namespace IngenieriaSoftware.UI
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            if (this.MdiParent is FormMDI formPrincipal && this is IActualizable actualizableForm)
+            if (this.MdiParent is FormMDI formPrincipal && this is IVerificoNotificaciones actualizableForm)
             {
                 formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
             }
@@ -91,7 +92,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

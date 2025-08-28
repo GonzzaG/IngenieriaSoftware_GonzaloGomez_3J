@@ -4,6 +4,7 @@ using IngenieriaSoftware.DAL.Mapper;
 using IngenieriaSoftware.DAL.Tools;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -18,21 +19,32 @@ namespace IngenieriaSoftware.DAL.Proveedores
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public List<Producto> GetById(int Id)
+        public List<Producto> GetProductosByIdDelProveedor(int id)
         {
-            var parametros = new SqlParameter[]
+            try
             {
-                new SqlParameter("@IdProveedor", Id)
-            };
+                SqlParameter[] parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Id", id)
+                };
 
-            var dt = new DAO().ExecuteStoredProcedure("Proveedor.sp_Proveedor_ObtenerProductos", parametros);
+                DataSet ds = new DAO().ExecuteStoredProcedure("Proveedor.sp_ObtenerProductosDeProveedorPorId", parametros);
 
-            if (!dt.esValido())
+                ds.esValido();
+
+                var productos = new List<Producto>();
+
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    productos.Add(new ProductoProveedorMapper().ConvertirDesdeRow(row));
+                }
+
+                return productos;
+            }
+            catch (ArgumentNullException)
+            {
                 return new List<Producto>();
-
-            List<Producto> productos = new ProductoMapper().MapearProductosDesdeDataSet(dt);
-
-            return productos;
+            }
         }
     }
 }

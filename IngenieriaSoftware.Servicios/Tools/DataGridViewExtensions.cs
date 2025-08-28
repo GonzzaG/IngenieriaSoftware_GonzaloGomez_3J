@@ -13,22 +13,23 @@ namespace IngenieriaSoftware.Servicios.Tools
             dgv.DataSource = data?.ToList();
         }
 
-        public static void PersonalizarEstiloPredeterminado(this DataGridView dgv)
+        public static bool EstaVacio<T>(this DataGridView dgv)
+        {
+            return dgv.RowCount > 0;
+        }
+
+        public static bool isEmpty(this DataGridView dgv)
+        {
+            return dgv is null || dgv.RowCount.Equals(0);
+        }   
+
+        public static void PersonalizarEstiloPredeterminado (this DataGridView dgv)
         {
             // Paleta de colores que combinan con DarkSlateGray
             Color colorBase = Color.FromArgb(0, 64, 64);        // fondo principal
             Color colorAlterno = Color.FromArgb(0, 80, 80);     // fila alterna
             Color colorEncabezado = Color.FromArgb(0, 90, 90);  // encabezado
             Color colorTexto = Color.WhiteSmoke;
-
-            // General
-            dgv.BackgroundColor = colorBase;
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.EnableHeadersVisualStyles = false;
-            dgv.GridColor = Color.FromArgb(20, 100, 100); // líneas suaves
-            dgv.MultiSelect = false;
-            dgv.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             // Encabezado de columnas
             dgv.ColumnHeadersDefaultCellStyle.BackColor = colorEncabezado;
@@ -51,14 +52,31 @@ namespace IngenieriaSoftware.Servicios.Tools
             dgv.AlternatingRowsDefaultCellStyle.Font = new Font("Segoe UI", 11F);
 
             // Quitar encabezado de filas
-            dgv.RowHeadersVisible = false;
+            dgv.RowHeadersVisible = false; 
 
             // AutoSize
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv.RowTemplate.Height = 45; // Ajusta altura para que no se corte el texto
             dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv.Width += 5;
 
+            // General
+            dgv.BackgroundColor = colorBase;
+            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.GridColor = Color.FromArgb(20, 100, 100); // líneas suaves
+            dgv.MultiSelect = false;
+            dgv.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            //dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+
+            if(dgv.Rows.Count.Equals(0))
+            {
+                dgv.AutoGenerateColumns = true;
+                dgv.DataSource = new List<object>();
+            }
+            
         }
     }
 }

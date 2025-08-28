@@ -49,6 +49,30 @@ namespace IngenieriaSoftware.BLL
             _instance.RegistrarActividad(mUsuario, $"ERROR: {ex.InnerException}", DateTime.Now, ex.StackTrace, clase, ubicacion, area);
         }
 
+
+        public static void RegistrarError(this Exception ex, string area = "General")
+        {
+            // Obtener el método que llamó a este
+            var method = new StackTrace().GetFrame(1)?.GetMethod();
+
+            // Crear el objeto Bitacora directamente
+            var registro = new Bitacora
+            {
+                FechaHora = DateTime.Now,
+                Usuario = SessionManager.GetInstance.Usuario?.Username ?? "Sistema",
+                Actividad = $"ERROR: {(ex.InnerException?.Message ?? ex.Message)}",
+                InfoAdicional = ex.StackTrace,
+                Controller = method?.DeclaringType?.FullName ?? "ClaseDesconocida",
+                Url = method?.Name ?? "MetodoDesconocido",
+                Area = area
+            };
+
+            // Registrar usando el método refactorizado
+            _instance.RegistrarActividad(registro);
+        }
+
+
+
         public static List<Bitacora> ConsultarBitacora(DateTime desde, DateTime hasta, string modulo = null)
         {
             return _instance.ConsultarBitacora(desde, hasta, modulo);

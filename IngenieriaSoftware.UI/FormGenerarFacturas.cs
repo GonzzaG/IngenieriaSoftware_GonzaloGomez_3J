@@ -1,13 +1,14 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Mesas;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Transactions;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGenerarFacturas : Form, IActualizable
+    public partial class FormGenerarFacturas : Form, IVerificoNotificaciones
     {
         private MesaBLL _mesaBLL = new MesaBLL();
 
@@ -34,7 +35,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

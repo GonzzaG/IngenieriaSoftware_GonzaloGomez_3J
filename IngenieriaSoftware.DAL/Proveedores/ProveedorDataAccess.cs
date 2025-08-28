@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL.Proveedor;
 using IngenieriaSoftware.DAL.Tools;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -36,20 +37,27 @@ namespace IngenieriaSoftware.DAL.Proveedores
 
         public Proveedor GetById(int Id)
         {
-            var parametros = new SqlParameter[]
+            try
             {
-                new SqlParameter("@Id", Id)
+                var parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Id", Id)
 
-            };
+                };
 
-            var dt = _dao.ExecuteStoredProcedure("Proveedor.sp_Proveedor_ObtenerPorId", parametros);
+                var dt = _dao.ExecuteStoredProcedure("Proveedor.sp_Proveedor_ObtenerPorId", parametros);
 
-            if (!dt.esValido())
+                dt.esValido();          
+
+                var proveedor = ProveedorMapper.MappearDesdeDatarow(dt.Tables[0].Rows[0]);
+
+                return proveedor;
+            }
+            catch(ArgumentNullException)
+            {
                 return new Proveedor();
+            }
 
-            var proveedor = ProveedorMapper.MappearDesdeDatarow(dt.Tables[0].Rows[0]);
-
-            return proveedor;
         }
 
         public void DeleteById(int Id)

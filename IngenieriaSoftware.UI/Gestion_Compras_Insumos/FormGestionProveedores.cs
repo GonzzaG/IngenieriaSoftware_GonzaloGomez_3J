@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
-    public partial class FormGestionProveedores : Form, IActualizable
+    public partial class FormGestionProveedores : Form, IVerificoNotificaciones
     {
 
         ProveedorBussiness _proveedorBussiness = new ProveedorBussiness();

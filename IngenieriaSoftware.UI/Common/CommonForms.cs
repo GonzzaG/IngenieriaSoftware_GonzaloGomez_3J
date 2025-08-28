@@ -1,13 +1,19 @@
 ﻿using IngenieriaSoftware.BEL.Negocio;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IngenieriaSoftware.UI
+namespace IngenieriaSoftware.UI.Common
 {
-    internal class HelperForms
+    public static class CommonForms
     {
+        internal static event EventHandler ModalCerrado;
+
         public static List<Form> InstanciarTodosLosFormularios(Form mdiParent)
         {
             List<Form> formularios = new List<Form>();
@@ -72,6 +78,15 @@ namespace IngenieriaSoftware.UI
                 timer.Dispose();
             };
             timer.Start();
+        }
+
+
+        internal static void AbrirFormModal(this Form modal, Size? size = null)
+        {
+            modal.StartPosition = FormStartPosition.CenterScreen;
+            modal.Size = size ?? new Size(1800, 800);
+            modal.AutoScroll = true;
+            modal.ShowDialog();
         }
     }
 }

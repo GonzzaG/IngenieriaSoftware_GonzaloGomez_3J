@@ -2,6 +2,7 @@
 using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionarFacturas : Form, IActualizable
+    public partial class FormGestionarFacturas : Form, IVerificoNotificaciones
     {
         private readonly FacturaBLL _facturaBLL = new FacturaBLL();
         private readonly ComandaBLL _comandaBLL = new ComandaBLL();
@@ -42,7 +43,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

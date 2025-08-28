@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormGestionRoles : Form, IActualizable
+    public partial class FormGestionRoles : Form, IVerificoNotificaciones
     {
         private PermisoBLL _permisoBLL = new PermisoBLL();
         private List<PermisoDTO> _permisos = new List<PermisoDTO>();

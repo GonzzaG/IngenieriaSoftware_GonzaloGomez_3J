@@ -78,6 +78,7 @@
     <Compile Include="ProductoFactura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor\Proveedor.cs" />
+    <Compile Include="QueryModels\FiltroQueryModel.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>

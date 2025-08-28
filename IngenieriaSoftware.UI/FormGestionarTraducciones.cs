@@ -1,6 +1,7 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class AgregarIdioma : Form, IActualizable
+    public partial class AgregarIdioma : Form, IVerificoNotificaciones
     {
         //private readonly IdiomaSujeto _idiomaObserver;
         private Dictionary<EtiquetaDTO, TraduccionDTO> etiquetasConTraduccion = new Dictionary<EtiquetaDTO, TraduccionDTO>();
@@ -58,7 +59,7 @@ namespace IngenieriaSoftware.UI
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            if (this.MdiParent is FormMDI formPrincipal && this is IActualizable actualizableForm)
+            if (this.MdiParent is FormMDI formPrincipal && this is IVerificoNotificaciones actualizableForm)
             {
                 formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
             }
@@ -146,7 +147,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }

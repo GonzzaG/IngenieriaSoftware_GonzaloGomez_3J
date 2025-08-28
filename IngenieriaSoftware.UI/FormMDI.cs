@@ -2,8 +2,9 @@
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
+using IngenieriaSoftware.UI.ComprasProveedores;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
-using IngenieriaSoftware.UI.Helpers;
+using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormMDI : Form, IActualizable
+    public partial class FormMDI : Form, IVerificoNotificaciones
     {
         internal UsuarioBLL usuarioBLL;
         internal PermisoBLL permisoBLL;
@@ -25,8 +26,8 @@ namespace IngenieriaSoftware.UI
         private readonly AuthService _authService;
         private ITraduccionServicio ItraduccionServicio;
 
-        private readonly ControlesHelper _controlesHelper;
-        private readonly HelperExcepciones _helperExcepciones;
+        private readonly CommonControles _controlesHelper;
+        private readonly CommonExcepciones _helperExcepciones;
         private IdiomaSujeto _idiomaObserver;
         private readonly DigitoVerificadorManager _digitoVerificadorManager;
 
@@ -48,8 +49,8 @@ namespace IngenieriaSoftware.UI
             _authService = new AuthService();
             ItraduccionServicio = new TraduccionBLL();
             _idiomaObserver = new IdiomaSujeto(ItraduccionServicio);
-            _controlesHelper = new ControlesHelper(_idiomaObserver);
-            _helperExcepciones = new HelperExcepciones(_idiomaObserver);
+            _controlesHelper = new CommonControles(_idiomaObserver);
+            _helperExcepciones = new CommonExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
             VerificarIntegridad();
@@ -116,7 +117,7 @@ namespace IngenieriaSoftware.UI
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            if (this.MdiParent is FormMDI formPrincipal && this is IActualizable actualizableForm)
+            if (this.MdiParent is FormMDI formPrincipal && this is IVerificoNotificaciones actualizableForm)
             {
                 formPrincipal.ActualizarFormsHijos -= actualizableForm.Actualizar;
             }
@@ -163,21 +164,16 @@ namespace IngenieriaSoftware.UI
         {
             this.menuStripMDI.Visible = true;
             comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
+
+            // Solución: forzar primero a Normal, luego a Maximized
+            this.WindowState = FormWindowState.Normal;
             this.WindowState = FormWindowState.Maximized;
-            //_controlesHelper.SuscribirControles(this);
-            // Notificamos a los suscriptores del cambio de idioma
-            //_idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
-
-            // PermisosData.PermisosString = AuthService.PermisosUsuario;
-            var permisosUsuario = AuthService.PermisosUsuario;
-
-            //InicializarPermisosMenu();
-            //VerificarPermisosRoles(permisosUsuario);
-
-            //ActualizarVisibilidadBotones();
 
             VerificarNotificaciones();
+
+            this.Activate();
         }
+
 
         private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -185,7 +181,7 @@ namespace IngenieriaSoftware.UI
 
         private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormRegistrarUsuario formRegistrarUsuario = new FormRegistrarUsuario(_digitoVerificadorManager);
+            IngenieriaSoftware.UI.FormRegistrarUsuario formRegistrarUsuario = new IngenieriaSoftware.UI.FormRegistrarUsuario(_digitoVerificadorManager);
             AbrirFormHijo(formRegistrarUsuario);
         }
 
@@ -228,7 +224,7 @@ namespace IngenieriaSoftware.UI
             formInicio.MaximizeBox = true;
             formInicio.Size = this.Size;
             formInicio.InicioSesionExitoso += AbrirFormMenu;
-            //panel1.Visible = false;
+            formInicio.AutoScroll = true;
             formInicio.Show();
         }
 
@@ -242,7 +238,7 @@ namespace IngenieriaSoftware.UI
             VerificarNotificaciones();
             //_idiomaObserver.CambiarEstado(IdiomaData.IdiomaActual.Id);
 
-            if (formHijo is IActualizable formActualizable)
+            if (formHijo is IVerificoNotificaciones formActualizable)
             {
                 this.ActualizarFormsHijos += formActualizable.Actualizar;
             }
@@ -260,6 +256,39 @@ namespace IngenieriaSoftware.UI
             //panel1.Visible = false;
         }
 
+        [Obsolete("Este metodo es obsoleto, usar AbrirFormHijo en su lugar")]
+        internal void AbrirFormHijoExtension(Form formHijo)
+        {
+            foreach (Form hijo in this.MdiChildren)
+            {
+                hijo.Close();
+            }
+
+            VerificarNotificaciones();
+
+            if (formHijo is IVerificoNotificaciones formActualizable)
+            {
+                this.ActualizarFormsHijos += formActualizable.Actualizar;
+            }
+
+            formHijo.MdiParent = this;
+
+            formHijo.StartPosition = FormStartPosition.Manual;
+            formHijo.MaximizeBox = false;
+            formHijo.ControlBox = false;
+            formHijo.AutoScroll = true;
+
+            // Mostrar el formulario
+            formHijo.Show();
+
+            // Solución clave: forzar el maximizado luego del render inicial
+            formHijo.BeginInvoke((MethodInvoker)delegate
+            {
+                formHijo.WindowState = FormWindowState.Maximized;
+                formHijo.Activate();
+                formHijo.BringToFront();
+            });
+        }
         #endregion Metodos privados
 
         private void ActualizarVisibilidadBotones()
@@ -335,11 +364,11 @@ namespace IngenieriaSoftware.UI
 
         public void ActualizarEtiquetas()
         {
-            var formularios = HelperForms.InstanciarTodosLosFormularios(this);
+            var formularios = CommonForms.InstanciarTodosLosFormularios(this);
             formularios.Add(this);
-            Dictionary<string, IIdiomaObservador> etiquetasEnMemoria = ControlesHelper.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaObservador)p.Value);
+            Dictionary<string, IIdiomaObservador> etiquetasEnMemoria = CommonControles.ListarControles(this).ToDictionary(p => p.Key, p => (IIdiomaObservador)p.Value);
 
-            var etiquetasExcepciones = HelperExcepciones.ListarExcepciones();
+            var etiquetasExcepciones = CommonExcepciones.ListarExcepciones();
             foreach (var etiquetaExcepcion in etiquetasExcepciones)
             {
                 etiquetasEnMemoria[etiquetaExcepcion.Key] = etiquetaExcepcion.Value;
@@ -444,7 +473,7 @@ namespace IngenieriaSoftware.UI
                 var notificaciones = _notificacionService.ObtenerNotificaciones();
                 if (notificaciones.Count > 0)
                 {
-                    HelperForms.MostrarNotificacion(notificaciones, this);
+                    CommonForms.MostrarNotificacion(notificaciones, this);
                 }
             }
         }
@@ -679,6 +708,31 @@ namespace IngenieriaSoftware.UI
             {
                 FormGestionProveedores formGestionProveedores = new FormGestionProveedores();
                 AbrirFormHijo(formGestionProveedores);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new FormCategoriaABM());
+        }
+
+        private void FormMDI_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ordenDeCompraToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                FormListaComprasProveedores ordenCompraForm = new FormListaComprasProveedores();
+                AbrirFormHijo(ordenCompraForm);
+
             }
             catch (Exception ex)
             {

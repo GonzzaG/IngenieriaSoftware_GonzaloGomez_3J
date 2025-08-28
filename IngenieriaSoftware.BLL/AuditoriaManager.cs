@@ -93,7 +93,7 @@ namespace IngenieriaSoftware.BLL
             }
             catch (Exception ex)
             {
-                BitacoraHelper.RegistrarError(SessionManager.GetInstance.Usuario.ToString(), ex, "AuditoriaManager", "AceptarPeticionDeRestauracion");
+                ex.RegistrarError("Auditoria");
                 throw new Exception(ex.Message);
             }
         }

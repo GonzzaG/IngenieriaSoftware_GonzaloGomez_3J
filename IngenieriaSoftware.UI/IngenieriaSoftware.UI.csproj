@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +48,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Puerco-arana-icono.ico</ApplicationIcon>
@@ -63,9 +65,15 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="IngenieriaSoftware.UI">
+      <HintPath>obj\Debug\IngenieriaSoftware.UI.exe</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.4\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -119,7 +127,37 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
+    <Compile Include="ComprasProveedores\FormAgregarCompraProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\FormAgregarCompraProveedores.Designer.cs">
+      <DependentUpon>FormAgregarCompraProveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasProveedores\FormListaComprasProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\FormListaComprasProveedores.Designer.cs">
+      <DependentUpon>FormListaComprasProveedores.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConexionDinamica.cs" />
+    <Compile Include="ControlesPersonalizados\FiltroCodigo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesPersonalizados\FiltroCodigo.Designer.cs">
+      <DependentUpon>FiltroCodigo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesPersonalizados\FiltroNombre.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesPersonalizados\FiltroNombre.Designer.cs">
+      <DependentUpon>FiltroNombre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesPersonalizados\GrillaConFiltros.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesPersonalizados\GrillaConFiltros.Designer.cs">
+      <DependentUpon>GrillaConFiltros.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormABMMesas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,9 +302,9 @@
     <Compile Include="Gestion_Compras_Insumos\FormOrdenCompraFactura.Designer.cs">
       <DependentUpon>FormOrdenCompraFactura.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\HelperControles.cs" />
-    <Compile Include="Helpers\HelperExcepciones.cs" />
-    <Compile Include="Common.Helpers\common.helper.forms.cs" />
+    <Compile Include="Common\CommonControles.cs" />
+    <Compile Include="Common\CommonExcepciones.cs" />
+    <Compile Include="Common\CommonForms.cs" />
     <Compile Include="FormGestionarTraducciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,11 +349,27 @@
     </Compile>
     <Compile Include="IdiomaObservadorDTO.cs" />
     <Compile Include="Interfaces\IActualizable.cs" />
+    <Compile Include="Interfaces\IVerificoNotificaciones.cs" />
     <Compile Include="IdiomaSujeto.cs" />
     <Compile Include="MensajeDTO.cs" />
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ComprasProveedores\FormAgregarCompraProveedores.resx">
+      <DependentUpon>FormAgregarCompraProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasProveedores\FormListaComprasProveedores.resx">
+      <DependentUpon>FormListaComprasProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesPersonalizados\FiltroCodigo.resx">
+      <DependentUpon>FiltroCodigo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesPersonalizados\FiltroNombre.resx">
+      <DependentUpon>FiltroNombre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesPersonalizados\GrillaConFiltros.resx">
+      <DependentUpon>GrillaConFiltros.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormABMMesas.resx">
       <DependentUpon>FormABMMesas.cs</DependentUpon>
     </EmbeddedResource>
@@ -414,12 +468,15 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Properties\FormateoCadenaExtension.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="IngenieriaSoftware.UI_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\IngenieriaSoftware.BLL.AuthService.datasource" />
     <None Include="Properties\DataSources\IngenieriaSoftware.BLL.UsuarioBLL.datasource" />
     <None Include="Properties\Settings.settings">

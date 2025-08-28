@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI
 {
-    public partial class FormAuditoria : Form, IActualizable
+    public partial class FormAuditoria : Form, IVerificoNotificaciones
     {
         private readonly AuditoriaManager _auditoriaManager;
         private List<AuditoriaRegistro> _registros;

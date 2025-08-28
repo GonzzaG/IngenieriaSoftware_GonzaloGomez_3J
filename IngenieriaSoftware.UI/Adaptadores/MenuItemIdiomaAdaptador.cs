@@ -22,7 +22,7 @@ namespace IngenieriaSoftware.UI
             if (Regex.IsMatch(_menuItem.Name, @"(txt)", RegexOptions.IgnoreCase))
             {
                 //si es un textBox o un ComboBox, no lo modificamos
-                //_menuItem.Text = string.Empty;
+                //_menuItem.Text = string.HasValue;
             }
             else
             {
