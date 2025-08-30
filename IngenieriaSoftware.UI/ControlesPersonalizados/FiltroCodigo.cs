@@ -10,11 +10,25 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ControlesPersonalizados
 {
-    public partial class InputFiltroCodigo : UserControl
+    public partial class InputFiltroCodigo : UserControl, UserControlCustom
     {
+        private int TextoNumerico;
+        public int? Texto
+        {
+            get { return GetTextoNumerico(); }
+        }
         public InputFiltroCodigo()
         {
             InitializeComponent();
+        }
+
+        private int? GetTextoNumerico()
+        {
+            if (int.TryParse(txtFiltroCodigo.Text, out TextoNumerico))
+                return TextoNumerico;
+            else
+                return null;
+
         }
 
         /// <summary>

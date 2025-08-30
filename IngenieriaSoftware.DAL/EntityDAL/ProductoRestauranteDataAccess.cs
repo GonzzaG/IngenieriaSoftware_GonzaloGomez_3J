@@ -60,9 +60,15 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         {
             try
             {
+                var tablaFiltros = CrearTablaFiltros(filtro);
+
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@FiltrosBusquedaQuery", filtro)
+                    new SqlParameter("@Filtros", SqlDbType.Structured)
+                    {
+                        TypeName = "FiltrosBusquedaQuery", 
+                        Value = tablaFiltros
+                    }
                 };
 
                 DataSet ds = _dao.ExecuteStoredProcedure("sp_ProductoRestaurante_ObtenerFiltrado", parametros);
@@ -70,13 +76,10 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 if (ds.Tables[0].Rows.Count == 0)
                     return null;
 
-                DataRow row = ds.Tables[0].Rows[0];
-
                 var result = new List<Producto>();
-
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    result.Add(new ProductoMapper().ConvertirDesdeRow(ds.Tables[0].Rows[i]));
+                    result.Add(new ProductoMapper().ConvertirDesdeRow(row));
                 }
 
                 return result;
@@ -85,8 +88,23 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             {
                 throw ex;
             }
-        }
 
+        }
+        private DataTable CrearTablaFiltros(FiltroQueryModel filtro)
+        {
+            var table = new DataTable();
+            table.Columns.Add("Nombre", typeof(string));
+            table.Columns.Add("Codigo", typeof(int));
+            table.Columns.Add("Estado", typeof(bool));
+
+            var row = table.NewRow();
+            row["Nombre"] = filtro.Nombre ?? (object)DBNull.Value;
+            row["Codigo"] = filtro.Id.HasValue ? filtro.Id.Value : (object)DBNull.Value;
+            row["Estado"] = filtro.Estado.HasValue ? filtro.Estado.Value : (object)DBNull.Value;
+
+            table.Rows.Add(row);
+            return table;
+        }
         public List<Producto> GetByNombre(string nombre)
         {
             try

@@ -537,14 +537,6 @@ namespace IngenieriaSoftware.UI
 
         private void FormMDI_Activated(object sender, EventArgs e)
         {
-            if (this.MdiChildren.Length > 0)
-            {
-                // HidePanel(); // Si hay formularios hijos, ocultar el panel
-            }
-            else
-            {
-                //ShowPanel(); // Si no hay formularios hijos, mostrar el panel
-            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -695,11 +687,6 @@ namespace IngenieriaSoftware.UI
                 MessageBox.Show(ex.Message);
                 BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
             }
-        }
-
-        private void toolStrip_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)

@@ -13,9 +13,7 @@ namespace IngenieriaSoftware.BEL.QueryModels
     {
         public int? Id { get; set; } = 0;
         public string Nombre { get; set; } = string.Empty;
-        public DateTime? FechaDesde { get; set; }
-        public DateTime? FechaHasta { get; set; }
-        public int? EstadoId { get; set; } 
+        public int? Estado { get; set; } 
 
     }
 }

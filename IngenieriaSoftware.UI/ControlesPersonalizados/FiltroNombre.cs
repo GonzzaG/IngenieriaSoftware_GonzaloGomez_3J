@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ControlesPersonalizados
 {
-    public partial class InputNombreFiltro : UserControl
+    public partial class InputNombreFiltro : UserControl, UserControlCustom
     {
+        public string Texto
+        {
+            get { return txtFiltroNombre.Text ; }
+            set { txtFiltroNombre.Text = value; }
+        }   
+
         public InputNombreFiltro()
         {
             InitializeComponent();

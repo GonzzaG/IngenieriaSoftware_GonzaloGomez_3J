@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ControlesPersonalizados
 {
-    public partial class DataGridViewConFiltros : UserControl
+    public partial class DataGridViewConFiltros : UserControl, UserControlCustom
     {
 
         public int CantidadElementos

@@ -62,8 +62,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.lblFiltroCodigo);
             this.Controls.Add(this.txtFiltroCodigo);
+            this.Controls.Add(this.lblFiltroCodigo);
             this.Name = "InputFiltroCodigo";
             this.Size = new System.Drawing.Size(259, 66);
             this.ResumeLayout(false);

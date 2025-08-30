@@ -14,6 +14,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
     public partial class FormGestionarProductos : Form, IVerificoNotificaciones
     {
+
+        private bool Inicializado = false;
         public FormGestionarProductos()
         {
             InitializeComponent();
@@ -34,6 +36,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
             #endregion
             Actualizar();
+            Inicializado = true;
+
         }
         private void Actualizar()
         {
@@ -49,20 +53,30 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void ListarProductos()
         {
-            var filtro = MappearFiltros();
+            try
+            {
+                if (!Inicializado)
+                {
+                    gcfProductos.CargarDatos(new ProductoBLL().GetAll());
+                    return;
+                }
 
-            
-            gcfProductos.CargarDatos(new ProductoBLL().GetWithFiltro(filtro));
-            //else
-            //    gcfProductos.CargarDatos(new ProductoBLL().GetAll());
+                var filtro = MappearFiltros();
+                gcfProductos.CargarDatos(new ProductoBLL().GetWithFiltro(filtro));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ex.RegistrarError("Gestion de Productos");
+            }
         }
 
         private FiltroQueryModel MappearFiltros()
         {
             return new FiltroQueryModel
             {
-                Nombre = filtroNombreProducto.Text ,
-                Id = int.Parse(filtroCodigoProducto.Text),
+                Nombre = filtroNombreProducto.Texto,
+                Id = filtroCodigoProducto.Texto,
             };
         }
 

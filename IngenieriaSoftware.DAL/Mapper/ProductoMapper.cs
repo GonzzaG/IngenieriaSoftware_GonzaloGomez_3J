@@ -39,10 +39,9 @@ namespace IngenieriaSoftware.DAL.Mapper
                 ProductoId = (int)row["producto_id"],
                 Nombre = row["nombre"].ToString(),
                 Descripcion = row["descripcion"].ToString(),
-                Precio = (decimal)row["precio"],
-                TiempoPreparacion = (int)row["tiempo_preparacion"],
+                TiempoPreparacion = row["tiempo_preparacion"] is DBNull ? 0 : (int)row["tiempo_preparacion"],
                 Disponible = (bool)row["disponible"],
-                EsPostre = (bool)row["es_postre"],
+                EsPostre = row["es_postre"] is DBNull ? false: (bool)row["es_postre"],
                 Tipo = row["Tipo"].ToString(),
                 IdCategoria = row["categoria"] is DBNull ? 0 : (TipoProducto.Tipo)(int.Parse(row["categoria"].ToString())),
             };

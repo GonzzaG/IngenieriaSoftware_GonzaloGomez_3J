@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.Servicios.Interfaces;
+using IngenieriaSoftware.UI.ControlesPersonalizados;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -22,7 +23,7 @@ namespace IngenieriaSoftware.UI.Common
         {
             foreach (Control control in formulario.Controls)
             {
-                if (control.Tag != null && int.TryParse(control.Tag.ToString(), out int _))
+                if (control.Tag != null && int.TryParse(control.Tag.ToString(), out int _) && control is not UserControlCustom)
                 {
                     var controlAdaptador = new ControlIdiomaAdaptador(control);
                     _idiomaSujeto.Suscribir(controlAdaptador);
