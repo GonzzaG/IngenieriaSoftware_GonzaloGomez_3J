@@ -67,6 +67,7 @@
     <Compile Include="DigitoVerificadorHorizontalDAL.cs" />
     <Compile Include="DigitoVerificadorVerticalDAL.cs" />
     <Compile Include="Gestion_Compras_Insumos\CategoriaDataAccess.cs" />
+    <Compile Include="Gestion_Compras_Insumos\OrdenCompraDataAccess.cs" />
     <Compile Include="Interfaces\IDataAccessEntity.cs" />
     <Compile Include="Mapper\CategoriaMapper.cs" />
     <Compile Include="Mapper\ProductoProveedorMapper.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Proveedores\ProveedorDataAccess.cs" />
     <Compile Include="Tools\DataSetExtensions.cs" />
     <Compile Include="Tools\ListExtensions.cs" />
+    <Compile Include="Tools\ModelDataAccessExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">

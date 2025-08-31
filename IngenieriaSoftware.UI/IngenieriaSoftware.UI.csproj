@@ -136,6 +136,12 @@
     <Compile Include="ComprasProveedores\FormListaOrdenCompra.Designer.cs">
       <DependentUpon>FormListaOrdenCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprasProveedores\ModalSeleccionProdutosOrdenCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\ModalSeleccionProdutosOrdenCompra.Designer.cs">
+      <DependentUpon>ModalSeleccionProdutosOrdenCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConexionDinamica.cs" />
     <Compile Include="ControlesPersonalizados\FiltroCodigo.cs">
       <SubType>UserControl</SubType>
@@ -155,6 +161,7 @@
     <Compile Include="ControlesPersonalizados\GrillaConFiltros.Designer.cs">
       <DependentUpon>GrillaConFiltros.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlesPersonalizados\grillaCustom\ConstantesGrilla.cs" />
     <Compile Include="ControlesPersonalizados\panelCustom\PanelNoResultado.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -363,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\FormListaOrdenCompra.resx">
       <DependentUpon>FormListaOrdenCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasProveedores\ModalSeleccionProdutosOrdenCompra.resx">
+      <DependentUpon>ModalSeleccionProdutosOrdenCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesPersonalizados\FiltroCodigo.resx">
       <DependentUpon>FiltroCodigo.cs</DependentUpon>

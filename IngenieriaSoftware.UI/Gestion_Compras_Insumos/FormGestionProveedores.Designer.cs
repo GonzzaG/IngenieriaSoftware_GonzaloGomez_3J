@@ -60,9 +60,9 @@
             this.groupBoxProveedor.Controls.Add(this.lblCorreo);
             this.groupBoxProveedor.Controls.Add(this.txtDocumento);
             this.groupBoxProveedor.Controls.Add(this.lblDocumento);
-            this.groupBoxProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F);
             this.groupBoxProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBoxProveedor.Location = new System.Drawing.Point(154, 135);
+            this.groupBoxProveedor.Location = new System.Drawing.Point(194, 119);
             this.groupBoxProveedor.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxProveedor.Name = "groupBoxProveedor";
             this.groupBoxProveedor.Padding = new System.Windows.Forms.Padding(2);
@@ -78,7 +78,7 @@
             this.checkBoxEsActivo.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEsActivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxEsActivo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkBoxEsActivo.Location = new System.Drawing.Point(24, 371);
+            this.checkBoxEsActivo.Location = new System.Drawing.Point(24, 341);
             this.checkBoxEsActivo.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxEsActivo.Name = "checkBoxEsActivo";
             this.checkBoxEsActivo.Size = new System.Drawing.Size(80, 28);
@@ -92,7 +92,7 @@
             this.lblEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblEstado.Location = new System.Drawing.Point(20, 346);
+            this.lblEstado.Location = new System.Drawing.Point(20, 316);
             this.lblEstado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(56, 21);
@@ -105,7 +105,7 @@
             this.txtTelefono.BackColor = System.Drawing.Color.Teal;
             this.txtTelefono.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefono.ForeColor = System.Drawing.Color.Gainsboro;
-            this.txtTelefono.Location = new System.Drawing.Point(24, 311);
+            this.txtTelefono.Location = new System.Drawing.Point(24, 281);
             this.txtTelefono.Margin = new System.Windows.Forms.Padding(2);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(200, 29);
@@ -118,7 +118,7 @@
             this.lblTelefono.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTelefono.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTelefono.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTelefono.Location = new System.Drawing.Point(20, 287);
+            this.lblTelefono.Location = new System.Drawing.Point(20, 257);
             this.lblTelefono.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(70, 21);
@@ -131,7 +131,7 @@
             this.txtRazonSocial.BackColor = System.Drawing.Color.Teal;
             this.txtRazonSocial.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRazonSocial.ForeColor = System.Drawing.Color.Gainsboro;
-            this.txtRazonSocial.Location = new System.Drawing.Point(24, 189);
+            this.txtRazonSocial.Location = new System.Drawing.Point(24, 159);
             this.txtRazonSocial.Margin = new System.Windows.Forms.Padding(2);
             this.txtRazonSocial.Name = "txtRazonSocial";
             this.txtRazonSocial.Size = new System.Drawing.Size(200, 29);
@@ -144,7 +144,7 @@
             this.lblRazonSocial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblRazonSocial.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRazonSocial.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblRazonSocial.Location = new System.Drawing.Point(20, 165);
+            this.lblRazonSocial.Location = new System.Drawing.Point(20, 135);
             this.lblRazonSocial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRazonSocial.Name = "lblRazonSocial";
             this.lblRazonSocial.Size = new System.Drawing.Size(98, 21);
@@ -157,7 +157,7 @@
             this.txtCorreo.BackColor = System.Drawing.Color.Teal;
             this.txtCorreo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCorreo.ForeColor = System.Drawing.Color.Gainsboro;
-            this.txtCorreo.Location = new System.Drawing.Point(24, 250);
+            this.txtCorreo.Location = new System.Drawing.Point(24, 220);
             this.txtCorreo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(200, 29);
@@ -170,7 +170,7 @@
             this.lblCorreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCorreo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCorreo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblCorreo.Location = new System.Drawing.Point(20, 226);
+            this.lblCorreo.Location = new System.Drawing.Point(20, 196);
             this.lblCorreo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCorreo.Name = "lblCorreo";
             this.lblCorreo.Size = new System.Drawing.Size(58, 21);
@@ -183,7 +183,7 @@
             this.txtDocumento.BackColor = System.Drawing.Color.Teal;
             this.txtDocumento.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDocumento.ForeColor = System.Drawing.Color.Gainsboro;
-            this.txtDocumento.Location = new System.Drawing.Point(24, 129);
+            this.txtDocumento.Location = new System.Drawing.Point(24, 99);
             this.txtDocumento.Margin = new System.Windows.Forms.Padding(2);
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(200, 29);
@@ -196,7 +196,7 @@
             this.lblDocumento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblDocumento.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDocumento.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDocumento.Location = new System.Drawing.Point(20, 105);
+            this.lblDocumento.Location = new System.Drawing.Point(20, 75);
             this.lblDocumento.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDocumento.Name = "lblDocumento";
             this.lblDocumento.Size = new System.Drawing.Size(91, 21);
@@ -209,7 +209,7 @@
             this.btnAgregarProveedor.BackColor = System.Drawing.Color.Teal;
             this.btnAgregarProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAgregarProveedor.Location = new System.Drawing.Point(514, 559);
+            this.btnAgregarProveedor.Location = new System.Drawing.Point(563, 582);
             this.btnAgregarProveedor.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarProveedor.Name = "btnAgregarProveedor";
             this.btnAgregarProveedor.Size = new System.Drawing.Size(137, 57);
@@ -224,7 +224,7 @@
             this.btnEliminarProveedor.BackColor = System.Drawing.Color.Maroon;
             this.btnEliminarProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEliminarProveedor.Location = new System.Drawing.Point(763, 559);
+            this.btnEliminarProveedor.Location = new System.Drawing.Point(816, 582);
             this.btnEliminarProveedor.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminarProveedor.Name = "btnEliminarProveedor";
             this.btnEliminarProveedor.Size = new System.Drawing.Size(137, 57);
@@ -239,7 +239,7 @@
             this.btnModificar.BackColor = System.Drawing.Color.Orange;
             this.btnModificar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnModificar.Location = new System.Drawing.Point(1015, 559);
+            this.btnModificar.Location = new System.Drawing.Point(1066, 582);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(137, 57);
@@ -252,11 +252,12 @@
             // dgvFiltrosProveedores
             // 
             this.dgvFiltrosProveedores.BackColor = System.Drawing.Color.Transparent;
-            this.dgvFiltrosProveedores.Location = new System.Drawing.Point(514, 99);
+            this.dgvFiltrosProveedores.Location = new System.Drawing.Point(563, 131);
             this.dgvFiltrosProveedores.Margin = new System.Windows.Forms.Padding(2);
             this.dgvFiltrosProveedores.Name = "dgvFiltrosProveedores";
             this.dgvFiltrosProveedores.Size = new System.Drawing.Size(649, 447);
             this.dgvFiltrosProveedores.TabIndex = 32;
+            this.dgvFiltrosProveedores.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Mediano;
             // 
             // lblListaProveedores
             // 
@@ -264,7 +265,7 @@
             this.lblListaProveedores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblListaProveedores.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaProveedores.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblListaProveedores.Location = new System.Drawing.Point(937, 144);
+            this.lblListaProveedores.Location = new System.Drawing.Point(988, 173);
             this.lblListaProveedores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblListaProveedores.Name = "lblListaProveedores";
             this.lblListaProveedores.Size = new System.Drawing.Size(215, 30);
@@ -275,10 +276,10 @@
             // inputNombreFiltroNombre
             // 
             this.inputNombreFiltroNombre.BackColor = System.Drawing.Color.Transparent;
-            this.inputNombreFiltroNombre.Location = new System.Drawing.Point(514, 40);
+            this.inputNombreFiltroNombre.Location = new System.Drawing.Point(563, 100);
             this.inputNombreFiltroNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.inputNombreFiltroNombre.Name = "inputNombreFiltroNombre";
-            this.inputNombreFiltroNombre.Size = new System.Drawing.Size(194, 55);
+            this.inputNombreFiltroNombre.Size = new System.Drawing.Size(194, 47);
             this.inputNombreFiltroNombre.TabIndex = 34;
             this.inputNombreFiltroNombre.Texto = "";
             // 
@@ -287,7 +288,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1445, 729);
+            this.ClientSize = new System.Drawing.Size(1328, 744);
             this.Controls.Add(this.inputNombreFiltroNombre);
             this.Controls.Add(this.lblListaProveedores);
             this.Controls.Add(this.dgvFiltrosProveedores);

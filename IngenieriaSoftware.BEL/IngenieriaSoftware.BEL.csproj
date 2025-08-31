@@ -73,6 +73,8 @@
     <Compile Include="Negocio\ComandaProducto.cs" />
     <Compile Include="Negocio\Mesa.cs" />
     <Compile Include="Negocio\Notificacion.cs" />
+    <Compile Include="OrdenDeCompra\OrdenDeCompraDetalleModel.cs" />
+    <Compile Include="OrdenDeCompra\OrdenDeCompraModel.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Negocio\Producto.cs" />
     <Compile Include="PeticionRestauracion.cs" />

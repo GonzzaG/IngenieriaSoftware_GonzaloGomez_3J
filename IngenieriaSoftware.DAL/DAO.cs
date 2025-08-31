@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -13,12 +14,13 @@ namespace IngenieriaSoftware.DAL
 
         public string rutaBD = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\BD"));
 
+        private string _ConnectionString { get => ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString; }
         public void Conectar()
         {
             try
             {
                 //string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
-                string connectionStringBD = ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString;
+                string connectionStringBD = _ConnectionString;
 
                 if (string.IsNullOrEmpty(connectionStringBD))
                 {
@@ -117,6 +119,26 @@ namespace IngenieriaSoftware.DAL
                     mCon.Close();
             }
         }
+
+        /// <summary>
+        /// Ejecutar varios procedures para cuando necesitamos hacer una transaccion
+        /// </summary>
+        /// <param name="procedureName"></param>
+        /// <param name="parameters"></param>
+        /// <param name="conn"></param>
+        /// <param name="tran"></param>
+        public void ExecuteStoredProcedure(string procedureName, SqlParameter[] parameters,SqlConnection conn, SqlTransaction tran)
+        {
+            using (SqlCommand cmd = new SqlCommand(procedureName, conn, tran))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
 
 
         // Inhabilitado para permitir el identity increment en la base de datos

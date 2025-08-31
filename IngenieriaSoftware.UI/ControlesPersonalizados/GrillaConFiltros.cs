@@ -1,9 +1,11 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Interfaces;
+﻿using IngenieriaSoftware.BEL.Interfaces;
 using IngenieriaSoftware.Servicios.Tools;
+using IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,6 +13,20 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 {
     public partial class DataGridViewConFiltros : UserControl, IUserControlCustom
     {
+        [Browsable(true)]
+        [Category("Apariencia")]
+        [Description("Permite establecer el tamaño de la grilla y el fondo del control.")]
+        public ModoTamanoGrilla TamanoGrilla
+        {
+            get => tamanoGrilla;
+            set
+            {
+                tamanoGrilla = value;
+                AplicarTamanoGrilla();
+            }
+        }
+        private ModoTamanoGrilla tamanoGrilla = ModoTamanoGrilla.Mediano;
+
 
         public int CantidadElementos
         {
@@ -25,11 +41,47 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
                 return dgv.CurrentRow.DataBoundItem;
             }
         }
-
-
         private int paginaActual = 1;
         private int tamanoPagina = 10;
         private List<object> datosOriginales = new();
+
+
+      
+
+        private void AplicarTamanoGrilla()
+        {
+            Size tamanoGrilla;
+            Size tamanoControl;
+            Size tamanoMensaje;
+
+            switch (this.tamanoGrilla)
+            {
+                case ModoTamanoGrilla.Pequeño:
+                    tamanoGrilla = new Size(500, 300);
+                    tamanoControl = new Size(505, 385);
+                    tamanoMensaje = new Size(200, 152);
+                    break;
+
+                case ModoTamanoGrilla.Grande:
+                    tamanoGrilla = new Size(900, 500);
+                    tamanoControl = new Size(905, 585);
+                    tamanoMensaje = new Size(523, 152); 
+                    break;
+
+                case ModoTamanoGrilla.Mediano:
+                default:
+                    tamanoGrilla = new Size(632, 352); 
+                    tamanoControl = new Size(637, 437);
+                    tamanoMensaje = new Size(523, 152);
+                    break;
+            }
+
+            dgv.Size = tamanoGrilla;
+            panelNoResultadoProducto.Size = tamanoGrilla;
+        }
+
+
+    
         public DataGridViewConFiltros()
         {
             InitializeComponent();
@@ -49,6 +101,8 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             dgv.AutoGenerateColumns = true;
             dgv.AllowUserToOrderColumns = true;
             dgv.ColumnHeaderMouseClick += dgv_ColumnHeaderMouseClick;
+
+            //ReajustarMensaje();
         }
 
         private void InicializarFiltros()
@@ -70,6 +124,16 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
             MostrarPagina(datosOriginales);
         }
+
+
+        /// <summary>
+        /// Reajusta la posicion del mensaje de "No se encontraron resultados" en el centro de la grilla, y que se vaya centrando horizontalmente dentro de el.
+        /// </summary>
+        private void ReajustarMensaje()
+        {
+            panelNoResultadoProducto.Location = new Point((dgv.Width - panelNoResultadoProducto.Width) / 2, (dgv.Height - panelNoResultadoProducto.Height) / 2);
+        }
+
 
         public void Limpiar()
         {

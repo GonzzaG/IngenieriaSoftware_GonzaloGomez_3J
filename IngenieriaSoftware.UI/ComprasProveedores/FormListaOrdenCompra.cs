@@ -34,6 +34,10 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             ListarProductos();  
         }
 
-
+        private void btnAgregar_Click_1(object sender, EventArgs e)
+        {
+            var formMDI = this.MdiParent as FormMDI;
+            formMDI.AbrirFormHijo(new FormAgregarOrdenCompra());
+        }
     }
 }

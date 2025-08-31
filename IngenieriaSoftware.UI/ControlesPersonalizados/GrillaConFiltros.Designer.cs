@@ -40,7 +40,7 @@
             // 
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv.Location = new System.Drawing.Point(2, 85);
-            this.dgv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgv.Margin = new System.Windows.Forms.Padding(2);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 51;
             this.dgv.RowTemplate.Height = 24;
@@ -81,16 +81,16 @@
             this.lblPagina.Location = new System.Drawing.Point(91, 54);
             this.lblPagina.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPagina.Name = "lblPagina";
-            this.lblPagina.Size = new System.Drawing.Size(70, 26);
+            this.lblPagina.Size = new System.Drawing.Size(80, 26);
             this.lblPagina.TabIndex = 4;
-            this.lblPagina.Text = "label1";
+            this.lblPagina.Text = "Pagina";
             // 
             // panelNoResultadoProducto
             // 
             this.panelNoResultadoProducto.BackColor = System.Drawing.Color.Transparent;
-            this.panelNoResultadoProducto.Location = new System.Drawing.Point(60, 167);
+            this.panelNoResultadoProducto.Location = new System.Drawing.Point(14, 97);
             this.panelNoResultadoProducto.Name = "panelNoResultadoProducto";
-            this.panelNoResultadoProducto.Size = new System.Drawing.Size(523, 152);
+            this.panelNoResultadoProducto.Size = new System.Drawing.Size(209, 48);
             this.panelNoResultadoProducto.TabIndex = 43;
             // 
             // DataGridViewConFiltros
@@ -103,9 +103,9 @@
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.dgv);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataGridViewConFiltros";
-            this.Size = new System.Drawing.Size(637, 437);
+            this.Size = new System.Drawing.Size(646, 448);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
