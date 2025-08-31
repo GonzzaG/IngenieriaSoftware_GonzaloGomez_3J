@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ComprasProveedores
 {
-    public partial class FormAgregarCompraProveedores : Form, IActualizable
+    public partial class FormAgregarOrdenCompra : Form, IActualizable
     {
-        public FormAgregarCompraProveedores()
+        public FormAgregarOrdenCompra()
         {
             InitializeComponent();
             Incializar();
@@ -19,8 +19,8 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         public void Incializar()
         {
-            ////Le decimos al filtroNombre que use el metodo ListarProductos para filtrar
-            //filtroNombre.InicializarFiltro(ListarProductos);
+            ////Le decimos al filtroNombre que use el metodo MostrarNoResultado para filtrar
+            //filtroNombre.InicializarFiltro(MostrarNoResultado);
 
             Actualizar();
         }   

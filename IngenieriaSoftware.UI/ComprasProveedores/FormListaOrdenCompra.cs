@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ComprasProveedores
 {
-    public partial class FormListaComprasProveedores : Form, IActualizable
+    public partial class FormListaOrdenCompra : Form, IActualizable
     {
-        public FormListaComprasProveedores()
+        public FormListaOrdenCompra()
         {
             InitializeComponent();
             Actualizar();
@@ -26,7 +26,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             var formMDI = this.MdiParent as FormMDI;
-            formMDI.AbrirFormHijo(new FormAgregarCompraProveedores());
+            formMDI.AbrirFormHijo(new FormAgregarOrdenCompra());
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

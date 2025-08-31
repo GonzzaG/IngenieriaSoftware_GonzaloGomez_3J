@@ -120,7 +120,7 @@ namespace IngenieriaSoftware.UI
                     OcultarColumnasComandaActual();
                 }
 
-                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "Eliminar Comanda Producto", DateTime.Now, "Se elimino un producto de la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
+                BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.ToString(), "EliminarProveedor Comanda Producto", DateTime.Now, "Se elimino un producto de la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
             }
             catch (Exception ex)
             {

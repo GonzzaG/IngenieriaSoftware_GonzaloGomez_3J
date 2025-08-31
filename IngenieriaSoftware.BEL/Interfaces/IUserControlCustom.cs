@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IngenieriaSoftware.UI.ControlesPersonalizados
+namespace IngenieriaSoftware.BEL.Interfaces
 {
-    internal interface UserControlCustom
+    public interface IUserControlCustom
     {
     }
 }

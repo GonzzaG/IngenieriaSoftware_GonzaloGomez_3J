@@ -717,7 +717,7 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                FormListaComprasProveedores ordenCompraForm = new FormListaComprasProveedores();
+                FormListaOrdenCompra ordenCompraForm = new FormListaOrdenCompra();
                 AbrirFormHijo(ordenCompraForm);
 
             }

@@ -15,5 +15,12 @@ namespace IngenieriaSoftware.DAL.Tools
 
             return true;
         }
+
+        internal static bool EstaVacio(this DataSet mDs)
+        {
+            if (mDs is null || mDs.Tables.Count.Equals(0) || mDs.Tables[0].Rows.Count.Equals(0))
+                return true;
+            return false;
+        }
     }
 }

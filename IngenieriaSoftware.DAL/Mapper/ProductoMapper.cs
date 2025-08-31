@@ -15,7 +15,7 @@ namespace IngenieriaSoftware.DAL.Mapper
             foreach (DataRow row in pDs.Tables[0].Rows)
             {
                 Producto producto = new Producto();
-                producto.ProductoId = (int)row["producto_id"];
+                producto.Id = (int)row["producto_id"];
                 producto.Nombre = row["nombre"].ToString();
                 producto.Descripcion = row["descripcion"].ToString();
                 producto.Precio = (decimal)row["precio"];
@@ -36,7 +36,7 @@ namespace IngenieriaSoftware.DAL.Mapper
 
             Producto producto = new Producto
             {
-                ProductoId = (int)row["producto_id"],
+                Id = (int)row["producto_id"],
                 Nombre = row["nombre"].ToString(),
                 Descripcion = row["descripcion"].ToString(),
                 TiempoPreparacion = row["tiempo_preparacion"] is DBNull ? 0 : (int)row["tiempo_preparacion"],

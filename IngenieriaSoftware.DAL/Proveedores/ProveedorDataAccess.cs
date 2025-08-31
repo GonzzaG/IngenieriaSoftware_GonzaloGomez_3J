@@ -60,6 +60,39 @@ namespace IngenieriaSoftware.DAL.Proveedores
 
         }
 
+        public List<Proveedor> GetByRazonSocial(string razonSocial)
+        {
+            try
+            {
+                var parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@RazonSocial", razonSocial)
+
+                };
+
+                var dt = _dao.ExecuteStoredProcedure("Proveedor.sp_Proveedor_ObtenerPorNombre", parametros);
+
+                var proveedores = new List<Proveedor>();
+
+                if (dt.EstaVacio())
+                    return new List<Proveedor>();   
+
+                foreach (DataRow row in dt.Tables[0].Rows)
+                {
+                    Proveedor proveedor = ProveedorMapper.MappearDesdeDatarow(row);
+
+                    proveedores.Add(proveedor);
+                }
+
+                return proveedores;
+            }
+            catch (ArgumentNullException)
+            {
+                return new List<Proveedor>();
+            }
+
+        }
+
         public void DeleteById(int Id)
         {
             var parametros = new SqlParameter[]
@@ -71,7 +104,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
             var dt = _dao.ExecuteStoredProcedure("Proveedor.sp_Proveedor_Eliminar", parametros);
         }
 
-        public int Save(Proveedor proveedor)
+        public int SaveOrUpdate(Proveedor proveedor)
         {
 
             bool esInsert = proveedor.IdProveedor == 0 ? true : false;

@@ -13,7 +13,7 @@ namespace IngenieriaSoftware.Servicios.Tools
 
             foreach (var control in container.Controls.Cast<Control>())
             {
-                if (tiposExcluidos.Any(t => t.IsInstanceOfType(control))) continue;
+                if (tiposExcluidos.Any(t => t.IsInstanceOfType(control) || control is IUserControlCustom)) continue;
 
                 switch (control)
                 {

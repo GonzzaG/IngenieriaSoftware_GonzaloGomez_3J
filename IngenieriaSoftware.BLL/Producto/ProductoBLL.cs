@@ -21,7 +21,7 @@ namespace IngenieriaSoftware.BLL
         public void Update(Producto entity)
         {
             if (entity is null) throw new System.Exception("El producto no puede ser nulo");
-            new ProductoBLL().Update(entity);
+            new ProductoRestauranteDataAccess().Update(entity);
         }
 
         public void Save(Producto entity)

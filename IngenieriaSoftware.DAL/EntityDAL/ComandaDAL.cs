@@ -261,7 +261,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 }
                 else
                 {
-                    table.Rows.Add(comandaProducto.ComandaId, comandaProducto.Producto.ProductoId, (int)comandaProducto.EstadoProducto,
+                    table.Rows.Add(comandaProducto.ComandaId, comandaProducto.Producto.Id, (int)comandaProducto.EstadoProducto,
                                    comandaProducto.Cantidad, comandaProducto.PrecioUnitario);
                 }
             }

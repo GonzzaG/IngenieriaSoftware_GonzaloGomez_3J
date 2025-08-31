@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IngenieriaSoftware.BEL.Interfaces;
+using System;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ControlesPersonalizados
 {
-    public partial class InputNombreFiltro : UserControl, UserControlCustom
+    public partial class InputNombreFiltro : UserControl, IUserControlCustom
     {
         public string Texto
         {

@@ -64,6 +64,7 @@
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />
     <Compile Include="Idiomas\Traduccion.cs" />
+    <Compile Include="Interfaces\IUserControlCustom.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="ISujeto.cs" />
     <Compile Include="MedioDePago.cs" />

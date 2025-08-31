@@ -25,17 +25,24 @@ namespace IngenieriaSoftware.BLL.Proveedores
             return proveedor;
         }
 
+        public List<Proveedor> GetByRazonSocial(string razonSocial)
+        {
+            var proveedor = _proveedorRepository.GetByRazonSocial(razonSocial);
+
+            return proveedor;
+        }
+
         /// <summary>
         /// Realiza un update o un insert, dependiendo de si tiene un Id asignado o no
         /// </summary>
         /// <param name="proveedor"></param>
         /// <returns></returns>
-        public int Save(Proveedor proveedor)
+        public int SaveOrUpdate(Proveedor proveedor)
         {
             if (proveedor == null)
                 throw new Exception("El proveedor no puede ser nulo");
 
-            int output = _proveedorRepository.Save(proveedor);
+            int output = _proveedorRepository.SaveOrUpdate(proveedor);
 
             return output;
         }

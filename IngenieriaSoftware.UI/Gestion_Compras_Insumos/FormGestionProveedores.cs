@@ -1,67 +1,78 @@
-﻿using IngenieriaSoftware.BEL.Proveedor;
+﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.BEL.Proveedor;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Proveedores;
 using IngenieriaSoftware.Servicios.Tools;
+using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
-    public partial class FormGestionProveedores : Form, IVerificoNotificaciones
+    public partial class FormGestionProveedores : Form, IActualizable
     {
 
         ProveedorBussiness _proveedorBussiness = new ProveedorBussiness();
 
         public NotificacionService _notificacionService => throw new NotImplementedException();
 
-        private bool _formCargado = false;
-
-        List<Proveedor> _Proveedores = new List<Proveedor>();
 
         public FormGestionProveedores()
         {
             InitializeComponent();
-            Actualizar();
+
+            InicializarFormulario();
+            
         }
 
         private void InicializarFormulario()
         {
             LimpiarCampos();
-            _Proveedores = _proveedorBussiness.GetAll();
-            MostrarProveedoresEnDataGrid();
+
+            inputNombreFiltroNombre.InicializarFiltro(ListarProductos);
+            Actualizar();
         }
-
-
-        private void MostrarProveedoresEnDataGrid()
+        private void ListarProductos()
         {
-            dgvProveedores.DataSource = null;
-            dgvProveedores.DataSource = _Proveedores;
+            try
+            {
+                if (inputNombreFiltroNombre.Texto == string.Empty)
+                    dgvFiltrosProveedores.CargarDatos(new ProveedorBussiness().GetAll());
+                else
+                    dgvFiltrosProveedores.CargarDatos(new ProveedorBussiness().GetByRazonSocial(inputNombreFiltroNombre.Texto));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ex.RegistrarError("Gestion de Productos");
+            }
         }
 
         private void LimpiarCampos()
         {
 
-            foreach (TextBox tb in this.Controls.OfType<TextBox>())
+            foreach (TextBox tb in groupBoxProveedor.Controls.OfType<TextBox>())
             {
                 tb.Text = string.Empty;
             }
+
+            Actualizar();
         }
 
         private void btnAgregarProveedor_Click(object sender, EventArgs e)
         {
             try
             {
-                string documento = txtDocumento.Text;
-                string razonSocial = txtRazonSocial.Text;
-                string correo = txtCorreo.Text;
-                string telefono = txtTelefono.Text;
-                bool estado = checkBoxEsActivo.Checked;
+                VerificarCamposGuardar();
 
-                var nuevoProveedor = Proveedor.CrearNuevoProveedor(documento, razonSocial, correo, telefono, estado);
-
-                _proveedorBussiness.Save(nuevoProveedor);
+                if (btnAgregarProveedor.Text.Equals("Guardar"))
+                    Guardar();
+                else
+                    Modificar();
 
                 Actualizar();
             }
@@ -70,40 +81,61 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 MessageBox.Show(ex.Message);
             }
         }
-        private void AgregarNuevoProveedor(Proveedor proveedor)
-        {
 
-            _proveedorBussiness.Save(proveedor);
+        private void Guardar()
+        {
+            _proveedorBussiness.SaveOrUpdate(new Proveedor
+            {
+                Documento = txtDocumento.Text,
+                RazonSocial = txtRazonSocial.Text,
+                Correo = txtCorreo.Text,
+                Telefono = txtTelefono.Text,
+                Estado = checkBoxEsActivo.Checked
+            });
+        }
+
+        private void Modificar()
+        {
+            var proveedor = (Proveedor)dgvFiltrosProveedores.ElementoSeleccionado;
+            if (proveedor is null) throw new Exception("No se ha seleccionado ningun proveedor para modificar");
+            _proveedorBussiness.SaveOrUpdate(new Proveedor
+            {
+                IdProveedor = proveedor.IdProveedor,
+                Documento = txtDocumento.Text,
+                RazonSocial = txtRazonSocial.Text,
+                Correo = txtCorreo.Text,
+                Telefono = txtTelefono.Text,
+                Estado = checkBoxEsActivo.Checked
+            });
+            LimpiarCampos();
+            PrepararAgregar();
+        }
+
+        private void VerificarCamposGuardar()
+        {
+            if (txtCorreo.Text == string.Empty
+               || txtDocumento.Text == string.Empty
+               || txtRazonSocial.Text is null
+               || int.Parse(txtTelefono.Text) < 1)
+
+                throw new Exception("Verificar los datos ingresados");
         }
 
         public void Actualizar()
         {
-            InicializarFormulario();
-        }
-
-        public void VerificarNotificaciones()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void FormGestionProveedores_Load(object sender, EventArgs e)
-        {
-            _formCargado = true;
-            dgvProveedores.PersonalizarEstiloPredeterminado();
-
+            ListarProductos();
         }
 
         private void btnEliminarProveedor_Click(object sender, EventArgs e)
         {
             try
             {
-                if ((dgvProveedores.SelectedRows.Count).Equals(0))
-                    new Exception("Seleccione un proveedor");
-
-                int id = (int)dgvProveedores.SelectedRows[0].Cells[nameof(Proveedor.IdProveedor)].Value;
-                _proveedorBussiness.DeleteById(id);
-
-                MessageBox.Show("Proveedor eliminado con exito");
+                if(btnEliminarProveedor.Text.Equals("Eliminar"))
+                    EliminarProveedor();
+                else
+                    PrepararAgregar();
+                    
+                Actualizar();
             }
             catch (Exception ex)
             {
@@ -111,19 +143,26 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             }
         }
 
-        private void dgvProveedores_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void EliminarProveedor()
         {
-            if (!_formCargado) return;
+            if (dgvFiltrosProveedores.CantidadElementos.Equals(0))
+                throw new Exception("Debe seleccionar un proveedor");
 
+            var proveedorId = ((Proveedor)dgvFiltrosProveedores.ElementoSeleccionado).IdProveedor;
+
+            new ProveedorBussiness().DeleteById(proveedorId);
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (dgvProveedores.SelectedRows.Count.Equals(0)) throw new Exception("Seleccione un proveedor para modificarlo");
 
-                CargarProveedorEnTextos(_Proveedores.Find(p => p.IdProveedor == (int)dgvProveedores.SelectedRows[0].Cells[nameof(Proveedor.IdProveedor)].Value));
+                if (dgvFiltrosProveedores.CantidadElementos.Equals(0)) throw new Exception("Seleccione un proveedor para modificarlo");
+
+                CargarProveedorEnTextos((Proveedor)dgvFiltrosProveedores.ElementoSeleccionado);
+
+                PrepararModificacion();
             }
             catch (Exception ex)
             {
@@ -131,6 +170,25 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             }
 
         }
+
+        private void PrepararModificacion()
+        {
+            btnAgregarProveedor.Text = "Guardar Cambios";
+            btnModificar.Enabled = false;
+            btnEliminarProveedor.Text = "Cancelar";
+            btnModificar.BackColor = Color.Gray;
+            dgvFiltrosProveedores.Deshabilitar();
+        }
+
+        private void PrepararAgregar()
+        {
+            btnAgregarProveedor.Text = "Registrar";
+            btnModificar.Enabled = true;
+            btnEliminarProveedor.Text = "Eliminar";
+            dgvFiltrosProveedores.Habilitar();
+            btnModificar.BackColor = Color.Orange;
+            LimpiarCampos();
+        }   
 
         private void CargarProveedorEnTextos(Proveedor proveedor)
         {
@@ -139,6 +197,11 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             txtRazonSocial.Text = proveedor.RazonSocial;
             txtTelefono.Text = proveedor.Telefono;
             checkBoxEsActivo.Checked = proveedor.Estado;
+        }
+
+        private void FormGestionProveedores_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

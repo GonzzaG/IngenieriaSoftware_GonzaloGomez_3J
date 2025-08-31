@@ -275,7 +275,7 @@
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
             this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
-            this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
+            this.eliminarUsuarioToolStripMenuItem.Text = "EliminarProveedor Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
             // 
             // gestionIdiomasToolStripMenuItem

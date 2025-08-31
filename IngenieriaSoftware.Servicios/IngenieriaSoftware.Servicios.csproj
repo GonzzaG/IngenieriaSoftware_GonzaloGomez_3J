@@ -76,6 +76,9 @@
     <Compile Include="Tools\ControlesExtensions.cs" />
     <Compile Include="Tools\DataGridViewExtensions.cs" />
     <Compile Include="Tools\GroupBoxExtensions.cs" />
+    <Compile Include="Tools\IUserControlCustom.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TraduccionServicio.cs" />
     <Compile Include="UsuarioDVHDTO.cs" />
   </ItemGroup>
@@ -83,6 +86,10 @@
     <ProjectReference Include="..\IngenieriaSoftware.Abstracciones\IngenieriaSoftware.Abstracciones.csproj">
       <Project>{524e8d24-0d9c-46ad-9a55-4e42dce5fa5f}</Project>
       <Name>IngenieriaSoftware.Abstracciones</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IngenieriaSoftware.BEL\IngenieriaSoftware.BEL.csproj">
+      <Project>{5da171d4-ef5b-4e09-8687-305243dfb51e}</Project>
+      <Name>IngenieriaSoftware.BEL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

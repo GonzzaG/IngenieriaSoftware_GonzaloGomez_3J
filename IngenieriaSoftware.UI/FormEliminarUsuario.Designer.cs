@@ -44,7 +44,7 @@
             this.btnEliminarUsuario.Size = new System.Drawing.Size(179, 48);
             this.btnEliminarUsuario.TabIndex = 11;
             this.btnEliminarUsuario.Tag = "40";
-            this.btnEliminarUsuario.Text = "Eliminar usuario";
+            this.btnEliminarUsuario.Text = "EliminarProveedor usuario";
             this.btnEliminarUsuario.UseVisualStyleBackColor = false;
             this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
             // 

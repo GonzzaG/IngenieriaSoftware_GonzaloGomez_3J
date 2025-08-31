@@ -94,7 +94,7 @@ namespace IngenieriaSoftware.UI
                         MessageBox.Show($"El digito verificador del usuario {comboBoxUsuarios.SelectedItem} fue calculado con exito");
                     }
 
-                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Eliminar Entidad", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
+                    BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "EliminarProveedor Entidad", DateTime.Now, $"Se eliminó el usuario {comboBoxUsuarios.SelectedItem.ToString()}", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Usuarios");
 
                     MessageBox.Show($"El usuario {comboBoxUsuarios.SelectedItem.ToString()} fue eliminado con exito");
                     listarUsuarios(usuarios);

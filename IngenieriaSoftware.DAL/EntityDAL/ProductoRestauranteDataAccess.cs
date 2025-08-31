@@ -114,7 +114,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 new SqlParameter("@Nombre", nombre)
                 };
 
-                DataSet ds = _dao.ExecuteStoredProcedure("sp_ProductoRestaurante_ObtenerPorNombre", parametros);
+                DataSet ds = _dao.ExecuteStoredProcedure("Producto.sp_ProductoRestaurante_ObtenerPorNombre", parametros);
 
                 if (ds.Tables[0].Rows.Count == 0)
                     return null;
@@ -144,7 +144,6 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 {
                     new SqlParameter("@Nombre", entity.Nombre),
                     new SqlParameter("@Descripcion", entity.Descripcion ?? (object)DBNull.Value),
-                    new SqlParameter("@Precio", entity.Precio),
                     new SqlParameter("@TiempoPreparacion", entity.TiempoPreparacion),
                     new SqlParameter("@Disponible", entity.Disponible),
                     new SqlParameter("@EsPostre", entity.EsPostre),
@@ -169,14 +168,14 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@Id", entity.ProductoId),
+                    new SqlParameter("@Id", entity.Id),
+                    new SqlParameter("@Precio", entity.Precio),
                     new SqlParameter("@Nombre", entity.Nombre),
                     new SqlParameter("@Descripcion", entity.Descripcion ?? (object)DBNull.Value),
-                    new SqlParameter("@Precio", entity.Precio),
                     new SqlParameter("@TiempoPreparacion", entity.TiempoPreparacion),
                     new SqlParameter("@Disponible", entity.Disponible),
                     new SqlParameter("@EsPostre", entity.EsPostre),
-                    new SqlParameter("@Categoria", entity.IdCategoria)
+                    new SqlParameter("@Categoria", entity.oCategoria.Id)
                 };
 
                 _dao.ExecuteStoredProcedure("sp_Producto_Actualizar", parametros);

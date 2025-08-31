@@ -124,17 +124,17 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
-    <Compile Include="ComprasProveedores\FormAgregarCompraProveedores.cs">
+    <Compile Include="ComprasProveedores\FormAgregarOrdenCompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ComprasProveedores\FormAgregarCompraProveedores.Designer.cs">
-      <DependentUpon>FormAgregarCompraProveedores.cs</DependentUpon>
+    <Compile Include="ComprasProveedores\FormAgregarOrdenCompra.Designer.cs">
+      <DependentUpon>FormAgregarOrdenCompra.cs</DependentUpon>
     </Compile>
-    <Compile Include="ComprasProveedores\FormListaComprasProveedores.cs">
+    <Compile Include="ComprasProveedores\FormListaOrdenCompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ComprasProveedores\FormListaComprasProveedores.Designer.cs">
-      <DependentUpon>FormListaComprasProveedores.cs</DependentUpon>
+    <Compile Include="ComprasProveedores\FormListaOrdenCompra.Designer.cs">
+      <DependentUpon>FormListaOrdenCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="ConexionDinamica.cs" />
     <Compile Include="ControlesPersonalizados\FiltroCodigo.cs">
@@ -155,7 +155,12 @@
     <Compile Include="ControlesPersonalizados\GrillaConFiltros.Designer.cs">
       <DependentUpon>GrillaConFiltros.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlesPersonalizados\UserControlCustom.cs" />
+    <Compile Include="ControlesPersonalizados\panelCustom\PanelNoResultado.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesPersonalizados\panelCustom\PanelNoResultado.Designer.cs">
+      <DependentUpon>PanelNoResultado.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormABMMesas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,11 +358,11 @@
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ComprasProveedores\FormAgregarCompraProveedores.resx">
-      <DependentUpon>FormAgregarCompraProveedores.cs</DependentUpon>
+    <EmbeddedResource Include="ComprasProveedores\FormAgregarOrdenCompra.resx">
+      <DependentUpon>FormAgregarOrdenCompra.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ComprasProveedores\FormListaComprasProveedores.resx">
-      <DependentUpon>FormListaComprasProveedores.cs</DependentUpon>
+    <EmbeddedResource Include="ComprasProveedores\FormListaOrdenCompra.resx">
+      <DependentUpon>FormListaOrdenCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesPersonalizados\FiltroCodigo.resx">
       <DependentUpon>FiltroCodigo.cs</DependentUpon>
@@ -367,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesPersonalizados\GrillaConFiltros.resx">
       <DependentUpon>GrillaConFiltros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesPersonalizados\panelCustom\PanelNoResultado.resx">
+      <DependentUpon>PanelNoResultado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormABMMesas.resx">
       <DependentUpon>FormABMMesas.cs</DependentUpon>

@@ -42,17 +42,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.cbDisponible = new System.Windows.Forms.CheckBox();
             this.lblEstado = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
-            this.lblCorreo = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblRazonSocial = new System.Windows.Forms.Label();
             this.lblDetalleProveedor = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblDocumento = new System.Windows.Forms.Label();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
-            this.btnAgregarCategoria = new System.Windows.Forms.Button();
-            this.gcfProductos = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.lblListaProveedores = new System.Windows.Forms.Label();
             this.filtroNombreProducto = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
+            this.gcfProductos = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.lblPrecio = new System.Windows.Forms.Label();
             this.groupBoxProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoPreparacion)).BeginInit();
@@ -63,12 +62,12 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.btnModificar.BackColor = System.Drawing.Color.Orange;
             this.btnModificar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnModificar.Location = new System.Drawing.Point(1032, 500);
+            this.btnModificar.Location = new System.Drawing.Point(961, 500);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(137, 57);
             this.btnModificar.TabIndex = 37;
-            this.btnModificar.Tag = "56";
+            this.btnModificar.Tag = "";
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -78,28 +77,27 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.btnEliminarProducto.BackColor = System.Drawing.Color.Maroon;
             this.btnEliminarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEliminarProducto.Location = new System.Drawing.Point(758, 500);
+            this.btnEliminarProducto.Location = new System.Drawing.Point(701, 500);
             this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminarProducto.Name = "btnEliminarProducto";
             this.btnEliminarProducto.Size = new System.Drawing.Size(137, 57);
             this.btnEliminarProducto.TabIndex = 36;
-            this.btnEliminarProducto.Tag = "56";
+            this.btnEliminarProducto.Tag = "";
             this.btnEliminarProducto.Text = "Eliminar";
             this.btnEliminarProducto.UseVisualStyleBackColor = false;
             this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
             // 
             // groupBoxProducto
             // 
+            this.groupBoxProducto.Controls.Add(this.lblPrecio);
             this.groupBoxProducto.Controls.Add(this.lblMinutos);
             this.groupBoxProducto.Controls.Add(this.nudPrecio);
             this.groupBoxProducto.Controls.Add(this.nudTiempoPreparacion);
-            this.groupBoxProducto.Controls.Add(this.btnAgregarCategoria);
             this.groupBoxProducto.Controls.Add(this.cbEsPostre);
             this.groupBoxProducto.Controls.Add(this.cbCategoria);
             this.groupBoxProducto.Controls.Add(this.cbDisponible);
             this.groupBoxProducto.Controls.Add(this.lblEstado);
             this.groupBoxProducto.Controls.Add(this.lblTelefono);
-            this.groupBoxProducto.Controls.Add(this.lblCorreo);
             this.groupBoxProducto.Controls.Add(this.txtDescripcion);
             this.groupBoxProducto.Controls.Add(this.lblRazonSocial);
             this.groupBoxProducto.Controls.Add(this.lblDetalleProveedor);
@@ -134,7 +132,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.nudPrecio.DecimalPlaces = 2;
             this.nudPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.nudPrecio.Location = new System.Drawing.Point(24, 370);
+            this.nudPrecio.Location = new System.Drawing.Point(24, 372);
             this.nudPrecio.Margin = new System.Windows.Forms.Padding(2);
             this.nudPrecio.Maximum = new decimal(new int[] {
             1000000,
@@ -179,7 +177,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.cbCategoria.BackColor = System.Drawing.Color.Teal;
             this.cbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(24, 257);
+            this.cbCategoria.Location = new System.Drawing.Point(24, 251);
             this.cbCategoria.Margin = new System.Windows.Forms.Padding(2);
             this.cbCategoria.Name = "cbCategoria";
             this.cbCategoria.Size = new System.Drawing.Size(200, 30);
@@ -188,6 +186,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // cbDisponible
             // 
             this.cbDisponible.AutoSize = true;
+            this.cbDisponible.Checked = true;
+            this.cbDisponible.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbDisponible.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbDisponible.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.cbDisponible.Location = new System.Drawing.Point(24, 411);
@@ -207,10 +207,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblEstado.Location = new System.Drawing.Point(20, 228);
             this.lblEstado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(90, 21);
+            this.lblEstado.Size = new System.Drawing.Size(77, 21);
             this.lblEstado.TabIndex = 27;
             this.lblEstado.Tag = "52";
-            this.lblEstado.Text = "IdCategoria";
+            this.lblEstado.Text = "Categoria";
             // 
             // lblTelefono
             // 
@@ -225,20 +225,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblTelefono.TabIndex = 25;
             this.lblTelefono.Tag = "52";
             this.lblTelefono.Text = "Tiempo de preparacion";
-            // 
-            // lblCorreo
-            // 
-            this.lblCorreo.AutoSize = true;
-            this.lblCorreo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCorreo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorreo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblCorreo.Location = new System.Drawing.Point(20, 345);
-            this.lblCorreo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblCorreo.Name = "lblCorreo";
-            this.lblCorreo.Size = new System.Drawing.Size(53, 21);
-            this.lblCorreo.TabIndex = 19;
-            this.lblCorreo.Tag = "52";
-            this.lblCorreo.Text = "Precio";
             // 
             // txtDescripcion
             // 
@@ -314,34 +300,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(137, 57);
             this.btnAgregarProducto.TabIndex = 33;
-            this.btnAgregarProducto.Tag = "56";
+            this.btnAgregarProducto.Tag = "";
             this.btnAgregarProducto.Text = "Guardar";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
             this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
-            // 
-            // btnAgregarCategoria
-            // 
-            this.btnAgregarCategoria.BackColor = System.Drawing.Color.DarkGreen;
-            this.btnAgregarCategoria.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarCategoria.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAgregarCategoria.Location = new System.Drawing.Point(139, 228);
-            this.btnAgregarCategoria.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAgregarCategoria.Name = "btnAgregarCategoria";
-            this.btnAgregarCategoria.Size = new System.Drawing.Size(85, 30);
-            this.btnAgregarCategoria.TabIndex = 38;
-            this.btnAgregarCategoria.Tag = "56";
-            this.btnAgregarCategoria.Text = "Agregar";
-            this.btnAgregarCategoria.UseVisualStyleBackColor = false;
-            this.btnAgregarCategoria.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
-            // 
-            // gcfProductos
-            // 
-            this.gcfProductos.BackColor = System.Drawing.Color.Transparent;
-            this.gcfProductos.Location = new System.Drawing.Point(460, 51);
-            this.gcfProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gcfProductos.Name = "gcfProductos";
-            this.gcfProductos.Size = new System.Drawing.Size(673, 445);
-            this.gcfProductos.TabIndex = 39;
             // 
             // lblListaProveedores
             // 
@@ -349,7 +311,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblListaProveedores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblListaProveedores.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaProveedores.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblListaProveedores.Location = new System.Drawing.Point(934, 93);
+            this.lblListaProveedores.Location = new System.Drawing.Point(909, 93);
             this.lblListaProveedores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblListaProveedores.Name = "lblListaProveedores";
             this.lblListaProveedores.Size = new System.Drawing.Size(189, 30);
@@ -366,6 +328,29 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.filtroNombreProducto.Size = new System.Drawing.Size(194, 47);
             this.filtroNombreProducto.TabIndex = 41;
             this.filtroNombreProducto.Texto = "";
+            // 
+            // gcfProductos
+            // 
+            this.gcfProductos.BackColor = System.Drawing.Color.Transparent;
+            this.gcfProductos.Location = new System.Drawing.Point(460, 51);
+            this.gcfProductos.Margin = new System.Windows.Forms.Padding(2);
+            this.gcfProductos.Name = "gcfProductos";
+            this.gcfProductos.Size = new System.Drawing.Size(673, 445);
+            this.gcfProductos.TabIndex = 39;
+            // 
+            // lblPrecio
+            // 
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblPrecio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblPrecio.Location = new System.Drawing.Point(20, 349);
+            this.lblPrecio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(53, 21);
+            this.lblPrecio.TabIndex = 41;
+            this.lblPrecio.Tag = "52";
+            this.lblPrecio.Text = "Precio";
             // 
             // FormGestionarProductos
             // 
@@ -402,7 +387,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private System.Windows.Forms.Label lblTelefono;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label lblRazonSocial;
-        private System.Windows.Forms.Label lblCorreo;
         private System.Windows.Forms.Label lblDetalleProveedor;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblDocumento;
@@ -411,11 +395,11 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private System.Windows.Forms.ComboBox cbCategoria;
         private System.Windows.Forms.CheckBox cbEsPostre;
         private System.Windows.Forms.NumericUpDown nudTiempoPreparacion;
-        private System.Windows.Forms.Button btnAgregarCategoria;
         private System.Windows.Forms.NumericUpDown nudPrecio;
         private System.Windows.Forms.Label lblMinutos;
         private DataGridViewConFiltros gcfProductos;
         private System.Windows.Forms.Label lblListaProveedores;
         private InputNombreFiltro filtroNombreProducto;
+        private System.Windows.Forms.Label lblPrecio;
     }
 }

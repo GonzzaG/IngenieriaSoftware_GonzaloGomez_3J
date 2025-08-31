@@ -1,4 +1,6 @@
-﻿using IngenieriaSoftware.Servicios.Tools;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Interfaces;
+using IngenieriaSoftware.Servicios.Tools;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,13 +9,23 @@ using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ControlesPersonalizados
 {
-    public partial class DataGridViewConFiltros : UserControl, UserControlCustom
+    public partial class DataGridViewConFiltros : UserControl, IUserControlCustom
     {
 
         public int CantidadElementos
         {
             get => TotalElementos();
         }
+
+        public object ElementoSeleccionado
+        {
+            get
+            {
+                if (dgv.CurrentRow == null) return null;
+                return dgv.CurrentRow.DataBoundItem;
+            }
+        }
+
 
         private int paginaActual = 1;
         private int tamanoPagina = 10;
@@ -57,6 +69,27 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             //Aca se podrian poner filtros, que se pasaran como parametro en MostrarPagina
 
             MostrarPagina(datosOriginales);
+        }
+
+        public void Limpiar()
+        {
+            dgv.DataSource = null;  
+        }
+
+        public void Deshabilitar()
+        {
+            for(int i = 0; i < this.Controls.Count; i++)
+            {
+                this.Controls[i].Enabled = false;
+            }
+        }
+
+        public void Habilitar()
+        {
+            for (int i = 0; i < this.Controls.Count; i++)
+            {
+                this.Controls[i].Enabled = true;
+            }
         }
 
         private void MostrarPagina(List<object> datosFiltrados)
@@ -106,7 +139,14 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         }
         public void CargarDatos<T>(List<T> datos) where T : class, new()
         {
-            if (datos.isEmpty()) return ;
+            if (datos.isEmpty())
+            {
+                panelNoResultadoProducto.MostrarNoResultado(true);
+                dgv.DataSource = null;  
+                return;
+            }
+            
+            panelNoResultadoProducto.MostrarNoResultado(false);
             datosOriginales = datos.Cast<object>().ToList(); 
             paginaActual = 1;
             AplicarFiltros(); 

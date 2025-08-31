@@ -113,7 +113,7 @@ namespace IngenieriaSoftware.UI
                 //se tiene que guardar en comandaProducto la relacion que va a existir entre ese producto y la comanda de la mesa
                 int indice = dataGridViewProductos.SelectedRows[0].Index;
                 int productoId = (int)dataGridViewProductos.SelectedRows[0].Cells[0].Value;
-                Producto producto = _productos.Find(p => p.ProductoId == productoId);
+                Producto producto = _productos.Find(p => p.Id == productoId);
 
                 _comandaBLL.NuevoComandaProducto(producto, _comandaId, (int)numericUpDownCantidad.Value);
                 BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Agregar Producto", DateTime.Now, "Producto agregado a la comanda", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Mesas");
