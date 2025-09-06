@@ -10,7 +10,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
         public void Guardar(OrdenDeCompraModel ordenCompra)
         {
             Validar(ordenCompra);   
-            ordenCompra.Guardar();
+            ordenCompra. Guardar();
         }
 
         #region Validaciones

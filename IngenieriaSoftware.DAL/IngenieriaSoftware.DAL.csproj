@@ -68,6 +68,7 @@
     <Compile Include="DigitoVerificadorVerticalDAL.cs" />
     <Compile Include="Gestion_Compras_Insumos\CategoriaDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\OrdenCompraDataAccess.cs" />
+    <Compile Include="Gestion_Compras_Insumos\ProductoOrdenCompraDataAccess.cs" />
     <Compile Include="Interfaces\IDataAccessEntity.cs" />
     <Compile Include="Mapper\CategoriaMapper.cs" />
     <Compile Include="Mapper\ProductoProveedorMapper.cs" />

@@ -13,6 +13,7 @@ namespace IngenieriaSoftware.BLL
         public ProductoBLL()
         { }
 
+        #region Metodos Genericos
         public List<Producto> GetAll()
         {
             return (List<Producto>)(new ProductoRestauranteDataAccess().GetAll());
@@ -58,7 +59,7 @@ namespace IngenieriaSoftware.BLL
             if (id.Equals(0)) throw new System.Exception("El id no puede ser 0");
             new ProductoRestauranteDataAccess().DeleteById(id);
         }
-
+        #endregion
 
     }
 }

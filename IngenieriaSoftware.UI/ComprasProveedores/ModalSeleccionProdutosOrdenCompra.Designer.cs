@@ -28,49 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridViewConFiltros1 = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
-            this.inputNombreFiltro1 = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
-            this.lblSeleccioneProductos = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            this.lblNumeroOrdenCompra = new System.Windows.Forms.Label();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lblCant = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.timerProductoAgregado = new System.Windows.Forms.Timer(this.components);
+            this.lblProductoAgregadoTimer = new System.Windows.Forms.Label();
+            this.dgvConFiltroProductos = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.inputNombreFiltroOrdenCompra = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridViewConFiltros1
+            // lblNumeroOrdenCompra
             // 
-            this.dataGridViewConFiltros1.BackColor = System.Drawing.Color.Transparent;
-            this.dataGridViewConFiltros1.Location = new System.Drawing.Point(74, 135);
-            this.dataGridViewConFiltros1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridViewConFiltros1.Name = "dataGridViewConFiltros1";
-            this.dataGridViewConFiltros1.Size = new System.Drawing.Size(646, 448);
-            this.dataGridViewConFiltros1.TabIndex = 0;
-            this.dataGridViewConFiltros1.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Mediano;
-            // 
-            // inputNombreFiltro1
-            // 
-            this.inputNombreFiltro1.BackColor = System.Drawing.Color.Transparent;
-            this.inputNombreFiltro1.Location = new System.Drawing.Point(74, 86);
-            this.inputNombreFiltro1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.inputNombreFiltro1.Name = "inputNombreFiltro1";
-            this.inputNombreFiltro1.Size = new System.Drawing.Size(194, 55);
-            this.inputNombreFiltro1.TabIndex = 1;
-            this.inputNombreFiltro1.Texto = "";
-            // 
-            // lblSeleccioneProductos
-            // 
-            this.lblSeleccioneProductos.AutoSize = true;
-            this.lblSeleccioneProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblSeleccioneProductos.Font = new System.Drawing.Font("Segoe UI Symbol", 16F);
-            this.lblSeleccioneProductos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblSeleccioneProductos.Location = new System.Drawing.Point(69, 28);
-            this.lblSeleccioneProductos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSeleccioneProductos.Name = "lblSeleccioneProductos";
-            this.lblSeleccioneProductos.Size = new System.Drawing.Size(271, 30);
-            this.lblSeleccioneProductos.TabIndex = 69;
-            this.lblSeleccioneProductos.Tag = "116";
-            this.lblSeleccioneProductos.Text = "Núm. de orden de compra";
+            this.lblNumeroOrdenCompra.AutoSize = true;
+            this.lblNumeroOrdenCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblNumeroOrdenCompra.Font = new System.Drawing.Font("Segoe UI Symbol", 16F);
+            this.lblNumeroOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblNumeroOrdenCompra.Location = new System.Drawing.Point(92, 34);
+            this.lblNumeroOrdenCompra.Name = "lblNumeroOrdenCompra";
+            this.lblNumeroOrdenCompra.Size = new System.Drawing.Size(329, 37);
+            this.lblNumeroOrdenCompra.TabIndex = 69;
+            this.lblNumeroOrdenCompra.Tag = "116";
+            this.lblNumeroOrdenCompra.Text = "Núm. de orden de compra";
             // 
             // btnAgregarProducto
             // 
@@ -78,22 +60,14 @@
             this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(74, 587);
-            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(99, 715);
+            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
-            this.btnAgregarProducto.Size = new System.Drawing.Size(197, 37);
+            this.btnAgregarProducto.Size = new System.Drawing.Size(263, 46);
             this.btnAgregarProducto.TabIndex = 70;
             this.btnAgregarProducto.Text = "Agregar producto";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
             this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarNuevo_Click);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.numericUpDown1.Location = new System.Drawing.Point(418, 182);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(63, 32);
-            this.numericUpDown1.TabIndex = 72;
             // 
             // lblCant
             // 
@@ -101,57 +75,120 @@
             this.lblCant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCant.Font = new System.Drawing.Font("Segoe UI Symbol", 8F);
             this.lblCant.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblCant.Location = new System.Drawing.Point(415, 166);
-            this.lblCant.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCant.Location = new System.Drawing.Point(494, 194);
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(34, 13);
-            this.lblCant.TabIndex = 73;
+            this.lblCant.Size = new System.Drawing.Size(41, 19);
+            this.lblCant.TabIndex = 77;
             this.lblCant.Tag = "116";
             this.lblCant.Text = "Cant.";
             // 
-            // button1
+            // nudCantidad
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(135)))), ((int)(((byte)(84)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(511, 179);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(197, 37);
-            this.button1.TabIndex = 71;
-            this.button1.Text = "Seleccionar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.nudCantidad.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.nudCantidad.Location = new System.Drawing.Point(498, 214);
+            this.nudCantidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudCantidad.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudCantidad.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudCantidad.Name = "nudCantidad";
+            this.nudCantidad.Size = new System.Drawing.Size(102, 39);
+            this.nudCantidad.TabIndex = 76;
+            this.nudCantidad.ThousandsSeparator = true;
+            this.nudCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(135)))), ((int)(((byte)(84)))));
+            this.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeleccionar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnSeleccionar.Location = new System.Drawing.Point(646, 209);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(295, 46);
+            this.btnSeleccionar.TabIndex = 75;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = false;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click_1);
+            // 
+            // timerProductoAgregado
+            // 
+            this.timerProductoAgregado.Tick += new System.EventHandler(this.timerProductoAgregado_Tick);
+            // 
+            // lblProductoAgregadoTimer
+            // 
+            this.lblProductoAgregadoTimer.AutoSize = true;
+            this.lblProductoAgregadoTimer.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
+            this.lblProductoAgregadoTimer.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.lblProductoAgregadoTimer.Location = new System.Drawing.Point(778, 175);
+            this.lblProductoAgregadoTimer.Name = "lblProductoAgregadoTimer";
+            this.lblProductoAgregadoTimer.Size = new System.Drawing.Size(163, 23);
+            this.lblProductoAgregadoTimer.TabIndex = 78;
+            this.lblProductoAgregadoTimer.Text = "Producto agregado!";
+            this.lblProductoAgregadoTimer.Visible = false;
+            // 
+            // dgvConFiltroProductos
+            // 
+            this.dgvConFiltroProductos.BackColor = System.Drawing.Color.Transparent;
+            this.dgvConFiltroProductos.Location = new System.Drawing.Point(99, 215);
+            this.dgvConFiltroProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvConFiltroProductos.Name = "dgvConFiltroProductos";
+            this.dgvConFiltroProductos.Size = new System.Drawing.Size(847, 487);
+            this.dgvConFiltroProductos.TabIndex = 74;
+            // 
+            // inputNombreFiltroOrdenCompra
+            // 
+            this.inputNombreFiltroOrdenCompra.BackColor = System.Drawing.Color.Transparent;
+            this.inputNombreFiltroOrdenCompra.Location = new System.Drawing.Point(99, 106);
+            this.inputNombreFiltroOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.inputNombreFiltroOrdenCompra.Name = "inputNombreFiltroOrdenCompra";
+            this.inputNombreFiltroOrdenCompra.Size = new System.Drawing.Size(259, 68);
+            this.inputNombreFiltroOrdenCompra.TabIndex = 1;
+            this.inputNombreFiltroOrdenCompra.Texto = "";
             // 
             // ModalSeleccionProdutosOrdenCompra
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(874, 683);
+            this.ClientSize = new System.Drawing.Size(1016, 841);
+            this.Controls.Add(this.lblProductoAgregadoTimer);
             this.Controls.Add(this.lblCant);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.nudCantidad);
+            this.Controls.Add(this.btnSeleccionar);
+            this.Controls.Add(this.dgvConFiltroProductos);
             this.Controls.Add(this.btnAgregarProducto);
-            this.Controls.Add(this.lblSeleccioneProductos);
-            this.Controls.Add(this.inputNombreFiltro1);
-            this.Controls.Add(this.dataGridViewConFiltros1);
+            this.Controls.Add(this.lblNumeroOrdenCompra);
+            this.Controls.Add(this.inputNombreFiltroOrdenCompra);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ModalSeleccionProdutosOrdenCompra";
             this.Text = "FormSeleccionProdutosOrdenCompra";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private ControlesPersonalizados.DataGridViewConFiltros dataGridViewConFiltros1;
-        private ControlesPersonalizados.InputNombreFiltro inputNombreFiltro1;
-        private System.Windows.Forms.Label lblSeleccioneProductos;
+        private ControlesPersonalizados.InputNombreFiltro inputNombreFiltroOrdenCompra;
+        private System.Windows.Forms.Label lblNumeroOrdenCompra;
         private System.Windows.Forms.Button btnAgregarProducto;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private ControlesPersonalizados.DataGridViewConFiltros dgvConFiltroProductos;
         private System.Windows.Forms.Label lblCant;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown nudCantidad;
+        private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.Timer timerProductoAgregado;
+        private System.Windows.Forms.Label lblProductoAgregadoTimer;
     }
 }

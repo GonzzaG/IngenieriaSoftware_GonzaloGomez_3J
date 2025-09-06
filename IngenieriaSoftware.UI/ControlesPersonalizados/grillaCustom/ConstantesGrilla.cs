@@ -2,9 +2,9 @@
 {
     public enum ModoTamanoGrilla
     {
-        Pequeño,
-        Mediano,
-        Grande
+        Pequeño = 0,
+        Mediano = 1,
+        Grande = 2
     }
 
 }

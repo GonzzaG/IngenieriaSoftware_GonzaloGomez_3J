@@ -335,7 +335,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.gcfProductos.Location = new System.Drawing.Point(563, 131);
             this.gcfProductos.Margin = new System.Windows.Forms.Padding(2);
             this.gcfProductos.Name = "gcfProductos";
-            this.gcfProductos.Size = new System.Drawing.Size(673, 445);
+            this.gcfProductos.Size = new System.Drawing.Size(688, 445);
             this.gcfProductos.TabIndex = 39;
             this.gcfProductos.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Mediano;
             // 
