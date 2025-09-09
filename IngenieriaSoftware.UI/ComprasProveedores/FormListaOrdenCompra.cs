@@ -1,4 +1,6 @@
 ﻿using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Windows.Forms;
@@ -19,7 +21,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         }
         private void ListarProductos()
         {
-            var lista = new ProductoBLL().GetAll();
+            var lista = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();
             grillaConFiltros.CargarDatos(lista);
         }
 

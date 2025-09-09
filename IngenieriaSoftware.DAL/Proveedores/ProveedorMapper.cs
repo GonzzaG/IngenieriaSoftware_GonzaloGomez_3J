@@ -14,7 +14,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
                 RazonSocial = dr["RazonSocial"].ToString(),
                 Correo = dr["Correo"].ToString(),
                 Telefono = dr["Telefono"].ToString(),
-                Estado = bool.Parse(dr["Estado"].ToString()),
+                Estado = bool.Parse(dr["ComandaEstado"].ToString()),
             };
 
             return proveedor;

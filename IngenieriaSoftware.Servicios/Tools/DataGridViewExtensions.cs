@@ -21,62 +21,92 @@ namespace IngenieriaSoftware.Servicios.Tools
         public static bool isEmpty(this DataGridView dgv)
         {
             return dgv is null || dgv.RowCount.Equals(0);
-        }   
-
-        public static void PersonalizarEstiloPredeterminado (this DataGridView dgv)
+        }
+        #region Personalizacion Grilla estandar
+        public static void PersonalizarEstiloPredeterminado(this DataGridView dgv)
         {
-            // Paleta de colores que combinan con DarkSlateGray
-            Color colorBase = Color.FromArgb(0, 64, 64);        // fondo principal
-            Color colorAlterno = Color.FromArgb(0, 80, 80);     // fila alterna
-            Color colorEncabezado = Color.FromArgb(0, 90, 90);  // encabezado
+            dgv.AplicarColoresBase();
+            dgv.ConfigurarEncabezados();
+            dgv.ConfigurarComportamiento();
+            dgv.InicializarSiVacio();
+            dgv.AplicarEstiloDinamico();
+        }
+
+        private static void AplicarColoresBase(this DataGridView dgv)
+        {
+            dgv.BackgroundColor = Color.FromArgb(0, 64, 64);
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.GridColor = Color.FromArgb(20, 100, 100); // líneas suaves
+        }
+
+        private static void ConfigurarEncabezados(this DataGridView dgv)
+        {
+            Color colorEncabezado = Color.FromArgb(0, 90, 90);
             Color colorTexto = Color.WhiteSmoke;
 
-            // Encabezado de columnas
             dgv.ColumnHeadersDefaultCellStyle.BackColor = colorEncabezado;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = colorTexto;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             dgv.ColumnHeadersHeight = 50;
 
-            // Celdas normales
-            dgv.DefaultCellStyle.BackColor = colorBase;
-            dgv.DefaultCellStyle.ForeColor = colorTexto;
-            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 120, 120);
-            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
-            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 11F);
+            dgv.RowHeadersVisible = false;
+            dgv.EnableHeadersVisualStyles = false;
+        }
 
-            // Celdas alternas
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = colorAlterno;
-            dgv.AlternatingRowsDefaultCellStyle.ForeColor = colorTexto;
-            dgv.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 120, 120);
-            dgv.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.White;
-            dgv.AlternatingRowsDefaultCellStyle.Font = new Font("Segoe UI", 11F);
-
-            // Quitar encabezado de filas
-            dgv.RowHeadersVisible = false; 
-
-            // AutoSize
+        private static void ConfigurarComportamiento(this DataGridView dgv)
+        {
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgv.RowTemplate.Height = 45; // Ajusta altura para que no se corte el texto
+            dgv.RowTemplate.Height = 45;
             dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgv.Width += 5;
 
-            // General
-            dgv.BackgroundColor = colorBase;
-            dgv.BorderStyle = BorderStyle.FixedSingle;
-            dgv.EnableHeadersVisualStyles = false;
-            dgv.GridColor = Color.FromArgb(20, 100, 100); // líneas suaves
             dgv.MultiSelect = false;
-            dgv.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            //dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            // ⚡ Esto es importante: NO bloqueamos todas las celdas,
+            // después vas a decidir qué columnas son editables
+            dgv.EditMode = DataGridViewEditMode.EditOnEnter;
+            dgv.ReadOnly = false;
+        }
 
-            if(dgv.Rows.Count.Equals(0))
+        private static void InicializarSiVacio(this DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0)
             {
                 dgv.AutoGenerateColumns = true;
                 dgv.DataSource = new List<object>();
             }
-            
         }
+
+        private static void AplicarEstiloDinamico(this DataGridView dgv)
+        {
+            Color colorBase = Color.FromArgb(0, 64, 64);
+            Color colorAlterno = Color.FromArgb(0, 80, 80);
+            Color colorTexto = Color.WhiteSmoke;
+
+            dgv.CellFormatting += (s, e) =>
+            {
+                if (dgv.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                    return; // no tocar botones
+
+                if (e.RowIndex % 2 == 0)
+                {
+                    e.CellStyle.BackColor = colorBase;
+                    e.CellStyle.ForeColor = colorTexto;
+                }
+                else
+                {
+                    e.CellStyle.BackColor = colorAlterno;
+                    e.CellStyle.ForeColor = colorTexto;
+                }
+
+                e.CellStyle.SelectionBackColor = Color.FromArgb(0, 120, 120);
+                e.CellStyle.SelectionForeColor = Color.White;
+                e.CellStyle.Font = new Font("Segoe UI", 11F);
+            };
+        }
+        #endregion
+
+       
     }
 }

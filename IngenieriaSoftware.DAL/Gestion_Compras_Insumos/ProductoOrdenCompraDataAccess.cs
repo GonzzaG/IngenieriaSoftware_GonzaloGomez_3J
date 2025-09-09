@@ -19,6 +19,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
             return (from DataRow row in result.Tables[0].Rows
                     select new ProductoOrdenCompraViewModel()
                     {
+                        IdProducto = int.Parse(row["producto_id"].ToString()),   
                         Nombre = row["nombre"].ToString(),
                         Descripcion = row["descripcion"].ToString(),
                         Categoria = row["categoria"].ToString(),
@@ -42,6 +43,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
             return (from DataRow row in result.Tables[0].Rows
                     select new ProductoOrdenCompraViewModel()
                     {
+                        IdProducto = int.Parse(row["producto_id"].ToString()),
                         Nombre = row["nombre"].ToString(),
                         Descripcion = row["descripcion"].ToString(),
                         Categoria = row["categoria"].ToString(),

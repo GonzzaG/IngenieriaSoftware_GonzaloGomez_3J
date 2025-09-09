@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IngenieriaSoftware.BEL.Constantes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,14 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra
 		public DateTime Fecha { get; set; }
 		public DateTime? FechaEntregaEsperada { get; set; }
 		public string CondicionesPago { get; set; }
+        //Tipo de cambio respecto a la moneda base de la empresa
+        public decimal TipoCambio { get; set; }
 		public string Moneda { get; set; }
-		public decimal? TipoCambio { get; set; }
-        // Estado puede ser: Pendiente, Aprobada, Rechazada, Recibida, Cancelada
+
+        // ComandaEstado puede ser: Pendiente, Aprobada, Rechazada, Recibida, Cancelada
         // Se va cambiando durante el proceso, pero puede los usuairos pueden ir aprobandolo, rechazandolo, etc.
         //Cuando se quiere asignar una orden de compra a la factura, la orden debe estar en estado "Aprobada"
-        public string Estado { get; set; }
+        public OrdenCompraEstado Estado { get; set; }
 		public decimal TotalEsperado { get; set; }
 		public string Observaciones { get; set; }
 		public List<OrdenDeCompraDetalleModel> Detalles { get; set; }
@@ -31,7 +34,6 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra
 		public DateTime? FechaModificacion { get; set; }
 		public string UsuarioModificacion { get; set; }
 
-	
 
     }
 }

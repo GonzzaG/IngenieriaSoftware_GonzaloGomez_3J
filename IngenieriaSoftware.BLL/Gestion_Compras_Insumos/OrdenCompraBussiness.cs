@@ -10,18 +10,31 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
         public void Guardar(OrdenDeCompraModel ordenCompra)
         {
             Validar(ordenCompra);   
-            ordenCompra. Guardar();
+            ordenCompra.Guardar();
         }
 
         #region Validaciones
         private void Validar(OrdenDeCompraModel ordenCompra)
         {
-            ValidarOrdenCompra(ordenCompra);
+            OrdenCompraIsValid(ordenCompra);
 
-            foreach(var detalle in ordenCompra.Detalles)
-                ValidarDetalle(detalle);
+            DetallesIsValid(ordenCompra);
+
+            ValidarOrdenCompraExists(ordenCompra);
         }
-        private void ValidarOrdenCompra (OrdenDeCompraModel ordenCompra)
+
+        private void DetallesIsValid(OrdenDeCompraModel ordenCompra)
+        {
+            for (int i = 0; i < ordenCompra.Detalles.Count; i++)
+                ValidarDetalle(ordenCompra.Detalles[i]);
+        }
+
+        private static void ValidarOrdenCompraExists(OrdenDeCompraModel ordenCompra)
+        {
+            OrdenCompraDataAccess.OrdenCompraExist(ordenCompra.NumOrdenCompra);
+        }
+
+        private void OrdenCompraIsValid (OrdenDeCompraModel ordenCompra)
         {
             StringBuilder sb = new StringBuilder();
             if (ordenCompra.IdProveedor <= 0)

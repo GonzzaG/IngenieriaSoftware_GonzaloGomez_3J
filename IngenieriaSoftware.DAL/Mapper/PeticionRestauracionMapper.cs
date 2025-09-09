@@ -22,7 +22,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                     UsuarioSolicitante = row["UsuarioSolicitante"].ToString(),
                     Registro = int.Parse(row["Registro"].ToString()),
                     Comentario = row["Comentario"].ToString(),
-                    Estado = row["Estado"].ToString(),
+                    Estado = row["ComandaEstado"].ToString(),
                 });
             }
 

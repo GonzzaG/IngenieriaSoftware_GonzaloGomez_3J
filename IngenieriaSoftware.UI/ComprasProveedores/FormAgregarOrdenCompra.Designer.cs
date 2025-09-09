@@ -35,13 +35,12 @@
             this.txtCondicionesPago = new System.Windows.Forms.TextBox();
             this.lblCondicionesPago = new System.Windows.Forms.Label();
             this.gbPagoMoneda = new System.Windows.Forms.GroupBox();
+            this.txtNumericTotalEsperado = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtTipoCambio = new System.Windows.Forms.TextBox();
             this.lblMoneda = new System.Windows.Forms.Label();
             this.txtMoneda = new System.Windows.Forms.TextBox();
             this.lblTipoCambio = new System.Windows.Forms.Label();
-            this.txtTotalEsperado = new System.Windows.Forms.TextBox();
             this.lblTotalEsperado = new System.Windows.Forms.Label();
             this.gBDatosGenerales = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,10 +52,11 @@
             this.lblFechaEmision = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
+            this.cbProveedor = new System.Windows.Forms.ComboBox();
             this.lblProveedor = new System.Windows.Forms.Label();
             this.lblOrdenCompra = new System.Windows.Forms.Label();
             this.dgvProductosOrdenCompra = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.txtNumericTipoCambio = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
             this.gbPagoMoneda.SuspendLayout();
             this.gBDatosGenerales.SuspendLayout();
             this.SuspendLayout();
@@ -66,13 +66,13 @@
             this.btnGenerarOrdenCompra.BackColor = System.Drawing.Color.DarkGreen;
             this.btnGenerarOrdenCompra.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnGenerarOrdenCompra.Location = new System.Drawing.Point(933, 1198);
+            this.btnGenerarOrdenCompra.Location = new System.Drawing.Point(935, 1114);
             this.btnGenerarOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGenerarOrdenCompra.Name = "btnGenerarOrdenCompra";
-            this.btnGenerarOrdenCompra.Size = new System.Drawing.Size(376, 87);
+            this.btnGenerarOrdenCompra.Size = new System.Drawing.Size(376, 61);
             this.btnGenerarOrdenCompra.TabIndex = 39;
             this.btnGenerarOrdenCompra.Tag = "56";
-            this.btnGenerarOrdenCompra.Text = "Generar";
+            this.btnGenerarOrdenCompra.Text = "Generar Orden";
             this.btnGenerarOrdenCompra.UseVisualStyleBackColor = false;
             this.btnGenerarOrdenCompra.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
             // 
@@ -82,7 +82,7 @@
             this.btnSeleccionarProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeleccionarProductos.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeleccionarProductos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnSeleccionarProductos.Location = new System.Drawing.Point(999, 433);
+            this.btnSeleccionarProductos.Location = new System.Drawing.Point(1002, 422);
             this.btnSeleccionarProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSeleccionarProductos.Name = "btnSeleccionarProductos";
             this.btnSeleccionarProductos.Size = new System.Drawing.Size(312, 46);
@@ -96,7 +96,7 @@
             this.txtAreaObservaciones.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtAreaObservaciones.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAreaObservaciones.ForeColor = System.Drawing.Color.DimGray;
-            this.txtAreaObservaciones.Location = new System.Drawing.Point(999, 652);
+            this.txtAreaObservaciones.Location = new System.Drawing.Point(1002, 655);
             this.txtAreaObservaciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAreaObservaciones.Multiline = true;
             this.txtAreaObservaciones.Name = "txtAreaObservaciones";
@@ -110,7 +110,7 @@
             this.lblObservaciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblObservaciones.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblObservaciones.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblObservaciones.Location = new System.Drawing.Point(992, 623);
+            this.lblObservaciones.Location = new System.Drawing.Point(995, 626);
             this.lblObservaciones.Name = "lblObservaciones";
             this.lblObservaciones.Size = new System.Drawing.Size(139, 28);
             this.lblObservaciones.TabIndex = 103;
@@ -122,7 +122,7 @@
             this.txtCondicionesPago.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtCondicionesPago.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCondicionesPago.ForeColor = System.Drawing.Color.DimGray;
-            this.txtCondicionesPago.Location = new System.Drawing.Point(671, 96);
+            this.txtCondicionesPago.Location = new System.Drawing.Point(927, 96);
             this.txtCondicionesPago.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCondicionesPago.Name = "txtCondicionesPago";
             this.txtCondicionesPago.Size = new System.Drawing.Size(201, 34);
@@ -135,7 +135,7 @@
             this.lblCondicionesPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCondicionesPago.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCondicionesPago.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblCondicionesPago.Location = new System.Drawing.Point(665, 65);
+            this.lblCondicionesPago.Location = new System.Drawing.Point(921, 66);
             this.lblCondicionesPago.Name = "lblCondicionesPago";
             this.lblCondicionesPago.Size = new System.Drawing.Size(155, 28);
             this.lblCondicionesPago.TabIndex = 101;
@@ -145,19 +145,19 @@
             // gbPagoMoneda
             // 
             this.gbPagoMoneda.AutoSize = true;
+            this.gbPagoMoneda.Controls.Add(this.txtNumericTipoCambio);
+            this.gbPagoMoneda.Controls.Add(this.txtNumericTotalEsperado);
             this.gbPagoMoneda.Controls.Add(this.label13);
             this.gbPagoMoneda.Controls.Add(this.label12);
-            this.gbPagoMoneda.Controls.Add(this.txtTipoCambio);
             this.gbPagoMoneda.Controls.Add(this.lblMoneda);
             this.gbPagoMoneda.Controls.Add(this.txtMoneda);
             this.gbPagoMoneda.Controls.Add(this.lblTipoCambio);
             this.gbPagoMoneda.Controls.Add(this.txtCondicionesPago);
             this.gbPagoMoneda.Controls.Add(this.lblCondicionesPago);
-            this.gbPagoMoneda.Controls.Add(this.txtTotalEsperado);
             this.gbPagoMoneda.Controls.Add(this.lblTotalEsperado);
             this.gbPagoMoneda.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbPagoMoneda.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.gbPagoMoneda.Location = new System.Drawing.Point(83, 930);
+            this.gbPagoMoneda.Location = new System.Drawing.Point(87, 875);
             this.gbPagoMoneda.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbPagoMoneda.Name = "gbPagoMoneda";
             this.gbPagoMoneda.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -165,6 +165,14 @@
             this.gbPagoMoneda.TabIndex = 98;
             this.gbPagoMoneda.TabStop = false;
             this.gbPagoMoneda.Text = "Pago y moneda";
+            // 
+            // txtNumericTotalEsperado
+            // 
+            this.txtNumericTotalEsperado.Location = new System.Drawing.Point(84, 97);
+            this.txtNumericTotalEsperado.Name = "txtNumericTotalEsperado";
+            this.txtNumericTotalEsperado.Size = new System.Drawing.Size(201, 34);
+            this.txtNumericTotalEsperado.TabIndex = 111;
+            this.txtNumericTotalEsperado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label13
             // 
@@ -191,18 +199,6 @@
             this.label12.TabIndex = 89;
             this.label12.Tag = "116";
             this.label12.Text = "*";
-            // 
-            // txtTipoCambio
-            // 
-            this.txtTipoCambio.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtTipoCambio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoCambio.ForeColor = System.Drawing.Color.DimGray;
-            this.txtTipoCambio.Location = new System.Drawing.Point(940, 96);
-            this.txtTipoCambio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTipoCambio.Name = "txtTipoCambio";
-            this.txtTipoCambio.Size = new System.Drawing.Size(201, 34);
-            this.txtTipoCambio.TabIndex = 78;
-            this.txtTipoCambio.Tag = "117";
             // 
             // lblMoneda
             // 
@@ -235,24 +231,12 @@
             this.lblTipoCambio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTipoCambio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTipoCambio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTipoCambio.Location = new System.Drawing.Point(935, 66);
+            this.lblTipoCambio.Location = new System.Drawing.Point(660, 67);
             this.lblTipoCambio.Name = "lblTipoCambio";
             this.lblTipoCambio.Size = new System.Drawing.Size(148, 28);
             this.lblTipoCambio.TabIndex = 79;
             this.lblTipoCambio.Tag = "116";
             this.lblTipoCambio.Text = "Tipo de cambio";
-            // 
-            // txtTotalEsperado
-            // 
-            this.txtTotalEsperado.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtTotalEsperado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalEsperado.ForeColor = System.Drawing.Color.DimGray;
-            this.txtTotalEsperado.Location = new System.Drawing.Point(84, 96);
-            this.txtTotalEsperado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTotalEsperado.Name = "txtTotalEsperado";
-            this.txtTotalEsperado.Size = new System.Drawing.Size(201, 34);
-            this.txtTotalEsperado.TabIndex = 80;
-            this.txtTotalEsperado.Tag = "117";
             // 
             // lblTotalEsperado
             // 
@@ -280,7 +264,7 @@
             this.gBDatosGenerales.Controls.Add(this.label4);
             this.gBDatosGenerales.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBDatosGenerales.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.gBDatosGenerales.Location = new System.Drawing.Point(83, 155);
+            this.gBDatosGenerales.Location = new System.Drawing.Point(86, 158);
             this.gBDatosGenerales.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gBDatosGenerales.Name = "gBDatosGenerales";
             this.gBDatosGenerales.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -395,22 +379,22 @@
             this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label11.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(1100, 507);
+            this.label11.Location = new System.Drawing.Point(1103, 510);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(20, 28);
             this.label11.TabIndex = 109;
             this.label11.Tag = "116";
             this.label11.Text = "*";
             // 
-            // cbEstado
+            // cbProveedor
             // 
-            this.cbEstado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(999, 537);
-            this.cbEstado.Margin = new System.Windows.Forms.Padding(4);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(309, 36);
-            this.cbEstado.TabIndex = 108;
+            this.cbProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
+            this.cbProveedor.FormattingEnabled = true;
+            this.cbProveedor.Location = new System.Drawing.Point(1002, 540);
+            this.cbProveedor.Margin = new System.Windows.Forms.Padding(4);
+            this.cbProveedor.Name = "cbProveedor";
+            this.cbProveedor.Size = new System.Drawing.Size(309, 36);
+            this.cbProveedor.TabIndex = 108;
             // 
             // lblProveedor
             // 
@@ -418,7 +402,7 @@
             this.lblProveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblProveedor.Location = new System.Drawing.Point(995, 507);
+            this.lblProveedor.Location = new System.Drawing.Point(998, 510);
             this.lblProveedor.Name = "lblProveedor";
             this.lblProveedor.Size = new System.Drawing.Size(103, 28);
             this.lblProveedor.TabIndex = 107;
@@ -431,7 +415,7 @@
             this.lblOrdenCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblOrdenCompra.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblOrdenCompra.Location = new System.Drawing.Point(73, 55);
+            this.lblOrdenCompra.Location = new System.Drawing.Point(76, 58);
             this.lblOrdenCompra.Name = "lblOrdenCompra";
             this.lblOrdenCompra.Size = new System.Drawing.Size(432, 46);
             this.lblOrdenCompra.TabIndex = 89;
@@ -441,23 +425,32 @@
             // dgvProductosOrdenCompra
             // 
             this.dgvProductosOrdenCompra.BackColor = System.Drawing.Color.Transparent;
-            this.dgvProductosOrdenCompra.Location = new System.Drawing.Point(81, 351);
+            this.dgvProductosOrdenCompra.Location = new System.Drawing.Point(89, 371);
             this.dgvProductosOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvProductosOrdenCompra.Name = "dgvProductosOrdenCompra";
-            this.dgvProductosOrdenCompra.Size = new System.Drawing.Size(847, 487);
+            this.dgvProductosOrdenCompra.Size = new System.Drawing.Size(906, 487);
             this.dgvProductosOrdenCompra.TabIndex = 110;
+            // 
+            // txtNumericTipoCambio
+            // 
+            this.txtNumericTipoCambio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
+            this.txtNumericTipoCambio.Location = new System.Drawing.Point(665, 96);
+            this.txtNumericTipoCambio.Name = "txtNumericTipoCambio";
+            this.txtNumericTipoCambio.Size = new System.Drawing.Size(201, 34);
+            this.txtNumericTipoCambio.TabIndex = 111;
+            this.txtNumericTipoCambio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // FormAgregarOrdenCompra
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
-            this.AutoScrollMinSize = new System.Drawing.Size(0, 1100);
+            this.AutoScrollMinSize = new System.Drawing.Size(0, 1500);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1418, 1040);
+            this.ClientSize = new System.Drawing.Size(1460, 1055);
             this.Controls.Add(this.dgvProductosOrdenCompra);
             this.Controls.Add(this.lblOrdenCompra);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.cbEstado);
+            this.Controls.Add(this.cbProveedor);
             this.Controls.Add(this.lblProveedor);
             this.Controls.Add(this.gBDatosGenerales);
             this.Controls.Add(this.txtAreaObservaciones);
@@ -488,11 +481,9 @@
         private System.Windows.Forms.GroupBox gbPagoMoneda;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtTipoCambio;
         private System.Windows.Forms.Label lblMoneda;
         private System.Windows.Forms.TextBox txtMoneda;
         private System.Windows.Forms.Label lblTipoCambio;
-        private System.Windows.Forms.TextBox txtTotalEsperado;
         private System.Windows.Forms.Label lblTotalEsperado;
         private System.Windows.Forms.GroupBox gBDatosGenerales;
         private System.Windows.Forms.Label label8;
@@ -504,9 +495,11 @@
         private System.Windows.Forms.Label lblFechaEmision;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cbEstado;
+        private System.Windows.Forms.ComboBox cbProveedor;
         private System.Windows.Forms.Label lblProveedor;
         private System.Windows.Forms.Label lblOrdenCompra;
         private ControlesPersonalizados.DataGridViewConFiltros dgvProductosOrdenCompra;
+        private ControlesPersonalizados.Inputs.InputNumericTextBox txtNumericTotalEsperado;
+        private ControlesPersonalizados.Inputs.InputNumericTextBox txtNumericTipoCambio;
     }
 }

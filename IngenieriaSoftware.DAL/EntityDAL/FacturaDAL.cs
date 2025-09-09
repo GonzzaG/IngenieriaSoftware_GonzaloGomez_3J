@@ -58,7 +58,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             {
                 SqlParameter[] parametros = new SqlParameter[]
                 {
-                    new SqlParameter("@Estado", Estado)
+                    new SqlParameter("@ComandaEstado", Estado)
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerFacturasPorEstado", parametros);

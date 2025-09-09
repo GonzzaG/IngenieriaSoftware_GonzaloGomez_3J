@@ -98,7 +98,7 @@
             this.lblEstado.Size = new System.Drawing.Size(56, 21);
             this.lblEstado.TabIndex = 27;
             this.lblEstado.Tag = "52";
-            this.lblEstado.Text = "Estado";
+            this.lblEstado.Text = "ComandaEstado";
             // 
             // txtTelefono
             // 

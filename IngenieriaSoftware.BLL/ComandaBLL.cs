@@ -29,8 +29,8 @@ namespace IngenieriaSoftware.BLL
 
             for (int i = productos.Count - 1; i >= 0; i--)
             {
-                if (productos[i].EstadoProducto != EstadoComandaProductos.Estado.Propuesta &&
-                    productos[i].EstadoProducto != EstadoComandaProductos.Estado.Pendiente)
+                if (productos[i].EstadoProducto != ComandaProductosEstado.Propuesta &&
+                    productos[i].EstadoProducto != ComandaProductosEstado.Pendiente)
                 {
                     productos.RemoveAt(i);
                 }
@@ -38,7 +38,7 @@ namespace IngenieriaSoftware.BLL
 
             if (productos != null)
             {
-                _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.En_Preparacion);
+                _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)ComandaProductosEstado.En_Preparacion);
             }
             else
             {
@@ -52,7 +52,7 @@ namespace IngenieriaSoftware.BLL
 
             for (int i = productos.Count - 1; i >= 0; i--)
             {
-                if (productos[i].EstadoProducto != EstadoComandaProductos.Estado.En_Preparacion)
+                if (productos[i].EstadoProducto != ComandaProductosEstado.En_Preparacion)
                 {
                     productos.RemoveAt(i);
                 }
@@ -60,7 +60,7 @@ namespace IngenieriaSoftware.BLL
 
             if (productos != null)
             {
-                _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)EstadoComandaProductos.Estado.Lista);
+                _comandaDAL.ActualizarEstadoComandaProducto(productos, (int)ComandaProductosEstado.Lista);
             }
             else
             {
@@ -93,7 +93,7 @@ namespace IngenieriaSoftware.BLL
                 ComandaId = comandaId,
                 Producto = producto,
                 Cantidad = cantidad,
-                EstadoProducto = BEL.Constantes.EstadoComandaProductos.Estado.Propuesta,
+                EstadoProducto = BEL.Constantes.ComandaProductosEstado.Propuesta,
                 PrecioUnitario = producto.Precio,
                 Nombre = producto.Nombre,
                 Descripcion = producto.Descripcion,

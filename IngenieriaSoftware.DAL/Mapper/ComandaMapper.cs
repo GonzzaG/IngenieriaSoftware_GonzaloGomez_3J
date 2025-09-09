@@ -21,7 +21,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                         ComandaId = Convert.ToInt32(row["comanda_id"]),
                         MesaId = Convert.ToInt32(row["mesa_id"]),
                         FechaHoraCreacion = (DateTime)row["fecha_hora_creacion"],
-                        EstadoComanda = (EstadoComanda.Estado)(int)row["estado"]
+                        EstadoComanda = (ComandaEstado)(int)row["estado"]
                     });
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL.Interfaces;
+using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Tools;
 using IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom;
 using System;
@@ -58,7 +59,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            AplicarTamanoGrilla(); 
+            AplicarTamanoGrilla();
         }
 
         private void AplicarTamanoGrilla()
@@ -76,15 +77,15 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
                     break;
 
                 case ModoTamanoGrilla.Grande:
-                    tamanoControl = new Size(1016, 584);
-                    tamanoGrilla = new Size(1011, 519);
+                    tamanoControl = new Size(1016, 487);
+                    tamanoGrilla = new Size(1011, 433);
                     tamanoMensaje = new Size(401, 71);
                     break;
 
                 case ModoTamanoGrilla.Mediano:
                 default:
-                    tamanoControl = new Size(847, 487);
-                    tamanoGrilla = new Size(843, 433);
+                    tamanoControl = new Size(906, 487);
+                    tamanoGrilla = new Size(903, 433);
                     tamanoMensaje = new Size(334, 59);
                     break;
             }
@@ -93,7 +94,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             dgv.Size = tamanoGrilla;
             panelNoResultadoProducto.Size = tamanoMensaje;
             Debug.WriteLine($"Modo: {tamanoGrilla}, Size aplicado: {this.Size}, Grilla: {dgv.Size}");
-            
+
         }
 
         private int TotalElementos()
@@ -131,7 +132,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
         public void Deshabilitar()
         {
-            for(int i = 0; i < this.Controls.Count; i++)
+            for (int i = 0; i < this.Controls.Count; i++)
             {
                 this.Controls[i].Enabled = false;
             }
@@ -181,20 +182,20 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             return paginaActual > (datosOriginales.Count() / tamanoPagina);
 
         }
-    
+
         public void CargarDatos<T>(List<T> datos) where T : class, new()
         {
             if (datos.isEmpty())
             {
                 panelNoResultadoProducto.MostrarNoResultado(true);
-                dgv.DataSource = null;  
+                dgv.DataSource = null;
                 return;
             }
-            
+
             panelNoResultadoProducto.MostrarNoResultado(false);
-            datosOriginales = datos.Cast<object>().ToList(); 
+            datosOriginales = datos.Cast<object>().ToList();
             paginaActual = 1;
-            AplicarFiltros(); 
+            AplicarFiltros();
         }
 
         public void CambiarTamanoPagina(int nuevoTamano)
@@ -215,71 +216,194 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
         #region Agregar columnas
 
+        // Variables privadas para manejar la suscripción
+        private DataGridViewCellEventHandler _agregarHandler;
+        private DataGridViewCellEventHandler _quitarHandler;
+        private bool _cantidadColumnHandlerAdded = false;
+
         /// <summary>
         /// Agrega una columna con botón "Agregar"
         /// </summary>
-        /// <param name="columnName">Nombre de la columna</param>
-        /// <param name="text">Texto que tendra el boton</param>
-        public void AddButtonAgregarColumna(string columnName = "Agregar", string text = "Agregar")
+        public void AddButtonAgregarColumna(Action eventoClick, string columnName = "Agregar", string text = "Agregar")
         {
-            var btnCol = new DataGridViewButtonColumn
+            if (!dgv.Columns.Contains(columnName))
             {
-                Name = columnName,
-                HeaderText = "",
-                Text = text,
-                UseColumnTextForButtonValue = true,
-                FlatStyle = FlatStyle.Flat
+                var btnCol = new DataGridViewButtonColumn
+                {
+                    Name = columnName,
+                    HeaderText = "",
+                    Text = text,
+                    UseColumnTextForButtonValue = true,
+                    FlatStyle = FlatStyle.Flat
+                };
+                btnCol.DefaultCellStyle.BackColor = Color.FromArgb(25, 135, 84);
+                btnCol.DefaultCellStyle.ForeColor = Color.White;
+                btnCol.DefaultCellStyle.SelectionBackColor = Color.FromArgb(15, 95, 54);
+
+                dgv.Columns.Add(btnCol);
+            }
+
+            // Desuscribir si ya estaba
+            if (_agregarHandler != null)
+                dgv.CellContentClick -= _agregarHandler;
+
+            // Suscribir
+            _agregarHandler = (s, e) =>
+            {
+                if (e.RowIndex >= 0 && dgv.Columns[e.ColumnIndex].Name == columnName)
+                {
+                    eventoClick?.Invoke();
+                }
             };
-            btnCol.DefaultCellStyle.BackColor = Color.FromArgb(25, 135, 84); 
-            btnCol.DefaultCellStyle.SelectionBackColor = Color.FromArgb(15, 95, 54);
-            dgv.Columns.Add(btnCol);
+            dgv.CellContentClick += _agregarHandler;
         }
 
         /// <summary>
         /// Agrega una columna con botón "Quitar"
         /// </summary>
-        /// <param name="columnName">Nombre de la columna</param>
-        /// <param name="text">Texto que tendra el boton</param>
-        public void AddButtonQuitarColumna(string columnName = "Quitar", string text = "Quitar")
+        public void AddButtonQuitarColumna(Action eventoClick, string columnName = "Quitar", string text = "Quitar")
         {
-            var btnCol = new DataGridViewButtonColumn
+            if (!dgv.Columns.Contains(columnName))
             {
-                Name = columnName,
-                HeaderText = "",
-                Text = text,
-                UseColumnTextForButtonValue = true
-            };
-            btnCol.DefaultCellStyle.BackColor = Color.FromArgb(220, 53, 69);
-            btnCol.DefaultCellStyle.SelectionBackColor = Color.FromArgb(180, 13, 29);
+                var btnCol = new DataGridViewButtonColumn
+                {
+                    Name = columnName,
+                    HeaderText = "",
+                    Text = text,
+                    UseColumnTextForButtonValue = true
+                };
+                btnCol.DefaultCellStyle.BackColor = Color.FromArgb(220, 53, 69);
+                btnCol.DefaultCellStyle.ForeColor = Color.White;
+                btnCol.DefaultCellStyle.SelectionBackColor = Color.FromArgb(180, 13, 29);
 
-            dgv.Columns.Add(btnCol);
+                dgv.Columns.Add(btnCol);
+            }
+
+            // Desuscribir si ya estaba
+            if (_quitarHandler != null)
+                dgv.CellContentClick -= _quitarHandler;
+
+            // Suscribir
+            _quitarHandler = (s, e) =>
+            {
+                if (e.RowIndex >= 0 && dgv.Columns[e.ColumnIndex].Name == columnName)
+                {
+                    eventoClick?.Invoke();
+                }
+            };
+            dgv.CellContentClick += _quitarHandler;
         }
 
+        #region Agregar Columna Cantidad
         /// <summary>
-        /// Agrega una columna numérica para "Cantidad" con valor por defecto
+        /// Metodo que añade una columna editable para modificar el valor de la cantidad de un registro
         /// </summary>
+        /// <param name="onValueChanged"></param>
         /// <param name="columnName"></param>
-        /// <param name="defaultValue">Valor por default de la cantidad</param>
-        public void AddNumericCantidadColumna(string columnName = "Cantidad", int defaultValue = 1)
+        /// <param name="defaultValue"></param>
+        // Método principal que orquesta la creación de la columna
+        public void AddNumericCantidadColumna(Action<object> onValueChanged, string columnName = "Cantidad", int defaultValue = 1)
+        {
+            if (ColumnExists(columnName))
+                return;
+
+            var col = CreateNumericColumn(columnName);
+            InitializeColumnValues(col, defaultValue);
+            ConfigureColumnEvents(columnName);
+        }
+
+        // Verifica si la columna ya existe
+        private bool ColumnExists(string columnName)
+        {
+            return dgv.Columns.Contains(columnName);
+        }
+
+        //  Crea la columna editable de tipo int con estilo
+        private DataGridViewTextBoxColumn CreateNumericColumn(string columnName)
         {
             var col = new DataGridViewTextBoxColumn
             {
                 Name = columnName,
                 HeaderText = "Cantidad",
-                ValueType = typeof(int)
+                ValueType = typeof(int),
+                ReadOnly = false
             };
-            dgv.Columns.Add(col);
 
-            // inicializar con un valor por defecto si querés
+            // Estilo por defecto
+            col.DefaultCellStyle.BackColor = Color.FromArgb(200, 230, 201); // verde claro
+            col.DefaultCellStyle.ForeColor = Color.Black;
+
+            dgv.Columns.Add(col);
+            return col;
+        }
+
+        // Inicializa los valores de cada fila y aplica estilo
+        private void InitializeColumnValues(DataGridViewTextBoxColumn col, int defaultValue)
+        {
             foreach (DataGridViewRow row in dgv.Rows)
             {
-                if (!row.IsNewRow) row.Cells[columnName].Value = defaultValue;
+                if (!row.IsNewRow)
+                {
+                    var cell = row.Cells[col.Name];
+                    cell.Value = defaultValue;
+                    cell.Style.BackColor = Color.FromArgb(200, 230, 201);
+                    cell.Style.ForeColor = Color.Black;
+                }
             }
         }
+
+        // Configura eventos de la columna: commit, edición, keydown
+        private void ConfigureColumnEvents(string columnName)
+        {
+            if (_cantidadColumnHandlerAdded)
+                return;
+
+            // Commit automático al editar celda
+            dgv.CurrentCellDirtyStateChanged += (s, e) =>
+            {
+                if (dgv.IsCurrentCellDirty)
+                    dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            };
+
+            // Detectar Enter para salir de la celda
+            dgv.EditingControlShowing += (s, e) =>
+            {
+                if (dgv.CurrentCell.ColumnIndex == dgv.Columns[columnName].Index && e.Control is TextBox tb)
+                {
+                    tb.KeyDown -= NumericCell_KeyDown;
+                    tb.KeyDown += NumericCell_KeyDown;
+                }
+            };
+
+            _cantidadColumnHandlerAdded = true;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Bloquea todas las columnas excepto la indicada.
+        /// </summary>
+        public void PermitirEdicionSoloEn(string columnNameEditable)
+        {
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                col.ReadOnly = col.Name != columnNameEditable;
+            }
+        }
+
 
         #endregion
         #endregion
         #region Eventos
+        private void NumericCell_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                dgv.EndEdit(); // Termina edición
+                dgv.CurrentCell = null; // Saca el foco de la celda
+                e.Handled = true;
+            }
+        }
         private void dgv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var columna = dgv.Columns[e.ColumnIndex].DataPropertyName;
@@ -298,7 +422,31 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         {
 
         }
+
+        public void OcultarColumna(string nombreColumna)
+        {
+            if (dgv.Columns.Contains(nombreColumna))
+                dgv.Columns[nombreColumna].Visible = false;
+        }
         #endregion
 
+        private void dgv_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (dgv.Columns[e.ColumnIndex].Name == "Cantidad")
+            {
+                // Obtener el objeto asociado a la fila
+                var rowObj = dgv.Rows[e.RowIndex].DataBoundItem as ProductoOrdenCompraViewModel;
+                if (rowObj != null)
+                {
+                    // Restaurar el valor original desde la propiedad
+                    dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = rowObj.Cantidad;
+                }
+
+                MessageBox.Show("Valor inválido. Solo se permiten números enteros.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                e.ThrowException = false; // evita que la excepción se propague
+                e.Cancel = true;          // cancela la edición
+            }
+        }
     }
 }

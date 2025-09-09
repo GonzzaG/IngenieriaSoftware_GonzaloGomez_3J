@@ -107,7 +107,7 @@ namespace IngenieriaSoftware.UI
                 var ComandaProductos = (List<ComandaProducto>)dataGridViewComandaActual.DataSource;
                 ComandaProducto ComandaProducto = ComandaProductos
                     .Where(m => m.ComandaId == comandaId)
-                    .First(m => m.EstadoProducto != EstadoComandaProductos.Estado.En_Preparacion);
+                    .First(m => m.EstadoProducto != ComandaProductosEstado.En_Preparacion);
 
                 if (ComandaProducto == null) { return; }
 

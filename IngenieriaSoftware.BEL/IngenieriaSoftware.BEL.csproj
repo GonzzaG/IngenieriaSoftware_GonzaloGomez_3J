@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +54,7 @@
     <Compile Include="Constantes\EstadoComanda.cs" />
     <Compile Include="Constantes\EstadoComandaProductos.cs" />
     <Compile Include="Constantes\EstadoFactura.cs" />
+    <Compile Include="Constantes\EstadoOrdenCompra.cs" />
     <Compile Include="Constantes\TipoProducto.cs" />
     <Compile Include="DigitoVerificadorVertical.cs" />
     <Compile Include="Empleados\Administrador.cs" />

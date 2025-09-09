@@ -1,38 +1,36 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BLL;
-using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
-using IngenieriaSoftware.Servicios.Tools;
+﻿using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ComprasProveedores
 {
     public partial class ModalSeleccionProdutosOrdenCompra : Form, IActualizable
     {
-        private List<Producto> _Productos;
+        private List<ProductoOrdenCompraViewModel> _ProductosOrdenCompra;
+        private List<ProductoOrdenCompraViewModel> _ProductosListado;
 
         private Timer avisoTimer;
         private int tiempoRestante;
         private const int duracionMiliseg = 1000; 
         private const int intervaloMiliseg = 100; 
 
-
-        public ModalSeleccionProdutosOrdenCompra(List<Producto> productos)
+        public ModalSeleccionProdutosOrdenCompra(List<ProductoOrdenCompraViewModel> productos)
         {
             InitializeComponent();
             Inicializar(productos);
 
         }
 
-        private void Inicializar(List<Producto> productos)
+        private void Inicializar(List<ProductoOrdenCompraViewModel> productos)
         {
-            _Productos = productos;
+            _ProductosOrdenCompra = productos;
+            _ProductosListado = new List<ProductoOrdenCompraViewModel>();
             Actualizar();
 
             avisoTimer = new Timer();
@@ -50,8 +48,10 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void ListaProductos()
         {
-            dgvConFiltroProductos.CargarDatos(new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra());
-            dgvConFiltroProductos.AddButtonAgregarColumna();
+            _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();
+            dgvConFiltroProductos.CargarDatos(_ProductosListado);
+            dgvConFiltroProductos.OcultarColumna("Cantidad");   
+            dgvConFiltroProductos.AddButtonAgregarColumna(AgregarProductoSeleccionado);
         }   
 
         private void btnAgregarNuevo_Click(object sender, EventArgs e)
@@ -61,19 +61,18 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
             Actualizar();
         }
-            
-        private void btnSeleccionar_Click_1(object sender, EventArgs e)
+
+        public void AgregarProductoSeleccionado()
         {
             try
             {
-                var productoSeleccionado = (Producto)dgvConFiltroProductos.ElementoSeleccionado;
-                
-                if (productoSeleccionado == null)
-                    throw new Exception("Debe seleccionar un producto");
+                var productoSeleccionado = (ProductoOrdenCompraViewModel)dgvConFiltroProductos.ElementoSeleccionado;
 
-                _Productos.Add(productoSeleccionado);
-                MostrarAviso();
+                ThrowIfProductoIsNull(productoSeleccionado);
 
+                AgregarProductoOrdenCompra(productoSeleccionado);
+
+                ActualizarListado(productoSeleccionado);
             }
             catch (Exception ex)
             {
@@ -81,15 +80,59 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             }
         }
 
+        private static void ThrowIfProductoIsNull(ProductoOrdenCompraViewModel productoSeleccionado)
+        {
+            if (productoSeleccionado == null)
+                throw new Exception("Debe seleccionar un producto");
+        }
+
+        private void AgregarProductoOrdenCompra(ProductoOrdenCompraViewModel productoSeleccionado)
+        {
+            var productoExistente = (ProductoOrdenCompraViewModel)_ProductosOrdenCompra
+                .Find(p => p.IdProducto == productoSeleccionado.IdProducto);
+
+            if (productoExistente != null)
+                productoExistente.Cantidad += 1;
+            else
+            {
+                productoSeleccionado.Cantidad = 1;
+                _ProductosOrdenCompra.Add(productoSeleccionado);
+            }
+
+        }
+
+        private void ActualizarListado(ProductoOrdenCompraViewModel productoSeleccionado)
+        {
+           // ModificarProductoAgregadoExtension(productoSeleccionado);
+
+            MostrarAviso();
+
+            dgvConFiltroProductos.CargarDatos(_ProductosListado);
+        }
+
+        private void ModificarProductoAgregadoExtension(ProductoOrdenCompraViewModel productoSeleccionado)
+        {
+            var productoAgregado = (ProductoOrdenCompraViewModel)_ProductosListado
+                .Find(p => p.IdProducto == productoSeleccionado.IdProducto);
+
+            if (productoAgregado == null)
+            {
+                this.Close();
+                throw new Exception("Error al agregar el producto.");
+            }
+
+            productoAgregado.Cantidad = productoSeleccionado.Cantidad;
+        }
 
         // Método para mostrar el aviso
         private void MostrarAviso()
         {
             tiempoRestante = duracionMiliseg;
             lblProductoAgregadoTimer.Visible = true;
-            lblProductoAgregadoTimer.ForeColor = Color.Black; // reinicia a opaco
+            lblProductoAgregadoTimer.ForeColor = Color.MediumSpringGreen; 
             avisoTimer.Start();
         }
+
         private void timerProductoAgregado_Tick(object sender, EventArgs e)
         {
             tiempoRestante -= intervaloMiliseg;
@@ -98,7 +141,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             float progreso = (float)tiempoRestante / duracionMiliseg;
             int alpha = (int)(255 * progreso);
 
-            lblProductoAgregadoTimer.ForeColor = Color.FromArgb(alpha, lblProductoAgregadoTimer.ForeColor.R, lblProductoAgregadoTimer.ForeColor.G, lblProductoAgregadoTimer.ForeColor.B);
+            lblProductoAgregadoTimer.ForeColor = Color.FromArgb(alpha, Color.MediumSpringGreen);
 
             if (tiempoRestante <= 0)
             {

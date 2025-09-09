@@ -1,14 +1,11 @@
 ﻿namespace IngenieriaSoftware.BEL.Constantes
 {
-    public class EstadoComandaProductos
+    public enum ComandaProductosEstado
     {
-        public enum Estado
-        {
-            Propuesta = 0,
-            Pendiente = 1,
-            En_Preparacion = 2,
-            Lista = 3,
-            Entregada = 4
-        };
-    }
+        Propuesta = 0,
+        Pendiente = 1,
+        En_Preparacion = 2,
+        Lista = 3,
+        Entregada = 4
+    };
 }

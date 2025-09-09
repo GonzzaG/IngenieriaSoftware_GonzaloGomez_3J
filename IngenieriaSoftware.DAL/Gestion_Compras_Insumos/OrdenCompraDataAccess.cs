@@ -9,6 +9,22 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
 {
     public static class OrdenCompraDataAccess
     {
+        public static void OrdenCompraExist(string numOrdenCompra)
+        {
+            SqlParameter[] parameteros = new SqlParameter[]
+            {
+                new SqlParameter("@NumOrdenCompra", numOrdenCompra),
+                new SqlParameter("@Exist", SqlDbType.Bit) { Direction = ParameterDirection.Output }
+            };
+
+            new DAO().ExecuteStoredProcedure("OrdenCompra.sp_OrdenCompraExist", parameteros);
+
+            if(parameteros.Last().Value is bool exist && exist)
+                throw new System.Exception($"Ya existe una orden de compra con el número {numOrdenCompra}");
+            
+        }
+
+
         /// <summary>
         /// Guarda una orden de compra
         /// </summary>
@@ -33,7 +49,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                             new SqlParameter("@CondicionesPago", ordenCompra.CondicionesPago.ToDbValue()),
                             new SqlParameter("@Moneda", ordenCompra.Moneda),
                             new SqlParameter("@TipoCambio", ordenCompra.TipoCambio.ToDbValue()),
-                            new SqlParameter("@Estado", ordenCompra.Estado),
+                            new SqlParameter("@ComandaEstado", ordenCompra.Estado),
                             new SqlParameter("@TotalEsperado", ordenCompra.TotalEsperado),
                             new SqlParameter("@Observaciones", ordenCompra.Observaciones.ToDbValue()),
                             new SqlParameter("@FechaCreacion", ordenCompra.FechaCreacion),

@@ -69,7 +69,7 @@
             // 
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaDesde.Location = new System.Drawing.Point(353, 81);
-            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(200, 34);
             this.dtpFechaDesde.TabIndex = 43;
@@ -78,7 +78,7 @@
             // 
             this.cbEstado.FormattingEnabled = true;
             this.cbEstado.Location = new System.Drawing.Point(668, 79);
-            this.cbEstado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbEstado.Margin = new System.Windows.Forms.Padding(4);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(251, 37);
             this.cbEstado.TabIndex = 42;
@@ -93,7 +93,7 @@
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(71, 28);
             this.lblEstado.TabIndex = 41;
-            this.lblEstado.Tag = "116";
+            this.lblEstado.Tag = "";
             this.lblEstado.Text = "Estado";
             // 
             // lblFechaDesde
@@ -180,12 +180,11 @@
             // grillaConFiltros
             // 
             this.grillaConFiltros.BackColor = System.Drawing.Color.Transparent;
-            this.grillaConFiltros.Location = new System.Drawing.Point(273, 266);
+            this.grillaConFiltros.Location = new System.Drawing.Point(229, 303);
             this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grillaConFiltros.Name = "grillaConFiltros";
-            this.grillaConFiltros.Size = new System.Drawing.Size(1016, 584);
+            this.grillaConFiltros.Size = new System.Drawing.Size(906, 487);
             this.grillaConFiltros.TabIndex = 35;
-            this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
             // 
             // FormListaOrdenCompra
             // 

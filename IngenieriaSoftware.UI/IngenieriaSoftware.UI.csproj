@@ -162,6 +162,9 @@
       <DependentUpon>GrillaConFiltros.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlesPersonalizados\grillaCustom\ConstantesGrilla.cs" />
+    <Compile Include="ControlesPersonalizados\Inputs\InputNumericTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ControlesPersonalizados\panelCustom\PanelNoResultado.cs">
       <SubType>UserControl</SubType>
     </Compile>

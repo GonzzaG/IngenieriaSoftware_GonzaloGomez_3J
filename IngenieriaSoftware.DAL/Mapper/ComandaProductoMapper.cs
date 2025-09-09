@@ -17,7 +17,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                 ComandaProducto comandaProducto = new ComandaProducto();
                 comandaProducto.ComandaId = (int)row["comanda_id"];
                 comandaProducto.ProductoId = (int)row["producto_id"];
-                comandaProducto.EstadoProducto = (EstadoComandaProductos.Estado)(int)row["estado_producto"];
+                comandaProducto.EstadoProducto = (ComandaProductosEstado)(int)row["estado_producto"];
                 comandaProducto.Cantidad = (int)row["cantidad"];
                 comandaProducto.PrecioUnitario = (decimal)row["precio_unitario"];
                 comandaProducto.Nombre = row["nombre"].ToString();

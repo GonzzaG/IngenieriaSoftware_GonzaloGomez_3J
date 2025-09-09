@@ -134,7 +134,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
                 new SqlParameter("@RazonSocial",proveedor.RazonSocial),
                 new SqlParameter("@Correo",proveedor.Correo),
                 new SqlParameter("@Telefono",proveedor.Telefono),
-                new SqlParameter("@Estado",proveedor.Estado),
+                new SqlParameter("@ComandaEstado",proveedor.Estado),
                 output
             };
 
