@@ -32,14 +32,19 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             _ProductosOrdenCompra = productos;
             _ProductosListado = new List<ProductoOrdenCompraViewModel>();
             Actualizar();
+            InicializarTimerProductoAgregado();
 
+        }
+
+        private void InicializarTimerProductoAgregado()
+        {
             avisoTimer = new Timer();
             avisoTimer.Interval = intervaloMiliseg;
             avisoTimer.Tick += timerProductoAgregado_Tick;
 
             lblProductoAgregadoTimer.Visible = false;
             lblProductoAgregadoTimer.Text = "Producto agregado!";
-        }   
+        }
 
         public void Actualizar()
         {
@@ -50,17 +55,10 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();
             dgvConFiltroProductos.CargarDatos(_ProductosListado);
-            dgvConFiltroProductos.OcultarColumna("Cantidad");   
+            dgvConFiltroProductos.OcultarColumnas("Cantidad", "PrecioUnitarioEsperado");  
             dgvConFiltroProductos.AddButtonAgregarColumna(AgregarProductoSeleccionado);
         }   
 
-        private void btnAgregarNuevo_Click(object sender, EventArgs e)
-        {
-            var formMDI = this.MdiParent as FormMDI;
-            new FormGestionarProductos().AbrirFormModal();
-
-            Actualizar();
-        }
 
         public void AgregarProductoSeleccionado()
         {
@@ -103,25 +101,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void ActualizarListado(ProductoOrdenCompraViewModel productoSeleccionado)
         {
-           // ModificarProductoAgregadoExtension(productoSeleccionado);
-
             MostrarAviso();
 
             dgvConFiltroProductos.CargarDatos(_ProductosListado);
-        }
-
-        private void ModificarProductoAgregadoExtension(ProductoOrdenCompraViewModel productoSeleccionado)
-        {
-            var productoAgregado = (ProductoOrdenCompraViewModel)_ProductosListado
-                .Find(p => p.IdProducto == productoSeleccionado.IdProducto);
-
-            if (productoAgregado == null)
-            {
-                this.Close();
-                throw new Exception("Error al agregar el producto.");
-            }
-
-            productoAgregado.Cantidad = productoSeleccionado.Cantidad;
         }
 
         // Método para mostrar el aviso
@@ -148,6 +130,14 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 avisoTimer.Stop();
                 lblProductoAgregadoTimer.Visible = false;
             }
+        }
+
+        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            var formMDI = this.MdiParent as FormMDI;
+            new FormGestionarProductos().AbrirFormModal();
+
+            Actualizar();
         }
     }
 }

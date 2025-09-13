@@ -31,8 +31,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnEliminarProducto = new System.Windows.Forms.Button();
             this.groupBoxProducto = new System.Windows.Forms.GroupBox();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.lblMinutos = new System.Windows.Forms.Label();
@@ -47,44 +45,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblRazonSocial = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblDocumento = new System.Windows.Forms.Label();
+            this.gcfProductos = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminarProducto = new System.Windows.Forms.Button();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
             this.lblListaProveedores = new System.Windows.Forms.Label();
             this.filtroNombreProducto = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
-            this.gcfProductos = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.groupBoxProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoPreparacion)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.BackColor = System.Drawing.Color.Orange;
-            this.btnModificar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnModificar.Location = new System.Drawing.Point(1066, 580);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(137, 57);
-            this.btnModificar.TabIndex = 10;
-            this.btnModificar.Tag = "";
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = false;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnEliminarProducto
-            // 
-            this.btnEliminarProducto.BackColor = System.Drawing.Color.Maroon;
-            this.btnEliminarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEliminarProducto.Location = new System.Drawing.Point(819, 580);
-            this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEliminarProducto.Name = "btnEliminarProducto";
-            this.btnEliminarProducto.Size = new System.Drawing.Size(137, 57);
-            this.btnEliminarProducto.TabIndex = 9;
-            this.btnEliminarProducto.Tag = "";
-            this.btnEliminarProducto.Text = "Eliminar";
-            this.btnEliminarProducto.UseVisualStyleBackColor = false;
-            this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
             // 
             // groupBoxProducto
             // 
@@ -290,20 +260,57 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblDocumento.Tag = "52";
             this.lblDocumento.Text = "Nombre";
             // 
+            // gcfProductos
+            // 
+            this.gcfProductos.BackColor = System.Drawing.Color.Transparent;
+            this.gcfProductos.Location = new System.Drawing.Point(459, 103);
+            this.gcfProductos.Margin = new System.Windows.Forms.Padding(2);
+            this.gcfProductos.Name = "gcfProductos";
+            this.gcfProductos.Size = new System.Drawing.Size(1016, 487);
+            this.gcfProductos.TabIndex = 41;
+            this.gcfProductos.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.BackColor = System.Drawing.Color.Orange;
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnModificar.Location = new System.Drawing.Point(1077, 594);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(137, 57);
+            this.btnModificar.TabIndex = 44;
+            this.btnModificar.Tag = "";
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = false;
+            // 
+            // btnEliminarProducto
+            // 
+            this.btnEliminarProducto.BackColor = System.Drawing.Color.Maroon;
+            this.btnEliminarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnEliminarProducto.Location = new System.Drawing.Point(820, 594);
+            this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEliminarProducto.Name = "btnEliminarProducto";
+            this.btnEliminarProducto.Size = new System.Drawing.Size(137, 57);
+            this.btnEliminarProducto.TabIndex = 43;
+            this.btnEliminarProducto.Tag = "";
+            this.btnEliminarProducto.Text = "Eliminar";
+            this.btnEliminarProducto.UseVisualStyleBackColor = false;
+            // 
             // btnAgregarProducto
             // 
             this.btnAgregarProducto.BackColor = System.Drawing.Color.Teal;
             this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(563, 580);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(561, 594);
             this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(137, 57);
-            this.btnAgregarProducto.TabIndex = 8;
+            this.btnAgregarProducto.TabIndex = 42;
             this.btnAgregarProducto.Tag = "";
             this.btnAgregarProducto.Text = "Guardar";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
-            this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
             // 
             // lblListaProveedores
             // 
@@ -311,47 +318,37 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblListaProveedores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblListaProveedores.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaProveedores.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblListaProveedores.Location = new System.Drawing.Point(1014, 173);
+            this.lblListaProveedores.Location = new System.Drawing.Point(454, 36);
             this.lblListaProveedores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblListaProveedores.Name = "lblListaProveedores";
             this.lblListaProveedores.Size = new System.Drawing.Size(189, 30);
-            this.lblListaProveedores.TabIndex = 40;
+            this.lblListaProveedores.TabIndex = 45;
             this.lblListaProveedores.Tag = "52";
             this.lblListaProveedores.Text = "Lista de Productos";
             // 
             // filtroNombreProducto
             // 
             this.filtroNombreProducto.BackColor = System.Drawing.Color.Transparent;
-            this.filtroNombreProducto.Location = new System.Drawing.Point(563, 100);
+            this.filtroNombreProducto.Location = new System.Drawing.Point(1077, 88);
             this.filtroNombreProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.filtroNombreProducto.Name = "filtroNombreProducto";
             this.filtroNombreProducto.Size = new System.Drawing.Size(194, 47);
-            this.filtroNombreProducto.TabIndex = 7;
+            this.filtroNombreProducto.TabIndex = 46;
             this.filtroNombreProducto.Texto = "";
-            // 
-            // gcfProductos
-            // 
-            this.gcfProductos.BackColor = System.Drawing.Color.Transparent;
-            this.gcfProductos.Location = new System.Drawing.Point(563, 131);
-            this.gcfProductos.Margin = new System.Windows.Forms.Padding(2);
-            this.gcfProductos.Name = "gcfProductos";
-            this.gcfProductos.Size = new System.Drawing.Size(688, 445);
-            this.gcfProductos.TabIndex = 39;
-            this.gcfProductos.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Mediano;
             // 
             // FormGestionarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1328, 744);
+            this.ClientSize = new System.Drawing.Size(1585, 744);
             this.Controls.Add(this.filtroNombreProducto);
             this.Controls.Add(this.lblListaProveedores);
-            this.Controls.Add(this.gcfProductos);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminarProducto);
-            this.Controls.Add(this.groupBoxProducto);
             this.Controls.Add(this.btnAgregarProducto);
+            this.Controls.Add(this.gcfProductos);
+            this.Controls.Add(this.groupBoxProducto);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormGestionarProductos";
             this.Text = "FormGestionarProductos";
@@ -365,9 +362,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnEliminarProducto;
         private System.Windows.Forms.GroupBox groupBoxProducto;
         private System.Windows.Forms.CheckBox cbDisponible;
         private System.Windows.Forms.Label lblEstado;
@@ -377,15 +371,17 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblDocumento;
         private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.Button btnAgregarProducto;
         private System.Windows.Forms.ComboBox cbCategoria;
         private System.Windows.Forms.CheckBox cbEsPostre;
         private System.Windows.Forms.NumericUpDown nudTiempoPreparacion;
         private System.Windows.Forms.NumericUpDown nudPrecio;
         private System.Windows.Forms.Label lblMinutos;
+        private System.Windows.Forms.Label lblPrecio;
         private DataGridViewConFiltros gcfProductos;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminarProducto;
+        private System.Windows.Forms.Button btnAgregarProducto;
         private System.Windows.Forms.Label lblListaProveedores;
         private InputNombreFiltro filtroNombreProducto;
-        private System.Windows.Forms.Label lblPrecio;
     }
 }

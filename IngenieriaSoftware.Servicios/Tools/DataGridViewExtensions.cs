@@ -23,6 +23,11 @@ namespace IngenieriaSoftware.Servicios.Tools
             return dgv is null || dgv.RowCount.Equals(0);
         }
         #region Personalizacion Grilla estandar
+        /// <summary>
+        /// Personaliza el estilo del DataGridView con un diseño predeterminado.
+        /// </summary>
+        /// <remarks>Utilizar luego de cargar los datos</remarks>
+        /// <param name="dgv"></param>
         public static void PersonalizarEstiloPredeterminado(this DataGridView dgv)
         {
             dgv.AplicarColoresBase();
@@ -63,10 +68,18 @@ namespace IngenieriaSoftware.Servicios.Tools
             dgv.MultiSelect = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            // ⚡ Esto es importante: NO bloqueamos todas las celdas,
-            // después vas a decidir qué columnas son editables
             dgv.EditMode = DataGridViewEditMode.EditOnEnter;
-            dgv.ReadOnly = false;
+
+        }
+
+        public static void SetColumnasReadonly(this DataGridView dgv)
+        {
+            if (dgv.Columns == null) return;
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                var col = dgv.Columns[i];
+                col.ReadOnly = true;
+            }
         }
 
         private static void InicializarSiVacio(this DataGridView dgv)

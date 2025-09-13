@@ -12,9 +12,18 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         public FormListaOrdenCompra()
         {
             InitializeComponent();
-            Actualizar();
+            Inicializar();
         }
 
+        private void Inicializar()
+        {
+
+            Actualizar();
+            if(grillaConFiltros.CantidadElementos > 0)
+            {
+                grillaConFiltros.OcultarColumnas("Cantidad", "PrecioUnitarioEsperado");
+            }
+        }
         public void Actualizar()
         {
             ListarProductos();

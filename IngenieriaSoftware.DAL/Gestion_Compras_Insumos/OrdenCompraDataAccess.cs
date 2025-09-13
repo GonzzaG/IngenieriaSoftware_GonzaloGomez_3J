@@ -49,7 +49,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                             new SqlParameter("@CondicionesPago", ordenCompra.CondicionesPago.ToDbValue()),
                             new SqlParameter("@Moneda", ordenCompra.Moneda),
                             new SqlParameter("@TipoCambio", ordenCompra.TipoCambio.ToDbValue()),
-                            new SqlParameter("@ComandaEstado", ordenCompra.Estado),
+                            new SqlParameter("@Estado", ordenCompra.Estado),
                             new SqlParameter("@TotalEsperado", ordenCompra.TotalEsperado),
                             new SqlParameter("@Observaciones", ordenCompra.Observaciones.ToDbValue()),
                             new SqlParameter("@FechaCreacion", ordenCompra.FechaCreacion),
@@ -75,10 +75,6 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                                 new SqlParameter("@DescuentoLinea", detalle.DescuentoLinea),
                                 new SqlParameter("@NotasLinea", detalle.NotasLinea.ToDbValue()),
                                 new SqlParameter("@Subtotal", detalle.Subtotal.ToDbValue()),
-                                new SqlParameter("@FechaCreacion", detalle.FechaCreacion),
-                                new SqlParameter("@UsuarioCreacion", detalle.UsuarioCreacion),
-                                new SqlParameter("@FechaModificacion", detalle.FechaModificacion.ToDbValue()),
-                                new SqlParameter("@UsuarioModificacion", detalle.UsuarioModificacion.ToDbValue()),
                             };
 
                             new DAO().ExecuteStoredProcedure("OrdenCompra.sp_OrdenCompraDetalle_Guardar", parametrosDetalle, conn, tran);

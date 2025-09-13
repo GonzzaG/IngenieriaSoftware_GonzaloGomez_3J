@@ -15,16 +15,15 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra
 		public int IdOrdenCompra { get; set; }
 		public int IdProducto { get; set; }
 		public decimal Cantidad { get; set; }
-		public decimal PrecioUnitarioEsperado { get; set; }
-		public decimal DescuentoLinea { get; set; }
+		public decimal? PrecioUnitarioEsperado { get; set; }
+		public decimal? DescuentoLinea { get; set; }
 		public string NotasLinea { get; set; }
-		public decimal? Subtotal { get; set; }
+		public decimal? Subtotal 
+		{ 
+			get => PrecioUnitarioEsperado != null 
+					? Cantidad * PrecioUnitarioEsperado 
+					: 0; 
+		}
 
-
-		//Auditoria
-		public DateTime FechaCreacion { get; set; }
-		public string UsuarioCreacion { get; set; }
-		public DateTime? FechaModificacion { get; set; }
-		public string UsuarioModificacion { get; set; }
     }
 }

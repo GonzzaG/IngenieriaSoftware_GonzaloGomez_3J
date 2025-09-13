@@ -13,7 +13,23 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados.Inputs
     {
         // Cultura para el formato con separador de miles
         private readonly CultureInfo _cultura = new CultureInfo("es-ES");
+        /// <summary>
+        /// Devuelve el texto con formato (con puntos).
+        /// </summary>
+        [Browsable(false)]
+        public string ValorFormateado
+        {
+            get => this.Text;
+        }
 
+        /// <summary>
+        /// Devuelve solo los dígitos, sin separadores.
+        /// </summary>
+        [Browsable(false)]
+        public string ValorNumerico
+        {
+            get => this.Text.Replace(".", "");
+        }
         public InputNumericTextBox()
         {
             this.TextAlign = HorizontalAlignment.Right;
@@ -56,22 +72,6 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados.Inputs
             }
         }
 
-        /// <summary>
-        /// Devuelve el texto con formato (con puntos).
-        /// </summary>
-        [Browsable(false)]
-        public string ValorFormateado
-        {
-            get => this.Text;
-        }
 
-        /// <summary>
-        /// Devuelve solo los dígitos, sin separadores.
-        /// </summary>
-        [Browsable(false)]
-        public string ValorNumerico
-        {
-            get => this.Text.Replace(".", "");
-        }
     }
 }

@@ -16,7 +16,7 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra
 		public DateTime? FechaEntregaEsperada { get; set; }
 		public string CondicionesPago { get; set; }
         //Tipo de cambio respecto a la moneda base de la empresa
-        public decimal TipoCambio { get; set; }
+        public decimal? TipoCambio { get; set; }
 		public string Moneda { get; set; }
 
         // ComandaEstado puede ser: Pendiente, Aprobada, Rechazada, Recibida, Cancelada

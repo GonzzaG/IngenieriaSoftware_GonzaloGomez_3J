@@ -547,6 +547,8 @@
     <Content Include="dd779451f90bfcf15d997368ffece841.ico" />
     <Content Include="Puerco-arana-icono.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ControlesPersonalizados\ButtonCustom\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

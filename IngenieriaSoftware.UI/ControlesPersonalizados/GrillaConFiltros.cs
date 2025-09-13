@@ -117,13 +117,6 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             btnSiguiente.Click += (s, e) => CambiarPagina(1);
         }
 
-        public void CargarDatos(List<object> datos)
-        {
-            datosOriginales = datos;
-            paginaActual = 1;
-            AplicarFiltros();
-        }
-
         private void AplicarFiltros()
         {
             //Aca se podrian poner filtros, que se pasaran como parametro en MostrarPagina
@@ -155,6 +148,8 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
             dgv.DataSource = paginados;
             lblPagina.Text = $"Página {paginaActual}";
+
+            dgv.SetColumnasReadonly();
         }
 
         private void CambiarPagina(int delta)
@@ -220,6 +215,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         private DataGridViewCellEventHandler _agregarHandler;
         private DataGridViewCellEventHandler _quitarHandler;
         private bool _cantidadColumnHandlerAdded = false;
+        private bool _precioUnitarioColumnHandlerAdded = false;
 
         /// <summary>
         /// Agrega una columna con botón "Agregar"
@@ -380,17 +376,133 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
         #endregion
 
+        #region Agregar Columna PrecioUnitarioEsperado
         /// <summary>
-        /// Bloquea todas las columnas excepto la indicada.
+        /// Método que añade una columna editable para modificar el valor del precio unitario esperado de un registro.
         /// </summary>
-        public void PermitirEdicionSoloEn(string columnNameEditable)
+        /// <param name="onValueChanged"></param>
+        /// <param name="columnName"></param>
+        /// <param name="defaultValue"></param>
+        public void AddNumericPrecioUnitarioColumna(Action<object> onValueChanged, string columnName = "PrecioUnitarioEsperado", decimal defaultValue = 0.00m)
         {
-            foreach (DataGridViewColumn col in dgv.Columns)
+            if (ColumnExists(columnName))
+                return;
+
+            var col = CreateDecimalColumn(columnName);
+            InitializePrecioUnitarioValues(col, defaultValue);
+            ConfigurePrecioUnitarioEvents(columnName);
+        }
+
+        // Crea la columna editable de tipo decimal con estilo
+        private DataGridViewTextBoxColumn CreateDecimalColumn(string columnName)
+        {
+            var col = new DataGridViewTextBoxColumn
             {
-                col.ReadOnly = col.Name != columnNameEditable;
+                Name = columnName,
+                HeaderText = "Precio Unitario Esperado",
+                ValueType = typeof(decimal),
+                ReadOnly = false
+            };
+
+            //Celeste claro por defecto
+            col.DefaultCellStyle.BackColor = Color.FromArgb(200, 220, 240);
+            col.DefaultCellStyle.ForeColor = Color.Black;
+            col.DefaultCellStyle.Format = "N2"; 
+
+            dgv.Columns.Add(col);
+            return col;
+        }
+
+        // Inicializa valores de cada fila
+        private void InitializePrecioUnitarioValues(DataGridViewTextBoxColumn col, decimal defaultValue)
+        {
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    var cell = row.Cells[col.Name];
+                    cell.Value = defaultValue.Equals(0) ? 0.00m : defaultValue;
+                    cell.Style.BackColor = Color.FromArgb(200, 220, 240);
+                    cell.Style.ForeColor = Color.Black;
+                }
             }
         }
 
+        // Configura eventos de edición, validación y commit
+        private void ConfigurePrecioUnitarioEvents(string columnName)
+        {
+            if (_precioUnitarioColumnHandlerAdded)
+                return;
+
+            dgv.CurrentCellDirtyStateChanged += (s, e) =>
+            {
+                if (dgv.IsCurrentCellDirty)
+                    dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            };
+
+            dgv.EditingControlShowing += (s, e) =>
+            {
+                if (dgv.CurrentCell.ColumnIndex == dgv.Columns[columnName].Index && e.Control is TextBox tb)
+                {
+                    tb.KeyDown -= DecimalCell_KeyDown;
+                    tb.KeyDown += DecimalCell_KeyDown;
+                }
+            };
+
+            _precioUnitarioColumnHandlerAdded = true;
+        }
+
+        // Maneja la validación al presionar teclas
+        private void DecimalCell_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender is TextBox tb)
+            {
+                // Permitir números, decimales y control
+                if (!(char.IsDigit((char)e.KeyCode) ||
+                      e.KeyCode == Keys.Back ||
+                      e.KeyCode == Keys.Delete ||
+                      e.KeyCode == Keys.Decimal ||
+                      e.KeyCode == Keys.OemPeriod))
+                {
+                    e.SuppressKeyPress = true;
+                }
+            }
+        }
+        #endregion
+
+
+
+
+        /// <summary>
+        /// Hace readonly todas las columnas excepto las indicadas
+        /// </summary>
+        public void PermitirEdicionSoloEn(params string[] columnNameEditable)
+        {
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                var col = dgv.Columns[i];
+
+                col.ReadOnly = !columnNameEditable.Contains(col.Name);
+            }
+        }
+
+        /// <summary>
+        /// Oculta las columnas indicadas por nombre
+        /// </summary>
+        /// <param name="nombreColumnas"></param>
+        public void OcultarColumnas(params string[] nombreColumnas)
+        {
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                var col = dgv.Columns[i];
+                col.Visible = !nombreColumnas.Contains(col.Name);
+            }
+        }
+
+        public void SetBackColorColumna(string columname, Color color)
+        {
+            dgv.Columns[columname].DefaultCellStyle.BackColor = color;
+        }
 
         #endregion
         #endregion
@@ -423,11 +535,6 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
         }
 
-        public void OcultarColumna(string nombreColumna)
-        {
-            if (dgv.Columns.Contains(nombreColumna))
-                dgv.Columns[nombreColumna].Visible = false;
-        }
         #endregion
 
         private void dgv_DataError(object sender, DataGridViewDataErrorEventArgs e)

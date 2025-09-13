@@ -89,6 +89,20 @@ namespace IngenieriaSoftware.UI.Common
             modal.ShowDialog();
         }
 
-     
+        internal static void MensajeInformativo(this string mensaje)
+        {
+            MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        internal static void MensajeError(this string mensaje)
+        {
+            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        internal static void MensajeAdvertencia(this string mensaje)
+        {
+            MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }   
+
     }
 }
