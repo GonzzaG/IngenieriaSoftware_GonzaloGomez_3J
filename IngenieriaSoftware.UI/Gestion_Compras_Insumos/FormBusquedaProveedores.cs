@@ -81,7 +81,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void ValidarProveedor(Proveedor proveedor)
         {
-            proveedor.ValidarObjetoNoNulo();
+            proveedor.IsNull();
         }
     }
 }

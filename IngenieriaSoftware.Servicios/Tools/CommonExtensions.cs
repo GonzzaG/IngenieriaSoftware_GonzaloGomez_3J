@@ -6,7 +6,7 @@ namespace IngenieriaSoftware.Servicios.Tools
 {
     public static class CommonExtensions
     {
-        public static void ValidarObjetoNoNulo(this object objeto)
+        public static void IsNull(this object objeto)
         {
             if (objeto is null)
                 throw new ArgumentNullException($"{nameof(objeto)}, no validado correctamente");
@@ -17,16 +17,21 @@ namespace IngenieriaSoftware.Servicios.Tools
             return !string.IsNullOrWhiteSpace(value);
         }
 
-        public static bool HasPositiveValue(this decimal value)
+        public static bool Empty(this string value)
+        {
+            return string.IsNullOrWhiteSpace(value);
+        }
+
+        public static bool IsPositive(this decimal value)
         {
             return value > 0;
         }
-        public static bool HasPositiveValue(this int value)
+        public static bool IsPositive(this int value)
         {
             return value > 0;
         }
 
-        public static bool isEmpty(this IEnumerable<object> lista)
+        public static bool Empty(this IEnumerable<object> lista)
         {
             return lista == null || !lista.Any();
                

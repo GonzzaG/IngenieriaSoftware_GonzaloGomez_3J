@@ -51,6 +51,7 @@
     <Compile Include="Auditoria\UsuarioAuditoriaModel.cs" />
     <Compile Include="Bitacora.cs" />
     <Compile Include="BackupRegistro.cs" />
+    <Compile Include="Common\SelectListSimple.cs" />
     <Compile Include="Constantes\EstadoComanda.cs" />
     <Compile Include="Constantes\EstadoComandaProductos.cs" />
     <Compile Include="Constantes\EstadoFactura.cs" />
@@ -75,8 +76,11 @@
     <Compile Include="Negocio\ComandaProducto.cs" />
     <Compile Include="Negocio\Mesa.cs" />
     <Compile Include="Negocio\Notificacion.cs" />
+    <Compile Include="OrdenDeCompra\Models\OrdenCompraEstado.cs" />
+    <Compile Include="OrdenDeCompra\Models\OrdenCompraQuery.cs" />
     <Compile Include="OrdenDeCompra\OrdenDeCompraDetalleModel.cs" />
     <Compile Include="OrdenDeCompra\OrdenDeCompraModel.cs" />
+    <Compile Include="OrdenDeCompra\Models\OrdenCompraGetListaModel.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Negocio\Producto.cs" />
     <Compile Include="PeticionRestauracion.cs" />

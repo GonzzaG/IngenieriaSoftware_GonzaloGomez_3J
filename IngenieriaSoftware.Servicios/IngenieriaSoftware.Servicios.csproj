@@ -46,7 +46,7 @@
     <Compile Include="AuditoriaServicio.cs" />
     <Compile Include="DTOs\EtiquetaDTO.cs" />
     <Compile Include="DTOs\IdiomaDTO.cs" />
-    <Compile Include="DTOs\ListSimple\ProveedorListSimpleViewModel.cs" />
+    <Compile Include="DTOs\ListSimple\ProveedorListSimpleModel.cs" />
     <Compile Include="DTOs\ProductoOrdenCompraViewModel.cs" />
     <Compile Include="DTOs\TraduccionDTO.cs" />
     <Compile Include="DVHService.cs" />

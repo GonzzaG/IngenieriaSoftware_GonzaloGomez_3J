@@ -1,14 +1,40 @@
 ﻿using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.OrdenDeCompra;
+using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
+using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.DAL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.Tools;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
 {
     public class OrdenCompraBussiness
     {
+        /// <summary>
+        /// Obtiene la lista de órdenes de compra.
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenCompraGetListaModel> GetOrdenesCompra()
+        {
+            return OrdenCompraDataAccess.GetOrdenesCompra();
+        }
+
+        public List<OrdenCompraGetListaModel> GetOrdenesCompra(OrdenCompraQuery query)
+        {
+            PrepararQuery(query);
+
+            return query.GetOrdenesCompraDataAccess();
+        }
+
+        private static void PrepararQuery(OrdenCompraQuery query)
+        {
+            if (query.IdEstado == 0) query.IdEstado = null;
+            if (query.NumOrdenCompra.Empty()) query.NumOrdenCompra = null;
+        }
+
         public void Guardar(OrdenDeCompraModel ordenCompra)
         {
             Validar(ordenCompra);
@@ -20,7 +46,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
         {
             ordenCompra.FechaCreacion = DateTime.Now;
             ordenCompra.UsuarioCreacion = SessionManager.GetInstance.Usuario.Username;
-            ordenCompra.Estado = OrdenCompraEstado.Pendiente;
+            ordenCompra.Estado = OrdenCompraEstadoEnum.Pendiente;
         }
 
         #region Validaciones
@@ -44,7 +70,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
 
         private static void ValidarOrdenCompraExists(OrdenDeCompraModel ordenCompra)
         {
-            OrdenCompraDataAccess.OrdenCompraExist(ordenCompra.NumOrdenCompra);
+            ordenCompra.NumOrdenCompra.OrdenCompraExist();
         }
 
         private void OrdenCompraIsValid (OrdenDeCompraModel ordenCompra)

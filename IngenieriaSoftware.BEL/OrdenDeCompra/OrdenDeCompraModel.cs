@@ -22,7 +22,7 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra
         // ComandaEstado puede ser: Pendiente, Aprobada, Rechazada, Recibida, Cancelada
         // Se va cambiando durante el proceso, pero puede los usuairos pueden ir aprobandolo, rechazandolo, etc.
         //Cuando se quiere asignar una orden de compra a la factura, la orden debe estar en estado "Aprobada"
-        public OrdenCompraEstado Estado { get; set; }
+        public OrdenCompraEstadoEnum Estado { get; set; }
 		public decimal TotalEsperado { get; set; }
 		public string Observaciones { get; set; }
 		public List<OrdenDeCompraDetalleModel> Detalles { get; set; }

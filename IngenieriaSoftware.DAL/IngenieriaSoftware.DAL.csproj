@@ -72,6 +72,7 @@
     <Compile Include="Interfaces\IDataAccessEntity.cs" />
     <Compile Include="ListSimpleDataAccess\ListSimpleDataAccess.cs" />
     <Compile Include="Mapper\CategoriaMapper.cs" />
+    <Compile Include="Mapper\OrdenCompraMapper.cs" />
     <Compile Include="Mapper\ProductoProveedorMapper.cs" />
     <Compile Include="ObjetoDAL.cs" />
     <Compile Include="EntityDAL\ClienteDAL.cs" />

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.Tools
 {
@@ -15,7 +11,19 @@ namespace IngenieriaSoftware.DAL.Tools
         /// <returns></returns>
         public static object ToDbValue(this object value)
         {
-            return value ?? DBNull.Value;
+            if (value == null)
+                return DBNull.Value;
+
+            var s = value as string;
+            if (s != null)
+                if (s.Trim().Length == 0)
+                    return DBNull.Value;
+                else
+                    return s;
+
+            return value;
         }
+
+
     }
 }

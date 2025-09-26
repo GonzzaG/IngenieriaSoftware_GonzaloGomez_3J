@@ -713,12 +713,25 @@ namespace IngenieriaSoftware.UI
 
         }
 
-        private void ordenDeCompraToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void agregarOrdenDeCompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                FormListaOrdenCompra ordenCompraForm = new FormListaOrdenCompra();
-                AbrirFormHijo(ordenCompraForm);
+                AbrirFormHijo(new FormListaOrdenCompra());
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
+            }
+        }
+
+        private void autorizaciónDeOrdenesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AbrirFormHijo(new FormAutorizacionOrdenCompra());
 
             }
             catch (Exception ex)

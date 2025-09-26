@@ -82,7 +82,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void OnProveedorSeleccionado(Proveedor proveedor)
         {
-            proveedor.ValidarObjetoNoNulo();
+            proveedor.IsNull();
 
             MostrarDatosProveedorSeleccionado(proveedor);
 
@@ -172,7 +172,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void AgregarProductoAlCarrito(Producto productoSeleccionado)
         {
-            productoSeleccionado.ValidarObjetoNoNulo();
+            productoSeleccionado.IsNull();
             CarritoProductos.Add(productoSeleccionado);
 
             ActualizarCarrito();
@@ -187,7 +187,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         }
         private void MostrarEnLabelTotal(decimal total)
         {
-            lblTotal.Text = total.HasPositiveValue()
+            lblTotal.Text = total.IsPositive()
                 ? total.FormatearCadenaPrecioDecimal()
                 : string.Empty;
         }
@@ -249,7 +249,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void QuitarProductoDelCarrito(Producto productoSeleccionado)
         {
-            productoSeleccionado.ValidarObjetoNoNulo();
+            productoSeleccionado.IsNull();
             CarritoProductos.Remove(productoSeleccionado);
 
             ActualizarCarrito();

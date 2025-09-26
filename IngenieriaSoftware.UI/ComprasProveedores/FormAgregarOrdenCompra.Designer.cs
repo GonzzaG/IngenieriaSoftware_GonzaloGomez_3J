@@ -313,17 +313,18 @@
             // 
             // dtpFechaEntregaEsperada
             // 
+            this.dtpFechaEntregaEsperada.Checked = false;
             this.dtpFechaEntregaEsperada.CustomFormat = " ";
             this.dtpFechaEntregaEsperada.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
             this.dtpFechaEntregaEsperada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaEntregaEsperada.Location = new System.Drawing.Point(1013, 89);
             this.dtpFechaEntregaEsperada.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpFechaEntregaEsperada.MinDate = new System.DateTime(2025, 9, 5, 0, 0, 0, 0);
+            this.dtpFechaEntregaEsperada.MinDate = new System.DateTime(2025, 9, 25, 0, 0, 0, 0);
             this.dtpFechaEntregaEsperada.Name = "dtpFechaEntregaEsperada";
             this.dtpFechaEntregaEsperada.ShowCheckBox = true;
             this.dtpFechaEntregaEsperada.Size = new System.Drawing.Size(251, 29);
             this.dtpFechaEntregaEsperada.TabIndex = 85;
-            this.dtpFechaEntregaEsperada.Value = new System.DateTime(2025, 9, 5, 19, 20, 22, 0);
+            this.dtpFechaEntregaEsperada.Value = new System.DateTime(2025, 9, 25, 0, 0, 0, 0);
             // 
             // lblCodigo
             // 

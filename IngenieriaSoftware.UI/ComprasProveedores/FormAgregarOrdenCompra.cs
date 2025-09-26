@@ -110,7 +110,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 NumOrdenCompra = txtNumeroOrdenCompra.Text,
                 IdProveedor = cbProveedor.SelectedItem == null 
                               ? 0 
-                              : ((ProveedorListSimpleViewModel)cbProveedor.SelectedItem).IdProveedor,
+                              : ((ProveedorListSimpleModel)cbProveedor.SelectedItem).IdProveedor,
                 Fecha = dtpFechaEmision.Value,
                 FechaEntregaEsperada = dtpFechaEntregaEsperada.Checked 
                                         ? dtpFechaEntregaEsperada.Value 
@@ -120,9 +120,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 TipoCambio = txtNumericTipoCambio.Text.Equals(string.Empty)
                                        ? 0
                                        : decimal.Parse(txtNumericTipoCambio.Text),
-                Estado = OrdenCompraEstado.Pendiente,
+                Estado = OrdenCompraEstadoEnum.Pendiente,
                 TotalEsperado = ObtenerTotalEsperado(txtNumericTotalEsperado.Text),
                 Observaciones = txtAreaObservaciones.Text,
+
+                
                 Detalles = (from producto in _ProductosOrdenCompra
                             select new OrdenDeCompraDetalleModel
                             {
@@ -133,7 +135,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
                             }).ToList()
             };
-
             new OrdenCompraBussiness().Guardar(ordenCompra);
 
             return ordenCompra.NumOrdenCompra;

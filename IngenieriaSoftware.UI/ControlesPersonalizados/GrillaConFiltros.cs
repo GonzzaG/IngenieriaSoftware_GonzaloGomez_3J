@@ -62,6 +62,13 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             AplicarTamanoGrilla();
         }
 
+        public void Limpiar()
+        {
+            dgv.DataSource = null;
+            datosOriginales.Clear();
+            paginaActual = 1;
+        }   
+
         private void AplicarTamanoGrilla()
         {
             Size tamanoGrilla;
@@ -180,7 +187,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
         public void CargarDatos<T>(List<T> datos) where T : class, new()
         {
-            if (datos.isEmpty())
+            if (datos.Empty())
             {
                 panelNoResultadoProducto.MostrarNoResultado(true);
                 dgv.DataSource = null;

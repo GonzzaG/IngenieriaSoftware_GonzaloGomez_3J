@@ -130,6 +130,12 @@
     <Compile Include="ComprasProveedores\FormAgregarOrdenCompra.Designer.cs">
       <DependentUpon>FormAgregarOrdenCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprasProveedores\FormAutorizacionOrdenCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\FormAutorizacionOrdenCompra.Designer.cs">
+      <DependentUpon>FormAutorizacionOrdenCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComprasProveedores\FormListaOrdenCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,6 +376,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ComprasProveedores\FormAgregarOrdenCompra.resx">
       <DependentUpon>FormAgregarOrdenCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasProveedores\FormAutorizacionOrdenCompra.resx">
+      <DependentUpon>FormAutorizacionOrdenCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\FormListaOrdenCompra.resx">
       <DependentUpon>FormListaOrdenCompra.cs</DependentUpon>

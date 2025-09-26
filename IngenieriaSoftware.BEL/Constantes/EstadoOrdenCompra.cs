@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.BEL.Constantes
 {
-    public enum OrdenCompraEstado
+    public enum OrdenCompraEstadoEnum
     {
         Pendiente = 1,
         Aprobada = 2,

@@ -96,7 +96,7 @@ namespace IngenieriaSoftware.DAL.Auditoria
 
                 //foreach (DataRow row in dt.Tables[0].Rows)
                 //{
-                //    lista.Add(new UsuarioAuditoriaMapper().ConvertirDesdeRow(row));
+                //    lista.Add(new UsuarioAuditoriaMapper().ConvertirDataSet(row));
                 //}
 
                 //return lista;

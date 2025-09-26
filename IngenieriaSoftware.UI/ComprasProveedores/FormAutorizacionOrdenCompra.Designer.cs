@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI.ComprasProveedores
 {
-    partial class FormListaOrdenCompra
+    partial class FormAutorizacionOrdenCompra
     {
         /// <summary>
         /// Required designer variable.
@@ -28,40 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.grillaConFiltros = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.gBListaOrdenCompra = new System.Windows.Forms.GroupBox();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
-            this.lblEstado = new System.Windows.Forms.Label();
             this.lblFechaDesde = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.grillaConFiltros = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnRechazarOrden = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.gBListaOrdenCompra.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // grillaConFiltros
+            // 
+            this.grillaConFiltros.BackColor = System.Drawing.Color.Transparent;
+            this.grillaConFiltros.Location = new System.Drawing.Point(148, 292);
+            this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2);
+            this.grillaConFiltros.Name = "grillaConFiltros";
+            this.grillaConFiltros.Size = new System.Drawing.Size(1016, 487);
+            this.grillaConFiltros.TabIndex = 37;
+            this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
             // 
             // gBListaOrdenCompra
             // 
             this.gBListaOrdenCompra.AutoSize = true;
             this.gBListaOrdenCompra.Controls.Add(this.dtpFechaDesde);
-            this.gBListaOrdenCompra.Controls.Add(this.cbEstado);
-            this.gBListaOrdenCompra.Controls.Add(this.lblEstado);
             this.gBListaOrdenCompra.Controls.Add(this.lblFechaDesde);
             this.gBListaOrdenCompra.Controls.Add(this.txtCodigo);
             this.gBListaOrdenCompra.Controls.Add(this.lblCodigo);
             this.gBListaOrdenCompra.Controls.Add(this.btnBuscar);
-            this.gBListaOrdenCompra.Controls.Add(this.btnAgregar);
             this.gBListaOrdenCompra.Controls.Add(this.btnLimpiar);
             this.gBListaOrdenCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBListaOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.gBListaOrdenCompra.Location = new System.Drawing.Point(148, 33);
+            this.gBListaOrdenCompra.Location = new System.Drawing.Point(148, 41);
             this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(2);
             this.gBListaOrdenCompra.Name = "gBListaOrdenCompra";
             this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(2);
             this.gBListaOrdenCompra.Size = new System.Drawing.Size(1040, 228);
-            this.gBListaOrdenCompra.TabIndex = 34;
+            this.gBListaOrdenCompra.TabIndex = 36;
             this.gBListaOrdenCompra.TabStop = false;
             this.gBListaOrdenCompra.Text = "Orden de compra";
             // 
@@ -73,28 +80,6 @@
             this.dtpFechaDesde.Size = new System.Drawing.Size(151, 28);
             this.dtpFechaDesde.TabIndex = 43;
             this.dtpFechaDesde.Value = new System.DateTime(2025, 9, 16, 23, 18, 0, 0);
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(555, 82);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(189, 30);
-            this.cbEstado.TabIndex = 42;
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblEstado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblEstado.Location = new System.Drawing.Point(551, 58);
-            this.lblEstado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(56, 21);
-            this.lblEstado.TabIndex = 41;
-            this.lblEstado.Tag = "";
-            this.lblEstado.Text = "IdEstado";
             // 
             // lblFechaDesde
             // 
@@ -131,7 +116,7 @@
             this.lblCodigo.Location = new System.Drawing.Point(76, 60);
             this.lblCodigo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(60, 21);
+            this.lblCodigo.Size = new System.Drawing.Size(145, 21);
             this.lblCodigo.TabIndex = 36;
             this.lblCodigo.Tag = "116";
             this.lblCodigo.Text = "NumOrdenCompra";
@@ -149,22 +134,7 @@
             this.btnBuscar.TabIndex = 35;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAgregar.Location = new System.Drawing.Point(767, 165);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(103, 37);
-            this.btnAgregar.TabIndex = 36;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click_1);
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnLimpiar
             // 
@@ -179,29 +149,65 @@
             this.btnLimpiar.TabIndex = 37;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // grillaConFiltros
+            // btnAceptar
             // 
-            this.grillaConFiltros.BackColor = System.Drawing.Color.Transparent;
-            this.grillaConFiltros.Location = new System.Drawing.Point(148, 311);
-            this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2);
-            this.grillaConFiltros.Name = "grillaConFiltros";
-            this.grillaConFiltros.Size = new System.Drawing.Size(1016, 487);
-            this.grillaConFiltros.TabIndex = 35;
-            this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
+            this.btnAceptar.BackColor = System.Drawing.Color.DarkGreen;
+            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAceptar.Location = new System.Drawing.Point(1342, 251);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(161, 51);
+            this.btnAceptar.TabIndex = 40;
+            this.btnAceptar.Tag = "56";
+            this.btnAceptar.Text = "Aceptar Orden";
+            this.btnAceptar.UseVisualStyleBackColor = false;
             // 
-            // FormListaOrdenCompra
+            // btnRechazarOrden
+            // 
+            this.btnRechazarOrden.BackColor = System.Drawing.Color.Maroon;
+            this.btnRechazarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRechazarOrden.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRechazarOrden.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnRechazarOrden.Location = new System.Drawing.Point(1342, 321);
+            this.btnRechazarOrden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRechazarOrden.Name = "btnRechazarOrden";
+            this.btnRechazarOrden.Size = new System.Drawing.Size(161, 51);
+            this.btnRechazarOrden.TabIndex = 41;
+            this.btnRechazarOrden.Tag = "56";
+            this.btnRechazarOrden.Text = "Rechazar Orden";
+            this.btnRechazarOrden.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(715, 599);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(725, 21);
+            this.label1.TabIndex = 44;
+            this.label1.Tag = "116";
+            this.label1.Text = "Mostrar productos de la orden de compra que se aceptaran, junto con algun desgloc" +
+    "e de la informacion";
+            // 
+            // FormAutorizacionOrdenCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1374, 839);
+            this.ClientSize = new System.Drawing.Size(1648, 877);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnRechazarOrden);
+            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.grillaConFiltros);
             this.Controls.Add(this.gBListaOrdenCompra);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "FormListaOrdenCompra";
-            this.Text = "Orden de compra";
+            this.Name = "FormAutorizacionOrdenCompra";
+            this.Text = "FormAutorizacionOrdenCompra";
             this.gBListaOrdenCompra.ResumeLayout(false);
             this.gBListaOrdenCompra.PerformLayout();
             this.ResumeLayout(false);
@@ -210,16 +216,17 @@
         }
 
         #endregion
+
+        private ControlesPersonalizados.DataGridViewConFiltros grillaConFiltros;
         private System.Windows.Forms.GroupBox gBListaOrdenCompra;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.DateTimePicker dtpFechaDesde;
         private System.Windows.Forms.Label lblFechaDesde;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label lblCodigo;
-        private System.Windows.Forms.DateTimePicker dtpFechaDesde;
-        private System.Windows.Forms.ComboBox cbEstado;
-        private ControlesPersonalizados.DataGridViewConFiltros grillaConFiltros;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnRechazarOrden;
+        private System.Windows.Forms.Label label1;
     }
 }

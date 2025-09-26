@@ -43,7 +43,7 @@
             this.lblNumeroOrdenCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblNumeroOrdenCompra.Font = new System.Drawing.Font("Segoe UI Symbol", 16F);
             this.lblNumeroOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblNumeroOrdenCompra.Location = new System.Drawing.Point(69, 15);
+            this.lblNumeroOrdenCompra.Location = new System.Drawing.Point(69, 31);
             this.lblNumeroOrdenCompra.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumeroOrdenCompra.Name = "lblNumeroOrdenCompra";
             this.lblNumeroOrdenCompra.Size = new System.Drawing.Size(271, 30);
@@ -59,9 +59,9 @@
             // 
             this.dgvConFiltroProductos.BackColor = System.Drawing.Color.Transparent;
             this.dgvConFiltroProductos.Location = new System.Drawing.Point(51, 107);
-            this.dgvConFiltroProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvConFiltroProductos.Margin = new System.Windows.Forms.Padding(2);
             this.dgvConFiltroProductos.Name = "dgvConFiltroProductos";
-            this.dgvConFiltroProductos.Size = new System.Drawing.Size(762, 396);
+            this.dgvConFiltroProductos.Size = new System.Drawing.Size(1016, 487);
             this.dgvConFiltroProductos.TabIndex = 79;
             this.dgvConFiltroProductos.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
             // 
@@ -72,7 +72,7 @@
             this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnAgregarProducto.Location = new System.Drawing.Point(74, 566);
-            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(197, 37);
             this.btnAgregarProducto.TabIndex = 80;
