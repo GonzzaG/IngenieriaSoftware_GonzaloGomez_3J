@@ -46,7 +46,8 @@
             this.txtPassword.Location = new System.Drawing.Point(185, 238);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(251, 34);
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(251, 29);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.Tag = "137";
             // 
@@ -58,7 +59,7 @@
             this.txtUsername.Location = new System.Drawing.Point(185, 142);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(251, 34);
+            this.txtUsername.Size = new System.Drawing.Size(251, 29);
             this.txtUsername.TabIndex = 2;
             this.txtUsername.Tag = "135";
             // 
@@ -70,7 +71,7 @@
             this.lblUsername.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblUsername.Location = new System.Drawing.Point(180, 102);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(181, 28);
+            this.lblUsername.Size = new System.Drawing.Size(145, 21);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Tag = "134";
             this.lblUsername.Text = "Nombre de usuario";
@@ -84,7 +85,7 @@
             this.lblPassword.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblPassword.Location = new System.Drawing.Point(182, 206);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(110, 28);
+            this.lblPassword.Size = new System.Drawing.Size(89, 21);
             this.lblPassword.TabIndex = 4;
             this.lblPassword.Tag = "136";
             this.lblPassword.Text = "Contraseña";

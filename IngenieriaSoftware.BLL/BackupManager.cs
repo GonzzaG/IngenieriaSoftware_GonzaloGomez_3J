@@ -3,6 +3,7 @@ using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -52,30 +53,64 @@ namespace IngenieriaSoftware.BLL
         {
             string backupFilePath = Path.Combine(BackupsDirectory, nombreBackup);
 
-            if (string.IsNullOrEmpty(backupFilePath) ||
-                !File.Exists(backupFilePath))
+            if (string.IsNullOrEmpty(backupFilePath) || !File.Exists(backupFilePath))
             {
                 throw new FileNotFoundException("El backup especificado no existe.", backupFilePath);
             }
 
-            string dataFile = Path.Combine(BackupsDirectory, "ISProyecto.mdf");
+            #region 1. Obtener las rutas por defecto de la instancia
+            (string dataPath, string logPath) = GetDefaultPaths();
 
-            string logFile = Path.Combine(BackupsDirectory, "ISProyecto_log.ldf");
+            if (string.IsNullOrEmpty(dataPath) || string.IsNullOrEmpty(logPath))
+            {
+                throw new Exception("No se pudieron obtener las rutas de datos y logs de SQL Server.");
+            }
+            #endregion
 
+            #region 2. Definir las rutas de destino para MDF y LDF dentro de las carpetas de SQL
+            string dataFile = Path.Combine(dataPath, "ISProyecto.mdf");
+            string logFile = Path.Combine(logPath, "ISProyecto_log.ldf");
+            #endregion
+
+            #region 3. Construir el script de restauración
             var cmd = new StringBuilder();
 
-            cmd.AppendLine("USE MASTER;");
+            cmd.AppendLine("USE master;");
             cmd.AppendLine("ALTER DATABASE ISProyecto SET SINGLE_USER WITH ROLLBACK IMMEDIATE;");
             cmd.AppendLine($"RESTORE DATABASE ISProyecto FROM DISK = N'{backupFilePath}' WITH REPLACE,");
-
             cmd.AppendLine($"MOVE 'ISProyecto' TO N'{dataFile}',");
-
             cmd.AppendLine($"MOVE 'ISProyecto_log' TO N'{logFile}';");
-
             cmd.AppendLine("ALTER DATABASE ISProyecto SET MULTI_USER;");
+            #endregion
 
+            #region 4. Ejecutar
             _backupRepository.actionBD(cmd.ToString());
+            #endregion
         }
+
+        // Método auxiliar para obtener rutas
+        private (string DataPath, string LogPath) GetDefaultPaths()
+        {
+            const string query = @"
+        SELECT 
+            CAST(SERVERPROPERTY('InstanceDefaultDataPath') AS NVARCHAR(200)) AS DataPath,
+            CAST(SERVERPROPERTY('InstanceDefaultLogPath') AS NVARCHAR(200)) AS LogPath";
+
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString))
+            using (var cmd = new SqlCommand(query, conn))
+            {
+                conn.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return (reader["DataPath"].ToString(), reader["LogPath"].ToString());
+                    }
+                }
+            }
+            return (null, null);
+        }
+
 
 
         public List<string> GetBackUps()
