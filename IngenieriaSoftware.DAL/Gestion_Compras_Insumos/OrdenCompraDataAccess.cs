@@ -22,6 +22,34 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                 .ConvertirDataSet();
         }
 
+        public static OrdenCompraGetDetalles GetOrdenCompraByNumero(this string numOrdenCompra)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@NumOrdenCompra",numOrdenCompra)
+            };
+
+            var ordenCompra = new DAO()
+                .ExecuteStoredProcedure("OrdenCompra.sp_GetOrdenCompraByNumero", parametros)
+                .ConvertirOrdenCompraConDetallesDataSet();
+
+            if(ordenCompra == null)
+                throw new Exception($"No se encontró una orden de compra con el número {numOrdenCompra}");
+
+            if(ordenCompra is OrdenCompraGetDetalles orden)
+            {
+                var ds = new DAO()
+                    .ExecuteStoredProcedure("OrdenCompra.sp_OrdenCompraDetalles", new SqlParameter[]
+                    {
+                        new SqlParameter("@IdOrdenCompra", orden.IdOrdenCompra)
+                    });
+
+                orden.Detalles = ds.ConvertirDetallesDataSet();
+            }
+
+            return ordenCompra;
+        }
+
         public static List<OrdenCompraGetListaModel> GetOrdenesCompraDataAccess(this OrdenCompraQuery query)
         {
             var parametros = new SqlParameter[]

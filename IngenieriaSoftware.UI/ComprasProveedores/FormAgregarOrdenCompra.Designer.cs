@@ -99,7 +99,7 @@
             this.txtAreaObservaciones.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtAreaObservaciones.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAreaObservaciones.ForeColor = System.Drawing.Color.DimGray;
-            this.txtAreaObservaciones.Location = new System.Drawing.Point(1299, 684);
+            this.txtAreaObservaciones.Location = new System.Drawing.Point(1296, 691);
             this.txtAreaObservaciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAreaObservaciones.Multiline = true;
             this.txtAreaObservaciones.Name = "txtAreaObservaciones";
@@ -319,7 +319,6 @@
             this.dtpFechaEntregaEsperada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaEntregaEsperada.Location = new System.Drawing.Point(1013, 89);
             this.dtpFechaEntregaEsperada.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpFechaEntregaEsperada.MinDate = new System.DateTime(2025, 9, 25, 0, 0, 0, 0);
             this.dtpFechaEntregaEsperada.Name = "dtpFechaEntregaEsperada";
             this.dtpFechaEntregaEsperada.ShowCheckBox = true;
             this.dtpFechaEntregaEsperada.Size = new System.Drawing.Size(251, 29);

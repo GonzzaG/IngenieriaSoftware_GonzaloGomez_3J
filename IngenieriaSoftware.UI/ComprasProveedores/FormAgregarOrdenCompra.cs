@@ -1,6 +1,8 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.OrdenDeCompra;
+using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
+using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BLL.ListSimpleBussiness;
 using IngenieriaSoftware.Servicios;
@@ -20,7 +22,79 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
     public partial class FormAgregarOrdenCompra : Form, IActualizable
     {
         private List<ProductoOrdenCompraViewModel> _ProductosOrdenCompra { get; set; }
+        private OrdenCompraGetDetalles _OrdenDeCompra { get; set; }
 
+        private bool isEdit=false;
+        public FormAgregarOrdenCompra(string numOrdenCompra)
+        {
+            InitializeComponent();
+            InicializarVistaAutorizacionOrden(numOrdenCompra);
+            isEdit = true;
+        }
+
+        
+        private void InicializarVistaAutorizacionOrden(string numOrdenCompra)
+        {
+            BuscarOrdenSeleccionada(numOrdenCompra);
+            
+
+            // Ponemos los datos de la orden de compra dentro de los componentes
+        }
+        private void BuscarOrdenSeleccionada(string numOrdenCompra)
+        {
+            var filtro = new OrdenCompraQuery
+            {
+                NumOrdenCompra = numOrdenCompra,
+                IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
+            };
+            _OrdenDeCompra = new OrdenCompraBussiness().GetOrdenCompraByNumero(numOrdenCompra);
+
+        }
+
+        /// <summary>
+        /// Esta funcion se encarga de cargar los datos de la orden de compra en los controles del formulario
+        /// </summary>
+        /// <param name="orden"></param>
+        private void PrepararVistaAutorizacionOrden(OrdenCompraGetDetalles orden)
+        {
+            txtAreaObservaciones.Text = orden.Observaciones;
+            txtCondicionesPago.Text = orden.CondicionesPago;
+            txtMoneda.Text = orden.Moneda;
+            txtNumericTipoCambio.Text = orden.TipoCambio.ToString();
+            txtNumericTotalEsperado.Text = orden.TotalEsperado.ToString();
+            txtNumeroOrdenCompra.Text = orden.NumOrdenCompra;
+            dtpFechaEmision.Value = orden.Fecha;
+            if (orden.FechaEntregaEsperada.HasValue)
+            {
+                dtpFechaEntregaEsperada.Value = orden.FechaEntregaEsperada.Value;
+                dtpFechaEntregaEsperada.Checked = true;
+            }
+            else
+                dtpFechaEntregaEsperada.Checked = false;
+            // Seleccionamos el proveedor en el comboBox
+            ListarProveedores();
+            if (orden is not null && orden.NumOrdenCompra != null)
+            {
+                var proveedorSeleccionado = ((List<ProveedorListSimpleModel>)cbProveedor.DataSource)
+                                            .FirstOrDefault(p => p.RazonSocial == orden.RazonSocialProveedor);
+                if (proveedorSeleccionado != null)
+                    cbProveedor.SelectedItem = proveedorSeleccionado;
+            }
+            // Cargamos los productos de la orden de compra en el DataGridView
+            dgvProductosOrdenCompra.CargarDatos(_OrdenDeCompra.Detalles);
+
+        }
+
+        private void DeshabilitarControles()
+        {
+            foreach (System.Windows.Forms.Control control in this.Controls)
+            {
+                if (control.ForeColor == Color.Red)
+                    control.Visible = false;
+                else
+                    control.Enabled = false;
+            }
+        }
 
         public FormAgregarOrdenCompra()
         {
@@ -43,7 +117,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             var proveedores = new ListSimpleBussiness().GetProveedoresListSimple();
 
-            //cbProveedor.DataSource = proveedores.Select(p => p.RazonSocial).ToList();
             cbProveedor.DataSource = proveedores;
 
             cbProveedor.DisplayMember = "RazonSocial";
@@ -170,7 +243,12 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void FormAgregarOrdenCompra_Load(object sender, EventArgs e)
         {
-
+            if (isEdit) 
+            {
+                PrepararVistaAutorizacionOrden(_OrdenDeCompra);
+                // Deshabilitamos todos los controles para que no se puedan editar
+                DeshabilitarControles();
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

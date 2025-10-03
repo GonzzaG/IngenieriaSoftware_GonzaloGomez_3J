@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL.Constantes;
 using System;
+using System.Collections.Generic;
 
 namespace IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels
 {
@@ -24,5 +25,11 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels
         // Estos se van a ir cargando automaticamente
         public DateTime FechaCreacion { get; set; }
         public string UsuarioCreacion { get; set; }
+    }
+
+    public class OrdenCompraGetDetalles : OrdenCompraGetListaModel
+    {
+        public int IdOrdenCompra { get; set; }  
+        public List<OrdenDeCompraDetalleModel> Detalles { get; set; }
     }
 }

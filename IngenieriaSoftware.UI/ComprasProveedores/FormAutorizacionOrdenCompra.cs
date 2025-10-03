@@ -1,14 +1,9 @@
 ﻿using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
+using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.UI.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ComprasProveedores
@@ -29,7 +24,26 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             };
 
             grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
+            grillaConFiltros.AddButtonAgregarColumna(AbrirModalAutorizacion, "Detalles", "Detalles");
         }
+
+        private void AbrirModalAutorizacion()
+        {
+            var ordenSeleccionada = grillaConFiltros.ElementoSeleccionado != null
+                ? grillaConFiltros.ElementoSeleccionado as OrdenCompraGetListaModel
+                : null;
+
+            if (ordenSeleccionada == null)
+                return;
+
+            using (var form = new FormAgregarOrdenCompra(ordenSeleccionada.NumOrdenCompra))
+            {
+                form.AbrirFormModal();
+                btnBuscar_Click(null, null);    
+            }
+        }
+
+
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -49,6 +63,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void FormAutorizacionOrdenCompra_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
