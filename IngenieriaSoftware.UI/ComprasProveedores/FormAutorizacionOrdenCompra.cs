@@ -3,12 +3,13 @@ using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.UI.Common;
+using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ComprasProveedores
 {
-    public partial class FormAutorizacionOrdenCompra : Form
+    public partial class FormAutorizacionOrdenCompra : Form, IActualizable
     {
         public FormAutorizacionOrdenCompra()
         {
@@ -18,13 +19,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void Inicializar()
         {
-            var filtro = new OrdenCompraQuery
-            {
-                IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
-            };
-
-            grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
-            grillaConFiltros.AddButtonAgregarColumna(AbrirModalAutorizacion, "Detalles", "Detalles");
+            Actualizar();
         }
 
         private void AbrirModalAutorizacion()
@@ -39,11 +34,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             using (var form = new FormAgregarOrdenCompra(ordenSeleccionada.NumOrdenCompra))
             {
                 form.AbrirFormModal();
-                btnBuscar_Click(null, null);    
+                btnBuscar_Click(null, null);
             }
         }
-
-
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -68,6 +61,22 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         private void FormAutorizacionOrdenCompra_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDetalles_Click(object sender, EventArgs e)
+        {
+            AbrirModalAutorizacion();
+            Actualizar();
+        }
+
+        public void Actualizar()
+        {
+            var filtro = new OrdenCompraQuery
+            {
+                IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
+            };
+
+            grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
         }
     }
 }

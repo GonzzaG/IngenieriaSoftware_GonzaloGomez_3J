@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Constantes;
+﻿using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.OrdenDeCompra;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
@@ -14,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ComprasProveedores
@@ -24,7 +22,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         private List<ProductoOrdenCompraViewModel> _ProductosOrdenCompra { get; set; }
         private OrdenCompraGetDetalles _OrdenDeCompra { get; set; }
 
-        private bool isEdit=false;
+        private bool isEdit = false;
         public FormAgregarOrdenCompra(string numOrdenCompra)
         {
             InitializeComponent();
@@ -32,11 +30,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             isEdit = true;
         }
 
-        
+
         private void InicializarVistaAutorizacionOrden(string numOrdenCompra)
         {
             BuscarOrdenSeleccionada(numOrdenCompra);
-            
+
 
             // Ponemos los datos de la orden de compra dentro de los componentes
         }
@@ -48,7 +46,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
             };
             _OrdenDeCompra = new OrdenCompraBussiness().GetOrdenCompraByNumero(numOrdenCompra);
-
+           
         }
 
         /// <summary>
@@ -87,13 +85,39 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void DeshabilitarControles()
         {
-            foreach (System.Windows.Forms.Control control in this.Controls)
-            {
-                if (control.ForeColor == Color.Red)
-                    control.Visible = false;
-                else
-                    control.Enabled = false;
-            }
+            txtNumeroOrdenCompra.Enabled = false;
+            dtpFechaEmision.Enabled = false;
+            dtpFechaEntregaEsperada.Enabled = false;
+            cbProveedor.Enabled = false;
+            txtAreaObservaciones.Enabled = false;
+            txtNumericTotalEsperado.Enabled = false;
+            txtMoneda.Enabled = false;
+            txtNumericTipoCambio.Enabled = false;
+            txtCondicionesPago.Enabled = false;
+
+            btnSeleccionarProductos.Visible = false;
+            btnGenerarOrdenCompra.Visible = false;
+
+            btnAceptarOrden.Visible = true;
+            btnRechazarOrden.Visible = true;
+        }
+
+        private void HabilitarControles()
+        {
+            txtNumeroOrdenCompra.Enabled = true;
+            dtpFechaEmision.Enabled = true;
+            dtpFechaEntregaEsperada.Enabled = true;
+            cbProveedor.Enabled = true;
+            txtAreaObservaciones.Enabled = true;
+            txtNumericTotalEsperado.Enabled = true;
+            txtMoneda.Enabled = true;
+            txtNumericTipoCambio.Enabled = true;
+            txtCondicionesPago.Enabled = true;
+
+            btnSeleccionarProductos.Visible = true;
+            btnGenerarOrdenCompra.Visible = true;
+            btnAceptarOrden.Visible = false;
+            btnRechazarOrden.Visible = false;
         }
 
         public FormAgregarOrdenCompra()
@@ -181,12 +205,12 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             var ordenCompra = new OrdenDeCompraModel
             {
                 NumOrdenCompra = txtNumeroOrdenCompra.Text,
-                IdProveedor = cbProveedor.SelectedItem == null 
-                              ? 0 
+                IdProveedor = cbProveedor.SelectedItem == null
+                              ? 0
                               : ((ProveedorListSimpleModel)cbProveedor.SelectedItem).IdProveedor,
                 Fecha = dtpFechaEmision.Value,
-                FechaEntregaEsperada = dtpFechaEntregaEsperada.Checked 
-                                        ? dtpFechaEntregaEsperada.Value 
+                FechaEntregaEsperada = dtpFechaEntregaEsperada.Checked
+                                        ? dtpFechaEntregaEsperada.Value
                                         : null,
                 CondicionesPago = txtCondicionesPago.Text,
                 Moneda = txtMoneda.Text,
@@ -197,9 +221,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 TotalEsperado = ObtenerTotalEsperado(txtNumericTotalEsperado.Text),
                 Observaciones = txtAreaObservaciones.Text,
 
-                
+
                 Detalles = (from producto in _ProductosOrdenCompra
-                            select new OrdenDeCompraDetalleModel
+                            select new ConvertirDetallesAprobacionDataSet
                             {
                                 IdProducto = producto.IdProducto,
                                 Cantidad = producto.Cantidad,
@@ -234,6 +258,8 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 var numOrdenCompra = GuardarOrdenDeCompra();
 
                 CommonForms.MensajeInformativo($"Orden de compra {numOrdenCompra} generada correctamente");
+
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -243,18 +269,55 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void FormAgregarOrdenCompra_Load(object sender, EventArgs e)
         {
-            if (isEdit) 
+            if (isEdit)
             {
                 PrepararVistaAutorizacionOrden(_OrdenDeCompra);
                 // Deshabilitamos todos los controles para que no se puedan editar
                 DeshabilitarControles();
+                dgvProductosOrdenCompra.OcultarColumnas("IdDetalle", "IdProducto", "IdOrdenCompra");
+            }
+            else
+            {
+                HabilitarControles();
             }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+
             var formMDI = this.MdiParent as FormMDI;
-            formMDI.AbrirFormHijo(new FormListaOrdenCompra());
+            if (isEdit)
+                this.Close();
+            else
+                formMDI.AbrirFormHijo(new FormListaOrdenCompra());
+        }
+
+        private void btnRechazarOrden_Click(object sender, EventArgs e)
+        {
+            //Se cancelara la orden de compra generada, por lo cual se pasará al estado de rechazada y se pondrá quien la rechazó
+            var dialog = MessageBox.Show("¿Está seguro que desea rechazar la orden de compra?", "Confirmar Rechazo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialog == DialogResult.Yes)
+            {
+                new OrdenCompraBussiness().SetOrdenCompraRechazada(_OrdenDeCompra.IdOrdenCompra);
+
+
+                CommonForms.MensajeInformativo("Orden de compra rechazada correctamente.");
+                this.Close();
+            }
+
+
+        }
+
+        private void btnAceptarOrden_Click(object sender, EventArgs e)
+        {
+            //Se pasara el estado de la orden de compra a aceptada, y se pondrá quien la aceptó
+            var dialog = MessageBox.Show("¿Está seguro que desea aceptar la orden de compra?", "Confirmar Aceptación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialog == DialogResult.Yes)
+            {
+                new OrdenCompraBussiness().SetOrdenCompraAceptada(_OrdenDeCompra.IdOrdenCompra);
+                CommonForms.MensajeInformativo("Orden de compra aceptada correctamente.");
+                this.Close();
+            }
         }
     }
 }

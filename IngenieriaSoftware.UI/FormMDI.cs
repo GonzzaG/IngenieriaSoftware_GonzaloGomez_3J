@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Transactions;
 using System.Windows.Forms;
+using IngenieriaSoftware.Abstracciones;
 
 namespace IngenieriaSoftware.UI
 {
@@ -64,13 +65,13 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
-                bool result = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
+               // bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
+                bool result2 = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                BitacoraHelper.RegistrarError(this.Name, ex, "Integridad", SessionManager.GetInstance.Usuario.Username);
+                BitacoraHelper.RegistrarError(this.Name, ex, "Integridad", "Nulo");
                 this.Close();
             }
         }

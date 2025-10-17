@@ -15,6 +15,28 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
 {
     public static class OrdenCompraDataAccess
     {
+        public static void SetOrdenCompraAceptada(this int idOrdenCompra, string usuario)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdOrdenCompra",idOrdenCompra),
+                new SqlParameter("@usuarioModificacion",usuario)
+            };
+
+            new DAO().ExecuteStoredProcedure("OrdenCompra.sp_SetOrdenCompraAprobada", parametros);
+        }
+
+        public static void SetOrdenCompraRechazada(this int idOrdenCompra, string usuario)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdOrdenCompra",idOrdenCompra),
+                new SqlParameter("@usuarioModificacion",usuario)
+            };
+
+            new DAO().ExecuteStoredProcedure("OrdenCompra.sp_SetOrdenCompraRechazada", parametros);
+        }
+
         public static List<OrdenCompraGetListaModel> GetOrdenesCompra()
         {
             return new DAO()
@@ -44,7 +66,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                         new SqlParameter("@IdOrdenCompra", orden.IdOrdenCompra)
                     });
 
-                orden.Detalles = ds.ConvertirDetallesDataSet();
+                orden.Detalles = ds.ConvertirDetallesAprobacionDataSet();
             }
 
             return ordenCompra;
@@ -105,7 +127,6 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                             new SqlParameter("@CondicionesPago", ordenCompra.CondicionesPago.ToDbValue()),
                             new SqlParameter("@Moneda", ordenCompra.Moneda),
                             new SqlParameter("@TipoCambio", ordenCompra.TipoCambio.ToDbValue()),
-                            new SqlParameter("@IdEstado", ordenCompra.Estado),
                             new SqlParameter("@TotalEsperado", ordenCompra.TotalEsperado),
                             new SqlParameter("@Observaciones", ordenCompra.Observaciones.ToDbValue()),
                             new SqlParameter("@FechaCreacion", ordenCompra.FechaCreacion),

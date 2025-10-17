@@ -54,14 +54,14 @@ namespace IngenieriaSoftware.DAL.Mapper
                     }).FirstOrDefault();
         }
 
-        public static List<OrdenDeCompraDetalleModel> ConvertirDetallesDataSet(this DataSet ds)
+        public static List<ConvertirDetallesAprobacionDataSet> ConvertirDetallesDataSet(this DataSet ds)
         {
             return (from DataRow row in ds.Tables[0].Rows
-                    select new OrdenDeCompraDetalleModel
+                    select new ConvertirDetallesAprobacionDataSet
                     {
                         IdDetalle = Convert.ToInt32(row["IdDetalle"]),
                         IdProducto = Convert.ToInt32(row["IdProducto"]),
-                        Cantidad = Convert.ToDecimal(row["Cantidad"]),
+                        Cantidad = Convert.ToInt32(row["Cantidad"]),
                         PrecioUnitarioEsperado = row["PrecioUnitarioEsperado"] == DBNull.Value
                                     ? (decimal?)null
                                     : Convert.ToDecimal(row["PrecioUnitarioEsperado"]),
@@ -72,5 +72,23 @@ namespace IngenieriaSoftware.DAL.Mapper
                     }).ToList();
         }
 
+        public static List<OrdenDeCompraDetalleAprobacionModel> ConvertirDetallesAprobacionDataSet(this DataSet ds)
+        {
+            return (from DataRow row in ds.Tables[0].Rows
+                    select new OrdenDeCompraDetalleAprobacionModel
+                    {
+                        IdDetalle = Convert.ToInt32(row["IdDetalle"]),
+                        IdProducto = Convert.ToInt32(row["IdProducto"]),
+                        NombreProducto = row["NombreProducto"].ToString(),
+                        Cantidad = Convert.ToInt32(row["Cantidad"]),
+                        PrecioUnitarioEsperado = row["PrecioUnitarioEsperado"] == DBNull.Value
+                                    ? (decimal?)null
+                                    : Convert.ToDecimal(row["PrecioUnitarioEsperado"]),
+                        DescuentoLinea = row["DescuentoLinea"] == DBNull.Value
+                                    ? (decimal?)null
+                                    : Convert.ToDecimal(row["DescuentoLinea"]),
+                        NotasLinea = row["NotasLinea"].ToString(),
+                    }).ToList();
+        }
     }
 }

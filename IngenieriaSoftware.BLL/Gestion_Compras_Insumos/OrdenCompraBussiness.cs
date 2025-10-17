@@ -13,6 +13,16 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
 {
     public class OrdenCompraBussiness
     {
+        public void SetOrdenCompraAceptada(int idOrdenCompra)
+        {
+            idOrdenCompra.SetOrdenCompraAceptada(SessionManager.GetInstance.ToString());
+        }
+
+        public void SetOrdenCompraRechazada(int idOrdenCompra)
+        {
+            idOrdenCompra.SetOrdenCompraRechazada(SessionManager.GetInstance.ToString());
+        }
+
         /// <summary>
         /// Obtiene la lista de órdenes de compra.
         /// </summary>
@@ -95,7 +105,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
                 throw new Exception(sb.ToString());
         }   
 
-        private void ValidarDetalle(OrdenDeCompraDetalleModel detalle)
+        private void ValidarDetalle(ConvertirDetallesAprobacionDataSet detalle)
         {
             StringBuilder sb = new StringBuilder();
             if (detalle.IdProducto <= 0)

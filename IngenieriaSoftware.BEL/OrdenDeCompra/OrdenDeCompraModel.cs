@@ -25,7 +25,7 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra
         public OrdenCompraEstadoEnum Estado { get; set; }
 		public decimal TotalEsperado { get; set; }
 		public string Observaciones { get; set; }
-		public List<OrdenDeCompraDetalleModel> Detalles { get; set; }
+		public List<ConvertirDetallesAprobacionDataSet> Detalles { get; set; }
 
         // Auditoria
         // Estos se van a ir cargando automaticamente

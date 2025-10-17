@@ -7,7 +7,7 @@
     <ProjectGuid>{5506744E-35C0-46D6-97CA-470E36341397}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>IngenieriaSoftware.UI</RootNamespace>
-    <AssemblyName>IngenieriaSoftware.UI</AssemblyName>
+    <AssemblyName>Puerco Arana</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

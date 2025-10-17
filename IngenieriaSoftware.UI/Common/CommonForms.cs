@@ -84,7 +84,7 @@ namespace IngenieriaSoftware.UI.Common
         internal static void AbrirFormModal(this Form modal, Size? size = null)
         {
             modal.StartPosition = FormStartPosition.CenterScreen;
-            modal.Size = size ?? new Size(1800, 800);
+            modal.Size = size ?? new Size(1680, 800);
             modal.AutoScroll = true;
             modal.ShowDialog();
         }
