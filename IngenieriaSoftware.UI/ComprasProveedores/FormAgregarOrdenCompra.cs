@@ -20,7 +20,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
     public partial class FormAgregarOrdenCompra : Form, IActualizable
     {
         private List<ProductoOrdenCompraViewModel> _ProductosOrdenCompra { get; set; }
-        private OrdenCompraGetDetalles _OrdenDeCompra { get; set; }
+        private OrdenCompraWithDetalles _OrdenDeCompra { get; set; }
 
         private bool isEdit = false;
         public FormAgregarOrdenCompra(string numOrdenCompra)
@@ -53,7 +53,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         /// Esta funcion se encarga de cargar los datos de la orden de compra en los controles del formulario
         /// </summary>
         /// <param name="orden"></param>
-        private void PrepararVistaAutorizacionOrden(OrdenCompraGetDetalles orden)
+        private void PrepararVistaAutorizacionOrden(OrdenCompraWithDetalles orden)
         {
             txtAreaObservaciones.Text = orden.Observaciones;
             txtCondicionesPago.Text = orden.CondicionesPago;

@@ -6,6 +6,7 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels
 {
     public class OrdenCompraGetListaModel
     {
+        public int IdOrdenCompra { get; set; }
         public string NumOrdenCompra { get; set; }
         public string RazonSocialProveedor { get; set; }
         public DateTime Fecha { get; set; }
@@ -27,7 +28,7 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels
         public string UsuarioCreacion { get; set; }
     }
 
-    public class OrdenCompraGetDetalles : OrdenCompraGetListaModel
+    public class OrdenCompraWithDetalles : OrdenCompraGetListaModel
     {
         public int IdOrdenCompra { get; set; }  
         public List<OrdenDeCompraDetalleAprobacionModel> Detalles { get; set; }

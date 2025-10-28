@@ -38,6 +38,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.grillaConFiltros = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.gBListaOrdenCompra.SuspendLayout();
             this.SuspendLayout();
@@ -56,31 +57,35 @@
             this.gBListaOrdenCompra.Controls.Add(this.btnLimpiar);
             this.gBListaOrdenCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBListaOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.gBListaOrdenCompra.Location = new System.Drawing.Point(148, 33);
-            this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(2);
+            this.gBListaOrdenCompra.Location = new System.Drawing.Point(197, 41);
+            this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gBListaOrdenCompra.Name = "gBListaOrdenCompra";
-            this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(2);
-            this.gBListaOrdenCompra.Size = new System.Drawing.Size(1040, 228);
-            this.gBListaOrdenCompra.TabIndex = 34;
+            this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gBListaOrdenCompra.Size = new System.Drawing.Size(1387, 281);
+            this.gBListaOrdenCompra.TabIndex = 1242;
             this.gBListaOrdenCompra.TabStop = false;
+            this.gBListaOrdenCompra.Tag = "1251";
             this.gBListaOrdenCompra.Text = "Orden de compra";
             // 
             // dtpFechaDesde
             // 
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(341, 83);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(455, 102);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(151, 28);
-            this.dtpFechaDesde.TabIndex = 43;
+            this.dtpFechaDesde.Size = new System.Drawing.Size(200, 34);
+            this.dtpFechaDesde.TabIndex = 1246;
             this.dtpFechaDesde.Value = new System.DateTime(2025, 9, 16, 23, 18, 0, 0);
             // 
             // cbEstado
             // 
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(555, 82);
+            this.cbEstado.Location = new System.Drawing.Point(740, 101);
+            this.cbEstado.Margin = new System.Windows.Forms.Padding(4);
             this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(189, 30);
-            this.cbEstado.TabIndex = 42;
+            this.cbEstado.Size = new System.Drawing.Size(251, 37);
+            this.cbEstado.TabIndex = 3;
+            this.cbEstado.Tag = "1249";
             // 
             // lblEstado
             // 
@@ -88,13 +93,12 @@
             this.lblEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblEstado.Location = new System.Drawing.Point(551, 58);
-            this.lblEstado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEstado.Location = new System.Drawing.Point(735, 71);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(56, 21);
+            this.lblEstado.Size = new System.Drawing.Size(71, 28);
             this.lblEstado.TabIndex = 41;
-            this.lblEstado.Tag = "";
-            this.lblEstado.Text = "IdEstado";
+            this.lblEstado.Tag = "2000";
+            this.lblEstado.Text = "Estado";
             // 
             // lblFechaDesde
             // 
@@ -102,12 +106,11 @@
             this.lblFechaDesde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblFechaDesde.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaDesde.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblFechaDesde.Location = new System.Drawing.Point(337, 57);
-            this.lblFechaDesde.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFechaDesde.Location = new System.Drawing.Point(449, 70);
             this.lblFechaDesde.Name = "lblFechaDesde";
-            this.lblFechaDesde.Size = new System.Drawing.Size(95, 21);
-            this.lblFechaDesde.TabIndex = 39;
-            this.lblFechaDesde.Tag = "116";
+            this.lblFechaDesde.Size = new System.Drawing.Size(119, 28);
+            this.lblFechaDesde.TabIndex = 1245;
+            this.lblFechaDesde.Tag = "1245";
             this.lblFechaDesde.Text = "Fecha desde";
             // 
             // txtCodigo
@@ -115,12 +118,12 @@
             this.txtCodigo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtCodigo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.ForeColor = System.Drawing.Color.DimGray;
-            this.txtCodigo.Location = new System.Drawing.Point(80, 83);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCodigo.Location = new System.Drawing.Point(107, 102);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(189, 29);
-            this.txtCodigo.TabIndex = 35;
-            this.txtCodigo.Tag = "117";
+            this.txtCodigo.Size = new System.Drawing.Size(251, 34);
+            this.txtCodigo.TabIndex = 1244;
+            this.txtCodigo.Tag = "1244";
             // 
             // lblCodigo
             // 
@@ -128,12 +131,11 @@
             this.lblCodigo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCodigo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCodigo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblCodigo.Location = new System.Drawing.Point(76, 60);
-            this.lblCodigo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCodigo.Location = new System.Drawing.Point(101, 74);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(60, 21);
-            this.lblCodigo.TabIndex = 36;
-            this.lblCodigo.Tag = "116";
+            this.lblCodigo.Size = new System.Drawing.Size(180, 28);
+            this.lblCodigo.TabIndex = 1243;
+            this.lblCodigo.Tag = "1243";
             this.lblCodigo.Text = "NumOrdenCompra";
             // 
             // btnBuscar
@@ -142,11 +144,12 @@
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBuscar.Location = new System.Drawing.Point(650, 165);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBuscar.Location = new System.Drawing.Point(867, 203);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(103, 37);
+            this.btnBuscar.Size = new System.Drawing.Size(137, 46);
             this.btnBuscar.TabIndex = 35;
+            this.btnBuscar.Tag = "1250";
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
@@ -157,11 +160,12 @@
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAgregar.Location = new System.Drawing.Point(767, 165);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAgregar.Location = new System.Drawing.Point(1023, 203);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(103, 37);
+            this.btnAgregar.Size = new System.Drawing.Size(137, 46);
             this.btnAgregar.TabIndex = 36;
+            this.btnAgregar.Tag = "1253";
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click_1);
@@ -172,35 +176,56 @@
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLimpiar.Location = new System.Drawing.Point(883, 165);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLimpiar.Location = new System.Drawing.Point(1177, 203);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(103, 37);
+            this.btnLimpiar.Size = new System.Drawing.Size(137, 46);
             this.btnLimpiar.TabIndex = 37;
+            this.btnLimpiar.Tag = "1254";
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
+            // btnGenerarFactura
+            // 
+            this.btnGenerarFactura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(132)))), ((int)(((byte)(240)))));
+            this.btnGenerarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarFactura.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGenerarFactura.Location = new System.Drawing.Point(1393, 359);
+            this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnGenerarFactura.Name = "btnGenerarFactura";
+            this.btnGenerarFactura.Size = new System.Drawing.Size(191, 46);
+            this.btnGenerarFactura.TabIndex = 1243;
+            this.btnGenerarFactura.Tag = "";
+            this.btnGenerarFactura.Text = "Generar Factura";
+            this.btnGenerarFactura.UseVisualStyleBackColor = false;
+            this.btnGenerarFactura.Visible = false;
+            this.btnGenerarFactura.Click += new System.EventHandler(this.btnGenerarFactura_Click);
+            // 
             // grillaConFiltros
             // 
             this.grillaConFiltros.BackColor = System.Drawing.Color.Transparent;
-            this.grillaConFiltros.Location = new System.Drawing.Point(148, 311);
-            this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2);
+            this.grillaConFiltros.Location = new System.Drawing.Point(197, 379);
+            this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grillaConFiltros.Name = "grillaConFiltros";
-            this.grillaConFiltros.Size = new System.Drawing.Size(1016, 487);
+            this.grillaConFiltros.Size = new System.Drawing.Size(1404, 600);
             this.grillaConFiltros.TabIndex = 35;
-            this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
+            this.grillaConFiltros.Tag = "1255";
+            this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
             // 
             // FormListaOrdenCompra
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1374, 839);
+            this.ClientSize = new System.Drawing.Size(1832, 1033);
+            this.Controls.Add(this.btnGenerarFactura);
             this.Controls.Add(this.grillaConFiltros);
             this.Controls.Add(this.gBListaOrdenCompra);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormListaOrdenCompra";
+            this.Tag = "1256";
             this.Text = "Orden de compra";
             this.gBListaOrdenCompra.ResumeLayout(false);
             this.gBListaOrdenCompra.PerformLayout();
@@ -221,5 +246,6 @@
         private System.Windows.Forms.DateTimePicker dtpFechaDesde;
         private System.Windows.Forms.ComboBox cbEstado;
         private ControlesPersonalizados.DataGridViewConFiltros grillaConFiltros;
+        private System.Windows.Forms.Button btnGenerarFactura;
     }
 }

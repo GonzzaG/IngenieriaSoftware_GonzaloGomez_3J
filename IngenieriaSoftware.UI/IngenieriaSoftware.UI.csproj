@@ -7,7 +7,7 @@
     <ProjectGuid>{5506744E-35C0-46D6-97CA-470E36341397}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>IngenieriaSoftware.UI</RootNamespace>
-    <AssemblyName>Puerco Arana</AssemblyName>
+    <AssemblyName>PuercoArana</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -124,6 +124,18 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
+    <Compile Include="ComprasProveedores\Facturas\FormAgregarFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\Facturas\FormAgregarFactura.Designer.cs">
+      <DependentUpon>FormAgregarFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasProveedores\Facturas\FormListaFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\Facturas\FormListaFacturas.Designer.cs">
+      <DependentUpon>FormListaFacturas.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComprasProveedores\FormAgregarOrdenCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,7 +160,6 @@
     <Compile Include="ComprasProveedores\ModalSeleccionProdutosOrdenCompra.Designer.cs">
       <DependentUpon>ModalSeleccionProdutosOrdenCompra.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConexionDinamica.cs" />
     <Compile Include="ControlesPersonalizados\FiltroCodigo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -374,6 +385,12 @@
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ComprasProveedores\Facturas\FormAgregarFactura.resx">
+      <DependentUpon>FormAgregarFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasProveedores\Facturas\FormListaFacturas.resx">
+      <DependentUpon>FormListaFacturas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\FormAgregarOrdenCompra.resx">
       <DependentUpon>FormAgregarOrdenCompra.cs</DependentUpon>
     </EmbeddedResource>

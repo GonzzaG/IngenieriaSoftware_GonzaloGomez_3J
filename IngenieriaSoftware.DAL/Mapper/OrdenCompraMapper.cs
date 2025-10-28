@@ -15,6 +15,7 @@ namespace IngenieriaSoftware.DAL.Mapper
             return (from DataRow row in ds.Tables[0].Rows
                     select new OrdenCompraGetListaModel
                     {
+                        IdOrdenCompra = Convert.ToInt32(row["IdOrdenCompra"]),
                         NumOrdenCompra = row["NumOrdenDeCompra"].ToString(),
                         RazonSocialProveedor = row["RazonSocial"].ToString(),
                         Fecha = Convert.ToDateTime(row["Fecha"]),
@@ -33,10 +34,10 @@ namespace IngenieriaSoftware.DAL.Mapper
     }
     internal static class OrdenCompraGetDetallesMapper
     {
-        public static OrdenCompraGetDetalles ConvertirOrdenCompraConDetallesDataSet(this DataSet ds)
+        public static OrdenCompraWithDetalles ConvertirOrdenCompraConDetallesDataSet(this DataSet ds)
         {
             return (from DataRow row in ds.Tables[0].Rows
-                    select new OrdenCompraGetDetalles
+                    select new OrdenCompraWithDetalles
                     {
                         IdOrdenCompra = Convert.ToInt32(row["IdOrdenCompra"]),
                         NumOrdenCompra = row["NumOrdenDeCompra"].ToString(),

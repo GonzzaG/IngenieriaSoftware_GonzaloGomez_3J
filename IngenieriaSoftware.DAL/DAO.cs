@@ -1,26 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Windows.Forms;
 
 namespace IngenieriaSoftware.DAL
 {
     public class DAO
     {
         private SqlConnection mCon;
-        public string NombreBD { get; } = "ISProyecto";
 
         public string rutaBD = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\BD"));
 
-        private string _ConnectionString { get => ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString; }
+        internal static string _connectionString = ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString;
+        public static string GetConnectionString()
+        {
+            if (_connectionString != null)
+                return _connectionString;
+
+            string instanceFile = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "SQLINSTANCE.txt"
+            );
+
+            if (!File.Exists(instanceFile))
+                throw new FileNotFoundException("No se encontró el archivo con la instancia SQL.", instanceFile);
+
+            //string sqlInstance2 = @"HUMBERTO2024\SQLEXPRESS";
+            string sqlInstance = File.ReadAllText(instanceFile).Trim();
+
+            // El resto del código se queda igual
+            var baseConnStr = ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString;
+            var builder = new SqlConnectionStringBuilder(baseConnStr)
+            {
+                DataSource = sqlInstance
+            };
+
+            _connectionString = builder.ConnectionString;
+
+            MessageBox.Show(_connectionString); 
+
+            return _connectionString;
+        }
+
+        public static bool TestConnection(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            try
+            {
+                using (var conn = new SqlConnection(GetConnectionString()))
+                {
+                    conn.Open();
+                }
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                switch (ex.Number)
+                {
+                    case 53: // No se encuentra el servidor
+                        errorMessage = "No se puede localizar la instancia de SQL Server.\nVerifique que el servidor esté en ejecución y que el nombre de la instancia sea correcto.";
+                        break;
+                    case 4060: // No se puede abrir la base de datos
+                        errorMessage = "No se puede abrir la base de datos especificada. Verifique que exista y tenga los permisos correctos.";
+                        break;
+                    case 18456: // Error de autenticación
+                        errorMessage = "Error de autenticación. Verifique las credenciales y el tipo de seguridad configurado en la base de datos.";
+                        break;
+                    case 40: // No se puede abrir conexión con SQL
+                        errorMessage = "No se pudo abrir una conexión con SQL Server. Compruebe que el servidor permite conexiones remotas y que los protocolos (TCP/IP o Named Pipes) estén habilitados.";
+                        break;
+                    default:
+                        errorMessage = "Error de SQL Server: " + ex.Message;
+                        break;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Error general al conectarse a SQL Server: " + ex.Message;
+                return false;
+            }
+        }
         public void Conectar()
         {
             try
             {
-                //string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
-                string connectionStringBD = _ConnectionString;
+                string connectionStringBD = _connectionString;
 
                 if (string.IsNullOrEmpty(connectionStringBD))
                 {
@@ -139,8 +207,6 @@ namespace IngenieriaSoftware.DAL
             }
         }
 
-
-
         // Inhabilitado para permitir el identity increment en la base de datos
         public int ObtenerUltimoId(string pTabla, string pColumnaId)
         {
@@ -161,42 +227,6 @@ namespace IngenieriaSoftware.DAL
             {
                 if (mCon.State != ConnectionState.Closed)
                     mCon.Close();
-            }
-        }
-
-        public void CrearBaseSiNoExiste()
-        {
-            // La conexión actual usa la BD ya definida en connection string,
-            // pero si la BD no existe, falla la conexión.
-            // Por eso acá armamos una conexión SOLO al servidor sin DB para chequear o crear.
-
-            // Extraemos el Data Source (servidor) de la connection string
-            var builder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionStringBD"].ConnectionString);
-            string servidor = builder.DataSource;
-
-            // Cadena conexión sin DB
-            string connSinDB = $"Data Source={servidor};Initial Catalog=master;Integrated Security=True";
-
-            using (var conexion = new SqlConnection(connSinDB))
-            {
-                conexion.Open();
-
-                // Verificamos si la BD existe
-                string queryCheck = $"SELECT db_id('{NombreBD}')";
-                using (var cmdCheck = new SqlCommand(queryCheck, conexion))
-                {
-                    object result = cmdCheck.ExecuteScalar();
-                    if (result == DBNull.Value || result == null)
-                    {
-                        // BD no existe, la creamos
-                        string script = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "puercoscript.sql"));
-
-                        using (var cmdCreate = new SqlCommand(script, conexion))
-                        {
-                            cmdCreate.ExecuteNonQuery();
-                        }
-                    }
-                }
             }
         }
     }

@@ -4,7 +4,8 @@
     {
         Pequeño = 0,
         Mediano = 1,
-        Grande = 2
+        Grande = 2,
+        Gigante = 3   
     }
 
 }

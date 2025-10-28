@@ -741,5 +741,10 @@ namespace IngenieriaSoftware.UI
                 BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
             }
         }
+
+        private void facturasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

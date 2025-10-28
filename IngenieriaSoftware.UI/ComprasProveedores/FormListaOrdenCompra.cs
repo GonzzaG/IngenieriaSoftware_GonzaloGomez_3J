@@ -1,8 +1,12 @@
 ﻿using IngenieriaSoftware.BEL.Common;
+using IngenieriaSoftware.BEL.Constantes;
+using IngenieriaSoftware.BEL.OrdenDeCompra;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
+using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BLL.ListSimpleBussiness;
 using IngenieriaSoftware.Servicios.Tools;
+using IngenieriaSoftware.UI.ComprasProveedores.Facturas;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -90,11 +94,41 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 };
 
                 grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
+
+                //  Si el estado seleccionado es Aprobado, habilitaremos la opcion de generar facturas 
+                if(cbEstado.Text.Equals(OrdenCompraEstadoEnum.Aprobada.ToString()))
+                    btnGenerarFactura.Visible = true;
+                else
+                    btnGenerarFactura.Visible = false;
               
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Le pasamos a la pantalla de generar factura la orden de compra seleccionada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGenerarFactura_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ordenCompra = (OrdenCompraGetListaModel)grillaConFiltros.ElementoSeleccionado;
+
+                if (ordenCompra == null || ordenCompra.IdOrdenCompra <= 0) 
+                    throw new Exception("Debe seleccionar una orden de compra");
+
+                var formMDI = this.MdiParent as FormMDI;
+                formMDI
+                    .AbrirFormHijo(new FormAgregarFactura(ordenCompra.IdOrdenCompra));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

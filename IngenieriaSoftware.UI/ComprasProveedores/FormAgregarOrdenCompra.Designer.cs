@@ -75,7 +75,7 @@
             this.btnGenerarOrdenCompra.Name = "btnGenerarOrdenCompra";
             this.btnGenerarOrdenCompra.Size = new System.Drawing.Size(376, 64);
             this.btnGenerarOrdenCompra.TabIndex = 39;
-            this.btnGenerarOrdenCompra.Tag = "56";
+            this.btnGenerarOrdenCompra.Tag = "1283";
             this.btnGenerarOrdenCompra.Text = "Generar Orden";
             this.btnGenerarOrdenCompra.UseVisualStyleBackColor = false;
             this.btnGenerarOrdenCompra.Click += new System.EventHandler(this.btnGenerarOrdenCompra_Click);
@@ -91,6 +91,7 @@
             this.btnSeleccionarProductos.Name = "btnSeleccionarProductos";
             this.btnSeleccionarProductos.Size = new System.Drawing.Size(313, 64);
             this.btnSeleccionarProductos.TabIndex = 97;
+            this.btnSeleccionarProductos.Tag = "1264";
             this.btnSeleccionarProductos.Text = "Seleccionar productos";
             this.btnSeleccionarProductos.UseVisualStyleBackColor = false;
             this.btnSeleccionarProductos.Click += new System.EventHandler(this.btnSeleccionarProductos_Click);
@@ -106,7 +107,7 @@
             this.txtAreaObservaciones.Name = "txtAreaObservaciones";
             this.txtAreaObservaciones.Size = new System.Drawing.Size(309, 146);
             this.txtAreaObservaciones.TabIndex = 102;
-            this.txtAreaObservaciones.Tag = "117";
+            this.txtAreaObservaciones.Tag = "1269";
             // 
             // txtCondicionesPago
             // 
@@ -116,9 +117,9 @@
             this.txtCondicionesPago.Location = new System.Drawing.Point(1076, 97);
             this.txtCondicionesPago.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCondicionesPago.Name = "txtCondicionesPago";
-            this.txtCondicionesPago.Size = new System.Drawing.Size(201, 29);
+            this.txtCondicionesPago.Size = new System.Drawing.Size(201, 34);
             this.txtCondicionesPago.TabIndex = 100;
-            this.txtCondicionesPago.Tag = "117";
+            this.txtCondicionesPago.Tag = "1279";
             // 
             // lblCondicionesPago
             // 
@@ -128,9 +129,9 @@
             this.lblCondicionesPago.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblCondicionesPago.Location = new System.Drawing.Point(1070, 67);
             this.lblCondicionesPago.Name = "lblCondicionesPago";
-            this.lblCondicionesPago.Size = new System.Drawing.Size(121, 21);
+            this.lblCondicionesPago.Size = new System.Drawing.Size(155, 28);
             this.lblCondicionesPago.TabIndex = 101;
-            this.lblCondicionesPago.Tag = "116";
+            this.lblCondicionesPago.Tag = "1280";
             this.lblCondicionesPago.Text = "Condic. de pago";
             // 
             // gbPagoMoneda
@@ -155,6 +156,7 @@
             this.gbPagoMoneda.Size = new System.Drawing.Size(1289, 170);
             this.gbPagoMoneda.TabIndex = 98;
             this.gbPagoMoneda.TabStop = false;
+            this.gbPagoMoneda.Tag = "1270";
             this.gbPagoMoneda.Text = "Pago y moneda";
             // 
             // txtNumericTipoCambio
@@ -162,8 +164,9 @@
             this.txtNumericTipoCambio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
             this.txtNumericTipoCambio.Location = new System.Drawing.Point(743, 97);
             this.txtNumericTipoCambio.Name = "txtNumericTipoCambio";
-            this.txtNumericTipoCambio.Size = new System.Drawing.Size(201, 29);
+            this.txtNumericTipoCambio.Size = new System.Drawing.Size(201, 34);
             this.txtNumericTipoCambio.TabIndex = 111;
+            this.txtNumericTipoCambio.Tag = "1277";
             this.txtNumericTipoCambio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtNumericTotalEsperado
@@ -172,8 +175,9 @@
             this.txtNumericTotalEsperado.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
             this.txtNumericTotalEsperado.Location = new System.Drawing.Point(84, 97);
             this.txtNumericTotalEsperado.Name = "txtNumericTotalEsperado";
-            this.txtNumericTotalEsperado.Size = new System.Drawing.Size(201, 28);
+            this.txtNumericTotalEsperado.Size = new System.Drawing.Size(201, 34);
             this.txtNumericTotalEsperado.TabIndex = 111;
+            this.txtNumericTotalEsperado.Tag = "1273";
             this.txtNumericTotalEsperado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label13
@@ -184,9 +188,9 @@
             this.label13.ForeColor = System.Drawing.Color.Red;
             this.label13.Location = new System.Drawing.Point(216, 65);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(17, 21);
+            this.label13.Size = new System.Drawing.Size(20, 28);
             this.label13.TabIndex = 89;
-            this.label13.Tag = "116";
+            this.label13.Tag = "1272";
             this.label13.Text = "*";
             // 
             // label12
@@ -197,9 +201,9 @@
             this.label12.ForeColor = System.Drawing.Color.Red;
             this.label12.Location = new System.Drawing.Point(464, 66);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(17, 21);
+            this.label12.Size = new System.Drawing.Size(20, 28);
             this.label12.TabIndex = 89;
-            this.label12.Tag = "116";
+            this.label12.Tag = "1276";
             this.label12.Text = "*";
             // 
             // lblMoneda
@@ -210,9 +214,9 @@
             this.lblMoneda.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblMoneda.Location = new System.Drawing.Point(385, 67);
             this.lblMoneda.Name = "lblMoneda";
-            this.lblMoneda.Size = new System.Drawing.Size(67, 21);
+            this.lblMoneda.Size = new System.Drawing.Size(85, 28);
             this.lblMoneda.TabIndex = 77;
-            this.lblMoneda.Tag = "116";
+            this.lblMoneda.Tag = "1275";
             this.lblMoneda.Text = "Moneda";
             // 
             // txtMoneda
@@ -223,9 +227,9 @@
             this.txtMoneda.Location = new System.Drawing.Point(387, 97);
             this.txtMoneda.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMoneda.Name = "txtMoneda";
-            this.txtMoneda.Size = new System.Drawing.Size(201, 29);
+            this.txtMoneda.Size = new System.Drawing.Size(201, 34);
             this.txtMoneda.TabIndex = 76;
-            this.txtMoneda.Tag = "117";
+            this.txtMoneda.Tag = "1274";
             // 
             // lblTipoCambio
             // 
@@ -235,9 +239,9 @@
             this.lblTipoCambio.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTipoCambio.Location = new System.Drawing.Point(738, 68);
             this.lblTipoCambio.Name = "lblTipoCambio";
-            this.lblTipoCambio.Size = new System.Drawing.Size(116, 21);
+            this.lblTipoCambio.Size = new System.Drawing.Size(148, 28);
             this.lblTipoCambio.TabIndex = 79;
-            this.lblTipoCambio.Tag = "116";
+            this.lblTipoCambio.Tag = "1278";
             this.lblTipoCambio.Text = "Tipo de cambio";
             // 
             // lblTotalEsperado
@@ -248,9 +252,9 @@
             this.lblTotalEsperado.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTotalEsperado.Location = new System.Drawing.Point(79, 66);
             this.lblTotalEsperado.Name = "lblTotalEsperado";
-            this.lblTotalEsperado.Size = new System.Drawing.Size(112, 21);
+            this.lblTotalEsperado.Size = new System.Drawing.Size(142, 28);
             this.lblTotalEsperado.TabIndex = 81;
-            this.lblTotalEsperado.Tag = "116";
+            this.lblTotalEsperado.Tag = "1271";
             this.lblTotalEsperado.Text = "Total esperado";
             // 
             // gBDatosGenerales
@@ -273,6 +277,7 @@
             this.gBDatosGenerales.Size = new System.Drawing.Size(1271, 156);
             this.gBDatosGenerales.TabIndex = 106;
             this.gBDatosGenerales.TabStop = false;
+            this.gBDatosGenerales.Tag = "1251";
             this.gBDatosGenerales.Text = "Datos generales";
             // 
             // label8
@@ -284,7 +289,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(20, 28);
             this.label8.TabIndex = 89;
-            this.label8.Tag = "116";
+            this.label8.Tag = "1259";
             this.label8.Text = "*";
             // 
             // lblObligatorio
@@ -296,7 +301,7 @@
             this.lblObligatorio.Name = "lblObligatorio";
             this.lblObligatorio.Size = new System.Drawing.Size(20, 28);
             this.lblObligatorio.TabIndex = 86;
-            this.lblObligatorio.Tag = "116";
+            this.lblObligatorio.Tag = "1260";
             this.lblObligatorio.Text = "*";
             // 
             // dtpFechaEntregaEsperada
@@ -309,8 +314,9 @@
             this.dtpFechaEntregaEsperada.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaEntregaEsperada.Name = "dtpFechaEntregaEsperada";
             this.dtpFechaEntregaEsperada.ShowCheckBox = true;
-            this.dtpFechaEntregaEsperada.Size = new System.Drawing.Size(251, 29);
+            this.dtpFechaEntregaEsperada.Size = new System.Drawing.Size(251, 34);
             this.dtpFechaEntregaEsperada.TabIndex = 85;
+            this.dtpFechaEntregaEsperada.Tag = "1257";
             this.dtpFechaEntregaEsperada.Value = new System.DateTime(2025, 9, 25, 0, 0, 0, 0);
             // 
             // lblCodigo
@@ -321,9 +327,9 @@
             this.lblCodigo.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblCodigo.Location = new System.Drawing.Point(55, 59);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(192, 21);
+            this.lblCodigo.Size = new System.Drawing.Size(242, 28);
             this.lblCodigo.TabIndex = 68;
-            this.lblCodigo.Tag = "116";
+            this.lblCodigo.Tag = "1254";
             this.lblCodigo.Text = "Núm. de orden de compra";
             // 
             // dtpFechaEmision
@@ -333,8 +339,9 @@
             this.dtpFechaEmision.Location = new System.Drawing.Point(557, 89);
             this.dtpFechaEmision.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaEmision.Name = "dtpFechaEmision";
-            this.dtpFechaEmision.Size = new System.Drawing.Size(251, 29);
+            this.dtpFechaEmision.Size = new System.Drawing.Size(251, 34);
             this.dtpFechaEmision.TabIndex = 84;
+            this.dtpFechaEmision.Tag = "1256";
             // 
             // txtNumeroOrdenCompra
             // 
@@ -344,9 +351,9 @@
             this.txtNumeroOrdenCompra.Location = new System.Drawing.Point(60, 89);
             this.txtNumeroOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumeroOrdenCompra.Name = "txtNumeroOrdenCompra";
-            this.txtNumeroOrdenCompra.Size = new System.Drawing.Size(251, 29);
+            this.txtNumeroOrdenCompra.Size = new System.Drawing.Size(251, 34);
             this.txtNumeroOrdenCompra.TabIndex = 67;
-            this.txtNumeroOrdenCompra.Tag = "117";
+            this.txtNumeroOrdenCompra.Tag = "1253";
             // 
             // lblFechaEmision
             // 
@@ -356,9 +363,9 @@
             this.lblFechaEmision.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblFechaEmision.Location = new System.Drawing.Point(551, 59);
             this.lblFechaEmision.Name = "lblFechaEmision";
-            this.lblFechaEmision.Size = new System.Drawing.Size(109, 21);
+            this.lblFechaEmision.Size = new System.Drawing.Size(135, 28);
             this.lblFechaEmision.TabIndex = 70;
-            this.lblFechaEmision.Tag = "116";
+            this.lblFechaEmision.Tag = "1255";
             this.lblFechaEmision.Text = "Fecha emisión";
             // 
             // label4
@@ -369,9 +376,9 @@
             this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label4.Location = new System.Drawing.Point(1008, 57);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(174, 21);
+            this.label4.Size = new System.Drawing.Size(218, 28);
             this.label4.TabIndex = 73;
-            this.label4.Tag = "116";
+            this.label4.Tag = "1258";
             this.label4.Text = "Fecha entrega esperada";
             // 
             // label11
@@ -382,9 +389,9 @@
             this.label11.ForeColor = System.Drawing.Color.Red;
             this.label11.Location = new System.Drawing.Point(1103, 448);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(17, 21);
+            this.label11.Size = new System.Drawing.Size(20, 28);
             this.label11.TabIndex = 109;
-            this.label11.Tag = "116";
+            this.label11.Tag = "1267";
             this.label11.Text = "*";
             // 
             // cbProveedor
@@ -394,8 +401,9 @@
             this.cbProveedor.Location = new System.Drawing.Point(1036, 472);
             this.cbProveedor.Margin = new System.Windows.Forms.Padding(4);
             this.cbProveedor.Name = "cbProveedor";
-            this.cbProveedor.Size = new System.Drawing.Size(309, 29);
+            this.cbProveedor.Size = new System.Drawing.Size(309, 36);
             this.cbProveedor.TabIndex = 108;
+            this.cbProveedor.Tag = "1268";
             // 
             // lblProveedor
             // 
@@ -405,9 +413,9 @@
             this.lblProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblProveedor.Location = new System.Drawing.Point(1028, 448);
             this.lblProveedor.Name = "lblProveedor";
-            this.lblProveedor.Size = new System.Drawing.Size(82, 21);
+            this.lblProveedor.Size = new System.Drawing.Size(103, 28);
             this.lblProveedor.TabIndex = 107;
-            this.lblProveedor.Tag = "116";
+            this.lblProveedor.Tag = "1266";
             this.lblProveedor.Text = "Proveedor";
             // 
             // lblOrdenCompra
@@ -418,9 +426,9 @@
             this.lblOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblOrdenCompra.Location = new System.Drawing.Point(75, 66);
             this.lblOrdenCompra.Name = "lblOrdenCompra";
-            this.lblOrdenCompra.Size = new System.Drawing.Size(346, 37);
+            this.lblOrdenCompra.Size = new System.Drawing.Size(432, 46);
             this.lblOrdenCompra.TabIndex = 89;
-            this.lblOrdenCompra.Tag = "116";
+            this.lblOrdenCompra.Tag = "1250";
             this.lblOrdenCompra.Text = "Agregar orden de compra";
             // 
             // label1
@@ -431,9 +439,9 @@
             this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label1.Location = new System.Drawing.Point(1029, 547);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 21);
+            this.label1.Size = new System.Drawing.Size(139, 28);
             this.label1.TabIndex = 111;
-            this.label1.Tag = "116";
+            this.label1.Tag = "1269";
             this.label1.Text = "Observaciones";
             // 
             // btnBuscar
@@ -447,6 +455,7 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(193, 64);
             this.btnBuscar.TabIndex = 112;
+            this.btnBuscar.Tag = "1283";
             this.btnBuscar.Text = "Cancelar";
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -462,7 +471,7 @@
             this.btnRechazarOrden.Name = "btnRechazarOrden";
             this.btnRechazarOrden.Size = new System.Drawing.Size(201, 64);
             this.btnRechazarOrden.TabIndex = 113;
-            this.btnRechazarOrden.Tag = "56";
+            this.btnRechazarOrden.Tag = "1282";
             this.btnRechazarOrden.Text = "Rechazar Orden";
             this.btnRechazarOrden.UseVisualStyleBackColor = false;
             this.btnRechazarOrden.Click += new System.EventHandler(this.btnRechazarOrden_Click);
@@ -478,7 +487,7 @@
             this.btnAceptarOrden.Name = "btnAceptarOrden";
             this.btnAceptarOrden.Size = new System.Drawing.Size(201, 64);
             this.btnAceptarOrden.TabIndex = 114;
-            this.btnAceptarOrden.Tag = "56";
+            this.btnAceptarOrden.Tag = "1281";
             this.btnAceptarOrden.Text = "Aceptar Orden";
             this.btnAceptarOrden.UseVisualStyleBackColor = false;
             this.btnAceptarOrden.Click += new System.EventHandler(this.btnAceptarOrden_Click);
@@ -491,6 +500,7 @@
             this.dgvProductosOrdenCompra.Name = "dgvProductosOrdenCompra";
             this.dgvProductosOrdenCompra.Size = new System.Drawing.Size(906, 487);
             this.dgvProductosOrdenCompra.TabIndex = 110;
+            this.dgvProductosOrdenCompra.Tag = "1265";
             // 
             // FormAgregarOrdenCompra
             // 
@@ -498,7 +508,7 @@
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(0, 1500);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1311, 736);
+            this.ClientSize = new System.Drawing.Size(1414, 1022);
             this.Controls.Add(this.btnAceptarOrden);
             this.Controls.Add(this.btnRechazarOrden);
             this.Controls.Add(this.btnBuscar);
@@ -516,6 +526,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormAgregarOrdenCompra";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Tag = "1263";
             this.Text = "Generar";
             this.Load += new System.EventHandler(this.FormAgregarOrdenCompra_Load);
             this.gbPagoMoneda.ResumeLayout(false);

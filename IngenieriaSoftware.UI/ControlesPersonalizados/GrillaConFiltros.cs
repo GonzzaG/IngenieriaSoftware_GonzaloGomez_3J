@@ -88,6 +88,11 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
                     tamanoGrilla = new Size(1011, 433);
                     tamanoMensaje = new Size(401, 71);
                     break;
+                case ModoTamanoGrilla.Gigante:
+                    tamanoControl = new Size(1404, 600);
+                    tamanoGrilla = new Size(1400, 350);
+                    tamanoMensaje = new Size(450, 80);
+                    break;
 
                 case ModoTamanoGrilla.Mediano:
                 default:

@@ -32,9 +32,14 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
             return OrdenCompraDataAccess.GetOrdenesCompra();
         }
 
-        public OrdenCompraGetDetalles GetOrdenCompraByNumero(string numOrdenCompra)
+        public OrdenCompraWithDetalles GetOrdenCompraByNumero(string numOrdenCompra)
         {
             return numOrdenCompra.GetOrdenCompraByNumero();
+        }
+
+        public OrdenCompraWithDetalles GetOrdenCompraById(int idOrdenCompra)
+        {
+             return idOrdenCompra.GetOrdenCompraById();
         }
 
         public List<OrdenCompraGetListaModel> GetOrdenesCompra(OrdenCompraQuery query)

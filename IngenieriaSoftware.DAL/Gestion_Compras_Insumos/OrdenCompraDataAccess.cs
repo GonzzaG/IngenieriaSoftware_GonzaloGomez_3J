@@ -1,5 +1,4 @@
-﻿using IngenieriaSoftware.BEL.Constantes;
-using IngenieriaSoftware.BEL.OrdenDeCompra;
+﻿using IngenieriaSoftware.BEL.OrdenDeCompra;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.DAL.Mapper;
@@ -44,7 +43,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                 .ConvertirDataSet();
         }
 
-        public static OrdenCompraGetDetalles GetOrdenCompraByNumero(this string numOrdenCompra)
+        public static OrdenCompraWithDetalles GetOrdenCompraByNumero(this string numOrdenCompra)
         {
             var parametros = new SqlParameter[]
             {
@@ -58,7 +57,35 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
             if(ordenCompra == null)
                 throw new Exception($"No se encontró una orden de compra con el número {numOrdenCompra}");
 
-            if(ordenCompra is OrdenCompraGetDetalles orden)
+            if(ordenCompra is OrdenCompraWithDetalles orden)
+            {
+                var ds = new DAO()
+                    .ExecuteStoredProcedure("OrdenCompra.sp_OrdenCompraDetalles", new SqlParameter[]
+                    {
+                        new SqlParameter("@IdOrdenCompra", orden.IdOrdenCompra)
+                    });
+
+                orden.Detalles = ds.ConvertirDetallesAprobacionDataSet();
+            }
+
+            return ordenCompra;
+        }
+
+        public static OrdenCompraWithDetalles GetOrdenCompraById(this int idOrdenCompra)
+         {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdOrdenCompra",idOrdenCompra)
+            };
+
+            var ordenCompra = new DAO()
+                .ExecuteStoredProcedure("OrdenCompra.sp_GetOrdenCompraById", parametros)
+                .ConvertirOrdenCompraConDetallesDataSet();
+
+            if (ordenCompra == null)
+                throw new Exception($"La orden de compra no existe.");
+
+            if (ordenCompra is OrdenCompraWithDetalles orden)
             {
                 var ds = new DAO()
                     .ExecuteStoredProcedure("OrdenCompra.sp_OrdenCompraDetalles", new SqlParameter[]
