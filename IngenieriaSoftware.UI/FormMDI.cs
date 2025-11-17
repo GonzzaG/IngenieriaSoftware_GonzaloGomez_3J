@@ -1,17 +1,18 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.Abstracciones;
+using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
+using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.ComprasProveedores;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
-using IngenieriaSoftware.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Transactions;
 using System.Windows.Forms;
-using IngenieriaSoftware.Abstracciones;
 
 namespace IngenieriaSoftware.UI
 {
@@ -31,7 +32,7 @@ namespace IngenieriaSoftware.UI
         private readonly CommonExcepciones _helperExcepciones;
         private IdiomaSujeto _idiomaObserver;
         private readonly DigitoVerificadorManager _digitoVerificadorManager;
-
+      
         public NotificacionService _notificacionService => new NotificacionService();
 
         public event Action ActualizarFormsHijos;
@@ -54,7 +55,7 @@ namespace IngenieriaSoftware.UI
             _helperExcepciones = new CommonExcepciones(_idiomaObserver);
             Inicializar();
             AbrirIniciarSesion();
-            VerificarIntegridad();
+            //VerificarIntegridad();
         }
 
 
@@ -65,8 +66,8 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-               // bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
-                bool result2 = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
+                //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
+                //bool result2 = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
             }
             catch (Exception ex)
             {
@@ -88,10 +89,8 @@ namespace IngenieriaSoftware.UI
 
                 // Obtenemos el idioma actual del sistema para el inicio, ya que aun no se inicio sesion
                 var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
-                //IdiomaData.CambiarIdioma(idiomaActual);
-
-                comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre.ToString();
-
+                IdiomaData.IdiomaActual = IdiomaData.Idiomas.Find(i => i.Nombre == idiomaActual);
+                comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre;
             }
             catch (Exception ex)
             {
@@ -434,11 +433,15 @@ namespace IngenieriaSoftware.UI
         private void comboBoxIdiomas_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (comboBoxIdiomas.SelectedItem == null) return;
+
             //Obtengo el idiomaId de la lista de idiomas, comparando el nombre del idioma con el del combo box, item seleccionado, y retorno el id
             var idiomaId = (IdiomaData.Idiomas.Find(I => I.Nombre == comboBoxIdiomas.SelectedItem.ToString())).Id;
+            if(IdiomaData.IdiomaActual.Id != idiomaId)
+            {
+                _idiomaObserver.CambiarEstado(idiomaId);
+                ActualizarFormsHijos?.Invoke();
 
-            _idiomaObserver.CambiarEstado(idiomaId);
-            ActualizarFormsHijos?.Invoke();
+            }
         }
 
         private void gestionarMesasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -707,11 +710,6 @@ namespace IngenieriaSoftware.UI
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AbrirFormHijo(new FormCategoriaABM());
-        }
-
-        private void FormMDI_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void agregarOrdenDeCompraToolStripMenuItem_Click(object sender, EventArgs e)

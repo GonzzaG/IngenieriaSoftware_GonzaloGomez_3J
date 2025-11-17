@@ -217,7 +217,7 @@
             this.btnEliminarRol.Size = new System.Drawing.Size(144, 44);
             this.btnEliminarRol.TabIndex = 41;
             this.btnEliminarRol.Tag = "817";
-            this.btnEliminarRol.Text = "EliminarProveedor Rol";
+            this.btnEliminarRol.Text = "EliminarProducto Rol";
             this.btnEliminarRol.UseVisualStyleBackColor = false;
             this.btnEliminarRol.Click += new System.EventHandler(this.btnEliminarRol_Click);
             // 

@@ -125,6 +125,8 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 var formMDI = this.MdiParent as FormMDI;
                 formMDI
                     .AbrirFormHijo(new FormAgregarFactura(ordenCompra.IdOrdenCompra));
+
+
             }
             catch (Exception ex)
             {

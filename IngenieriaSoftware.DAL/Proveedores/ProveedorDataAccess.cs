@@ -97,7 +97,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
         {
             var parametros = new SqlParameter[]
             {
-                new SqlParameter("@Id", Id)
+                new SqlParameter("@IdProveedor", Id)
 
             };
 
@@ -134,7 +134,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
                 new SqlParameter("@RazonSocial",proveedor.RazonSocial),
                 new SqlParameter("@Correo",proveedor.Correo),
                 new SqlParameter("@Telefono",proveedor.Telefono),
-                new SqlParameter("@ComandaEstado",proveedor.Estado),
+                new SqlParameter("@Estado",proveedor.Estado),
                 output
             };
 

@@ -47,7 +47,7 @@
     <Compile Include="DTOs\EtiquetaDTO.cs" />
     <Compile Include="DTOs\IdiomaDTO.cs" />
     <Compile Include="DTOs\ListSimple\ProveedorListSimpleModel.cs" />
-    <Compile Include="DTOs\ProductoOrdenCompraViewModel.cs" />
+    <Compile Include="DTOs\ProductoSelectionModel.cs" />
     <Compile Include="DTOs\TraduccionDTO.cs" />
     <Compile Include="DVHService.cs" />
     <Compile Include="Encriptador.cs" />

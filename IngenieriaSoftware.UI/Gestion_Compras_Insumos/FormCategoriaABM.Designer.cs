@@ -124,7 +124,7 @@
             this.btnEliminarCategoria.Size = new System.Drawing.Size(183, 70);
             this.btnEliminarCategoria.TabIndex = 41;
             this.btnEliminarCategoria.Tag = "56";
-            this.btnEliminarCategoria.Text = "EliminarProveedor";
+            this.btnEliminarCategoria.Text = "EliminarProducto";
             this.btnEliminarCategoria.UseVisualStyleBackColor = false;
             // 
             // lblEliminarCategoria
@@ -138,7 +138,7 @@
             this.lblEliminarCategoria.Size = new System.Drawing.Size(242, 38);
             this.lblEliminarCategoria.TabIndex = 42;
             this.lblEliminarCategoria.Tag = "52";
-            this.lblEliminarCategoria.Text = "EliminarProveedor Categoria";
+            this.lblEliminarCategoria.Text = "EliminarProducto Categoria";
             // 
             // FormCategoriaABM
             // 

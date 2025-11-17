@@ -74,7 +74,7 @@
             this.btnEliminarProducto.Size = new System.Drawing.Size(225, 69);
             this.btnEliminarProducto.TabIndex = 24;
             this.btnEliminarProducto.Tag = "103";
-            this.btnEliminarProducto.Text = "EliminarProveedor producto";
+            this.btnEliminarProducto.Text = "EliminarProducto producto";
             this.btnEliminarProducto.UseVisualStyleBackColor = false;
             this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
             // 

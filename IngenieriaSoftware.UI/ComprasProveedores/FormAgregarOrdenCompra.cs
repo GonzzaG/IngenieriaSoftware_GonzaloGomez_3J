@@ -19,7 +19,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 {
     public partial class FormAgregarOrdenCompra : Form, IActualizable
     {
-        private List<ProductoOrdenCompraViewModel> _ProductosOrdenCompra { get; set; }
+        private List<ProductoSelectionModel> _ProductosOrdenCompra { get; set; }
         private OrdenCompraWithDetalles _OrdenDeCompra { get; set; }
 
         private bool isEdit = false;
@@ -128,7 +128,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         public void Incializar()
         {
-            _ProductosOrdenCompra = new List<ProductoOrdenCompraViewModel>();
+            _ProductosOrdenCompra = new List<ProductoSelectionModel>();
             Actualizar();
         }
         public void Actualizar()
@@ -156,7 +156,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             if (_ProductosOrdenCompra is null || _ProductosOrdenCompra.Count == 0)
                 return;
 
-            // Supongamos que la columna se llama "IdProducto"
             //dgvProductosOrdenCompra.OcultarColumnas("Cantidad");
             dgvProductosOrdenCompra.OcultarColumnas("IdProducto");
             AgregarColumnaCantidad();
@@ -170,7 +169,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             dgvProductosOrdenCompra.AddNumericCantidadColumna((elemento) =>
             {
-                var prod = elemento as ProductoOrdenCompraViewModel;
+                var prod = elemento as ProductoSelectionModel;
                 if (prod != null && int.TryParse(prod.Cantidad.ToString(), out int nuevoValor))
                     prod.Cantidad = nuevoValor;
 
@@ -182,7 +181,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             dgvProductosOrdenCompra.AddNumericPrecioUnitarioColumna((elemento) =>
             {
-                var prod = elemento as ProductoOrdenCompraViewModel;
+                var prod = elemento as ProductoSelectionModel;
                 if (prod != null && int.TryParse(prod.PrecioUnitarioEsperado.ToString(), out int nuevoValor))
                     prod.PrecioUnitarioEsperado = nuevoValor;
 
@@ -192,7 +191,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void QuitarProductoSeleccionado()
         {
-            var productoAEliminar = (ProductoOrdenCompraViewModel)dgvProductosOrdenCompra.ElementoSeleccionado;
+            var productoAEliminar = (ProductoSelectionModel)dgvProductosOrdenCompra.ElementoSeleccionado;
             if (productoAEliminar != null)
             {
                 _ProductosOrdenCompra.Remove(productoAEliminar);

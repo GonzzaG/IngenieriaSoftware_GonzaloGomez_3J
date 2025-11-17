@@ -65,6 +65,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         public void Limpiar()
         {
             dgv.DataSource = null;
+            dgv = new DataGridView();
             datosOriginales.Clear();
             paginaActual = 1;
         }   
@@ -78,26 +79,26 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             switch (this.tamanoGrilla)
             {
                 case ModoTamanoGrilla.Pequeño:
-                    tamanoControl = new Size(678, 390);
-                    tamanoGrilla = new Size(674, 346);
+                    tamanoControl = new Size(678, 282);
+                    tamanoGrilla = new Size(674, 282);
                     tamanoMensaje = new Size(267, 47);
                     break;
 
                 case ModoTamanoGrilla.Grande:
-                    tamanoControl = new Size(1016, 487);
-                    tamanoGrilla = new Size(1011, 433);
+                    tamanoControl = new Size(1016, 282);
+                    tamanoGrilla = new Size(1011, 282);
                     tamanoMensaje = new Size(401, 71);
                     break;
                 case ModoTamanoGrilla.Gigante:
-                    tamanoControl = new Size(1404, 600);
+                    tamanoControl = new Size(1404, 350);
                     tamanoGrilla = new Size(1400, 350);
                     tamanoMensaje = new Size(450, 80);
                     break;
 
                 case ModoTamanoGrilla.Mediano:
                 default:
-                    tamanoControl = new Size(906, 487);
-                    tamanoGrilla = new Size(903, 433);
+                    tamanoControl = new Size(906, 282);
+                    tamanoGrilla = new Size(903, 282);
                     tamanoMensaje = new Size(334, 59);
                     break;
             }
@@ -176,6 +177,9 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         {
             return paginaActual < 1;
         }
+        public string EstadoGrilla { get { return dgv != null ? dgv.Visible.ToString() : "NO INICIALIZADO"; } }
+
+
         private bool EsUltimaPagina()
         {
             //Guardamos el resto de dividir la cantidad de datos por el tamanio de pagina
@@ -195,14 +199,19 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             if (datos.Empty())
             {
                 panelNoResultadoProducto.MostrarNoResultado(true);
+                dgv.Visible = false;
+                datosOriginales = new List<object>();
                 dgv.DataSource = null;
+                //dgv = new DataGridView();
                 return;
             }
 
+            dgv.BringToFront();
             panelNoResultadoProducto.MostrarNoResultado(false);
             datosOriginales = datos.Cast<object>().ToList();
             paginaActual = 1;
             AplicarFiltros();
+            dgv.Visible = true;
         }
 
         public void CambiarTamanoPagina(int nuevoTamano)
@@ -297,6 +306,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
                 if (e.RowIndex >= 0 && dgv.Columns[e.ColumnIndex].Name == columnName)
                 {
                     eventoClick?.Invoke();
+
                 }
             };
             dgv.CellContentClick += _quitarHandler;
@@ -549,12 +559,20 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
         #endregion
 
+
+        public void RenombrarColumna(string nombreColumna, string nuevoNombre)
+        {
+            if (dgv.Columns.Contains(nombreColumna))
+            {
+                dgv.Columns[nombreColumna].HeaderText = nuevoNombre;
+            }
+        }
         private void dgv_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             if (dgv.Columns[e.ColumnIndex].Name == "Cantidad")
             {
                 // Obtener el objeto asociado a la fila
-                var rowObj = dgv.Rows[e.RowIndex].DataBoundItem as ProductoOrdenCompraViewModel;
+                var rowObj = dgv.Rows[e.RowIndex].DataBoundItem as ProductoSelectionModel;
                 if (rowObj != null)
                 {
                     // Restaurar el valor original desde la propiedad

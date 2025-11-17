@@ -60,6 +60,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 tb.Text = string.Empty;
             }
 
+            checkBoxEsActivo.Checked = false;
+
+
             Actualizar();
         }
 

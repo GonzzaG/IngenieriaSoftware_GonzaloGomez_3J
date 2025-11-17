@@ -136,6 +136,12 @@
     <Compile Include="ComprasProveedores\Facturas\FormListaFacturas.Designer.cs">
       <DependentUpon>FormListaFacturas.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprasProveedores\Facturas\FormModalFacturaTotalFinal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\Facturas\FormModalFacturaTotalFinal.Designer.cs">
+      <DependentUpon>FormModalFacturaTotalFinal.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComprasProveedores\FormAgregarOrdenCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -390,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\Facturas\FormListaFacturas.resx">
       <DependentUpon>FormListaFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasProveedores\Facturas\FormModalFacturaTotalFinal.resx">
+      <DependentUpon>FormModalFacturaTotalFinal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\FormAgregarOrdenCompra.resx">
       <DependentUpon>FormAgregarOrdenCompra.cs</DependentUpon>

@@ -56,11 +56,11 @@
             this.gBListaOrdenCompra.Controls.Add(this.btnLimpiar);
             this.gBListaOrdenCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBListaOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.gBListaOrdenCompra.Location = new System.Drawing.Point(194, 40);
-            this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gBListaOrdenCompra.Location = new System.Drawing.Point(146, 32);
+            this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gBListaOrdenCompra.Name = "gBListaOrdenCompra";
-            this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gBListaOrdenCompra.Size = new System.Drawing.Size(1387, 281);
+            this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gBListaOrdenCompra.Size = new System.Drawing.Size(1040, 228);
             this.gBListaOrdenCompra.TabIndex = 36;
             this.gBListaOrdenCompra.TabStop = false;
             this.gBListaOrdenCompra.Tag = "1301";
@@ -69,10 +69,9 @@
             // dtpFechaDesde
             // 
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(455, 102);
-            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(300, 82);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(200, 34);
+            this.dtpFechaDesde.Size = new System.Drawing.Size(219, 28);
             this.dtpFechaDesde.TabIndex = 43;
             this.dtpFechaDesde.Tag = "1305";
             this.dtpFechaDesde.Value = new System.DateTime(2025, 9, 16, 23, 18, 0, 0);
@@ -80,10 +79,9 @@
             // cbEstado
             // 
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(740, 101);
-            this.cbEstado.Margin = new System.Windows.Forms.Padding(4);
+            this.cbEstado.Location = new System.Drawing.Point(555, 82);
             this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(251, 37);
+            this.cbEstado.Size = new System.Drawing.Size(189, 30);
             this.cbEstado.TabIndex = 42;
             this.cbEstado.Tag = "1307";
             // 
@@ -93,9 +91,10 @@
             this.Estado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Estado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Estado.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Estado.Location = new System.Drawing.Point(735, 71);
+            this.Estado.Location = new System.Drawing.Point(551, 58);
+            this.Estado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Estado.Name = "Estado";
-            this.Estado.Size = new System.Drawing.Size(71, 28);
+            this.Estado.Size = new System.Drawing.Size(56, 21);
             this.Estado.TabIndex = 41;
             this.Estado.Tag = "1306";
             this.Estado.Text = "Estado";
@@ -106,9 +105,10 @@
             this.lblFechaDesde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblFechaDesde.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaDesde.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblFechaDesde.Location = new System.Drawing.Point(449, 70);
+            this.lblFechaDesde.Location = new System.Drawing.Point(296, 58);
+            this.lblFechaDesde.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFechaDesde.Name = "lblFechaDesde";
-            this.lblFechaDesde.Size = new System.Drawing.Size(119, 28);
+            this.lblFechaDesde.Size = new System.Drawing.Size(95, 21);
             this.lblFechaDesde.TabIndex = 39;
             this.lblFechaDesde.Tag = "1304";
             this.lblFechaDesde.Text = "Fecha desde";
@@ -118,10 +118,10 @@
             this.txtNumFactura.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtNumFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNumFactura.ForeColor = System.Drawing.Color.DimGray;
-            this.txtNumFactura.Location = new System.Drawing.Point(107, 102);
-            this.txtNumFactura.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtNumFactura.Location = new System.Drawing.Point(80, 83);
+            this.txtNumFactura.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNumFactura.Name = "txtNumFactura";
-            this.txtNumFactura.Size = new System.Drawing.Size(251, 34);
+            this.txtNumFactura.Size = new System.Drawing.Size(189, 29);
             this.txtNumFactura.TabIndex = 35;
             this.txtNumFactura.Tag = "1302";
             // 
@@ -131,9 +131,10 @@
             this.lblNumeroFactura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblNumeroFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumeroFactura.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblNumeroFactura.Location = new System.Drawing.Point(101, 74);
+            this.lblNumeroFactura.Location = new System.Drawing.Point(76, 60);
+            this.lblNumeroFactura.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumeroFactura.Name = "lblNumeroFactura";
-            this.lblNumeroFactura.Size = new System.Drawing.Size(128, 28);
+            this.lblNumeroFactura.Size = new System.Drawing.Size(103, 21);
             this.lblNumeroFactura.TabIndex = 36;
             this.lblNumeroFactura.Tag = "1303";
             this.lblNumeroFactura.Text = "Num. Factura";
@@ -144,10 +145,10 @@
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBuscar.Location = new System.Drawing.Point(1023, 203);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBuscar.Location = new System.Drawing.Point(767, 165);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(137, 46);
+            this.btnBuscar.Size = new System.Drawing.Size(103, 37);
             this.btnBuscar.TabIndex = 35;
             this.btnBuscar.Tag = "1308";
             this.btnBuscar.Text = "Buscar";
@@ -159,10 +160,10 @@
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLimpiar.Location = new System.Drawing.Point(1177, 203);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLimpiar.Location = new System.Drawing.Point(883, 165);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(137, 46);
+            this.btnLimpiar.Size = new System.Drawing.Size(103, 37);
             this.btnLimpiar.TabIndex = 37;
             this.btnLimpiar.Tag = "1310";
             this.btnLimpiar.Text = "Limpiar";
@@ -171,10 +172,10 @@
             // dgvFacturas
             // 
             this.dgvFacturas.BackColor = System.Drawing.Color.Transparent;
-            this.dgvFacturas.Location = new System.Drawing.Point(194, 416);
-            this.dgvFacturas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvFacturas.Location = new System.Drawing.Point(146, 338);
+            this.dgvFacturas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvFacturas.Name = "dgvFacturas";
-            this.dgvFacturas.Size = new System.Drawing.Size(1404, 600);
+            this.dgvFacturas.Size = new System.Drawing.Size(1053, 488);
             this.dgvFacturas.TabIndex = 38;
             this.dgvFacturas.Tag = "1312";
             this.dgvFacturas.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
@@ -185,10 +186,10 @@
             this.btnDetalleFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetalleFactura.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetalleFactura.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDetalleFactura.Location = new System.Drawing.Point(1444, 376);
-            this.btnDetalleFactura.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDetalleFactura.Location = new System.Drawing.Point(1083, 306);
+            this.btnDetalleFactura.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDetalleFactura.Name = "btnDetalleFactura";
-            this.btnDetalleFactura.Size = new System.Drawing.Size(137, 46);
+            this.btnDetalleFactura.Size = new System.Drawing.Size(103, 37);
             this.btnDetalleFactura.TabIndex = 44;
             this.btnDetalleFactura.Tag = "1309";
             this.btnDetalleFactura.Text = "Detalles";
@@ -200,10 +201,10 @@
             this.btnRechazarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRechazarOrden.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRechazarOrden.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnRechazarOrden.Location = new System.Drawing.Point(1240, 376);
-            this.btnRechazarOrden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRechazarOrden.Location = new System.Drawing.Point(930, 306);
+            this.btnRechazarOrden.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnRechazarOrden.Name = "btnRechazarOrden";
-            this.btnRechazarOrden.Size = new System.Drawing.Size(176, 46);
+            this.btnRechazarOrden.Size = new System.Drawing.Size(132, 37);
             this.btnRechazarOrden.TabIndex = 114;
             this.btnRechazarOrden.Tag = "1282";
             this.btnRechazarOrden.Text = "Anular Factura";
@@ -211,14 +212,15 @@
             // 
             // Facturas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1790, 1055);
+            this.ClientSize = new System.Drawing.Size(1342, 857);
             this.Controls.Add(this.btnRechazarOrden);
             this.Controls.Add(this.btnDetalleFactura);
             this.Controls.Add(this.dgvFacturas);
             this.Controls.Add(this.gBListaOrdenCompra);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Facturas";
             this.Tag = "1311";
             this.Text = "FormListaFacturas";

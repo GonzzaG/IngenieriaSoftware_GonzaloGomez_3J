@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace IngenieriaSoftware.Servicios
 {
@@ -17,10 +18,19 @@ namespace IngenieriaSoftware.Servicios
             return Usuario.Username;
         }
 
+        public static bool IsLoggedIn () => _Session != null;  
+
         public static SessionManager GetInstance
         {
             get
             {
+                var stackTrace = new StackTrace();
+
+                // El frame 0 es el método actual (MetodoB)
+                // El frame 1 es el método que lo llamó (MetodoA)
+                var callerFrame = stackTrace.GetFrame(1);
+                var callerMethod = callerFrame.GetMethod();
+
                 if (_Session == null)
                     throw new Exception("Sesión no iniciada.");
                 return _Session;

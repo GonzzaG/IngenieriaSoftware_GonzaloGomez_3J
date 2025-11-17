@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace IngenieriaSoftware.Servicios
 {
-    public class IdiomaData
+    public static class IdiomaData
     {
         public static Dictionary<string, string> TagTraducciones { get; set; }
         private static IdiomaDTO _idiomaActual;
@@ -39,10 +39,5 @@ namespace IngenieriaSoftware.Servicios
             IdiomaActual = Idiomas.Find(i => i.Id == nuevoIdiomaId);
         }
 
-        public static void CambiarIdioma(string nuevoIdiomaNombre)
-        {
-            //if (IdiomaActual == null) { IdiomaActual = new IdiomaDTO(); }
-            IdiomaActual = Idiomas.Find(i => i.Nombre == nuevoIdiomaNombre);
-        }
     }
 }

@@ -12,25 +12,27 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 {
     public partial class ModalSeleccionProdutosOrdenCompra : Form, IActualizable
     {
-        private List<ProductoOrdenCompraViewModel> _ProductosOrdenCompra;
-        private List<ProductoOrdenCompraViewModel> _ProductosListado;
+        private List<ProductoSelectionModel> _ProductosOrdenCompra;
+        private List<ProductoSelectionModel> _ProductosListado;
 
         private Timer avisoTimer;
         private int tiempoRestante;
         private const int duracionMiliseg = 1000; 
         private const int intervaloMiliseg = 100; 
 
-        public ModalSeleccionProdutosOrdenCompra(List<ProductoOrdenCompraViewModel> productos)
+        public ModalSeleccionProdutosOrdenCompra(List<ProductoSelectionModel> productos)
         {
+            if (productos is null)
+                throw new Exception("La lista de productos no puede ser nula");
             InitializeComponent();
             Inicializar(productos);
 
         }
 
-        private void Inicializar(List<ProductoOrdenCompraViewModel> productos)
+        private void Inicializar(List<ProductoSelectionModel> productos)
         {
             _ProductosOrdenCompra = productos;
-            _ProductosListado = new List<ProductoOrdenCompraViewModel>();
+            _ProductosListado = new List<ProductoSelectionModel>();
             Actualizar();
             InicializarTimerProductoAgregado();
 
@@ -64,7 +66,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             try
             {
-                var productoSeleccionado = (ProductoOrdenCompraViewModel)dgvConFiltroProductos.ElementoSeleccionado;
+                var productoSeleccionado = (ProductoSelectionModel)dgvConFiltroProductos.ElementoSeleccionado;
 
                 ThrowIfProductoIsNull(productoSeleccionado);
 
@@ -78,15 +80,15 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             }
         }
 
-        private static void ThrowIfProductoIsNull(ProductoOrdenCompraViewModel productoSeleccionado)
+        private static void ThrowIfProductoIsNull(ProductoSelectionModel productoSeleccionado)
         {
             if (productoSeleccionado == null)
                 throw new Exception("Debe seleccionar un producto");
         }
 
-        private void AgregarProductoOrdenCompra(ProductoOrdenCompraViewModel productoSeleccionado)
+        private void AgregarProductoOrdenCompra(ProductoSelectionModel productoSeleccionado)
         {
-            var productoExistente = (ProductoOrdenCompraViewModel)_ProductosOrdenCompra
+            var productoExistente = (ProductoSelectionModel)_ProductosOrdenCompra
                 .Find(p => p.IdProducto == productoSeleccionado.IdProducto);
 
             if (productoExistente != null)
@@ -99,7 +101,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         }
 
-        private void ActualizarListado(ProductoOrdenCompraViewModel productoSeleccionado)
+        private void ActualizarListado(ProductoSelectionModel productoSeleccionado)
         {
             MostrarAviso();
 

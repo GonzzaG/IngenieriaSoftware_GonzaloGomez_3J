@@ -12,12 +12,12 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
         /// Trae una lista de productos para la orden de compra
         /// </summary>
         /// <returns></returns>
-        public List<ProductoOrdenCompraViewModel> GetProductosToOrdenCompra()
+        public List<ProductoSelectionModel> GetProductosToOrdenCompra()
         {
             var result = new DAO().ExecuteStoredProcedure("Producto.sp_ProductoRestaurante_OrdenCompra_GetAll", null);
             
             return (from DataRow row in result.Tables[0].Rows
-                    select new ProductoOrdenCompraViewModel()
+                    select new ProductoSelectionModel()
                     {
                         IdProducto = int.Parse(row["producto_id"].ToString()),   
                         Nombre = row["nombre"].ToString(),
@@ -31,7 +31,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
         /// Trae los productos para la orden de compra
         /// </summary>
         /// <returns></returns>
-        public ProductoOrdenCompraViewModel GetProductosToOrdenCompra(int idProducto)
+        public ProductoSelectionModel GetProductosToOrdenCompra(int idProducto)
         {
             var parametro = new SqlParameter[]
             {
@@ -41,7 +41,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
             var result = new DAO().ExecuteStoredProcedure("Producto.sp_ProductoRestaurante_OrdenCompra_GetById", parametro);
 
             return (from DataRow row in result.Tables[0].Rows
-                    select new ProductoOrdenCompraViewModel()
+                    select new ProductoSelectionModel()
                     {
                         IdProducto = int.Parse(row["producto_id"].ToString()),
                         Nombre = row["nombre"].ToString(),

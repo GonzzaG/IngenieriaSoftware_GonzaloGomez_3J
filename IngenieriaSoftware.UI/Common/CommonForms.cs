@@ -14,6 +14,19 @@ namespace IngenieriaSoftware.UI.Common
     {
         internal static event EventHandler ModalCerrado;
 
+        public static void Redireccionar(this Form formActual, Form formDestino)
+        {
+            if(formActual is null || formDestino is null)
+                return; 
+
+            var formMDI = formActual.MdiParent as FormMDI;
+            if (formMDI is null)
+                return;
+
+            formMDI.AbrirFormHijo(formDestino);
+
+        }
+
         public static List<Form> InstanciarTodosLosFormularios(Form mdiParent)
         {
             List<Form> formularios = new List<Form>();

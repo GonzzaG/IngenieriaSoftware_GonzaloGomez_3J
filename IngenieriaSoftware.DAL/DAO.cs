@@ -84,42 +84,54 @@ namespace IngenieriaSoftware.DAL
                 return false;
             }
         }
+
         public void Conectar()
         {
+            string logPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "TuApp_connection_log.txt"
+            );
+
             try
             {
                 string connectionStringBD = _connectionString;
 
+                // Registrar cadena
+                File.WriteAllText(logPath, $"[{DateTime.Now}] ConnectionString usada NUEVONUEVONUEVO:\n{connectionStringBD}");
+
                 if (string.IsNullOrEmpty(connectionStringBD))
                 {
-                    throw new Exception("La cadena de conexion no está definida.");
+                    throw new Exception("La cadena de conexión no está definida.");
                 }
 
                 mCon = new SqlConnection(connectionStringBD);
+                mCon.Open();
 
+                File.AppendAllText(logPath, "\nConexión abierta correctamente.\n");
             }
             catch (Exception ex)
             {
+                File.AppendAllText(logPath, $"\n[{DateTime.Now}] Error al conectar: {ex.Message}\n");
                 throw new Exception("Error al conectar a la base de datos: " + ex.Message);
             }
-
         }
+
+
 
         public int Execute(string pCommandText)
         {
             try
             {
-                Conectar();
+                Conectar(); // ya abre la conexión
 
-                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
-
-                mCon.Open();
-
-                return mComm.ExecuteNonQuery();
+                using (SqlCommand mComm = new SqlCommand(pCommandText, mCon))
+                {
+                    return mComm.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Error en Execute: " + ex.Message, ex);
             }
             finally
             {
@@ -127,26 +139,26 @@ namespace IngenieriaSoftware.DAL
                     mCon.Close();
             }
         }
+
         public int ExecuteNonQuery(string pCommandText, SqlParameter[] pParametros)
         {
             try
             {
                 Conectar();
 
-                SqlCommand mComm = new SqlCommand(pCommandText, mCon);
-                mComm.CommandType = CommandType.StoredProcedure;
-
-                if (pParametros != null)
+                using (SqlCommand mComm = new SqlCommand(pCommandText, mCon))
                 {
-                    mComm.Parameters.AddRange(pParametros);
-                }
+                    mComm.CommandType = CommandType.StoredProcedure;
 
-                mCon.Open();
-                return mComm.ExecuteNonQuery();
+                    if (pParametros != null)
+                        mComm.Parameters.AddRange(pParametros);
+
+                    return mComm.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Error en ExecuteNonQuery: " + ex.Message, ex);
             }
             finally
             {
@@ -154,6 +166,7 @@ namespace IngenieriaSoftware.DAL
                     mCon.Close();
             }
         }
+
 
         public DataSet ExecuteStoredProcedure(string pNombreStoreProcedure, SqlParameter[] pParametros)
         {
@@ -213,15 +226,16 @@ namespace IngenieriaSoftware.DAL
             try
             {
                 Conectar();
-                SqlCommand mComm = new SqlCommand("SELECT ISNULL(MAX(" + pColumnaId + "),0) FROM " + pTabla, mCon);
 
-                mCon.Open();
-
-                return (int)mComm.ExecuteScalar();
+                using (SqlCommand mComm = new SqlCommand(
+                    $"SELECT ISNULL(MAX({pColumnaId}),0) FROM {pTabla}", mCon))
+                {
+                    return (int)mComm.ExecuteScalar();
+                }
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error en ObtenerUltimoId: " + ex.Message, ex);
             }
             finally
             {
@@ -229,5 +243,6 @@ namespace IngenieriaSoftware.DAL
                     mCon.Close();
             }
         }
+
     }
 }

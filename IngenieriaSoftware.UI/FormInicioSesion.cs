@@ -111,7 +111,8 @@ namespace IngenieriaSoftware.UI
 
                     BitacoraHelper.RegistrarActividad(SessionManager.GetInstance.Usuario.Username, "Inicio de Sesion", DateTime.Now, "Inicio de sesion exitoso", this.Name, AppDomain.CurrentDomain.BaseDirectory, "Sesion");
                     //_idiomaObserver.CambiarEstado(usuario.Id);
-                    throw new CredencialesCorrectasException();
+                    this.Close();
+                    MessageBox.Show("Inició sesión correctamente");
                 }
             }
             catch (FalloCredencialesException ex)

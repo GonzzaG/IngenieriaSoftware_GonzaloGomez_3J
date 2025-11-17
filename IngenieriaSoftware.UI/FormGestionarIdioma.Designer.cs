@@ -103,7 +103,7 @@
             this.btnEliminarIdioma.Size = new System.Drawing.Size(187, 51);
             this.btnEliminarIdioma.TabIndex = 7;
             this.btnEliminarIdioma.Tag = "782";
-            this.btnEliminarIdioma.Text = "EliminarProveedor idioma";
+            this.btnEliminarIdioma.Text = "EliminarProducto idioma";
             this.btnEliminarIdioma.UseVisualStyleBackColor = false;
             this.btnEliminarIdioma.Click += new System.EventHandler(this.btnEliminarIdioma_Click);
             // 

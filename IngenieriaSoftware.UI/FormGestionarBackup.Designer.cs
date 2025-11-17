@@ -101,7 +101,7 @@
             this.btnEliminarBackup.Size = new System.Drawing.Size(246, 80);
             this.btnEliminarBackup.TabIndex = 10;
             this.btnEliminarBackup.Tag = "1220";
-            this.btnEliminarBackup.Text = "EliminarProveedor Back Up";
+            this.btnEliminarBackup.Text = "EliminarProducto Back Up";
             this.btnEliminarBackup.UseVisualStyleBackColor = false;
             this.btnEliminarBackup.Click += new System.EventHandler(this.btnEliminarBackup_Click);
             // 

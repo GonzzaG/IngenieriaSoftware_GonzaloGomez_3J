@@ -53,7 +53,7 @@
             this.btnEliminarMesa.Size = new System.Drawing.Size(233, 61);
             this.btnEliminarMesa.TabIndex = 19;
             this.btnEliminarMesa.Tag = "301";
-            this.btnEliminarMesa.Text = "EliminarProveedor Mesa";
+            this.btnEliminarMesa.Text = "EliminarProducto Mesa";
             this.btnEliminarMesa.UseVisualStyleBackColor = false;
             this.btnEliminarMesa.Visible = false;
             this.btnEliminarMesa.Click += new System.EventHandler(this.btnEliminarMesa_Click);

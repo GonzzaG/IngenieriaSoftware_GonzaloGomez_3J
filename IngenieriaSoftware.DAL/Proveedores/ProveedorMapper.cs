@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL.Proveedor;
+using System;
 using System.Data;
 
 namespace IngenieriaSoftware.DAL.Proveedores
@@ -14,7 +15,7 @@ namespace IngenieriaSoftware.DAL.Proveedores
                 RazonSocial = dr["RazonSocial"].ToString(),
                 Correo = dr["Correo"].ToString(),
                 Telefono = dr["Telefono"].ToString(),
-                Estado = bool.Parse(dr["ComandaEstado"].ToString()),
+                Estado = Convert.ToBoolean(dr["Estado"])
             };
 
             return proveedor;

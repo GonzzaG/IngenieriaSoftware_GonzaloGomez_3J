@@ -73,11 +73,11 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.groupBoxProducto.Controls.Add(this.lblDocumento);
             this.groupBoxProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F);
             this.groupBoxProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBoxProducto.Location = new System.Drawing.Point(194, 119);
-            this.groupBoxProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBoxProducto.Location = new System.Drawing.Point(259, 146);
+            this.groupBoxProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxProducto.Name = "groupBoxProducto";
-            this.groupBoxProducto.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxProducto.Size = new System.Drawing.Size(245, 471);
+            this.groupBoxProducto.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxProducto.Size = new System.Drawing.Size(327, 580);
             this.groupBoxProducto.TabIndex = 34;
             this.groupBoxProducto.TabStop = false;
             this.groupBoxProducto.Text = "Detalle Producto";
@@ -88,10 +88,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblPrecio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblPrecio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblPrecio.Location = new System.Drawing.Point(19, 318);
-            this.lblPrecio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPrecio.Location = new System.Drawing.Point(25, 391);
             this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(53, 21);
+            this.lblPrecio.Size = new System.Drawing.Size(66, 28);
             this.lblPrecio.TabIndex = 41;
             this.lblPrecio.Tag = "52";
             this.lblPrecio.Text = "Precio";
@@ -102,10 +101,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblMinutos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblMinutos.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMinutos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblMinutos.Location = new System.Drawing.Point(109, 287);
-            this.lblMinutos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMinutos.Location = new System.Drawing.Point(145, 353);
             this.lblMinutos.Name = "lblMinutos";
-            this.lblMinutos.Size = new System.Drawing.Size(67, 21);
+            this.lblMinutos.Size = new System.Drawing.Size(84, 28);
             this.lblMinutos.TabIndex = 40;
             this.lblMinutos.Tag = "52";
             this.lblMinutos.Text = "Minutos";
@@ -116,15 +114,15 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.nudPrecio.DecimalPlaces = 2;
             this.nudPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.nudPrecio.Location = new System.Drawing.Point(23, 341);
-            this.nudPrecio.Margin = new System.Windows.Forms.Padding(2);
+            this.nudPrecio.Location = new System.Drawing.Point(31, 420);
+            this.nudPrecio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudPrecio.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
             this.nudPrecio.Name = "nudPrecio";
-            this.nudPrecio.Size = new System.Drawing.Size(82, 26);
+            this.nudPrecio.Size = new System.Drawing.Size(109, 30);
             this.nudPrecio.TabIndex = 4;
             // 
             // nudTiempoPreparacion
@@ -132,15 +130,15 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.nudTiempoPreparacion.BackColor = System.Drawing.Color.Teal;
             this.nudTiempoPreparacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudTiempoPreparacion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.nudTiempoPreparacion.Location = new System.Drawing.Point(23, 287);
-            this.nudTiempoPreparacion.Margin = new System.Windows.Forms.Padding(2);
+            this.nudTiempoPreparacion.Location = new System.Drawing.Point(31, 353);
+            this.nudTiempoPreparacion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudTiempoPreparacion.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.nudTiempoPreparacion.Name = "nudTiempoPreparacion";
-            this.nudTiempoPreparacion.Size = new System.Drawing.Size(82, 26);
+            this.nudTiempoPreparacion.Size = new System.Drawing.Size(109, 30);
             this.nudTiempoPreparacion.TabIndex = 3;
             // 
             // cbEsPostre
@@ -148,10 +146,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.cbEsPostre.AutoSize = true;
             this.cbEsPostre.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbEsPostre.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.cbEsPostre.Location = new System.Drawing.Point(23, 412);
-            this.cbEsPostre.Margin = new System.Windows.Forms.Padding(2);
+            this.cbEsPostre.Location = new System.Drawing.Point(31, 507);
+            this.cbEsPostre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbEsPostre.Name = "cbEsPostre";
-            this.cbEsPostre.Size = new System.Drawing.Size(118, 28);
+            this.cbEsPostre.Size = new System.Drawing.Size(149, 33);
             this.cbEsPostre.TabIndex = 6;
             this.cbEsPostre.Text = "Es postre?";
             this.cbEsPostre.UseVisualStyleBackColor = true;
@@ -161,10 +159,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.cbCategoria.BackColor = System.Drawing.Color.Teal;
             this.cbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(23, 220);
-            this.cbCategoria.Margin = new System.Windows.Forms.Padding(2);
+            this.cbCategoria.Location = new System.Drawing.Point(31, 271);
+            this.cbCategoria.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbCategoria.Name = "cbCategoria";
-            this.cbCategoria.Size = new System.Drawing.Size(200, 30);
+            this.cbCategoria.Size = new System.Drawing.Size(265, 37);
             this.cbCategoria.TabIndex = 2;
             // 
             // cbDisponible
@@ -174,10 +172,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.cbDisponible.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbDisponible.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbDisponible.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.cbDisponible.Location = new System.Drawing.Point(23, 380);
-            this.cbDisponible.Margin = new System.Windows.Forms.Padding(2);
+            this.cbDisponible.Location = new System.Drawing.Point(31, 468);
+            this.cbDisponible.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbDisponible.Name = "cbDisponible";
-            this.cbDisponible.Size = new System.Drawing.Size(128, 28);
+            this.cbDisponible.Size = new System.Drawing.Size(163, 33);
             this.cbDisponible.TabIndex = 5;
             this.cbDisponible.Text = "Disponible?";
             this.cbDisponible.UseVisualStyleBackColor = true;
@@ -188,10 +186,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblEstado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstado.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblEstado.Location = new System.Drawing.Point(19, 197);
-            this.lblEstado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEstado.Location = new System.Drawing.Point(25, 242);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(77, 21);
+            this.lblEstado.Size = new System.Drawing.Size(97, 28);
             this.lblEstado.TabIndex = 27;
             this.lblEstado.Tag = "52";
             this.lblEstado.Text = "Categoria";
@@ -202,10 +199,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblTelefono.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTelefono.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTelefono.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTelefono.Location = new System.Drawing.Point(19, 262);
-            this.lblTelefono.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTelefono.Location = new System.Drawing.Point(25, 322);
             this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(170, 21);
+            this.lblTelefono.Size = new System.Drawing.Size(215, 28);
             this.lblTelefono.TabIndex = 25;
             this.lblTelefono.Tag = "52";
             this.lblTelefono.Text = "Tiempo de preparacion";
@@ -214,10 +210,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // 
             this.txtDescripcion.BackColor = System.Drawing.Color.Teal;
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(23, 158);
-            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDescripcion.Location = new System.Drawing.Point(31, 194);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(200, 29);
+            this.txtDescripcion.Size = new System.Drawing.Size(265, 34);
             this.txtDescripcion.TabIndex = 1;
             this.txtDescripcion.Tag = "55";
             // 
@@ -227,10 +223,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblRazonSocial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblRazonSocial.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRazonSocial.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblRazonSocial.Location = new System.Drawing.Point(19, 134);
-            this.lblRazonSocial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRazonSocial.Location = new System.Drawing.Point(25, 165);
             this.lblRazonSocial.Name = "lblRazonSocial";
-            this.lblRazonSocial.Size = new System.Drawing.Size(91, 21);
+            this.lblRazonSocial.Size = new System.Drawing.Size(114, 28);
             this.lblRazonSocial.TabIndex = 23;
             this.lblRazonSocial.Tag = "52";
             this.lblRazonSocial.Text = "Descripcion";
@@ -239,10 +234,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // 
             this.txtNombre.BackColor = System.Drawing.Color.Teal;
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(23, 98);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNombre.Location = new System.Drawing.Point(31, 121);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(200, 29);
+            this.txtNombre.Size = new System.Drawing.Size(265, 34);
             this.txtNombre.TabIndex = 0;
             this.txtNombre.Tag = "55";
             // 
@@ -252,10 +247,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblDocumento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblDocumento.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDocumento.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDocumento.Location = new System.Drawing.Point(19, 74);
-            this.lblDocumento.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDocumento.Location = new System.Drawing.Point(25, 91);
             this.lblDocumento.Name = "lblDocumento";
-            this.lblDocumento.Size = new System.Drawing.Size(68, 21);
+            this.lblDocumento.Size = new System.Drawing.Size(85, 28);
             this.lblDocumento.TabIndex = 16;
             this.lblDocumento.Tag = "52";
             this.lblDocumento.Text = "Nombre";
@@ -263,10 +257,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // gcfProductos
             // 
             this.gcfProductos.BackColor = System.Drawing.Color.Transparent;
-            this.gcfProductos.Location = new System.Drawing.Point(459, 103);
-            this.gcfProductos.Margin = new System.Windows.Forms.Padding(2);
+            this.gcfProductos.Location = new System.Drawing.Point(612, 127);
+            this.gcfProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gcfProductos.Name = "gcfProductos";
-            this.gcfProductos.Size = new System.Drawing.Size(1016, 487);
+            this.gcfProductos.Size = new System.Drawing.Size(1355, 599);
             this.gcfProductos.TabIndex = 41;
             this.gcfProductos.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
             // 
@@ -275,42 +269,45 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.btnModificar.BackColor = System.Drawing.Color.Orange;
             this.btnModificar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnModificar.Location = new System.Drawing.Point(1077, 594);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnModificar.Location = new System.Drawing.Point(1436, 731);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(137, 57);
+            this.btnModificar.Size = new System.Drawing.Size(183, 70);
             this.btnModificar.TabIndex = 44;
             this.btnModificar.Tag = "";
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
             // 
             // btnEliminarProducto
             // 
             this.btnEliminarProducto.BackColor = System.Drawing.Color.Maroon;
             this.btnEliminarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEliminarProducto.Location = new System.Drawing.Point(820, 594);
-            this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEliminarProducto.Location = new System.Drawing.Point(1093, 731);
+            this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminarProducto.Name = "btnEliminarProducto";
-            this.btnEliminarProducto.Size = new System.Drawing.Size(137, 57);
+            this.btnEliminarProducto.Size = new System.Drawing.Size(183, 70);
             this.btnEliminarProducto.TabIndex = 43;
             this.btnEliminarProducto.Tag = "";
             this.btnEliminarProducto.Text = "Eliminar";
             this.btnEliminarProducto.UseVisualStyleBackColor = false;
+            this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click_1);
             // 
             // btnAgregarProducto
             // 
             this.btnAgregarProducto.BackColor = System.Drawing.Color.Teal;
             this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(561, 594);
-            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAgregarProducto.Location = new System.Drawing.Point(748, 731);
+            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
-            this.btnAgregarProducto.Size = new System.Drawing.Size(137, 57);
+            this.btnAgregarProducto.Size = new System.Drawing.Size(183, 70);
             this.btnAgregarProducto.TabIndex = 42;
             this.btnAgregarProducto.Tag = "";
             this.btnAgregarProducto.Text = "Guardar";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
+            this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click_1);
             // 
             // lblListaProveedores
             // 
@@ -318,10 +315,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblListaProveedores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblListaProveedores.Font = new System.Drawing.Font("Segoe UI Symbol", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaProveedores.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblListaProveedores.Location = new System.Drawing.Point(454, 36);
-            this.lblListaProveedores.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblListaProveedores.Location = new System.Drawing.Point(605, 44);
             this.lblListaProveedores.Name = "lblListaProveedores";
-            this.lblListaProveedores.Size = new System.Drawing.Size(189, 30);
+            this.lblListaProveedores.Size = new System.Drawing.Size(243, 38);
             this.lblListaProveedores.TabIndex = 45;
             this.lblListaProveedores.Tag = "52";
             this.lblListaProveedores.Text = "Lista de Productos";
@@ -329,19 +325,19 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // filtroNombreProducto
             // 
             this.filtroNombreProducto.BackColor = System.Drawing.Color.Transparent;
-            this.filtroNombreProducto.Location = new System.Drawing.Point(1077, 88);
-            this.filtroNombreProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.filtroNombreProducto.Location = new System.Drawing.Point(1436, 108);
+            this.filtroNombreProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.filtroNombreProducto.Name = "filtroNombreProducto";
-            this.filtroNombreProducto.Size = new System.Drawing.Size(194, 47);
+            this.filtroNombreProducto.Size = new System.Drawing.Size(259, 58);
             this.filtroNombreProducto.TabIndex = 46;
             this.filtroNombreProducto.Texto = "";
             // 
             // FormGestionarProductos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1585, 744);
+            this.ClientSize = new System.Drawing.Size(2113, 916);
             this.Controls.Add(this.filtroNombreProducto);
             this.Controls.Add(this.lblListaProveedores);
             this.Controls.Add(this.btnModificar);
@@ -349,7 +345,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.Controls.Add(this.btnAgregarProducto);
             this.Controls.Add(this.gcfProductos);
             this.Controls.Add(this.groupBoxProducto);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormGestionarProductos";
             this.Text = "FormGestionarProductos";
             this.groupBoxProducto.ResumeLayout(false);

@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.Interfaces;
+using System.Diagnostics;
 
 namespace IngenieriaSoftware.UI.Adaptadores
 {
@@ -25,6 +26,7 @@ namespace IngenieriaSoftware.UI.Adaptadores
 
         public string ObtenerMensajeTraducido()
         {
+
             if (IdiomaData.TagTraducciones == null) { return this.Message; }
             if (IdiomaData.TagTraducciones.TryGetValue(this.Tag.ToString(), out string traduccion))
             {

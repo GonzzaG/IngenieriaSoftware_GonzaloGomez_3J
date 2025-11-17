@@ -3,7 +3,6 @@ using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BEL.Proveedor;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
-using IngenieriaSoftware.BLL.Proveedores;
 using IngenieriaSoftware.Servicios.Tools;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
@@ -48,6 +47,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         void LimpiarFormulario()
         {
             groupBoxProducto.LimpiarControles(typeof(Button), typeof(Label));
+            nudTiempoPreparacion.Value = 0;
+            nudPrecio.Value = 0;
         }
 
         private void ListarProductos()
@@ -77,25 +78,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         void IActualizable.Actualizar()
         {
             Actualizar();
-        }
-
-        private void btnAgregarProducto_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                VerificarCamposGuardar();
-
-                if (btnAgregarProducto.Text.Equals("Guardar"))
-                    Guardar();
-                else 
-                    Modificar();
-
-                Actualizar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void Modificar()
@@ -175,6 +157,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                                throw new Exception("Debe seleccionar una categoria") :
                                new CategoriaBussines().GetCategoriaByNombre(cbCategoria.Text),
                 TiempoPreparacion = (int)nudTiempoPreparacion.Value,
+                Precio = nudPrecio.Value,
                 Disponible = cbDisponible.Checked,
                 EsPostre = cbEsPostre.Checked,
             });
@@ -190,12 +173,52 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 throw new Exception("Verificar los datos ingresados");
         }
 
-        private void btnEliminarProducto_Click(object sender, EventArgs e)
+        private void EliminarProducto()
+        {
+            if (gcfProductos.CantidadElementos.Equals(0))
+                throw new Exception("Debe seleccionar un producto");
+
+            var proveedorId = ((Producto)gcfProductos.ElementoSeleccionado).Id;
+
+            new ProductoBLL().DeleteById(proveedorId);
+        }
+
+        private void CargarProductorEnTextos(Producto producto)
+        {
+            txtNombre.Text = producto.Nombre;
+            txtDescripcion.Text = producto.Descripcion;
+            cbCategoria.Text = producto.IdCategoria.ToString();
+
+            nudTiempoPreparacion.Value = producto.TiempoPreparacion;
+            cbDisponible.Checked = producto.Disponible;
+            cbEsPostre.Checked = producto.EsPostre;
+        }
+
+        private void btnAgregarProducto_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                VerificarCamposGuardar();
+
+                if (btnAgregarProducto.Text.Equals("Guardar"))
+                    Guardar();
+                else
+                    Modificar();
+
+                Actualizar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnEliminarProducto_Click_1(object sender, EventArgs e)
         {
             try
             {
                 if (btnEliminarProducto.Text.Equals("Eliminar"))
-                    EliminarProveedor();
+                    EliminarProducto();
                 else
                     PrepararAgregar();
 
@@ -207,17 +230,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             }
         }
 
-        private void EliminarProveedor()
-        {
-            if (gcfProductos.CantidadElementos.Equals(0))
-                throw new Exception("Debe seleccionar un producto");
-
-            var proveedorId = ((Producto)gcfProductos.ElementoSeleccionado).Id;
-
-            new ProveedorBussiness().DeleteById(proveedorId);
-        }
-
-        private void btnModificar_Click(object sender, EventArgs e)
+        private void btnModificar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -232,17 +245,5 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void CargarProductorEnTextos(Producto producto)
-        {
-            txtNombre.Text = producto.Nombre;
-            txtDescripcion.Text = producto.Descripcion;
-            cbCategoria.Text = producto.IdCategoria.ToString();
-
-            nudTiempoPreparacion.Value = producto.TiempoPreparacion;
-            cbDisponible.Checked = producto.Disponible;
-            cbEsPostre.Checked = producto.EsPostre;
-        }
-        
     }
 }

@@ -24,7 +24,7 @@ namespace IngenieriaSoftware.BLL
 
                 string ubicacion = $"{clase}.{metodo}";
 
-                var mUsuario = SessionManager.GetInstance.Usuario?.Username ?? "Sistema";
+                var mUsuario = SessionManager.IsLoggedIn() ? SessionManager.GetInstance?.Usuario?.Username : "Sistema";
                 _instance.RegistrarActividad(mUsuario, actividad, DateTime.Now, infoAdicional, clase, ubicacion, area);
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace IngenieriaSoftware.BLL
             string ubicacion = $"{clase}.{metodo}";
 
             var mUsuario = SessionManager.GetInstance.Usuario?.Username ?? "Sistema";
-            _instance.RegistrarActividad(mUsuario, $"ERROR: {ex.InnerException}", DateTime.Now, ex.StackTrace, clase, ubicacion, area);
+            _instance.RegistrarActividad(mUsuario, $"ERROR: {ex.Message} {ex.InnerException}", DateTime.Now, ex.StackTrace, clase, ubicacion, area);
         }
 
 

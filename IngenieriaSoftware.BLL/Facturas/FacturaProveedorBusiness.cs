@@ -29,6 +29,13 @@ namespace IngenieriaSoftware.BLL.Facturas
             if (facturaProveedor.Detalles.Count == 0)
                 throw new Exception("La factura de proveedor debe contener al menos un detalle.");
 
+
+            for(int i=0; i < facturaProveedor.Detalles.Count; i++)
+            {
+
+            }
+            
+
             using (var transaccion = new TransactionScope())
             {
                 //  Insertamos la factura
@@ -106,7 +113,7 @@ namespace IngenieriaSoftware.BLL.Facturas
 
         public FacturaProveedor GetFacturaProveedorByIdOrdenCompra(int idOrdenCompra)
         {
-            return idOrdenCompra.GetFacturaProveedorByIdOrdenCompra() ?? 
+            return idOrdenCompra.GetFacturaProveedorByIdOrdenCompra() ??
                 throw new Exception("No se encontró una factura asociada a la orden de compra.");
         }
 
@@ -117,7 +124,7 @@ namespace IngenieriaSoftware.BLL.Facturas
         /// <returns></returns>
         public FacturaProveedor GetFacturaProveedorById(int idFacturaProveedor)
         {
-            return idFacturaProveedor.GetFacturaProveedorById()  
+            return idFacturaProveedor.GetFacturaProveedorById()
                 ?? throw new Exception("La factura no existe."); ;
         }
 

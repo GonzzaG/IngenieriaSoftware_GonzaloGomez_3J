@@ -40,12 +40,12 @@
             // 
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(0, 41);
-            this.dgv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgv.Location = new System.Drawing.Point(0, 50);
+            this.dgv.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 51;
             this.dgv.RowTemplate.Height = 24;
-            this.dgv.Size = new System.Drawing.Size(677, 352);
+            this.dgv.Size = new System.Drawing.Size(903, 347);
             this.dgv.TabIndex = 0;
             this.dgv.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_DataError);
             // 
@@ -56,7 +56,7 @@
             this.btnAnterior.Location = new System.Drawing.Point(0, 0);
             this.btnAnterior.Margin = new System.Windows.Forms.Padding(0);
             this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(36, 36);
+            this.btnAnterior.Size = new System.Drawing.Size(48, 44);
             this.btnAnterior.TabIndex = 2;
             this.btnAnterior.Text = "Ant.";
             this.btnAnterior.UseVisualStyleBackColor = false;
@@ -66,10 +66,10 @@
             // 
             this.btnSiguiente.BackColor = System.Drawing.Color.Black;
             this.btnSiguiente.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnSiguiente.Location = new System.Drawing.Point(40, 0);
+            this.btnSiguiente.Location = new System.Drawing.Point(53, 0);
             this.btnSiguiente.Margin = new System.Windows.Forms.Padding(0);
             this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(36, 36);
+            this.btnSiguiente.Size = new System.Drawing.Size(48, 44);
             this.btnSiguiente.TabIndex = 3;
             this.btnSiguiente.Text = "Sig.";
             this.btnSiguiente.UseVisualStyleBackColor = false;
@@ -80,8 +80,7 @@
             this.lblPagina.AutoSize = true;
             this.lblPagina.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPagina.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblPagina.Location = new System.Drawing.Point(88, 9);
-            this.lblPagina.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPagina.Location = new System.Drawing.Point(117, 11);
             this.lblPagina.Name = "lblPagina";
             this.lblPagina.Size = new System.Drawing.Size(80, 26);
             this.lblPagina.TabIndex = 4;
@@ -90,15 +89,15 @@
             // panelNoResultadoProducto
             // 
             this.panelNoResultadoProducto.BackColor = System.Drawing.Color.Transparent;
-            this.panelNoResultadoProducto.Location = new System.Drawing.Point(12, 52);
-            this.panelNoResultadoProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelNoResultadoProducto.Location = new System.Drawing.Point(16, 64);
+            this.panelNoResultadoProducto.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panelNoResultadoProducto.Name = "panelNoResultadoProducto";
-            this.panelNoResultadoProducto.Size = new System.Drawing.Size(250, 48);
+            this.panelNoResultadoProducto.Size = new System.Drawing.Size(410, 137);
             this.panelNoResultadoProducto.TabIndex = 43;
             // 
             // DataGridViewConFiltros
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panelNoResultadoProducto);
@@ -106,9 +105,9 @@
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.dgv);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "DataGridViewConFiltros";
-            this.Size = new System.Drawing.Size(680, 396);
+            this.Size = new System.Drawing.Size(907, 402);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

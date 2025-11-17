@@ -14,16 +14,16 @@ namespace IngenieriaSoftware.UI
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                if (!ProductoService.TestConnection(out string error))
-                {
-                    MessageBox.Show(
-                        "No se pudo iniciar la aplicación:\n\n" + error,
-                        "Error de conexión a SQL Server",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
-                    return;
-                }
+                //if (!ProductoService.TestConnection(out string error))
+                //{
+                //    MessageBox.Show(
+                //        "No se pudo iniciar la aplicación:\n\n" + error,
+                //        "Error de conexión a SQL Server",
+                //        MessageBoxButtons.OK,
+                //        MessageBoxIcon.Error
+                //    );
+                //    return;
+                //}
 
                 Application.Run(new FormMDI());
             }

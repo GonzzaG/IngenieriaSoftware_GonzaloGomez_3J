@@ -6,12 +6,12 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
 {
     public class ProductoOrdenCompraBussiness
     {
-        public List<ProductoOrdenCompraViewModel> GetProductosToOrdenCompra()
+        public List<ProductoSelectionModel> GetProductosToOrdenCompra()
         {
             return new ProductoOrdenCompraDataAccess().GetProductosToOrdenCompra();
         }
 
-        public ProductoOrdenCompraViewModel GetProductosToOrdenCompra(int idProducto)
+        public ProductoSelectionModel GetProductosToOrdenCompra(int idProducto)
         {
             if(idProducto <= 0)
                 return null;
