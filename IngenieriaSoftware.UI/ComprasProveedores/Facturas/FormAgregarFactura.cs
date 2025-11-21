@@ -79,7 +79,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
         {
             lblNumeroOrden.Text = _OrdenCompra.NumOrdenCompra;
             dgvProductosOrdenCompra.CargarDatos(_ProductosOrdenCompra);
-            OcultarColumnasOrdenCompra();
+            ConfigurarColumnasOrdenCompra();
 
             txtNumericTotalEsperado.Text = _OrdenCompra.TotalEsperado.ToString("N2");
             txtMoneda.Text = _OrdenCompra.Moneda;
@@ -150,9 +150,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
 
         }
 
-        private void OcultarColumnasOrdenCompra()
+        private void ConfigurarColumnasOrdenCompra()
         {
             dgvProductosOrdenCompra.OcultarColumnas("IdDetalle", "IdOrdenCompra", "IdProducto", "NotasLinea");
+            dgvProductosOrdenCompra.RenombrarColumna("PrecioUnitarioEsperado", "P.U Esperado");
+
         }
 
         private OrdenCompraWithDetalles GetOrdenCompraById(int IdOrdenCompra)
@@ -324,11 +326,15 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
             if (_ProductosFactura is null || _ProductosFactura.Count == 0)
                 throw new Exception("Debe seleccionar al menos un producto para generar la factura");
 
-            if (_ProductosFactura.Any(p => p.Cantidad <= 0))
-                throw new Exception("Todos los productos deben tener una cantidad mayor a cero");
+            for (int i = 0; i < _ProductosFactura.Count; i++)
+            {
+                if (_ProductosFactura[i].PrecioUnitarioEsperado == null)
+                    throw new Exception("Todos los productos deben tener un precio unitario");
 
-            if (_ProductosFactura.Any(p => p.PrecioUnitarioEsperado <= 0))
-                throw new Exception("Todos los productos deben tener un precio unitario mayor a cero");
+                if (_ProductosFactura[i].Cantidad <= 0)
+                    throw new Exception("Todos los productos deben tener una cantidad mayor a cero");
+
+            }
 
             if (string.IsNullOrWhiteSpace(txtNumFactura.Text))
                 throw new Exception("El número de factura es obligatorio");
@@ -338,6 +344,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
 
             if (string.IsNullOrWhiteSpace(dtpFechaEntregaEsperada.Text))
                 throw new Exception("La fecha de entrega esperada es obligatoria");
+        }
+
+        private void FormAgregarFactura_Shown(object sender, EventArgs e)
+        {
+            this.AutoScrollPosition = new Point(0, 0);
         }
     }
 }

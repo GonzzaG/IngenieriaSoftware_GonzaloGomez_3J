@@ -63,20 +63,24 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
 
         private void txtNumDescuento_TextChanged(object sender, EventArgs e)
         {
-            if(decimal.TryParse(txtNumDescuento.ValorNumerico, out decimal result))
-            {
-                Total -= result;
-                txtNumTotalFinal.Text = Total.ToString();
-            }
+            if(decimal.TryParse(txtNumDescuento.ValorNumerico, out decimal descuento))
+                Total = _FacturaProveedor.Subtotal - descuento;
+            else
+                Total = _FacturaProveedor.Subtotal;
+
+            txtNumTotalFinal.Text = Total.ToString();
+
         }
 
         private void txtNumImpuestos_TextChanged(object sender, EventArgs e)
         {
-            if (decimal.TryParse(txtNumImpuestos.ValorNumerico, out decimal result))
-            {
-                Total += result;
-                txtNumTotalFinal.Text = Total.ToString();
-            }
+            if (decimal.TryParse(txtNumImpuestos.ValorNumerico, out decimal impuestos))
+                Total = _FacturaProveedor.Subtotal + impuestos;
+            else 
+                Total = _FacturaProveedor.Subtotal;
+
+            txtNumTotalFinal.Text = Total.ToString();
+
         }
 
         private void btnGenerarOrdenCompra_Click(object sender, EventArgs e)
