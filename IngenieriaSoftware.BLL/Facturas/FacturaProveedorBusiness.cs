@@ -1,5 +1,7 @@
 ﻿using IngenieriaSoftware.BEL.FacturaProveedor;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.DAL.FacturaProveedores.DataAccess;
+using IngenieriaSoftware.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Transactions;
@@ -23,32 +25,42 @@ namespace IngenieriaSoftware.BLL.Facturas
         /// <returns>Id de la factura</returns>
         public int CrearFacturaProveedor(FacturaProveedor facturaProveedor)
         {
-            if (facturaProveedor.IdFacturaProveedor == 0)
-                throw new Exception("El Id de la factura proveedor no puede ser 0.");
-
+            #region Paso 1: Validaciones
             if (facturaProveedor.Detalles.Count == 0)
                 throw new Exception("La factura de proveedor debe contener al menos un detalle.");
 
+            if (!facturaProveedor.IdOrdenCompra.HasValue)
+                throw new Exception("La factura de proveedor debe estar asociada a una orden de compra.");
+            #endregion
 
-            for(int i=0; i < facturaProveedor.Detalles.Count; i++)
-            {
+            #region Paso 2: Colocar factura como pendiente
+            //  Establecemos el estado inicial de la factura como Pendiente
+            facturaProveedor.IdFacturaProveedorEstado = (int)EstadoFacturaProveedor.Pendiente;
+            #endregion
 
-            }
-            
+            #region  Paso 2.1: Obtenemos el usuario actual
+            facturaProveedor.IdUsuarioCreador = SessionManager.GetInstance.Usuario.Id;
+            #endregion
 
+            #region Paso 3: Insercion de Factura y detalles
             using (var transaccion = new TransactionScope())
             {
-                //  Insertamos la factura
-                int idFacturaProveedor = facturaProveedor.InsertFacturaProveedor();
+                //  Insertamos la factura y retornamos el id de la factura generada 
+                facturaProveedor.IdFacturaProveedor = facturaProveedor.InsertFacturaProveedor();
 
                 //  Insertamos los detalles de la factura
                 facturaProveedor.InsertFacturaProveedorDetalles();
 
+                // Colocamos la Orden de compra asociada a la factura como Recibida
+                new OrdenCompraBussiness().SetOrdenCompraRecibida((int)facturaProveedor.IdOrdenCompra);
+
                 transaccion.Complete();
 
                 //  Devolvemos el Id de la factura
-                return idFacturaProveedor;
+                return facturaProveedor.IdFacturaProveedor;
             }
+
+            #endregion
         }
 
         #region Cambio estado de factura proveedor

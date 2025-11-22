@@ -51,21 +51,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                 if (_OrdenCompra == null)
                     throw new Exception("No se pudo obtener la factura");
 
-                _ProductosOrdenCompra = (from detalle in _OrdenCompra.Detalles
-                                         select new ProductoSelectionModel()
-                                         {
-                                             IdProducto = detalle.IdProducto,
-                                             Cantidad = detalle.Cantidad,
-                                             PrecioUnitarioEsperado = detalle.PrecioUnitarioEsperado,
-                                             Nombre = detalle.NombreProducto,
-
-                                         }).ToList();
-
+                GetProductosOrdenCompra();
                 //  Listamos los datos de la orden de compra en los controles.
                 CargarOrdenCompra();
-                //  Listamos los datos de la factura en los controles.
-
-
             }
             catch (Exception ex)
             {
@@ -73,6 +61,19 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                 BitacoraHelper.RegistrarError("Inicializacion Factura", ex, "Factura", SessionManager.GetInstance.Usuario.ToString());
             }
 
+        }
+
+        private void GetProductosOrdenCompra()
+        {
+            _ProductosOrdenCompra = (from detalle in _OrdenCompra.Detalles
+                                     select new ProductoSelectionModel()
+                                     {
+                                         IdProducto = detalle.IdProducto,
+                                         Cantidad = detalle.Cantidad,
+                                         PrecioUnitarioEsperado = detalle.PrecioUnitarioEsperado,
+                                         Nombre = detalle.NombreProducto,
+
+                                     }).ToList();
         }
 
         private void CargarOrdenCompra()
@@ -244,17 +245,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
             return productosSinAgregar != null ? productosSinAgregar : new List<ProductoSelectionModel>();
         }
 
-        private void AgregarProductosOrden(List<ProductoSelectionModel> productosSinAgregar)
-        {
-            for (int i = 0; i < productosSinAgregar.Count; i++)
-            {
-                if (!_ProductosFactura.Contains(_ProductosOrdenCompra[i]))
-                {
-                    productosSinAgregar.Add(_ProductosFactura[i]);
-                }
-            }
-        }
-
         private void ValidarProductosOrden()
         {
             if (_OrdenCompra.Detalles is null || _OrdenCompra.Detalles.Count == 0)
@@ -273,9 +263,8 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                     NumeroFactura = txtNumFactura.Text,
                     FechaPago = dtpFechaEmision.Value,
                     FechaEmision = dtpFechaEmision.Value,
-                    FechaRegistro = dtpFechaEntregaEsperada.Value,
                     Subtotal = GetSubTotal(),
-
+                    IdProveedor = _OrdenCompra.IdProveedor,
                     Detalles = (from detalle in _ProductosFactura
                                 select new FacturaProveedorDetalle()
                                 {
@@ -292,21 +281,13 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                 new FormModalFacturaTotalFinal(factura).AbrirFormModal(new Size(1600, 670));
 
                 //TODO Seguir aca lo que quiero hacer despues de guardar la factura
-                //GetFactura(); <-- Obtener la factura generada y mostrala en un mensaje
+                this.Redireccionar(new FormListaOrdenCompra());
             }
             catch (Exception ex)
             {
                 MessageBox.Show("No se pudo generar la factura: " + ex.Message);
                 BitacoraHelper.RegistrarError("Generar factura", ex, "Factura", SessionManager.GetInstance.Usuario.ToString());
             }
-        }
-
-        private FacturaProveedor GetFactura(int idFactura)
-        {
-            if (idFactura <= 0)
-                throw new ArgumentException("El Id de la factura no puede ser menor o igual a cero.", nameof(idFactura));
-
-            return new FacturaProveedorBusiness().GetFacturaProveedorById(idFactura);
         }
 
         private decimal GetSubTotal()
@@ -341,9 +322,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
 
             if (string.IsNullOrWhiteSpace(dtpFechaEmision.Text))
                 throw new Exception("La fecha de la factura es obligatoria");
-
-            if (string.IsNullOrWhiteSpace(dtpFechaEntregaEsperada.Text))
-                throw new Exception("La fecha de entrega esperada es obligatoria");
         }
 
         private void FormAgregarFactura_Shown(object sender, EventArgs e)

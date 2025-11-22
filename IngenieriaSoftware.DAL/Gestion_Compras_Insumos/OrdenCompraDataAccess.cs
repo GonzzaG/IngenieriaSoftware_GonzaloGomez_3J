@@ -36,6 +36,18 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
             new DAO().ExecuteStoredProcedure("OrdenCompra.sp_SetOrdenCompraRechazada", parametros);
         }
 
+
+        public static void SetOrdenCompraRecibida(this int idOrdenCompra, string usuario)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdOrdenCompra",idOrdenCompra),
+                new SqlParameter("@usuarioModificacion",usuario)
+            };
+
+            new DAO().ExecuteStoredProcedure("OrdenCompra.sp_SetOrdenCompraRecibida", parametros);
+        }
+
         public static List<OrdenCompraGetListaModel> GetOrdenesCompra()
         {
             return new DAO()

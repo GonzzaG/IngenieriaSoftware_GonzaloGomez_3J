@@ -10,7 +10,7 @@
         public decimal PrecioUnitario { get; set; }
         public decimal Descuento { get; set; }
         public decimal Impuesto { get; set; }
-        public int IdOrdenCompraDetalle { get; set; }
+        public int? IdOrdenCompraDetalle { get; set; }
     }
 
 }

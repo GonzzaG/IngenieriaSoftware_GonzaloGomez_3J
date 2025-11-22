@@ -46,6 +46,7 @@
             // gBListaOrdenCompra
             // 
             this.gBListaOrdenCompra.AutoSize = true;
+            this.gBListaOrdenCompra.Controls.Add(this.btnGenerarFactura);
             this.gBListaOrdenCompra.Controls.Add(this.dtpFechaDesde);
             this.gBListaOrdenCompra.Controls.Add(this.cbEstado);
             this.gBListaOrdenCompra.Controls.Add(this.lblEstado);
@@ -58,9 +59,9 @@
             this.gBListaOrdenCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBListaOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.gBListaOrdenCompra.Location = new System.Drawing.Point(148, 33);
-            this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(2);
             this.gBListaOrdenCompra.Name = "gBListaOrdenCompra";
-            this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(2);
             this.gBListaOrdenCompra.Size = new System.Drawing.Size(1040, 228);
             this.gBListaOrdenCompra.TabIndex = 1242;
             this.gBListaOrdenCompra.TabStop = false;
@@ -119,7 +120,7 @@
             this.txtCodigo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.ForeColor = System.Drawing.Color.DimGray;
             this.txtCodigo.Location = new System.Drawing.Point(80, 83);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(189, 29);
             this.txtCodigo.TabIndex = 1244;
@@ -146,7 +147,7 @@
             this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnBuscar.Location = new System.Drawing.Point(650, 165);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(103, 37);
             this.btnBuscar.TabIndex = 35;
@@ -162,7 +163,7 @@
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAgregar.Location = new System.Drawing.Point(767, 165);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(103, 37);
             this.btnAgregar.TabIndex = 36;
@@ -178,7 +179,7 @@
             this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnLimpiar.Location = new System.Drawing.Point(883, 165);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(103, 37);
             this.btnLimpiar.TabIndex = 37;
@@ -193,8 +194,8 @@
             this.btnGenerarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerarFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarFactura.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnGenerarFactura.Location = new System.Drawing.Point(1045, 292);
-            this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGenerarFactura.Location = new System.Drawing.Point(494, 165);
+            this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(2);
             this.btnGenerarFactura.Name = "btnGenerarFactura";
             this.btnGenerarFactura.Size = new System.Drawing.Size(143, 37);
             this.btnGenerarFactura.TabIndex = 1243;
@@ -210,7 +211,7 @@
             this.grillaConFiltros.Location = new System.Drawing.Point(148, 308);
             this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grillaConFiltros.Name = "grillaConFiltros";
-            this.grillaConFiltros.Size = new System.Drawing.Size(1053, 488);
+            this.grillaConFiltros.Size = new System.Drawing.Size(1404, 350);
             this.grillaConFiltros.TabIndex = 35;
             this.grillaConFiltros.Tag = "1255";
             this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
@@ -221,10 +222,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1374, 839);
-            this.Controls.Add(this.btnGenerarFactura);
             this.Controls.Add(this.grillaConFiltros);
             this.Controls.Add(this.gBListaOrdenCompra);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormListaOrdenCompra";
             this.Tag = "1256";
             this.Text = "Orden de compra";

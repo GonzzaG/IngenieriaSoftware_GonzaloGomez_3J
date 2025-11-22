@@ -23,6 +23,11 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
             idOrdenCompra.SetOrdenCompraRechazada(SessionManager.GetInstance.ToString());
         }
 
+        public void SetOrdenCompraRecibida(int idOrdenCompra)
+        {
+            idOrdenCompra.SetOrdenCompraRecibida(SessionManager.GetInstance.ToString());
+        }
+
         /// <summary>
         /// Obtiene la lista de órdenes de compra.
         /// </summary>

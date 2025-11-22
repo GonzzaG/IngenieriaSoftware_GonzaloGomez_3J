@@ -28,7 +28,7 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
             {
                 new SqlParameter("@NumeroFactura",facturaProveedor.NumeroFactura),
                 new SqlParameter("@FechaEmision",facturaProveedor.FechaEmision),
-                new SqlParameter("@IdOrdenCompra",facturaProveedor.ToDbValue()),
+                new SqlParameter("@IdOrdenCompra",facturaProveedor.IdOrdenCompra.ToDbValue()),
                 new SqlParameter("@IdProveedor",facturaProveedor.IdProveedor),
                 new SqlParameter("@IdUsuarioCreador",facturaProveedor.IdUsuarioCreador),
                 new SqlParameter("@Subtotal",facturaProveedor.Subtotal),
@@ -38,8 +38,7 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
                 new SqlParameter("@MetodoPago",facturaProveedor.MetodoPago),
                 new SqlParameter("@IdFacturaProveedorEstado",facturaProveedor.IdFacturaProveedorEstado),
                 new SqlParameter("@Observaciones",facturaProveedor.Observaciones),
-                new SqlParameter("@FechaRegistro",facturaProveedor.FechaRegistro),
-                new SqlParameter("@FechaPago",facturaProveedor.ToDbValue()),
+                new SqlParameter("@FechaPago",facturaProveedor.FechaPago.ToDbValue()),
                 new SqlParameter("@NewIdFacturaProveedor", SqlDbType.Int) { Direction = ParameterDirection.Output }
             };
 
@@ -68,7 +67,7 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
                     new SqlParameter("@PrecioUnitario",detalle.PrecioUnitario),
                     new SqlParameter("@Descuento",detalle.Descuento),
                     new SqlParameter("@Impuesto",detalle.Impuesto),
-                    new SqlParameter("@IdOrdenCompraDetalle",detalle.IdOrdenCompraDetalle),
+                    new SqlParameter("@IdOrdenCompraDetalle", detalle.IdOrdenCompraDetalle <= 0 ? null : detalle.IdOrdenCompraDetalle),
 
                     new SqlParameter("@NewIdDetalleFacturaProveedor", SqlDbType.Int) { Direction = ParameterDirection.Output }
                 };

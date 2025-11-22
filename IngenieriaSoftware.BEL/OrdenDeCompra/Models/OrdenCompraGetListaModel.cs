@@ -30,7 +30,7 @@ namespace IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels
 
     public class OrdenCompraWithDetalles : OrdenCompraGetListaModel
     {
-        public int IdOrdenCompra { get; set; }  
         public List<OrdenDeCompraDetalleAprobacionModel> Detalles { get; set; }
+        public int IdProveedor { get; set; }    
     }
 }

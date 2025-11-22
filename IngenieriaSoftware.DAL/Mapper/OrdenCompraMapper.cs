@@ -49,6 +49,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                         Moneda = row["Moneda"].ToString(),
                         Estado = (OrdenCompraEstadoEnum)Convert.ToInt32(row["IdEstado"]),
                         TotalEsperado = Convert.ToDecimal(row["TotalEsperado"]),
+                        IdProveedor = Convert.ToInt32(row["IdProveedor"]),
                         Observaciones = row["Observaciones"].ToString(),
                         FechaCreacion = Convert.ToDateTime(row["FechaCreacion"]),
                         UsuarioCreacion = row["UsuarioCreacion"].ToString()
