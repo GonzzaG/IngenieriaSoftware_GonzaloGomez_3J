@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.gBListaOrdenCompra = new System.Windows.Forms.GroupBox();
+            this.cbEstado = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
+            this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.lblEstado = new System.Windows.Forms.Label();
             this.lblFechaDesde = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -38,7 +39,6 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.grillaConFiltros = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.gBListaOrdenCompra.SuspendLayout();
             this.SuspendLayout();
@@ -46,9 +46,9 @@
             // gBListaOrdenCompra
             // 
             this.gBListaOrdenCompra.AutoSize = true;
+            this.gBListaOrdenCompra.Controls.Add(this.cbEstado);
             this.gBListaOrdenCompra.Controls.Add(this.btnGenerarFactura);
             this.gBListaOrdenCompra.Controls.Add(this.dtpFechaDesde);
-            this.gBListaOrdenCompra.Controls.Add(this.cbEstado);
             this.gBListaOrdenCompra.Controls.Add(this.lblEstado);
             this.gBListaOrdenCompra.Controls.Add(this.lblFechaDesde);
             this.gBListaOrdenCompra.Controls.Add(this.txtCodigo);
@@ -68,23 +68,40 @@
             this.gBListaOrdenCompra.Tag = "1251";
             this.gBListaOrdenCompra.Text = "Orden de compra";
             // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(605, 82);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(189, 30);
+            this.cbEstado.TabIndex = 3;
+            // 
+            // btnGenerarFactura
+            // 
+            this.btnGenerarFactura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(132)))), ((int)(((byte)(240)))));
+            this.btnGenerarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarFactura.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGenerarFactura.Location = new System.Drawing.Point(494, 165);
+            this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGenerarFactura.Name = "btnGenerarFactura";
+            this.btnGenerarFactura.Size = new System.Drawing.Size(143, 37);
+            this.btnGenerarFactura.TabIndex = 7;
+            this.btnGenerarFactura.Tag = "";
+            this.btnGenerarFactura.Text = "Generar Factura";
+            this.btnGenerarFactura.UseVisualStyleBackColor = false;
+            this.btnGenerarFactura.Visible = false;
+            this.btnGenerarFactura.Click += new System.EventHandler(this.btnGenerarFactura_Click);
+            // 
             // dtpFechaDesde
             // 
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaDesde.Location = new System.Drawing.Point(341, 84);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(189, 28);
-            this.dtpFechaDesde.TabIndex = 1246;
-            this.dtpFechaDesde.Value = new System.DateTime(2025, 9, 16, 23, 18, 0, 0);
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(605, 83);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(189, 30);
-            this.cbEstado.TabIndex = 3;
-            this.cbEstado.Tag = "1249";
+            this.dtpFechaDesde.TabIndex = 2;
+            this.dtpFechaDesde.Value = new System.DateTime(2025, 11, 22, 0, 0, 0, 0);
             // 
             // lblEstado
             // 
@@ -123,7 +140,7 @@
             this.txtCodigo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(189, 29);
-            this.txtCodigo.TabIndex = 1244;
+            this.txtCodigo.TabIndex = 0;
             this.txtCodigo.Tag = "1244";
             // 
             // lblCodigo
@@ -135,10 +152,10 @@
             this.lblCodigo.Location = new System.Drawing.Point(76, 60);
             this.lblCodigo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(145, 21);
+            this.lblCodigo.Size = new System.Drawing.Size(96, 21);
             this.lblCodigo.TabIndex = 1243;
             this.lblCodigo.Tag = "1243";
-            this.lblCodigo.Text = "NumOrdenCompra";
+            this.lblCodigo.Text = "Num. Orden";
             // 
             // btnBuscar
             // 
@@ -150,7 +167,7 @@
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(103, 37);
-            this.btnBuscar.TabIndex = 35;
+            this.btnBuscar.TabIndex = 4;
             this.btnBuscar.Tag = "1250";
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -166,7 +183,7 @@
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(103, 37);
-            this.btnAgregar.TabIndex = 36;
+            this.btnAgregar.TabIndex = 5;
             this.btnAgregar.Tag = "1253";
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;
@@ -182,28 +199,11 @@
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(103, 37);
-            this.btnLimpiar.TabIndex = 37;
+            this.btnLimpiar.TabIndex = 6;
             this.btnLimpiar.Tag = "1254";
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnGenerarFactura
-            // 
-            this.btnGenerarFactura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(132)))), ((int)(((byte)(240)))));
-            this.btnGenerarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerarFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarFactura.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnGenerarFactura.Location = new System.Drawing.Point(494, 165);
-            this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(2);
-            this.btnGenerarFactura.Name = "btnGenerarFactura";
-            this.btnGenerarFactura.Size = new System.Drawing.Size(143, 37);
-            this.btnGenerarFactura.TabIndex = 1243;
-            this.btnGenerarFactura.Tag = "";
-            this.btnGenerarFactura.Text = "Generar Factura";
-            this.btnGenerarFactura.UseVisualStyleBackColor = false;
-            this.btnGenerarFactura.Visible = false;
-            this.btnGenerarFactura.Click += new System.EventHandler(this.btnGenerarFactura_Click);
             // 
             // grillaConFiltros
             // 
@@ -245,8 +245,8 @@
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label lblCodigo;
         private System.Windows.Forms.DateTimePicker dtpFechaDesde;
-        private System.Windows.Forms.ComboBox cbEstado;
         private ControlesPersonalizados.DataGridViewConFiltros grillaConFiltros;
         private System.Windows.Forms.Button btnGenerarFactura;
+        private ControlesPersonalizados.Inputs.ComboBoxCustom cbEstado;
     }
 }

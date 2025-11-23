@@ -278,10 +278,12 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                 };
 
                 //  Abrimos un pequeño modal donde calcularemos el Total antes de generarla
-                new FormModalFacturaTotalFinal(factura).AbrirFormModal(new Size(1600, 670));
+                var dialog = new FormModalFacturaTotalFinal(factura).AbrirFormModal(new Size(1600, 670));
 
-                //TODO Seguir aca lo que quiero hacer despues de guardar la factura
-                this.Redireccionar(new FormListaOrdenCompra());
+                if (dialog.Equals(DialogResult.OK))
+                    //TODO Seguir aca lo que quiero hacer despues de guardar la factura
+                    this.Redireccionar(new FormListaOrdenCompra());
+
             }
             catch (Exception ex)
             {

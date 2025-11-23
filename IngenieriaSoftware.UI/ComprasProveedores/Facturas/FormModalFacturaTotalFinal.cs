@@ -63,26 +63,43 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
 
         }
 
-        private void txtNumDescuento_TextChanged(object sender, EventArgs e)
+        private void RecalcularTotal()
         {
-            if(decimal.TryParse(txtNumDescuento.ValorNumerico, out decimal descuento))
-                Total = _FacturaProveedor.Subtotal - descuento;
-            else
-                Total = _FacturaProveedor.Subtotal;
+            decimal subtotal = _FacturaProveedor.Subtotal;
+
+            // Descuento
+            decimal descuento = 0;
+            if (decimal.TryParse(txtNumDescuento.ValorNumerico, out decimal d))
+                descuento = ckbDescuento.Checked ? subtotal * (d / 100) : d;
+
+            // Impuesto
+            decimal impuestos = 0;
+            if (decimal.TryParse(txtNumImpuestos.ValorNumerico, out decimal imp))
+                impuestos = ckbImpuesto.Checked ? subtotal * (imp / 100) : imp;
+
+            Total = subtotal - descuento + impuestos;
 
             lblNumeroTotal.Text = Total.ToString();
+        }
 
+        private void txtNumDescuento_TextChanged(object sender, EventArgs e)
+        {
+            RecalcularTotal();
         }
 
         private void txtNumImpuestos_TextChanged(object sender, EventArgs e)
         {
-            if (decimal.TryParse(txtNumImpuestos.ValorNumerico, out decimal impuestos))
-                Total = _FacturaProveedor.Subtotal + impuestos;
-            else 
-                Total = _FacturaProveedor.Subtotal;
+            RecalcularTotal();
+        }
 
-            lblNumeroTotal.Text = Total.ToString();
+        private void ckbDescuento_CheckedChanged(object sender, EventArgs e)
+        {
+            RecalcularTotal();
+        }
 
+        private void ckbImpuesto_CheckedChanged(object sender, EventArgs e)
+        {
+            RecalcularTotal();
         }
 
         private void btnGenerarFactura_Click(object sender, EventArgs e)
@@ -156,6 +173,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                 lblNumeroTotal.ForeColor = Color.Red;
             else
                 lblNumeroTotal.ForeColor = Color.WhiteSmoke;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

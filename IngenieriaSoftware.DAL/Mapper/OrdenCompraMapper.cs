@@ -56,6 +56,27 @@ namespace IngenieriaSoftware.DAL.Mapper
                     }).FirstOrDefault();
         }
 
+        public static OrdenCompraWithDetalles ConvertirOrdenCompraDetalleDataSet(this DataSet ds)
+        {
+            return (from DataRow row in ds.Tables[0].Rows
+                    select new OrdenCompraWithDetalles
+                    {
+                        IdOrdenCompra = Convert.ToInt32(row["IdOrdenCompra"]),
+                        NumOrdenCompra = row["NumOrdenDeCompra"].ToString(),
+                        RazonSocialProveedor = row["RazonSocial"].ToString(),
+                        Fecha = Convert.ToDateTime(row["Fecha"]),
+                        FechaEntregaEsperada = row["FechaEntregaEsperada"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["FechaEntregaEsperada"]),
+                        CondicionesPago = row["CondicionesPago"].ToString(),
+                        TipoCambio = row["TipoCambio"] == DBNull.Value ? (decimal?)null : Convert.ToDecimal(row["TipoCambio"]),
+                        Moneda = row["Moneda"].ToString(),
+                        Estado = (OrdenCompraEstadoEnum)Convert.ToInt32(row["IdEstado"]),
+                        TotalEsperado = Convert.ToDecimal(row["TotalEsperado"]),
+                        Observaciones = row["Observaciones"].ToString(),
+                        FechaCreacion = Convert.ToDateTime(row["FechaCreacion"]),
+                        UsuarioCreacion = row["UsuarioCreacion"].ToString()
+                    }).FirstOrDefault();
+        }
+
         public static List<ConvertirDetallesAprobacionDataSet> ConvertirDetallesDataSet(this DataSet ds)
         {
             return (from DataRow row in ds.Tables[0].Rows

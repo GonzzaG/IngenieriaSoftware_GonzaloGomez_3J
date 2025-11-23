@@ -52,7 +52,6 @@
             this.lblFechaEmision = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.cbProveedor = new System.Windows.Forms.ComboBox();
             this.lblProveedor = new System.Windows.Forms.Label();
             this.lblOrdenCompra = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,6 +59,7 @@
             this.btnRechazarOrden = new System.Windows.Forms.Button();
             this.btnAceptarOrden = new System.Windows.Forms.Button();
             this.dgvProductosOrdenCompra = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.cbProveedor = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.gbPagoMoneda.SuspendLayout();
             this.gBDatosGenerales.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +74,7 @@
             this.btnGenerarOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGenerarOrdenCompra.Name = "btnGenerarOrdenCompra";
             this.btnGenerarOrdenCompra.Size = new System.Drawing.Size(376, 64);
-            this.btnGenerarOrdenCompra.TabIndex = 39;
+            this.btnGenerarOrdenCompra.TabIndex = 11;
             this.btnGenerarOrdenCompra.Tag = "1283";
             this.btnGenerarOrdenCompra.Text = "Generar Orden";
             this.btnGenerarOrdenCompra.UseVisualStyleBackColor = false;
@@ -90,7 +90,7 @@
             this.btnSeleccionarProductos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSeleccionarProductos.Name = "btnSeleccionarProductos";
             this.btnSeleccionarProductos.Size = new System.Drawing.Size(313, 64);
-            this.btnSeleccionarProductos.TabIndex = 97;
+            this.btnSeleccionarProductos.TabIndex = 4;
             this.btnSeleccionarProductos.Tag = "1264";
             this.btnSeleccionarProductos.Text = "Seleccionar productos";
             this.btnSeleccionarProductos.UseVisualStyleBackColor = false;
@@ -106,7 +106,7 @@
             this.txtAreaObservaciones.Multiline = true;
             this.txtAreaObservaciones.Name = "txtAreaObservaciones";
             this.txtAreaObservaciones.Size = new System.Drawing.Size(309, 146);
-            this.txtAreaObservaciones.TabIndex = 102;
+            this.txtAreaObservaciones.TabIndex = 6;
             this.txtAreaObservaciones.Tag = "1269";
             // 
             // txtCondicionesPago
@@ -117,8 +117,8 @@
             this.txtCondicionesPago.Location = new System.Drawing.Point(1076, 97);
             this.txtCondicionesPago.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCondicionesPago.Name = "txtCondicionesPago";
-            this.txtCondicionesPago.Size = new System.Drawing.Size(201, 34);
-            this.txtCondicionesPago.TabIndex = 100;
+            this.txtCondicionesPago.Size = new System.Drawing.Size(201, 29);
+            this.txtCondicionesPago.TabIndex = 10;
             this.txtCondicionesPago.Tag = "1279";
             // 
             // lblCondicionesPago
@@ -129,7 +129,7 @@
             this.lblCondicionesPago.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblCondicionesPago.Location = new System.Drawing.Point(1070, 67);
             this.lblCondicionesPago.Name = "lblCondicionesPago";
-            this.lblCondicionesPago.Size = new System.Drawing.Size(155, 28);
+            this.lblCondicionesPago.Size = new System.Drawing.Size(121, 21);
             this.lblCondicionesPago.TabIndex = 101;
             this.lblCondicionesPago.Tag = "1280";
             this.lblCondicionesPago.Text = "Condic. de pago";
@@ -161,12 +161,13 @@
             // 
             // txtNumericTipoCambio
             // 
-            this.txtNumericTipoCambio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
-            this.txtNumericTipoCambio.Location = new System.Drawing.Point(743, 97);
+            this.txtNumericTipoCambio.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtNumericTipoCambio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
+            this.txtNumericTipoCambio.Location = new System.Drawing.Point(742, 98);
             this.txtNumericTipoCambio.Name = "txtNumericTipoCambio";
-            this.txtNumericTipoCambio.Size = new System.Drawing.Size(201, 34);
-            this.txtNumericTipoCambio.TabIndex = 111;
-            this.txtNumericTipoCambio.Tag = "1277";
+            this.txtNumericTipoCambio.Size = new System.Drawing.Size(201, 28);
+            this.txtNumericTipoCambio.TabIndex = 9;
+            this.txtNumericTipoCambio.Tag = "1273";
             this.txtNumericTipoCambio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtNumericTotalEsperado
@@ -175,8 +176,8 @@
             this.txtNumericTotalEsperado.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
             this.txtNumericTotalEsperado.Location = new System.Drawing.Point(84, 97);
             this.txtNumericTotalEsperado.Name = "txtNumericTotalEsperado";
-            this.txtNumericTotalEsperado.Size = new System.Drawing.Size(201, 34);
-            this.txtNumericTotalEsperado.TabIndex = 111;
+            this.txtNumericTotalEsperado.Size = new System.Drawing.Size(201, 28);
+            this.txtNumericTotalEsperado.TabIndex = 7;
             this.txtNumericTotalEsperado.Tag = "1273";
             this.txtNumericTotalEsperado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -188,7 +189,7 @@
             this.label13.ForeColor = System.Drawing.Color.Red;
             this.label13.Location = new System.Drawing.Point(216, 65);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(20, 28);
+            this.label13.Size = new System.Drawing.Size(17, 21);
             this.label13.TabIndex = 89;
             this.label13.Tag = "1272";
             this.label13.Text = "*";
@@ -201,7 +202,7 @@
             this.label12.ForeColor = System.Drawing.Color.Red;
             this.label12.Location = new System.Drawing.Point(464, 66);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(20, 28);
+            this.label12.Size = new System.Drawing.Size(17, 21);
             this.label12.TabIndex = 89;
             this.label12.Tag = "1276";
             this.label12.Text = "*";
@@ -214,7 +215,7 @@
             this.lblMoneda.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblMoneda.Location = new System.Drawing.Point(385, 67);
             this.lblMoneda.Name = "lblMoneda";
-            this.lblMoneda.Size = new System.Drawing.Size(85, 28);
+            this.lblMoneda.Size = new System.Drawing.Size(67, 21);
             this.lblMoneda.TabIndex = 77;
             this.lblMoneda.Tag = "1275";
             this.lblMoneda.Text = "Moneda";
@@ -227,8 +228,8 @@
             this.txtMoneda.Location = new System.Drawing.Point(387, 97);
             this.txtMoneda.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMoneda.Name = "txtMoneda";
-            this.txtMoneda.Size = new System.Drawing.Size(201, 34);
-            this.txtMoneda.TabIndex = 76;
+            this.txtMoneda.Size = new System.Drawing.Size(201, 29);
+            this.txtMoneda.TabIndex = 8;
             this.txtMoneda.Tag = "1274";
             // 
             // lblTipoCambio
@@ -239,7 +240,7 @@
             this.lblTipoCambio.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTipoCambio.Location = new System.Drawing.Point(738, 68);
             this.lblTipoCambio.Name = "lblTipoCambio";
-            this.lblTipoCambio.Size = new System.Drawing.Size(148, 28);
+            this.lblTipoCambio.Size = new System.Drawing.Size(116, 21);
             this.lblTipoCambio.TabIndex = 79;
             this.lblTipoCambio.Tag = "1278";
             this.lblTipoCambio.Text = "Tipo de cambio";
@@ -252,7 +253,7 @@
             this.lblTotalEsperado.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTotalEsperado.Location = new System.Drawing.Point(79, 66);
             this.lblTotalEsperado.Name = "lblTotalEsperado";
-            this.lblTotalEsperado.Size = new System.Drawing.Size(142, 28);
+            this.lblTotalEsperado.Size = new System.Drawing.Size(112, 21);
             this.lblTotalEsperado.TabIndex = 81;
             this.lblTotalEsperado.Tag = "1271";
             this.lblTotalEsperado.Text = "Total esperado";
@@ -314,8 +315,8 @@
             this.dtpFechaEntregaEsperada.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaEntregaEsperada.Name = "dtpFechaEntregaEsperada";
             this.dtpFechaEntregaEsperada.ShowCheckBox = true;
-            this.dtpFechaEntregaEsperada.Size = new System.Drawing.Size(251, 34);
-            this.dtpFechaEntregaEsperada.TabIndex = 85;
+            this.dtpFechaEntregaEsperada.Size = new System.Drawing.Size(251, 29);
+            this.dtpFechaEntregaEsperada.TabIndex = 3;
             this.dtpFechaEntregaEsperada.Tag = "1257";
             this.dtpFechaEntregaEsperada.Value = new System.DateTime(2025, 9, 25, 0, 0, 0, 0);
             // 
@@ -327,7 +328,7 @@
             this.lblCodigo.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblCodigo.Location = new System.Drawing.Point(55, 59);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(242, 28);
+            this.lblCodigo.Size = new System.Drawing.Size(192, 21);
             this.lblCodigo.TabIndex = 68;
             this.lblCodigo.Tag = "1254";
             this.lblCodigo.Text = "Núm. de orden de compra";
@@ -339,8 +340,8 @@
             this.dtpFechaEmision.Location = new System.Drawing.Point(557, 89);
             this.dtpFechaEmision.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaEmision.Name = "dtpFechaEmision";
-            this.dtpFechaEmision.Size = new System.Drawing.Size(251, 34);
-            this.dtpFechaEmision.TabIndex = 84;
+            this.dtpFechaEmision.Size = new System.Drawing.Size(251, 29);
+            this.dtpFechaEmision.TabIndex = 2;
             this.dtpFechaEmision.Tag = "1256";
             // 
             // txtNumeroOrdenCompra
@@ -351,8 +352,8 @@
             this.txtNumeroOrdenCompra.Location = new System.Drawing.Point(60, 89);
             this.txtNumeroOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumeroOrdenCompra.Name = "txtNumeroOrdenCompra";
-            this.txtNumeroOrdenCompra.Size = new System.Drawing.Size(251, 34);
-            this.txtNumeroOrdenCompra.TabIndex = 67;
+            this.txtNumeroOrdenCompra.Size = new System.Drawing.Size(251, 29);
+            this.txtNumeroOrdenCompra.TabIndex = 1;
             this.txtNumeroOrdenCompra.Tag = "1253";
             // 
             // lblFechaEmision
@@ -363,7 +364,7 @@
             this.lblFechaEmision.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblFechaEmision.Location = new System.Drawing.Point(551, 59);
             this.lblFechaEmision.Name = "lblFechaEmision";
-            this.lblFechaEmision.Size = new System.Drawing.Size(135, 28);
+            this.lblFechaEmision.Size = new System.Drawing.Size(109, 21);
             this.lblFechaEmision.TabIndex = 70;
             this.lblFechaEmision.Tag = "1255";
             this.lblFechaEmision.Text = "Fecha emisión";
@@ -376,7 +377,7 @@
             this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label4.Location = new System.Drawing.Point(1008, 57);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(218, 28);
+            this.label4.Size = new System.Drawing.Size(174, 21);
             this.label4.TabIndex = 73;
             this.label4.Tag = "1258";
             this.label4.Text = "Fecha entrega esperada";
@@ -389,21 +390,10 @@
             this.label11.ForeColor = System.Drawing.Color.Red;
             this.label11.Location = new System.Drawing.Point(1103, 448);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(20, 28);
+            this.label11.Size = new System.Drawing.Size(17, 21);
             this.label11.TabIndex = 109;
             this.label11.Tag = "1267";
             this.label11.Text = "*";
-            // 
-            // cbProveedor
-            // 
-            this.cbProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
-            this.cbProveedor.FormattingEnabled = true;
-            this.cbProveedor.Location = new System.Drawing.Point(1036, 472);
-            this.cbProveedor.Margin = new System.Windows.Forms.Padding(4);
-            this.cbProveedor.Name = "cbProveedor";
-            this.cbProveedor.Size = new System.Drawing.Size(309, 36);
-            this.cbProveedor.TabIndex = 108;
-            this.cbProveedor.Tag = "1268";
             // 
             // lblProveedor
             // 
@@ -413,7 +403,7 @@
             this.lblProveedor.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblProveedor.Location = new System.Drawing.Point(1028, 448);
             this.lblProveedor.Name = "lblProveedor";
-            this.lblProveedor.Size = new System.Drawing.Size(103, 28);
+            this.lblProveedor.Size = new System.Drawing.Size(82, 21);
             this.lblProveedor.TabIndex = 107;
             this.lblProveedor.Tag = "1266";
             this.lblProveedor.Text = "Proveedor";
@@ -426,7 +416,7 @@
             this.lblOrdenCompra.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblOrdenCompra.Location = new System.Drawing.Point(75, 66);
             this.lblOrdenCompra.Name = "lblOrdenCompra";
-            this.lblOrdenCompra.Size = new System.Drawing.Size(432, 46);
+            this.lblOrdenCompra.Size = new System.Drawing.Size(346, 37);
             this.lblOrdenCompra.TabIndex = 89;
             this.lblOrdenCompra.Tag = "1250";
             this.lblOrdenCompra.Text = "Agregar orden de compra";
@@ -439,7 +429,7 @@
             this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label1.Location = new System.Drawing.Point(1029, 547);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 28);
+            this.label1.Size = new System.Drawing.Size(112, 21);
             this.label1.TabIndex = 111;
             this.label1.Tag = "1269";
             this.label1.Text = "Observaciones";
@@ -454,7 +444,7 @@
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(193, 64);
-            this.btnBuscar.TabIndex = 112;
+            this.btnBuscar.TabIndex = 16;
             this.btnBuscar.Tag = "1283";
             this.btnBuscar.Text = "Cancelar";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -470,7 +460,7 @@
             this.btnRechazarOrden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRechazarOrden.Name = "btnRechazarOrden";
             this.btnRechazarOrden.Size = new System.Drawing.Size(201, 64);
-            this.btnRechazarOrden.TabIndex = 113;
+            this.btnRechazarOrden.TabIndex = 15;
             this.btnRechazarOrden.Tag = "1282";
             this.btnRechazarOrden.Text = "Rechazar Orden";
             this.btnRechazarOrden.UseVisualStyleBackColor = false;
@@ -486,7 +476,7 @@
             this.btnAceptarOrden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAceptarOrden.Name = "btnAceptarOrden";
             this.btnAceptarOrden.Size = new System.Drawing.Size(201, 64);
-            this.btnAceptarOrden.TabIndex = 114;
+            this.btnAceptarOrden.TabIndex = 14;
             this.btnAceptarOrden.Tag = "1281";
             this.btnAceptarOrden.Text = "Aceptar Orden";
             this.btnAceptarOrden.UseVisualStyleBackColor = false;
@@ -498,9 +488,19 @@
             this.dgvProductosOrdenCompra.Location = new System.Drawing.Point(82, 326);
             this.dgvProductosOrdenCompra.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvProductosOrdenCompra.Name = "dgvProductosOrdenCompra";
-            this.dgvProductosOrdenCompra.Size = new System.Drawing.Size(906, 487);
+            this.dgvProductosOrdenCompra.Size = new System.Drawing.Size(906, 282);
             this.dgvProductosOrdenCompra.TabIndex = 110;
             this.dgvProductosOrdenCompra.Tag = "1265";
+            // 
+            // cbProveedor
+            // 
+            this.cbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProveedor.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
+            this.cbProveedor.FormattingEnabled = true;
+            this.cbProveedor.Location = new System.Drawing.Point(1032, 472);
+            this.cbProveedor.Name = "cbProveedor";
+            this.cbProveedor.Size = new System.Drawing.Size(306, 29);
+            this.cbProveedor.TabIndex = 5;
             // 
             // FormAgregarOrdenCompra
             // 
@@ -508,7 +508,8 @@
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(0, 1500);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1414, 1022);
+            this.ClientSize = new System.Drawing.Size(1431, 1022);
+            this.Controls.Add(this.cbProveedor);
             this.Controls.Add(this.btnAceptarOrden);
             this.Controls.Add(this.btnRechazarOrden);
             this.Controls.Add(this.btnBuscar);
@@ -516,7 +517,6 @@
             this.Controls.Add(this.dgvProductosOrdenCompra);
             this.Controls.Add(this.lblOrdenCompra);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.cbProveedor);
             this.Controls.Add(this.lblProveedor);
             this.Controls.Add(this.txtAreaObservaciones);
             this.Controls.Add(this.gbPagoMoneda);
@@ -529,6 +529,7 @@
             this.Tag = "1263";
             this.Text = "Generar";
             this.Load += new System.EventHandler(this.FormAgregarOrdenCompra_Load);
+            this.Shown += new System.EventHandler(this.FormAgregarOrdenCompra_Shown);
             this.gbPagoMoneda.ResumeLayout(false);
             this.gbPagoMoneda.PerformLayout();
             this.gBDatosGenerales.ResumeLayout(false);
@@ -559,17 +560,17 @@
         private System.Windows.Forms.TextBox txtNumeroOrdenCompra;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cbProveedor;
         private System.Windows.Forms.Label lblProveedor;
         private System.Windows.Forms.Label lblOrdenCompra;
         private ControlesPersonalizados.DataGridViewConFiltros dgvProductosOrdenCompra;
         private ControlesPersonalizados.Inputs.InputNumericTextBox txtNumericTotalEsperado;
-        private ControlesPersonalizados.Inputs.InputNumericTextBox txtNumericTipoCambio;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblFechaEmision;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnRechazarOrden;
         private System.Windows.Forms.Button btnAceptarOrden;
+        private ControlesPersonalizados.Inputs.InputNumericTextBox txtNumericTipoCambio;
+        private ControlesPersonalizados.Inputs.ComboBoxCustom cbProveedor;
     }
 }

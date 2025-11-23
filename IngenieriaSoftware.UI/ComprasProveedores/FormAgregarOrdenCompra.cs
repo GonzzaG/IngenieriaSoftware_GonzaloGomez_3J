@@ -22,12 +22,22 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         private List<ProductoSelectionModel> _ProductosOrdenCompra { get; set; }
         private OrdenCompraWithDetalles _OrdenDeCompra { get; set; }
 
+        private ProveedorListSimpleModel _ProveedorSeleccionado { get; set; }
+
         private bool isEdit = false;
         public FormAgregarOrdenCompra(string numOrdenCompra)
         {
             InitializeComponent();
-            InicializarVistaAutorizacionOrden(numOrdenCompra);
-            isEdit = true;
+            try
+            {
+                InicializarVistaAutorizacionOrden(numOrdenCompra);
+                isEdit = true;
+            }
+            catch(Exception ex)
+            {
+                this.Close();
+                throw new Exception(ex.Message);
+            }
         }
 
 
@@ -46,7 +56,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
             };
             _OrdenDeCompra = new OrdenCompraBussiness().GetOrdenCompraByNumero(numOrdenCompra);
-           
+
         }
 
         /// <summary>
@@ -122,6 +132,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         public FormAgregarOrdenCompra()
         {
+            isEdit = false;
             InitializeComponent();
             Incializar();
         }
@@ -145,6 +156,22 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
             cbProveedor.DisplayMember = "RazonSocial";
             cbProveedor.ValueMember = "IdProveedor";
+            GetProveedorSeleccionado(proveedores);
+
+        }
+
+        private void GetProveedorSeleccionado(List<ProveedorListSimpleModel> proveedores)
+        {
+            if (_ProveedorSeleccionado is not null)
+            {
+                var p = proveedores.First(p => p.IdProveedor == _ProveedorSeleccionado.IdProveedor);
+
+                if (p is not null)
+                    cbProveedor.SelectedItem = p;
+
+                Console.WriteLine("proveedor: " + ((ProveedorListSimpleModel)cbProveedor.SelectedItem).RazonSocial);
+            }
+
 
         }
 
@@ -201,6 +228,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         public string GuardarOrdenDeCompra()
         {
+            var proveedor = cbProveedor.SelectedItem == null
+                              ? 0
+                              : ((ProveedorListSimpleModel)cbProveedor.SelectedItem).IdProveedor;
             var ordenCompra = new OrdenDeCompraModel
             {
                 NumOrdenCompra = txtNumeroOrdenCompra.Text,
@@ -244,10 +274,19 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void btnSeleccionarProductos_Click(object sender, EventArgs e)
         {
+            //  Guardamos le proveeodor seleccionado para que cuando se renderice le formulario se vuelva a oclocar el mismo
+            GuardarProveedorSeleccionado();
+
             var formMDI = this.MdiParent as FormMDI;
             new ModalSeleccionProdutosOrdenCompra(_ProductosOrdenCompra).AbrirFormModal(new Size(954, 722));
 
             Actualizar();
+        }
+
+        private void GuardarProveedorSeleccionado()
+        {
+            if (cbProveedor.SelectedItem is not null && cbProveedor.SelectedItem is ProveedorListSimpleModel p)
+                _ProveedorSeleccionado = p;
         }
 
         private void btnGenerarOrdenCompra_Click(object sender, EventArgs e)
@@ -258,7 +297,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
                 CommonForms.MensajeInformativo($"Orden de compra {numOrdenCompra} generada correctamente");
 
-                this.Close();
+                this.Redireccionar(new FormListaOrdenCompra(OrdenCompraEstadoEnum.Aprobada));
             }
             catch (Exception ex)
             {
@@ -317,6 +356,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 CommonForms.MensajeInformativo("Orden de compra aceptada correctamente.");
                 this.Close();
             }
+        }
+
+        private void FormAgregarOrdenCompra_Shown(object sender, EventArgs e)
+        {
+            this.AutoScrollPosition = new Point(0, 0);
         }
     }
 }

@@ -185,6 +185,9 @@
       <DependentUpon>GrillaConFiltros.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlesPersonalizados\grillaCustom\ConstantesGrilla.cs" />
+    <Compile Include="ControlesPersonalizados\Inputs\ComboBoxCustom.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ControlesPersonalizados\Inputs\InputNumericTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -420,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesPersonalizados\GrillaConFiltros.resx">
       <DependentUpon>GrillaConFiltros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesPersonalizados\Inputs\ComboBoxCustom.resx">
+      <DependentUpon>ComboBoxCustom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ControlesPersonalizados\panelCustom\PanelNoResultado.resx">
       <DependentUpon>PanelNoResultado.cs</DependentUpon>

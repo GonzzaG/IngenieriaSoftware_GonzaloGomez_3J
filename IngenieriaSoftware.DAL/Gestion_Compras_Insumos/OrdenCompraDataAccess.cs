@@ -64,7 +64,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
 
             var ordenCompra = new DAO()
                 .ExecuteStoredProcedure("OrdenCompra.sp_GetOrdenCompraByNumero", parametros)
-                .ConvertirOrdenCompraConDetallesDataSet();
+                .ConvertirOrdenCompraDetalleDataSet();
 
             if(ordenCompra == null)
                 throw new Exception($"No se encontró una orden de compra con el número {numOrdenCompra}");

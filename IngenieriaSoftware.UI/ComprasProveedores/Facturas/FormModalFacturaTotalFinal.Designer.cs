@@ -29,7 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ckbImpuesto = new System.Windows.Forms.CheckBox();
+            this.ckbDescuento = new System.Windows.Forms.CheckBox();
+            this.cbMedioPago = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
+            this.lblMedioPago = new System.Windows.Forms.Label();
             this.lblNumeroTotal = new System.Windows.Forms.Label();
+            this.txtNumSubtotal = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
+            this.txtNumDescuento = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
+            this.txtNumImpuestos = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.lblImpuestos = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -37,19 +44,16 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.lblAgregarFactura = new System.Windows.Forms.Label();
-            this.cbMedioPago = new System.Windows.Forms.ComboBox();
-            this.lblMedioPago = new System.Windows.Forms.Label();
-            this.txtNumSubtotal = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
-            this.txtNumDescuento = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
-            this.txtNumImpuestos = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.InputNumericTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
-            this.groupBox1.Controls.Add(this.lblMedioPago);
+            this.groupBox1.Controls.Add(this.ckbImpuesto);
+            this.groupBox1.Controls.Add(this.ckbDescuento);
             this.groupBox1.Controls.Add(this.cbMedioPago);
+            this.groupBox1.Controls.Add(this.lblMedioPago);
             this.groupBox1.Controls.Add(this.lblNumeroTotal);
             this.groupBox1.Controls.Add(this.txtNumSubtotal);
             this.groupBox1.Controls.Add(this.txtNumDescuento);
@@ -70,13 +74,58 @@
             this.groupBox1.Tag = "";
             this.groupBox1.Text = "Resumen final";
             // 
+            // ckbImpuesto
+            // 
+            this.ckbImpuesto.AutoSize = true;
+            this.ckbImpuesto.Location = new System.Drawing.Point(668, 79);
+            this.ckbImpuesto.Name = "ckbImpuesto";
+            this.ckbImpuesto.Size = new System.Drawing.Size(44, 28);
+            this.ckbImpuesto.TabIndex = 4;
+            this.ckbImpuesto.Text = "%";
+            this.ckbImpuesto.UseVisualStyleBackColor = true;
+            this.ckbImpuesto.CheckedChanged += new System.EventHandler(this.ckbImpuesto_CheckedChanged);
+            // 
+            // ckbDescuento
+            // 
+            this.ckbDescuento.AutoSize = true;
+            this.ckbDescuento.Location = new System.Drawing.Point(440, 78);
+            this.ckbDescuento.Name = "ckbDescuento";
+            this.ckbDescuento.Size = new System.Drawing.Size(44, 28);
+            this.ckbDescuento.TabIndex = 2;
+            this.ckbDescuento.Text = "%";
+            this.ckbDescuento.UseVisualStyleBackColor = true;
+            this.ckbDescuento.CheckedChanged += new System.EventHandler(this.ckbDescuento_CheckedChanged);
+            // 
+            // cbMedioPago
+            // 
+            this.cbMedioPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMedioPago.FormattingEnabled = true;
+            this.cbMedioPago.Location = new System.Drawing.Point(748, 75);
+            this.cbMedioPago.Name = "cbMedioPago";
+            this.cbMedioPago.Size = new System.Drawing.Size(152, 30);
+            this.cbMedioPago.TabIndex = 5;
+            // 
+            // lblMedioPago
+            // 
+            this.lblMedioPago.AutoSize = true;
+            this.lblMedioPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblMedioPago.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMedioPago.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblMedioPago.Location = new System.Drawing.Point(744, 52);
+            this.lblMedioPago.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMedioPago.Name = "lblMedioPago";
+            this.lblMedioPago.Size = new System.Drawing.Size(114, 21);
+            this.lblMedioPago.TabIndex = 117;
+            this.lblMedioPago.Tag = "";
+            this.lblMedioPago.Text = "Medio de pago";
+            // 
             // lblNumeroTotal
             // 
             this.lblNumeroTotal.AutoSize = true;
             this.lblNumeroTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblNumeroTotal.Font = new System.Drawing.Font("Verdana", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumeroTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblNumeroTotal.Location = new System.Drawing.Point(952, 68);
+            this.lblNumeroTotal.Location = new System.Drawing.Point(945, 68);
             this.lblNumeroTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumeroTotal.Name = "lblNumeroTotal";
             this.lblNumeroTotal.Size = new System.Drawing.Size(68, 38);
@@ -84,6 +133,45 @@
             this.lblNumeroTotal.Tag = "";
             this.lblNumeroTotal.Text = "$ 0";
             this.lblNumeroTotal.TextChanged += new System.EventHandler(this.lblNumeroTotal_TextChanged);
+            // 
+            // txtNumSubtotal
+            // 
+            this.txtNumSubtotal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtNumSubtotal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
+            this.txtNumSubtotal.Enabled = false;
+            this.txtNumSubtotal.Location = new System.Drawing.Point(64, 78);
+            this.txtNumSubtotal.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNumSubtotal.Name = "txtNumSubtotal";
+            this.txtNumSubtotal.Size = new System.Drawing.Size(152, 28);
+            this.txtNumSubtotal.TabIndex = 114;
+            this.txtNumSubtotal.Tag = "";
+            this.txtNumSubtotal.Text = "0,00";
+            this.txtNumSubtotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtNumDescuento
+            // 
+            this.txtNumDescuento.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtNumDescuento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
+            this.txtNumDescuento.Location = new System.Drawing.Point(283, 78);
+            this.txtNumDescuento.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNumDescuento.Name = "txtNumDescuento";
+            this.txtNumDescuento.Size = new System.Drawing.Size(152, 28);
+            this.txtNumDescuento.TabIndex = 1;
+            this.txtNumDescuento.Tag = "";
+            this.txtNumDescuento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtNumDescuento.TextChanged += new System.EventHandler(this.txtNumDescuento_TextChanged);
+            // 
+            // txtNumImpuestos
+            // 
+            this.txtNumImpuestos.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.txtNumImpuestos.Location = new System.Drawing.Point(511, 77);
+            this.txtNumImpuestos.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNumImpuestos.Name = "txtNumImpuestos";
+            this.txtNumImpuestos.Size = new System.Drawing.Size(152, 28);
+            this.txtNumImpuestos.TabIndex = 3;
+            this.txtNumImpuestos.Tag = "";
+            this.txtNumImpuestos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtNumImpuestos.TextChanged += new System.EventHandler(this.txtNumImpuestos_TextChanged);
             // 
             // lblSubtotal
             // 
@@ -105,7 +193,7 @@
             this.lblImpuestos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblImpuestos.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblImpuestos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblImpuestos.Location = new System.Drawing.Point(498, 53);
+            this.lblImpuestos.Location = new System.Drawing.Point(508, 53);
             this.lblImpuestos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblImpuestos.Name = "lblImpuestos";
             this.lblImpuestos.Size = new System.Drawing.Size(82, 21);
@@ -133,7 +221,7 @@
             this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTotal.Location = new System.Drawing.Point(955, 34);
+            this.lblTotal.Location = new System.Drawing.Point(948, 34);
             this.lblTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(78, 21);
@@ -151,10 +239,11 @@
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(121, 52);
-            this.btnCancelar.TabIndex = 141;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Tag = "";
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGenerarFactura
             // 
@@ -166,7 +255,7 @@
             this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(2);
             this.btnGenerarFactura.Name = "btnGenerarFactura";
             this.btnGenerarFactura.Size = new System.Drawing.Size(151, 52);
-            this.btnGenerarFactura.TabIndex = 140;
+            this.btnGenerarFactura.TabIndex = 6;
             this.btnGenerarFactura.Tag = "";
             this.btnGenerarFactura.Text = "Generar Factura";
             this.btnGenerarFactura.UseVisualStyleBackColor = false;
@@ -185,68 +274,6 @@
             this.lblAgregarFactura.TabIndex = 142;
             this.lblAgregarFactura.Tag = "";
             this.lblAgregarFactura.Text = "Total de factura";
-            // 
-            // cbMedioPago
-            // 
-            this.cbMedioPago.FormattingEnabled = true;
-            this.cbMedioPago.Location = new System.Drawing.Point(715, 77);
-            this.cbMedioPago.Name = "cbMedioPago";
-            this.cbMedioPago.Size = new System.Drawing.Size(152, 30);
-            this.cbMedioPago.TabIndex = 116;
-            // 
-            // lblMedioPago
-            // 
-            this.lblMedioPago.AutoSize = true;
-            this.lblMedioPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblMedioPago.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMedioPago.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblMedioPago.Location = new System.Drawing.Point(711, 52);
-            this.lblMedioPago.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMedioPago.Name = "lblMedioPago";
-            this.lblMedioPago.Size = new System.Drawing.Size(114, 21);
-            this.lblMedioPago.TabIndex = 117;
-            this.lblMedioPago.Tag = "";
-            this.lblMedioPago.Text = "Medio de pago";
-            // 
-            // txtNumSubtotal
-            // 
-            this.txtNumSubtotal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtNumSubtotal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
-            this.txtNumSubtotal.Enabled = false;
-            this.txtNumSubtotal.Location = new System.Drawing.Point(64, 78);
-            this.txtNumSubtotal.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNumSubtotal.Name = "txtNumSubtotal";
-            this.txtNumSubtotal.Size = new System.Drawing.Size(152, 28);
-            this.txtNumSubtotal.TabIndex = 114;
-            this.txtNumSubtotal.Tag = "";
-            this.txtNumSubtotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtNumDescuento
-            // 
-            this.txtNumDescuento.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtNumDescuento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
-            this.txtNumDescuento.Location = new System.Drawing.Point(283, 78);
-            this.txtNumDescuento.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNumDescuento.Name = "txtNumDescuento";
-            this.txtNumDescuento.Size = new System.Drawing.Size(152, 28);
-            this.txtNumDescuento.TabIndex = 113;
-            this.txtNumDescuento.Tag = "";
-            this.txtNumDescuento.Text = "0,00";
-            this.txtNumDescuento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtNumDescuento.TextChanged += new System.EventHandler(this.txtNumDescuento_TextChanged);
-            // 
-            // txtNumImpuestos
-            // 
-            this.txtNumImpuestos.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.txtNumImpuestos.Location = new System.Drawing.Point(501, 77);
-            this.txtNumImpuestos.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNumImpuestos.Name = "txtNumImpuestos";
-            this.txtNumImpuestos.Size = new System.Drawing.Size(152, 28);
-            this.txtNumImpuestos.TabIndex = 111;
-            this.txtNumImpuestos.Tag = "";
-            this.txtNumImpuestos.Text = "0,00";
-            this.txtNumImpuestos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtNumImpuestos.TextChanged += new System.EventHandler(this.txtNumImpuestos_TextChanged);
             // 
             // FormModalFacturaTotalFinal
             // 
@@ -283,6 +310,8 @@
         private System.Windows.Forms.Label lblAgregarFactura;
         private System.Windows.Forms.Label lblNumeroTotal;
         private System.Windows.Forms.Label lblMedioPago;
-        private System.Windows.Forms.ComboBox cbMedioPago;
+        private ControlesPersonalizados.Inputs.ComboBoxCustom cbMedioPago;
+        private System.Windows.Forms.CheckBox ckbDescuento;
+        private System.Windows.Forms.CheckBox ckbImpuesto;
     }
 }

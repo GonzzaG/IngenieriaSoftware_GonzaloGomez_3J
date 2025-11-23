@@ -1,6 +1,5 @@
 ﻿using IngenieriaSoftware.BEL.Common;
 using IngenieriaSoftware.BEL.Constantes;
-using IngenieriaSoftware.BEL.OrdenDeCompra;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
@@ -20,23 +19,55 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             InitializeComponent();
             Inicializar();
+            Actualizar();
+        }
+
+        public FormListaOrdenCompra(OrdenCompraEstadoEnum estado)
+        {
+
+            try
+            {
+                InitializeComponent();
+                Inicializar();
+
+                var filtro = new OrdenCompraQuery
+                {
+                    NumOrdenCompra = string.Empty,
+                    FechaDesde = DateTime.Now,
+                    IdEstado = (int)estado,
+                };
+
+                // Seleccionamos el estado que se pasa como parametro
+                cbEstado.SelectedIndex = (int)estado;
+
+                // Ponemos visible el boton de generar factura ya que estamos buscando las aprobadas
+                if(estado.Equals(OrdenCompraEstadoEnum.Aprobada))
+                    btnGenerarFactura.Visible = true;
+
+                //  Buscamos las orden de compra segun el estado del parametro
+                grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Actualizar();
+            }
+          
+
         }
 
         private void Inicializar()
         {
             //Buscar los nombres de los estados y ponerlo en el datasource del combo
-            Actualizar();
+
             List<SelectListSimple> ordenCompraEstados = GetOrdenesCompraEstados();
 
             cbEstado.DataSource = ordenCompraEstados;
 
             cbEstado.DisplayMember = "Nombre";
             cbEstado.ValueMember = "Id";
-
-            if (grillaConFiltros.CantidadElementos > 0)
-            {
-                //grillaConFiltros.OcultarColumnas("IdProducto","Cantidad", "PrecioUnitarioEsperado");
-            }
         }
 
         private static List<SelectListSimple> GetOrdenesCompraEstados()
@@ -78,7 +109,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             txtCodigo.Text = string.Empty;
             dtpFechaDesde.Value = DateTime.Now;
-            cbEstado.Text = string.Empty;
+            cbEstado.SelectedIndex = 0;
             grillaConFiltros.LimpiarControles();
         }
 
@@ -132,6 +163,23 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void cbEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbEstado.SelectedIndex == -1)
+            {
+                cbEstado.SelectedIndex = 0;
+            }
+        }
+
+        private void cbEstado_TextChanged(object sender, EventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(cbEstado.Text))
+            {
+                cbEstado.SelectedIndex = 0;
+            }
+            
         }
     }
 }

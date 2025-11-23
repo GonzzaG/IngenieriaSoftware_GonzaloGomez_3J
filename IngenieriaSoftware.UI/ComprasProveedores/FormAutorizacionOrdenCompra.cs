@@ -31,10 +31,18 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             if (ordenSeleccionada == null)
                 return;
 
-            using (var form = new FormAgregarOrdenCompra(ordenSeleccionada.NumOrdenCompra))
+            try
             {
-                form.AbrirFormModal();
-                btnBuscar_Click(null, null);
+                using (var form = new FormAgregarOrdenCompra(ordenSeleccionada.NumOrdenCompra))
+                {
+                    form.AbrirFormModal();
+                    btnBuscar_Click(null, null);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Actualizar();
             }
         }
 

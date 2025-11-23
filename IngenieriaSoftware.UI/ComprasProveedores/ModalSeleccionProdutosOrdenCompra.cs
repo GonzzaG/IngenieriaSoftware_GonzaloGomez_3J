@@ -1,4 +1,6 @@
-﻿using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
@@ -33,6 +35,8 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             _ProductosOrdenCompra = productos;
             _ProductosListado = new List<ProductoSelectionModel>();
+
+            inputNombreFiltroOrdenCompra.InicializarFiltro(ListarProductos);
             Actualizar();
             InicializarTimerProductoAgregado();
 
@@ -50,15 +54,45 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         public void Actualizar()
         {
-            ListaProductos();
+            ListarProductos();
         }
 
-        private void ListaProductos()
+        private void ListarProductos()
         {
-            _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();
-            dgvConFiltroProductos.CargarDatos(_ProductosListado);
-            dgvConFiltroProductos.OcultarColumnas("Cantidad", "PrecioUnitarioEsperado");  
-            dgvConFiltroProductos.AddButtonAgregarColumna(AgregarProductoSeleccionado);
+            try
+            {
+
+                // Deberia obtener los productos los cuales no son de tipo "RESTAURANTE"
+                _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();
+
+                if (inputNombreFiltroOrdenCompra.Texto == string.Empty)
+                    _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();
+                else
+                    _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompraByNombre(inputNombreFiltroOrdenCompra.Texto);
+
+                //if (productos is not null && productos.Count > 0)
+                //{
+                //    _ProductosListado.Clear();
+
+                //    productos.ForEach(p => _ProductosListado.Add(new ProductoSelectionModel()
+                //    {
+                //        IdProducto = p.Id,
+                //        Nombre = p.Nombre,
+                //        Descripcion = p.Descripcion,
+                //        PrecioUnitarioEsperado = p.Precio,
+                //        Cantidad = 0
+                //    }));
+                //}
+
+                dgvConFiltroProductos.CargarDatos(_ProductosListado);
+                dgvConFiltroProductos.OcultarColumnas("Cantidad", "PrecioUnitarioEsperado");
+                dgvConFiltroProductos.AddButtonAgregarColumna(AgregarProductoSeleccionado);
+            }
+            catch(Exception ex)
+            {
+               MessageBox.Show(ex.Message);
+            }
+           
         }   
 
 
