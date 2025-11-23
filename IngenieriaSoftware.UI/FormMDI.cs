@@ -56,6 +56,7 @@ namespace IngenieriaSoftware.UI
             Inicializar();
             AbrirIniciarSesion();
             //VerificarIntegridad();
+
         }
 
 
@@ -67,7 +68,7 @@ namespace IngenieriaSoftware.UI
             try
             {
                 //bool result = new DigitoVerificadorManager().ActualizarVerificadores(TablesName.Usuario);
-                //bool result2 = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
+                bool result2 = new DigitoVerificadorManager().VerificarDigitoVerticalYHorizontal();
             }
             catch (Exception ex)
             {
@@ -172,6 +173,8 @@ namespace IngenieriaSoftware.UI
             VerificarNotificaciones();
 
             this.Activate();
+
+            ActualizarVisibilidadBotones();
         }
 
 
@@ -226,6 +229,8 @@ namespace IngenieriaSoftware.UI
             formInicio.InicioSesionExitoso += AbrirFormMenu;
             formInicio.AutoScroll = true;
             formInicio.Show();
+
+
         }
 
         internal void AbrirFormHijo(Form formHijo)
@@ -293,65 +298,72 @@ namespace IngenieriaSoftware.UI
 
         private void ActualizarVisibilidadBotones()
         {
-            PermisosData.Permisos = permisoBLL.ObtenerPermisosUsuario(SessionManager.GetInstance.Usuario.Id);
-            PermisosData.PermisosString = PermisosData.Permisos.Select(p => p.Nombre).ToList();
-            List<int> permisosId = PermisosData.Permisos.Select(x => x.Id).ToList();
+            var permisos = permisoBLL.ObtenerPermisosUsuario(SessionManager.GetInstance.Usuario.Id)
+                                     .Select(p => p.Id)
+                                     .ToHashSet();
 
-            var items = menuStripMDI.Items.Cast<ToolStripItem>().OfType<ToolStripMenuItem>().ToList();
-
-            foreach (ToolStripMenuItem item in items)
+            foreach (ToolStripMenuItem top in menuStripMDI.Items.OfType<ToolStripMenuItem>())
             {
-                EstablecerInvisibilidadRecursiva(item);
-            }
-
-            foreach (ToolStripMenuItem item in items)
-            {
-                ActualizarVisibilidadItem(item, permisosId);
+                // Aplicar visibilidad a todo el árbol
+                AplicarVisibilidadPorPermisos(top, permisos);
             }
         }
 
-        private void EstablecerInvisibilidadRecursiva(ToolStripMenuItem item)
+        // Devuelve true si el item o CUALQUIER descendiente tiene permiso
+        private bool TienePermisoODescendienteConPermiso(ToolStripMenuItem item, HashSet<int> permisos)
         {
-            item.Visible = false;
-
-            var subItems = item.DropDownItems.OfType<ToolStripMenuItem>().ToList();
-            foreach (ToolStripMenuItem subItem in subItems)
+            // permiso propio
+            if (item.Tag != null && int.TryParse(item.Tag.ToString(), out int pid) && pid > 0)
             {
-                EstablecerInvisibilidadRecursiva(subItem);
-            }
-        }
-
-        private void ActualizarVisibilidadItem(ToolStripMenuItem item, List<int> permisosId)
-        {
-            bool esVisible = false;
-
-            if (item.Tag != null && int.TryParse(item.Tag.ToString(), out int etiquetaId))
-            {
-                esVisible = permisosId.Contains(etiquetaId);
+                if (permisos.Contains(pid))
+                    return true;
             }
 
-            var subItems = item.DropDownItems.OfType<ToolStripMenuItem>().ToList();
-            foreach (ToolStripMenuItem subItem in subItems)
+            // buscar en TODOS los descendientes (recursivo)
+            foreach (ToolStripItem sub in item.DropDownItems)
             {
-                ActualizarVisibilidadItem(subItem, permisosId);
-                if (subItem.Visible)
+                if (sub is ToolStripMenuItem subMenu)
                 {
-                    esVisible = true;
+                    if (TienePermisoODescendienteConPermiso(subMenu, permisos))
+                        return true;
                 }
             }
 
-            item.Visible = esVisible;
+            return false;
         }
+
+        private void AplicarVisibilidadPorPermisos(ToolStripMenuItem item, HashSet<int> permisos)
+        {
+            // Si yo o cualquier descendiente tiene permiso → visible, si no → oculto
+            bool visible = TienePermisoODescendienteConPermiso(item, permisos);
+            item.Visible = visible;
+
+            // luego aplicamos lo mismo a hijos para mantener el árbol consistente
+            foreach (ToolStripItem sub in item.DropDownItems)
+            {
+                if (sub is ToolStripMenuItem subMenu)
+                    AplicarVisibilidadPorPermisos(subMenu, permisos);
+            }
+        }
+
 
         private void actualizarEtiquetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult respuesta = MessageBox.Show("Está seguro que desea agregar todos los controles a la base de datos?", "Alerta de Agregacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (respuesta == DialogResult.No) return;
-            else if (respuesta == DialogResult.Yes)
+            try
             {
-                ActualizarEtiquetas();
+                DialogResult respuesta = MessageBox.Show("Está seguro que desea agregar todos los controles a la base de datos?", "Alerta de Agregacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (respuesta == DialogResult.No) return;
+                else if (respuesta == DialogResult.Yes)
+                {
+                    ActualizarEtiquetas();
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + ":\n" + ex.InnerException);
+            }
+        
             // Este boton preguntara si esta seguro que desea continuar
             //este evento instanciara todos los formularios agregandolos a una List<Form>
             //se ejecutara el metodo d eControlesHelper que establece los tags a cada form
@@ -376,28 +388,6 @@ namespace IngenieriaSoftware.UI
             idiomaBLL.AgregarEtiqueta(etiquetasEnMemoria);
         }
 
-        private void RegistrarEtiquetasDeControles(Control control, List<EtiquetaDTO> etiquetasEnBD, List<EtiquetaDTO> etiquetasNuevas)
-        {
-            foreach (Control c in control.Controls)
-            {
-                if (!etiquetasEnBD.Any(e => e.Name == c.Name))
-                {
-                    var nuevaEtiqueta = new EtiquetaDTO { Tag = (int)c.Tag, Name = c.Name };
-                    etiquetasNuevas.Add(nuevaEtiqueta);
-                }
-                if (c is MenuStrip menuStrip)
-                {
-                    foreach (ToolStripItem menuItem in menuStrip.Items)
-                    {
-                        RegistrarEtiquetasDeMenu(menuItem, etiquetasEnBD, etiquetasNuevas);
-                    }
-                }
-                if (c.HasChildren)
-                {
-                    RegistrarEtiquetasDeControles(c, etiquetasEnBD, etiquetasNuevas);
-                }
-            }
-        }
 
         private void RegistrarEtiquetasDeMenu(ToolStripItem menuItem, List<EtiquetaDTO> etiquetasEnBD, List<EtiquetaDTO> etiquetasNuevas)
         {
@@ -533,6 +523,7 @@ namespace IngenieriaSoftware.UI
         private void MDI_Load(object sender, EventArgs e)
         {
             bitacoraToolStripMenuItem.Visible = true;
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

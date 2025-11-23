@@ -65,7 +65,7 @@
             this.gBListaOrdenCompra.Size = new System.Drawing.Size(1040, 228);
             this.gBListaOrdenCompra.TabIndex = 1242;
             this.gBListaOrdenCompra.TabStop = false;
-            this.gBListaOrdenCompra.Tag = "1251";
+            this.gBListaOrdenCompra.Tag = "";
             this.gBListaOrdenCompra.Text = "Orden de compra";
             // 
             // cbEstado
@@ -114,7 +114,7 @@
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(56, 21);
             this.lblEstado.TabIndex = 41;
-            this.lblEstado.Tag = "2000";
+            this.lblEstado.Tag = "";
             this.lblEstado.Text = "Estado";
             // 
             // lblFechaDesde
@@ -128,7 +128,7 @@
             this.lblFechaDesde.Name = "lblFechaDesde";
             this.lblFechaDesde.Size = new System.Drawing.Size(95, 21);
             this.lblFechaDesde.TabIndex = 1245;
-            this.lblFechaDesde.Tag = "1245";
+            this.lblFechaDesde.Tag = "";
             this.lblFechaDesde.Text = "Fecha desde";
             // 
             // txtCodigo
@@ -141,7 +141,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(189, 29);
             this.txtCodigo.TabIndex = 0;
-            this.txtCodigo.Tag = "1244";
+            this.txtCodigo.Tag = "";
             // 
             // lblCodigo
             // 
@@ -154,7 +154,7 @@
             this.lblCodigo.Name = "lblCodigo";
             this.lblCodigo.Size = new System.Drawing.Size(96, 21);
             this.lblCodigo.TabIndex = 1243;
-            this.lblCodigo.Tag = "1243";
+            this.lblCodigo.Tag = "";
             this.lblCodigo.Text = "Num. Orden";
             // 
             // btnBuscar
@@ -168,7 +168,7 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(103, 37);
             this.btnBuscar.TabIndex = 4;
-            this.btnBuscar.Tag = "1250";
+            this.btnBuscar.Tag = "";
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
@@ -184,7 +184,7 @@
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(103, 37);
             this.btnAgregar.TabIndex = 5;
-            this.btnAgregar.Tag = "1253";
+            this.btnAgregar.Tag = "";
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click_1);
@@ -200,7 +200,7 @@
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(103, 37);
             this.btnLimpiar.TabIndex = 6;
-            this.btnLimpiar.Tag = "1254";
+            this.btnLimpiar.Tag = "";
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -213,7 +213,7 @@
             this.grillaConFiltros.Name = "grillaConFiltros";
             this.grillaConFiltros.Size = new System.Drawing.Size(1404, 350);
             this.grillaConFiltros.TabIndex = 35;
-            this.grillaConFiltros.Tag = "1255";
+            this.grillaConFiltros.Tag = "";
             this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
             // 
             // FormListaOrdenCompra
@@ -226,7 +226,7 @@
             this.Controls.Add(this.gBListaOrdenCompra);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormListaOrdenCompra";
-            this.Tag = "1256";
+            this.Tag = "";
             this.Text = "Orden de compra";
             this.gBListaOrdenCompra.ResumeLayout(false);
             this.gBListaOrdenCompra.PerformLayout();

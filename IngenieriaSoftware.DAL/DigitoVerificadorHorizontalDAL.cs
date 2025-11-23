@@ -102,7 +102,7 @@ namespace IngenieriaSoftware.DAL
         }
 
         /// <summary>
-        /// Agrega el DVH a todos los registros de la tabla que aún no lo tienen.
+        /// Recalcula y actualiza el DVH de todos los registros.
         /// </summary>
         public bool AgregarVerificadorHorizontal(string nombreTabla)
         {
@@ -111,17 +111,31 @@ namespace IngenieriaSoftware.DAL
 
             string campoId = TablasDVCamposId.ObtenerCampoId(nombreTabla);
 
+            // Obtenemos todos los datos
             DataSet mDs = _objetoDAL.ObtenerDatosDeTabla(nombreTabla);
             DataTable tabla = mDs.Tables[0];
 
             foreach (DataRow row in tabla.Rows)
             {
-                if (row["DVH"] != DBNull.Value && !string.IsNullOrEmpty(row["DVH"].ToString()))
+                // 1. Calculamos el DVH que DEBERÍA tener el registro
+                string dvhCalculado = DVMapper.GenerarDVH(row);
+
+                // 2. Obtenemos el DVH que tiene ACTUALMENTE (si tiene)
+                string dvhActual = "";
+                if (row["DVH"] != DBNull.Value)
+                {
+                    dvhActual = row["DVH"].ToString();
+                }
+
+                // 3. LÓGICA DE ACTUALIZACIÓN:
+                // Si el DVH actual es igual al calculado, no hacemos nada (ahorramos conexión a DB)
+                // Si son distintos (o el actual es nulo), actualizamos.
+                if (dvhActual == dvhCalculado)
+                {
                     continue;
+                }
 
-                // Generar DVH usando el método que recibiste
-                string dvh = DVMapper.GenerarDVH(row);
-
+                // Si llegamos aquí, es porque hay que actualizar/insertar
                 object valorId = row[campoId];
 
                 SqlParameter[] parametros = new SqlParameter[]
@@ -129,9 +143,10 @@ namespace IngenieriaSoftware.DAL
                     new SqlParameter("@Tabla", nombreTabla),
                     new SqlParameter("@CampoId", campoId),
                     new SqlParameter("@ValorId", valorId),
-                    new SqlParameter("@DVH", dvh)
+                    new SqlParameter("@DVH", dvhCalculado)
                 };
 
+                // OJO: Asegúrate que este SP haga un UPDATE, no solo un INSERT
                 _dao.ExecuteStoredProcedure("sp_InsertarDVH", parametros);
             }
 

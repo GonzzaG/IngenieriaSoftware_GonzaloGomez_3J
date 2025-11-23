@@ -88,31 +88,32 @@ namespace IngenieriaSoftware.UI.Common
 
         private static void RecorrerControles(Control control, Dictionary<string, IdiomaObservadorDTO> controles)
         {
-            // Si el control tiene un Tag, lo usamos, si no, asignamos uno nuevo usando el TagContador
-            if (control.Tag == null) { control.Tag = 0; }
-            if (int.Parse(control.Tag.ToString()) is int tagValue)
+            int tagValue;
+
+            // Intentamos obtener el tag como entero
+            if (control.Tag != null &&
+                !string.IsNullOrWhiteSpace(control.Tag.ToString()) &&
+                int.TryParse(control.Tag.ToString(), out tagValue) &&
+                tagValue > 0)
             {
-                controles[tagValue.ToString()] = new IdiomaObservadorDTO
-                {
-                    Tag = tagValue,
-                    Control = control,
-                    Name = control.Name
-                };
+                // Tag existente válido
             }
             else
             {
-                // Asignar un nuevo Tag si el control no tiene uno
-                int nuevoTag = controles.Count() + TagContador++;
-                control.Tag = nuevoTag;
-                controles[nuevoTag.ToString()] = new IdiomaObservadorDTO
-                {
-                    Tag = nuevoTag,
-                    Control = control,
-                    Name = control.Name
-                };
+                // Asignamos uno nuevo
+                tagValue = controles.Count + TagContador++;
+                control.Tag = tagValue;
             }
 
-            // Si el control es un MenuStrip, recorremos sus items
+            // Registrar el control
+            controles[tagValue.ToString()] = new IdiomaObservadorDTO
+            {
+                Tag = tagValue,
+                Control = control,
+                Name = control.Name
+            };
+
+            // Recorrer MenuStrip
             if (control is MenuStrip menuStrip)
             {
                 foreach (ToolStripMenuItem item in menuStrip.Items)
@@ -121,24 +122,34 @@ namespace IngenieriaSoftware.UI.Common
                 }
             }
 
-            // Recorrer los controles hijos
+            // Recorrer hijos
             foreach (Control hijo in control.Controls)
             {
                 RecorrerControles(hijo, controles);
             }
         }
 
+
         private static void RecorrerMenuItems(ToolStripMenuItem item, Dictionary<string, IdiomaObservadorDTO> controles)
         {
-            // Verificamos si el Tag es nulo o vacío, o si el valor es 0
-            if (item.Tag == null || string.IsNullOrEmpty(item.Tag.ToString()) || int.Parse(item.Tag.ToString()) == 0)
+            int tagValue;
+
+            if (item.Tag != null &&
+                !string.IsNullOrWhiteSpace(item.Tag.ToString()) &&
+                int.TryParse(item.Tag.ToString(), out tagValue) &&
+                tagValue > 0)
             {
-                item.Tag = controles.Count() + TagContador++;
+                // Tag válido
+            }
+            else
+            {
+                tagValue = controles.Count + TagContador++;
+                item.Tag = tagValue;
             }
 
-            controles[item.Tag.ToString()] = new IdiomaObservadorDTO
+            controles[tagValue.ToString()] = new IdiomaObservadorDTO
             {
-                Tag = int.Parse(item.Tag.ToString()),
+                Tag = tagValue,
                 MenuItem = item,
                 Name = item.Name
             };
@@ -151,6 +162,7 @@ namespace IngenieriaSoftware.UI.Common
                 }
             }
         }
+
 
         #endregion Obtener Controles Del Formulario
     }

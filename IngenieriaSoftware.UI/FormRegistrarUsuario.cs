@@ -128,7 +128,7 @@ namespace IngenieriaSoftware.UI
             {
                 string nombreTabla = entidadVerificable.getNombreTabla();
 
-                if (_digitoVerificadorManager.ActualizarDVH_Y_DVV_DeRegistro(nombreTabla, entidadVerificable.Id))
+                if (_digitoVerificadorManager.ActualizarVerificadores(nombreTabla))
                 {
                     if (_digitoVerificadorManager.VerificarDigitoVerticalYHorizontal())
                         return true;

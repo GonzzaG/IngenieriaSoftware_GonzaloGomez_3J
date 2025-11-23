@@ -1,10 +1,12 @@
 ﻿using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.UI.ControlesPersonalizados;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Navigation;
 
 namespace IngenieriaSoftware.UI
 {
@@ -38,7 +40,8 @@ namespace IngenieriaSoftware.UI
                     dataGridViewPermisos.DataSource = null;
                     dataGridViewPermisos.DataSource = permisos;
 
-                    OcultarColumnasDataGrid(dataGridViewPermisos);
+                    OcultarColumnasDataGridExtension(dataGridViewPermisos);
+
                 }
 
                 if (roles != null)
@@ -46,7 +49,7 @@ namespace IngenieriaSoftware.UI
                     dataGridViewRoles.DataSource = null;
                     dataGridViewRoles.DataSource = roles;
 
-                    OcultarColumnasDataGrid(dataGridViewRoles);
+                    OcultarColumnasDataGridExtension(dataGridViewRoles);
                 }
 
                 foreach (DataGridViewRow row in dataGridViewPermisos.Rows)
@@ -67,7 +70,7 @@ namespace IngenieriaSoftware.UI
             }
         }
 
-        private void OcultarColumnasDataGrid(DataGridView dgv)
+        private void OcultarColumnasDataGridExtension(DataGridView dgv)
         {
             foreach (DataGridViewColumn dc in dgv.Columns)
             {
@@ -107,7 +110,12 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
+                if (comboBoxRoles.SelectedItem is null) 
+                    throw new Exception("Debe seleccionar un rol para poder asignarle un permiso o un rol");
+
+
                 int permisoPadreId = _permisos.Find(p => p.Nombre == comboBoxRoles.Text).Id;
+
                 if (btnAsignarPermiso.Text == "Asignar Rol")
                 {
                     int rolHijo = _permisos.Find(r => r.Id == (int)dataGridViewRoles.SelectedRows[0].Cells[0].Value).Id;
@@ -139,7 +147,6 @@ namespace IngenieriaSoftware.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                BitacoraHelper.RegistrarError(this.Name, ex, "Permisos", SessionManager.GetInstance.Usuario.Username);
             }
         }
 
@@ -305,6 +312,7 @@ namespace IngenieriaSoftware.UI
             if (dataGridViewRoles.SelectedRows.Count > 0)
             {
                 string nombre = dataGridViewRoles.SelectedRows[0].Cells["Nombre"].Value.ToString();
+
                 _permisoSeleccionado = _permisos.First(rol => rol.Nombre == nombre);
                 txtPermisoSeleccionado.Text = nombre;
                 btnAsignarPermiso.Text = "Asignar Rol";
