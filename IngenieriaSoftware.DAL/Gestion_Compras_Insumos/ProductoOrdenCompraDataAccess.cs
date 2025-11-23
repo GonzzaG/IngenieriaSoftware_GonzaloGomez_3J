@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.Servicios.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -22,7 +23,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                         IdProducto = int.Parse(row["producto_id"].ToString()),   
                         Nombre = row["nombre"].ToString(),
                         Descripcion = row["descripcion"].ToString(),
-                        Categoria = row["categoria"].ToString(),
+                        Categoria = row["categoria"] == DBNull.Value ? string.Empty : row["categoria"].ToString(),
                         Tipo = row["Tipo"].ToString()
                     }).ToList();
         }

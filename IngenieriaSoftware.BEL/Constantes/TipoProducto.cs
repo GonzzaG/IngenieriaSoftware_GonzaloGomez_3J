@@ -4,9 +4,9 @@
     {
         public enum Tipo
         {
-            SinAsignar = 0,
             Comida = 1,
-            Bebida = 2
+            Bebida = 2,
+            SinAsignar = 3
         };
     }
 }

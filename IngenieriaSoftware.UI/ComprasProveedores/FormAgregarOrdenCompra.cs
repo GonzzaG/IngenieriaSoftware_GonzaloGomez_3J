@@ -183,7 +183,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             if (_ProductosOrdenCompra is null || _ProductosOrdenCompra.Count == 0)
                 return;
 
-            //dgvProductosOrdenCompra.OcultarColumnas("Cantidad");
             dgvProductosOrdenCompra.OcultarColumnas("IdProducto");
             AgregarColumnaCantidad();
             AgregarColumnaPrecioUnitarioEsperado();
@@ -228,9 +227,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         public string GuardarOrdenDeCompra()
         {
-            var proveedor = cbProveedor.SelectedItem == null
-                              ? 0
-                              : ((ProveedorListSimpleModel)cbProveedor.SelectedItem).IdProveedor;
             var ordenCompra = new OrdenDeCompraModel
             {
                 NumOrdenCompra = txtNumeroOrdenCompra.Text,
@@ -243,11 +239,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                                         : null,
                 CondicionesPago = txtCondicionesPago.Text,
                 Moneda = txtMoneda.Text,
-                TipoCambio = txtNumericTipoCambio.Text.Equals(string.Empty)
-                                       ? 0
-                                       : decimal.Parse(txtNumericTipoCambio.Text),
+                TipoCambio = ObtenerValorDeInputNumerico(txtNumericTipoCambio.Text),
                 Estado = OrdenCompraEstadoEnum.Pendiente,
-                TotalEsperado = ObtenerTotalEsperado(txtNumericTotalEsperado.Text),
+                TotalEsperado = ObtenerValorDeInputNumerico(txtNumericTotalEsperado.Text),
                 Observaciones = txtAreaObservaciones.Text,
 
 
@@ -266,11 +260,12 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             return ordenCompra.NumOrdenCompra;
         }
 
-        private decimal ObtenerTotalEsperado(string totalEsperado)
+        private decimal ObtenerValorDeInputNumerico(string totalEsperado)
         {
             decimal.TryParse(totalEsperado, out decimal total);
             return total;
         }
+
 
         private void btnSeleccionarProductos_Click(object sender, EventArgs e)
         {

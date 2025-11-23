@@ -66,6 +66,7 @@
     <Compile Include="DAO.cs" />
     <Compile Include="DigitoVerificadorHorizontalDAL.cs" />
     <Compile Include="DigitoVerificadorVerticalDAL.cs" />
+    <Compile Include="EntityDAL\ProductoTipo\ProductoTipoDataAccess.cs" />
     <Compile Include="FacturaProveedores\FacturaProveedorDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\CategoriaDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\OrdenCompraDataAccess.cs" />

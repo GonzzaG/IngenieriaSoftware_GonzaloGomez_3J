@@ -47,6 +47,8 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         private int paginaActual = 1;
         private int tamanoPagina = 10;
         private List<object> datosOriginales = new();
+        private string ultimaColumnaOrden = null;
+        private bool ordenAscendente = true;
         #endregion
         public DataGridViewConFiltros()
         {
@@ -541,12 +543,39 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         private void dgv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var columna = dgv.Columns[e.ColumnIndex].DataPropertyName;
-            datosOriginales = datosOriginales
-                .OrderBy(d => d.GetType().GetProperty(columna)?.GetValue(d))
-                .ToList();
+
+            // Si se hace clic en la misma columna → invertir orden
+            if (columna == ultimaColumnaOrden)
+            {
+                ordenAscendente = !ordenAscendente;
+            }
+            else
+            {
+                // Nueva columna → arrancamos orden ascendente
+                ultimaColumnaOrden = columna;
+                ordenAscendente = true;
+            }
+
+            // Obtener la propiedad
+            var propInfo = datosOriginales.First().GetType().GetProperty(columna);
+
+            // Ordenar
+            if (ordenAscendente)
+            {
+                datosOriginales = datosOriginales
+                    .OrderBy(d => propInfo.GetValue(d))
+                    .ToList();
+            }
+            else
+            {
+                datosOriginales = datosOriginales
+                    .OrderByDescending(d => propInfo.GetValue(d))
+                    .ToList();
+            }
 
             AplicarFiltros();
         }
+
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
 
@@ -584,6 +613,11 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
                 e.ThrowException = false; // evita que la excepción se propague
                 e.Cancel = true;          // cancela la edición
             }
+        }
+
+        public List<object> GetElementos()
+        {
+            return datosOriginales;
         }
     }
 }

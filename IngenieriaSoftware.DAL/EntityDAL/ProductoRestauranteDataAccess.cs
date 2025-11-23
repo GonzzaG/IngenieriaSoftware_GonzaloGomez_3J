@@ -149,7 +149,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                     new SqlParameter("@EsPostre", entity.EsPostre),
                     new SqlParameter("@Categoria", entity.oCategoria.Id),
                     new SqlParameter("@Precio", entity.Precio),
-                    new SqlParameter("@Tipo", "RESTAURANTE"),
+                    new SqlParameter("@Tipo", "Venta"),
                     new SqlParameter("@NuevoId", SqlDbType.Int) { Direction = ParameterDirection.Output }
                 };
 

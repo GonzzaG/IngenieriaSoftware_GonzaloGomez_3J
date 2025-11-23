@@ -70,6 +70,7 @@
             this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.toolTipNotificacion = new System.Windows.Forms.ToolTip(this.components);
             this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -416,7 +417,8 @@
             // 
             this.gestionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.productosToolStripMenuItem,
-            this.proveedoresToolStripMenuItem});
+            this.proveedoresToolStripMenuItem,
+            this.inventarioToolStripMenuItem});
             this.gestionToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.gestionToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
@@ -481,6 +483,12 @@
             this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.categoriasToolStripMenuItem.Text = "Categorias";
             this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
+            // 
+            // inventarioToolStripMenuItem
+            // 
+            this.inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
+            this.inventarioToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.inventarioToolStripMenuItem.Text = "Inventario";
             // 
             // FormMDI
             // 
@@ -552,5 +560,6 @@
         private System.Windows.Forms.ToolStripMenuItem agregarOrdenDeCompraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autorizaciónDeOrdenesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem facturasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventarioToolStripMenuItem;
     }
 }

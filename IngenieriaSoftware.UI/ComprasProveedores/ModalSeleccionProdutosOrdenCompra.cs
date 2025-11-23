@@ -61,9 +61,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             try
             {
-
-                // Deberia obtener los productos los cuales no son de tipo "RESTAURANTE"
-                _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();
+                // Obtener los productos los cuales no son de tipo "Venta"
 
                 if (inputNombreFiltroOrdenCompra.Texto == string.Empty)
                     _ProductosListado = new ProductoOrdenCompraBussiness().GetProductosToOrdenCompra();

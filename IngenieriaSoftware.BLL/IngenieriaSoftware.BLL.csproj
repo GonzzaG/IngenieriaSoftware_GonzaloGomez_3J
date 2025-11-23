@@ -117,6 +117,7 @@
     <Compile Include="Gestion_Compras_Insumos\OrdenCompraBussiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoOrdenCompraBussiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoProveedorBussiness.cs" />
+    <Compile Include="Gestion_Compras_Insumos\TiposBusiness.cs" />
     <Compile Include="IdiomaBLL.cs" />
     <Compile Include="ListSimpleBussiness\ListSimpleBussiness.cs" />
     <Compile Include="MedioDePagoBLL.cs" />

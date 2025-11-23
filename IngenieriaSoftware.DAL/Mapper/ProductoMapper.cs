@@ -18,11 +18,11 @@ namespace IngenieriaSoftware.DAL.Mapper
                 producto.Id = (int)row["producto_id"];
                 producto.Nombre = row["nombre"].ToString();
                 producto.Descripcion = row["descripcion"].ToString();
-                producto.Precio = (decimal)row["precio"];
+                producto.Precio = row["precio"] == DBNull.Value ? 0 : (decimal)row["precio"];
                 producto.TiempoPreparacion = (int)row["tiempo_preparacion"];
                 producto.Disponible = (bool)row["disponible"];
                 producto.EsPostre = (bool)row["es_postre"];
-                int categoria = (int)row["categoria"];
+                int categoria = row["categoria"] == DBNull.Value ? 0 : (int)row["categoria"];
                 producto.IdCategoria = (TipoProducto.Tipo)categoria;
                 producto.Tipo = row["Tipo"].ToString();
 

@@ -1,12 +1,12 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
-using IngenieriaSoftware.BEL.Proveedor;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.Servicios.Tools;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,6 +14,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
     public partial class FormGestionarProductos : Form, IVerificoNotificaciones
     {
+        List<Producto> _ListaProductos = new List<Producto>();
 
         public FormGestionarProductos()
         {
@@ -42,6 +43,15 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             ListarProductos();
             LimpiarFormulario();
             ListarCategorias();
+            ListarTipos();
+        }
+
+        private void ListarTipos()
+        {
+            cbcTipo.Items.Clear();
+            var tipos = new List<string>() { "Todos" };
+            tipos.AddRange(new TiposBusiness().GetProductosTipo());
+            cbcTipo.DataSource = tipos;
         }
 
         void LimpiarFormulario()
@@ -55,12 +65,21 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
+
                 if (filtroNombreProducto.Texto == string.Empty)
-                    gcfProductos.CargarDatos(new ProductoBLL().GetAll());
+                    _ListaProductos = new ProductoBLL().GetAll();
                 else
-                    gcfProductos.CargarDatos(new ProductoBLL().GetByNombre(filtroNombreProducto.Texto));
+                    _ListaProductos = new ProductoBLL().GetByNombre(filtroNombreProducto.Texto);
+
+                FiltrarPorTipo(ref _ListaProductos);
+
+                gcfProductos.CargarDatos(_ListaProductos);
+
+                gcfProductos.OcultarColumnas("oCategoria", "Id", "Cantidad");
+
+                gcfProductos.RenombrarColumna("IdCategoria", "Categoria");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 ex.RegistrarError("Gestion de Productos");
@@ -84,8 +103,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             var producto = (Producto)gcfProductos.ElementoSeleccionado;
 
-            if (producto is null) throw new Exception("No se ha seleccionado ningun producto para modificar");
-          
+            if (producto is null) throw new Exception("No se ha seleccionado ningun productosFiltrados para modificar");
+
             new ProductoBLL().Update(new Producto
             {
                 Id = producto.Id,
@@ -166,9 +185,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private void VerificarCamposGuardar()
         {
             if (txtNombre.Text == string.Empty
-               || txtDescripcion.Text == string.Empty
-               || cbCategoria.SelectedItem is null
-               || nudTiempoPreparacion.Value < 1)
+               || txtDescripcion.Text == string.Empty)
 
                 throw new Exception("Verificar los datos ingresados");
         }
@@ -176,7 +193,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private void EliminarProducto()
         {
             if (gcfProductos.CantidadElementos.Equals(0))
-                throw new Exception("Debe seleccionar un producto");
+                throw new Exception("Debe seleccionar un productosFiltrados");
 
             var proveedorId = ((Producto)gcfProductos.ElementoSeleccionado).Id;
 
@@ -234,7 +251,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-                if (gcfProductos.CantidadElementos.Equals(0)) throw new Exception("Seleccione un producto para modificarlo");
+                if (gcfProductos.CantidadElementos.Equals(0)) throw new Exception("Seleccione un productosFiltrados para modificarlo");
 
                 CargarProductorEnTextos((Producto)gcfProductos.ElementoSeleccionado);
 
@@ -244,6 +261,34 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void cbcTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbcTipo.SelectedIndex < 0) return;
+
+                ListarProductos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void FiltrarPorTipo(ref List<Producto> productos)
+        {
+            // Si selecciono el tipo "Todos" debemos listar todos los productos con el filtro de nombre
+            if (cbcTipo.SelectedIndex <= 0 )
+                return;
+
+            //  Caso contrario, obtenemos el tipo y mostramos unicamente los productos que coincidan con el tipo seleccionado
+            var tipo = cbcTipo.SelectedItem as string;
+
+            productos = _ListaProductos
+                                .Where(p => p.Tipo.Equals(tipo, StringComparison.OrdinalIgnoreCase))
+                                .ToList();
         }
     }
 }
