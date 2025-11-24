@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BEL.QueryModels;
 using IngenieriaSoftware.DAL.EntityDAL;
 using IngenieriaSoftware.Servicios.Tools;
@@ -14,6 +15,7 @@ namespace IngenieriaSoftware.BLL
         { }
 
         #region Obtener productos inventario
+
         public List<Producto> GetProductosInventario()
         {
             return new ProductoRestauranteDataAccess().GetAllProductosInventario();

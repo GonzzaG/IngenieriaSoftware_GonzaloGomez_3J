@@ -234,6 +234,7 @@
             this.btnSumarCantidadAlSeleccionado.Tag = "";
             this.btnSumarCantidadAlSeleccionado.Text = "Sumar cantidad";
             this.btnSumarCantidadAlSeleccionado.UseVisualStyleBackColor = false;
+            this.btnSumarCantidadAlSeleccionado.Visible = false;
             this.btnSumarCantidadAlSeleccionado.Click += new System.EventHandler(this.btnSumarCantidadAlSeleccionado_Click);
             // 
             // FormGestionarInventario

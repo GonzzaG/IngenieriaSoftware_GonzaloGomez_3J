@@ -2,7 +2,7 @@
 using System;
 using System.Data.SqlClient;
 
-namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos.ProductoInventario
+namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos.UpdateProductoInventario
 {
     public class MermaDataAccess
     {

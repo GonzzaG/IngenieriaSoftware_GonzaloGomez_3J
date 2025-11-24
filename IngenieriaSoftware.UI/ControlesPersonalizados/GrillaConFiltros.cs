@@ -49,12 +49,28 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         private List<object> datosOriginales = new();
         private string ultimaColumnaOrden = null;
         private bool ordenAscendente = true;
+        public event Action<object, string>? CeldaEditada;
+        public event DataGridViewCellCancelEventHandler CeldaComienzoEdicion;
+        public event DataGridViewCellEventHandler CeldaFinEdicion;
         #endregion
+
         public DataGridViewConFiltros()
         {
             InitializeComponent();
             InicializarGrilla();
             InicializarFiltros();
+
+            dgv.CellEndEdit += dgv_CellEndEdit;
+
+            dgv.CellBeginEdit += (s, e) =>
+            {
+                CeldaComienzoEdicion?.Invoke(s, e);
+            };
+
+            dgv.CellEndEdit += (s, e) =>
+            {
+                CeldaFinEdicion?.Invoke(s, e);
+            };
         }
 
         
@@ -606,7 +622,6 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
 
         #endregion
 
-
         public void RenombrarColumna(string nombreColumna, string nuevoNombre)
         {
             if (dgv.Columns.Contains(nombreColumna))
@@ -632,10 +647,38 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
                 e.Cancel = true;          // cancela la edición
             }
         }
+        private object valorOriginalCelda;
 
-        public List<object> GetElementos()
+        private void dgv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            return datosOriginales;
+            var valorNuevo = dgv[e.ColumnIndex, e.RowIndex].Value;
+
+            // Si el valor no cambió, NO marcar como modificado
+            if (Convert.ToDecimal(valorOriginalCelda) == Convert.ToDecimal(valorNuevo))
+                return;
+
+            // Si cambió, marcás la celda como modificada
+            dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.LightYellow;
         }
+
+       
+
+        private void dgv_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            valorOriginalCelda = dgv[e.ColumnIndex, e.RowIndex].Value;
+        }
+
+        public DataGridViewColumnCollection Columnas => dgv.Columns;
+
+        public object ObtenerValor(int row, int col)
+        {
+            return dgv.Rows[row].Cells[col].Value;
+        }
+
+        public T ObtenerItem<T>(int row)
+        {
+            return (T)dgv.Rows[row].DataBoundItem;
+        }
+
     }
 }

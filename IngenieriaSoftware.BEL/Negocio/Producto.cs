@@ -23,4 +23,5 @@ namespace IngenieriaSoftware.BEL
             return TablesName.Producto;
         }
     }
+
 }

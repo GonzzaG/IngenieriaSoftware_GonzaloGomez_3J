@@ -1,7 +1,10 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.BEL.OrdenDeCompra;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos.Inventario;
 using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.ComprasProveedores;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario;
@@ -12,56 +15,92 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using IngenieriaSoftware.BLL.Gestion_Compras_Insumos.Inventario;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
     public partial class FormGestionarInventario : Form, IActualizable
     {
-        private List<Producto> _ListaProductos = new List<Producto>();
+        // ---- listas principales (nombres unificados y sin duplicados) ----
+        private List<ProductoInventario> _ListaProductos = new List<ProductoInventario>();
+        private List<ProductoInventario> _ListaOriginal = new List<ProductoInventario>();
+        private Dictionary<int, int> _ValoresOriginales = new Dictionary<int, int>();
+
+        private object valorOriginal;   
         private OrdenCompraWithDetalles _OrdenCompraRecepcion;
+        // Guarda SOLO los cambios realizados por el usuario
+private Dictionary<int, int> _CambiosLocales = new();
+
         public FormGestionarInventario()
         {
             InitializeComponent();
             Incializar();
+
+            SuscribirEventosEdicionCantidad();
         }
 
         private void Incializar()
         {
             ListarTipos();
-            ListarProductosInventario();
-            filtroNombreProducto.InicializarFiltro(ListarProductosInventario);
+
+            // Usamos CargarProductosInventario como método unificado para cargar desde BD
+            CargarProductosInventario();
+
+            // Inicializar filtro para que invoque el método unificado
+            filtroNombreProducto.InicializarFiltro(CargarProductosInventario);
         }
 
         public void Actualizar()
         {
-            ListarProductosInventario();
+            CargarProductosInventario();
         }
 
-
-        // Vamos a obtener los productos los cuales no aparecen en la orden de compra
-        // Seran los productos tanto de consumidor final como de inventario/insumos
-
-        // Inventario / Restaurante 
-        private void ListarProductosInventario()
+        /// <summary>
+        /// Método unificado: carga desde BD, aplica filtros, crea copia para cancelar,
+        /// carga la grilla y suscribe eventos una sola vez.
+        /// </summary>
+        private void CargarProductosInventario()
         {
             try
             {
-                if (filtroNombreProducto.Texto == string.Empty)
-                    _ListaProductos = new ProductoBLL().GetProductosInventario();
-                else
-                    _ListaProductos = new ProductoBLL().GetProductosInventarioPorNombre(filtroNombreProducto.Texto);
+                List<Producto> productos;
 
+                // Paso 1 → obtener desde BD según filtro
+                if (string.IsNullOrWhiteSpace(filtroNombreProducto.Texto))
+                    productos = new ProductoBLL().GetProductosInventario();
+                else
+                    productos = new ProductoBLL().GetProductosInventarioPorNombre(filtroNombreProducto.Texto);
+
+                // Paso 2 → convertir a ProductoInventario
+                _ListaProductos = productos
+                    .Select(p => MapToInventario(p))
+                    .ToList();
+
+                // Paso 3 → filtrar por tipo
                 FiltrarPorTipo(ref _ListaProductos);
 
+                // Paso 4 → Clonar lista original
+                _ListaOriginal = _ListaProductos
+                    .Select(p => p.Clone())
+                    .ToList();
+
+                // *** NUEVO PASO → Guardar valores originales de cantidad ***
+                _ValoresOriginales.Clear();
+                foreach (var p in _ListaOriginal)
+                {
+                    _ValoresOriginales[p.Id] = p.Cantidad is null ? 0 : (int)p.Cantidad;
+                }
+
+                // Paso 5 → cargar grilla
                 dgvProductoInventario.CargarDatos(_ListaProductos);
 
-                dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion");
-
+                // Paso 6 → columnas
+                dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion", "Disponible");
                 dgvProductoInventario.RenombrarColumna("Categoria", "Categoria");
-
                 AgregarColumnaCantidad();
-               
+
+                // Paso 7 → conectar evento una sola vez
+                dgvProductoInventario.CeldaEditada -= OnCeldaEditada;
+                dgvProductoInventario.CeldaEditada += OnCeldaEditada;
             }
             catch (Exception ex)
             {
@@ -70,32 +109,67 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             }
         }
 
-        private void AgregarColumnaCantidad()
+        /// <summary>
+        /// Refresca la grilla usando la lista temporal actual (sin ir a BD).
+        /// Útil para cancelar cambios o para refrescar vista tras modificaciones en memoria.
+        /// </summary>
+        private void RefrescarGrillaInventario()
         {
-            //que hacer cuadno se modifique la cantidad 
-            dgvProductoInventario.AddNumericCantidadColumna((elemento) =>
-            {
-                var prod = elemento as Producto;
-                if (prod != null && int.TryParse(prod.Cantidad.ToString(), out int nuevoValor))
-                    prod.Cantidad = nuevoValor;
-
-            });
-
-            dgvProductoInventario.PermitirEdicionSoloEn("Cantidad");
+            dgvProductoInventario.CargarDatos(_ListaProductos);
+            dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion");
+            dgvProductoInventario.RenombrarColumna("Categoria", "Categoria");
+            AgregarColumnaCantidad();
         }
 
-        private void FiltrarPorTipo(ref List<Producto> productos)
+        /// <summary>
+        /// Agrega columna editable de Cantidad y prepara la grilla para permitir solo esa edición.
+        /// NO suscribe al evento CeldaEditada aquí (se hace en CargarProductosInventario) para evitar duplicados.
+        /// </summary>
+        private void AgregarColumnaCantidad()
         {
-            // Si selecciono el tipo "Todos" debemos listar todos los productos con el filtro de nombre
+            //dgvProductoInventario.AddNumericCantidadColumna(null);
+            dgvProductoInventario.PermitirEdicionSoloEn("Cantidad");
+
+            dgvProductoInventario.CeldaEditada -= OnCeldaEditada;
+            dgvProductoInventario.CeldaEditada += OnCeldaEditada;
+        }
+
+        /// <summary>
+        /// Manejador que se ejecuta cuando el UserControl notifica que una celda fue editada.
+        /// Marca el producto como Modificado si corresponde.
+        /// </summary>
+        private void OnCeldaEditada(object objeto, string columnName)
+        {
+            if (objeto is ProductoInventario prod && columnName == "Cantidad")
+            {
+                // Valor original
+                if (_ValoresOriginales.TryGetValue(prod.Id, out int valorOriginal))
+                {
+                    // Comparar contra el valor actual
+                    if (prod.Cantidad != valorOriginal)
+                        prod.Modificado = true;
+                    else
+                        prod.Modificado = false;
+                }
+                else
+                {
+                    // Si no existe en el diccionario (caso raro), lo consideramos no modificado
+                    prod.Modificado = false;
+                }
+            }
+        }
+
+
+        private void FiltrarPorTipo(ref List<ProductoInventario> productos)
+        {
             if (cbcTipo.SelectedIndex <= 0)
                 return;
 
-            //  Caso contrario, obtenemos el tipo y mostramos unicamente los productos que coincidan con el tipo seleccionado
-            var tipo = cbcTipo.SelectedItem as string;
+            string tipo = cbcTipo.SelectedItem.ToString();
 
-            productos = _ListaProductos
-                                .Where(p => p.Tipo.Equals(tipo, StringComparison.OrdinalIgnoreCase))
-                                .ToList();
+            productos = productos
+                .Where(p => p.Tipo.Equals(tipo, StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
 
         private void ListarTipos()
@@ -119,7 +193,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             {
                 if (cbcTipo.SelectedIndex < 0) return;
 
-                ListarProductosInventario();
+                // Usar el método unificado para que regenere listas/copia original adecuadamente
+                CargarProductosInventario();
             }
             catch (Exception ex)
             {
@@ -130,14 +205,13 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         /// <summary>
         /// Abrirá un modal que permitira cargar un numero de merma, para un producto seleciconado
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnRegistrarMerma_Click(object sender, EventArgs e)
         {
             try
             {
                 // validar que se selecciono un producto
-                var productoSeleccionado = (Producto)dgvProductoInventario.ElementoSeleccionado;
+                // ElementoSeleccionado devuelve object: ProductoInventario hereda Producto (si es así), casteamos a Producto
+                var productoSeleccionado = dgvProductoInventario.ElementoSeleccionado as Producto;
 
                 if (productoSeleccionado is null)
                     throw new Exception("Debe seleccionar un producto");
@@ -146,7 +220,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 new ModalMerma(productoSeleccionado).AbrirFormModal(new Size(705, 532));
                 // si se acepta se registra merma y se descuenta del stock
 
-                //Actualizar
+                //Actualizar vista desde BD
                 Actualizar();
             }
             catch (Exception ex)
@@ -156,11 +230,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         }
 
         /// <summary>
-        /// Este evento abrira un modal con las ordenes de compra que no se recibieron aun
-        /// Al seleccionarse una, se podrá realizar la recepción de la misma, teniendo un listado de ayuda en una grilla a un costado para mayor facilidad
+        /// Botón Recibir Productos / Confirmar Recepción
+        /// - Si está en modo "Recibir Productos" abre modal
+        /// - Si está en modo "Confirmar Recepción" guarda los cambios de cantidades modificadas y marca orden recibida
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnRecibirProductos_Click(object sender, EventArgs e)
         {
             try
@@ -174,15 +247,29 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                     var dialog = MessageBox.Show("¿Está seguro que desea finalizar la recepción de los productos seleccionados?", "Confirmar Recepción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dialog == DialogResult.No)
                         return;
+
+                    var modificados = _ListaProductos.Where(p => p.Modificado).ToList();
+
+                    if (modificados.Count == 0)
+                    {
+                        MessageBox.Show("No hay cambios para guardar.");
+                        return;
+                    }
+
+                    // Guardar las cantidades modificadas (BLL)
+                    new ProductoInventarioBusiness().UpdateCantidadInventario(modificados);
+
                     // Marcar la orden de compra como recibida
                     new OrdenCompraBussiness().SetOrdenCompraRecibida(_OrdenCompraRecepcion.IdOrdenCompra);
-                    // Limpiamos la grilla y orden
+
+                    MessageBox.Show("Cambios guardados correctamente.");
+
+                    // Recargar desde BD para reflejar estado real
+                    CargarProductosInventario();
+
+                    // Limpiar / desactivar modo de recepción
                     DesactivarModoRecepcionOrden();
                 }
-
-
-
-
             }
             catch (Exception ex)
             {
@@ -192,28 +279,20 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void DesactivarModoRecepcionOrden()
         {
-            //dgvOrdenDetalle.Limpiar();
             _OrdenCompraRecepcion = null;
-            // Desactivar modo de recepcion de productos
             ModoRecepcionProducto(false);
         }
 
         private void RecibirOrdenCompra()
         {
-            // Abrir modal de seleccion de productos, asignandole el metodo que se ejecutara cunado se seleccione una orden de compra
             AbrirSeleccionOrdenModal();
-
-            // Al cerrar el modal con una orden seleccionada, se cargaran en otra grilla a un costado con los productos de esa odrden
-
-            // Se iran cargando los productos que la persona del inventario crea conveniente, luego guardara de finalizar maracara la orden como recibida
-
-            // Actualizar el inventario con los productos recibidos
+            // Queda en modo recepción hasta que confirme/cancele
         }
 
         private void AbrirSeleccionOrdenModal()
         {
             new FormListaOrdenCompra(CargarDetallesOrden)
-                .AbrirFormModal(new Size(1440,600));
+                .AbrirFormModal(new Size(1440, 600));
         }
 
         private void CargarDetallesOrden(string numOrden)
@@ -222,14 +301,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             if (string.IsNullOrEmpty(numOrden))
                 throw new Exception("No se pudo obtener los detalles de la orden de compra");
             #endregion
+
             // Obtenemos la orden con detalles por su numero
             _OrdenCompraRecepcion = new OrdenCompraBussiness().GetOrdenCompraByNumero(numOrden);
+
             #region Validacion
             if (_OrdenCompraRecepcion.Detalles.Count <= 0)
                 throw new Exception("No se pudo obtener los detalles de la orden de compra");
-            // Cargar los detalles en la grilla
             #endregion
 
+            // Cargar los detalles en la grilla
             dgvOrdenDetalle.CargarDatos(_OrdenCompraRecepcion.Detalles);
 
             PrepararRecepcionProductosOrden();
@@ -238,7 +319,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private void PrepararRecepcionProductosOrden()
         {
             ModoRecepcionProducto(true);
-            //todo ocultar columnas innecesarias
+            // ocultar columnas innecesarias
             dgvOrdenDetalle.OcultarColumnas("IdDetalle", "IdOrdenCompra", "IdProducto", "PrecioUnitarioEsperado", "DescuentoLinea", "NotasLinea", "Subtotal");
         }
 
@@ -248,39 +329,33 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             dgvOrdenDetalle.Visible = activado;
             lblDetalleOrden.Visible = activado;
 
-            // Deshabilitamos otros botones hasta terminar con la recepcion
+            // Deshabilitamos/mostramos otros botones hasta terminar con la recepcion
             btnAlertaEscasez.Visible = !activado;
             btnRegistrarMerma.Visible = !activado;
             btnCancelarRecepcion.Visible = activado;
+            btnSumarCantidadAlSeleccionado.Visible = activado;
 
             // Colocamos el texto correspondiente al boton de recibir productos 
             btnRecibirProductos.Text = activado ? "Confirmar Recepción" : "Recibir Productos";
         }
 
         /// <summary>
-        /// Abrirá un modal que permitira cargar un numero de alerta por escasez, para un producto seleciconado
+        /// Abrirá un modal que permitira cargar un numero de alerta por escasez, para un producto seleccionado
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAlertaEscasez_Click(object sender, EventArgs e)
         {
             try
             {
-                // validar que se selecciono un producto
-                var productoSeleccionado = (Producto)dgvProductoInventario.ElementoSeleccionado;
+                var productoSeleccionado = dgvProductoInventario.ElementoSeleccionado as Producto;
 
                 if (productoSeleccionado is null)
                     throw new Exception("Debe seleccionar un producto");
 
-                //  No se pueden generar alertas de escasez de productos de tipo compra
                 if (productoSeleccionado.Tipo.Equals("Compra", StringComparison.OrdinalIgnoreCase))
                     throw new Exception("Solo se pueden generar alertas de escasez para productos que no sean de tipo 'Compra'");
 
-                // Abrir modal donde se ingresera la cantidad sugerida para poder comprar
                 new ModalEscasez(productoSeleccionado).AbrirFormModal(new Size(705, 532));
 
-                
-                //Actualizar
                 Actualizar();
             }
             catch (Exception ex)
@@ -293,7 +368,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-                // Cancelar recepcion de productos
+                // Restaurar copia original (descartar cambios temporales)
+                _ListaProductos = _ListaOriginal
+                                .Select(p => p.Clone())
+                                .ToList();
+
+                RefrescarGrillaInventario();
+
+                MessageBox.Show("Cambios descartados.");
+
+                // Cancelar modo recepcion
                 DesactivarModoRecepcionOrden();
             }
             catch (Exception ex)
@@ -307,7 +391,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             try
             {
                 new FormGestionarProductos().AbrirFormModal(new Size(1500, 720));
-
                 Actualizar();
             }
             catch (Exception ex)
@@ -320,12 +403,66 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
+                var prodInventarioSeleccionado = dgvProductoInventario.ElementoSeleccionado as ProductoInventario;
+                var prodDetalleSeleccionado = dgvOrdenDetalle.ElementoSeleccionado as OrdenDeCompraDetalleAprobacionModel;
 
+                if (prodInventarioSeleccionado is null || prodDetalleSeleccionado is null)
+                    throw new Exception("Debe seleccionar un producto del inventario y uno del detalle para sumar la cantidad");
+
+                // Modificamos la cantidad localmente y lo marcamos como modificado
+                prodInventarioSeleccionado.Cantidad += prodDetalleSeleccionado.Cantidad;
+                prodInventarioSeleccionado.Modificado = true;
+
+                // Refrescar la vista sin recargar desde BD
+                RefrescarGrillaInventario();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("No se pudo realizar la suma");
             }
         }
+
+        private ProductoInventario MapToInventario(Producto p)
+        {
+            return new ProductoInventario
+            {
+                Id = p.Id,
+                Nombre = p.Nombre,
+                Categoria = p.Categoria,
+                Tipo = p.Tipo,
+                Cantidad = p.Cantidad,
+                Precio = p.Precio,
+                EsPostre = p.EsPostre,
+                TiempoPreparacion = p.TiempoPreparacion
+            };
+        }
+
+        private void SuscribirEventosEdicionCantidad()
+        {
+            dgvProductoInventario.CeldaComienzoEdicion += (s, e) =>
+            {
+                var nombreColumna = dgvProductoInventario.Columnas[e.ColumnIndex].Name;
+
+                if (nombreColumna == "Cantidad")
+                {
+                    valorOriginal = dgvProductoInventario.ObtenerValor(e.RowIndex, e.ColumnIndex);
+                }
+            };
+
+            dgvProductoInventario.CeldaFinEdicion += (s, e) =>
+            {
+                var nombreColumna = dgvProductoInventario.Columnas[e.ColumnIndex].Name;
+                if (nombreColumna != "Cantidad") return;
+
+                var nuevoValor = dgvProductoInventario.ObtenerValor(e.RowIndex, e.ColumnIndex);
+
+                if (!Equals(nuevoValor, valorOriginal))
+                {
+                    var p = dgvProductoInventario.ObtenerItem<ProductoInventario>(e.RowIndex);
+                    p.Modificado = true;
+                }
+            };
+        }
+
     }
 }

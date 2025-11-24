@@ -68,6 +68,7 @@
     <Compile Include="Gestion_Compras_Insumos\Categoria.cs" />
     <Compile Include="Gestion_Compras_Insumos\EscasezModel.cs" />
     <Compile Include="Gestion_Compras_Insumos\MermaInsertModel.cs" />
+    <Compile Include="Gestion_Compras_Insumos\ProductoInventario.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />
     <Compile Include="Idiomas\Traduccion.cs" />

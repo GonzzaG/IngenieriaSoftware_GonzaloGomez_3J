@@ -1,5 +1,5 @@
 ﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
-using IngenieriaSoftware.DAL.Gestion_Compras_Insumos.ProductoInventario;
+using IngenieriaSoftware.DAL.Gestion_Compras_Insumos.UpdateProductoInventario;
 using IngenieriaSoftware.Servicios;
 using System;
 
