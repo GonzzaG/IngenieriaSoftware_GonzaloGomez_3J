@@ -101,7 +101,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private void ListarTipos()
         {
             var tipos = new TiposBusiness().GetProductosTipo();
-            var tipoVenta = tipos.Find(i => i == "Venta");
+            var tipoVenta = tipos.Find(i => i == "Compra");
 
             tipos.Remove(tipoVenta);
 
@@ -143,7 +143,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                     throw new Exception("Debe seleccionar un producto");
 
                 // Abrir modal donde se ingresera la cantidad de merma
-                new ModalMerma(productoSeleccionado).AbrirFormModal(new Size(517, 359));
+                new ModalMerma(productoSeleccionado).AbrirFormModal(new Size(705, 532));
                 // si se acepta se registra merma y se descuenta del stock
 
                 //Actualizar
@@ -176,7 +176,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                         return;
                     // Marcar la orden de compra como recibida
                     new OrdenCompraBussiness().SetOrdenCompraRecibida(_OrdenCompraRecepcion.IdOrdenCompra);
-
                     // Limpiamos la grilla y orden
                     DesactivarModoRecepcionOrden();
                 }
@@ -268,12 +267,17 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             try
             {
                 // validar que se selecciono un producto
-                var productoSeleccionado = dgvProductoInventario.ElementoSeleccionado;
+                var productoSeleccionado = (Producto)dgvProductoInventario.ElementoSeleccionado;
 
                 if (productoSeleccionado is null)
                     throw new Exception("Debe seleccionar un producto");
+
+                //  No se pueden generar alertas de escasez de productos de tipo compra
+                if (productoSeleccionado.Tipo.Equals("Compra", StringComparison.OrdinalIgnoreCase))
+                    throw new Exception("Solo se pueden generar alertas de escasez para productos que no sean de tipo 'Compra'");
+
                 // Abrir modal donde se ingresera la cantidad sugerida para poder comprar
-                new ModalEscasez().AbrirFormModal(new Size(705, 359));
+                new ModalEscasez(productoSeleccionado).AbrirFormModal(new Size(705, 532));
 
                 
                 //Actualizar
@@ -309,6 +313,18 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnSumarCantidadAlSeleccionado_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("No se pudo realizar la suma");
             }
         }
     }

@@ -12,10 +12,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario
         public ModalEscasez(Producto producto)
         {
             InitializeComponent();
-            if(producto is null)
+            Inicializar(producto);
+        }
+
+        private void Inicializar(Producto producto)
+        {
+            if (producto is null)
                 throw new Exception("El producto no puede ser nulo");
 
             _ProductoSeleccionado = producto;
+            lblProducto.Text = $"Producto: {_ProductoSeleccionado.Nombre}";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -27,16 +33,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario
         {
             try
             {
-                var nuevaMerma = new EscasezInsertModel
+                var escasez = new EscasezInsertModel
                 {
                     IdProducto = _ProductoSeleccionado.Id,
                     FechaRegistro = DateTime.Now,
                     Observacion = txtObservaciones.Text,
-                    CantidadActual = nudCantidadRecomendada.Value,
-
+                    CantidadRecomendada = nudCantidadRecomendada.Value,
                 };
+
                 // se acepta y se envia la alerta
-                new EscasezBusiness.InsertEscasez(nuevaMerma);
+                new EscasezBusiness().InsertEscasez(escasez);
             }
             catch (Exception ex)
             {

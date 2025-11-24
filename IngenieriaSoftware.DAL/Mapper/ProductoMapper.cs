@@ -31,6 +31,31 @@ namespace IngenieriaSoftware.DAL.Mapper
             return productos;
         }
 
+        public List<Producto> MapearProductosInventarioDesdeDataSet(DataSet pDs)
+        {
+            List<Producto> productos = new List<Producto>();
+
+            foreach (DataRow row in pDs.Tables[0].Rows)
+            {
+                Producto producto = new Producto();
+                producto.Id = (int)row["producto_id"];
+                producto.Nombre = row["nombre"].ToString();
+                producto.Descripcion = row["descripcion"].ToString();
+                producto.Precio = row["precio"] == DBNull.Value ? 0 : (decimal)row["precio"];
+                producto.TiempoPreparacion = (int)row["tiempo_preparacion"];
+                producto.Disponible = (bool)row["disponible"];
+                producto.Cantidad = row["Cantidad"] == DBNull.Value ? (int?)null : (int)row["Cantidad"];
+                producto.EsPostre = (bool)row["es_postre"];
+                int categoria = row["categoria"] == DBNull.Value ? 0 : (int)row["categoria"];
+                producto.Categoria = (TipoProducto.Tipo)categoria;
+                producto.Tipo = row["Tipo"].ToString();
+
+                productos.Add(producto);
+            }
+            return productos;
+        }
+
+
         public Producto ConvertirDesdeRow(DataRow row)
         {
 

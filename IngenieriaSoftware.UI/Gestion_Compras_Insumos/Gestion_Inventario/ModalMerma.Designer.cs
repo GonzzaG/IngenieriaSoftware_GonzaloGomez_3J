@@ -32,6 +32,9 @@
             this.lblMerma = new System.Windows.Forms.Label();
             this.nudMerma = new System.Windows.Forms.NumericUpDown();
             this.btnGuardarMerma = new System.Windows.Forms.Button();
+            this.lblObservaciones = new System.Windows.Forms.Label();
+            this.txtObservaciones = new System.Windows.Forms.TextBox();
+            this.lblProducto = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudMerma)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +43,7 @@
             this.btnCancelar.BackColor = System.Drawing.Color.Black;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnCancelar.Location = new System.Drawing.Point(318, 221);
+            this.btnCancelar.Location = new System.Drawing.Point(489, 389);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(137, 57);
@@ -71,7 +74,7 @@
             this.nudMerma.Font = new System.Drawing.Font("Segoe UI Symbol", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudMerma.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.nudMerma.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.nudMerma.Location = new System.Drawing.Point(334, 128);
+            this.nudMerma.Location = new System.Drawing.Point(505, 140);
             this.nudMerma.Margin = new System.Windows.Forms.Padding(0);
             this.nudMerma.Maximum = new decimal(new int[] {
             10000,
@@ -94,10 +97,10 @@
             // 
             // btnGuardarMerma
             // 
-            this.btnGuardarMerma.BackColor = System.Drawing.Color.Orange;
+            this.btnGuardarMerma.BackColor = System.Drawing.Color.Maroon;
             this.btnGuardarMerma.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarMerma.ForeColor = System.Drawing.Color.Black;
-            this.btnGuardarMerma.Location = new System.Drawing.Point(177, 221);
+            this.btnGuardarMerma.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGuardarMerma.Location = new System.Drawing.Point(348, 389);
             this.btnGuardarMerma.Margin = new System.Windows.Forms.Padding(2);
             this.btnGuardarMerma.Name = "btnGuardarMerma";
             this.btnGuardarMerma.Size = new System.Drawing.Size(137, 57);
@@ -105,13 +108,53 @@
             this.btnGuardarMerma.Tag = "";
             this.btnGuardarMerma.Text = "Guardar";
             this.btnGuardarMerma.UseVisualStyleBackColor = false;
+            this.btnGuardarMerma.Click += new System.EventHandler(this.btnGuardarMerma_Click);
+            // 
+            // lblObservaciones
+            // 
+            this.lblObservaciones.AutoSize = true;
+            this.lblObservaciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblObservaciones.Font = new System.Drawing.Font("Segoe UI Symbol", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblObservaciones.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblObservaciones.Location = new System.Drawing.Point(491, 209);
+            this.lblObservaciones.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblObservaciones.Name = "lblObservaciones";
+            this.lblObservaciones.Size = new System.Drawing.Size(135, 25);
+            this.lblObservaciones.TabIndex = 62;
+            this.lblObservaciones.Tag = "";
+            this.lblObservaciones.Text = "Observaciones";
+            // 
+            // txtObservaciones
+            // 
+            this.txtObservaciones.Location = new System.Drawing.Point(285, 237);
+            this.txtObservaciones.Multiline = true;
+            this.txtObservaciones.Name = "txtObservaciones";
+            this.txtObservaciones.Size = new System.Drawing.Size(341, 103);
+            this.txtObservaciones.TabIndex = 61;
+            // 
+            // lblProducto
+            // 
+            this.lblProducto.AutoSize = true;
+            this.lblProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblProducto.Location = new System.Drawing.Point(52, 90);
+            this.lblProducto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblProducto.Name = "lblProducto";
+            this.lblProducto.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblProducto.Size = new System.Drawing.Size(0, 37);
+            this.lblProducto.TabIndex = 63;
+            this.lblProducto.Tag = "";
             // 
             // ModalMerma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(501, 320);
+            this.ClientSize = new System.Drawing.Size(689, 493);
+            this.Controls.Add(this.lblProducto);
+            this.Controls.Add(this.lblObservaciones);
+            this.Controls.Add(this.txtObservaciones);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblMerma);
             this.Controls.Add(this.nudMerma);
@@ -130,5 +173,8 @@
         private System.Windows.Forms.Label lblMerma;
         private System.Windows.Forms.NumericUpDown nudMerma;
         private System.Windows.Forms.Button btnGuardarMerma;
+        private System.Windows.Forms.Label lblObservaciones;
+        private System.Windows.Forms.TextBox txtObservaciones;
+        private System.Windows.Forms.Label lblProducto;
     }
 }

@@ -13,7 +13,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos.ProductoInventario
             {
                 new SqlParameter("@IdProducto", model.IdProducto),
                 new SqlParameter("@CantidadRecomendada", model.CantidadRecomendada),
-                new SqlParameter("@FechaRegistro", DateTime.Now),
+                new SqlParameter("@FechaRegistro", model.FechaRegistro),
                 new SqlParameter("@RegistradoPor", model.RegistradoPor),
                 new SqlParameter("@Observacion", model.Observacion)
             }; 

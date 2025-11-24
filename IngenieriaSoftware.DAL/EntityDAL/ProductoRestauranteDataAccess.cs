@@ -206,7 +206,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
             {
                 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosInventario", null);
-                return new ProductoMapper().MapearProductosDesdeDataSet(mDs);
+                return new ProductoMapper().MapearProductosInventarioDesdeDataSet(mDs);
             }
             catch (Exception ex)
             {
@@ -224,7 +224,7 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 };
 
                 DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosInventarioPorNombre", parametros);
-                return new ProductoMapper().MapearProductosDesdeDataSet(mDs);
+                return new ProductoMapper().MapearProductosInventarioDesdeDataSet(mDs);
             }
             catch (Exception ex)
             {

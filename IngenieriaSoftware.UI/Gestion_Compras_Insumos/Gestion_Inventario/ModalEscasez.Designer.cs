@@ -34,6 +34,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtObservaciones = new System.Windows.Forms.TextBox();
             this.lblObservaciones = new System.Windows.Forms.Label();
+            this.lblProducto = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadRecomendada)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,12 +133,27 @@
             this.lblObservaciones.Tag = "";
             this.lblObservaciones.Text = "Observaciones";
             // 
+            // lblProducto
+            // 
+            this.lblProducto.AutoSize = true;
+            this.lblProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblProducto.Location = new System.Drawing.Point(35, 74);
+            this.lblProducto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblProducto.Name = "lblProducto";
+            this.lblProducto.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblProducto.Size = new System.Drawing.Size(0, 37);
+            this.lblProducto.TabIndex = 59;
+            this.lblProducto.Tag = "";
+            // 
             // ModalEscasez
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(689, 493);
+            this.Controls.Add(this.lblProducto);
             this.Controls.Add(this.lblObservaciones);
             this.Controls.Add(this.txtObservaciones);
             this.Controls.Add(this.btnCancelar);
@@ -160,5 +176,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtObservaciones;
         private System.Windows.Forms.Label lblObservaciones;
+        private System.Windows.Forms.Label lblProducto;
     }
 }
