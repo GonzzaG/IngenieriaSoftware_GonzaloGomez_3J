@@ -14,7 +14,7 @@ namespace IngenieriaSoftware.BEL
         public int? Cantidad { get; set; } 
 
         public string Tipo { get; set; } = "Venta";
-        public Constantes.TipoProducto.Tipo IdCategoria { get; set; } = Constantes.TipoProducto.Tipo.SinAsignar;
+        public Constantes.TipoProducto.Tipo Categoria { get; set; } = Constantes.TipoProducto.Tipo.SinAsignar;
         public Categoria oCategoria { get; set; }
         public int Id { get; set; }
 

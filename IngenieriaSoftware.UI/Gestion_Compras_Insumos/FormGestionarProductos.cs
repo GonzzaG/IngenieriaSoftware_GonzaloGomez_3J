@@ -2,7 +2,7 @@
 using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
-using IngenieriaSoftware.Servicios.Tools;
+using IngenieriaSoftware.UI.ControlesPersonalizados.Inputs;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections;
@@ -20,8 +20,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             InitializeComponent();
             Inicializar();
-
-
         }
 
         public NotificacionService _notificacionService => new NotificacionService();
@@ -36,27 +34,41 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
             #endregion
             Actualizar();
-
+            ListarTipos();
+            ListarCategorias();
         }
         private void Actualizar()
         {
             ListarProductos();
             LimpiarFormulario();
-            ListarCategorias();
-            ListarTipos();
         }
 
         private void ListarTipos()
         {
+            var tipos = new TiposBusiness().GetProductosTipo();
+
+            #region ComboBox Tipo Detalle
+            cbcTipoDetalle.Items.Clear();
+            var tipoDetalle = new List<string>() { "Seleccione..." };
+            tipoDetalle.AddRange(tipos);
+            cbcTipoDetalle.DataSource = tipoDetalle;
+            #endregion
+
+            #region ComboBox Tipo Filtro
             cbcTipo.Items.Clear();
-            var tipos = new List<string>() { "Todos" };
-            tipos.AddRange(new TiposBusiness().GetProductosTipo());
-            cbcTipo.DataSource = tipos;
+            var tiposCombo = new List<string>() { "Todos" };
+            tiposCombo.AddRange(tipos);
+            cbcTipo.DataSource = tiposCombo;
+            #endregion
         }
 
         void LimpiarFormulario()
         {
-            groupBoxProducto.LimpiarControles(typeof(Button), typeof(Label));
+            //groupBoxProducto.LimpiarControles(typeof(Button), typeof(Label));
+            txtNombre.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
+            cbDisponible.Checked = false;
+            cbEsPostre.Checked = false;
             nudTiempoPreparacion.Value = 0;
             nudPrecio.Value = 0;
         }
@@ -77,7 +89,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
                 gcfProductos.OcultarColumnas("oCategoria", "Id", "Cantidad");
 
-                gcfProductos.RenombrarColumna("IdCategoria", "Categoria");
+                gcfProductos.RenombrarColumna("Categoria", "Categoria");
             }
             catch (Exception ex)
             {
@@ -88,10 +100,11 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void ListarCategorias()
         {
-            var categorias = new CategoriaBussines().GetAll();
-            int[] catVector = new int[categorias.Count()];
+            cbCategoria.Items.Clear();  
+            var categorias = new List<Categoria>() { new Categoria { Id = 0, Nombre = "Seleccione..." } };
+            categorias.AddRange(new CategoriaBussines().GetAll());
 
-            cbCategoria.ActualizarComboBox<Categoria>(new CategoriaBussines().GetAll());
+            cbCategoria.DataSource = categorias;    
         }
 
         void IActualizable.Actualizar()
@@ -151,8 +164,13 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 switch (tb)
                 {
                     case TextBox:
-                    case ComboBox:
                         tb.Text = string.Empty;
+                        break;
+                    case ComboBoxCustom d:
+                        d.SelectedIndex = 0;
+                        break;
+                    case ComboBox d:
+                        d.SelectedIndex = 0;
                         break;
                     case NumericUpDown nud:
                         nud.Value = nud.Minimum;
@@ -204,8 +222,16 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             txtNombre.Text = producto.Nombre;
             txtDescripcion.Text = producto.Descripcion;
-            cbCategoria.Text = producto.IdCategoria.ToString();
+            //cbCategoria.Text = producto.Categoria.ToString();
+            cbCategoria.SelectedItem = cbCategoria.Items
+                                        .Cast<Categoria>()
+                                        .FirstOrDefault(c => c.Nombre == producto.Categoria.ToString());
+            
 
+
+            cbcTipoDetalle.SelectedItem = cbcTipoDetalle.Items.Cast<string>().FirstOrDefault(c => c == producto.Tipo);
+            
+            //cbcTipo.Text = producto.Tipo.ToString();
             nudTiempoPreparacion.Value = producto.TiempoPreparacion;
             cbDisponible.Checked = producto.Disponible;
             cbEsPostre.Checked = producto.EsPostre;
@@ -280,7 +306,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private void FiltrarPorTipo(ref List<Producto> productos)
         {
             // Si selecciono el tipo "Todos" debemos listar todos los productos con el filtro de nombre
-            if (cbcTipo.SelectedIndex <= 0 )
+            if (cbcTipo.SelectedIndex <= 0)
                 return;
 
             //  Caso contrario, obtenemos el tipo y mostramos unicamente los productos que coincidan con el tipo seleccionado

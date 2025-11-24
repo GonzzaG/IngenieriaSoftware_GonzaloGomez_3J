@@ -13,6 +13,18 @@ namespace IngenieriaSoftware.BLL
         public ProductoBLL()
         { }
 
+        #region Obtener productos inventario
+        public List<Producto> GetProductosInventario()
+        {
+            return new ProductoRestauranteDataAccess().GetAllProductosInventario();
+        }
+
+        public List<Producto> GetProductosInventarioPorNombre(string nombre)
+        {
+            return new ProductoRestauranteDataAccess().GetAllProductosInventarioPorNombre(nombre);
+        }
+        #endregion
+
         #region Metodos Genericos
         public List<Producto> GetAll()
         {

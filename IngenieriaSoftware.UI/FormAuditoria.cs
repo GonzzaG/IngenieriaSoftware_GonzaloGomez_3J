@@ -80,7 +80,7 @@ namespace IngenieriaSoftware.UI
 
             // Agregar columnas del modelo auditable
             dataGridViewHistorialCambios.Columns.Add("Version", "Version");
-            dataGridViewHistorialCambios.Columns.Add("Accion", "Acción");
+            dataGridViewHistorialCambios.Columns.Add("EstadioAccion", "Acción");
             dataGridViewHistorialCambios.Columns.Add("CambiadoPor", "Cambiado Por");
             dataGridViewHistorialCambios.Columns.Add("FechaCambio", "Fecha de Cambio");
             dataGridViewHistorialCambios.Columns.Add("EsUltimaVersion", "Última Versión");

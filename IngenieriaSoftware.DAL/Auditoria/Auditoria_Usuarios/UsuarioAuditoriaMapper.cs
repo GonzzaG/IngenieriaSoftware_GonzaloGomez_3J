@@ -28,7 +28,7 @@ namespace IngenieriaSoftware.DAL.Auditoria.Auditoria_Usuarios
             {
                 Entidad = usuario,
                 Version = row.Field<int>("Version"),
-                Accion = row.Field<string>("Accion"),
+                Accion = row.Field<string>("EstadioAccion"),
                 CambiadoPor = row.Field<string>("CambiadoPor"),
                 FechaCambio = row.Field<DateTime>("FechaCambio"),
                 EsUltimaVersion = row.Field<bool>("EsUltimaVersion")

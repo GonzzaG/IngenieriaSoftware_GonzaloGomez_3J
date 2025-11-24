@@ -54,7 +54,7 @@ namespace IngenieriaSoftware.DAL.Auditoria
                     new SqlParameter("@Id_Usuario", usuario.Id),
                     new SqlParameter("@FechaCreacion", usuario.FechaCreacion),
                     new SqlParameter("@Version", version),
-                    new SqlParameter("@Accion", entidad.Accion),
+                    new SqlParameter("@EstadioAccion", entidad.Accion),
                     new SqlParameter("@CambiadoPor", entidad.CambiadoPor),
                     new SqlParameter("@FechaCambio", DateTime.Now),
                     new SqlParameter("@EsUltimaVersion", true)

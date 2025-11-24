@@ -727,13 +727,25 @@ namespace IngenieriaSoftware.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                BitacoraHelper.RegistrarError(this.Name, ex, "Backup", SessionManager.GetInstance.Usuario.Username);
             }
         }
 
         private void facturasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void inventarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AbrirFormHijo(new FormGestionarInventario());
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

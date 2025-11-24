@@ -199,5 +199,37 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
+
+        public List<Producto> GetAllProductosInventario()
+        {
+            try
+            {
+                
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosInventario", null);
+                return new ProductoMapper().MapearProductosDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Producto> GetAllProductosInventarioPorNombre(string nombre)
+        {
+            try
+            {
+                var parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Nombre", nombre)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosInventarioPorNombre", parametros);
+                return new ProductoMapper().MapearProductosDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

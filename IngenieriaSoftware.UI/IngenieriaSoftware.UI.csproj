@@ -329,11 +329,11 @@
     <Compile Include="Gestion_Compras_Insumos\FormGestionarProductos.Designer.cs">
       <DependentUpon>FormGestionarProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion_Compras_Insumos\FormGestionInventario.cs">
+    <Compile Include="Gestion_Compras_Insumos\FormGestionarInventario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion_Compras_Insumos\FormGestionInventario.Designer.cs">
-      <DependentUpon>FormGestionInventario.cs</DependentUpon>
+    <Compile Include="Gestion_Compras_Insumos\FormGestionarInventario.Designer.cs">
+      <DependentUpon>FormGestionarInventario.cs</DependentUpon>
     </Compile>
     <Compile Include="Gestion_Compras_Insumos\FormGestionProveedores.cs">
       <SubType>Form</SubType>
@@ -385,6 +385,24 @@
     </Compile>
     <Compile Include="FormMDI.Designer.cs">
       <DependentUpon>FormMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\Gestion_Inventario\FormListaOrdenCompraSimple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\Gestion_Inventario\FormListaOrdenCompraSimple.Designer.cs">
+      <DependentUpon>FormListaOrdenCompraSimple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\Gestion_Inventario\ModalEscasez.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\Gestion_Inventario\ModalEscasez.Designer.cs">
+      <DependentUpon>ModalEscasez.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\Gestion_Inventario\ModalMerma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion_Compras_Insumos\Gestion_Inventario\ModalMerma.Designer.cs">
+      <DependentUpon>ModalMerma.cs</DependentUpon>
     </Compile>
     <Compile Include="IdiomaObservadorDTO.cs" />
     <Compile Include="Interfaces\IActualizable.cs" />
@@ -517,11 +535,20 @@
     <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionarProductos.resx">
       <DependentUpon>FormGestionarProductos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionInventario.resx">
-      <DependentUpon>FormGestionInventario.cs</DependentUpon>
+    <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionarInventario.resx">
+      <DependentUpon>FormGestionarInventario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion_Compras_Insumos\FormGestionProveedores.resx">
       <DependentUpon>FormGestionProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion_Compras_Insumos\Gestion_Inventario\FormListaOrdenCompraSimple.resx">
+      <DependentUpon>FormListaOrdenCompraSimple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion_Compras_Insumos\Gestion_Inventario\ModalEscasez.resx">
+      <DependentUpon>ModalEscasez.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion_Compras_Insumos\Gestion_Inventario\ModalMerma.resx">
+      <DependentUpon>ModalMerma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

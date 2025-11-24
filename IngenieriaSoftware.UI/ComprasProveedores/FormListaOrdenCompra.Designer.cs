@@ -163,7 +163,7 @@
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnBuscar.Location = new System.Drawing.Point(650, 165);
+            this.btnBuscar.Location = new System.Drawing.Point(767, 165);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(103, 37);
@@ -179,7 +179,7 @@
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAgregar.Location = new System.Drawing.Point(767, 165);
+            this.btnAgregar.Location = new System.Drawing.Point(650, 165);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(103, 37);
@@ -227,7 +227,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormListaOrdenCompra";
             this.Tag = "";
-            this.Text = "Orden de compra";
+            this.Text = "Seleccionar";
             this.gBListaOrdenCompra.ResumeLayout(false);
             this.gBListaOrdenCompra.PerformLayout();
             this.ResumeLayout(false);

@@ -23,7 +23,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                 producto.Disponible = (bool)row["disponible"];
                 producto.EsPostre = (bool)row["es_postre"];
                 int categoria = row["categoria"] == DBNull.Value ? 0 : (int)row["categoria"];
-                producto.IdCategoria = (TipoProducto.Tipo)categoria;
+                producto.Categoria = (TipoProducto.Tipo)categoria;
                 producto.Tipo = row["Tipo"].ToString();
 
                 productos.Add(producto);
@@ -43,7 +43,7 @@ namespace IngenieriaSoftware.DAL.Mapper
                 Disponible = (bool)row["disponible"],
                 EsPostre = row["es_postre"] is DBNull ? false: (bool)row["es_postre"],
                 Tipo = row["Tipo"].ToString(),
-                IdCategoria = row["categoria"] is DBNull ? 0 : (TipoProducto.Tipo)(int.Parse(row["categoria"].ToString())),
+                Categoria = row["categoria"] is DBNull ? 0 : (TipoProducto.Tipo)(int.Parse(row["categoria"].ToString())),
             };
 
             return producto;

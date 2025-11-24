@@ -15,12 +15,41 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 {
     public partial class FormListaOrdenCompra : Form, IActualizable
     {
+
+        private Action<string> OrdenCompraSeleccionada;
+
+        /// <summary>
+        /// Constructor para solo realizar una busqueda de ordenes de compra y ejecutar el metodo pasado como parametro al momento de seleccionar la aorden de compra
+        /// </summary>
+        /// <param name="oc"></param>
+        public FormListaOrdenCompra(Action<string> oc)
+        {
+
+            // como en este caso queremos ordenes de compra las cuales no fueron recibidas, se debe de validadr eso o
+            // que los metodos no obtengan todos, sino que filtren solamente las que no fueron recibidas
+            // Esto se puede hacer con un check que ponga "Recibidas" y que no sea posible modificarlo. y que busque solo esas
+
+            InitializeComponent();
+            Inicializar();
+            Actualizar();
+
+            OrdenCompraSeleccionada = oc;
+            btnAgregar.Text = "Seleccionar";
+
+        }
+
+
+
         public FormListaOrdenCompra()
         {
             InitializeComponent();
             Inicializar();
             Actualizar();
+
+            btnAgregar.Text = "Agregar";
         }
+
+
 
         public FormListaOrdenCompra(OrdenCompraEstadoEnum estado)
         {
@@ -41,7 +70,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 cbEstado.SelectedIndex = (int)estado;
 
                 // Ponemos visible el boton de generar factura ya que estamos buscando las aprobadas
-                if(estado.Equals(OrdenCompraEstadoEnum.Aprobada))
+                if (estado.Equals(OrdenCompraEstadoEnum.Aprobada))
                     btnGenerarFactura.Visible = true;
 
                 //  Buscamos las orden de compra segun el estado del parametro
@@ -54,7 +83,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 MessageBox.Show(ex.Message);
                 Actualizar();
             }
-          
+
 
         }
 
@@ -96,13 +125,27 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            ListarOrdenCompras();  
+            ListarOrdenCompras();
         }
 
         private void btnAgregar_Click_1(object sender, EventArgs e)
         {
-            var formMDI = this.MdiParent as FormMDI;
-            formMDI.AbrirFormHijo(new FormAgregarOrdenCompra());
+            if (btnAgregar.Text.Equals("Agregar"))
+            {
+                var formMDI = this.MdiParent as FormMDI;
+                formMDI.AbrirFormHijo(new FormAgregarOrdenCompra());
+            }
+            else
+            {
+                var ordenSeleccionada = (OrdenCompraGetListaModel)grillaConFiltros.ElementoSeleccionado;
+
+                if(ordenSeleccionada != null && !string.IsNullOrEmpty(ordenSeleccionada.NumOrdenCompra))
+                {
+                    OrdenCompraSeleccionada.Invoke(ordenSeleccionada.NumOrdenCompra);
+                    this.Close();
+                }
+            }
+           
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -127,13 +170,13 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
 
                 //  Si el estado seleccionado es Aprobado, habilitaremos la opcion de generar facturas 
-                if(cbEstado.Text.Equals(OrdenCompraEstadoEnum.Aprobada.ToString()))
+                if (cbEstado.Text.Equals(OrdenCompraEstadoEnum.Aprobada.ToString()))
                     btnGenerarFactura.Visible = true;
                 else
                     btnGenerarFactura.Visible = false;
-              
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -150,7 +193,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             {
                 var ordenCompra = (OrdenCompraGetListaModel)grillaConFiltros.ElementoSeleccionado;
 
-                if (ordenCompra == null || ordenCompra.IdOrdenCompra <= 0) 
+                if (ordenCompra == null || ordenCompra.IdOrdenCompra <= 0)
                     throw new Exception("Debe seleccionar una orden de compra");
 
                 var formMDI = this.MdiParent as FormMDI;
@@ -167,7 +210,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void cbEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbEstado.SelectedIndex == -1)
+            if (cbEstado.SelectedIndex == -1)
             {
                 cbEstado.SelectedIndex = 0;
             }
@@ -175,11 +218,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void cbEstado_TextChanged(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(cbEstado.Text))
+            if (string.IsNullOrWhiteSpace(cbEstado.Text))
             {
                 cbEstado.SelectedIndex = 0;
             }
-            
+
         }
     }
 }

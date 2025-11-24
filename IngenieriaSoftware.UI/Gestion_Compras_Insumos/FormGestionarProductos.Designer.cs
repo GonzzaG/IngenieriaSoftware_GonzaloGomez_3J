@@ -53,6 +53,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.filtroNombreProducto = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
             this.cbcTipo = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.lblTipo = new System.Windows.Forms.Label();
+            this.cbcTipoDetalle = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
+            this.lblDetalle = new System.Windows.Forms.Label();
             this.groupBoxProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTiempoPreparacion)).BeginInit();
@@ -60,6 +62,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // 
             // groupBoxProducto
             // 
+            this.groupBoxProducto.Controls.Add(this.lblDetalle);
+            this.groupBoxProducto.Controls.Add(this.cbcTipoDetalle);
             this.groupBoxProducto.Controls.Add(this.lblPrecio);
             this.groupBoxProducto.Controls.Add(this.lblMinutos);
             this.groupBoxProducto.Controls.Add(this.nudPrecio);
@@ -79,7 +83,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.groupBoxProducto.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxProducto.Name = "groupBoxProducto";
             this.groupBoxProducto.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxProducto.Size = new System.Drawing.Size(245, 479);
+            this.groupBoxProducto.Size = new System.Drawing.Size(245, 532);
             this.groupBoxProducto.TabIndex = 34;
             this.groupBoxProducto.TabStop = false;
             this.groupBoxProducto.Text = "Detalle Producto";
@@ -90,7 +94,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblPrecio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblPrecio.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblPrecio.Location = new System.Drawing.Point(19, 318);
+            this.lblPrecio.Location = new System.Drawing.Point(19, 384);
             this.lblPrecio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(53, 21);
@@ -104,7 +108,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblMinutos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblMinutos.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMinutos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblMinutos.Location = new System.Drawing.Point(109, 287);
+            this.lblMinutos.Location = new System.Drawing.Point(109, 353);
             this.lblMinutos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMinutos.Name = "lblMinutos";
             this.lblMinutos.Size = new System.Drawing.Size(67, 21);
@@ -118,7 +122,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.nudPrecio.DecimalPlaces = 2;
             this.nudPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.nudPrecio.Location = new System.Drawing.Point(23, 341);
+            this.nudPrecio.Location = new System.Drawing.Point(23, 407);
             this.nudPrecio.Margin = new System.Windows.Forms.Padding(2);
             this.nudPrecio.Maximum = new decimal(new int[] {
             1000000,
@@ -134,7 +138,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.nudTiempoPreparacion.BackColor = System.Drawing.Color.Teal;
             this.nudTiempoPreparacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudTiempoPreparacion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.nudTiempoPreparacion.Location = new System.Drawing.Point(23, 287);
+            this.nudTiempoPreparacion.Location = new System.Drawing.Point(23, 353);
             this.nudTiempoPreparacion.Margin = new System.Windows.Forms.Padding(2);
             this.nudTiempoPreparacion.Maximum = new decimal(new int[] {
             1000,
@@ -150,7 +154,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.cbEsPostre.AutoSize = true;
             this.cbEsPostre.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbEsPostre.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.cbEsPostre.Location = new System.Drawing.Point(23, 412);
+            this.cbEsPostre.Location = new System.Drawing.Point(23, 478);
             this.cbEsPostre.Margin = new System.Windows.Forms.Padding(2);
             this.cbEsPostre.Name = "cbEsPostre";
             this.cbEsPostre.Size = new System.Drawing.Size(118, 28);
@@ -161,6 +165,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // cbCategoria
             // 
             this.cbCategoria.BackColor = System.Drawing.Color.Teal;
+            this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCategoria.FormattingEnabled = true;
             this.cbCategoria.Location = new System.Drawing.Point(23, 220);
@@ -176,7 +181,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.cbDisponible.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbDisponible.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbDisponible.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.cbDisponible.Location = new System.Drawing.Point(23, 380);
+            this.cbDisponible.Location = new System.Drawing.Point(23, 446);
             this.cbDisponible.Margin = new System.Windows.Forms.Padding(2);
             this.cbDisponible.Name = "cbDisponible";
             this.cbDisponible.Size = new System.Drawing.Size(128, 28);
@@ -204,7 +209,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblTelefono.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTelefono.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTelefono.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTelefono.Location = new System.Drawing.Point(19, 262);
+            this.lblTelefono.Location = new System.Drawing.Point(19, 328);
             this.lblTelefono.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(170, 21);
@@ -358,13 +363,37 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             this.lblTipo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTipo.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTipo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTipo.Location = new System.Drawing.Point(826, 83);
+            this.lblTipo.Location = new System.Drawing.Point(826, 86);
             this.lblTipo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTipo.Name = "lblTipo";
             this.lblTipo.Size = new System.Drawing.Size(40, 21);
             this.lblTipo.TabIndex = 42;
             this.lblTipo.Tag = "";
             this.lblTipo.Text = "Tipo";
+            // 
+            // cbcTipoDetalle
+            // 
+            this.cbcTipoDetalle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbcTipoDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.cbcTipoDetalle.FormattingEnabled = true;
+            this.cbcTipoDetalle.Location = new System.Drawing.Point(23, 285);
+            this.cbcTipoDetalle.Name = "cbcTipoDetalle";
+            this.cbcTipoDetalle.Size = new System.Drawing.Size(200, 30);
+            this.cbcTipoDetalle.TabIndex = 48;
+            // 
+            // lblDetalle
+            // 
+            this.lblDetalle.AutoSize = true;
+            this.lblDetalle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblDetalle.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetalle.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDetalle.Location = new System.Drawing.Point(19, 261);
+            this.lblDetalle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDetalle.Name = "lblDetalle";
+            this.lblDetalle.Size = new System.Drawing.Size(40, 21);
+            this.lblDetalle.TabIndex = 49;
+            this.lblDetalle.Tag = "";
+            this.lblDetalle.Text = "Tipo";
             // 
             // FormGestionarProductos
             // 
@@ -417,5 +446,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private InputNombreFiltro filtroNombreProducto;
         private ControlesPersonalizados.Inputs.ComboBoxCustom cbcTipo;
         private System.Windows.Forms.Label lblTipo;
+        private ControlesPersonalizados.Inputs.ComboBoxCustom cbcTipoDetalle;
+        private System.Windows.Forms.Label lblDetalle;
     }
 }
