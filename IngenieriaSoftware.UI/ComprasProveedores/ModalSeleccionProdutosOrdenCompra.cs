@@ -168,7 +168,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            var formMDI = this.MdiParent as FormMDI;
             new FormGestionarProductos().AbrirFormModal();
 
             Actualizar();

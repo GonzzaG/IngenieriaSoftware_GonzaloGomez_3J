@@ -61,7 +61,7 @@
             this.dgvConFiltroProductos.Location = new System.Drawing.Point(51, 107);
             this.dgvConFiltroProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvConFiltroProductos.Name = "dgvConFiltroProductos";
-            this.dgvConFiltroProductos.Size = new System.Drawing.Size(762, 229);
+            this.dgvConFiltroProductos.Size = new System.Drawing.Size(1016, 282);
             this.dgvConFiltroProductos.TabIndex = 79;
             this.dgvConFiltroProductos.Tag = "1298";
             this.dgvConFiltroProductos.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
@@ -73,7 +73,7 @@
             this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnAgregarProducto.Location = new System.Drawing.Point(74, 566);
-            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
             this.btnAgregarProducto.Size = new System.Drawing.Size(197, 37);
             this.btnAgregarProducto.TabIndex = 1;

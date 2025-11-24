@@ -114,6 +114,7 @@
     <Compile Include="FacturaBLL.cs" />
     <Compile Include="Facturas\FacturaProveedorBusiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\CategoriaBussines.cs" />
+    <Compile Include="Gestion_Compras_Insumos\Inventario\EscasezBusiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\OrdenCompraBussiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoOrdenCompraBussiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoProveedorBussiness.cs" />

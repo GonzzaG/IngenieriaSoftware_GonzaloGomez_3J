@@ -1,5 +1,4 @@
 ﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
@@ -9,21 +8,18 @@ using IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos.Inventario;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 {
     public partial class FormGestionarInventario : Form, IActualizable
     {
         private List<Producto> _ListaProductos = new List<Producto>();
-
+        private OrdenCompraWithDetalles _OrdenCompraRecepcion;
         public FormGestionarInventario()
         {
             InitializeComponent();
@@ -39,7 +35,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         public void Actualizar()
         {
-            ListarProductosInventario();    
+            ListarProductosInventario();
         }
 
 
@@ -60,24 +56,32 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
                 dgvProductoInventario.CargarDatos(_ListaProductos);
 
-                dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Cantidad");
+                dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion");
 
                 dgvProductoInventario.RenombrarColumna("Categoria", "Categoria");
 
-                //que hacer cuadno se modifique la cantidad 
-                dgvProductoInventario.AddNumericCantidadColumna((elemento) =>
-                {
-                    var prod = elemento as Producto;
-                    if (prod != null && int.TryParse(prod.Cantidad.ToString(), out int nuevoValor))
-                        prod.Cantidad = nuevoValor;
-
-                });
+                AgregarColumnaCantidad();
+               
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 ex.RegistrarError("Gestion de Productos");
             }
+        }
+
+        private void AgregarColumnaCantidad()
+        {
+            //que hacer cuadno se modifique la cantidad 
+            dgvProductoInventario.AddNumericCantidadColumna((elemento) =>
+            {
+                var prod = elemento as Producto;
+                if (prod != null && int.TryParse(prod.Cantidad.ToString(), out int nuevoValor))
+                    prod.Cantidad = nuevoValor;
+
+            });
+
+            dgvProductoInventario.PermitirEdicionSoloEn("Cantidad");
         }
 
         private void FiltrarPorTipo(ref List<Producto> productos)
@@ -133,13 +137,13 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             try
             {
                 // validar que se selecciono un producto
-                var productoSeleccionado = dgvProductoInventario.ElementoSeleccionado;
+                var productoSeleccionado = (Producto)dgvProductoInventario.ElementoSeleccionado;
 
                 if (productoSeleccionado is null)
                     throw new Exception("Debe seleccionar un producto");
 
                 // Abrir modal donde se ingresera la cantidad de merma
-                new ModalMerma().AbrirFormModal(new Size(517,359));
+                new ModalMerma(productoSeleccionado).AbrirFormModal(new Size(517, 359));
                 // si se acepta se registra merma y se descuenta del stock
 
                 //Actualizar
@@ -161,23 +165,20 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         {
             try
             {
-                if(btnRecibirProductos.Text.Equals("Recibir Productos", StringComparison.InvariantCulture))
+                if (btnRecibirProductos.Text.Equals("Recibir Productos", StringComparison.InvariantCulture))
                 {
                     RecibirOrdenCompra();
                 }
                 else
                 {
-                    // Finalizacion de recepcion orden compra
+                    var dialog = MessageBox.Show("¿Está seguro que desea finalizar la recepción de los productos seleccionados?", "Confirmar Recepción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.No)
+                        return;
+                    // Marcar la orden de compra como recibida
+                    new OrdenCompraBussiness().SetOrdenCompraRecibida(_OrdenCompraRecepcion.IdOrdenCompra);
 
-                    // Se debe de modificar el estado de la orden marcandola como recibida, para que no aparezca mas en la lista
-
-                    // Se invisibiliza nuevamente la grilla label de orden y se cambia n ombre de boton
-
-                    btnRecibirProductos.Text = "Recibir Productos";
-                    btnAlertaEscasez.Visible = true;
-                    btnRegistrarMerma.Visible = true;
-                    lblDetalleOrden.Visible = false;
-                    dgvOrdenDetalle.Visible = false;
+                    // Limpiamos la grilla y orden
+                    DesactivarModoRecepcionOrden();
                 }
 
 
@@ -188,6 +189,14 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void DesactivarModoRecepcionOrden()
+        {
+            //dgvOrdenDetalle.Limpiar();
+            _OrdenCompraRecepcion = null;
+            // Desactivar modo de recepcion de productos
+            ModoRecepcionProducto(false);
         }
 
         private void RecibirOrdenCompra()
@@ -204,33 +213,49 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void AbrirSeleccionOrdenModal()
         {
-            new FormListaOrdenCompra(CargarDetallesOrden).AbrirFormModal(new Size(1680, 800));
+            new FormListaOrdenCompra(CargarDetallesOrden)
+                .AbrirFormModal(new Size(1440,600));
         }
 
         private void CargarDetallesOrden(string numOrden)
         {
+            #region Validacion
             if (string.IsNullOrEmpty(numOrden))
                 throw new Exception("No se pudo obtener los detalles de la orden de compra");
-
+            #endregion
             // Obtenemos la orden con detalles por su numero
-            var ordenDetalles = new OrdenCompraBussiness().GetOrdenCompraByNumero(numOrden);
-
-            if(ordenDetalles.Detalles.Count <= 0)
+            _OrdenCompraRecepcion = new OrdenCompraBussiness().GetOrdenCompraByNumero(numOrden);
+            #region Validacion
+            if (_OrdenCompraRecepcion.Detalles.Count <= 0)
                 throw new Exception("No se pudo obtener los detalles de la orden de compra");
             // Cargar los detalles en la grilla
-            dgvOrdenDetalle.CargarDatos(ordenDetalles.Detalles);
+            #endregion
 
+            dgvOrdenDetalle.CargarDatos(_OrdenCompraRecepcion.Detalles);
+
+            PrepararRecepcionProductosOrden();
+        }
+
+        private void PrepararRecepcionProductosOrden()
+        {
+            ModoRecepcionProducto(true);
+            //todo ocultar columnas innecesarias
+            dgvOrdenDetalle.OcultarColumnas("IdDetalle", "IdOrdenCompra", "IdProducto", "PrecioUnitarioEsperado", "DescuentoLinea", "NotasLinea", "Subtotal");
+        }
+
+        private void ModoRecepcionProducto(bool activado)
+        {
             // Visibilizamos la grilla y label
-            dgvOrdenDetalle.Visible = true;
-            lblDetalleOrden.Visible = true;
+            dgvOrdenDetalle.Visible = activado;
+            lblDetalleOrden.Visible = activado;
 
             // Deshabilitamos otros botones hasta terminar con la recepcion
-            btnAlertaEscasez.Visible = false;
-            btnRegistrarMerma.Visible = false;
-            // Colocamos el boton de recibir producto como finalizar recepcion
-            btnRecibirProductos.Text = "Finalizar recepcion";
-            //todo ocultar columnas innecesarias
-            dgvOrdenDetalle.OcultarColumnas("IdDetalle", "IdOrdenCompra","IdProducto","PrecioUnitarioEsperado","DescuentoLinea","NotasLinea","Subtotal");
+            btnAlertaEscasez.Visible = !activado;
+            btnRegistrarMerma.Visible = !activado;
+            btnCancelarRecepcion.Visible = activado;
+
+            // Colocamos el texto correspondiente al boton de recibir productos 
+            btnRecibirProductos.Text = activado ? "Confirmar Recepción" : "Recibir Productos";
         }
 
         /// <summary>
@@ -250,9 +275,35 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 // Abrir modal donde se ingresera la cantidad sugerida para poder comprar
                 new ModalEscasez().AbrirFormModal(new Size(705, 359));
 
-                // se acepta y se envia la alerta
-
+                
                 //Actualizar
+                Actualizar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnCancelarRecepcion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Cancelar recepcion de productos
+                DesactivarModoRecepcionOrden();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                new FormGestionarProductos().AbrirFormModal(new Size(1500, 720));
+
                 Actualizar();
             }
             catch (Exception ex)

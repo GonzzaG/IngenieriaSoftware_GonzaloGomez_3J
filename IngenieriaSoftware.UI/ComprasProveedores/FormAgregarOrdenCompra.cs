@@ -272,7 +272,6 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             //  Guardamos le proveeodor seleccionado para que cuando se renderice le formulario se vuelva a oclocar el mismo
             GuardarProveedorSeleccionado();
 
-            var formMDI = this.MdiParent as FormMDI;
             new ModalSeleccionProdutosOrdenCompra(_ProductosOrdenCompra).AbrirFormModal(new Size(954, 722));
 
             Actualizar();

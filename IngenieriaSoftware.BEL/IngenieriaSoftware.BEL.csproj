@@ -66,6 +66,7 @@
     <Compile Include="FacturaProveedor\FacturaProveedor.cs" />
     <Compile Include="FacturaProveedor\FacturaProveedorDetalle.cs" />
     <Compile Include="Gestion_Compras_Insumos\Categoria.cs" />
+    <Compile Include="Gestion_Compras_Insumos\EscasezModel.cs" />
     <Compile Include="Idiomas\Etiqueta.cs" />
     <Compile Include="Idiomas\Idioma.cs" />
     <Compile Include="Idiomas\Traduccion.cs" />

@@ -13,6 +13,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
 {
     public class OrdenCompraBussiness
     {
+
         public void SetOrdenCompraAceptada(int idOrdenCompra)
         {
             idOrdenCompra.SetOrdenCompraAceptada(SessionManager.GetInstance.ToString());

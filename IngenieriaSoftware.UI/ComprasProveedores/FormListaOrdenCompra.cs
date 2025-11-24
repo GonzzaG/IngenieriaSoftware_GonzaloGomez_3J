@@ -9,6 +9,7 @@ using IngenieriaSoftware.UI.ComprasProveedores.Facturas;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.ComprasProveedores
@@ -31,11 +32,13 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
             InitializeComponent();
             Inicializar();
-            Actualizar();
 
             OrdenCompraSeleccionada = oc;
             btnAgregar.Text = "Seleccionar";
-
+            cbEstado.Enabled = false;
+            cbEstado.SelectedIndex = (int)OrdenCompraEstadoEnum.Recibida;
+            grillaConFiltros.SetCustomSize(new Size(1040, 250));
+            BusquedaFiltrada();
         }
 
 
@@ -97,6 +100,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
             cbEstado.DisplayMember = "Nombre";
             cbEstado.ValueMember = "Id";
+
         }
 
         private static List<SelectListSimple> GetOrdenesCompraEstados()
@@ -139,35 +143,36 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             {
                 var ordenSeleccionada = (OrdenCompraGetListaModel)grillaConFiltros.ElementoSeleccionado;
 
-                if(ordenSeleccionada != null && !string.IsNullOrEmpty(ordenSeleccionada.NumOrdenCompra))
+                if (ordenSeleccionada != null && !string.IsNullOrEmpty(ordenSeleccionada.NumOrdenCompra))
                 {
                     OrdenCompraSeleccionada.Invoke(ordenSeleccionada.NumOrdenCompra);
                     this.Close();
                 }
             }
-           
+
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtCodigo.Text = string.Empty;
             dtpFechaDesde.Value = DateTime.Now;
-            cbEstado.SelectedIndex = 0;
+
+            //  Metodo que valida si se el formulario cumple su funcionamiento normal o solo es utilizado para busqueda
+            if (NoEsBusqueda())
+                cbEstado.SelectedIndex = 0;
             grillaConFiltros.LimpiarControles();
+        }
+
+        private bool NoEsBusqueda()
+        {
+            return cbEstado.Text.Equals("Seleccionar");
         }
 
         private void btnBuscar_Click_1(object sender, EventArgs e)
         {
             try
             {
-                var filtro = new OrdenCompraQuery
-                {
-                    NumOrdenCompra = txtCodigo.Text,
-                    FechaDesde = dtpFechaDesde.Value,
-                    IdEstado = int.Parse(cbEstado.SelectedValue.ToString()),
-                };
-
-                grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
+                BusquedaFiltrada();
 
                 //  Si el estado seleccionado es Aprobado, habilitaremos la opcion de generar facturas 
                 if (cbEstado.Text.Equals(OrdenCompraEstadoEnum.Aprobada.ToString()))
@@ -180,6 +185,18 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void BusquedaFiltrada()
+        {
+            var filtro = new OrdenCompraQuery
+            {
+                NumOrdenCompra = txtCodigo.Text,
+                FechaDesde = dtpFechaDesde.Value,
+                IdEstado = int.Parse(cbEstado.SelectedValue.ToString()),
+            };
+
+            grillaConFiltros.CargarDatos(new OrdenCompraBussiness().GetOrdenesCompra(filtro));
         }
 
         /// <summary>
@@ -208,21 +225,18 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             }
         }
 
-        private void cbEstado_SelectedIndexChanged(object sender, EventArgs e)
+        private void FormListaOrdenCompra_Scroll(object sender, ScrollEventArgs e)
         {
-            if (cbEstado.SelectedIndex == -1)
+            try
             {
-                cbEstado.SelectedIndex = 0;
-            }
-        }
+                this.AutoScrollPosition = new Point(0, 0);
+                this.ScrollControlIntoView(null);
 
-        private void cbEstado_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(cbEstado.Text))
+            }
+            catch (Exception ex)
             {
-                cbEstado.SelectedIndex = 0;
+                MessageBox.Show(ex.Message);
             }
-
         }
     }
 }

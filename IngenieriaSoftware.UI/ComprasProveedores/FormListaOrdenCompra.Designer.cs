@@ -208,10 +208,10 @@
             // grillaConFiltros
             // 
             this.grillaConFiltros.BackColor = System.Drawing.Color.Transparent;
-            this.grillaConFiltros.Location = new System.Drawing.Point(148, 308);
+            this.grillaConFiltros.Location = new System.Drawing.Point(148, 302);
             this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grillaConFiltros.Name = "grillaConFiltros";
-            this.grillaConFiltros.Size = new System.Drawing.Size(1404, 350);
+            this.grillaConFiltros.Size = new System.Drawing.Size(1040, 350);
             this.grillaConFiltros.TabIndex = 35;
             this.grillaConFiltros.Tag = "";
             this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
@@ -228,6 +228,7 @@
             this.Name = "FormListaOrdenCompra";
             this.Tag = "";
             this.Text = "Seleccionar";
+            this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.FormListaOrdenCompra_Scroll);
             this.gBListaOrdenCompra.ResumeLayout(false);
             this.gBListaOrdenCompra.PerformLayout();
             this.ResumeLayout(false);

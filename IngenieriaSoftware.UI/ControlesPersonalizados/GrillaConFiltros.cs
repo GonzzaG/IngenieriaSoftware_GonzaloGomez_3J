@@ -30,7 +30,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             }
         }
         private ModoTamanoGrilla tamanoGrilla = ModoTamanoGrilla.Mediano;
-
+        private Size CustomSize;
         public int CantidadElementos
         {
             get => TotalElementos();
@@ -57,7 +57,19 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             InicializarFiltros();
         }
 
+        
+
         #region Metodos
+
+        public void SetCustomSize(Size size)
+        {
+            if(size == null || size == Size.Empty)
+                throw new ArgumentException("El tamaño personalizado no puede ser nulo o vacío.");
+
+            CustomSize = size;
+            AplicarTamanoGrilla();
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -70,10 +82,16 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             dgv = new DataGridView();
             datosOriginales.Clear();
             paginaActual = 1;
-        }   
+        }
 
         private void AplicarTamanoGrilla()
         {
+            if (CustomSize != null && CustomSize != Size.Empty)
+            {
+                this.Size = CustomSize;
+                dgv.Size = new Size(CustomSize.Width - 4, CustomSize.Height - 4);
+                return;
+            }
             Size tamanoGrilla;
             Size tamanoControl;
             Size tamanoMensaje;
@@ -431,7 +449,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             //Celeste claro por defecto
             col.DefaultCellStyle.BackColor = Color.FromArgb(200, 220, 240);
             col.DefaultCellStyle.ForeColor = Color.Black;
-            col.DefaultCellStyle.Format = "N2"; 
+            col.DefaultCellStyle.Format = "N2";
 
             dgv.Columns.Add(col);
             return col;

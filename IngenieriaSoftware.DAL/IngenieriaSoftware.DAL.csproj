@@ -70,6 +70,7 @@
     <Compile Include="FacturaProveedores\FacturaProveedorDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\CategoriaDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\OrdenCompraDataAccess.cs" />
+    <Compile Include="Gestion_Compras_Insumos\ProductoInventario\EscasezDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoOrdenCompraDataAccess.cs" />
     <Compile Include="Interfaces\IDataAccessEntity.cs" />
     <Compile Include="ListSimpleDataAccess\ListSimpleDataAccess.cs" />
@@ -136,6 +137,8 @@
     <Analyzer Include="..\packages\MSTest.Analyzers.3.8.3\analyzers\dotnet\cs\MSTest.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\MSTest.Analyzers.3.8.3\analyzers\dotnet\cs\MSTest.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="EntityDAL\NewFolder1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

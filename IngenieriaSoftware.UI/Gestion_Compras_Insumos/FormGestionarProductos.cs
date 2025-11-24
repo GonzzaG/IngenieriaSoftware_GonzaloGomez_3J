@@ -100,11 +100,11 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
         private void ListarCategorias()
         {
-            cbCategoria.Items.Clear();  
+            cbCategoria.Items.Clear();
             var categorias = new List<Categoria>() { new Categoria { Id = 0, Nombre = "Seleccione..." } };
             categorias.AddRange(new CategoriaBussines().GetAll());
 
-            cbCategoria.DataSource = categorias;    
+            cbCategoria.DataSource = categorias;
         }
 
         void IActualizable.Actualizar()
@@ -126,6 +126,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 oCategoria = cbCategoria.Text == string.Empty ?
                                throw new Exception("Debe seleccionar una categoria") :
                                new CategoriaBussines().GetCategoriaByNombre(cbCategoria.Text),
+                Tipo = cbcTipo.Text == string.Empty ?
+                               throw new Exception("Debe seleccionar un tip") :
+                               cbcTipoDetalle.Text,
                 TiempoPreparacion = (int)nudTiempoPreparacion.Value,
                 Disponible = cbDisponible.Checked,
                 EsPostre = cbEsPostre.Checked,
@@ -226,11 +229,11 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             cbCategoria.SelectedItem = cbCategoria.Items
                                         .Cast<Categoria>()
                                         .FirstOrDefault(c => c.Nombre == producto.Categoria.ToString());
-            
+
 
 
             cbcTipoDetalle.SelectedItem = cbcTipoDetalle.Items.Cast<string>().FirstOrDefault(c => c == producto.Tipo);
-            
+
             //cbcTipo.Text = producto.Tipo.ToString();
             nudTiempoPreparacion.Value = producto.TiempoPreparacion;
             cbDisponible.Checked = producto.Disponible;
