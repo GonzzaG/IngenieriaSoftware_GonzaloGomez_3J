@@ -1,5 +1,6 @@
 ﻿using IngenieriaSoftware.BEL;
 using IngenieriaSoftware.BEL.Constantes;
+using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -49,6 +50,21 @@ namespace IngenieriaSoftware.DAL.Mapper
                 int categoria = row["categoria"] == DBNull.Value ? 0 : (int)row["categoria"];
                 producto.Categoria = (TipoProducto.Tipo)categoria;
                 producto.Tipo = row["Tipo"].ToString();
+
+                productos.Add(producto);
+            }
+            return productos;
+        }
+
+        public List<ProductoCategorizacion> MapearProductosCategorizacionDesdeDataSet(DataSet pDs)
+        {
+            List<ProductoCategorizacion> productos = new List<ProductoCategorizacion>();
+
+            foreach (DataRow row in pDs.Tables[0].Rows)
+            {
+                ProductoCategorizacion producto = new ProductoCategorizacion();
+                producto.IdProducto = (int)row["producto_id"];
+                producto.Nombre = row["nombre"].ToString();
 
                 productos.Add(producto);
             }

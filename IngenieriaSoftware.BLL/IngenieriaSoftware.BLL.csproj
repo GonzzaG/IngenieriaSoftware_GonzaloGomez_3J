@@ -117,6 +117,7 @@
     <Compile Include="Gestion_Compras_Insumos\Inventario\EscasezBusiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\Inventario\MermaBusiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\Inventario\ProductoInventarioBusiness.cs" />
+    <Compile Include="Gestion_Compras_Insumos\Inventario\ProductoVentaInventarioBusiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\OrdenCompraBussiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoOrdenCompraBussiness.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoProveedorBussiness.cs" />

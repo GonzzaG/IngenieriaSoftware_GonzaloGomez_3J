@@ -198,7 +198,7 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             dgv.DataSource = paginados;
             lblPagina.Text = $"Página {paginaActual}";
 
-            dgv.SetColumnasReadonly();
+            //dgv.SetColumnasReadonly();
         }
 
         private void CambiarPagina(int delta)
@@ -238,17 +238,21 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
                 dgv.Visible = false;
                 datosOriginales = new List<object>();
                 dgv.DataSource = null;
-                //dgv = new DataGridView();
                 return;
             }
 
             dgv.BringToFront();
             panelNoResultadoProducto.MostrarNoResultado(false);
             datosOriginales = datos.Cast<object>().ToList();
+
             paginaActual = 1;
             AplicarFiltros();
+
+            SetAllColumnsReadOnly();
+
             dgv.Visible = true;
         }
+
 
         public void CambiarTamanoPagina(int nuevoTamano)
         {
@@ -679,6 +683,19 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         {
             return (T)dgv.Rows[row].DataBoundItem;
         }
+
+        public void ResetearPaginacion()
+        {
+            paginaActual = 1;
+            AplicarFiltros();
+        }
+
+        private void SetAllColumnsReadOnly()
+        {
+            foreach (DataGridViewColumn col in dgv.Columns)
+                col.ReadOnly = true;
+        }
+
 
     }
 }

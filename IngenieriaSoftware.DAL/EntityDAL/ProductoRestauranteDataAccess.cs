@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BEL.QueryModels;
 using IngenieriaSoftware.DAL.Interfaces;
 using IngenieriaSoftware.DAL.Mapper;
@@ -199,6 +200,8 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
+        #region Productos Inventario
+
 
         public List<Producto> GetAllProductosInventario()
         {
@@ -231,5 +234,74 @@ namespace IngenieriaSoftware.DAL.EntityDAL
                 throw ex;
             }
         }
+
+        #endregion
+
+        #region Productos Categorizacion
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoVenta()
+        {
+            try
+            {
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosCategorizacion", null);
+                return new ProductoMapper().MapearProductosCategorizacionDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoVentaPorNombre(string nombre)
+        {
+            try
+            {
+                var parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Nombre", nombre)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosCategorizacionPorNombre", parametros);
+                return new ProductoMapper().MapearProductosCategorizacionDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoInventario()
+        {
+            try
+            {
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosCategorizacionInventario", null);
+                return new ProductoMapper().MapearProductosCategorizacionDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoInventarioPorNombre(string nombre)
+        {
+            try
+            {
+                var parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Nombre", nombre)
+                };
+
+                DataSet mDs = _dao.ExecuteStoredProcedure("sp_ObtenerTodosLosProductosCategorizacionInventarioPorNombre", parametros);
+                return new ProductoMapper().MapearProductosCategorizacionDesdeDataSet(mDs);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
     }
 }

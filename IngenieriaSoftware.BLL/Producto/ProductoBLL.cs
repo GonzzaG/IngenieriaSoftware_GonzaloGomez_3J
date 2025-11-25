@@ -14,6 +14,29 @@ namespace IngenieriaSoftware.BLL
         public ProductoBLL()
         { }
 
+        #region Obtener productos categorizacion
+
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoVenta()
+        {
+            return new ProductoRestauranteDataAccess().GetAllProductosCategorizacionTipoVenta();
+        }
+
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoVentaPorNombre(string nombre)
+        {
+            return new ProductoRestauranteDataAccess().GetAllProductosCategorizacionTipoVentaPorNombre(nombre);
+        }
+
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoInventario()
+        {
+            return new ProductoRestauranteDataAccess().GetAllProductosCategorizacionTipoInventario();
+        }
+
+        public List<ProductoCategorizacion> GetAllProductosCategorizacionTipoInventarioPorNombre(string nombre)
+        {
+            return new ProductoRestauranteDataAccess().GetAllProductosCategorizacionTipoInventarioPorNombre(nombre);
+        }
+        #endregion
+
         #region Obtener productos inventario
 
         public List<Producto> GetProductosInventario()

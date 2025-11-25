@@ -35,13 +35,13 @@
             this.btnAlertaEscasez = new System.Windows.Forms.Button();
             this.btnRecibirProductos = new System.Windows.Forms.Button();
             this.lblDetalleOrden = new System.Windows.Forms.Label();
-            this.btnCancelarRecepcion = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregarProducto = new System.Windows.Forms.Button();
+            this.btnGuardarCantidades = new System.Windows.Forms.Button();
             this.dgvOrdenDetalle = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.filtroNombreProducto = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
             this.cbcTipo = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.dgvProductoInventario = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
-            this.btnSumarCantidadAlSeleccionado = new System.Windows.Forms.Button();
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,25 +147,25 @@
             this.lblDetalleOrden.Text = "Detalle Orden ";
             this.lblDetalleOrden.Visible = false;
             // 
-            // btnCancelarRecepcion
+            // btnCancelar
             // 
-            this.btnCancelarRecepcion.BackColor = System.Drawing.Color.Maroon;
-            this.btnCancelarRecepcion.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelarRecepcion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnCancelarRecepcion.Location = new System.Drawing.Point(768, 170);
-            this.btnCancelarRecepcion.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancelarRecepcion.Name = "btnCancelarRecepcion";
-            this.btnCancelarRecepcion.Size = new System.Drawing.Size(137, 37);
-            this.btnCancelarRecepcion.TabIndex = 56;
-            this.btnCancelarRecepcion.Tag = "";
-            this.btnCancelarRecepcion.Text = "Cancelar";
-            this.btnCancelarRecepcion.UseVisualStyleBackColor = false;
-            this.btnCancelarRecepcion.Visible = false;
-            this.btnCancelarRecepcion.Click += new System.EventHandler(this.btnCancelarRecepcion_Click);
+            this.btnCancelar.BackColor = System.Drawing.Color.Maroon;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCancelar.Location = new System.Drawing.Point(768, 170);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(137, 37);
+            this.btnCancelar.TabIndex = 56;
+            this.btnCancelar.Tag = "";
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Visible = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelarRecepcion_Click);
             // 
             // btnAgregarProducto
             // 
-            this.btnAgregarProducto.BackColor = System.Drawing.Color.Teal;
+            this.btnAgregarProducto.BackColor = System.Drawing.Color.CadetBlue;
             this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnAgregarProducto.Location = new System.Drawing.Point(138, 599);
@@ -178,11 +178,26 @@
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
             this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
             // 
+            // btnGuardarCantidades
+            // 
+            this.btnGuardarCantidades.BackColor = System.Drawing.Color.Teal;
+            this.btnGuardarCantidades.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarCantidades.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGuardarCantidades.Location = new System.Drawing.Point(574, 599);
+            this.btnGuardarCantidades.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGuardarCantidades.Name = "btnGuardarCantidades";
+            this.btnGuardarCantidades.Size = new System.Drawing.Size(137, 57);
+            this.btnGuardarCantidades.TabIndex = 59;
+            this.btnGuardarCantidades.Tag = "";
+            this.btnGuardarCantidades.Text = "Actualizar cantidades";
+            this.btnGuardarCantidades.UseVisualStyleBackColor = false;
+            this.btnGuardarCantidades.Click += new System.EventHandler(this.btnGuardarCantidades_Click);
+            // 
             // dgvOrdenDetalle
             // 
             this.dgvOrdenDetalle.BackColor = System.Drawing.Color.Transparent;
             this.dgvOrdenDetalle.Location = new System.Drawing.Point(1203, 252);
-            this.dgvOrdenDetalle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvOrdenDetalle.Margin = new System.Windows.Forms.Padding(2);
             this.dgvOrdenDetalle.Name = "dgvOrdenDetalle";
             this.dgvOrdenDetalle.Size = new System.Drawing.Size(678, 282);
             this.dgvOrdenDetalle.TabIndex = 54;
@@ -215,27 +230,11 @@
             // 
             this.dgvProductoInventario.BackColor = System.Drawing.Color.Transparent;
             this.dgvProductoInventario.Location = new System.Drawing.Point(138, 252);
-            this.dgvProductoInventario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvProductoInventario.Margin = new System.Windows.Forms.Padding(2);
             this.dgvProductoInventario.Name = "dgvProductoInventario";
             this.dgvProductoInventario.Size = new System.Drawing.Size(1016, 282);
             this.dgvProductoInventario.TabIndex = 0;
             this.dgvProductoInventario.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
-            // 
-            // btnSumarCantidadAlSeleccionado
-            // 
-            this.btnSumarCantidadAlSeleccionado.BackColor = System.Drawing.Color.Teal;
-            this.btnSumarCantidadAlSeleccionado.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSumarCantidadAlSeleccionado.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnSumarCantidadAlSeleccionado.Location = new System.Drawing.Point(983, 211);
-            this.btnSumarCantidadAlSeleccionado.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSumarCantidadAlSeleccionado.Name = "btnSumarCantidadAlSeleccionado";
-            this.btnSumarCantidadAlSeleccionado.Size = new System.Drawing.Size(131, 37);
-            this.btnSumarCantidadAlSeleccionado.TabIndex = 59;
-            this.btnSumarCantidadAlSeleccionado.Tag = "";
-            this.btnSumarCantidadAlSeleccionado.Text = "Sumar cantidad";
-            this.btnSumarCantidadAlSeleccionado.UseVisualStyleBackColor = false;
-            this.btnSumarCantidadAlSeleccionado.Visible = false;
-            this.btnSumarCantidadAlSeleccionado.Click += new System.EventHandler(this.btnSumarCantidadAlSeleccionado_Click);
             // 
             // FormGestionarInventario
             // 
@@ -243,9 +242,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1525, 744);
-            this.Controls.Add(this.btnSumarCantidadAlSeleccionado);
+            this.Controls.Add(this.btnGuardarCantidades);
             this.Controls.Add(this.btnAgregarProducto);
-            this.Controls.Add(this.btnCancelarRecepcion);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblDetalleOrden);
             this.Controls.Add(this.dgvOrdenDetalle);
             this.Controls.Add(this.btnRegistrarMerma);
@@ -276,8 +275,8 @@
         private System.Windows.Forms.Button btnRecibirProductos;
         private ControlesPersonalizados.DataGridViewConFiltros dgvOrdenDetalle;
         private System.Windows.Forms.Label lblDetalleOrden;
-        private System.Windows.Forms.Button btnCancelarRecepcion;
+        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAgregarProducto;
-        private System.Windows.Forms.Button btnSumarCantidadAlSeleccionado;
+        private System.Windows.Forms.Button btnGuardarCantidades;
     }
 }

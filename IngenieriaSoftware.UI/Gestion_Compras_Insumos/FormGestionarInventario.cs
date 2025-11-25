@@ -25,10 +25,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
         private List<ProductoInventario> _ListaOriginal = new List<ProductoInventario>();
         private Dictionary<int, int> _ValoresOriginales = new Dictionary<int, int>();
 
-        private object valorOriginal;   
+        private object valorOriginal;
         private OrdenCompraWithDetalles _OrdenCompraRecepcion;
-        // Guarda SOLO los cambios realizados por el usuario
-private Dictionary<int, int> _CambiosLocales = new();
 
         public FormGestionarInventario()
         {
@@ -71,36 +69,43 @@ private Dictionary<int, int> _CambiosLocales = new();
                     productos = new ProductoBLL().GetProductosInventarioPorNombre(filtroNombreProducto.Texto);
 
                 // Paso 2 → convertir a ProductoInventario
-                _ListaProductos = productos
-                    .Select(p => MapToInventario(p))
-                    .ToList();
+                var listaNueva = productos.Select(p => MapToInventario(p)).ToList();
 
                 // Paso 3 → filtrar por tipo
-                FiltrarPorTipo(ref _ListaProductos);
+                FiltrarPorTipo(ref listaNueva);
 
-                // Paso 4 → Clonar lista original
-                _ListaOriginal = _ListaProductos
-                    .Select(p => p.Clone())
-                    .ToList();
-
-                // *** NUEVO PASO → Guardar valores originales de cantidad ***
-                _ValoresOriginales.Clear();
-                foreach (var p in _ListaOriginal)
+                // combinar cambios locales con los datos nuevos
+                foreach (var prodNuevo in listaNueva)
                 {
-                    _ValoresOriginales[p.Id] = p.Cantidad is null ? 0 : (int)p.Cantidad;
+                    var prodViejo = _ListaProductos.FirstOrDefault(x => x.Id == prodNuevo.Id);
+
+                    if (prodViejo != null && prodViejo.Modificado)
+                    {
+                        // Mantener cantidad modificada
+                        prodNuevo.Cantidad = prodViejo.Cantidad;
+                        prodNuevo.Modificado = true;
+                    }
                 }
 
-                // Paso 5 → cargar grilla
+                // Reemplazar la lista actual con la lista combinada
+                _ListaProductos = listaNueva;
+
+                // Paso 4 → Clonar lista original (estado inicial después del filtro)
+                _ListaOriginal = _ListaProductos.Select(p => p.Clone()).ToList();
+
+                // Paso 5 → guardar cantidades "originales" para detectar cambios al editar
+                _ValoresOriginales.Clear();
+                foreach (var p in _ListaOriginal)
+                    _ValoresOriginales[p.Id] = p.Cantidad is null ? 0 : (int)p.Cantidad;
+
+                // Paso 6 → cargar grilla
                 dgvProductoInventario.CargarDatos(_ListaProductos);
 
-                // Paso 6 → columnas
-                dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion", "Disponible");
-                dgvProductoInventario.RenombrarColumna("Categoria", "Categoria");
-                AgregarColumnaCantidad();
+                // Paso 7 → columnas
+                ConfiguraraColumnas();
 
-                // Paso 7 → conectar evento una sola vez
-                dgvProductoInventario.CeldaEditada -= OnCeldaEditada;
-                dgvProductoInventario.CeldaEditada += OnCeldaEditada;
+                // Paso 8 → conectar evento una sola vez
+                SuscribirEventos();
             }
             catch (Exception ex)
             {
@@ -109,6 +114,20 @@ private Dictionary<int, int> _CambiosLocales = new();
             }
         }
 
+        private void SuscribirEventos()
+        {
+            dgvProductoInventario.CeldaEditada -= OnCeldaEditada;
+            dgvProductoInventario.CeldaEditada += OnCeldaEditada;
+        }
+
+        private void ConfiguraraColumnas()
+        {
+            dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion", "Disponible");
+            dgvProductoInventario.RenombrarColumna("Categoria", "Categoria");
+            AgregarColumnaCantidad();
+        }
+
+
         /// <summary>
         /// Refresca la grilla usando la lista temporal actual (sin ir a BD).
         /// Útil para cancelar cambios o para refrescar vista tras modificaciones en memoria.
@@ -116,7 +135,7 @@ private Dictionary<int, int> _CambiosLocales = new();
         private void RefrescarGrillaInventario()
         {
             dgvProductoInventario.CargarDatos(_ListaProductos);
-            dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion");
+            dgvProductoInventario.OcultarColumnas("oCategoria", "Id", "Precio", "EsPostre", "TiempoPreparacion", "Disponible");
             dgvProductoInventario.RenombrarColumna("Categoria", "Categoria");
             AgregarColumnaCantidad();
         }
@@ -239,43 +258,57 @@ private Dictionary<int, int> _CambiosLocales = new();
             try
             {
                 if (btnRecibirProductos.Text.Equals("Recibir Productos", StringComparison.InvariantCulture))
-                {
                     RecibirOrdenCompra();
-                }
                 else
-                {
-                    var dialog = MessageBox.Show("¿Está seguro que desea finalizar la recepción de los productos seleccionados?", "Confirmar Recepción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dialog == DialogResult.No)
-                        return;
-
-                    var modificados = _ListaProductos.Where(p => p.Modificado).ToList();
-
-                    if (modificados.Count == 0)
-                    {
-                        MessageBox.Show("No hay cambios para guardar.");
-                        return;
-                    }
-
-                    // Guardar las cantidades modificadas (BLL)
-                    new ProductoInventarioBusiness().UpdateCantidadInventario(modificados);
-
-                    // Marcar la orden de compra como recibida
-                    new OrdenCompraBussiness().SetOrdenCompraRecibida(_OrdenCompraRecepcion.IdOrdenCompra);
-
-                    MessageBox.Show("Cambios guardados correctamente.");
-
-                    // Recargar desde BD para reflejar estado real
-                    CargarProductosInventario();
-
-                    // Limpiar / desactivar modo de recepción
-                    DesactivarModoRecepcionOrden();
-                }
+                    ActualizarModificados();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void ActualizarModificados()
+        {
+            var dialog = MessageBox.Show(
+                "¿Está seguro que desea finalizar la recepción de los productos seleccionados?",
+                "Confirmar Recepción",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (dialog == DialogResult.No)
+                return;
+
+            var modificados = _ListaProductos.Where(p => p.Modificado).ToList();
+
+            if (modificados.Count == 0)
+                throw new Exception("No hay cambios para guardar.");
+
+            // Guardar en BD
+            new ProductoInventarioBusiness().UpdateCantidadInventario(modificados);
+
+            if (_OrdenCompraRecepcion is not null && _OrdenCompraRecepcion.IdOrdenCompra > 0)
+                new OrdenCompraBussiness().SetOrdenCompraRegistrada(_OrdenCompraRecepcion.IdOrdenCompra);
+
+            MessageBox.Show("Cambios guardados correctamente.");
+
+            // Recargar desde BD
+            CargarProductosInventario();
+
+            // limpiar marcas de modificado
+            _ListaProductos.ForEach(p => p.Modificado = false);
+
+            //  Opcional: resetear paginación si querés arrancar desde página 1
+            dgvProductoInventario.ResetearPaginacion();
+
+            // Reaplicar columnas editables
+            AgregarColumnaCantidad();
+
+            // Salir del modo recepción
+            DesactivarModoRecepcionOrden();
+        }
+
 
         private void DesactivarModoRecepcionOrden()
         {
@@ -328,12 +361,12 @@ private Dictionary<int, int> _CambiosLocales = new();
             // Visibilizamos la grilla y label
             dgvOrdenDetalle.Visible = activado;
             lblDetalleOrden.Visible = activado;
+            btnCancelar.Visible = activado;
 
             // Deshabilitamos/mostramos otros botones hasta terminar con la recepcion
             btnAlertaEscasez.Visible = !activado;
             btnRegistrarMerma.Visible = !activado;
-            btnCancelarRecepcion.Visible = activado;
-            btnSumarCantidadAlSeleccionado.Visible = activado;
+            btnGuardarCantidades.Visible = !activado;
 
             // Colocamos el texto correspondiente al boton de recibir productos 
             btnRecibirProductos.Text = activado ? "Confirmar Recepción" : "Recibir Productos";
@@ -399,22 +432,11 @@ private Dictionary<int, int> _CambiosLocales = new();
             }
         }
 
-        private void btnSumarCantidadAlSeleccionado_Click(object sender, EventArgs e)
+        private void btnGuardarCantidades_Click(object sender, EventArgs e)
         {
             try
             {
-                var prodInventarioSeleccionado = dgvProductoInventario.ElementoSeleccionado as ProductoInventario;
-                var prodDetalleSeleccionado = dgvOrdenDetalle.ElementoSeleccionado as OrdenDeCompraDetalleAprobacionModel;
-
-                if (prodInventarioSeleccionado is null || prodDetalleSeleccionado is null)
-                    throw new Exception("Debe seleccionar un producto del inventario y uno del detalle para sumar la cantidad");
-
-                // Modificamos la cantidad localmente y lo marcamos como modificado
-                prodInventarioSeleccionado.Cantidad += prodDetalleSeleccionado.Cantidad;
-                prodInventarioSeleccionado.Modificado = true;
-
-                // Refrescar la vista sin recargar desde BD
-                RefrescarGrillaInventario();
+                ActualizarModificados();
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@ using IngenieriaSoftware.Servicios.Interfaces;
 using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.ComprasProveedores;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
+using IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categorizar_productos;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -746,6 +747,25 @@ namespace IngenieriaSoftware.UI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void categorizarPrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void relacionarConsumoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Metodo que abre el formulario para relacionar el consumo de productos de venta con los productos del inventario
+            AbrirFormHijo(new FormRelacionarConsumoProductos());
+
+
+        }
+
+        private void gestionCategoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Metodo que abre el formulario para gestionar las categorias de productos de venta al publico
+
         }
     }
 }
