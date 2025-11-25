@@ -152,6 +152,34 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
 
         }
 
+        public static OrdenCompraWithDetalles GetOrdenCompraWithDetallesById(this int idOrdenCompra)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdOrdenCompra",idOrdenCompra)
+            };
+
+            var ordenCompra = new DAO()
+                .ExecuteStoredProcedure("sp_GetOrdenCompraForPDF", parametros)
+                .ConvertirOrdenCompraWithDetallesDataSet();
+
+            if (ordenCompra == null)
+                throw new Exception($"La orden de compra no existe.");
+
+            if (ordenCompra is OrdenCompraWithDetalles orden)
+            {
+                orden.Detalles = new DAO()
+                    .ExecuteStoredProcedure("sp_GetOrdenCompraDetallesForPDF", new SqlParameter[]
+                    {
+                        new SqlParameter("@IdOrdenCompra", orden.IdOrdenCompra)
+                    }).ConvertirDetallesOrdenCompra();
+
+            }
+
+
+            return ordenCompra;
+        }
+
 
         /// <summary>
         /// Guarda una orden de compra

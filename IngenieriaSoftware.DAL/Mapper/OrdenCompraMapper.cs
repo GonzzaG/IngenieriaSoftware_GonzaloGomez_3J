@@ -114,4 +114,70 @@ namespace IngenieriaSoftware.DAL.Mapper
                     }).ToList();
         }
     }
+
+    internal static class OrdenCompraWithDetallesMapper
+    {
+        public static OrdenCompraWithDetalles ConvertirOrdenCompraWithDetallesDataSet(this DataSet ds)
+        {
+            if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+                return null;
+
+            return (from DataRow row in ds.Tables[0].Rows
+                    select new OrdenCompraWithDetalles
+                    {
+                        IdOrdenCompra = Convert.ToInt32(row["IdOrdenCompra"]),
+                        NumOrdenCompra = row["NumOrdenDeCompra"].ToString(),
+                        RazonSocialProveedor = row["RazonSocial"].ToString(),
+                        Fecha = Convert.ToDateTime(row["Fecha"]),
+                        FechaEntregaEsperada = row["FechaEntregaEsperada"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["FechaEntregaEsperada"]),
+                        CondicionesPago = row["CondicionesPago"].ToString(),
+                        TipoCambio = row["TipoCambio"] == DBNull.Value ? (decimal?)null : Convert.ToDecimal(row["TipoCambio"]),
+                        Moneda = row["Moneda"].ToString(),
+                        Estado = (OrdenCompraEstadoEnum)Convert.ToInt32(row["IdEstado"]),
+                        TotalEsperado = Convert.ToDecimal(row["TotalEsperado"]),
+                        IdProveedor = Convert.ToInt32(row["IdProveedor"]),
+                        Observaciones = row["Observaciones"].ToString(),
+                        FechaCreacion = Convert.ToDateTime(row["FechaCreacion"]),
+                        UsuarioCreacion = row["UsuarioCreacion"].ToString(),
+
+                    }).FirstOrDefault();
+        }
+
+        public static List<OrdenDeCompraDetalleAprobacionModel> ConvertirDetallesOrdenCompra(this DataSet ds)
+        {
+            var lista = new List<OrdenDeCompraDetalleAprobacionModel>();
+
+            if (ds == null || ds.Tables.Count < 1)
+                return lista; // No hay detalles
+
+            var tbl = ds.Tables[0];
+
+            foreach (DataRow row in tbl.Rows)
+            {
+                var det = new OrdenDeCompraDetalleAprobacionModel
+                {
+                    IdDetalle = Convert.ToInt32(row["IdDetalle"]),
+                    IdOrdenCompra = Convert.ToInt32(row["IdOrdenCompra"]),
+                    IdProducto = Convert.ToInt32(row["IdProducto"]),
+                    NombreProducto = row["NombreProducto"].ToString(),
+                    Cantidad = Convert.ToInt32(row["Cantidad"]),
+
+                    PrecioUnitarioEsperado = row["PrecioUnitarioEsperado"] == DBNull.Value
+                        ? (decimal?)null
+                        : Convert.ToDecimal(row["PrecioUnitarioEsperado"]),
+
+                    DescuentoLinea = row["DescuentoLinea"] == DBNull.Value
+                        ? (decimal?)null
+                        : Convert.ToDecimal(row["DescuentoLinea"]),
+
+                    NotasLinea = row["NotasLinea"].ToString()
+                };
+
+                lista.Add(det);
+            }
+
+            return lista;
+        }
+
+    }
 }

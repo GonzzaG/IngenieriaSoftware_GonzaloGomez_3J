@@ -98,5 +98,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categ
                 MessageBox.Show(this, "Error al comenzar la relación de productos.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }       
         }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

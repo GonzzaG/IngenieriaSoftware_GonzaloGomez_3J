@@ -60,7 +60,12 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
             return query.GetOrdenesCompraDataAccess();
         }
 
-        private static void PrepararQuery(OrdenCompraQuery query)
+        public OrdenCompraWithDetalles GetOrdenCompraWithDetallesById(int idOrdenCompra)
+        {
+            return OrdenCompraDataAccess.GetOrdenCompraWithDetallesById(idOrdenCompra);
+        }
+
+        private void PrepararQuery(OrdenCompraQuery query)
         {
             if (query.IdEstado == 0) query.IdEstado = null;
             if (query.NumOrdenCompra.Empty()) query.NumOrdenCompra = null;
@@ -73,7 +78,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
             ordenCompra.Guardar();
         }
 
-        private static void SetDatosExtra(OrdenDeCompraModel ordenCompra)
+        private void SetDatosExtra(OrdenDeCompraModel ordenCompra)
         {
             ordenCompra.FechaCreacion = DateTime.Now;
             ordenCompra.UsuarioCreacion = SessionManager.GetInstance.Usuario.Username;
@@ -99,7 +104,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
                 ValidarDetalle(ordenCompra.Detalles[i]);
         }
 
-        private static void ValidarOrdenCompraExists(OrdenDeCompraModel ordenCompra)
+        private void ValidarOrdenCompraExists(OrdenDeCompraModel ordenCompra)
         {
             ordenCompra.NumOrdenCompra.OrdenCompraExist();
         }

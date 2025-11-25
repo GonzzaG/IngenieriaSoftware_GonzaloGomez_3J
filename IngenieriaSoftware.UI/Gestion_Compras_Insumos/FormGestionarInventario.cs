@@ -361,7 +361,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
             // Visibilizamos la grilla y label
             dgvOrdenDetalle.Visible = activado;
             lblDetalleOrden.Visible = activado;
-            btnCancelar.Visible = activado;
+            //btnCancelar.Visible = activado;
 
             // Deshabilitamos/mostramos otros botones hasta terminar con la recepcion
             btnAlertaEscasez.Visible = !activado;
@@ -412,6 +412,14 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
 
                 // Cancelar modo recepcion
                 DesactivarModoRecepcionOrden();
+
+
+                // limpiar marcas de modificado
+                _ListaProductos.ForEach(p => p.Modificado = false);
+
+
+                // Recargar desde BD
+                CargarProductosInventario();
             }
             catch (Exception ex)
             {
@@ -455,7 +463,8 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos
                 Cantidad = p.Cantidad,
                 Precio = p.Precio,
                 EsPostre = p.EsPostre,
-                TiempoPreparacion = p.TiempoPreparacion
+                TiempoPreparacion = p.TiempoPreparacion,
+                Modificado = false
             };
         }
 

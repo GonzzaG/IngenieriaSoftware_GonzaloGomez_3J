@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gBListaOrdenCompra = new System.Windows.Forms.GroupBox();
+            this.btnGenerarPdf = new System.Windows.Forms.Button();
             this.cbEstado = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
@@ -46,6 +47,7 @@
             // gBListaOrdenCompra
             // 
             this.gBListaOrdenCompra.AutoSize = true;
+            this.gBListaOrdenCompra.Controls.Add(this.btnGenerarPdf);
             this.gBListaOrdenCompra.Controls.Add(this.cbEstado);
             this.gBListaOrdenCompra.Controls.Add(this.btnGenerarFactura);
             this.gBListaOrdenCompra.Controls.Add(this.dtpFechaDesde);
@@ -67,6 +69,22 @@
             this.gBListaOrdenCompra.TabStop = false;
             this.gBListaOrdenCompra.Tag = "";
             this.gBListaOrdenCompra.Text = "Orden de compra";
+            // 
+            // btnGenerarPdf
+            // 
+            this.btnGenerarPdf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(132)))), ((int)(((byte)(240)))));
+            this.btnGenerarPdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarPdf.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarPdf.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGenerarPdf.Location = new System.Drawing.Point(883, 48);
+            this.btnGenerarPdf.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGenerarPdf.Name = "btnGenerarPdf";
+            this.btnGenerarPdf.Size = new System.Drawing.Size(103, 97);
+            this.btnGenerarPdf.TabIndex = 1246;
+            this.btnGenerarPdf.Tag = "";
+            this.btnGenerarPdf.Text = "Generar PDF";
+            this.btnGenerarPdf.UseVisualStyleBackColor = false;
+            this.btnGenerarPdf.Click += new System.EventHandler(this.btnGenerarPdf_Click);
             // 
             // cbEstado
             // 
@@ -209,9 +227,9 @@
             // 
             this.grillaConFiltros.BackColor = System.Drawing.Color.Transparent;
             this.grillaConFiltros.Location = new System.Drawing.Point(148, 302);
-            this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2);
             this.grillaConFiltros.Name = "grillaConFiltros";
-            this.grillaConFiltros.Size = new System.Drawing.Size(1040, 350);
+            this.grillaConFiltros.Size = new System.Drawing.Size(1404, 350);
             this.grillaConFiltros.TabIndex = 35;
             this.grillaConFiltros.Tag = "";
             this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
@@ -249,5 +267,6 @@
         private ControlesPersonalizados.DataGridViewConFiltros grillaConFiltros;
         private System.Windows.Forms.Button btnGenerarFactura;
         private ControlesPersonalizados.Inputs.ComboBoxCustom cbEstado;
+        private System.Windows.Forms.Button btnGenerarPdf;
     }
 }

@@ -4,11 +4,13 @@ using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BLL.ListSimpleBussiness;
+using IngenieriaSoftware.BLL.PDF.OrdenCompra;
 using IngenieriaSoftware.Servicios.Tools;
 using IngenieriaSoftware.UI.ComprasProveedores.Facturas;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -234,6 +236,31 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
             }
             catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnGenerarPdf_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                var elemento = (OrdenCompraGetListaModel)grillaConFiltros.ElementoSeleccionado;
+
+                if (elemento is null || elemento.IdOrdenCompra <= 0)
+                    throw new Exception("Debe seleccionar una orden de compra");
+
+                var ordenCompra = new OrdenCompraBussiness().GetOrdenCompraWithDetallesById(elemento.IdOrdenCompra);
+
+                if (ordenCompra.Detalles is null || ordenCompra.Detalles.Count <= 0)
+                    throw new Exception("No se puede generar un PDF de orden de compra sin detalles");
+
+                var mensaje = ordenCompra.GenerarPdf();
+
+                MessageBox.Show(mensaje);
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

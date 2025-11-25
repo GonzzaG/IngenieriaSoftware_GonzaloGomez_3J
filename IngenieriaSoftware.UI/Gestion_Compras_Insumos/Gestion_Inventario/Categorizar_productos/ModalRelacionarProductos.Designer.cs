@@ -32,10 +32,10 @@
             this.lblProductosRelacionados = new System.Windows.Forms.Label();
             this.btnComenzarRelacion = new System.Windows.Forms.Button();
             this.lblNombreProducto = new System.Windows.Forms.Label();
+            this.btnQuitarRelacion = new System.Windows.Forms.Button();
             this.filtroNombreProducto = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
             this.dgvProductosRelacionados = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.dgvProductosInventario = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
-            this.btnQuitarRelacion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblProductosInventario
@@ -44,7 +44,7 @@
             this.lblProductosInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblProductosInventario.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProductosInventario.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblProductosInventario.Location = new System.Drawing.Point(54, 103);
+            this.lblProductosInventario.Location = new System.Drawing.Point(52, 120);
             this.lblProductosInventario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductosInventario.Name = "lblProductosInventario";
             this.lblProductosInventario.Size = new System.Drawing.Size(262, 37);
@@ -58,7 +58,7 @@
             this.lblProductosRelacionados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblProductosRelacionados.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProductosRelacionados.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblProductosRelacionados.Location = new System.Drawing.Point(675, 89);
+            this.lblProductosRelacionados.Location = new System.Drawing.Point(673, 120);
             this.lblProductosRelacionados.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductosRelacionados.Name = "lblProductosRelacionados";
             this.lblProductosRelacionados.Size = new System.Drawing.Size(175, 37);
@@ -71,7 +71,7 @@
             this.btnComenzarRelacion.BackColor = System.Drawing.Color.Orange;
             this.btnComenzarRelacion.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComenzarRelacion.ForeColor = System.Drawing.Color.Black;
-            this.btnComenzarRelacion.Location = new System.Drawing.Point(468, 461);
+            this.btnComenzarRelacion.Location = new System.Drawing.Point(454, 489);
             this.btnComenzarRelacion.Margin = new System.Windows.Forms.Padding(2);
             this.btnComenzarRelacion.Name = "btnComenzarRelacion";
             this.btnComenzarRelacion.Size = new System.Drawing.Size(172, 65);
@@ -87,7 +87,7 @@
             this.lblNombreProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblNombreProducto.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreProducto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblNombreProducto.Location = new System.Drawing.Point(54, 30);
+            this.lblNombreProducto.Location = new System.Drawing.Point(52, 53);
             this.lblNombreProducto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNombreProducto.Name = "lblNombreProducto";
             this.lblNombreProducto.Size = new System.Drawing.Size(138, 37);
@@ -95,11 +95,26 @@
             this.lblNombreProducto.Tag = "";
             this.lblNombreProducto.Text = "Producto: ";
             // 
+            // btnQuitarRelacion
+            // 
+            this.btnQuitarRelacion.BackColor = System.Drawing.Color.Maroon;
+            this.btnQuitarRelacion.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuitarRelacion.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnQuitarRelacion.Location = new System.Drawing.Point(680, 182);
+            this.btnQuitarRelacion.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuitarRelacion.Name = "btnQuitarRelacion";
+            this.btnQuitarRelacion.Size = new System.Drawing.Size(172, 43);
+            this.btnQuitarRelacion.TabIndex = 61;
+            this.btnQuitarRelacion.Tag = "";
+            this.btnQuitarRelacion.Text = "Quitar relacion";
+            this.btnQuitarRelacion.UseVisualStyleBackColor = false;
+            this.btnQuitarRelacion.Click += new System.EventHandler(this.btnQuitarRelacion_Click);
+            // 
             // filtroNombreProducto
             // 
             this.filtroNombreProducto.BackColor = System.Drawing.Color.Transparent;
             this.filtroNombreProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filtroNombreProducto.Location = new System.Drawing.Point(264, 161);
+            this.filtroNombreProducto.Location = new System.Drawing.Point(59, 169);
             this.filtroNombreProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.filtroNombreProducto.Name = "filtroNombreProducto";
             this.filtroNombreProducto.Size = new System.Drawing.Size(209, 56);
@@ -109,44 +124,29 @@
             // dgvProductosRelacionados
             // 
             this.dgvProductosRelacionados.BackColor = System.Drawing.Color.Transparent;
-            this.dgvProductosRelacionados.Location = new System.Drawing.Point(682, 152);
+            this.dgvProductosRelacionados.Location = new System.Drawing.Point(680, 248);
             this.dgvProductosRelacionados.Margin = new System.Windows.Forms.Padding(2);
             this.dgvProductosRelacionados.Name = "dgvProductosRelacionados";
-            this.dgvProductosRelacionados.Size = new System.Drawing.Size(525, 282);
+            this.dgvProductosRelacionados.Size = new System.Drawing.Size(678, 282);
             this.dgvProductosRelacionados.TabIndex = 57;
             this.dgvProductosRelacionados.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Pequeño;
             // 
             // dgvProductosInventario
             // 
             this.dgvProductosInventario.BackColor = System.Drawing.Color.Transparent;
-            this.dgvProductosInventario.Location = new System.Drawing.Point(61, 175);
+            this.dgvProductosInventario.Location = new System.Drawing.Point(59, 248);
             this.dgvProductosInventario.Margin = new System.Windows.Forms.Padding(2);
             this.dgvProductosInventario.Name = "dgvProductosInventario";
             this.dgvProductosInventario.Size = new System.Drawing.Size(678, 282);
             this.dgvProductosInventario.TabIndex = 55;
             this.dgvProductosInventario.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Pequeño;
             // 
-            // btnQuitarRelacion
-            // 
-            this.btnQuitarRelacion.BackColor = System.Drawing.Color.Maroon;
-            this.btnQuitarRelacion.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitarRelacion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnQuitarRelacion.Location = new System.Drawing.Point(1022, 136);
-            this.btnQuitarRelacion.Margin = new System.Windows.Forms.Padding(2);
-            this.btnQuitarRelacion.Name = "btnQuitarRelacion";
-            this.btnQuitarRelacion.Size = new System.Drawing.Size(172, 51);
-            this.btnQuitarRelacion.TabIndex = 61;
-            this.btnQuitarRelacion.Tag = "";
-            this.btnQuitarRelacion.Text = "QuitarRelacion";
-            this.btnQuitarRelacion.UseVisualStyleBackColor = false;
-            this.btnQuitarRelacion.Click += new System.EventHandler(this.btnQuitarRelacion_Click);
-            // 
             // ModalRelacionarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1334, 817);
+            this.ClientSize = new System.Drawing.Size(1286, 817);
             this.Controls.Add(this.btnQuitarRelacion);
             this.Controls.Add(this.lblNombreProducto);
             this.Controls.Add(this.filtroNombreProducto);

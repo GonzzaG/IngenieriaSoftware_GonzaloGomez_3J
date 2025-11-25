@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngenieriaSoftware.BEL.OrdenDeCompra
+﻿namespace IngenieriaSoftware.BEL.OrdenDeCompra
 {
     /// <summary>
     /// Modelo de BD de la tabla OrdenCompraDetalle

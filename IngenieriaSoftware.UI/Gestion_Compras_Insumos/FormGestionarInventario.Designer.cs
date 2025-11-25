@@ -31,6 +31,8 @@
             this.lblListaProductos = new System.Windows.Forms.Label();
             this.lblTipo = new System.Windows.Forms.Label();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.filtroNombreProducto = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
+            this.cbcTipo = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.btnRegistrarMerma = new System.Windows.Forms.Button();
             this.btnAlertaEscasez = new System.Windows.Forms.Button();
             this.btnRecibirProductos = new System.Windows.Forms.Button();
@@ -39,8 +41,6 @@
             this.btnAgregarProducto = new System.Windows.Forms.Button();
             this.btnGuardarCantidades = new System.Windows.Forms.Button();
             this.dgvOrdenDetalle = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
-            this.filtroNombreProducto = new IngenieriaSoftware.UI.ControlesPersonalizados.InputNombreFiltro();
-            this.cbcTipo = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.dgvProductoInventario = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +86,28 @@
             this.gbFiltros.TabIndex = 51;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
+            // 
+            // filtroNombreProducto
+            // 
+            this.filtroNombreProducto.BackColor = System.Drawing.Color.Transparent;
+            this.filtroNombreProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filtroNombreProducto.Location = new System.Drawing.Point(297, 34);
+            this.filtroNombreProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.filtroNombreProducto.Name = "filtroNombreProducto";
+            this.filtroNombreProducto.Size = new System.Drawing.Size(237, 67);
+            this.filtroNombreProducto.TabIndex = 47;
+            this.filtroNombreProducto.Texto = "";
+            // 
+            // cbcTipo
+            // 
+            this.cbcTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbcTipo.Font = new System.Drawing.Font("Segoe UI Symbol", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbcTipo.FormattingEnabled = true;
+            this.cbcTipo.Location = new System.Drawing.Point(62, 58);
+            this.cbcTipo.Name = "cbcTipo";
+            this.cbcTipo.Size = new System.Drawing.Size(172, 28);
+            this.cbcTipo.TabIndex = 49;
+            this.cbcTipo.SelectedIndexChanged += new System.EventHandler(this.cbcTipo_SelectedIndexChanged);
             // 
             // btnRegistrarMerma
             // 
@@ -160,7 +182,6 @@
             this.btnCancelar.Tag = "";
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Visible = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelarRecepcion_Click);
             // 
             // btnAgregarProducto
@@ -203,28 +224,6 @@
             this.dgvOrdenDetalle.TabIndex = 54;
             this.dgvOrdenDetalle.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Pequeño;
             this.dgvOrdenDetalle.Visible = false;
-            // 
-            // filtroNombreProducto
-            // 
-            this.filtroNombreProducto.BackColor = System.Drawing.Color.Transparent;
-            this.filtroNombreProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filtroNombreProducto.Location = new System.Drawing.Point(297, 34);
-            this.filtroNombreProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.filtroNombreProducto.Name = "filtroNombreProducto";
-            this.filtroNombreProducto.Size = new System.Drawing.Size(237, 67);
-            this.filtroNombreProducto.TabIndex = 47;
-            this.filtroNombreProducto.Texto = "";
-            // 
-            // cbcTipo
-            // 
-            this.cbcTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbcTipo.Font = new System.Drawing.Font("Segoe UI Symbol", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbcTipo.FormattingEnabled = true;
-            this.cbcTipo.Location = new System.Drawing.Point(62, 58);
-            this.cbcTipo.Name = "cbcTipo";
-            this.cbcTipo.Size = new System.Drawing.Size(172, 28);
-            this.cbcTipo.TabIndex = 49;
-            this.cbcTipo.SelectedIndexChanged += new System.EventHandler(this.cbcTipo_SelectedIndexChanged);
             // 
             // dgvProductoInventario
             // 

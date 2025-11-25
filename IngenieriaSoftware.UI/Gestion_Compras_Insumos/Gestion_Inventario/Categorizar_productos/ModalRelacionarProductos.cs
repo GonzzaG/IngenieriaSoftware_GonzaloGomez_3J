@@ -5,13 +5,9 @@ using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categorizar_productos
@@ -35,7 +31,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categ
 
             _ProductoVentaSeleccionado = productoVenta;
             lblNombreProducto.Text = $"Producto: " + productoVenta.Nombre;
+
+            filtroNombreProducto.InicializarFiltro(CargarProductosInventario);
             Actualizar();
+
         }
 
         public void Actualizar()
@@ -44,7 +43,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categ
             CargarProductosInventariosRelacionados();
         }
 
-        private List<ProductoCategorizacion> CargarProductosInventario()
+        private void CargarProductosInventario()
         {
             List<ProductoCategorizacion> productos;
             // Paso 1 → obtener desde BD según filtro
@@ -56,7 +55,6 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categ
             // Paso 2 → cargar en el control de usuario
             dgvProductosInventario.CargarDatos(productos);
             dgvProductosRelacionados.RenombrarColumna("IdProducto", "Id");
-            return productos;
         }
 
         /// <summary>
@@ -130,7 +128,14 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categ
         {
             try
             {
+                var productoQuitar = (ProductoVentaInventarioModel)dgvProductosRelacionados.ElementoSeleccionado;
 
+                if (productoQuitar is null || productoQuitar.IdRelacion <= 0)
+                    throw new Exception("Debe seleccionar un producto");
+
+                new ProductoVentaInventarioBusiness().DeleteRelacionProductoVentaInventario(productoQuitar.IdRelacion);
+
+                Actualizar();
             }
             catch(Exception ex)
             {
