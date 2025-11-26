@@ -4,6 +4,7 @@ using IngenieriaSoftware.BLL;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
 using IngenieriaSoftware.Servicios.Interfaces;
+using IngenieriaSoftware.UI.Ayuda;
 using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.ComprasProveedores;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
@@ -766,6 +767,21 @@ namespace IngenieriaSoftware.UI
         {
             // Metodo que abre el formulario para gestionar las categorias de productos de venta al publico
 
+        }
+
+        private void toolStripMenuItem1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStripMDI_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void contactarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new FormSolicitarAyuda());
         }
     }
 }

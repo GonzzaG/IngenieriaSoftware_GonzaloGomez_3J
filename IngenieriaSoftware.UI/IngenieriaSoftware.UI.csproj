@@ -124,6 +124,12 @@
   <ItemGroup>
     <Compile Include="Adaptadores\ControlIdiomaAdaptador.cs" />
     <Compile Include="Adaptadores\ExcepcionesIdiomaAdaptador.cs" />
+    <Compile Include="Ayuda\FormSolicitarAyuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ayuda\FormSolicitarAyuda.Designer.cs">
+      <DependentUpon>FormSolicitarAyuda.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComprasProveedores\Facturas\FormAgregarFactura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -430,6 +436,9 @@
     <Compile Include="Adaptadores\MenuItemIdiomaAdaptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Ayuda\FormSolicitarAyuda.resx">
+      <DependentUpon>FormSolicitarAyuda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\Facturas\FormAgregarFactura.resx">
       <DependentUpon>FormAgregarFactura.cs</DependentUpon>
     </EmbeddedResource>

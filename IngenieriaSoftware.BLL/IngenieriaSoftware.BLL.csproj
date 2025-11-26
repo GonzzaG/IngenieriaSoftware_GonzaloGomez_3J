@@ -129,6 +129,7 @@
     <Compile Include="Auditoria\Factories\UsuarioAuditoriaFactory.cs" />
     <Compile Include="Auditoria\Services\UsuariosAuditoriaService.cs" />
     <Compile Include="AuthService.cs" />
+    <Compile Include="Ayuda\AyudaService.cs" />
     <Compile Include="BackupManager.cs" />
     <Compile Include="BitacoraBLL.cs" />
     <Compile Include="BitacoraHelper.cs" />
