@@ -11,6 +11,7 @@ using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categorizar_productos;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Transactions;
@@ -94,6 +95,11 @@ namespace IngenieriaSoftware.UI
                 var idiomaActual = CultureInfo.CurrentCulture.DisplayName.Split((' '))[0];
                 IdiomaData.IdiomaActual = IdiomaData.Idiomas.Find(i => i.Nombre == idiomaActual);
                 comboBoxIdiomas.Text = IdiomaData.IdiomaActual.Nombre;
+                hoverTimer.Interval = 30; // velocidad de animación
+                hoverTimer.Tick += HoverTimer_Tick;
+
+                lblAyuda.MouseEnter += Lbl_MouseEnter;
+                lblAyuda.MouseLeave += Lbl_MouseLeave;
             }
             catch (Exception ex)
             {
@@ -783,5 +789,75 @@ namespace IngenieriaSoftware.UI
         {
             AbrirFormHijo(new FormSolicitarAyuda());
         }
+
+        Timer hoverTimer = new Timer();
+        bool isHovering = false;
+        int animationStep = 0;
+        Color startColor = Color.DarkTurquoise;          
+        Color endColor = Color.DarkOrange;       
+
+
+        private void lblAyuda_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                new FormSolicitarAyuda().AbrirFormModal(new Size(820,517));
+            }   
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Lbl_MouseEnter(object sender, EventArgs e)
+        {
+            isHovering = true;
+            hoverTimer.Start();
+        }
+
+        private void Lbl_MouseLeave(object sender, EventArgs e)
+        {
+            isHovering = false;
+            hoverTimer.Start();
+        }
+
+        private void HoverTimer_Tick(object sender, EventArgs e)
+        {
+            if (isHovering)
+            {
+                if (animationStep < 10)
+                {
+                    animationStep++;
+                    lblAyuda.ForeColor = CambiarColor(startColor, endColor, animationStep / 10f);
+                }
+                else
+                {
+                    hoverTimer.Stop();
+                }
+            }
+            else
+            {
+                if (animationStep > 0)
+                {
+                    animationStep--;
+                    lblAyuda.ForeColor = CambiarColor(startColor, endColor, animationStep / 10f);
+                }
+                else
+                {
+                    hoverTimer.Stop();
+                }
+            }
+        }
+
+        private Color CambiarColor(Color c1, Color c2, float amount)
+        {
+            int r = (int)(c1.R + (c2.R - c1.R) * amount);
+            int g = (int)(c1.G + (c2.G - c1.G) * amount);
+            int b = (int)(c1.B + (c2.B - c1.B) * amount);
+
+            return Color.FromArgb(r, g, b);
+        }
+
+
     }
 }

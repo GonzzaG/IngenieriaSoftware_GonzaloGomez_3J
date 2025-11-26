@@ -76,6 +76,9 @@
             this.lblIdiomaActual = new System.Windows.Forms.Label();
             this.toolTipNotificacion = new System.Windows.Forms.ToolTip(this.components);
             this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblAyuda = new System.Windows.Forms.Label();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.menuStripMDI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,7 +106,7 @@
             this.menuStripMDI.Name = "menuStripMDI";
             this.menuStripMDI.Padding = new System.Windows.Forms.Padding(8, 8, 8, 41);
             this.menuStripMDI.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStripMDI.Size = new System.Drawing.Size(1443, 84);
+            this.menuStripMDI.Size = new System.Drawing.Size(1596, 84);
             this.menuStripMDI.TabIndex = 1;
             this.menuStripMDI.Tag = "14";
             this.menuStripMDI.Text = "menuStrip1";
@@ -377,7 +380,7 @@
             // backUpToolStripMenuItem
             // 
             this.backUpToolStripMenuItem.Name = "backUpToolStripMenuItem";
-            this.backUpToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
+            this.backUpToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.backUpToolStripMenuItem.Tag = "1222";
             this.backUpToolStripMenuItem.Text = "Back Up";
             this.backUpToolStripMenuItem.Click += new System.EventHandler(this.backUpToolStripMenuItem1_Click);
@@ -385,7 +388,7 @@
             // bitacoraToolStripMenuItem
             // 
             this.bitacoraToolStripMenuItem.Name = "bitacoraToolStripMenuItem";
-            this.bitacoraToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
+            this.bitacoraToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.bitacoraToolStripMenuItem.Tag = "1208";
             this.bitacoraToolStripMenuItem.Text = "Bitacora";
             this.bitacoraToolStripMenuItem.Click += new System.EventHandler(this.bitacoraToolStripMenuItem1_Click);
@@ -520,8 +523,9 @@
             // 
             // comboBoxIdiomas
             // 
+            this.comboBoxIdiomas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxIdiomas.FormattingEnabled = true;
-            this.comboBoxIdiomas.Location = new System.Drawing.Point(1275, 50);
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(1341, 48);
             this.comboBoxIdiomas.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxIdiomas.Name = "comboBoxIdiomas";
             this.comboBoxIdiomas.Size = new System.Drawing.Size(157, 21);
@@ -531,9 +535,10 @@
             // 
             // lblIdiomaActual
             // 
+            this.lblIdiomaActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIdiomaActual.AutoSize = true;
             this.lblIdiomaActual.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdiomaActual.Location = new System.Drawing.Point(1330, 15);
+            this.lblIdiomaActual.Location = new System.Drawing.Point(1393, 25);
             this.lblIdiomaActual.Name = "lblIdiomaActual";
             this.lblIdiomaActual.Size = new System.Drawing.Size(105, 21);
             this.lblIdiomaActual.TabIndex = 9;
@@ -547,12 +552,29 @@
             this.categoriasToolStripMenuItem.Text = "Categorias";
             this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
             // 
+            // lblAyuda
+            // 
+            this.lblAyuda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAyuda.AutoEllipsis = true;
+            this.lblAyuda.AutoSize = true;
+            this.lblAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblAyuda.Font = new System.Drawing.Font("Yu Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAyuda.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.lblAyuda.Location = new System.Drawing.Point(1537, 25);
+            this.lblAyuda.Name = "lblAyuda";
+            this.lblAyuda.Size = new System.Drawing.Size(30, 35);
+            this.lblAyuda.TabIndex = 11;
+            this.lblAyuda.Tag = "";
+            this.lblAyuda.Text = "?";
+            this.lblAyuda.Click += new System.EventHandler(this.lblAyuda_Click);
+            // 
             // FormMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(1443, 612);
+            this.ClientSize = new System.Drawing.Size(1596, 612);
+            this.Controls.Add(this.lblAyuda);
             this.Controls.Add(this.lblIdiomaActual);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.menuStripMDI);
@@ -623,5 +645,8 @@
         private System.Windows.Forms.ToolStripMenuItem gestionCategoriasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contactarToolStripMenuItem;
+        private System.Windows.Forms.Label lblAyuda;
+        private System.Windows.Forms.HelpProvider helpProvider1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

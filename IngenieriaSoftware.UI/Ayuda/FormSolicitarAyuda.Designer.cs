@@ -35,6 +35,7 @@
             this.btnEnviar = new System.Windows.Forms.Button();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.lblSolicitarAyuda = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtEmail
@@ -42,7 +43,7 @@
             this.txtEmail.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.ForeColor = System.Drawing.Color.DimGray;
-            this.txtEmail.Location = new System.Drawing.Point(70, 89);
+            this.txtEmail.Location = new System.Drawing.Point(69, 127);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(251, 29);
@@ -54,7 +55,7 @@
             this.txtMensaje.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtMensaje.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMensaje.ForeColor = System.Drawing.Color.DimGray;
-            this.txtMensaje.Location = new System.Drawing.Point(444, 89);
+            this.txtMensaje.Location = new System.Drawing.Point(443, 129);
             this.txtMensaje.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMensaje.Multiline = true;
             this.txtMensaje.Name = "txtMensaje";
@@ -68,7 +69,7 @@
             this.lblEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblEmail.Location = new System.Drawing.Point(66, 66);
+            this.lblEmail.Location = new System.Drawing.Point(65, 104);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(48, 21);
             this.lblEmail.TabIndex = 69;
@@ -81,7 +82,7 @@
             this.lblMensaje.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblMensaje.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMensaje.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblMensaje.Location = new System.Drawing.Point(440, 61);
+            this.lblMensaje.Location = new System.Drawing.Point(439, 101);
             this.lblMensaje.Name = "lblMensaje";
             this.lblMensaje.Size = new System.Drawing.Size(68, 21);
             this.lblMensaje.TabIndex = 70;
@@ -94,7 +95,7 @@
             this.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEnviar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnviar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEnviar.Location = new System.Drawing.Point(444, 343);
+            this.btnEnviar.Location = new System.Drawing.Point(443, 375);
             this.btnEnviar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(313, 64);
@@ -110,7 +111,7 @@
             this.lblTelefono.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTelefono.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTelefono.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTelefono.Location = new System.Drawing.Point(66, 146);
+            this.lblTelefono.Location = new System.Drawing.Point(65, 184);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(70, 21);
             this.lblTelefono.TabIndex = 73;
@@ -122,12 +123,26 @@
             this.txtTelefono.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtTelefono.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefono.ForeColor = System.Drawing.Color.DimGray;
-            this.txtTelefono.Location = new System.Drawing.Point(70, 169);
+            this.txtTelefono.Location = new System.Drawing.Point(69, 207);
             this.txtTelefono.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(251, 29);
             this.txtTelefono.TabIndex = 72;
             this.txtTelefono.Tag = "";
+            // 
+            // lblSolicitarAyuda
+            // 
+            this.lblSolicitarAyuda.AutoSize = true;
+            this.lblSolicitarAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblSolicitarAyuda.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSolicitarAyuda.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblSolicitarAyuda.Location = new System.Drawing.Point(62, 25);
+            this.lblSolicitarAyuda.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSolicitarAyuda.Name = "lblSolicitarAyuda";
+            this.lblSolicitarAyuda.Size = new System.Drawing.Size(236, 37);
+            this.lblSolicitarAyuda.TabIndex = 74;
+            this.lblSolicitarAyuda.Tag = "";
+            this.lblSolicitarAyuda.Text = "Solicitud de ayuda";
             // 
             // FormSolicitarAyuda
             // 
@@ -135,6 +150,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(804, 478);
+            this.Controls.Add(this.lblSolicitarAyuda);
             this.Controls.Add(this.lblTelefono);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.btnEnviar);
@@ -158,5 +174,6 @@
         private System.Windows.Forms.Button btnEnviar;
         private System.Windows.Forms.Label lblTelefono;
         private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.Label lblSolicitarAyuda;
     }
 }

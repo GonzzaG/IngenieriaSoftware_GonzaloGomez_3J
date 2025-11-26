@@ -15,13 +15,14 @@ namespace IngenieriaSoftware.UI
         public FormBitacoraBusqueda()
         {
             InitializeComponent();
+            dgvBitacora.SetCustomSize(new Size(1300, 383));
         }
 
         private void btnBuscarRegistros_Click(object sender, EventArgs e)
         {
             try
             {
-                dataGridViewBitacora.DataSource = BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text);
+                dgvBitacora.CargarDatos(BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text));
             }
             catch (Exception ex)
             {
