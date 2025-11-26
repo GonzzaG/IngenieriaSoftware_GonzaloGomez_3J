@@ -95,12 +95,12 @@ namespace IngenieriaSoftware.DAL.EntityDAL
         {
             var table = new DataTable();
             table.Columns.Add("Nombre", typeof(string));
-            table.Columns.Add("NumOrdenCompra", typeof(int));
+            table.Columns.Add("Numero", typeof(int));
             table.Columns.Add("ComandaEstado", typeof(bool));
 
             var row = table.NewRow();
             row["Nombre"] = filtro.Nombre ?? (object)DBNull.Value;
-            row["NumOrdenCompra"] = filtro.Id.HasValue ? filtro.Id.Value : (object)DBNull.Value;
+            row["Numero"] = filtro.Id.HasValue ? filtro.Id.Value : (object)DBNull.Value;
             row["ComandaEstado"] = filtro.Estado.HasValue ? filtro.Estado.Value : (object)DBNull.Value;
 
             table.Rows.Add(row);

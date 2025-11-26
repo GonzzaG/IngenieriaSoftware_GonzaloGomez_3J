@@ -56,6 +56,7 @@
     <Compile Include="Constantes\EstadoComandaProductos.cs" />
     <Compile Include="Constantes\EstadoFactura.cs" />
     <Compile Include="Constantes\EstadoOrdenCompra.cs" />
+    <Compile Include="Constantes\FacturaEstadoEnum.cs" />
     <Compile Include="Constantes\TipoProducto.cs" />
     <Compile Include="DigitoVerificadorVertical.cs" />
     <Compile Include="Empleados\Administrador.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Negocio\Mesa.cs" />
     <Compile Include="Negocio\Notificacion.cs" />
     <Compile Include="OrdenDeCompra\Models\OrdenCompraEstado.cs" />
-    <Compile Include="OrdenDeCompra\Models\OrdenCompraQuery.cs" />
+    <Compile Include="OrdenDeCompra\Models\ObjectQuery.cs" />
     <Compile Include="OrdenDeCompra\OrdenDeCompraDetalleModel.cs" />
     <Compile Include="OrdenDeCompra\OrdenDeCompraModel.cs" />
     <Compile Include="OrdenDeCompra\Models\OrdenCompraGetListaModel.cs" />

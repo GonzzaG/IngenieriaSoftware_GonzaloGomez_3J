@@ -1,7 +1,11 @@
-﻿using IngenieriaSoftware.BEL.FacturaProveedor;
+﻿using IngenieriaSoftware.BEL.Common;
+using IngenieriaSoftware.BEL.FacturaProveedor;
+using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.DAL.FacturaProveedores.DataAccess;
+using IngenieriaSoftware.DAL.ListSimpleDataAccess;
 using IngenieriaSoftware.Servicios;
+using IngenieriaSoftware.Servicios.Tools;
 using System;
 using System.Collections.Generic;
 using System.Transactions;
@@ -160,6 +164,18 @@ namespace IngenieriaSoftware.BLL.Facturas
         public List<FacturaProveedorGetListModel> ObtenerFacturasAnuladas()
         {
             return FacturaProveedorDataAccess.GetListFacturasAnuladas(EstadoFacturaProveedor.Anulada.ToString());
+        }
+
+        public List<FacturaProveedorGetListFilterModel> GetListFacturas(ObjectQuery query)
+        {
+            PrepararQuery(query);
+            return FacturaProveedorDataAccess.GetListFacturas(query);
+        }
+
+        private void PrepararQuery(ObjectQuery query)
+        {
+            if (query.IdEstado == 0) query.IdEstado = null;
+            if (query.Numero.Empty()) query.Numero = null;
         }
         #endregion
     }

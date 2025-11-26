@@ -1,6 +1,6 @@
 ﻿namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
 {
-    partial class Facturas
+    partial class FormListaFacturas
     {
         /// <summary>
         /// Required designer variable.
@@ -38,14 +38,16 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.dgvFacturas = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
-            this.btnDetalleFactura = new System.Windows.Forms.Button();
-            this.btnRechazarOrden = new System.Windows.Forms.Button();
+            this.btnAnular = new System.Windows.Forms.Button();
+            this.btnGenerarPdf = new System.Windows.Forms.Button();
             this.gBListaOrdenCompra.SuspendLayout();
             this.SuspendLayout();
             // 
             // gBListaOrdenCompra
             // 
             this.gBListaOrdenCompra.AutoSize = true;
+            this.gBListaOrdenCompra.Controls.Add(this.btnAnular);
+            this.gBListaOrdenCompra.Controls.Add(this.btnGenerarPdf);
             this.gBListaOrdenCompra.Controls.Add(this.dtpFechaDesde);
             this.gBListaOrdenCompra.Controls.Add(this.cbEstado);
             this.gBListaOrdenCompra.Controls.Add(this.Estado);
@@ -63,7 +65,7 @@
             this.gBListaOrdenCompra.Size = new System.Drawing.Size(1040, 228);
             this.gBListaOrdenCompra.TabIndex = 36;
             this.gBListaOrdenCompra.TabStop = false;
-            this.gBListaOrdenCompra.Tag = "1301";
+            this.gBListaOrdenCompra.Tag = "";
             this.gBListaOrdenCompra.Text = "Factura";
             // 
             // dtpFechaDesde
@@ -73,7 +75,7 @@
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(219, 28);
             this.dtpFechaDesde.TabIndex = 2;
-            this.dtpFechaDesde.Tag = "1305";
+            this.dtpFechaDesde.Tag = "";
             this.dtpFechaDesde.Value = new System.DateTime(2025, 9, 16, 23, 18, 0, 0);
             // 
             // cbEstado
@@ -83,7 +85,7 @@
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(189, 30);
             this.cbEstado.TabIndex = 3;
-            this.cbEstado.Tag = "1307";
+            this.cbEstado.Tag = "";
             // 
             // Estado
             // 
@@ -96,7 +98,7 @@
             this.Estado.Name = "Estado";
             this.Estado.Size = new System.Drawing.Size(56, 21);
             this.Estado.TabIndex = 41;
-            this.Estado.Tag = "1306";
+            this.Estado.Tag = "";
             this.Estado.Text = "Estado";
             // 
             // lblFechaDesde
@@ -110,7 +112,7 @@
             this.lblFechaDesde.Name = "lblFechaDesde";
             this.lblFechaDesde.Size = new System.Drawing.Size(95, 21);
             this.lblFechaDesde.TabIndex = 39;
-            this.lblFechaDesde.Tag = "1304";
+            this.lblFechaDesde.Tag = "";
             this.lblFechaDesde.Text = "Fecha desde";
             // 
             // txtNumFactura
@@ -123,7 +125,7 @@
             this.txtNumFactura.Name = "txtNumFactura";
             this.txtNumFactura.Size = new System.Drawing.Size(189, 29);
             this.txtNumFactura.TabIndex = 1;
-            this.txtNumFactura.Tag = "1302";
+            this.txtNumFactura.Tag = "";
             // 
             // lblNumeroFactura
             // 
@@ -136,7 +138,7 @@
             this.lblNumeroFactura.Name = "lblNumeroFactura";
             this.lblNumeroFactura.Size = new System.Drawing.Size(103, 21);
             this.lblNumeroFactura.TabIndex = 36;
-            this.lblNumeroFactura.Tag = "1303";
+            this.lblNumeroFactura.Tag = "";
             this.lblNumeroFactura.Text = "Num. Factura";
             // 
             // btnBuscar
@@ -150,9 +152,10 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(103, 37);
             this.btnBuscar.TabIndex = 4;
-            this.btnBuscar.Tag = "1308";
+            this.btnBuscar.Tag = "";
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnLimpiar
             // 
@@ -165,7 +168,7 @@
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(103, 37);
             this.btnLimpiar.TabIndex = 5;
-            this.btnLimpiar.Tag = "1310";
+            this.btnLimpiar.Tag = "";
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
             // 
@@ -173,56 +176,55 @@
             // 
             this.dgvFacturas.BackColor = System.Drawing.Color.Transparent;
             this.dgvFacturas.Location = new System.Drawing.Point(146, 338);
-            this.dgvFacturas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvFacturas.Margin = new System.Windows.Forms.Padding(2);
             this.dgvFacturas.Name = "dgvFacturas";
             this.dgvFacturas.Size = new System.Drawing.Size(1404, 350);
             this.dgvFacturas.TabIndex = 38;
-            this.dgvFacturas.Tag = "1312";
+            this.dgvFacturas.Tag = "";
             this.dgvFacturas.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
             // 
-            // btnDetalleFactura
+            // btnAnular
             // 
-            this.btnDetalleFactura.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDetalleFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDetalleFactura.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDetalleFactura.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDetalleFactura.Location = new System.Drawing.Point(1083, 306);
-            this.btnDetalleFactura.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDetalleFactura.Name = "btnDetalleFactura";
-            this.btnDetalleFactura.Size = new System.Drawing.Size(103, 37);
-            this.btnDetalleFactura.TabIndex = 7;
-            this.btnDetalleFactura.Tag = "1309";
-            this.btnDetalleFactura.Text = "Detalles";
-            this.btnDetalleFactura.UseVisualStyleBackColor = false;
+            this.btnAnular.BackColor = System.Drawing.Color.Maroon;
+            this.btnAnular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnular.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnular.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAnular.Location = new System.Drawing.Point(612, 165);
+            this.btnAnular.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAnular.Name = "btnAnular";
+            this.btnAnular.Size = new System.Drawing.Size(132, 37);
+            this.btnAnular.TabIndex = 6;
+            this.btnAnular.Tag = "";
+            this.btnAnular.Text = "Anular Factura";
+            this.btnAnular.UseVisualStyleBackColor = false;
+            this.btnAnular.Click += new System.EventHandler(this.btnRechazarOrden_Click);
             // 
-            // btnRechazarOrden
+            // btnGenerarPdf
             // 
-            this.btnRechazarOrden.BackColor = System.Drawing.Color.Maroon;
-            this.btnRechazarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRechazarOrden.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRechazarOrden.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnRechazarOrden.Location = new System.Drawing.Point(930, 306);
-            this.btnRechazarOrden.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRechazarOrden.Name = "btnRechazarOrden";
-            this.btnRechazarOrden.Size = new System.Drawing.Size(132, 37);
-            this.btnRechazarOrden.TabIndex = 6;
-            this.btnRechazarOrden.Tag = "1282";
-            this.btnRechazarOrden.Text = "Anular Factura";
-            this.btnRechazarOrden.UseVisualStyleBackColor = false;
+            this.btnGenerarPdf.BackColor = System.Drawing.Color.Orange;
+            this.btnGenerarPdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarPdf.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarPdf.ForeColor = System.Drawing.Color.Black;
+            this.btnGenerarPdf.Location = new System.Drawing.Point(883, 50);
+            this.btnGenerarPdf.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGenerarPdf.Name = "btnGenerarPdf";
+            this.btnGenerarPdf.Size = new System.Drawing.Size(103, 97);
+            this.btnGenerarPdf.TabIndex = 1247;
+            this.btnGenerarPdf.Tag = "";
+            this.btnGenerarPdf.Text = "Generar PDF";
+            this.btnGenerarPdf.UseVisualStyleBackColor = false;
             // 
-            // Facturas
+            // FormListaFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1342, 857);
-            this.Controls.Add(this.btnRechazarOrden);
-            this.Controls.Add(this.btnDetalleFactura);
             this.Controls.Add(this.dgvFacturas);
             this.Controls.Add(this.gBListaOrdenCompra);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Facturas";
-            this.Tag = "1311";
+            this.Name = "FormListaFacturas";
+            this.Tag = "";
             this.Text = "FormListaFacturas";
             this.gBListaOrdenCompra.ResumeLayout(false);
             this.gBListaOrdenCompra.PerformLayout();
@@ -243,7 +245,7 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;
         private ControlesPersonalizados.DataGridViewConFiltros dgvFacturas;
-        private System.Windows.Forms.Button btnDetalleFactura;
-        private System.Windows.Forms.Button btnRechazarOrden;
+        private System.Windows.Forms.Button btnAnular;
+        private System.Windows.Forms.Button btnGenerarPdf;
     }
 }

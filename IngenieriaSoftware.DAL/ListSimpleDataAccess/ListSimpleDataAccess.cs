@@ -33,6 +33,18 @@ namespace IngenieriaSoftware.DAL.ListSimpleDataAccess
         }
 
 
+        public List<SelectListSimple> GetFacturaEstadosListSimple()
+        {
+            var result = new DAO().ExecuteStoredProcedure("sp_GetFacturaProveedorEstados", null);
+            return (from DataRow row in result.Tables[0].Rows
+                    select new SelectListSimple()
+                    {
+                        Id = Convert.ToInt32(row["IdEstado"]),
+                        Nombre = row["Nombre"].ToString()
+                    }).ToList();
+        }
+
+
 
     }
 }

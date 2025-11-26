@@ -7,6 +7,7 @@ using IngenieriaSoftware.Servicios.Interfaces;
 using IngenieriaSoftware.UI.Ayuda;
 using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.ComprasProveedores;
+using IngenieriaSoftware.UI.ComprasProveedores.Facturas;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos;
 using IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categorizar_productos;
 using System;
@@ -740,7 +741,15 @@ namespace IngenieriaSoftware.UI
 
         private void facturasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            try
+            {
+                AbrirFormHijo(new FormListaFacturas());
 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void inventarioToolStripMenuItem_Click(object sender, EventArgs e)

@@ -54,7 +54,7 @@
             this.lblFacturas.Size = new System.Drawing.Size(138, 36);
             this.lblFacturas.TabIndex = 26;
             this.lblFacturas.Tag = "173";
-            this.lblFacturas.Text = "Facturas";
+            this.lblFacturas.Text = "FormListaFacturas";
             // 
             // comboBoxFiltroEstado
             // 

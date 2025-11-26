@@ -1,14 +1,11 @@
-﻿using IngenieriaSoftware.BEL.Constantes;
-using IngenieriaSoftware.BEL.FacturaProveedor;
+﻿using IngenieriaSoftware.BEL.FacturaProveedor;
+using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.DAL.Tools;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
 {
@@ -205,6 +202,19 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
                 .MapFacturaProveedoresGetListPendiente(estadoFactura);
         }
 
+        public static List<FacturaProveedorGetListFilterModel> GetListFacturas(this ObjectQuery query)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@NumFactura",query.Numero.ToDbValue()),
+                new SqlParameter("@FechaDesde", query.FechaDesde.ToDbValue()),
+                new SqlParameter("@IdEstado", query.IdEstado.ToDbValue())
+            };
+
+            return new DAO()
+                .ExecuteStoredProcedure("Fact.sp_GetFacturasProveedor", null)
+                .MapFacturaProveedoresGetList();
+        }
         #endregion
 
         #region Metodos Privados
@@ -266,6 +276,42 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
                     Observaciones = Convert.ToString(((DataRow)row)["Observaciones"]),
                     FechaRegistro = Convert.ToDateTime(((DataRow)row)["FechaRegistro"]),
                     FechaPago = ((DataRow)row)["FechaPago"] != DBNull.Value ? Convert.ToDateTime(((DataRow)row)["fecha_pago"]) : (DateTime?)null,
+                });
+            }
+
+            return facturasProveedores;
+        }
+
+        /// <summary>
+        /// Mapper para convertir un DataSet en una lista de FacturaProveedorGetListModel
+        /// </summary>
+        /// <param name="mDs"></param>
+        /// <returns></returns>
+        private static List<FacturaProveedorGetListFilterModel> MapFacturaProveedoresGetList(this DataSet mDs)
+        {
+            if (mDs == null || mDs.Tables.Count == 0)
+                return new List<FacturaProveedorGetListFilterModel>();
+
+            var facturasProveedores = new List<FacturaProveedorGetListFilterModel>();
+
+            foreach (var row in mDs.Tables[0].Rows)
+            {
+                facturasProveedores.Add(new FacturaProveedorGetListFilterModel()
+                {
+                    IdFacturaProveedor = Convert.ToInt32(((DataRow)row)["IdFacturaProveedor"]),
+                    NumeroFactura = Convert.ToString(((DataRow)row)["NumeroFactura"]),
+                    FechaEmision = Convert.ToDateTime(((DataRow)row)["FechaEmision"]),
+                    ProveedorNombre = Convert.ToString(((DataRow)row)["RazonSocial"]),
+                    UsuarioNombre = Convert.ToString(((DataRow)row)["username"]),
+                    Subtotal = Convert.ToDecimal(((DataRow)row)["Subtotal"]),
+                    Impuestos = Convert.ToDecimal(((DataRow)row)["Impuestos"]),
+                    Descuento = Convert.ToDecimal(((DataRow)row)["Descuento"]),
+                    EstadoFactura = Convert.ToString(((DataRow)row)["EstadoFactura"]),
+                    Total = Convert.ToDecimal(((DataRow)row)["Total"]),
+                    MetodoPago = Convert.ToString(((DataRow)row)["MetodoPago"]),
+                    Observaciones = Convert.ToString(((DataRow)row)["Observaciones"]),
+                    FechaRegistro = Convert.ToDateTime(((DataRow)row)["FechaRegistro"]),
+                    FechaPago = ((DataRow)row)["FechaPago"] != DBNull.Value ? Convert.ToDateTime(((DataRow)row)["FechaPago"]) : (DateTime?)null,
                 });
             }
 

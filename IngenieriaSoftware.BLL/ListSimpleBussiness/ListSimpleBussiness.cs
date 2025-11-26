@@ -17,5 +17,10 @@ namespace IngenieriaSoftware.BLL.ListSimpleBussiness
         {
             return new ListSimpleDataAccess().GetOrdenCompraEstadosListSimple();
         }
+
+        public List<SelectListSimple> GetFacturaEstadosListSimple()
+        {
+            return new ListSimpleDataAccess().GetFacturaEstadosListSimple();
+        }
     }
 }

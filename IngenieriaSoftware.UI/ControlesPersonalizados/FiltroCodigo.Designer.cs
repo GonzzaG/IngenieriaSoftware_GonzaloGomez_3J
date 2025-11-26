@@ -43,7 +43,7 @@
             this.lblFiltroCodigo.Size = new System.Drawing.Size(77, 28);
             this.lblFiltroCodigo.TabIndex = 17;
             this.lblFiltroCodigo.Tag = "116";
-            this.lblFiltroCodigo.Text = "NumOrdenCompra";
+            this.lblFiltroCodigo.Text = "Numero";
             // 
             // txtFiltroCodigo
             // 

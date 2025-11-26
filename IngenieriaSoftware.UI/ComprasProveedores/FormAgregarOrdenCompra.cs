@@ -50,9 +50,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         }
         private void BuscarOrdenSeleccionada(string numOrdenCompra)
         {
-            var filtro = new OrdenCompraQuery
+            var filtro = new ObjectQuery
             {
-                NumOrdenCompra = numOrdenCompra,
+                Numero = numOrdenCompra,
                 IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
             };
             _OrdenDeCompra = new OrdenCompraBussiness().GetOrdenCompraByNumero(numOrdenCompra);

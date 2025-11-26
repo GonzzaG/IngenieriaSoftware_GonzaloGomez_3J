@@ -109,7 +109,7 @@
             this.lblCodigo.Size = new System.Drawing.Size(145, 21);
             this.lblCodigo.TabIndex = 36;
             this.lblCodigo.Tag = "1286";
-            this.lblCodigo.Text = "NumOrdenCompra";
+            this.lblCodigo.Text = "Numero";
             // 
             // btnBuscar
             // 

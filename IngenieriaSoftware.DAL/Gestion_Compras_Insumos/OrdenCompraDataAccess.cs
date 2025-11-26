@@ -70,7 +70,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
         {
             var parametros = new SqlParameter[]
             {
-                new SqlParameter("@NumOrdenCompra",numOrdenCompra)
+                new SqlParameter("@Numero",numOrdenCompra)
             };
 
             var ordenCompra = new DAO()
@@ -122,11 +122,11 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
             return ordenCompra;
         }
 
-        public static List<OrdenCompraGetListaModel> GetOrdenesCompraDataAccess(this OrdenCompraQuery query)
+        public static List<OrdenCompraGetListaModel> GetOrdenesCompraDataAccess(this ObjectQuery query)
         {
             var parametros = new SqlParameter[]
             {
-                new SqlParameter("@NumOrdenCompra",query.NumOrdenCompra.ToDbValue()),
+                new SqlParameter("@Numero",query.Numero.ToDbValue()),
                 new SqlParameter("@FechaDesde", query.FechaDesde.ToDbValue()),
                 new SqlParameter("@IdEstado", query.IdEstado.ToDbValue())
             };
@@ -141,7 +141,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
         {
             SqlParameter[] parameteros = new SqlParameter[]
             {
-                new SqlParameter("@NumOrdenCompra", numOrdenCompra),
+                new SqlParameter("@Numero", numOrdenCompra),
                 new SqlParameter("@Exist", SqlDbType.Bit) { Direction = ParameterDirection.Output }
             };
 
@@ -198,7 +198,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos
                     {
                         SqlParameter[] parametrosOrden = new SqlParameter[]
                         {
-                            new SqlParameter("@NumOrdenCompra", ordenCompra.NumOrdenCompra),
+                            new SqlParameter("@Numero", ordenCompra.NumOrdenCompra),
                             new SqlParameter("@IdProveedor", ordenCompra.IdProveedor),
                             new SqlParameter("@Fecha", ordenCompra.Fecha),
                             new SqlParameter("@FechaEntregaEsperada", ordenCompra.FechaEntregaEsperada.ToDbValue()),

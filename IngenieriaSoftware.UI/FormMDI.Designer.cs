@@ -232,7 +232,7 @@
             this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
             this.facturasToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.facturasToolStripMenuItem.Tag = "2216";
-            this.facturasToolStripMenuItem.Text = "Facturas";
+            this.facturasToolStripMenuItem.Text = "FormListaFacturas";
             this.facturasToolStripMenuItem.Click += new System.EventHandler(this.facturasToolStripMenuItem_Click);
             // 
             // cobrosToolStripMenuItem
@@ -253,7 +253,7 @@
             this.generarFacturarToolStripMenuItem.Name = "generarFacturarToolStripMenuItem";
             this.generarFacturarToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.generarFacturarToolStripMenuItem.Tag = "380";
-            this.generarFacturarToolStripMenuItem.Text = "Generar Facturas";
+            this.generarFacturarToolStripMenuItem.Text = "Generar FormListaFacturas";
             this.generarFacturarToolStripMenuItem.Click += new System.EventHandler(this.generarFacturarToolStripMenuItem_Click);
             // 
             // fToolStripMenuItem
@@ -261,7 +261,7 @@
             this.fToolStripMenuItem.Name = "fToolStripMenuItem";
             this.fToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.fToolStripMenuItem.Tag = "433";
-            this.fToolStripMenuItem.Text = "Ver Facturas";
+            this.fToolStripMenuItem.Text = "Ver FormListaFacturas";
             this.fToolStripMenuItem.Click += new System.EventHandler(this.fToolStripMenuItem_Click);
             // 
             // gestionarPermisosToolStripMenuItem

@@ -53,7 +53,7 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
              return idOrdenCompra.GetOrdenCompraById();
         }
 
-        public List<OrdenCompraGetListaModel> GetOrdenesCompra(OrdenCompraQuery query)
+        public List<OrdenCompraGetListaModel> GetOrdenesCompra(ObjectQuery query)
         {
             PrepararQuery(query);
 
@@ -65,10 +65,10 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos
             return OrdenCompraDataAccess.GetOrdenCompraWithDetallesById(idOrdenCompra);
         }
 
-        private void PrepararQuery(OrdenCompraQuery query)
+        private void PrepararQuery(ObjectQuery query)
         {
             if (query.IdEstado == 0) query.IdEstado = null;
-            if (query.NumOrdenCompra.Empty()) query.NumOrdenCompra = null;
+            if (query.Numero.Empty()) query.Numero = null;
         }
 
         public void Guardar(OrdenDeCompraModel ordenCompra)

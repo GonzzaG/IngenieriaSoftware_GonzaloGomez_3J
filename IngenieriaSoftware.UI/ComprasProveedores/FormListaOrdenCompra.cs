@@ -65,9 +65,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 InitializeComponent();
                 Inicializar();
 
-                var filtro = new OrdenCompraQuery
+                var filtro = new ObjectQuery
                 {
-                    NumOrdenCompra = string.Empty,
+                    Numero = string.Empty,
                     FechaDesde = DateTime.Now,
                     IdEstado = (int)estado,
                 };
@@ -192,9 +192,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         private void BusquedaFiltrada()
         {
-            var filtro = new OrdenCompraQuery
+            var filtro = new ObjectQuery
             {
-                NumOrdenCompra = txtCodigo.Text,
+                Numero = txtCodigo.Text,
                 FechaDesde = dtpFechaDesde.Value,
                 IdEstado = int.Parse(cbEstado.SelectedValue.ToString()),
             };

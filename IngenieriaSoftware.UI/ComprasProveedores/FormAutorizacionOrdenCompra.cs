@@ -50,9 +50,9 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         {
             try
             {
-                var filtro = new OrdenCompraQuery
+                var filtro = new ObjectQuery
                 {
-                    NumOrdenCompra = txtCodigo.Text,
+                    Numero = txtCodigo.Text,
                     FechaDesde = dtpFechaDesde.Value,
                     IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
                 };
@@ -79,7 +79,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
 
         public void Actualizar()
         {
-            var filtro = new OrdenCompraQuery
+            var filtro = new ObjectQuery
             {
                 IdEstado = (int)OrdenCompraEstadoEnum.Pendiente,
             };
