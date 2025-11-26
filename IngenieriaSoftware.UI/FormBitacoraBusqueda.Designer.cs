@@ -37,6 +37,7 @@
             this.txtModulo = new System.Windows.Forms.TextBox();
             this.checkBoxBuscarPorArea = new System.Windows.Forms.CheckBox();
             this.dgvBitacora = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.btnExportar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBuscarRegistros
@@ -157,12 +158,28 @@
             this.dgvBitacora.TabIndex = 32;
             this.dgvBitacora.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
             // 
+            // btnExportar
+            // 
+            this.btnExportar.BackColor = System.Drawing.Color.Orange;
+            this.btnExportar.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.ForeColor = System.Drawing.Color.Black;
+            this.btnExportar.Location = new System.Drawing.Point(869, 72);
+            this.btnExportar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(176, 57);
+            this.btnExportar.TabIndex = 33;
+            this.btnExportar.Tag = "1212";
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
             // FormBitacoraBusqueda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1443, 692);
+            this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.dgvBitacora);
             this.Controls.Add(this.checkBoxBuscarPorArea);
             this.Controls.Add(this.txtModulo);
@@ -193,5 +210,6 @@
         private System.Windows.Forms.TextBox txtModulo;
         private System.Windows.Forms.CheckBox checkBoxBuscarPorArea;
         private ControlesPersonalizados.DataGridViewConFiltros dgvBitacora;
+        private System.Windows.Forms.Button btnExportar;
     }
 }

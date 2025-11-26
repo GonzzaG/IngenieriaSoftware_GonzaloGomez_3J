@@ -1,7 +1,12 @@
-﻿using IngenieriaSoftware.BLL;
+﻿using IngenieriaSoftware.Abstracciones;
+using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Serializacion.Bitacora;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.UI.Common;
+using IngenieriaSoftware.UI.Common.ModalCommon;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,7 +16,7 @@ namespace IngenieriaSoftware.UI
     {
         public NotificacionService _notificacionService => new NotificacionService();
         private bool formCargado = false;
-
+        private List<Bitacora> _Bitacora = new List<Bitacora>();
         public FormBitacoraBusqueda()
         {
             InitializeComponent();
@@ -22,7 +27,8 @@ namespace IngenieriaSoftware.UI
         {
             try
             {
-                dgvBitacora.CargarDatos(BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text));
+                _Bitacora = BitacoraHelper.ConsultarBitacora(desdeDateTimePicker.Value, hastaDateTimePicker.Value, txtModulo.Text);
+                dgvBitacora.CargarDatos(_Bitacora);
             }
             catch (Exception ex)
             {
@@ -97,6 +103,40 @@ namespace IngenieriaSoftware.UI
         {
             InicializarFechas();
             formCargado = true;
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_Bitacora == null)
+                {
+                    MessageBox.Show("No hay datos para exportar.");
+                    return;
+                }
+
+                if (_Bitacora == null || _Bitacora.Count == 0)
+                {
+                    MessageBox.Show("No hay registros para exportar.");
+                    return;
+                }
+
+                var exportador = new ExportadorSerializadorService();
+
+                string nombreArchivo = $"bitacora_{DateTime.Now:yyyyMMdd_HHmmss}";
+                string ruta = exportador.ExportarObjeto(_Bitacora, nombreArchivo);
+
+                //MessageBox.Show($"Bitácora exportada en:\n\n{ruta}");
+
+                var frm = new FormMensajeConCopia(ruta);
+                frm.ShowDialog();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al exportar bitácora: " + ex.Message);
+            }
         }
     }
 }

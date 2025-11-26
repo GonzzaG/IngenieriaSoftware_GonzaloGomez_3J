@@ -13,7 +13,7 @@ namespace IngenieriaSoftware.BLL.PDF.OrdenCompra
 
                 orden.GenerarPDFOrdenCompra(rutaFinal);
 
-                return $"PDF generado en:\n{rutaFinal}";
+                return rutaFinal;
 
             }
             catch (Exception ex)

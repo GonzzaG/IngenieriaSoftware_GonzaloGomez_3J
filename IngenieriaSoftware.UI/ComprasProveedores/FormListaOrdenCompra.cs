@@ -6,6 +6,7 @@ using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BLL.ListSimpleBussiness;
 using IngenieriaSoftware.BLL.PDF.OrdenCompra;
 using IngenieriaSoftware.Servicios.Tools;
+using IngenieriaSoftware.UI.Common.ModalCommon;
 using IngenieriaSoftware.UI.ComprasProveedores.Facturas;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
@@ -256,9 +257,10 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
                 if (ordenCompra.Detalles is null || ordenCompra.Detalles.Count <= 0)
                     throw new Exception("No se puede generar un PDF de orden de compra sin detalles");
 
-                var mensaje = ordenCompra.GenerarPdf();
+                var path = ordenCompra.GenerarPdf();
 
-                MessageBox.Show(mensaje);
+                var form = new FormMensajeConCopia(path);
+                form.ShowDialog();
             }
             catch(Exception ex)
             {

@@ -72,10 +72,10 @@
             // 
             // btnGenerarPdf
             // 
-            this.btnGenerarPdf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(132)))), ((int)(((byte)(240)))));
+            this.btnGenerarPdf.BackColor = System.Drawing.Color.Orange;
             this.btnGenerarPdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerarPdf.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarPdf.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGenerarPdf.ForeColor = System.Drawing.Color.Black;
             this.btnGenerarPdf.Location = new System.Drawing.Point(883, 48);
             this.btnGenerarPdf.Margin = new System.Windows.Forms.Padding(2);
             this.btnGenerarPdf.Name = "btnGenerarPdf";
