@@ -69,7 +69,7 @@ namespace IngenieriaSoftware.DAL
                 usuario.Username = row["Username"].ToString();
                 usuario._passwordHash = row["PasswordHash"].ToString();
                 usuario.FechaCreacion = (DateTime)row["FechaCreacion"];
-                usuario.id_rol = (int)row["id_rol"];
+                usuario.id_rol = row["id_rol"] == DBNull.Value ? 0 : (int)row["id_rol"];
                 usuario.IdiomaId = (int)row["idioma_id"];
                 usuario.DVH = row["DVH"] == DBNull.Value ? null : row["DVH"].ToString();
                 usuario.Email = row["Email"] == DBNull.Value ? null : row["Email"].ToString();

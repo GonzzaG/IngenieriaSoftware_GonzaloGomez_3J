@@ -24,6 +24,7 @@ namespace IngenieriaSoftware.BEL.FacturaProveedor
         public string MetodoPago { get; set; }
 
         public int IdFacturaProveedorEstado { get; set; }
+        public string NombreEstado { get; set; }
 
         public string Observaciones { get; set; }
 

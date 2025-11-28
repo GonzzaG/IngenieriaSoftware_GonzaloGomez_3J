@@ -30,6 +30,7 @@
         {
             this.gBListaOrdenCompra = new System.Windows.Forms.GroupBox();
             this.btnAnular = new System.Windows.Forms.Button();
+            this.btnPagarFactura = new System.Windows.Forms.Button();
             this.btnGenerarPdf = new System.Windows.Forms.Button();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.cbEstado = new System.Windows.Forms.ComboBox();
@@ -47,6 +48,7 @@
             // 
             this.gBListaOrdenCompra.AutoSize = true;
             this.gBListaOrdenCompra.Controls.Add(this.btnAnular);
+            this.gBListaOrdenCompra.Controls.Add(this.btnPagarFactura);
             this.gBListaOrdenCompra.Controls.Add(this.btnGenerarPdf);
             this.gBListaOrdenCompra.Controls.Add(this.dtpFechaDesde);
             this.gBListaOrdenCompra.Controls.Add(this.cbEstado);
@@ -62,7 +64,7 @@
             this.gBListaOrdenCompra.Margin = new System.Windows.Forms.Padding(2);
             this.gBListaOrdenCompra.Name = "gBListaOrdenCompra";
             this.gBListaOrdenCompra.Padding = new System.Windows.Forms.Padding(2);
-            this.gBListaOrdenCompra.Size = new System.Drawing.Size(1040, 228);
+            this.gBListaOrdenCompra.Size = new System.Drawing.Size(1125, 228);
             this.gBListaOrdenCompra.TabIndex = 36;
             this.gBListaOrdenCompra.TabStop = false;
             this.gBListaOrdenCompra.Tag = "";
@@ -74,15 +76,32 @@
             this.btnAnular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnular.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnular.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAnular.Location = new System.Drawing.Point(612, 165);
+            this.btnAnular.Location = new System.Drawing.Point(883, 115);
             this.btnAnular.Margin = new System.Windows.Forms.Padding(2);
             this.btnAnular.Name = "btnAnular";
-            this.btnAnular.Size = new System.Drawing.Size(132, 37);
+            this.btnAnular.Size = new System.Drawing.Size(103, 37);
             this.btnAnular.TabIndex = 6;
             this.btnAnular.Tag = "";
-            this.btnAnular.Text = "Anular Factura";
+            this.btnAnular.Text = "Anular ";
             this.btnAnular.UseVisualStyleBackColor = false;
             this.btnAnular.Click += new System.EventHandler(this.btnAnular_Click);
+            // 
+            // btnPagarFactura
+            // 
+            this.btnPagarFactura.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnPagarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPagarFactura.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagarFactura.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPagarFactura.Location = new System.Drawing.Point(883, 64);
+            this.btnPagarFactura.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPagarFactura.Name = "btnPagarFactura";
+            this.btnPagarFactura.Size = new System.Drawing.Size(103, 37);
+            this.btnPagarFactura.TabIndex = 1248;
+            this.btnPagarFactura.Tag = "";
+            this.btnPagarFactura.Text = "Pagar ";
+            this.btnPagarFactura.UseVisualStyleBackColor = false;
+            this.btnPagarFactura.Visible = false;
+            this.btnPagarFactura.Click += new System.EventHandler(this.btnPagarFactura_Click);
             // 
             // btnGenerarPdf
             // 
@@ -90,10 +109,10 @@
             this.btnGenerarPdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerarPdf.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarPdf.ForeColor = System.Drawing.Color.Black;
-            this.btnGenerarPdf.Location = new System.Drawing.Point(883, 50);
+            this.btnGenerarPdf.Location = new System.Drawing.Point(1004, 64);
             this.btnGenerarPdf.Margin = new System.Windows.Forms.Padding(2);
             this.btnGenerarPdf.Name = "btnGenerarPdf";
-            this.btnGenerarPdf.Size = new System.Drawing.Size(103, 97);
+            this.btnGenerarPdf.Size = new System.Drawing.Size(103, 138);
             this.btnGenerarPdf.TabIndex = 1247;
             this.btnGenerarPdf.Tag = "";
             this.btnGenerarPdf.Text = "Generar PDF";
@@ -208,7 +227,7 @@
             // dgvFacturas
             // 
             this.dgvFacturas.BackColor = System.Drawing.Color.Transparent;
-            this.dgvFacturas.Location = new System.Drawing.Point(146, 338);
+            this.dgvFacturas.Location = new System.Drawing.Point(146, 366);
             this.dgvFacturas.Margin = new System.Windows.Forms.Padding(2);
             this.dgvFacturas.Name = "dgvFacturas";
             this.dgvFacturas.Size = new System.Drawing.Size(1016, 282);
@@ -249,5 +268,6 @@
         private ControlesPersonalizados.DataGridViewConFiltros dgvFacturas;
         private System.Windows.Forms.Button btnAnular;
         private System.Windows.Forms.Button btnGenerarPdf;
+        private System.Windows.Forms.Button btnPagarFactura;
     }
 }

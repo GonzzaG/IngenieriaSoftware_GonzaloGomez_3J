@@ -44,7 +44,7 @@ namespace IngenieriaSoftware.BLL.PDF.Factura
                 doc.Add(new Paragraph($"Proveedor: {factura.RazonSocialProveedor}"));
                 doc.Add(new Paragraph($"Fecha Emisión: {factura.FechaEmision:dd/MM/yyyy}"));
                 doc.Add(new Paragraph($"Método de Pago: {factura.MetodoPago}"));
-                doc.Add(new Paragraph($"Estado: {factura.IdFacturaProveedorEstado}"));
+                doc.Add(new Paragraph($"Estado: {factura.NombreEstado}"));
                 doc.Add(new Paragraph($"Observaciones: {factura.Observaciones}"));
 
                 doc.Add(new Paragraph(" "));

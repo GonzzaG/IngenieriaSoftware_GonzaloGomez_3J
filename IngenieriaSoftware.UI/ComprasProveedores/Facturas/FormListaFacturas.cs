@@ -57,6 +57,11 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                     btnAnular.Visible = false;
                 else
                     btnAnular.Visible = true;
+
+                if(cbEstado.Text.Equals(FacturaEstadoEnum.Pendiente.ToString()))
+                    btnPagarFactura.Visible = true;
+                else
+                    btnPagarFactura.Visible = false;
             }
             catch(Exception ex)
             {
@@ -144,6 +149,22 @@ namespace IngenieriaSoftware.UI.ComprasProveedores.Facturas
                 form.ShowDialog();
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnPagarFactura_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var factura = (FacturaProveedorGetListFilterModel)dgvFacturas.ElementoSeleccionado;
+                if (factura is not null && factura.IdFacturaProveedor > 0)
+                    new FacturaProveedorBusiness().PagarFactura(factura.IdFacturaProveedor);
+
+                Actualizar();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

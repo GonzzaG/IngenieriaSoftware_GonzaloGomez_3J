@@ -1,4 +1,5 @@
-﻿using IngenieriaSoftware.BEL.FacturaProveedor;
+﻿using IngenieriaSoftware.BEL;
+using IngenieriaSoftware.BEL.FacturaProveedor;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.DAL.Tools;
 using System;
@@ -274,6 +275,40 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
             }
 
             return factura;
+
+
+        }
+
+        public static int GetEstadoFacturaProveedor(this int idFactura)
+        {
+            var outValue = new SqlParameter("@IdFacturaEstado", ParameterDirection.Output);
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdFacturaProveedor", idFactura),
+                outValue
+            };
+
+            var ds = new DAO()
+                .ExecuteStoredProcedure("sp_GetEstadoFacturaProveedorById", parametros);
+
+            if (outValue != null)
+                // Obtener el valor del parámetro de salida
+                return (int)outValue.Value;
+
+            throw new Exception("No se pudo obtener el estado de la factua");
+        }
+        public static void PagarFactura(this int idFacturaProveedor)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdFacturaProveedor", idFacturaProveedor)
+            };
+
+            new DAO()
+                .ExecuteStoredProcedure("sp_PagarFacturaProveedor", parametros);
+
+            
+
         }
 
         #endregion
@@ -303,6 +338,7 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
                         Total = Convert.ToDecimal(row["Total"]),
                         MetodoPago = row["MetodoPago"]?.ToString(),
                         IdFacturaProveedorEstado = Convert.ToInt32(row["IdFacturaProveedorEstado"]),
+                        NombreEstado = Convert.ToString(row["NombreEstado"]),
                         Observaciones = row["Observaciones"]?.ToString(),
                         FechaRegistro = Convert.ToDateTime(row["FechaRegistro"]),
                         FechaPago = row["FechaPago"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["FechaPago"]),
@@ -466,6 +502,7 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
             }
             return facturaProveedorDetalles;
         }
+
 
         #endregion
     }

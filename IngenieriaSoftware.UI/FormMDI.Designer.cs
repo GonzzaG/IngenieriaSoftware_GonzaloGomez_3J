@@ -224,14 +224,14 @@
             this.facturasToolStripMenuItem});
             this.facturaToolStripMenuItem.Name = "facturaToolStripMenuItem";
             this.facturaToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
-            this.facturaToolStripMenuItem.Tag = "2213";
+            this.facturaToolStripMenuItem.Tag = "2216";
             this.facturaToolStripMenuItem.Text = "Factura";
             // 
             // facturasToolStripMenuItem
             // 
             this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
             this.facturasToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
-            this.facturasToolStripMenuItem.Tag = "2216";
+            this.facturasToolStripMenuItem.Tag = "2213";
             this.facturasToolStripMenuItem.Text = "Lista Facturas";
             this.facturasToolStripMenuItem.Click += new System.EventHandler(this.facturasToolStripMenuItem_Click);
             // 
@@ -280,7 +280,7 @@
             // gestionPermisosToolStripMenuItem
             // 
             this.gestionPermisosToolStripMenuItem.Name = "gestionPermisosToolStripMenuItem";
-            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.gestionPermisosToolStripMenuItem.Tag = "570";
             this.gestionPermisosToolStripMenuItem.Text = "Gestion Roles";
             this.gestionPermisosToolStripMenuItem.Click += new System.EventHandler(this.gestionPermisosToolStripMenuItem_Click);
@@ -288,7 +288,7 @@
             // asignarRolToolStripMenuItem
             // 
             this.asignarRolToolStripMenuItem.Name = "asignarRolToolStripMenuItem";
-            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.asignarRolToolStripMenuItem.Tag = "571";
             this.asignarRolToolStripMenuItem.Text = "Asignar Rol";
             this.asignarRolToolStripMenuItem.Click += new System.EventHandler(this.asignarRolToolStripMenuItem_Click);
@@ -380,7 +380,7 @@
             // backUpToolStripMenuItem
             // 
             this.backUpToolStripMenuItem.Name = "backUpToolStripMenuItem";
-            this.backUpToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.backUpToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
             this.backUpToolStripMenuItem.Tag = "1222";
             this.backUpToolStripMenuItem.Text = "Back Up";
             this.backUpToolStripMenuItem.Click += new System.EventHandler(this.backUpToolStripMenuItem1_Click);
@@ -388,7 +388,7 @@
             // bitacoraToolStripMenuItem
             // 
             this.bitacoraToolStripMenuItem.Name = "bitacoraToolStripMenuItem";
-            this.bitacoraToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.bitacoraToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
             this.bitacoraToolStripMenuItem.Tag = "1208";
             this.bitacoraToolStripMenuItem.Text = "Bitacora";
             this.bitacoraToolStripMenuItem.Click += new System.EventHandler(this.bitacoraToolStripMenuItem1_Click);
@@ -505,7 +505,7 @@
             // contactarToolStripMenuItem
             // 
             this.contactarToolStripMenuItem.Name = "contactarToolStripMenuItem";
-            this.contactarToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.contactarToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.contactarToolStripMenuItem.Tag = "2225";
             this.contactarToolStripMenuItem.Text = "Contactar";
             this.contactarToolStripMenuItem.Click += new System.EventHandler(this.contactarToolStripMenuItem_Click);

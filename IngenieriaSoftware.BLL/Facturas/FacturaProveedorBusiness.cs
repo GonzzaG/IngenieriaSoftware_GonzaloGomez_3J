@@ -212,10 +212,30 @@ namespace IngenieriaSoftware.BLL.Facturas
             if (query.Numero.Empty()) query.Numero = null;
         }
 
-        public FacturaProveedorWithDetalles GetFacturaWithDetallesById( int idFactura)
+        public FacturaProveedorWithDetalles GetFacturaWithDetallesById(int idFactura)
         {
             return idFactura.GetFacturaWithDetallesById();
         }
+
+        public void PagarFactura(int idFactura)
+        {
+            if (idFactura == 0)
+                throw new Exception("La factura no es valida");
+
+            var estadofactura = new FacturaProveedorBusiness().GetEstadoFacturaProveedorById(idFactura);
+
+            if (NotValidForPagar(estadofactura))
+                throw new Exception("La factura tiene que estar e n estado pendiente para ser pagada");
+
+            idFactura.PagarFactura();
+        }
+
+        private static bool NotValidForPagar(string estadofactura)
+        {
+            return estadofactura == FacturaEstadoEnum.Anulada.ToString() || estadofactura == FacturaEstadoEnum.Cancelada.ToString() || estadofactura == FacturaEstadoEnum.Pagada.ToString();
+        }
+
+        //PagarFactura
         #endregion
     }
 }
