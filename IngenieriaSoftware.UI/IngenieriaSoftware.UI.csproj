@@ -173,6 +173,12 @@
     <Compile Include="ComprasProveedores\FormListaOrdenCompra.Designer.cs">
       <DependentUpon>FormListaOrdenCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprasProveedores\ModalProductosEscasez.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprasProveedores\ModalProductosEscasez.Designer.cs">
+      <DependentUpon>ModalProductosEscasez.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComprasProveedores\ModalSeleccionProdutosOrdenCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -466,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\FormListaOrdenCompra.resx">
       <DependentUpon>FormListaOrdenCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprasProveedores\ModalProductosEscasez.resx">
+      <DependentUpon>ModalProductosEscasez.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprasProveedores\ModalSeleccionProdutosOrdenCompra.resx">
       <DependentUpon>ModalSeleccionProdutosOrdenCompra.cs</DependentUpon>

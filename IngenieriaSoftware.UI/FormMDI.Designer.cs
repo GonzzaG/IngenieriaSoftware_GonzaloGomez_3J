@@ -230,9 +230,9 @@
             // facturasToolStripMenuItem
             // 
             this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
-            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.facturasToolStripMenuItem.Tag = "2216";
-            this.facturasToolStripMenuItem.Text = "FormListaFacturas";
+            this.facturasToolStripMenuItem.Text = "Lista Facturas";
             this.facturasToolStripMenuItem.Click += new System.EventHandler(this.facturasToolStripMenuItem_Click);
             // 
             // cobrosToolStripMenuItem
@@ -253,7 +253,7 @@
             this.generarFacturarToolStripMenuItem.Name = "generarFacturarToolStripMenuItem";
             this.generarFacturarToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.generarFacturarToolStripMenuItem.Tag = "380";
-            this.generarFacturarToolStripMenuItem.Text = "Generar FormListaFacturas";
+            this.generarFacturarToolStripMenuItem.Text = "Generar Facturas";
             this.generarFacturarToolStripMenuItem.Click += new System.EventHandler(this.generarFacturarToolStripMenuItem_Click);
             // 
             // fToolStripMenuItem
@@ -261,7 +261,7 @@
             this.fToolStripMenuItem.Name = "fToolStripMenuItem";
             this.fToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.fToolStripMenuItem.Tag = "433";
-            this.fToolStripMenuItem.Text = "Ver FormListaFacturas";
+            this.fToolStripMenuItem.Text = "Ver Facturas";
             this.fToolStripMenuItem.Click += new System.EventHandler(this.fToolStripMenuItem_Click);
             // 
             // gestionarPermisosToolStripMenuItem
@@ -280,7 +280,7 @@
             // gestionPermisosToolStripMenuItem
             // 
             this.gestionPermisosToolStripMenuItem.Name = "gestionPermisosToolStripMenuItem";
-            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.gestionPermisosToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.gestionPermisosToolStripMenuItem.Tag = "570";
             this.gestionPermisosToolStripMenuItem.Text = "Gestion Roles";
             this.gestionPermisosToolStripMenuItem.Click += new System.EventHandler(this.gestionPermisosToolStripMenuItem_Click);
@@ -288,7 +288,7 @@
             // asignarRolToolStripMenuItem
             // 
             this.asignarRolToolStripMenuItem.Name = "asignarRolToolStripMenuItem";
-            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.asignarRolToolStripMenuItem.Tag = "571";
             this.asignarRolToolStripMenuItem.Text = "Asignar Rol";
             this.asignarRolToolStripMenuItem.Click += new System.EventHandler(this.asignarRolToolStripMenuItem_Click);
@@ -310,7 +310,7 @@
             // registrarUsuarioToolStripMenuItem
             // 
             this.registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
+            this.registrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.registrarUsuarioToolStripMenuItem.Tag = "7";
             this.registrarUsuarioToolStripMenuItem.Text = "Registrar Usuario";
             this.registrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.registrarUsuarioToolStripMenuItem_Click);
@@ -318,9 +318,9 @@
             // eliminarUsuarioToolStripMenuItem
             // 
             this.eliminarUsuarioToolStripMenuItem.Name = "eliminarUsuarioToolStripMenuItem";
-            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
+            this.eliminarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.eliminarUsuarioToolStripMenuItem.Tag = "8";
-            this.eliminarUsuarioToolStripMenuItem.Text = "EliminarProducto Usuario";
+            this.eliminarUsuarioToolStripMenuItem.Text = "Eliminar Usuario";
             this.eliminarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.eliminarUsuarioToolStripMenuItem_Click);
             // 
             // gestionIdiomasToolStripMenuItem

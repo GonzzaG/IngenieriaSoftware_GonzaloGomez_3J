@@ -6,13 +6,13 @@ using iTextSharp.text.pdf;
 
 namespace IngenieriaSoftware.BLL.PDF
 {
-    public static class PDFGenerator
+    public static class OrdenCompraPDFGenerator
     {
         public static string ObtenerRutaPDF(this int idOrden)
         {
             // Carpeta Documentos\Sitema\PDFs
             string documentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string carpetaDestino = Path.Combine(documentos, "MiSistema", "PDFs");
+            string carpetaDestino = Path.Combine(documentos, "PuercoArana", "PDFs");
 
             if (!Directory.Exists(carpetaDestino))
                 Directory.CreateDirectory(carpetaDestino);

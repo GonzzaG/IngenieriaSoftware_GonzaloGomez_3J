@@ -1,5 +1,8 @@
 ﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.DAL.Gestion_Compras_Insumos.ProductoInventario.Mapper;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos.UpdateProductoInventario
@@ -7,7 +10,7 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos.UpdateProductoInventari
     public class EscasezDataAccess
     {
 
-        public void InsertEscasez(EscasezInsertModel model)
+        public void InsertEscasez(EscasezModel model)
         {
             var parametros = new SqlParameter[]
             {
@@ -22,5 +25,12 @@ namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos.UpdateProductoInventari
         }
 
 
+        public List<EscasezModel> GetProductosEscasez()
+        {
+            return new DAO().ExecuteStoredProcedure("sp_GetProductosEscasez", null)
+                .MapearEscasezDesdeDataSet();
+        }
+
+       
     }
 }

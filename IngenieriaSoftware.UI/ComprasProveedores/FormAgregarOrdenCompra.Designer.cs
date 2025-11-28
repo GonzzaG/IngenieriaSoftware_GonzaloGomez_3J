@@ -60,6 +60,7 @@
             this.btnAceptarOrden = new System.Windows.Forms.Button();
             this.dgvProductosOrdenCompra = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
             this.cbProveedor = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
+            this.btnProductosEscasez = new System.Windows.Forms.Button();
             this.gbPagoMoneda.SuspendLayout();
             this.gBDatosGenerales.SuspendLayout();
             this.SuspendLayout();
@@ -502,6 +503,22 @@
             this.cbProveedor.Size = new System.Drawing.Size(306, 29);
             this.cbProveedor.TabIndex = 5;
             // 
+            // btnProductosEscasez
+            // 
+            this.btnProductosEscasez.BackColor = System.Drawing.Color.Orange;
+            this.btnProductosEscasez.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductosEscasez.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductosEscasez.ForeColor = System.Drawing.Color.Black;
+            this.btnProductosEscasez.Location = new System.Drawing.Point(1032, 744);
+            this.btnProductosEscasez.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnProductosEscasez.Name = "btnProductosEscasez";
+            this.btnProductosEscasez.Size = new System.Drawing.Size(309, 37);
+            this.btnProductosEscasez.TabIndex = 112;
+            this.btnProductosEscasez.Tag = "1264";
+            this.btnProductosEscasez.Text = "Productos escasez";
+            this.btnProductosEscasez.UseVisualStyleBackColor = false;
+            this.btnProductosEscasez.Click += new System.EventHandler(this.btnProductosEscasez_Click);
+            // 
             // FormAgregarOrdenCompra
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -509,6 +526,7 @@
             this.AutoScrollMinSize = new System.Drawing.Size(0, 1500);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1431, 1022);
+            this.Controls.Add(this.btnProductosEscasez);
             this.Controls.Add(this.cbProveedor);
             this.Controls.Add(this.btnAceptarOrden);
             this.Controls.Add(this.btnRechazarOrden);
@@ -572,5 +590,6 @@
         private System.Windows.Forms.Button btnAceptarOrden;
         private ControlesPersonalizados.Inputs.InputNumericTextBox txtNumericTipoCambio;
         private ControlesPersonalizados.Inputs.ComboBoxCustom cbProveedor;
+        private System.Windows.Forms.Button btnProductosEscasez;
     }
 }

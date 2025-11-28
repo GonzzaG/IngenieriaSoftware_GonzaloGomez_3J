@@ -72,6 +72,7 @@
     <Compile Include="Gestion_Compras_Insumos\OrdenCompraDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoCategorizacion\ProductoVentaInventarioDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoInventario\EscasezDataAccess.cs" />
+    <Compile Include="Gestion_Compras_Insumos\ProductoInventario\Mapper\EscasezMapper.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoInventario\MermaDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoInventario\ProductoInventarioDataAccess.cs" />
     <Compile Include="Gestion_Compras_Insumos\ProductoOrdenCompraDataAccess.cs" />

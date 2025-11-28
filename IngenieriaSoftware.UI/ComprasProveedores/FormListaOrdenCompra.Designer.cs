@@ -30,7 +30,6 @@
         {
             this.gBListaOrdenCompra = new System.Windows.Forms.GroupBox();
             this.btnGenerarPdf = new System.Windows.Forms.Button();
-            this.cbEstado = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.lblEstado = new System.Windows.Forms.Label();
@@ -41,6 +40,7 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.grillaConFiltros = new IngenieriaSoftware.UI.ControlesPersonalizados.DataGridViewConFiltros();
+            this.cbEstado = new IngenieriaSoftware.UI.ControlesPersonalizados.Inputs.ComboBoxCustom();
             this.gBListaOrdenCompra.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,15 +85,6 @@
             this.btnGenerarPdf.Text = "Generar PDF";
             this.btnGenerarPdf.UseVisualStyleBackColor = false;
             this.btnGenerarPdf.Click += new System.EventHandler(this.btnGenerarPdf_Click);
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(605, 82);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(189, 30);
-            this.cbEstado.TabIndex = 3;
             // 
             // btnGenerarFactura
             // 
@@ -229,10 +220,19 @@
             this.grillaConFiltros.Location = new System.Drawing.Point(148, 302);
             this.grillaConFiltros.Margin = new System.Windows.Forms.Padding(2);
             this.grillaConFiltros.Name = "grillaConFiltros";
-            this.grillaConFiltros.Size = new System.Drawing.Size(1404, 350);
+            this.grillaConFiltros.Size = new System.Drawing.Size(1016, 282);
             this.grillaConFiltros.TabIndex = 35;
             this.grillaConFiltros.Tag = "";
-            this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Gigante;
+            this.grillaConFiltros.TamanoGrilla = IngenieriaSoftware.UI.ControlesPersonalizados.grillaCustom.ModoTamanoGrilla.Grande;
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(605, 82);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(189, 30);
+            this.cbEstado.TabIndex = 3;
             // 
             // FormListaOrdenCompra
             // 

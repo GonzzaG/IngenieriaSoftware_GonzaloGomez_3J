@@ -23,7 +23,7 @@ namespace IngenieriaSoftware.DAL.Auditoria
                         Version = Convert.ToInt32(row["Version"]),
                         SolicitadoPor = Convert.ToInt32(row["SolicitadoPor"]),
                         FechaSolicitud = Convert.ToDateTime(row["FechaSolicitud"]),
-                        Estado = row["ComandaEstado"].ToString(),
+                        Estado = row["Estado"].ToString(),
                         ProcesadoPor = row.IsNull("ProcesadoPor") ? (int?)null : Convert.ToInt32(row["ProcesadoPor"]),
                         FechaProcesado = row.IsNull("FechaProcesado") ? (DateTime?)null : Convert.ToDateTime(row["FechaProcesado"]),
                         Comentario = row["Comentario"].ToString()

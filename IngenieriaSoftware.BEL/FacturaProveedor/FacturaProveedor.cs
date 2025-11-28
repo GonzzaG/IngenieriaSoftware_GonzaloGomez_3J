@@ -57,6 +57,7 @@ namespace IngenieriaSoftware.BEL.FacturaProveedor
         public decimal Descuento { get; set; }
         public decimal Total { get; set; }
         public string MetodoPago { get; set; }
+        public int IdFacturaProveedorEstado { get; set; }
         public string EstadoFactura { get; set; }
         public string Observaciones { get; set; }
         public DateTime FechaRegistro { get; set; }

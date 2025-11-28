@@ -1,23 +1,18 @@
-﻿using IngenieriaSoftware.BEL;
-using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
+﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
 using IngenieriaSoftware.BLL;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos.Inventario;
 using IngenieriaSoftware.UI.Common;
 using IngenieriaSoftware.UI.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Diagnostics;
 using System.Windows.Forms;
 
 namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categorizar_productos
 {
     public partial class FormRelacionarConsumoProductos : Form, IActualizable
     {
+        List<ProductoVentaInventarioModel> _ProductosRelacionados;
+
         /// <summary>
         /// Contiene el producto a relacionar junto con la lista de ids de los productos inventarios a los que esta relacionado
         /// </summary>
@@ -32,13 +27,13 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categ
         {
             CargarProductosInventario();
 
+            ActualizarProductosRelacionados();
             // Inicializar filtro para que invoque el método unificado
             filtroNombreProducto.InicializarFiltro(CargarProductosInventario);
         }
 
         public void Actualizar()
         {
-            throw new NotImplementedException();
         }
 
         private void CargarProductosInventario()
@@ -102,6 +97,45 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario.Categ
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FormRelacionarConsumoProductos_Load(object sender, EventArgs e)
+        {
+            dgvProductosVenta.ActivarEventoSeleccion();
+            dgvProductosVenta.SelectionChangedCustom += dgv_SelectionChangedCustom;
+        }
+        private void dgv_SelectionChangedCustom(object sender, EventArgs e)
+        {
+            ActualizarProductosRelacionados();
+        }
+
+        private void ActualizarProductosRelacionados()
+        {
+            // Acá hacés lo que necesites cuando cambia la selección
+            var fila = (ProductoCategorizacion)dgvProductosVenta.ElementoSeleccionado;
+            if (fila != null)
+                CargarProductosInventariosRelacionados(fila.IdProducto);
+            //Obtenemos los productos relacionados
+        }
+
+        /// <summary>
+        /// En este metodo listaremos los productosVentaInventario que tienen relacion con el seleccionado en la pantalla anterior
+        /// </summary>
+        private void CargarProductosInventariosRelacionados(int idProducto)
+        {
+            List<ProductoVentaInventarioModel> productosVentaInventario;
+
+            productosVentaInventario = new ProductoVentaInventarioBusiness().GetProductoVentaInventario(idProducto);
+
+            _ProductosRelacionados = productosVentaInventario;
+
+            // Paso 2 → cargar en el control de usuario
+            dgvProductosRelacionados.CargarDatos(productosVentaInventario);
+
+            dgvProductosRelacionados.OcultarColumnas("IdRelacion", "IdProductoVenta");
+            dgvProductosRelacionados.RenombrarColumna("IdProductoInventario", "Id");
+            dgvProductosRelacionados.RenombrarColumna("NombreProductoInventario", "Nombre");
+
         }
     }
 }

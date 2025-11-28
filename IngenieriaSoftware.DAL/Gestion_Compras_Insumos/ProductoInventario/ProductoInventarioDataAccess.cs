@@ -1,12 +1,11 @@
-﻿using IngenieriaSoftware.BEL.Gestion_Compras_Insumos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace IngenieriaSoftware.DAL.Gestion_Compras_Insumos.UpdateProductoInventario
 {
     public class ProductoInventarioDataAccess
     {
-        public void UpdateCantidadInventario(List<ProductoInventario> productosModificados)
+        public void UpdateCantidadInventario(List<BEL.Gestion_Compras_Insumos.ProductoInventario> productosModificados)
         {
             for(int i = 0; i < productosModificados.Count; i++)
             {

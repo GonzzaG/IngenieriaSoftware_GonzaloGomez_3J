@@ -1,4 +1,5 @@
 ﻿using IngenieriaSoftware.BEL.Common;
+using IngenieriaSoftware.BEL.Constantes;
 using IngenieriaSoftware.BEL.FacturaProveedor;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
@@ -7,6 +8,7 @@ using IngenieriaSoftware.DAL.ListSimpleDataAccess;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.Tools;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Transactions;
 
@@ -172,10 +174,47 @@ namespace IngenieriaSoftware.BLL.Facturas
             return FacturaProveedorDataAccess.GetListFacturas(query);
         }
 
+        /// <summary>
+        /// Anula una factura
+        /// </summary>
+        /// <param name="factura"></param>
+        /// <exception cref="Exception"></exception>
+        public void AnularFactura(FacturaProveedorGetListFilterModel factura)
+        {
+            if (factura.IdFacturaProveedor <= 0)
+                throw new Exception("El id de la factura debe ser mayor a 1");
+
+            if (factura.IdFacturaProveedorEstado == (int)FacturaEstadoEnum.Anulada)
+                throw new Exception("Esta factura ya se encuentra anulada");
+
+            factura.IdFacturaProveedor.AnularFactura();
+        }
+
+        /// <summary>
+        /// Cancela una factura validando que esta este en estado pendiente
+        /// </summary>
+        /// <param name="factura"></param>
+        /// <exception cref="Exception"></exception>
+        public void CancelarFactura(FacturaProveedor factura)
+        {
+            if (factura.IdFacturaProveedor <= 0)
+                throw new Exception("El id de la factura debe ser mayor a 0");
+
+            if (factura.IdFacturaProveedorEstado == (int)FacturaEstadoEnum.Pendiente)
+                factura.IdFacturaProveedor.CancelarFactura();
+            else
+                throw new Exception("Para cancelar una factura, esta debe estar en estado pendiente");
+        }
+
         private void PrepararQuery(ObjectQuery query)
         {
             if (query.IdEstado == 0) query.IdEstado = null;
             if (query.Numero.Empty()) query.Numero = null;
+        }
+
+        public FacturaProveedorWithDetalles GetFacturaWithDetallesById( int idFactura)
+        {
+            return idFactura.GetFacturaWithDetallesById();
         }
         #endregion
     }

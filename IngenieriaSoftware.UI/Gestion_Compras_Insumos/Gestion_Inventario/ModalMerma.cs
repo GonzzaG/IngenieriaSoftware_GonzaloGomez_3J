@@ -43,6 +43,10 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario
                 };
 
                 new MermaBusiness().InsertEscasez(merma);
+
+                MessageBox.Show($"Se registró la escasez de {_ProductoSeleccionado.Nombre}");
+
+                this.Close();
             }
             catch(Exception ex)
             {

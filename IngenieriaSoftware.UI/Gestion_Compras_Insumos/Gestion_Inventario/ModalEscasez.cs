@@ -33,7 +33,7 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario
         {
             try
             {
-                var escasez = new EscasezInsertModel
+                var escasez = new EscasezModel
                 {
                     IdProducto = _ProductoSeleccionado.Id,
                     FechaRegistro = DateTime.Now,
@@ -43,6 +43,9 @@ namespace IngenieriaSoftware.UI.Gestion_Compras_Insumos.Gestion_Inventario
 
                 // se acepta y se envia la alerta
                 new EscasezBusiness().InsertEscasez(escasez);
+
+                MessageBox.Show($"Se registró la escasez de {_ProductoSeleccionado.Nombre}");
+                this.Close();
             }
             catch (Exception ex)
             {

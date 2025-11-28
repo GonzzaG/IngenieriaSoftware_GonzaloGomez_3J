@@ -152,8 +152,10 @@
     <Compile Include="MedioDePagoBLL.cs" />
     <Compile Include="Mesas\MesaBLL.cs" />
     <Compile Include="NotificacionService.cs" />
+    <Compile Include="PDF\Factura\FacturaProveedorGenerarPDF.cs" />
+    <Compile Include="PDF\Factura\PDFGeneratorFactura.cs" />
     <Compile Include="PDF\OrdenCompra\OrdenCompraGenerarPDF.cs" />
-    <Compile Include="PDF\PDFGenerator.cs" />
+    <Compile Include="PDF\OrdenCompra\OrdenCompraPDFGenerator.cs" />
     <Compile Include="Permisos\ComponentePermiso.cs" />
     <Compile Include="Permisos\CompositePermiso.cs" />
     <Compile Include="Permisos\HojaPermiso.cs" />

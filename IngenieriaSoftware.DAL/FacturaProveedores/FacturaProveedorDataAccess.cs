@@ -212,14 +212,138 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
             };
 
             return new DAO()
-                .ExecuteStoredProcedure("Fact.sp_GetFacturasProveedor", null)
+                .ExecuteStoredProcedure("Fact.sp_GetFacturasProveedor", parametros)
                 .MapFacturaProveedoresGetList();
         }
+
+        #region Anular Factura
+        /// <summary>
+        /// Obtiene las Facturas que se encuentran en estado anuladas.
+        /// </summary>
+        /// <returns></returns>
+        public static void AnularFactura(this int idFactura)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdFactura",idFactura)
+            };
+
+            new DAO().ExecuteStoredProcedure("Fact.sp_AnularFactura", parametros);
+        }
+        #endregion
+        #region Cancelar Factura
+        /// <summary>
+        /// Obtiene las Facturas que se encuentran en estado anuladas.
+        /// </summary>
+        /// <returns></returns>
+        public static void CancelarFactura(this int idFactura)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdFactura",idFactura)
+            };
+
+            new DAO().ExecuteStoredProcedure("Fact.sp_CanceladaFactura", parametros);
+        }
+        #endregion
+
+        public static FacturaProveedorWithDetalles GetFacturaWithDetallesById(this int idFactura)
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("@IdFacturaProveedor", idFactura)
+            };
+
+            var factura = new DAO()
+                .ExecuteStoredProcedure("sp_FacturaProveedor_GetById", parametros)
+                .ConvertirFacturaProveedorWithDetallesDataSet();
+
+            if (factura == null)
+                throw new Exception("La factura no existe.");
+
+            // Si existe, obtener detalles
+            if (factura is FacturaProveedorWithDetalles f)
+            {
+                factura.Detalles = new DAO()
+                    .ExecuteStoredProcedure("sp_FacturaProveedorDetalle_GetByIdFactura",
+                        new SqlParameter[]
+                        {
+                    new SqlParameter("@IdFacturaProveedor", f.IdFacturaProveedor)
+                        }
+                    ).ConvertirDetallesFacturaProveedor();
+            }
+
+            return factura;
+        }
+
         #endregion
 
         #region Metodos Privados
 
         #region Mapeadores
+
+        public static FacturaProveedorWithDetalles ConvertirFacturaProveedorWithDetallesDataSet(this DataSet ds)
+        {
+            if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+                return null;
+
+            return (from DataRow row in ds.Tables[0].Rows
+                    select new FacturaProveedorWithDetalles
+                    {
+                        IdFacturaProveedor = Convert.ToInt32(row["IdFacturaProveedor"]),
+                        NumeroFactura = row["NumeroFactura"]?.ToString(),
+                        FechaEmision = Convert.ToDateTime(row["FechaEmision"]),
+                        IdOrdenCompra = Convert.ToInt32(row["IdOrdenCompra"]),
+                        IdProveedor = Convert.ToInt32(row["IdProveedor"]),
+                        RazonSocialProveedor = row["RazonSocialProveedor"]?.ToString(),
+                        IdUsuarioCreador = Convert.ToInt32(row["IdUsuarioCreador"]),
+                        Subtotal = Convert.ToDecimal(row["Subtotal"]),
+                        Impuestos = Convert.ToDecimal(row["Impuestos"]),
+                        Descuento = Convert.ToDecimal(row["Descuento"]),
+                        Total = Convert.ToDecimal(row["Total"]),
+                        MetodoPago = row["MetodoPago"]?.ToString(),
+                        IdFacturaProveedorEstado = Convert.ToInt32(row["IdFacturaProveedorEstado"]),
+                        Observaciones = row["Observaciones"]?.ToString(),
+                        FechaRegistro = Convert.ToDateTime(row["FechaRegistro"]),
+                        FechaPago = row["FechaPago"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["FechaPago"]),
+                        Anulada = Convert.ToBoolean(row["Anulada"])
+                    }).FirstOrDefault();
+        }
+
+        public static List<FacturaProveedorDetalleModel> ConvertirDetallesFacturaProveedor(this DataSet ds)
+        {
+            var lista = new List<FacturaProveedorDetalleModel>();
+
+            if (ds == null || ds.Tables.Count < 1)
+                return lista;
+
+            var tbl = ds.Tables[0];
+
+            foreach (DataRow row in tbl.Rows)
+            {
+                var det = new FacturaProveedorDetalleModel
+                {
+                    IdDetalleFacturaProveedor = Convert.ToInt32(row["IdDetalleFacturaProveedor"]),
+                    IdFacturaProveedor = Convert.ToInt32(row["IdFacturaProveedor"]),
+                    IdProducto = Convert.ToInt32(row["IdProducto"]),
+                    NombreProducto = row["NombreProducto"]?.ToString(),
+                    Descripcion = row["Descripcion"]?.ToString(),
+                    Cantidad = Convert.ToDecimal(row["Cantidad"]),
+                    PrecioUnitario = Convert.ToDecimal(row["PrecioUnitario"]),
+                    Descuento = Convert.ToDecimal(row["Descuento"]),
+                    Impuesto = Convert.ToDecimal(row["Impuesto"]),
+                    TotalLinea = Convert.ToDecimal(row["TotalLinea"]),
+                    IdOrdenCompraDetalle = row["IdOrdenCompraDetalle"] == DBNull.Value
+                        ? (int?)null
+                        : Convert.ToInt32(row["IdOrdenCompraDetalle"])
+                };
+
+                lista.Add(det);
+            }
+
+            return lista;
+        }
+
         private static FacturaProveedor MapFacturaProveedoresGetById(this DataSet mDs)
         {
             if (mDs == null || mDs.Tables.Count == 0 || mDs.Tables[0].Rows.Count == 0)
@@ -311,6 +435,7 @@ namespace IngenieriaSoftware.DAL.FacturaProveedores.DataAccess
                     MetodoPago = Convert.ToString(((DataRow)row)["MetodoPago"]),
                     Observaciones = Convert.ToString(((DataRow)row)["Observaciones"]),
                     FechaRegistro = Convert.ToDateTime(((DataRow)row)["FechaRegistro"]),
+                    IdFacturaProveedorEstado = Convert.ToInt32(((DataRow)row)["IdFacturaProveedorEstado"]),
                     FechaPago = ((DataRow)row)["FechaPago"] != DBNull.Value ? Convert.ToDateTime(((DataRow)row)["FechaPago"]) : (DateTime?)null,
                 });
             }

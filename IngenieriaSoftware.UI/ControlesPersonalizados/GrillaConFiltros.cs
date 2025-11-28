@@ -52,6 +52,9 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
         public event Action<object, string>? CeldaEditada;
         public event DataGridViewCellCancelEventHandler CeldaComienzoEdicion;
         public event DataGridViewCellEventHandler CeldaFinEdicion;
+
+        public event EventHandler SelectionChangedCustom;
+
         #endregion
 
         public DataGridViewConFiltros()
@@ -695,6 +698,17 @@ namespace IngenieriaSoftware.UI.ControlesPersonalizados
             foreach (DataGridViewColumn col in dgv.Columns)
                 col.ReadOnly = true;
         }
+
+        private void dgvInterno_SelectionChanged(object sender, EventArgs e)
+        {
+            SelectionChangedCustom?.Invoke(this, e);
+        }
+
+        public void ActivarEventoSeleccion()
+        {
+            dgv.SelectionChanged += dgvInterno_SelectionChanged;
+        }
+
 
 
     }

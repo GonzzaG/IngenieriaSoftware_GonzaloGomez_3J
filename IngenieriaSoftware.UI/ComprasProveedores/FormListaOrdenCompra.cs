@@ -40,7 +40,7 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
             btnAgregar.Text = "Seleccionar";
             cbEstado.Enabled = false;
             cbEstado.SelectedIndex = (int)OrdenCompraEstadoEnum.Recibida;
-            grillaConFiltros.SetCustomSize(new Size(1040, 250));
+            grillaConFiltros.SetCustomSize(new Size(800, 250));
             BusquedaFiltrada();
         }
 

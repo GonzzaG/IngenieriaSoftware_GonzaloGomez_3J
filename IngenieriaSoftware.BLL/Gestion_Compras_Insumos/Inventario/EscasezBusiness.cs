@@ -2,12 +2,13 @@
 using IngenieriaSoftware.DAL.Gestion_Compras_Insumos.UpdateProductoInventario;
 using IngenieriaSoftware.Servicios;
 using System;
+using System.Collections.Generic;
 
 namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos.Inventario
 {
     public class EscasezBusiness
     {
-        public void InsertEscasez(EscasezInsertModel model)
+        public void InsertEscasez(EscasezModel model)
         {
             // validaciones 
             if(model.IdProducto <= 0)
@@ -20,6 +21,11 @@ namespace IngenieriaSoftware.BLL.Gestion_Compras_Insumos.Inventario
             model.RegistradoPor = SessionManager.GetInstance.Usuario.Id;
 
             new EscasezDataAccess().InsertEscasez(model);    
+        }
+
+        public List<EscasezModel> GetProductosEscasez()
+        {
+            return new EscasezDataAccess().GetProductosEscasez();
         }
     }
 }

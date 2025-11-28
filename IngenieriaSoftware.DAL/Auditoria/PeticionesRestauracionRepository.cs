@@ -50,7 +50,7 @@ namespace IngenieriaSoftware.DAL.Auditoria
                 SqlParameter[] parametros = new SqlParameter[]
                 {
                     new SqlParameter("@Id", idPeticion),
-                     new SqlParameter("@ComandaEstado", estado),
+                     new SqlParameter("@Estado", estado),
                      new SqlParameter("@ProcesadoPor", procesadoPor),
                 };
 

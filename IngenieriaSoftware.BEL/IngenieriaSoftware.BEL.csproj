@@ -66,6 +66,8 @@
     <Compile Include="Factura.cs" />
     <Compile Include="FacturaProveedor\FacturaProveedor.cs" />
     <Compile Include="FacturaProveedor\FacturaProveedorDetalle.cs" />
+    <Compile Include="FacturaProveedor\FacturaProveedorDetalleModel.cs" />
+    <Compile Include="FacturaProveedor\FacturaProveedorWithDetalles.cs" />
     <Compile Include="Gestion_Compras_Insumos\Categoria.cs" />
     <Compile Include="Gestion_Compras_Insumos\EscasezModel.cs" />
     <Compile Include="Gestion_Compras_Insumos\MermaInsertModel.cs" />

@@ -3,6 +3,7 @@ using IngenieriaSoftware.BEL.OrdenDeCompra;
 using IngenieriaSoftware.BEL.OrdenDeCompra.Models;
 using IngenieriaSoftware.BEL.OrdenDeCompra.ViewModels;
 using IngenieriaSoftware.BLL.Gestion_Compras_Insumos;
+using IngenieriaSoftware.BLL.Gestion_Compras_Insumos.Inventario;
 using IngenieriaSoftware.BLL.ListSimpleBussiness;
 using IngenieriaSoftware.Servicios;
 using IngenieriaSoftware.Servicios.DTOs;
@@ -355,6 +356,19 @@ namespace IngenieriaSoftware.UI.ComprasProveedores
         private void FormAgregarOrdenCompra_Shown(object sender, EventArgs e)
         {
             this.AutoScrollPosition = new Point(0, 0);
+        }
+
+        private void btnProductosEscasez_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var modalProductosEscasez = new ModalProductosEscasez();
+                modalProductosEscasez.Show();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
