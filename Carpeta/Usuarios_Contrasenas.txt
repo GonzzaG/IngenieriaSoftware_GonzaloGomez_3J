@@ -1,0 +1,27 @@
+Encargado deposito
+Usuario: EncargadoDeposito
+Contraseña: 123
+
+Administrador de productos
+Usuario: AdminProductos 
+Contraseña: 123
+
+
+
+Analista de compras
+Usuario: AnalistCompra 
+Contraseña: 123
+
+Supervisor de compras
+Usuario: AutorizOrdenCompra
+Contraseña: 123
+
+Gerente de compras
+Usuario: GestionFacturas
+Contraseña: 123
+
+
+
+Administrador
+Usuario: Gonza2
+Contraseña: pruebanueva
